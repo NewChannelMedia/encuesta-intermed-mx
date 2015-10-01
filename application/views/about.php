@@ -1,3 +1,4 @@
+<div class="container">
 <?php if ($status === 1 || $status === 2){ ?>
   <form role="form" method="POST" action="/encuesta-intermed-mx/encuesta">
         <input type="hidden" name="codigo" value="<?php echo $codigo ?>">
@@ -10,3 +11,4 @@
         </button><br/>
   </form>
 <?php } ?>
+</div>

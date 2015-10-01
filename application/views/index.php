@@ -1,3 +1,4 @@
+<div class="container">
 <h2>esta es mi pagina - INDEX</h2>
 
 <form role="form" method="POST" action="/encuesta-intermed-mx/about">
@@ -8,3 +9,4 @@
   </div>
   <button type="submit" class="btn btn-default">Enviar</button>
 </form>
+</div>
