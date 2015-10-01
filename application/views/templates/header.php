@@ -8,10 +8,9 @@
     <meta name="author" content="">
 
     <title><?php echo $title ?> - Prueba 1</title>
-
-    <link href="<?= public_url('css/bootstrap.min.css')?>">
-    <link href="<?= public_url('css/fonts.css')?>">
-    <link href="<?= public_url('css/encuesta.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>css/encuesta.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>fonts/fonts.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,5 +20,5 @@
     <![endif]-->
 </head>
 
-<body id="page-top" class="index">
+<body id="page-top" class="index Flama">
   <!-- Aqui empieza el body de la pagina -->

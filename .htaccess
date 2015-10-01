@@ -1,3 +1,7 @@
-RewriteEngine on
-RewriteCond $1 !^(index.php|public|robots.txt)
-RewriteRule ^(.*)$ /prueba/index.php/$1 [L]
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond $1 !^(index\.php|public|robots.txt)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ /encuesta-intermed-mx/index.php/$1 [L]
+</IfModule>
