@@ -1,3 +1,4 @@
+
     <!-- Aqui termina el body de la pagina
     <script type="text/javascript" src="<?= public_url('js/jquery.js')?>"></script>
     <script type="text/javascript" src="<?= public_url('js/bootstrap.min.js')?>"></script>

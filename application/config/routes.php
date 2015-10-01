@@ -55,5 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'pages/index';
 $route['(:any)'] = 'pages/view/$1';
-$route['encuesta/'] = 'encuesta/index';
+$route['newsletter'] = 'encuesta/newsletter';
+$route['about'] = 'encuesta/existe';
+$route['encuesta'] = 'encuesta/encuesta';
 $route['encuesta/(:any)'] = 'encuesta/view/$1';

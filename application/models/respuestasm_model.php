@@ -46,4 +46,24 @@ class RespuestasM_Model extends CI_Model {
     $query = $this->db->get('respuestasM');
     return $query->row_array();
   }
+
+  public function update_respuestamByEncuesta($encuestaM_id = FALSE, $data = FALSE)
+  {
+    if ($encuestaM_id === FALSE || $data === FALSE)
+    {
+      return FALSE;
+    }
+
+    $query = $this->db->get_where('respuestasM', array('encuestaM_id' => $encuestaM_id));
+    $result = $query->row_array();
+
+    if (!$result){
+      $this->db->set('encuestaM_id', $encuestaM_id);
+      $this->db->insert('respuestasM');
+    }
+    
+    $this->db->where('encuestaM_id', $encuestaM_id);
+    return $this->db->update('respuestasM', $data);
+
+  }
 }

@@ -49,9 +49,9 @@ class Usuarios_Model extends CI_Model {
     return $query->row_array();
   }
 
-  public function create_usuario()
+  public function create_usuario($data)
   {
-    $this->load->helper('url');
+    $this->load->helper('url');/*
     $data = array(
       'nombre' => $this->input->post('nombre'),
       'email' => $this->input->post('email'),
@@ -64,7 +64,7 @@ class Usuarios_Model extends CI_Model {
 
     if ($this->input->post('justificacion')){
       $data['justificacion'] = $this->input->post('justificacion');
-    }
+    }*/
     return $this->db->insert('usuarios', $data);
   }
 

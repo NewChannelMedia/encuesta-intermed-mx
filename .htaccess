@@ -1,3 +1,3 @@
 RewriteEngine on
 RewriteCond $1 !^(index.php|public|robots.txt)
-RewriteRule ^(.*)$ /prueba/index.php/$1 [L]
+RewriteRule ^(.*)$ /encuesta-intermed-mx/index.php/$1 [L]

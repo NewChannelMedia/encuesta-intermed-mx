@@ -31,6 +31,18 @@ class EncuestasM_Model extends CI_Model {
     return $query->row_array();
   }
 
+  public function update_encuestam($id = FALSE, $data)
+  {
+    if ($id === FALSE){
+      return FALSE;
+    }
+
+    $this->load->helper('url');
+
+    $this->db->where('id', $id);
+    return $this->db->update('encuestasM', $data);
+  }
+
   public function create_encuestaM(){
     //Crear usuario y obtener el Id
     //Crear codigo de encuestas
