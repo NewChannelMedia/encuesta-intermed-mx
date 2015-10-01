@@ -53,7 +53,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //$route['404_override'] = '';
 //$route['translate_uri_dashes'] = FALSE;
 
-$route['default_controller'] = 'pages/index';
+$route['default_controller'] = 'main/index';
 $route['(:any)'] = 'pages/view/$1';
-$route['encuesta/'] = 'encuesta/index';
-$route['encuesta/(:any)'] = 'encuesta/view/$1';
