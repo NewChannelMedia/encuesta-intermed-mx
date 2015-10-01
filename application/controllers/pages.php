@@ -6,6 +6,8 @@
       }
 
     public function index($page = 'index'){
+
+      $this->session->set_userdata('codigo', '');
       if(!file_exists('application/views/'.$page.'.php')){
         show_404();
       }
