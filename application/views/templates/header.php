@@ -7,12 +7,31 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?php echo $title ?> - Prueba 1</title>
+    <title><?php echo $title ?> </title>
 
     <link href="<?= public_url('css/bootstrap.min.css')?>">
     <link href="<?= public_url('css/fonts.css')?>">
     <link href="<?= public_url('css/encuesta.css')?>">
-
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#envioEmail").click(function(){
+              $(this).val()
+              $.ajax({
+                url:'/encuesta-intermed-mx/codigo/dataPostCorreo',
+                type:"POST",
+                dataType: 'JSON',
+                async:true,
+                success: function(){
+                  $("#doctor").load('/encuesta-intermed-mx/porValidar/index')
+                },
+                error: function(){
+                  console.log("Error: AJax dead :(");
+                }
+              });
+            });
+        });
+    </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
