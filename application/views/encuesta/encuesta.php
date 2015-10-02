@@ -19,8 +19,8 @@
       <div id="progress-title">
       AVANCE.
       </div>
-      <div class="progress" id="progress-bar" title=""  data-toggle="popover" data-content="<?php echo $terminado*25 ?>%" data-placement="top" >
-        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $terminado*25 ?>%;"  >
+      <div class="progress" id="progress-bar" >
+        <div class="progress-bar" id="progress-bar-current" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $terminado*25 ?>%;" title=""  data-toggle="popover" data-content="<?php echo $terminado*25 ?>%" data-placement="top" >
         </div>
       </div>
     </div>
