@@ -23,27 +23,20 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
+<form role="form" method="POST" action="/encuesta-intermed-mx/about">
       <ul class="nav navbar-nav navbar-right">
         <li class="hidden">
           <a href="#page-top"></a>
         </li>
         <li>
-          <a class="page-scroll" href="#services">Services</a>
+          <input type="text" class="form-control"
+           placeholder="Introduce el código de tu encuesta" name="codigo">
         </li>
         <li>
-          <a class="page-scroll" href="#portfolio">Portfolio</a>
-        </li>
-        <li>
-          <a class="page-scroll" href="#about">About</a>
-        </li>
-        <li>
-          <a class="page-scroll" href="#team">Team</a>
-        </li>
-        <li>
-          <a class="page-scroll" href="#contact">Contact</a>
+          <button type="submit" class="btn btn-default">Enviar</button>
         </li>
       </ul>
+</form>
     </div>
     <!-- /.navbar-collapse -->
   </div>

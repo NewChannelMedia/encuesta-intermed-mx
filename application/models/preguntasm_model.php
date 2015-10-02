@@ -5,7 +5,7 @@ class PreguntasM_Model extends CI_Model {
     $this->load->database();
   }
 
-  public function get_preguntam()
+  public function get_preguntasm()
   {
     $query = $this->db->get('preguntasM');
     return $query->result_array();
@@ -18,16 +18,16 @@ class PreguntasM_Model extends CI_Model {
       return false;
     }
     $query = $this->db->get_where('preguntasM', array('id' => $id));
-    return $query->row_array();
+    return $query->result_array();
   }
 
-  public function get_preguntamByEtapa($etapa = FALSE)
+  public function get_preguntamByCategoria($categoria_id = FALSE)
   {
-    if ($etapa === FALSE)
+    if ($categoria_id === FALSE)
     {
       return false;
     }
-    $query = $this->db->get_where('preguntasM', array('etapa' => $etapa));
-    return $query->row_array();
+    $query = $this->db->get_where('preguntasM', array('categoria_id' => $categoria_id));
+    return $query->result_array();
   }
 }
