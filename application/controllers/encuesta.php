@@ -54,10 +54,12 @@
             //Encuesta sin iniciar
         case 2:
             //Encuesta sin terminar
-        case 3:
-            //Encuesta ya contestada
             $this->load->view('about', $data);
             break;
+        case 3:
+            //Encuesta ya contestada
+            header('Location: /encuesta-intermed-mx/encuesta');
+            die();
         default:
             break;
       }
@@ -203,17 +205,13 @@
         $data['etapa'] = $etapa;
 
         $contenido .= '<input type="hidden" name="etapaResp" id="etapaResp" value="'. $etapa .'">';
-        $contenido .= '<div class="progress">
-                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: '. ($data['terminado'])*25 .'%">
-                          <span class="sr-only">40% Complete (success)</span>
-                        </div>
-                      </div>';
 
         $resultado = $this->Categorias_Model->get_categoriasByEtapa($etapa);
 
         foreach ($resultado as $categoria) {
           if ($categoria){
-            $contenido .= '<hr/><b>' . $categoria['categoria'] . '</b><br/>';
+            $contenido .= '<div class="block-container-category"><span class="glyphicon glyphicon-asterisk"></span><span class="category">' . $categoria['categoria'] . '</span></div>';
+            $contenido .= '<table class="table table-striped block-container-table">';
             $preguntas = $this->PreguntasM_Model->get_preguntamByCategoria($categoria['id']);
 
             foreach ($preguntas as $pregunta) {
@@ -232,7 +230,9 @@
                 //echo 'Complemento: <pre>' . print_r($complemento, 1) . '</pre>';
 
 
-                $contenido .= '<br/><li>' . $pregunta['pregunta'] . '</li><br/>';
+                $contenido .= '<tr><td>';
+                $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['pregunta'] . '</div>';
+                $contenido .= '<div class="block-container-table-respuesta">';
                 $opciones = explode('|', $pregunta['opciones']);
                 switch ($pregunta['tipo']) {
                   case 'text':
@@ -257,7 +257,6 @@
                         }
                         $contenido .= '&nbsp;&nbsp;';
                       }
-                      $contenido .= '<br/>';
                       break;
                   case 'text|enum':
                       $contenido .= '<ul class="sortable">';
@@ -276,14 +275,14 @@
                           $contenido .= '<li class="ui-state-default"><input type="hidden" name="respuesta_' . $pregunta['id'] . '_' . ++$total . '" value="' . $total . '"> '. $opcion . '</li>';
                         }
                       }
-                      $contenido .= '</ul>';
-                      $contenido .= '<br/>';
                       break;
                   default:
                       break;
                 }
+                $contenido .= '</div>';
+                $contenido .= '</td></tr>';
             }
-            echo '</ul>';
+            $contenido .= '</table>';
           }
           $data['contenido'] = $contenido;
         }

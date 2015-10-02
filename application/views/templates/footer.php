@@ -9,8 +9,9 @@
     <script src="<?= base_url() ?>js/cbpAnimatedHeader.js"></script>
     <!-- Contact Form JavaScript -->
     <script src="<?= base_url() ?>js/jqBootstrapValidation.js"></script>
-    <script src="<?= base_url() ?>js/contact_me.js"></script>
+    <!--<script src="<?= base_url() ?>js/contact_me.js"></script>
     <!-- Custom Theme JavaScript -->
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="<?= base_url() ?>js/utils.js"></script>
   </body>
 </html>
