@@ -54,11 +54,9 @@
             //Encuesta sin iniciar
         case 2:
             //Encuesta sin terminar
-            $this->load->view('about', $data);
-            break;
         case 3:
             //Encuesta ya contestada
-            echo 'La encuesta ya esta contestada';
+            $this->load->view('about', $data);
             break;
         default:
             break;
@@ -292,20 +290,16 @@
 
         $this->load->view('encuesta/encuesta', $data);
         $this->load->view('templates/footer', $data);
-      } else if ($data['status'] == 3) {
-        if ($guardado){
-          $this->load->view('templates/header', $data);
-          $contenido .= 'Gracias por contestar la encuesta<br/>';
-          $contenido .= '<input type="checkbox" id="promo" value="si" onchange="aceptarPromocion()">';
-          $contenido .= 'Quiero recibir correos y promociones<br/>';
-          $contenido .= '<div id="contenido"><a href="/encuesta-intermed-mx">Ir a inicio</a></div>';
-          $data['contenido'] = $contenido;
+      } else if ($data['status'] != 0) {
+        $this->load->view('templates/header', $data);
+        $contenido .= 'Gracias por contestar la encuesta<br/>';
+        $contenido .= '<input type="checkbox" id="promo" value="si" onchange="aceptarPromocion()">';
+        $contenido .= 'Quiero recibir correos y promociones<br/>';
+        $contenido .= '<div id="contenido"><a href="/encuesta-intermed-mx">Ir a inicio</a></div>';
+        $data['contenido'] = $contenido;
 
-          $this->load->view('encuesta/encuesta', $data);
-          $this->load->view('templates/footer', $data);
-        } else {
-          echo 'la encuesta ya se contesto';
-        }
+        $this->load->view('encuesta/encuesta', $data);
+        $this->load->view('templates/footer', $data);
         //Redirect /about o index
       }
 

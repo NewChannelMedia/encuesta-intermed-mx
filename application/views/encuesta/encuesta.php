@@ -1,7 +1,7 @@
 <div class="container">
 <h2>Encuesta de medicos</h2>
 
-<?php if (($status === 1 || $status === 2 || $status === 3) && !$finalizar) {?>
+<?php if (($status === 1 || $status === 2) && !$finalizar) {?>
   <form method="POST" action="/encuesta-intermed-mx/encuesta" onsubmit="comprobar()" id="formEnc">
   <input type="hidden" name="codigo" value="<?php echo $codigo; ?>">
   <input type="hidden" name="continuar" id="continuar">
