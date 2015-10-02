@@ -176,17 +176,12 @@
       $data['codigo'] = $codigo;
       $data['title'] = "Encuesta";
 
-      $contenido = '<script type="text/javascript">
-      history.pushState(null, null, location.href);
-      window.onpopstate = function(event) {
-          history.go(1);
-      };</script>';
-
       if ($continuarEnc === "0"){
         header('Location: /encuesta-intermed-mx');
         die();
       }
 
+      $contenido = '';
       if (($data['status'] == 1 || $data['status'] == 2) && !$finalizar){
         //Mostrar la encuesta
         $this->load->view('templates/header', $data);
@@ -236,7 +231,7 @@
                 $opciones = explode('|', $pregunta['opciones']);
                 switch ($pregunta['tipo']) {
                   case 'text':
-                      $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" value="" required >&nbsp;&nbsp;<br/>';
+                      $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control" >&nbsp;&nbsp;<br/>';
                       break;
                   case 'radio':
                       $total = 0;
@@ -245,7 +240,7 @@
                         if ($opcion === $respuestas[0]){
                             $checked = 'checked';
                         }
-                        $contenido .= '<input type="radio" name="respuesta_' . $pregunta['id'] . '" value="' . $opcion . '" required  onchange="LimpiarComplementos('. $pregunta['id'] .','. ++$total .')" '. $checked .'> '. $opcion . '&nbsp;&nbsp;';
+                        $contenido .= '<input type="radio" name="respuesta_' . $pregunta['id'] . '" value="' . $opcion . '" required  onchange="LimpiarComplementos('. $pregunta['id'] .','. ++$total .')" '. $checked .' > '. $opcion . '&nbsp;&nbsp;';
                         if (substr($opcion, -1) == ":"){
                           $valorComp = '';
                           $disabled = 'disabled';
@@ -253,7 +248,7 @@
                             $valorComp = $complemento;
                             $disabled = '';
                           }
-                          $contenido .= '<input type="text" ' . $disabled . ' onkeyup="validarFormulario()" onpaste="validarFormulario()" name="complemento_' . $pregunta['id'] . '" id="complemento_' . $pregunta['id'] . '_' . $total . '" value="' . $valorComp . '" >';
+                          $contenido .= '<input type="text" ' . $disabled . ' onkeyup="validarFormulario()" onpaste="validarFormulario()" name="complemento_' . $pregunta['id'] . '" id="complemento_' . $pregunta['id'] . '_' . $total . '" value="' . $valorComp . '"  >';
                         }
                         $contenido .= '&nbsp;&nbsp;';
                       }
@@ -264,7 +259,7 @@
                         asort($respuestas);
                         foreach ($respuestas as $index => $value) {
                           if (array_key_exists($index, $opciones)){
-                            $contenido .= '<li class="ui-state-default"><input type="hidden" name="respuesta_' . $pregunta['id'] . '_' . ($index+1) . '" value="' . $value . '"> '. $opciones[$index] . '</li>';
+                            $contenido .= '<li class="ui-state-default"><input type="hidden" name="respuesta_' . $pregunta['id'] . '_' . ($index+1) . '" value="' . $value . '" class="form-control" > '. $opciones[$index] . '</li>';
                           }
                         }
                       } else {
@@ -272,7 +267,7 @@
                         $cantidad = count($opciones);
                         foreach ($opciones as $opcion) {
                           $valorNum = '';
-                          $contenido .= '<li class="ui-state-default"><input type="hidden" name="respuesta_' . $pregunta['id'] . '_' . ++$total . '" value="' . $total . '"> '. $opcion . '</li>';
+                          $contenido .= '<li class="ui-state-default"><input type="hidden" name="respuesta_' . $pregunta['id'] . '_' . ++$total . '" value="' . $total . '" class="form-control" > '. $opcion . '</li>';
                         }
                       }
                       break;

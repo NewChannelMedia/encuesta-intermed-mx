@@ -5,8 +5,8 @@
     <script src="<?= base_url() ?>js/bootstrap.min.js"></script>
     <!-- Plugin JavaScript -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="<?= base_url() ?>js/classie.js"></script>
-    <script src="<?= base_url() ?>js/cbpAnimatedHeader.js"></script>
+    <!--<script src="<?= base_url() ?>js/classie.js"></script>-->
+    <!--<script src="<?= base_url() ?>js/cbpAnimatedHeader.js"></script>-->
     <!-- Contact Form JavaScript -->
     <script src="<?= base_url() ?>js/jqBootstrapValidation.js"></script>
     <!--<script src="<?= base_url() ?>js/contact_me.js"></script>
