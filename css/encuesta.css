@@ -852,3 +852,7 @@ ul.social-buttons li a:active {
   display: none;
   opacity: 0;
 }
+
+#admin-page {
+  margin-top:40px;
+}
