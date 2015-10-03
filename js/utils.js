@@ -189,4 +189,16 @@ $( function () {
     }
   }
 
+  function validarMoneda(e, item){
+    var aceptarPunto = false;
+    if (parseInt($(item).val().indexOf(".")) == -1 && $(item).val().length > 0) aceptarPunto = true;
+    var key = window.Event ? e.which : e.keyCode;
+    return ((key >= 48 && key <= 57) || (key==8) || (key==46 && aceptarPunto))
+  }
+
+  function formatoMoneda(item){
+    if ($(item).val().length > 0)
+      $(item).val(parseFloat($(item).val(), 10).toFixed(2));
+  }
+
 /*Fin funciones encuesta*/
