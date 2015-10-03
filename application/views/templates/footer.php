@@ -13,11 +13,18 @@
     <!-- Custom Theme JavaScript -->
     <script src="<?= base_url() ?>js/utils.js"></script>
     <script>
+
+      //MODALES
+      function enviarSucces(mail){
+          $("#codigoCorreo").html(mail);
+      }
+
       $(document).ready(function(){
         $("#pAceptar").click(function(){
           $("#porAceptar").removeClass('hidden');
           $("#noAceptadas").addClass('hidden');
           $("#aceptados").addClass('hidden');
+
           //se carga el ajax para la carga de las tablas
           $.ajax({
             url:'/encuesta-intermed-mx/admin/porAceptar',
@@ -35,8 +42,8 @@
                       $('#datosPa #tr'+i+'').append('<td>'+item.correo+'</td>');
                       $('#datosPa #tr'+i+'').append('<td>'+item.cedula+'</td>');
                       $('#datosPa #tr'+i+'').append('<td>'+item.justificacion+'</td>');
-                      $('#datosPa #tr'+i+'').append('<td><button type = "button" id = "enviarSucces" class = "btn btn-primary">Aceptar</button></td>');
-                      $('#datosPa #tr'+i+'').append('<td><button type = "button" id = "enviarNoSucces" class = "btn btn-danger">Rechazar</button></td>');
+                      $('#datosPa #tr'+i+'').append('<td><button malto = "'+item.correo+'" onclick="enviarSucces(\''+item.correo+'\')" type = "button" id = "enviarSucces" class = "btn btn-primary" data-toggle="modal" data-target="#aceptarModal">Aceptar</button></td>');
+                      $('#datosPa #tr'+i+'').append('<td><button noMalTo = "'+item.correo+'" type = "button" id = "enviarNoSucces" class = "btn btn-danger" data-toggle="modal" data-target="#NoaceptarModal">Rechazar</button></td>');
                   }else{
                       $("#datosPa").append('<tr  id = "t'+i+'"></tr>');
                       $('#datosPa #t'+i+'').append('<td >'+item.id+'</td>');
@@ -44,8 +51,8 @@
                       $('#datosPa #t'+i+'').append('<td >'+item.correo+'</td>');
                       $('#datosPa #t'+i+'').append('<td >'+item.cedula+'</td>');
                       $('#datosPa #t'+i+'').append('<td >'+item.justificacion+'</td>');
-                      $('#datosPa #t'+i+'').append('<td ><button type = "button" id = "enviarSucces" class = "btn btn-primary">Aceptar</button></td>');
-                      $('#datosPa #t'+i+'').append('<td ><button type = "button" id = "enviarNoSucces" class = "btn btn-danger">Rechazar</button></td>');
+                      $('#datosPa #t'+i+'').append('<td ><button malto = "'+item.correo+'" onclick="enviarSucces(\''+item.correo+'\')"  type = "button" id = "enviarSucces'+i+'" class = "btn btn-primary"data-toggle="modal" data-target="#aceptarModal">Aceptar</button></td>');
+                      $('#datosPa #t'+i+'').append('<td ><button noMalTo = "'+item.correo+'" type = "button" id = "enviarNoSucces" class = "btn btn-danger" data-toggle="modal" data-target="#NoaceptarModal">Rechazar</button></td>');
                   }
                 }
               });
@@ -106,6 +113,54 @@
               console.log("Error al cargar los aceptados: "+e);
             }
           });
+        });
+        //genera el codigo y lo mete en el input
+        $("#generaCodigo").click(function(){
+          //carga ajax para generar el codigo
+          $.ajax({
+            url: "/encuesta-intermed-mx/codigo/makeCode",
+            type: "POST",
+            dataType:"JSON",
+            success: function(data){
+              console.log("dato: "+data);
+              $("#aleatorioDato").attr('value',data);
+            },
+            error: function(e){
+              console.log("Aleatorio fallo: "+e);
+            }
+          });
+        });
+        //envia el codigo genera a la tabla correspondiente y lo envia por correo
+        $("#enviaCodigoGenerado").click(function(){
+          if($("#aleatorioDato").val() != ""){
+              $.ajax({
+                url: '/encuesta-intermed-mx/admin/insertaCodigo/'+$("#aleatorioDato").val(),
+                type: "POST",
+                dataType: "JSON",
+                success:function(data){
+                    console.log(data);
+                },
+                error:function(e){
+                  console.log("erorr al insertar el codigo"+e );
+                }
+              });
+              // se envia el correo con los datos correspondientes
+              $.ajax({
+                url: 'encuesta-intermed-mx/codigo/sendMail/'+$("#codigoCorreo").text()+"/Cedula valida/"+"prueba.php",
+                type: "POST",
+                success:function(p){
+                  alert("correo enviado");
+                },
+                error: function(e){
+                  alert("correo no enviado: "+e);
+                }
+              });
+          }else{
+            alert("Debe de generar un codigo primero");
+          }
+        });
+        $("#enviarNoSucces").click(function(){
+          $("#NoaceptarModal").modal('show');
         });
       });
     </script>

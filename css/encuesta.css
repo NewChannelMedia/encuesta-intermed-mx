@@ -1,3 +1,7 @@
+.separador{
+  border-left: solid 2px #333;
+}
+
 body {
   overflow-x: hidden;
 }

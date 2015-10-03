@@ -76,3 +76,70 @@
     </table>
   </div>
 </div><!-- /.container -->
+<!-- modal -->
+<div class = "modal fade" id = "aceptarModal" tabindex = "-1" role="dialog">
+    <div class = "modal-dialog" role="document">
+      <div class = "modal-content">
+        <div class = "modal-header">
+          <button type = "button" class = "close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden = "true">&times;</span>
+          </button>
+          <h4 class = "modal-title">Enviar mensaje de aceptado</h4>
+        </div>
+        <div class = "modal-body">
+          <div class = "">
+            <div class = "row">
+                <div class = "col-md-6">
+                  <div class = "col-md-12"><label>Generar código para:&nbsp;<br /><span id="codigoCorreo"></span></label></div>
+                  <hr>
+                  <div class = "input-group">
+                    <span class = "input-group-btn">
+                      <button class = "btn btn-danger" id ="generaCodigo" type ="button"><span class = "glyphicon glyphicon-fire"></span></button>
+                    </span>
+                    <input type = "text" id="aleatorioDato"class = "form-control" readonly/>
+                  </div>
+                  <div class = "col-md-12">
+                    <button type = "button" id = "enviaCodigoGenerado" class = "form-control btn btn-primary">Enviar codigo</button>
+                  </div>
+                </div>
+                <div class = "col-md-6 separador">
+                  <div class = "col-md-12">
+                    <textarea class = "form-control" id = "mensajeAceptado"></textarea>
+                  </div>
+                  <div class = "col-md-12">
+                    <button type = "button" class = "form-control btn btn-danger" id = "enviarMensaje">Enviar mensaje</button>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- SEGUNDO MODAL -->
+<div class = "modal fade" id = "NoaceptarModal" tabindex = "-1" role="dialog">
+    <div class = "modal-dialog" role="document">
+      <div class = "modal-content">
+        <div class = "modal-header">
+          <button type = "button" class = "close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden = "true">&times;</span>
+          </button>
+          <h4 class = "modal-title">Rechazados</h4>
+        </div>
+        <div class = "modal-body">
+          <div class ="">
+            <div class = "row">
+              <div class = "col-md-12">
+                  <div class = "col-md-12">
+                    <textarea class = "form-control" id = "areaRechazado"></textarea>
+                  </div>
+                  <div class = "col-md-12">
+                    <button type = "button" class = "form-control btn btn-success"id = "envioRechazado">Enviar</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

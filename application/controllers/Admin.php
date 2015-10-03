@@ -55,7 +55,11 @@
               $i++;
             }
             print_r(json_encode($aceptar));
-            //return json_encode($aceptar);
+          }
+          //inserta el codigo
+          public function insertaCodigo($codigo){
+            $this->load->model('admin_model');
+            return $this->admin_model->insertaCodigoGenerado($codigo);
           }
       }
   ?>

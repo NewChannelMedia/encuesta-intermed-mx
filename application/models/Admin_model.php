@@ -38,5 +38,10 @@
             $query = $this->db->get('porValidar');
             return $query;
           }
+          // inserta el codigo en la db
+          public function insertaCodigoGenerado($codigo){
+            $data = array('codigo' => $codigo);
+            return $this->db->insert('encuestasM',$data);
+          }
       }
   ?>
