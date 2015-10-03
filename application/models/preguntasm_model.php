@@ -27,6 +27,7 @@ class PreguntasM_Model extends CI_Model {
     {
       return false;
     }
+    $this->db->order_by("id", "asc");
     $query = $this->db->get_where('preguntasM', array('categoria_id' => $categoria_id));
     return $query->result_array();
   }
