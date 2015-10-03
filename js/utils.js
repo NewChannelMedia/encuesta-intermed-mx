@@ -42,3 +42,20 @@ $( function () {
     } );
   } );
 } );
+
+
+//radio on change hide div
+$(function(){
+  $('#medicoRadio').click(function() {
+    if ($(this).prop("checked", true)){
+      $("#medicoSolicitud").removeClass("hidden");
+      $("#usuarioSolicitud").addClass("hidden");
+    }
+  });
+  $('#usuarioRadio').click(function() {
+    if ($(this).prop("checked", true)){
+      $("#medicoSolicitud").addClass("hidden");
+      $("#usuarioSolicitud").removeClass("hidden");
+    }
+  });
+});
