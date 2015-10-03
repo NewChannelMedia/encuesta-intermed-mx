@@ -1012,13 +1012,14 @@ body {
 }
 
 /*Sortable format*/
-.sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+.sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
 .sortable li {
     margin: 0 5px 5px 5px;
     padding: 6px;
     border : solid 1px #e6e6e6;
     border-radius : 3px;
     background : #FEFEFE;
+    text-align: center;
   }
 html>body .sortable li { height: 2em; line-height: 1.2em; }
 .ui-state-highlight { height: 1.5em; line-height: 1.2em; }

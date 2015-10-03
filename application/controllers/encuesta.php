@@ -229,8 +229,8 @@
                 $opciones = explode('|', $pregunta['opciones']);
                 switch ($pregunta['tipo']) {
                   case 'text':
-                      $contenido .= '<div class="form-inline"><label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
-                      $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" id="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control block-container-table-respuesta" ></div>';
+                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
+                      $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" id="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control block-container-table-respuesta" >';
                       break;
                   case 'radio':
                       $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['pregunta'] . '</div>';
@@ -241,7 +241,7 @@
                         if ($opcion === $respuestas[0]){
                             $checked = 'checked';
                         }
-                        $contenido .= '<input type="radio" name="respuesta_' . $pregunta['id'] . '" value="' . $opcion . '" required  onchange="LimpiarComplementos('. $pregunta['id'] .','. ++$total .')" '. $checked .' > '. $opcion . '&nbsp;&nbsp;';
+                        $contenido .= '<input type="radio" name="respuesta_' . $pregunta['id'] . '" value="' . $opcion . '" required  onchange="LimpiarComplementos('. $pregunta['id'] .','. ++$total .')" '. $checked .' class="form-control"> '. $opcion . '&nbsp;&nbsp;';
                         if (substr($opcion, -1) == ":"){
                           $valorComp = '';
                           $disabled = 'disabled';
@@ -249,7 +249,7 @@
                             $valorComp = $complemento;
                             $disabled = '';
                           }
-                          $contenido .= '<input type="text" ' . $disabled . ' onkeyup="validarFormulario()" onpaste="validarFormulario()" name="complemento_' . $pregunta['id'] . '" id="complemento_' . $pregunta['id'] . '_' . $total . '" value="' . $valorComp . '"  >';
+                          $contenido .= '<input type="text" ' . $disabled . ' onkeyup="validarFormulario()" onpaste="validarFormulario()" name="complemento_' . $pregunta['id'] . '" id="complemento_' . $pregunta['id'] . '_' . $total . '" value="' . $valorComp . '" class="form-control" >';
                         }
                         $contenido .= '&nbsp;&nbsp;';
                       }
