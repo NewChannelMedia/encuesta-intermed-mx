@@ -226,14 +226,15 @@
 
 
                 $contenido .= '<tr><td>';
-                $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['pregunta'] . '</div>';
-                $contenido .= '<div class="block-container-table-respuesta">';
                 $opciones = explode('|', $pregunta['opciones']);
                 switch ($pregunta['tipo']) {
                   case 'text':
-                      $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control" >&nbsp;&nbsp;<br/>';
+                      $contenido .= '<div class="form-inline"><label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
+                      $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" id="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control block-container-table-respuesta" ></div>';
                       break;
                   case 'radio':
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-respuesta">';
                       $total = 0;
                       foreach ($opciones as $opcion) {
                         $checked = '';
@@ -254,6 +255,8 @@
                       }
                       break;
                   case 'text|enum':
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-respuesta">';
                       $contenido .= '<ul class="sortable">';
                       if (count($respuestas) > 1){
                         asort($respuestas);
