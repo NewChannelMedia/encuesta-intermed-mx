@@ -7,6 +7,9 @@ class Categorias_Model extends CI_Model {
 
   public function get_categorias()
   {
+    $this->db->select('id');
+    $this->db->select('categoria');
+    $this->db->order_by("id", "asc");
     $query = $this->db->get('categorias');
     return $query->result_array();
   }

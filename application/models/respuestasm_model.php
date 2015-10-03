@@ -17,8 +17,14 @@ class RespuestasM_Model extends CI_Model {
     {
       return FALSE;
     }
-    $query = $this->db->get_where('respuestasM', array('preguntaM_id' => $preguntasM_id));
-    return $query->row_array();
+    $select =   array(
+                'pregunta_'.$preguntasM_id.' as respuesta',
+                'count(pregunta_'.$preguntasM_id.') as Total'
+            );
+    $this->db->select($select);
+    $this->db->group_by('pregunta_'.$preguntasM_id);
+    $query = $this->db->get('respuestasM');
+    return $query->result_array();
   }
 
   public function get_respuestamByEncuesta($encuestasM_id = FALSE)
