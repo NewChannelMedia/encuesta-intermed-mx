@@ -1,24 +1,70 @@
 <div class="container">
-<h2>Encuesta de medicos</h2>
+<div class="encuesta-logo"><img src="<?=base_url()?>img/logos/intermed.png" class="img-responsive center-block"></div>
+
+<div class="encuesta-body">
 
 <?php if (($status === 1 || $status === 2) && !$finalizar) {?>
-  <form method="POST" action="/encuesta-intermed-mx/encuesta" onsubmit="comprobar()" id="formEnc">
+  <div class="encuesta-title">
+    Por favor conteste las siguientes preguntas seleccionando las opciones que correspondan.<br/>
+    <span>(La encuesta es de carácter anónimo)</span>
+  </div>
+
+  <form method="POST" action="/encuesta-intermed-mx/encuesta" onsubmit="comprobar()" id="formEnc"  class="form-inline">
   <input type="hidden" name="codigo" value="<?php echo $codigo; ?>">
   <input type="hidden" name="continuar" id="continuar">
   <input type="hidden" name="irEtapa" id="irEtapa">
 
-  <div id="contenido">
+  <div id="contenido" class="block-container">
+    <div class="block-container-progress">
+      <div id="progress-title">
+      AVANCE.
+      </div>
+      <div class="progress" id="progress-bar" >
+        <div class="progress-bar" id="progress-bar-current" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $terminado*25 ?>%;" title=""  data-toggle="popover" data-content="<?php echo $terminado*25 ?>%" data-placement="top" >
+        </div>
+      </div>
+    </div>
     <?php echo $contenido; ?>
   </div>
-  <input onclick="salir()" class="btn btn-md btn-danger" type="button" value="Salir" style="width:200px;margin-top:30px;">
-  <input onclick="guardarysal()" id="guardarysalir" class="btn btn-md btn-default pull-right " disabled type="button" value="Guardar y salir" style="width:200px;margin-top:30px;">
-  <input onclick="guardarycont()" id="guardarycontinuar" class="btn btn-md btn-default pull-right" disabled type="button" value="Guardar y continuar" style="width:200px;margin-top:30px;"><br/>
-  <?php if ($etapa > 1){?>
-  <a style="float: left" onclick="regresar()" type="submit" style="width:200px;margin-top:50px;height:40px;">&#60;&#60;Anterior</a>
-  <?php } ?>
-  <?php if ($etapa < 4){ ?>
-  <a style="float: right" onclick="siguiente()" type="submit" style="width:200px;margin-top:50px;height:40px;">Siguiente&#62;&#62;</a>
-  <?php } ?>
+  <div class="row" id="btn-encuesta">
+    <?php if ($etapa > 1 && $etapa < 4){?>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <a class="nav-enc pull-left" onclick="regresar()" type="submit"><span class="glyphicon glyphicon-chevron-left"></span>Anterior</a>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+        <a class="nav-enc pull-right" onclick="siguiente()" type="submit">Siguiente<span class="glyphicon glyphicon-chevron-right"></span></a>
+      </div>
+    <?php } elseif ($etapa > 1){ ?>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <a class="nav-enc pull-left" onclick="regresar()" type="submit"><span class="glyphicon glyphicon-chevron-left"></span>Anterior</a>
+      </div>
+    <?php } elseif ($etapa < 4){ ?>
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+        <a class="nav-enc pull-right" onclick="siguiente()" type="submit">Siguiente<span class="glyphicon glyphicon-chevron-right"></span></a>
+      </div>
+    <?php } ?>
+    <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-10 col-xs-12">
+          <input onclick="salir()" id="btnsalir" class="btn col-lg-12" type="button" value="Salir" >
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
+          <input onclick="guardarycont()" id="btnguardarycontinuar"  class="btn" disabled type="button" value="Guardar y continuar">
+        </div>
+        <div class="col-lg-4 col-md-4  col-xs-8 pull-right">
+          <input onclick="guardarysal()" id="btnguardarysalir"  class="btn" disabled type="button" value="Guardar y salir"><br/>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
+          <span class="pull-right">Retoma la encuesta volviendo a ingresar con tu código</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <?php } else {
   echo $contenido;
 }?>
@@ -26,133 +72,7 @@
 </div>
 
 <script type="text/javascript">
-  history.go(1);
-
-  $(document).ready(function() {
-    validarFormulario();
-  });
-
-  $(function() {
-    $( "·sortable" ).sortable({
-      placeholder: "ui-state-highlight"
-    });
-    $( ".sortable" ).disableSelection();
-  });
-
-  $( ".sortable" ).sortable({
-    stop: function( event, ui ) {
-      var count = 1;
-      var opciones = $( ".sortable" ).find( "input[type=hidden]" ).each(function (index, element) {
-          $(element).val(count++);
-      });
-    }
-  });
-
-  function guardarysal(){
-    $('#continuar').val('0');
-    $("#formEnc").submit();
-  }
-
-  function guardarycont(){
-    $('#continuar').val('1');
-    $( "#formEnc" ).submit();
-  }
-
-  function regresar(){
-    $etapa = $('#etapaResp').val();
-    $('#irEtapa').val(--$etapa);
-    $('#contenido').html('');
-    $( "#formEnc" ).submit();
-  }
-
-  function siguiente(){
-    $etapa = $('#etapaResp').val();
-    $('#irEtapa').val(++$etapa);
-    $('#contenido').html('');
-    $( "#formEnc" ).submit();
-  }
-
-  function comprobar(){
-    var arrText= $('input').map(function(){
-      if (!this.value){
-        this.name = '';
-      }
-    }).get();
-  }
-
-  $('input').change(function(event) {
-    validarFormulario();
-  });
-
-  function validarFormulario(){
-      var continuar = true;
-      var formulario = $('form#formEnc').serializeArray();
-      $('input').each(function() {
-        var field = $(this);
-        if (field.prop('name').substring(0, 9) == "respuesta"){
-          if (field.prop('type') == "radio"){
-            //Buscar por lo menos uno
-            var encontrado = false;
-            formulario.forEach(function(form){
-              if (form['name'] == field.prop('name')){
-                encontrado = true;
-              }
-            });
-            if (encontrado == false){
-              continuar = false;
-            }
-          } else {
-            if (field.prop('required') && field.prop('value') == ""){
-              continuar = false;
-            }
-          }
-        } else if (field.prop('name').substring(0, 11) == "complemento"){
-          if (field.prop('required') && field.prop('value') == ""){
-            continuar = false;
-          }
-        }
-      });
-      if (continuar){
-        $('#guardarysalir').removeClass('btn-default');
-        $('#guardarycontinuar').removeClass('btn-default');
-        $('#guardarysalir').addClass('btn-warning');
-        $('#guardarycontinuar').addClass('btn-success');
-        $('#guardarysalir').attr("disabled", false);
-        $('#guardarycontinuar').attr("disabled", false);
-      } else {
-        $('#guardarysalir').removeClass('btn-warning');
-        $('#guardarycontinuar').removeClass('btn-success');
-        $('#guardarysalir').addClass('btn-default');
-        $('#guardarycontinuar').addClass('btn-default');
-        $('#guardarysalir').attr("disabled", true);
-        $('#guardarycontinuar').attr("disabled", true);
-      }
-  }
-
-  function salir(){
-    window.location.href = "/encuesta-intermed-mx";
-  }
-
-  function LimpiarComplementos(id, comp){
-    $("input[name='complemento_" + id +"']").each(function() {
-        $(this).val('');
-        $(this).prop('required',false);
-        $(this).prop('disabled',true);
-    });
-    if ($('#complemento_' + id + '_' + comp)){
-      $('#complemento_'+ id +'_' + comp).prop('required',true);
-      $('#complemento_'+ id +'_' + comp).prop('disabled',false);
-      $('#complemento_' + id + '_' + comp).focus();
-    }
-  }
-
-  function aceptarPromocion(){
-    var value = $('#promo').prop('checked');
-    if (value == true){
-      var contenido = '<form method="POST" action="newsletter"><div class="form-group"><label for="nombre">Nombre:</label><input type="text" class="form-control" id="nombre" name="nombre" required></div><div class="form-group"><label for="email">Correo:</label><input type="email" name="email" class="form-control" id="email" required></div><input type="submit" value="Enviar"></form>';
-      $('#contenido').html(contenido);
-    }else {
-      $('#contenido').html('<a href="/encuesta-intermed-mx">Ir a inicio</a>');
-    }
-  }
-</script>
+history.pushState(null, null, location.href);
+window.onpopstate = function(event) {
+    history.go(1);
+};</script>

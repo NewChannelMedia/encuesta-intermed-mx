@@ -23,7 +23,7 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-<form role="form" method="POST" action="/encuesta-intermed-mx/about">
+      <form role="form" method="POST" action="/encuesta-intermed-mx/about">
       <ul class="nav navbar-nav navbar-right">
         <li class="hidden">
           <a href="#page-top"></a>
@@ -36,7 +36,7 @@
           <button type="submit" class="btn btn-default">Enviar</button>
         </li>
       </ul>
-</form>
+    </form>
     </div>
     <!-- /.navbar-collapse -->
   </div>
