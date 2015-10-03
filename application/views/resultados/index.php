@@ -10,11 +10,16 @@
         <pre><?php echo $pregunta['pregunta'] ?><br/>
 
           <?php foreach ($pregunta['respuestas'] as $respuesta){ ?>
-              <li><?php echo '['. $respuesta['total'] .'] - ' . $respuesta['respuesta'];
-              if (array_key_exists('complemento', $respuesta)){
-                  echo ' (Complemento: ' . $respuesta['complemento'] . ')';
-              }
-               ?></li>
+            <?php
+              if (is_array($respuesta['respuesta'])){
+                echo '<pre>'. print_r($respuesta['respuesta'],1) . '</pre>';
+              } else {
+                echo '<li>['. $respuesta['total'] .'] - ' . $respuesta['respuesta'];
+                if (array_key_exists('complemento', $respuesta)){
+                    echo ' (Complemento: ' . $respuesta['complemento'] . ')';
+                }
+                echo '</li>';
+              }?>
           <?php } ?>
 
         </pre>

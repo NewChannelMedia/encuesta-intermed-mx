@@ -31,6 +31,12 @@
               $pregArray['pregunta'] = $preg['pregunta'];
               $pregArray['respuestas'] = array();
               $respuestas = $this->RespuestasM_Model->get_respuestamByPregunta($preg['id']);
+              $opciones = array();
+              $resultadoTextEnum = array();
+              $resultadoRadioComplemento = array();
+              if ($preg['tipo'] == 'text|enum' || $preg['tipo'] == 'radio'){
+                $opciones = explode('|', $preg['opciones'] );
+              }
 
               foreach ($respuestas as $resp) {
                 $respFinal = array();
@@ -40,20 +46,37 @@
                   $respFinal['respuesta'] = $resp['respuesta'][0];
                   $respFinal['total'] = $resp['Total'];
                   $respFinal['complemento'] = $resp['respuesta'][1];
+                  $pregArray['respuestas'][] = $respFinal;
+
+                  /***PENDIENTE**/
+                  for ($i = 0; $i < count($resp['respuesta']); $i++) {
+                    if (array_key_exists($opciones[$i],$resultadoRadioComplemento)){
+                        $resultadoRadioComplemento[$opciones[$i]]['total'] =  ++$resultadoRadioComplemento[$opciones[$i]]['total'];
+                    } else {
+                        $resultadoRadioComplemento[$opciones[$i]]['total'] = 1;
+                    }
+                  }
+                  /*******/
+
                 } elseif (stripos($resp['respuesta'],'|') > -1){
                   //SPLIT con |
-                  echo $preg['opciones'] . '<br/>';
                   $resp['respuesta'] = explode('|', $resp['respuesta'] );
-                  foreach ($resp['respuesta'] as $total) {
-
+                  for ($i = 0; $i < count($resp['respuesta']); $i++) {
+                    if (array_key_exists($opciones[$i],$resultadoTextEnum)){
+                      $resultadoTextEnum[$opciones[$i]] = $resultadoTextEnum[$opciones[$i]] + $resp['respuesta'][$i];
+                    } else {
+                        $resultadoTextEnum[$opciones[$i]] = $resp['respuesta'][$i];
+                    }
                   }
-                  $respFinal['respuesta'] = '';
+                  asort($resultadoTextEnum);
+                  $respFinal['respuesta'] = $resultadoTextEnum;
                   $respFinal['total'] = '';
+                  $pregArray['respuestas'][0] = $respFinal;
                 } else {
                   $respFinal['respuesta'] = $resp['respuesta'];
                   $respFinal['total'] = $resp['Total'];
+                  $pregArray['respuestas'][] = $respFinal;
                 }
-                $pregArray['respuestas'][] = $respFinal;
               }
               $preguntasArray[] = $pregArray;
           }
