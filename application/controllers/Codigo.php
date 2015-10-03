@@ -23,9 +23,9 @@
         shuffle($posible);
         $codigo = array_slice($posible, 0,6);
         $str = implode('', $codigo);
-        //return $str;
-        $data['numero'] = $str;
-        $this->load->view('codigo/genera', $data);
+        print_r(json_encode($str));
+        /*$data['numero'] = $str;
+        $this->load->view('codigo/genera', $data);*/
       }
       /**
       * funcion para enviar el correo
@@ -41,10 +41,10 @@
         $headers .= 'From: <intermed.encuestas@newchannel.mx>'."\r\n";
         // se lee el archivo para guardarlo en una variable y poderlo enviar
         $archivo = "";
-        $archivo .= "application/views/correos/";
-        $archivo .= "".$file."";
+        $archivo .= "/application/views/correos/".$file;
         $fichero_texto = "".file_get_contents($archivo);
-        return mail($to,$subject,$fichero_texto,$headers);
+        print_r($fichero_texto);
+        //return mail($to,$subject,$fichero_texto,$headers);
       }
       /**
       * Se valida la cedula, en ser real se le envia un correo con el codigo, nuevo, y ese codigo quedara registrado

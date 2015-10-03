@@ -1,3 +1,7 @@
+.separador{
+  border-left: solid 2px #333;
+}
+
 body {
   overflow-x: hidden;
 }
@@ -1024,3 +1028,8 @@ body {
 html>body .sortable li { height: 2em; line-height: 1.2em; }
 .ui-state-highlight { height: 1.5em; line-height: 1.2em; }
 /*End sortable*/
+
+#admin-page {
+  margin-top:40px;
+}
+/* development */
