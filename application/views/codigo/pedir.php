@@ -48,24 +48,15 @@
               </div>
               </br>
               <div class="form-group col-md-8 col-md-offset-2 ">
-                <input class="btn btn-info btn-block" type="submit" value="solicitar" id="envioDatos">
+                <input class="btn btn-success btn-lg btn-block" type="submit" value="solicitar" id="envioDatos">
               </div>
             </div>
           </form>
         </div>
       </div>
-      <div class="row hidden invisible">
-        <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
-          <div class="">
-            <form class="" method = "POST" id = "correo" action = "/encuesta-intermed-mx/codigo/dataPostCorreo">
-              <h4 class="Flama-normal s20 text-center">Ingresa los siguientes datos para procesar tu solicitud:</h4>
-              <div class="form-group col-md-8 col-md-offset-2">
-                <input class="form-control" type="mail" id="e-mail" name="email" placeholder="E-mail:"/><br />
-                <input class="btn btn-default btn-block" type="submit" value="solicitar" id="envioEmail">
-              </div>
-            </form>
-            <div id = "doctor"></div>
-          </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
+        </br><a href="<?= base_url(); ?>" class="btn btn-danger btn-lg btn-block">Regresar</a>
         </div>
       </div>
     </div>

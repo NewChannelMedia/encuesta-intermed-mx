@@ -75,7 +75,7 @@
         if( $this->porValidar_model->insertData($correo)){
           $this->load->view('templates/header');
           $this->load->view('codigo/medico',$data);
-          $this->load->view('templates/footer');
+          $this->load->view('templates/footer2');
         }
         else{
           return false;

@@ -18,7 +18,7 @@
           * @param $usuario
           * @param $password
           */
-          public function loguin($usuario, $password){
+          public function login($usuario, $password){
               $this->db->where('usuario',$usuario);
               $this->db->where('password',$password);
               $query = $this->db->get('master');
