@@ -12,7 +12,18 @@
           <?php foreach ($pregunta['respuestas'] as $respuesta){ ?>
             <?php
               if (is_array($respuesta['respuesta'])){
-                echo '<pre>'. print_r($respuesta['respuesta'],1) . '</pre>';
+                foreach ($respuesta['respuesta'] as $resp => $total) {
+                    if (!is_array($total)){
+                      echo '<li>['. $total .'] - ' . $resp. '</li>';
+                    } else {
+                      echo '<li>['. $total['total'] .'] - ' . $resp. '</li>';
+                      echo '<pre><b>Complemento</b><br/>';
+                      foreach ($total['comp'] as $comp => $compt) {
+                        echo '[' . $compt. '] ' . $comp . '<br/>';
+                      }
+                      echo '</pre>';
+                  }
+                }
               } else {
                 echo '<li>['. $respuesta['total'] .'] - ' . $respuesta['respuesta'];
                 if (array_key_exists('complemento', $respuesta)){

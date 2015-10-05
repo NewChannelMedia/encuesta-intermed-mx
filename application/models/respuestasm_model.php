@@ -19,7 +19,7 @@ class RespuestasM_Model extends CI_Model {
     }
     $select =   array(
                 'pregunta_'.$preguntasM_id.' as respuesta',
-                'count(pregunta_'.$preguntasM_id.') as Total'
+                'count(pregunta_'.$preguntasM_id.') as total'
             );
     $this->db->select($select);
     $this->db->group_by('pregunta_'.$preguntasM_id);

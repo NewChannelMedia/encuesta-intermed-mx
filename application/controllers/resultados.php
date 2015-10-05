@@ -40,41 +40,46 @@
 
               foreach ($respuestas as $resp) {
                 $respFinal = array();
-                if (stripos($resp['respuesta'],':|comp:') > -1){
-                  //SPLIT con :|comp:
-                  $resp['respuesta'] = explode(':|comp:', $resp['respuesta'] );
-                  $respFinal['respuesta'] = $resp['respuesta'][0];
-                  $respFinal['total'] = $resp['Total'];
-                  $respFinal['complemento'] = $resp['respuesta'][1];
-                  $pregArray['respuestas'][] = $respFinal;
+                if ($preg['tipo'] == "radio"){
+                  $resp['respuesta'] = explode(':|comp:', $resp['respuesta']);
 
-                  /***PENDIENTE**/
-                  for ($i = 0; $i < count($resp['respuesta']); $i++) {
-                    if (array_key_exists($opciones[$i],$resultadoRadioComplemento)){
-                        $resultadoRadioComplemento[$opciones[$i]]['total'] =  ++$resultadoRadioComplemento[$opciones[$i]]['total'];
+                  if (count($resp['respuesta']) == 1){
+                    $resultadoRadioComplemento[$resp['respuesta'][0]] = $resp['total'];
+                  } else {
+                    $resp['respuesta'][1] = strtolower($resp['respuesta'][1]);
+                    if (array_key_exists($resp['respuesta'][0],$resultadoRadioComplemento)){
+                      $resultadoRadioComplemento[$resp['respuesta'][0]]['total'] =  $resultadoRadioComplemento[$resp['respuesta'][0]]['total'] + $resp['total'];
+                      if (array_key_exists($resp['respuesta'][1], $resultadoRadioComplemento[$resp['respuesta'][0]]['comp'])){
+                        $cant =   $resultadoRadioComplemento[$resp['respuesta'][0]]['comp'][$resp['respuesta'][1]];
+                        $resultadoRadioComplemento[$resp['respuesta'][0]]['comp'][$resp['respuesta'][1]] = $cant + $resp['total'];
+                      } else {
+                        $resultadoRadioComplemento[$resp['respuesta'][0]]['comp'][$resp['respuesta'][1]] = $resp['total'];
+                      }
                     } else {
-                        $resultadoRadioComplemento[$opciones[$i]]['total'] = 1;
+                      $resultadoRadioComplemento[$resp['respuesta'][0]]['total'] = $resp['total'];
+                      $resultadoRadioComplemento[$resp['respuesta'][0]]['comp'][$resp['respuesta'][1]] = $resp['total'];
                     }
                   }
-                  /*******/
+                  $respFinal['respuesta'] = $resultadoRadioComplemento;
+                  $pregArray['respuestas'][0] = $respFinal;
 
-                } elseif (stripos($resp['respuesta'],'|') > -1){
+                } elseif ($preg['tipo'] == "text|enum"){
                   //SPLIT con |
                   $resp['respuesta'] = explode('|', $resp['respuesta'] );
                   for ($i = 0; $i < count($resp['respuesta']); $i++) {
                     if (array_key_exists($opciones[$i],$resultadoTextEnum)){
-                      $resultadoTextEnum[$opciones[$i]] = $resultadoTextEnum[$opciones[$i]] + $resp['respuesta'][$i];
+                      $resultadoTextEnum[$opciones[$i]] = $resultadoTextEnum[$opciones[$i]] + (count($opciones) + 1 - $resp['respuesta'][$i]);
                     } else {
-                        $resultadoTextEnum[$opciones[$i]] = $resp['respuesta'][$i];
+                      $resultadoTextEnum[$opciones[$i]] = (count($opciones) + 1 - $resp['respuesta'][$i]);
                     }
                   }
-                  asort($resultadoTextEnum);
+                  arsort($resultadoTextEnum);
                   $respFinal['respuesta'] = $resultadoTextEnum;
                   $respFinal['total'] = '';
                   $pregArray['respuestas'][0] = $respFinal;
                 } else {
                   $respFinal['respuesta'] = $resp['respuesta'];
-                  $respFinal['total'] = $resp['Total'];
+                  $respFinal['total'] = $resp['total'];
                   $pregArray['respuestas'][] = $respFinal;
                 }
               }
