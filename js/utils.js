@@ -65,13 +65,6 @@ $( function () {
     validarFormulario();
   });
 
-  $(function() {
-    $( "·sortable" ).sortable({
-      placeholder: "ui-state-highlight"
-    });
-    $( ".sortable" ).disableSelection();
-  });
-
   $( ".sortable" ).sortable({
     stop: function( event, ui ) {
       var count = 1;
@@ -221,7 +214,9 @@ var data = [{
 
 var ykeys = ['value'];
 
+$(document).ready(function(){
 MorrisBar('myfirstchart', data, ykeys);
+});
 
 function MorrisDonut(element, data){
   if(document.getElementById(element) !== null){
@@ -240,7 +235,7 @@ function MorrisDonut(element, data){
 
 function MorrisBar(element, data, ykeys){
   if(document.getElementById(element) !== null){
-    new Morris.Donut({
+    new Morris.Bar({
     // ID of the element in which to draw the chart.
     element: element,
       data: [{

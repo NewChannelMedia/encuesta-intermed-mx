@@ -13,14 +13,10 @@
     <!-- Custom Theme JavaScript -->
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-    <script src="<?= base_url() ?>js/utils.js"></script>
-
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-    <script type="text/javascript">
-  </script>
 
+    <script src="<?= base_url() ?>js/utils.js"></script>
   </body>
 </html>
