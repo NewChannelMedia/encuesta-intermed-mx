@@ -158,7 +158,7 @@ $( function () {
         $('#btnguardarysalir').addClass('btn-default');
         $('#btnguardarycontinuar').addClass('btn-default');
         $('#btnguardarysalir').attr("disabled", true);
-        $('#guardarycontinuar').attr("disabled", true);
+        $('#btnguardarycontinuar').attr("disabled", true);
       }
   }
 
