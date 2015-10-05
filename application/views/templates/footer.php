@@ -78,51 +78,6 @@
         validarFormulario();
       });
 
-      function validarFormulario(){
-          var continuar = true;
-          var formulario = $('form#formEnc').serializeArray();
-          $('input').each(function() {
-            var field = $(this);
-            if (field.prop('name').substring(0, 9) == "respuesta"){
-              if (field.prop('type') == "radio"){
-                //Buscar por lo menos uno
-                var encontrado = false;
-                formulario.forEach(function(form){
-                  if (form['name'] == field.prop('name')){
-                    encontrado = true;
-                  }
-                });
-                if (encontrado == false){
-                  continuar = false;
-                }
-              } else {
-                if (field.prop('required') && field.prop('value') == ""){
-                  continuar = false;
-                }
-              }
-            } else if (field.prop('name').substring(0, 11) == "complemento"){
-              if (field.prop('required') && field.prop('value') == ""){
-                continuar = false;
-              }
-            }
-          });
-          if (continuar){
-            $('#guardarysalir').removeClass('btn-default');
-            $('#guardarycontinuar').removeClass('btn-default');
-            $('#guardarysalir').addClass('btn-warning');
-            $('#guardarycontinuar').addClass('btn-success');
-            $('#guardarysalir').attr("disabled", false);
-            $('#guardarycontinuar').attr("disabled", false);
-          } else {
-            $('#guardarysalir').removeClass('btn-warning');
-            $('#guardarycontinuar').removeClass('btn-success');
-            $('#guardarysalir').addClass('btn-default');
-            $('#guardarycontinuar').addClass('btn-default');
-            $('#guardarysalir').attr("disabled", true);
-            $('#guardarycontinuar').attr("disabled", true);
-          }
-      }
-
       function salir(){
         window.location.href = "/encuesta-intermed-mx";
       }
