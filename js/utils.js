@@ -202,3 +202,75 @@ $( function () {
   }
 
 /*Fin funciones encuesta*/
+
+/*Resultados*/
+
+var data = [{
+    label: '2006',
+    value: 100
+},{
+    label: '2006',
+    value: 100
+},{
+    label: '2006',
+    value: 100
+},{
+    label: '2006',
+    value: 100
+}];
+
+var ykeys = ['value'];
+
+MorrisBar('myfirstchart', data, ykeys);
+
+function MorrisDonut(element, data){
+  if(document.getElementById(element) !== null){
+    new Morris.Donut({
+      // ID of the element in which to draw the chart.
+      element: element,
+      // Chart data records -- each entry in this array corresponds to a point on
+      // the chart.
+      data: data,
+      // The name of the data record attribute that contains x-values.
+      hideHover: 'auto',
+      resize: true
+    });
+  }
+}
+
+function MorrisBar(element, data, ykeys){
+  if(document.getElementById(element) !== null){
+    new Morris.Donut({
+    // ID of the element in which to draw the chart.
+    element: element,
+      data: [{
+          label: '2006',
+          value: 100
+      }, {
+          label: '2007',
+          value: 75
+      }, {
+          label: '2008',
+          value: 50
+      }, {
+          label: '2009',
+          value: 75
+      }, {
+          label: '2010',
+          value: 50
+      }, {
+          label: '2011',
+          value: 75
+      }, {
+          label: '2012',
+          value: 100
+      }],
+      xkey: 'label',
+      ykeys: ['value'],
+      hideHover: 'auto',
+      resize: true
+  });
+  }
+}
+
+/*Fin funciones resultados*/
