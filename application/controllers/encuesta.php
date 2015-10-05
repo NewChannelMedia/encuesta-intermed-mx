@@ -55,12 +55,12 @@
             //Encuesta sin iniciar
         case 2:
             //Encuesta sin terminar
+            $this->load->view('about', $data);
+            break;
         case 3:
             //Encuesta ya contestada
-            //$this->load->view('about', $data);
             header('Location: /encuesta-intermed-mx/encuesta');
             die();
-            break;
         default:
             break;
       }
@@ -177,17 +177,12 @@
       $data['codigo'] = $codigo;
       $data['title'] = "Encuesta";
 
-      $contenido = '<script type="text/javascript">
-      history.pushState(null, null, location.href);
-      window.onpopstate = function(event) {
-          history.go(1);
-      };</script>';
-
       if ($continuarEnc === "0"){
         header('Location: /encuesta-intermed-mx');
         die();
       }
 
+      $contenido = '';
       if (($data['status'] == 1 || $data['status'] == 2) && !$finalizar){
         //Mostrar la encuesta
         $this->load->view('templates/header', $data);
@@ -206,17 +201,13 @@
         $data['etapa'] = $etapa;
 
         $contenido .= '<input type="hidden" name="etapaResp" id="etapaResp" value="'. $etapa .'">';
-        $contenido .= '<div class="progress">
-                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: '. ($data['terminado'])*25 .'%">
-                          <span class="sr-only">40% Complete (success)</span>
-                        </div>
-                      </div>';
 
         $resultado = $this->Categorias_Model->get_categoriasByEtapa($etapa);
 
         foreach ($resultado as $categoria) {
           if ($categoria){
-            $contenido .= '<hr/><b>' . $categoria['categoria'] . '</b><br/>';
+            $contenido .= '<div class="block-container-category"><span class="glyphicon glyphicon-asterisk"></span><span class="category">' . $categoria['categoria'] . '</span></div>';
+            $contenido .= '<table class="table table-striped block-container-table">';
             $preguntas = $this->PreguntasM_Model->get_preguntamByCategoria($categoria['id']);
 
             foreach ($preguntas as $pregunta) {
@@ -235,20 +226,27 @@
                 //echo 'Complemento: <pre>' . print_r($complemento, 1) . '</pre>';
 
 
-                $contenido .= '<br/><li>' . $pregunta['pregunta'] . '</li><br/>';
+                $contenido .= '<tr><td>';
                 $opciones = explode('|', $pregunta['opciones']);
                 switch ($pregunta['tipo']) {
                   case 'text':
-                      $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" value="" required >&nbsp;&nbsp;<br/>';
+                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
+                      $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" id="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control block-container-table-respuesta" >';
+                      break;
+                  case 'money':
+                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
+                      $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" id="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control block-container-table-respuesta" onkeypress="return validarMoneda(event, this)" onblur="formatoMoneda(this)">';
                       break;
                   case 'radio':
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-respuesta">';
                       $total = 0;
                       foreach ($opciones as $opcion) {
                         $checked = '';
                         if ($opcion === $respuestas[0]){
                             $checked = 'checked';
                         }
-                        $contenido .= '<input type="radio" name="respuesta_' . $pregunta['id'] . '" value="' . $opcion . '" required  onchange="LimpiarComplementos('. $pregunta['id'] .','. ++$total .')" '. $checked .'> '. $opcion . '&nbsp;&nbsp;';
+                        $contenido .= '<input type="radio" name="respuesta_' . $pregunta['id'] . '" value="' . $opcion . '" required  onchange="LimpiarComplementos('. $pregunta['id'] .','. ++$total .')" '. $checked .' class="form-control"> '. $opcion . '&nbsp;&nbsp;';
                         if (substr($opcion, -1) == ":"){
                           $valorComp = '';
                           $disabled = 'disabled';
@@ -256,19 +254,20 @@
                             $valorComp = $complemento;
                             $disabled = '';
                           }
-                          $contenido .= '<input type="text" ' . $disabled . ' onkeyup="validarFormulario()" onpaste="validarFormulario()" name="complemento_' . $pregunta['id'] . '" id="complemento_' . $pregunta['id'] . '_' . $total . '" value="' . $valorComp . '" >';
+                          $contenido .= '<input type="text" ' . $disabled . ' onkeyup="validarFormulario()" onpaste="validarFormulario()" name="complemento_' . $pregunta['id'] . '" id="complemento_' . $pregunta['id'] . '_' . $total . '" value="' . $valorComp . '" class="form-control" >';
                         }
                         $contenido .= '&nbsp;&nbsp;';
                       }
-                      $contenido .= '<br/>';
                       break;
                   case 'text|enum':
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-respuesta">';
                       $contenido .= '<ul class="sortable">';
                       if (count($respuestas) > 1){
                         asort($respuestas);
                         foreach ($respuestas as $index => $value) {
                           if (array_key_exists($index, $opciones)){
-                            $contenido .= '<li class="ui-state-default"><input type="hidden" name="respuesta_' . $pregunta['id'] . '_' . ($index+1) . '" value="' . $value . '"> '. $opciones[$index] . '</li>';
+                            $contenido .= '<li class="ui-state-default"><input type="hidden" name="respuesta_' . $pregunta['id'] . '_' . ($index+1) . '" value="' . $value . '" class="form-control" > '. $opciones[$index] . '</li>';
                           }
                         }
                       } else {
@@ -276,17 +275,17 @@
                         $cantidad = count($opciones);
                         foreach ($opciones as $opcion) {
                           $valorNum = '';
-                          $contenido .= '<li class="ui-state-default"><input type="hidden" name="respuesta_' . $pregunta['id'] . '_' . ++$total . '" value="' . $total . '"> '. $opcion . '</li>';
+                          $contenido .= '<li class="ui-state-default"><input type="hidden" name="respuesta_' . $pregunta['id'] . '_' . ++$total . '" value="' . $total . '" class="form-control" > '. $opcion . '</li>';
                         }
                       }
-                      $contenido .= '</ul>';
-                      $contenido .= '<br/>';
                       break;
                   default:
                       break;
                 }
+                $contenido .= '</div>';
+                $contenido .= '</td></tr>';
             }
-            echo '</ul>';
+            $contenido .= '</table>';
           }
           $data['contenido'] = $contenido;
         }
