@@ -12,15 +12,15 @@
             $data['title'] = "Administradores";
             $this->load->view('templates/header', $data);
             $this->load->view('admin/Admin_vista');
-            $this->load->view('templates/footer');
+            $this->load->view('templates/footer2');
           }
-          public function loguin(){
+          public function login(){
               // se carga el modelo para verificar si existen el usuario y password que se reciben por post
               $this->load->model('admin_model');
               // se atrapan los post del formulario
               $usuario = $this->input->post('user');
               $password = $this->input->post('password');
-              if( $this->admin_model->loguin($usuario, $password) != false ){
+              if( $this->admin_model->login($usuario, $password) != false ){
                 $ingresado = true;
                 $this->load->library('session');
                 $datosAca = array('user'=>$usuario,'ingresado'=>$ingresado);
@@ -29,13 +29,13 @@
                 $data['administrador'] = $this->session->user;
                 $this->load->view('templates/header', $data);
                 $this->load->view('admin/control', $data);
-                $this->load->view('templates/footer');
+                $this->load->view('templates/footer2');
               }else{
                 $ingresado = false;
                 $data['title'] = "Control";
                 $this->load->view('templates/header', $data);
                 $this->load->view('admin/error');
-                $this->load->view('templates/footer');
+                $this->load->view('templates/footer2');
               }
           }
           //carga los datos a la tabla por aceptar

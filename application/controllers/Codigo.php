@@ -66,7 +66,7 @@
         $data['title'] = "Cedula";
         $this->load->view('templates/header',$data);
         $this->load->view('codigo/pedir');
-        $this->load->view('templates/footer');
+        $this->load->view('templates/footer2');
       }
       public function dataPostCorreo(){
         $this->load->model('porValidar_model');
@@ -75,11 +75,37 @@
         if( $this->porValidar_model->insertData($correo)){
           $this->load->view('templates/header');
           $this->load->view('codigo/medico',$data);
-          $this->load->view('templates/footer');
+          $this->load->view('templates/footer2');
         }
         else{
           return false;
         }
       }
+
+      public function dataPost(){
+        $this->load->model('porValidar_model');
+        $nombre = $this->input->post('nombre');
+        $correo = $this->input->post('email');
+        $medico = $this->input->post('medico');
+        $cedula = $this->input->post('cedula');
+        $justificacion = $this->input->post('justificacion');
+
+        $data['title'] = "intermed";
+        $data['nombre'] = $nombre;
+        $data['correo'] = $correo;
+        $data['medico'] = $medico;
+        $data['cedula'] = $cedula;
+        $data['justificacion'] = $justificacion;
+
+        if( $this->porValidar_model->insertData($nombre, $correo, $medico, $cedula, $justificacion)){
+          $this->load->view('templates/header', $data);
+          $this->load->view('codigo/mensaje',$data);
+          $this->load->view('templates/footer2');
+        }
+        else{
+          return false;
+        }
+      }
+
   }
 ?>

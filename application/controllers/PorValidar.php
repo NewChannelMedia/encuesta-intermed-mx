@@ -18,7 +18,7 @@
               $data['cedula'] = $cedula;
               $this->load->view('templates/header',$data);
               $this->load->view('codigo/mensaje', $data);
-              $this->load->view('templates/footer');
+              $this->load->view('templates/footer2');
             }else{
 
             }
@@ -36,7 +36,7 @@
               $data['correo'] = $oculto;
               $this->load->view('templates/header',$data);
               $this->load->view('codigo/mensaje', $data);
-              $this->load->view('templates/footer');
+              $this->load->view('templates/footer2');
             }
           }
       }

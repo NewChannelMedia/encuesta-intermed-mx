@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?php echo $title ?> - Prueba 1</title>
+    <title><?php echo $title ?></title>
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>css/encuesta.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>fonts/fonts.css">

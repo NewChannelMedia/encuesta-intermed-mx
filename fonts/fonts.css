@@ -1029,7 +1029,7 @@
 }
 
 .s35 {
-  font-size: 15px;
+  font-size: 35px;
 }
 
 .s40 {
@@ -1037,7 +1037,7 @@
 }
 
 .s45 {
-  font-size: 15px;
+  font-size: 45px;
 }
 
 .s50 {
@@ -1045,5 +1045,77 @@
 }
 
 .s55 {
-  font-size: 15px;
+  font-size: 55px;
+}
+
+.s60 {
+  font-size: 60px;
+}
+
+.s65 {
+  font-size: 65px;
+}
+
+.uppr {
+  text-transform: uppercase;
+}
+
+.lwr {
+  text-transform: lowercase;
+}
+
+.cptlz {
+  text-transform: capitalize;
+}
+
+.notransform {
+  text-transform: none;
+}
+
+.ls-5 {
+  letter-spacing: -5px;
+}
+
+.ls-4 {
+  letter-spacing: -4px;
+}
+
+.ls-3 {
+  letter-spacing: -3px;
+}
+
+.ls-2 {
+  letter-spacing: -2px;
+}
+
+.ls-1 {
+  letter-spacing: -1px;
+}
+
+.ls0 {
+  letter-spacing: 0px;
+}
+
+.ls1 {
+  letter-spacing: 1px;
+}
+
+.ls2 {
+  letter-spacing: 2px;
+}
+
+.ls3 {
+  letter-spacing: 3px;
+}
+
+.ls4 {
+  letter-spacing: 4px;
+}
+
+.ls5 {
+  letter-spacing: 5px;
+}
+
+.white{
+  color: #ffffff;
 }

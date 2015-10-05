@@ -48,7 +48,8 @@
       switch ($data['status']) {
         case 0:
             //No existe la encuesta con ese código
-            echo 'La encuesta no existe';
+            $data['error'] = 'La encuesta no existe';
+            $this->load->view('about',$data);
             break;
         case 1:
             //Encuesta sin iniciar
@@ -64,7 +65,7 @@
             break;
       }
       /**/
-      $this->load->view('templates/footer', $data);
+      $this->load->view('templates/footer2', $data);
     }
 
     public function newsletter(){
@@ -293,14 +294,20 @@
         $this->load->view('templates/footer', $data);
       } else if ($data['status'] != 0) {
         $this->load->view('templates/header', $data);
-        $contenido .= 'Gracias por contestar la encuesta<br/>';
+        $contenido .= '<h1 class="Flama-normal s40 text-center">Gracias por contestar la encuesta</h1>';
+        $contenido .= '<div class="row"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">';
         $contenido .= '<input type="checkbox" id="promo" value="si" onchange="aceptarPromocion()">';
         $contenido .= 'Quiero recibir correos y promociones<br/>';
-        $contenido .= '<div id="contenido"><a href="/encuesta-intermed-mx">Ir a inicio</a></div>';
+        $contenido .= '<div id="contenido"></div></div></div>';
+        $contenido .= '<div class="row">
+          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
+          </br><a href="/encuesta-intermed-mx" class="btn btn-danger btn-lg btn-block">Regresar</a>
+          </div>
+        </div>';
         $data['contenido'] = $contenido;
 
         $this->load->view('encuesta/encuesta', $data);
-        $this->load->view('templates/footer', $data);
+        $this->load->view('templates/footer2', $data);
         //Redirect /about o index
       }
 
