@@ -6,8 +6,12 @@ html {
 }
 
 body {
-  position: relative;
+  position: absolute;
   display: block;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .navbarMain {
@@ -48,6 +52,14 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
+}
+.main2 {
+  position: absolute;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  bottom: 0;
 }
 
 .main-bg {
@@ -113,7 +125,7 @@ body {
 }
 
 .main-body-intern {
-  padding: 11% 0;
+  padding: 15% 0;
 }
 
 .main-body-intern-container {
@@ -236,7 +248,7 @@ section#contact .text-danger {
 
 footer {
   background-color: #3e97ce;
-  border-top: solid 7px #000003;
+  border-top: solid 7px #000003!important;
   color: #ffffff;
   padding-top: 30px;
   padding-bottom: 30px;

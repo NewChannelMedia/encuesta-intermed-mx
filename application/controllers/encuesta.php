@@ -48,7 +48,8 @@
       switch ($data['status']) {
         case 0:
             //No existe la encuesta con ese código
-            echo 'La encuesta no existe';
+            $data['error'] = 'La encuesta no existe';
+            $this->load->view('about',$data);
             break;
         case 1:
             //Encuesta sin iniciar
@@ -56,13 +57,15 @@
             //Encuesta sin terminar
         case 3:
             //Encuesta ya contestada
-            $this->load->view('about', $data);
+            //$this->load->view('about', $data);
+            header('Location: /encuesta-intermed-mx/encuesta');
+            die();
             break;
         default:
             break;
       }
       /**/
-      $this->load->view('templates/footer', $data);
+      $this->load->view('templates/footer2', $data);
     }
 
     public function newsletter(){
