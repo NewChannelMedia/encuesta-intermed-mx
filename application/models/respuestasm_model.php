@@ -1,5 +1,5 @@
 <?php
-class RespuestasM_Model extends CI_Model {
+class Respuestasm_model extends CI_Model {
   public function __construct()
   {
     $this->load->database();

@@ -29,12 +29,12 @@ $( function () {
   $( "#envioEmail" ).click( function () {
     $( this ).val()
     $.ajax( {
-      url: '/encuesta-intermed-mx/codigo/dataPostCorreo',
+      url: '/encuesta-intermed/codigo/dataPostCorreo',
       type: "POST",
       dataType: 'JSON',
       async: true,
       success: function () {
-        $( "#doctor" ).load( '/encuesta-intermed-mx/porValidar/index' )
+        $( "#doctor" ).load( '/encuesta-intermed/porValidar/index' )
       },
       error: function () {
         console.log( "Error: AJax dead :(" );
@@ -76,8 +76,6 @@ $( window ).resize( function () {
     $( element ).css( 'left', ( parseInt( $( element ).css( 'left' ) ) - 25 + parseInt( $( '#progress-bar-current' ).css( 'width' ) ) / 2 ) );
   } );
 } );
-
-history.go( 1 );
 
 $( document ).ready( function () {
   validarFormulario();
@@ -184,7 +182,7 @@ function validarFormulario() {
 }
 
 function salir() {
-  window.location.href = "/encuesta-intermed-mx";
+  window.location.href = "/encuesta-intermed";
 }
 
 function LimpiarComplementos( id, comp ) {
@@ -250,7 +248,7 @@ $( document ).ready( function () {
 
     //se carga el ajax para la carga de las tablas
     $.ajax( {
-      url: '/encuesta-intermed-mx/admin/porAceptar',
+      url: '/encuesta-intermed/admin/porAceptar',
       type: 'POST',
       dataType: 'JSON',
       success: function ( data ) {
@@ -291,7 +289,7 @@ $( document ).ready( function () {
     $( "#aceptados" ).addClass( 'hidden' );
     $( "#porAceptar" ).addClass( 'hidden' );
     $.ajax( {
-      url: '/encuesta-intermed-mx/admin/porAceptar',
+      url: '/encuesta-intermed/admin/porAceptar',
       type: 'POST',
       dataType: 'JSON',
       success: function ( data ) {
@@ -317,7 +315,7 @@ $( document ).ready( function () {
     $( "#porAceptar" ).addClass( 'hidden' );
     $( "#noAceptadas" ).addClass( 'hidden' );
     $.ajax( {
-      url: '/encuesta-intermed-mx/admin/porAceptar',
+      url: '/encuesta-intermed/admin/porAceptar',
       type: 'POST',
       dataType: 'JSON',
       success: function ( data ) {
@@ -342,7 +340,7 @@ $( document ).ready( function () {
   $( "#generaCodigo" ).click( function () {
     //carga ajax para generar el codigo
     $.ajax( {
-      url: "/encuesta-intermed-mx/codigo/makeCode",
+      url: "/encuesta-intermed/codigo/makeCode",
       type: "POST",
       dataType: "JSON",
       success: function ( data ) {
@@ -358,7 +356,7 @@ $( document ).ready( function () {
   $( "#enviaCodigoGenerado" ).click( function () {
     if ( $( "#aleatorioDato" ).val() != "" ) {
       $.ajax( {
-        url: '/encuesta-intermed-mx/admin/insertaCodigo/' + $( "#aleatorioDato" ).val(),
+        url: '/encuesta-intermed/admin/insertaCodigo/' + $( "#aleatorioDato" ).val(),
         type: "POST",
         dataType: "JSON",
         success: function ( data ) {
@@ -370,7 +368,7 @@ $( document ).ready( function () {
       } );
       // se envia el correo con los datos correspondientes
       $.ajax( {
-        url: 'encuesta-intermed-mx/codigo/sendMail/' + $( "#codigoCorreo" ).text() + "/Cedula valida/" + "prueba.php",
+        url: 'encuesta-intermed/codigo/sendMail/' + $( "#codigoCorreo" ).text() + "/Cedula valida/" + "prueba.php",
         type: "POST",
         success: function ( p ) {
           alert( "correo enviado" );

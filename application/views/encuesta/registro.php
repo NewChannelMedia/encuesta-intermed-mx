@@ -1,4 +1,4 @@
-<form role="form" method="POST" action="/encuesta-intermed-mx/encuesta">
+<form role="form" method="POST" action="<?=  base_url() ?>encuesta">
       <div style="color:red"><?php if (isset($mensaje)) echo $mensaje ?></div>
       <input type="hidden" name="codigo" value="<?php echo $codigo ?>">
       Nombre: <input type="text" name="nombre" <?php if (isset($nombre)){ echo 'value="' . $nombre . '"';} ?>><br/>

@@ -9,7 +9,7 @@
     <span>(La encuesta es de carácter anónimo)</span>
   </div>
 
-  <form method="POST" action="/encuesta-intermed-mx/encuesta" onsubmit="comprobar()" id="formEnc"  class="form-inline">
+  <form method="POST" action="<?= base_url() ?>encuesta" onsubmit="comprobar()" id="formEnc"  class="form-inline">
   <input type="hidden" name="codigo" value="<?php echo $codigo; ?>">
   <input type="hidden" name="continuar" id="continuar">
   <input type="hidden" name="irEtapa" id="irEtapa">

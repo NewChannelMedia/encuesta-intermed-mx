@@ -4,11 +4,11 @@
 
     public function __construct(){
       parent::__construct();
-      $this->load->model('EncuestasM_Model');
-      $this->load->model('Categorias_Model');
-      $this->load->model('PreguntasM_Model');
-      $this->load->model('RespuestasM_Model');
-      $this->load->model('Newsletter_Model');
+      $this->load->model('Encuestam_model');
+      $this->load->model('Categorias_model');
+      $this->load->model('Preguntasm_model');
+      $this->load->model('Respuestasm_model');
+      $this->load->model('Newsletter_model');
       header('Cache-Control: no cache');
     }
 
@@ -59,7 +59,7 @@
             break;
         case 3:
             //Encuesta ya contestada
-            header('Location: /encuesta-intermed-mx/encuesta');
+            header('Location: '. base_url() .'encuesta');
             die();
         default:
             break;
@@ -74,11 +74,11 @@
       $email = $this->input->post('email');
 
       if (!$nombre){
-        header('Location: /encuesta-intermed-mx');
+        header('Location: ' .  base_url() );
         die();
       }
 
-      $this->Newsletter_Model->create_newsletter($nombre,$email);
+      $this->Newsletter_model->create_newsletter($nombre,$email);
 
       echo '<script type="text/javascript">
       history.pushState(null, null, location.href);
@@ -86,7 +86,7 @@
           history.go(1);
       };</script>';
       echo 'Hola ' . $nombre. ', ya estas registrado en el newsletter<br/>';
-      echo '<a href="/encuesta-intermed-mx">Ir a inicio</a>';
+      echo '<a href="' . base_url() . '">Ir a inicio</a>';
 
     }
 
@@ -96,7 +96,7 @@
 
       if(!$codigo){
         //redireccionar
-        header('Location: /encuesta-intermed-mx');
+        header('Location: ' .  base_url() );
         die();
       }
 
@@ -152,7 +152,7 @@
               $update = array(
                  'pregunta_' . $id => $value,
               );
-              $resultado = $this->RespuestasM_Model->update_respuestamByEncuesta($data['encuesta_id'], $update);
+              $resultado = $this->Respuestasm_model->update_respuestamByEncuesta($data['encuesta_id'], $update);
               //echo 'resultado: ' . $resultado;
               if ($resultado > 0){
                 if ($actualizar === '') $actualizar = true;
@@ -164,7 +164,7 @@
           $update = array(
             'etapa_' . $etapaResp => 1
           );
-          $this->EncuestasM_Model->update_encuestam($data['encuesta_id'], $update);
+          $this->Encuestam_model->update_encuestam($data['encuesta_id'], $update);
           $data = $this->checkStatus($codigo);
           $guardado = true;
           if ($data['terminado'] == 4){
@@ -178,7 +178,7 @@
       $data['title'] = "Encuesta";
 
       if ($continuarEnc === "0"){
-        header('Location: /encuesta-intermed-mx');
+        header('Location: ' .  base_url() );
         die();
       }
 
@@ -202,16 +202,16 @@
 
         $contenido .= '<input type="hidden" name="etapaResp" id="etapaResp" value="'. $etapa .'">';
 
-        $resultado = $this->Categorias_Model->get_categoriasByEtapa($etapa);
+        $resultado = $this->Categorias_model->get_categoriasByEtapa($etapa);
 
         foreach ($resultado as $categoria) {
           if ($categoria){
             $contenido .= '<div class="block-container-category"><span class="glyphicon glyphicon-asterisk"></span><span class="category">' . $categoria['categoria'] . '</span></div>';
             $contenido .= '<table class="table table-striped block-container-table">';
-            $preguntas = $this->PreguntasM_Model->get_preguntamByCategoria($categoria['id']);
+            $preguntas = $this->Preguntasm_model->get_preguntamByCategoria($categoria['id']);
 
             foreach ($preguntas as $pregunta) {
-                $respuesta = $this->RespuestasM_Model->get_respuestaByEncuestaPregunta($data['encuesta_id'], $pregunta['id']);
+                $respuesta = $this->Respuestasm_model->get_respuestaByEncuestaPregunta($data['encuesta_id'], $pregunta['id']);
                 $respuesta = explode('|',$respuesta['pregunta_' . $pregunta['id']]);
                 $respuestas = array();
                 $complemento = '';
@@ -301,7 +301,7 @@
         $contenido .= '<div id="contenido"></div></div></div>';
         $contenido .= '<div class="row">
           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-          </br><a href="/encuesta-intermed-mx" class="btn btn-danger btn-lg btn-block">Regresar</a>
+          </br><a href="'. base_url() .'" class="btn btn-danger btn-lg btn-block">Regresar</a>
           </div>
         </div>';
         $data['contenido'] = $contenido;
@@ -322,7 +322,7 @@
       3-La encuesta existe y ya la terminaron de contenstar
       */
       $data = array();
-      $resultado = $this->EncuestasM_Model->get_encuestamByCodigo($codigo);
+      $resultado = $this->Encuestam_model->get_encuestamByCodigo($codigo);
 
       $status = -1;
       if ($resultado){

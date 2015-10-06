@@ -16,11 +16,11 @@
           }
           public function login(){
               // se carga el modelo para verificar si existen el usuario y password que se reciben por post
-              $this->load->model('admin_model');
+              $this->load->model('Admin_model');
               // se atrapan los post del formulario
               $usuario = $this->input->post('user');
               $password = $this->input->post('password');
-              if( $this->admin_model->login($usuario, $password) != false ){
+              if( $this->Admin_model->login($usuario, $password) != false ){
                 $ingresado = true;
                 $this->load->library('session');
                 $datosAca = array('user'=>$usuario,'ingresado'=>$ingresado);
@@ -40,8 +40,8 @@
           }
           //carga los datos a la tabla por aceptar
           public function porAceptar(){
-            $this->load->model('admin_model');
-            $query = $this->admin_model->porAceptar();
+            $this->load->model('Admin_model');
+            $query = $this->Admin_model->porAceptar();
             $aceptar = array();
             $i = 0;
             foreach( $query->result() as $row ){
@@ -58,8 +58,8 @@
           }
           //inserta el codigo
           public function insertaCodigo($codigo){
-            $this->load->model('admin_model');
-            return $this->admin_model->insertaCodigoGenerado($codigo);
+            $this->load->model('Admin_model');
+            return $this->Admin_model->insertaCodigoGenerado($codigo);
           }
       }
   ?>

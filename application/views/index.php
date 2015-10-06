@@ -17,7 +17,7 @@
   <div class="main-header">
     <div class="container">
       <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-1">
-        <img class="center-block" src="<?= base_url()?>img/Texto-header.png">
+        <img class="center-block" src="<?echo base_url()?>img/Texto-header.png">
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@
             <h4 class="Flama-w900 s20 text-center">Ingresa tu código aquí:</h4>
           </div>
           <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 code-input">
-            <form role="form" method="POST" action="/encuesta-intermed-mx/about">
+            <form role="form" method="POST" action="<?= base_url(); ?>about">
               <div class="form-group">
                 <input type="text" class="form-control code-intput-control" placeholder="" name="codigo">
               </div>
@@ -53,7 +53,7 @@
       <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
         <p class="Flama-normal s20 extra-info text-center">
           Si no has recibido un código de invitación pero estas interesado en obtener información acerca de <span class="Flama-w900">intermed<sup>&reg;</sup></span>,
-          <a href = "/encuesta-intermed-mx/codigo/pedir" class="Flama-w900 s25">solicítalo aquí</a>
+          <a href = "<?php echo base_url(); ?>codigo/pedir" class="Flama-w900 s25">solicítalo aquí</a>
         </p>
       </div>
     </div>
