@@ -18,7 +18,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
-          <form method="post" action="/encuesta-intermed-mx/codigo/dataPost" id="datosSolicitud"><!-- main-body-intern-container -->
+          <form method="post" action="<?php echo base_url(); ?>codigo/dataPost" id="datosSolicitud"><!-- main-body-intern-container -->
             <div class="h400">
               <h4 class="Flama-normal s20 text-center white">Ingresa los siguientes datos para procesar tu solicitud:</h4>
               <div class="form-group col-md-8 col-md-offset-2 usuarioSolcitud">
@@ -56,7 +56,7 @@
       </div>
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-        </br><a href="<?= base_url(); ?>" class="btn btn-danger btn-lg btn-block">Regresar</a>
+        </br><a href="<?echo base_url();; ?>" class="btn btn-danger btn-lg btn-block">Regresar</a>
         </div>
       </div>
     </div>

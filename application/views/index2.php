@@ -23,7 +23,7 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-<form role="form" method="POST" action="/encuesta-intermed-mx/about">
+<form role="form" method="POST" action="<?php echo base_url(); ?>about">
       <ul class="nav navbar-nav navbar-right">
         <li class="hidden">
           <a href="#page-top"></a>

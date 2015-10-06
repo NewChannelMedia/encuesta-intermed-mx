@@ -69,10 +69,10 @@
         $this->load->view('templates/footer2');
       }
       public function dataPostCorreo(){
-        $this->load->model('porValidar_model');
+        $this->load->model('PorValidar_model');
         $correo = $this->input->post('email');
         $data['correito'] = $correo;
-        if( $this->porValidar_model->insertData($correo)){
+        if( $this->PorValidar_model->insertData($correo)){
           $this->load->view('templates/header');
           $this->load->view('codigo/medico',$data);
           $this->load->view('templates/footer2');
@@ -83,7 +83,7 @@
       }
 
       public function dataPost(){
-        $this->load->model('porValidar_model');
+        $this->load->model('PorValidar_model');
         $nombre = $this->input->post('nombre');
         $correo = $this->input->post('email');
         $medico = $this->input->post('medico');
@@ -97,7 +97,7 @@
         $data['cedula'] = $cedula;
         $data['justificacion'] = $justificacion;
 
-        if( $this->porValidar_model->insertData($nombre, $correo, $medico, $cedula, $justificacion)){
+        if( $this->PorValidar_model->insertData($nombre, $correo, $medico, $cedula, $justificacion)){
           $this->load->view('templates/header', $data);
           $this->load->view('codigo/mensaje',$data);
           $this->load->view('templates/footer2');

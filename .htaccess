@@ -3,5 +3,5 @@
     RewriteCond $1 !^(index\.php|public|robots.txt)
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)$ /encuesta-intermed-mx/index.php/$1 [L]
+    RewriteRule ^(.*)$ /encuesta-intermed/index.php/$1 [L]
 </IfModule>

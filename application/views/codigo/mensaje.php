@@ -42,7 +42,7 @@
       </div>
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-        </br><a href="<?= base_url(); ?>" class="btn btn-info btn-lg btn-block">Regresar</a>
+        </br><a href="<?echo base_url();; ?>" class="btn btn-info btn-lg btn-block">Regresar</a>
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
           <?php if ($status != 0){ ?>
-            <form role="form" method="POST" action="/encuesta-intermed-mx/encuesta">
+            <form role="form" method="POST" action="<?php echo base_url(); ?>encuesta">
                   <input type="hidden" name="codigo" value="<?php echo $codigo ?>">
                   <button type="submit" class="btn btn-success btn-lg btn-block">
                       Contestar la encuesta
@@ -32,7 +32,7 @@
       </div>
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">
-        </br><a href="<?= base_url(); ?>" class="btn btn-danger btn-lg btn-block">Regresar</a>
+        </br><a href="<?echo base_url();; ?>" class="btn btn-danger btn-lg btn-block">Regresar</a>
         </div>
       </div>
     </div>

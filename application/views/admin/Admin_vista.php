@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="col-md-4">
         <div class="col-md-offset-2">
-          <form method="POST" action ="/encuesta-intermed-mx/admin/login" id="loguin" class="form-horizontal">
+          <form method="POST" action ="<?= base_url()?>admin/login" id="loguin" class="form-horizontal">
             <div class="form-group">
               <label for="userLog" class="col-sm-2 control-label">Usuario</label>
               <div class="col-sm-10">
