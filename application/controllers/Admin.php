@@ -3,7 +3,6 @@
       * Controlador para trabajar con la informacion que puede ver los administradores,
       * del sitio, la tabla para aceptar las solicitudes que nos lleguen.
       * Se usaran sessiones para los usuarios
-      *
       */
       class Admin extends CI_Controller
       {

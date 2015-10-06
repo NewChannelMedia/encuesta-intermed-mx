@@ -10,7 +10,6 @@
       $this->load->view('templates/header', $data);
       $this->load->view('index', $data);
       $this->load->view('templates/footer', $data);
-
     }
   }
 ?>

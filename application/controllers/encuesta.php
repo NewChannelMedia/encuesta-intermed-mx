@@ -1,7 +1,5 @@
 <?php
   class Encuesta extends CI_Controller {
-
-
     public function __construct(){
       parent::__construct();
       $this->load->model('Encuestam_model');

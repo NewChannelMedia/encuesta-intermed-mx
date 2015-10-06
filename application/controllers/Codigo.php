@@ -4,8 +4,6 @@
   * desde Generarlo hasta comprobar que exista. En caso que no exista,
   * se mandara a llamar otras funciones de otras clases para su uso, y
   * realice la tarea destinada que tiene el metodo que las esta llamando
-  *
-  *
   **/
   class Codigo extends CI_Controller
   {
