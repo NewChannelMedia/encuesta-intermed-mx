@@ -4,10 +4,10 @@
 
     public function __construct(){
       parent::__construct();
-      $this->load->model('EncuestasM_Model');
-      $this->load->model('Categorias_Model');
-      $this->load->model('PreguntasM_Model');
-      $this->load->model('RespuestasM_Model');
+      $this->load->model('Encuestam_model');
+      $this->load->model('Categorias_model');
+      $this->load->model('Preguntasm_model');
+      $this->load->model('Respuestasm_model');
       header('Cache-Control: no cache');
     }
 
@@ -18,19 +18,19 @@
 
       $resultado = array();
 
-      $categorias = $this->Categorias_Model->get_categorias();
+      $categorias = $this->Categorias_model->get_categorias();
 
       $total = 0;
       foreach ($categorias as $cat) {
           $categoriasArray = array();
           $categoriasArray['name'] = $cat['categoria'];
-          $preguntas = $this->PreguntasM_Model->get_preguntamByCategoria($cat['id']);
+          $preguntas = $this->Preguntasm_model->get_preguntamByCategoria($cat['id']);
           $preguntasArray = array();
           foreach ($preguntas as $preg) {
               $pregArray = array();
               $pregArray['pregunta'] = $preg['pregunta'];
               $pregArray['respuestas'] = array();
-              $respuestas = $this->RespuestasM_Model->get_respuestamByPregunta($preg['id']);
+              $respuestas = $this->Respuestasm_model->get_respuestamByPregunta($preg['id']);
               $opciones = array();
               $resultadoTextEnum = array();
               $resultadoRadioComplemento = array();

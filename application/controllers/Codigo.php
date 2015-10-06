@@ -23,9 +23,9 @@
         shuffle($posible);
         $codigo = array_slice($posible, 0,6);
         $str = implode('', $codigo);
-        //return $str;
-        $data['numero'] = $str;
-        $this->load->view('codigo/genera', $data);
+        print_r(json_encode($str));
+        /*$data['numero'] = $str;
+        $this->load->view('codigo/genera', $data);*/
       }
       /**
       * funcion para enviar el correo
@@ -41,10 +41,10 @@
         $headers .= 'From: <intermed.encuestas@newchannel.mx>'."\r\n";
         // se lee el archivo para guardarlo en una variable y poderlo enviar
         $archivo = "";
-        $archivo .= "application/views/correos/";
-        $archivo .= "".$file."";
+        $archivo .= "/application/views/correos/".$file;
         $fichero_texto = "".file_get_contents($archivo);
-        return mail($to,$subject,$fichero_texto,$headers);
+        print_r($fichero_texto);
+        //return mail($to,$subject,$fichero_texto,$headers);
       }
       /**
       * Se valida la cedula, en ser real se le envia un correo con el codigo, nuevo, y ese codigo quedara registrado
@@ -66,20 +66,46 @@
         $data['title'] = "Cedula";
         $this->load->view('templates/header',$data);
         $this->load->view('codigo/pedir');
-        $this->load->view('templates/footer');
+        $this->load->view('templates/footer2');
       }
       public function dataPostCorreo(){
-        $this->load->model('porValidar_model');
+        $this->load->model('PorValidar_model');
         $correo = $this->input->post('email');
         $data['correito'] = $correo;
-        if( $this->porValidar_model->insertData($correo)){
+        if( $this->PorValidar_model->insertData($correo)){
           $this->load->view('templates/header');
           $this->load->view('codigo/medico',$data);
-          $this->load->view('templates/footer');
+          $this->load->view('templates/footer2');
         }
         else{
           return false;
         }
       }
+
+      public function dataPost(){
+        $this->load->model('PorValidar_model');
+        $nombre = $this->input->post('nombre');
+        $correo = $this->input->post('email');
+        $medico = $this->input->post('medico');
+        $cedula = $this->input->post('cedula');
+        $justificacion = $this->input->post('justificacion');
+
+        $data['title'] = "intermed";
+        $data['nombre'] = $nombre;
+        $data['correo'] = $correo;
+        $data['medico'] = $medico;
+        $data['cedula'] = $cedula;
+        $data['justificacion'] = $justificacion;
+
+        if( $this->PorValidar_model->insertData($nombre, $correo, $medico, $cedula, $justificacion)){
+          $this->load->view('templates/header', $data);
+          $this->load->view('codigo/mensaje',$data);
+          $this->load->view('templates/footer2');
+        }
+        else{
+          return false;
+        }
+      }
+
   }
 ?>

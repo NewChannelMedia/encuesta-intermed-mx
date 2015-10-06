@@ -1,5 +1,5 @@
 <?php
-class Newsletter_Model extends CI_Model {
+class Newsletter_model extends CI_Model {
   public function __construct()
   {
     $this->load->database();
