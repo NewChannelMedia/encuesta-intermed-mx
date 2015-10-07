@@ -487,4 +487,9 @@ html>body .sortable li { height: 2em; line-height: 1.2em; }
 #admin-page {
   margin-top:40px;
 }
+
+.complemento {
+  background-color: #EEE;
+  padding: 20px;
+}
 /* development */

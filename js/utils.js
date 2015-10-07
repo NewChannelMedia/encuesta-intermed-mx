@@ -314,17 +314,25 @@ function ChartBar(data){
     ]
   }
   $('#'+element).html('<canvas id="canvas_'+element+'" height="' + height +'" width="500"></canvas>');
-  var ctx = document.getElementById('canvas_'+element).getContext("2d");
+  var canvas = document.getElementById('canvas_'+element);
+  var ctx = canvas.getContext("2d");
   var MyChart = new Chart(ctx).Bar(barChartData, {
     responsive : true
   });
 
-  document.getElementById('canvas_'+element).onclick = function(evt){
-    console.log('EVT: ' + JSON.stringify(evt));
-    var activePoints = MyChart.getBarsAtEvent(evt);
-    console.log('Active points: '. activePoints);
-      // => activePoints is an array of points on the canvas that are at the same position as the click event.
+  canvas.onclick = function(evt){
+      var activePoints = MyChart.getBarsAtEvent(evt);
+      data.data.forEach(function (result){
+        if (result.label == activePoints[0]['label']){
+          if (result.complemento){
+            $('#'+element+'_complemento').html('Tiene complemento');
+          } else {
+            $('#'+element+'_complemento').html('');
+          }
+        }
+      });
   };
+
 }
 
 function ChartRadar(data){

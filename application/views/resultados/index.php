@@ -27,26 +27,28 @@
                     if (!is_array($total)){
                       if (!empty($resp)){
                         $data[] = array('label' => $resp, 'value' => $total);
-                        echo '<li>['. $total .'] - ' . $resp. '</li>';
                       }
                     } else {
                       if (!empty($resp)){
-                        $data[] = array('label' => $resp, 'value' => $total['total']);
-                        echo '<li>['. $total['total'] .'] - ' . $resp. '</li>';
-                        echo '<pre><b>Complemento</b><br/>';
-                        foreach ($total['comp'] as $comp => $compt) {
-                          echo '[' . $compt. '] ' . $comp . '<br/>';
+                        if (count($total['comp'])>0){
+                          $complemento = [];
+                          foreach ($total['comp'] as $comp => $compt) {
+                            array_push($complemento, array('total' => $compt, 'comp' => $comp));
+                          }
+                          $data[] = array('label' => $resp, 'value' => $total['total'], 'complemento' => $complemento);
+                          echo '<pre>'. print_r(array('label' => $resp, 'value' => $total['total'], 'complemento' => $complemento),1) .'</pre>';
+                        } else {
+                          $data[] = array('label' => $resp, 'value' => $total['total']);
                         }
-                        echo '</pre>';
                       }
                   }
                 }
               } else {
                 if (!empty($respuesta['respuesta'])){
-                  $data[] = array('label' => $respuesta['respuesta'], 'value' => $respuesta['total']);
-                  echo '<li>['. $respuesta['total'] .'] - ' . $respuesta['respuesta'] . '</li>';
                   if (array_key_exists('complemento', $respuesta)){
-                      echo ' (Complemento: ' . $respuesta['complemento'] . ')';
+                    $data[] = array('label' => $respuesta['respuesta'], 'value' => $respuesta['total'], 'complemento' => $respuesta['complemento']);
+                  } else {
+                      $data[] = array('label' => $respuesta['respuesta'], 'value' => $respuesta['total']);
                   }
                 }
               }
@@ -55,7 +57,6 @@
             $divId = 'pregunta_' . $totalChar++;
 
             $tipo = rand(1,5);
-            echo 'TIPO: ' . $tipo . '<br/>';
 
             switch ($tipo) {
                 case 1:
@@ -91,6 +92,7 @@
               echo '</div>';
               echo '<div class="col-md-9" id="'. $divId .'">';
               echo '</div>';
+              echo '<div class="col-md-12 complemento" id="'. $divId .'_complemento"></div>';
             echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { Chart'. $tipo .'('.json_encode($enviar).') })</script>';
         ?>
         </pre>

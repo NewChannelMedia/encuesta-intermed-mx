@@ -36,11 +36,19 @@
               $resultadoRadioComplemento = array();
               if ($preg['tipo'] == 'text|enum' || $preg['tipo'] == 'radio'){
                 $opciones = explode('|', $preg['opciones'] );
-              }
-              foreach ($opciones as $key) {
-                if (strlen($key) > 0)
-                $resultadoRadioComplemento[$key] = 0;
-                $resultadoTextEnum[$key] = 0;
+                $num = 0;
+                foreach ($opciones as $key) {
+                  $value = $key;
+                  if (substr($key,-1) == ':'){
+                    $opciones[$num] = substr($key,0,strlen($key)-1);
+                    $num++;
+                    $value = $opciones[$num];
+                  }
+                  if (strlen($value) > 0){
+                    $resultadoRadioComplemento[$value] = 0;
+                    $resultadoTextEnum[$value] = 0;
+                  }
+                }
               }
 
               foreach ($respuestas as $resp) {
