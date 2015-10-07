@@ -121,42 +121,47 @@
         foreach ($POSTS as $post => $value) {
           if (substr($post,0,9) == "respuesta"){
             $id = explode('_', $post)[1];
-            if ($last != $id){
-              if (array_key_exists("respuesta_" . $id . '_1',$POSTS)){
-                $value = '';
-                $last = $id;
-                $next = true;
-                $total = 1;
-                $value =  $POSTS["respuesta_" . $id . '_' . $total];
-                $total++;
-                while ($next == true){
-                  if (array_key_exists("respuesta_" . $id . '_' . $total,$POSTS)){
-                    $value .= '|' . $POSTS["respuesta_" . $id . '_' . $total];
-                    $total++;
+            if ($id == 8  || $id == 9){
+              echo '<pre>' . print_r($POSTS,1). '</pre>';
+            }
+            else {
+              if ($last != $id){
+                if (array_key_exists("respuesta_" . $id . '_1',$POSTS)){
+                  $value = '';
+                  $last = $id;
+                  $next = true;
+                  $total = 1;
+                  $value =  $POSTS["respuesta_" . $id . '_' . $total];
+                  $total++;
+                  while ($next == true){
+                    if (array_key_exists("respuesta_" . $id . '_' . $total,$POSTS)){
+                      $value .= '|' . $POSTS["respuesta_" . $id . '_' . $total];
+                      $total++;
+                    } else {
+                      $next = false;
+                    }
+                  }
+                  if (array_key_exists("complemento_" . $id,$POSTS) && !empty($POSTS['complemento_' . $id])){
+                    $value .= '|comp:' . $POSTS['complemento_' . $id];
+                  }
+                } else {
+                  if (array_key_exists("complemento_" . $id,$POSTS) && !empty($POSTS['complemento_' . $id])){
+                    $value .= '|comp:' . $POSTS['complemento_' . $id];
+                    //echo "Es una respuesta! de la pregunta: ". $id ." y tiene complemento<br/>";
                   } else {
-                    $next = false;
+                    //echo "Es una respuesta! de la pregunta: ". $id ."<br/>";
                   }
                 }
-                if (array_key_exists("complemento_" . $id,$POSTS) && !empty($POSTS['complemento_' . $id])){
-                  $value .= '|comp:' . $POSTS['complemento_' . $id];
-                }
-              } else {
-                if (array_key_exists("complemento_" . $id,$POSTS) && !empty($POSTS['complemento_' . $id])){
-                  $value .= '|comp:' . $POSTS['complemento_' . $id];
-                  //echo "Es una respuesta! de la pregunta: ". $id ." y tiene complemento<br/>";
-                } else {
-                  //echo "Es una respuesta! de la pregunta: ". $id ."<br/>";
-                }
+                //echo $id . ': ' . $value .'<br/>';
+                $update = array(
+                   'pregunta_' . $id => $value,
+                );
+                $resultado = $this->Respuestasm_model->update_respuestamByEncuesta($data['encuesta_id'], $update);
+                //echo 'resultado: ' . $resultado;
+                if ($resultado > 0){
+                  if ($actualizar === '') $actualizar = true;
+                } else $actualizar = false;
               }
-              //echo $id . ': ' . $value .'<br/>';
-              $update = array(
-                 'pregunta_' . $id => $value,
-              );
-              $resultado = $this->Respuestasm_model->update_respuestamByEncuesta($data['encuesta_id'], $update);
-              //echo 'resultado: ' . $resultado;
-              if ($resultado > 0){
-                if ($actualizar === '') $actualizar = true;
-              } else $actualizar = false;
             }
           }
         }
@@ -246,7 +251,29 @@
                         if ($opcion === $respuestas[0]){
                             $checked = 'checked';
                         }
-                        $contenido .= '<input type="radio" name="respuesta_' . $pregunta['id'] . '" value="' . $opcion . '" required  onchange="LimpiarComplementos('. $pregunta['id'] .','. ++$total .')" '. $checked .' class="form-control"> '. $opcion . '&nbsp;&nbsp;';
+                        $contenido .= '<input type="radio" name="respuesta_' . $pregunta['id'] . '" value="' . $opcion . '" required  onchange="LimpiarComplementos('. $pregunta['id'] .','. ++$total .')" '. $checked .' > '. $opcion . '&nbsp;&nbsp;';
+                        if (substr($opcion, -1) == ":"){
+                          $valorComp = '';
+                          $disabled = 'disabled';
+                          if ($checked){
+                            $valorComp = $complemento;
+                            $disabled = '';
+                          }
+                          $contenido .= '<input type="text" ' . $disabled . ' onkeyup="validarFormulario()" onpaste="validarFormulario()" name="complemento_' . $pregunta['id'] . '" id="complemento_' . $pregunta['id'] . '_' . $total . '" value="' . $valorComp . '" class="form-control" >';
+                        }
+                        $contenido .= '&nbsp;&nbsp;';
+                      }
+                      break;
+                  case 'checkbox':
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-respuesta">';
+                      $total = 0;
+                      foreach ($opciones as $opcion) {
+                        $checked = '';
+                        if ($opcion === $respuestas[0]){
+                            $checked = 'checked';
+                        }
+                        $contenido .= '<input type="checkbox" name="respuesta_' . $pregunta['id'] . '" value="' . $opcion . '" required  onchange="LimpiarComplementos('. $pregunta['id'] .','. ++$total .')" '. $checked .' > '. $opcion . '&nbsp;&nbsp;';
                         if (substr($opcion, -1) == ":"){
                           $valorComp = '';
                           $disabled = 'disabled';
