@@ -37,10 +37,16 @@
               if ($preg['tipo'] == 'text|enum' || $preg['tipo'] == 'radio'){
                 $opciones = explode('|', $preg['opciones'] );
               }
+              foreach ($opciones as $key) {
+                if (strlen($key) > 0)
+                $resultadoRadioComplemento[$key] = 0;
+                $resultadoTextEnum[$key] = 0;
+              }
 
               foreach ($respuestas as $resp) {
                 $respFinal = array();
                 if ($preg['tipo'] == "radio"){
+
                   $resp['respuesta'] = explode(':|comp:', $resp['respuesta']);
 
                   if (count($resp['respuesta']) == 1){

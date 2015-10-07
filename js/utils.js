@@ -235,26 +235,6 @@ function formatoMoneda( item ) {
 
 /*Resultados*/
 
-var data = [{
-    label: '2006',
-    value: 100
-},{
-    label: '2006',
-    value: 100
-},{
-    label: '2006',
-    value: 100
-},{
-    label: '2006',
-    value: 100
-}];
-
-var ykeys = ['value'];
-
-$(document).ready(function(){
-MorrisBar('myfirstchart', data, ykeys);
-});
-
 function MorrisDonut(element, data){
   if(document.getElementById(element) !== null){
     new Morris.Donut({
@@ -305,4 +285,164 @@ function MorrisBar(element, data, ykeys){
   }
 }
 
+
+function ChartBar(data){
+  var element = data.element;
+  var labels = [];
+  var values = [];
+  var height = 20;
+  data.data.forEach(function (result){
+    labels.push(result.label);
+    values.push(result.value);
+    height = height +20;
+  });
+
+  var r = (Math.floor(Math.random() * 256));
+  var g = (Math.floor(Math.random() * 256));
+  var b = (Math.floor(Math.random() * 256));
+
+  var barChartData = {
+    labels : labels,
+    datasets : [
+      {
+        fillColor : "rgba("+r+","+g+","+b+",0.5)",
+        strokeColor : "rgba("+r+","+g+","+b+",0.8)",
+        highlightFill : "rgba("+r+","+g+","+b+",0.75)",
+        highlightStroke : "rgba("+r+","+g+","+b+",1)",
+        data : values
+      }
+    ]
+  }
+  $('#'+element).html('<canvas id="canvas_'+element+'" height="' + height +'" width="500"></canvas>');
+  var ctx = document.getElementById('canvas_'+element).getContext("2d");
+  var MyChart = new Chart(ctx).Bar(barChartData, {
+    responsive : true
+  });
+
+  document.getElementById('canvas_'+element).onclick = function(evt){
+    console.log('EVT: ' + JSON.stringify(evt));
+    var activePoints = MyChart.getBarsAtEvent(evt);
+    console.log('Active points: '. activePoints);
+      // => activePoints is an array of points on the canvas that are at the same position as the click event.
+  };
+}
+
+function ChartRadar(data){
+  var element = data['element'];
+  var labels = [];
+  var values = [];
+  data.data.forEach(function (result){
+    labels.push(result.label);
+    values.push(result.value);
+  });
+
+  var r = (Math.floor(Math.random() * 256));
+  var g = (Math.floor(Math.random() * 256));
+  var b = (Math.floor(Math.random() * 256));
+
+  var barChartData = {
+    labels : labels,
+    datasets : [
+      {
+        fillColor : "rgba("+r+","+g+","+b+",0.5)",
+        strokeColor : "rgba("+r+","+g+","+b+",0.8)",
+        highlightFill : "rgba("+r+","+g+","+b+",0.75)",
+        highlightStroke : "rgba("+r+","+g+","+b+",1)",
+        data : values
+      }
+    ]
+  }
+
+  $('#'+element).html('<canvas id="canvas_'+element+'" height="100" width="500"></canvas>');
+
+  var ctx = document.getElementById('canvas_'+element).getContext("2d");
+  window.myBar = new Chart(ctx).Radar(barChartData, {
+    responsive : true
+  });
+}
+
+function ChartPie(data){
+  var element = data['element'];
+  var values = [];
+
+  var b = (Math.floor(Math.random() * 256));
+  var g = (Math.floor(Math.random() * 256));
+  data.data.forEach(function (result){
+    var r = (Math.floor(Math.random() * 256));
+    values.push({
+      value: result.value,
+      color: "rgba("+r+","+g+","+b+",0.7)",
+      highlight: "rgba("+r+","+g+","+b+",0.5)",
+      label: result.label
+    });
+  });
+
+  $('#'+element).html('<canvas id="canvas_'+element+'" height="100" width="500"></canvas>');
+
+  var ctx = document.getElementById('canvas_'+element).getContext("2d");
+  window.myBar = new Chart(ctx).Pie(values, {
+    responsive : true
+  });
+}
+
+function ChartDoughnut(data){
+  var element = data['element'];
+  var values = [];
+
+  var b = (Math.floor(Math.random() * 256));
+  var g = (Math.floor(Math.random() * 256));
+  data.data.forEach(function (result){
+    var r = (Math.floor(Math.random() * 256));
+    values.push({
+      value: result.value,
+      color: "rgba("+r+","+g+","+b+",0.7)",
+      highlight: "rgba("+r+","+g+","+b+",0.5)",
+      label: result.label
+    });
+  });
+
+  $('#'+element).html('<canvas id="canvas_'+element+'" height="100" width="500"></canvas>');
+
+  var ctx = document.getElementById('canvas_'+element).getContext("2d");
+  window.myBar = new Chart(ctx).Doughnut(values, {
+    responsive : true
+  });
+}
+
+function ChartLine(data){
+  var element = data['element'];
+  var labels = [];
+  var values = [];
+  var height = 20;
+  data.data.forEach(function (result){
+    labels.push(result.label);
+    values.push(result.value);
+    height = height + 20;
+  });
+
+  var r = (Math.floor(Math.random() * 256));
+  var g = (Math.floor(Math.random() * 256));
+  var b = (Math.floor(Math.random() * 256));
+  var data = {
+    labels: labels,
+    datasets: [
+        {
+            fillColor : "rgba("+r+","+g+","+b+",0.5)",
+            strokeColor : "rgba("+r+","+g+","+b+",0.8)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: values
+        }
+    ]
+  };
+
+  $('#'+element).html('<canvas id="canvas_'+element+'" height="' + height +'" width="500"></canvas>');
+
+  var ctx = document.getElementById('canvas_'+element).getContext("2d");
+  window.myBar = new Chart(ctx).Line(data, {
+    responsive : true
+  });
+}
 /*Fin funciones resultados*/
