@@ -98,13 +98,31 @@ $( ".sortable" ).sortable( {
 } );
 
 function guardarysal() {
-  $( '#continuar' ).val( '0' );
-  $( "#formEnc" ).submit();
+  if (!($( '#btnguardarysalir' ).hasClass( 'notEnabled' ))){
+    $( '#continuar' ).val( '0' );
+    $( "#formEnc" ).submit();
+  } else {
+    $('#encError').html('<div class="alert alert-danger" role="alert" id="danger-alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><span class="sr-only">Error:</span> Por favor contesta las preguntas faltantes.</div>');
+    marcarFaltantes();
+    $("#danger-alert").fadeTo(2000, 500).slideUp(500, function(){
+        $("#danger-alert").alert('close');
+        $('#encError').html('');
+    });
+  }
 }
 
 function guardarycont() {
-  $( '#continuar' ).val( '1' );
-  $( "#formEnc" ).submit();
+  if (!($( '#btnguardarycontinuar' ).hasClass( 'notEnabled' ))){
+    $( '#continuar' ).val( '1' );
+    $( "#formEnc" ).submit();
+  } else {
+    $('#encError').html('<div class="alert alert-danger" role="alert" id="danger-alert"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span><span class="sr-only">Error:</span> Por favor contesta las preguntas faltantes.</div>');
+    marcarFaltantes();
+    $("#danger-alert").fadeTo(2000, 500).slideUp(500, function(){
+        $("#danger-alert").alert('close');
+        $('#encError').html('');
+    });
+  }
 }
 
 function regresar() {
@@ -119,6 +137,49 @@ function siguiente() {
   $( '#irEtapa' ).val( ++$etapa );
   $( '#contenido' ).html( '' );
   $( "#formEnc" ).submit();
+}
+
+function marcarFaltantes(){
+  var formulario = $( 'form#formEnc' ).serializeArray();
+  $( 'input' ).each( function () {
+    var field = $( this );
+    if ( field.prop( 'name' ).substring( 0, 9 ) == "respuesta" ) {
+      if ( field.prop( 'type' ) == "radio" ) {
+        //Buscar por lo menos uno
+        var encontrado = false;
+        formulario.forEach( function ( form ) {
+          if ( form[ 'name' ] == field.prop( 'name' ) ) {
+            encontrado = true;
+          }
+        } );
+        if ( encontrado == false ) {
+          field.parent().parent().addClass("has-error");
+          field.parent().parent().focusin(function(){
+              $( this ).removeClass("has-error");
+              $( this ).find('label').removeClass("has-error");
+          });
+        }
+      }
+      else {
+        if ( field.prop( 'required' ) && field.prop( 'value' ) == "" ) {
+          field.parent().parent().addClass("has-error");
+          field.parent().parent().focusin(function(){
+              $( this ).removeClass("has-error");
+              $( this ).find('label').removeClass("has-error");
+          });
+        }
+      }
+    }
+    else if ( field.prop( 'name' ).substring( 0, 11 ) == "complemento" ) {
+      if ( field.prop( 'required' ) && field.prop( 'value' ) == "" ) {
+        field.parent().addClass("has-error");
+        field.parent().focusin(function(){
+            $( this ).removeClass("has-error");
+            $( this ).find('label').removeClass("has-error");
+        });
+      }
+    }
+  } );
 }
 
 function comprobar() {
@@ -164,20 +225,22 @@ function validarFormulario() {
     }
   } );
   if ( continuar ) {
+    $( '#btnguardarycontinuar' ).removeClass( 'notEnabled' );
     $( '#btnguardarysalir' ).removeClass( 'btn-default' );
     $( '#btnguardarycontinuar' ).removeClass( 'btn-default' );
     $( '#btnguardarysalir' ).addClass( 'btn-warning' );
     $( '#btnguardarycontinuar' ).addClass( 'btn-success' );
-    $( '#btnguardarysalir' ).attr( "disabled", false );
-    $( '#btnguardarycontinuar' ).attr( "disabled", false );
+    //$( '#btnguardarysalir' ).attr( "disabled", false );
+    //$( '#btnguardarycontinuar' ).attr( "disabled", false );
   }
   else {
     $( '#btnguardarysalir' ).removeClass( 'btn-warning' );
     $( '#btnguardarycontinuar' ).removeClass( 'btn-success' );
     $( '#btnguardarysalir' ).addClass( 'btn-default' );
     $( '#btnguardarycontinuar' ).addClass( 'btn-default' );
-    $( '#btnguardarysalir' ).attr( "disabled", true );
-    $( '#btnguardarycontinuar' ).attr( "disabled", true );
+    $( '#btnguardarycontinuar' ).addClass( 'notEnabled' );
+    //$( '#btnguardarysalir' ).attr( "disabled", true );
+    //$( '#btnguardarycontinuar' ).attr( "disabled", true );
   }
 }
 

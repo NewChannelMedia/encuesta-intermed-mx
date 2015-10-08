@@ -491,4 +491,8 @@ html>body .sortable li { height: 2em; line-height: 1.2em; }
 canvas {
   height: 300px;
 }
+
+.has-error{
+  color: #8A0808;
+}
 /* development */

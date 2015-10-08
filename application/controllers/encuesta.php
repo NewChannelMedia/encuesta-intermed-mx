@@ -146,7 +146,7 @@
                       $total++;
                     }
                   }
-                  echo 'value: ' .  $value . '<br/>';
+                  //echo 'value: ' .  $value . '<br/>';
               } else {
                 if (array_key_exists("respuesta_" . $id . '_1',$POSTS)){
                   $value = '';
@@ -237,13 +237,16 @@
             foreach ($preguntas as $pregunta) {
                 $respuesta = $this->Respuestasm_model->get_respuestaByEncuestaPregunta($data['encuesta_id'], $pregunta['id']);
                 $respuesta = explode('|',$respuesta['pregunta_' . $pregunta['id']]);
-                $respuestas = array();
-                $complemento = '';
-                foreach ($respuesta as $resp) {
-                  if (substr($resp, 0, 5) === "comp:"){
-                      $complemento = substr($resp, 5);
-                  } else {
-                    $respuestas[] = $resp;
+                //echo 'respuesta: <pre>' . print_r($respuesta,1) . '</pre>';
+                if (!($pregunta['tipo'] == 'checkbox')){
+                  $respuestas = array();
+                  $complemento = '';
+                  foreach ($respuesta as $resp) {
+                    if (substr($resp, 0, 5) === "comp:"){
+                        $complemento = substr($resp, 5);
+                    } else {
+                      $respuestas[] = $resp;
+                    }
                   }
                 }
                 //echo 'respuesta: <pre>' . print_r($respuestas, 1) . '</pre>';
@@ -292,25 +295,26 @@
                         $checked = '';
                         $disabled = 'disabled';
                         $valorComp = '';
+                        $num = 0;
                         foreach ($respuesta as $rep) {
                           if ($rep == $opcion){
                             $checked = 'checked';
                             $disabled = '';
-                            if (substr($rep,-1) == ':' && array_key_exists($total+1, $respuesta) && stripos('comp:',$respuesta[$total+1]) == 0){
-                              $valorComp = $respuesta[$total+1];
-                              echo 'valorComp: ' . $valorComp . '<br/>';
+                            if (substr($rep,-1) == ':' && array_key_exists($num+1, $respuesta) && stripos($respuesta[$num+1],"comp:") == 0){
+                              $valorComp = explode('comp:',$respuesta[$num+1])[1];
                             }
                           }
+                          $num++;
                         }
                         $contenido .= '<input type="checkbox" name="respuesta_' . $pregunta['id'] . '_'. ($index+1) .'" id="respuesta_' . $pregunta['id'] . '_' . ++$total .'" value="' . $opcion . '" required  onchange="HabilitarComplementos('. $pregunta['id'] .','. $total .')" '. $checked .'  > ' . $opcion . '&nbsp;&nbsp;';
                         if (substr($opcion, -1) == ":"){
-                          $valorComp = '';
                           $disabled = 'disabled';
                           $required = '';
                           if ($checked){
-                            $valorComp = $complemento;
                             $disabled = '';
                             $required = 'required';
+                          } else {
+                            $valorComp = '';
                           }
                           $contenido .= '<input type="text" ' . $disabled . ' ' . $required . ' onkeyup="validarFormulario()" onpaste="validarFormulario()" name="complemento_' . $pregunta['id'] . '_' . $total . '" id="complemento_' . $pregunta['id'] . '_' . $total . '" value="' . $valorComp . '" class="form-control" >';
                         }

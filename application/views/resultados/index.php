@@ -74,7 +74,6 @@
             ?>
 
             <div class="col-lg-4 col-md-6">
-            <div class="row">
             <div class="panel panel-default">
             <div class="panel-heading">
             <?php echo $pregunta['pregunta'] ?>
@@ -113,7 +112,6 @@
               echo '<div class="col-md-2 complemento" id="'. $divId .'_complemento"></div>';
             echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { Chart'. $tipo .'('.json_encode($enviar).') })</script>';
         ?>
-        </div>
         </div>
         </div>
         </div>
