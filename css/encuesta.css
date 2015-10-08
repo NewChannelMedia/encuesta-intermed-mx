@@ -351,14 +351,14 @@ body {
   border-radius: 5px;
 }
 
-.popover-content {
+.progress .popover-content {
   margin-top: -7px;
   color: #A52A2A;
   font-weight: bold;
   text-align: center;
 }
 
-.popover {
+.progress .popover {
   padding: 0px;
   text-align: center;
   height: 27px;
@@ -368,7 +368,7 @@ body {
   border: none;
 }
 
-.popover .arrow {
+.progress .popover .arrow {
   margin: 0!important;
   transform: rotate(-135deg);
   bottom: 4px!important;
@@ -376,6 +376,11 @@ body {
   border: 0;
   width: 10px;
   height: 2px;
+}
+
+.ContenedorGrafica .popover{
+  position: relative;
+  width: 300px;
 }
 
 .block-container-category {

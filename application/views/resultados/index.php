@@ -78,41 +78,45 @@
 
             <div class="col-lg-4 col-md-6">
             <div class="panel panel-default">
-            <div class="panel-heading">
-            <?php echo $pregunta['pregunta'] ?>
-            <div class="btn-group pull-right">
-                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu list-inline" role="menu">
-                  <?php
-                      if ($complemento) echo '<span style="color:white">***</span>';
-                      $enviar = array('element' => $divId, 'data' => $data);
-                      $checked = ($tipo == "Bar")? 'checked':'';
-                      echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartBar('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Barras</label>';
-                      $checked = ($tipo == "Radar")? 'checked':'';
-                      echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartRadar('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Radio</label>';
-                      $checked = ($tipo == "Pie")? 'checked':'';
-                      echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartPie('.htmlspecialchars(print_r(json_encode($enviar),1)).')" > Circular</label>';
-                      $checked = ($tipo == "Doughnut")? 'checked':'';
-                      echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartDoughnut('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Dona</label>';
-                      $checked = ($tipo == "Polar")? 'checked':'';
-                      echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartPolar('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Polar</label>';
-                      $checked = ($tipo == "Line")? 'checked':'';
-                      echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartLine('.htmlspecialchars(print_r(json_encode($enviar),1)).')" > Linea</label>';
-                  ?>
-                </ul>
-            </div>
+            <div class="panel-heading" style="height:60px;">
+              <div class="row" style="height:50px;">
+                <div class="col-lg-10 col-md-11" style="font-size:80%;height:50px;overflow:hidden;">
+                  <?php echo $pregunta['pregunta'] ?>
+                </div>
+                <div class="col-lg-1 col-md-1 pull-right">
+                  <div class="btn-group pull-right">
+                      <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" style="height:40px;">
+                          <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu list-inline" role="menu">
+                        <?php
+                            if ($complemento) echo '<span style="color:white">***</span>';
+                            $enviar = array('element' => $divId, 'data' => $data,'pregunta'=>$pregunta['pregunta']);
+                            $checked = ($tipo == "Bar")? 'checked':'';
+                            echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartBar('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Barras</label>';
+                            $checked = ($tipo == "Radar")? 'checked':'';
+                            echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartRadar('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Radio</label>';
+                            $checked = ($tipo == "Pie")? 'checked':'';
+                            echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartPie('.htmlspecialchars(print_r(json_encode($enviar),1)).')" > Circular</label>';
+                            $checked = ($tipo == "Doughnut")? 'checked':'';
+                            echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartDoughnut('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Dona</label>';
+                            $checked = ($tipo == "Polar")? 'checked':'';
+                            echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartPolar('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Polar</label>';
+                            $checked = ($tipo == "Line")? 'checked':'';
+                            echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartLine('.htmlspecialchars(print_r(json_encode($enviar),1)).')" > Linea</label>';
+                        ?>
+                      </ul>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="panel-body">
 
             <?php
-
-
-              echo '<div class="col-md-12" id="'. $divId .'">';
+              echo '<div class="col-md-12" id="'. $divId .'" class="ContenedorGrafica">';
               echo '</div>';
               echo '<div class="col-md-1" ></div>';
-              echo '<div class="col-md-2 complemento" id="'. $divId .'_complemento"></div>';
+              echo '<div class="col-md-2 complemento" id="'. $divId .'_complemento" data-toggle="popover" title="" data-content="" data-html="true" data-placement="bottom"></div>';
             echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { Chart'. $tipo .'('.json_encode($enviar).') })</script>';
         ?>
         </div>
@@ -122,4 +126,6 @@
     <?php } ?>
   <?php } ?>
 <?php } ?>
+</div>
+
 </div>

@@ -403,20 +403,29 @@ function ChartBar(data){
 
   canvas.onclick = function(evt){
       var activePoints = MyChart.getBarsAtEvent(evt);
+      var closePopovers = true;
       data.data.forEach(function (result){
         if (activePoints[0]){
           if (result.label == activePoints[0]['label']){
-            //$('#'+element+'_complemento').html('');
             if (result.complemento){
+              closePopovers = false;
+              $('#'+element+'_complemento').attr('data-original-title',result.label);
+              $('#'+element+'_complemento').attr('data-content','');
+              var testPopover = $('#canvas_'+element).parent();
+
               console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
-              //$('#'+element+'_complemento').html('<div id="'+element+'_complemento_area" class="col-md-12" style="height:100px;overflow: scroll;"></div>');
               result.complemento.forEach(function (complemento){
-                //$('#'+element+'_complemento_area').append(complemento.total + ' - ' + complemento.comp + '<br/>') ;
+                $('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
               });
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+              $('#'+element+'_complemento').popover('show');
             }
           }
         }
       });
+      if (closePopovers){
+        $('[data-toggle="popover"]').popover('hide');
+      }
   };
 
 }
@@ -456,20 +465,29 @@ function ChartRadar(data){
 
   canvas.onclick = function(evt){
       var activePoints = MyChart.getPointsAtEvent(evt);
+      var closePopovers = true;
       data.data.forEach(function (result){
         if (activePoints[0]){
           if (result.label == activePoints[0]['label']){
-            //$('#'+element+'_complemento').html('');
             if (result.complemento){
+              closePopovers = false;
+              $('#'+element+'_complemento').attr('data-original-title',result.label);
+              $('#'+element+'_complemento').attr('data-content','');
+              var testPopover = $('#canvas_'+element).parent();
+
               console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
-              //$('#'+element+'_complemento').html('<div id="'+element+'_complemento_area" class="col-md-12" style="height:100px;overflow: scroll;"></div>');
               result.complemento.forEach(function (complemento){
-                //$('#'+element+'_complemento_area').append(complemento.total + ' - ' + complemento.comp + '<br/>') ;
+                $('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
               });
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+              $('#'+element+'_complemento').popover('show');
             }
           }
         }
       });
+      if (closePopovers){
+        $('[data-toggle="popover"]').popover('hide');
+      }
   };
 }
 
@@ -498,20 +516,29 @@ function ChartPie(data){
 
   canvas.onclick = function(evt){
       var activePoints = MyChart.getSegmentsAtEvent(evt);
+      var closePopovers = true;
       data.data.forEach(function (result){
         if (activePoints[0]){
           if (result.label == activePoints[0]['label']){
-            //$('#'+element+'_complemento').html('');
             if (result.complemento){
+              closePopovers = false;
+              $('#'+element+'_complemento').attr('data-original-title',result.label);
+              $('#'+element+'_complemento').attr('data-content','');
+              var testPopover = $('#canvas_'+element).parent();
+
               console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
-              //$('#'+element+'_complemento').html('<div id="'+element+'_complemento_area" class="col-md-12" style="height:100px;overflow: scroll;"></div>');
               result.complemento.forEach(function (complemento){
-                //$('#'+element+'_complemento_area').append(complemento.total + ' - ' + complemento.comp + '<br/>') ;
+                $('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
               });
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+              $('#'+element+'_complemento').popover('show');
             }
           }
         }
       });
+      if (closePopovers){
+        $('[data-toggle="popover"]').popover('hide');
+      }
   };
 }
 
@@ -540,20 +567,29 @@ function ChartDoughnut(data){
 
   canvas.onclick = function(evt){
       var activePoints = MyChart.getSegmentsAtEvent(evt);
+      var closePopovers = true;
       data.data.forEach(function (result){
         if (activePoints[0]){
           if (result.label == activePoints[0]['label']){
-            //$('#'+element+'_complemento').html('');
             if (result.complemento){
+              closePopovers = false;
+              $('#'+element+'_complemento').attr('data-original-title',result.label);
+              $('#'+element+'_complemento').attr('data-content','');
+              var testPopover = $('#canvas_'+element).parent();
+
               console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
-              //$('#'+element+'_complemento').html('<div id="'+element+'_complemento_area" class="col-md-12" style="height:100px;overflow: scroll;"></div>');
               result.complemento.forEach(function (complemento){
-                //$('#'+element+'_complemento_area').append(complemento.total + ' - ' + complemento.comp + '<br/>') ;
+                $('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
               });
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+              $('#'+element+'_complemento').popover('show');
             }
           }
         }
       });
+      if (closePopovers){
+        $('[data-toggle="popover"]').popover('hide');
+      }
   };
 }
 
@@ -581,20 +617,29 @@ function ChartPolar(data){
 
   canvas.onclick = function(evt){
       var activePoints = MyChart.getSegmentsAtEvent(evt);
+      var closePopovers = true;
       data.data.forEach(function (result){
         if (activePoints[0]){
           if (result.label == activePoints[0]['label']){
-            //$('#'+element+'_complemento').html('');
             if (result.complemento){
+              closePopovers = false;
+              $('#'+element+'_complemento').attr('data-original-title',result.label);
+              $('#'+element+'_complemento').attr('data-content','');
+              var testPopover = $('#canvas_'+element).parent();
+
               console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
-              //$('#'+element+'_complemento').html('<div id="'+element+'_complemento_area" class="col-md-12" style="height:100px;overflow: scroll;"></div>');
               result.complemento.forEach(function (complemento){
-                //$('#'+element+'_complemento_area').append(complemento.total + ' - ' + complemento.comp + '<br/>') ;
+                $('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
               });
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+              $('#'+element+'_complemento').popover('show');
             }
           }
         }
       });
+      if (closePopovers){
+        $('[data-toggle="popover"]').popover('hide');
+      }
   };
 }
 
@@ -643,20 +688,33 @@ function ChartLine(data){
 
   canvas.onclick = function(evt){
       var activePoints = MyChart.getPointsAtEvent(evt);
+      var closePopovers = true;
       data.data.forEach(function (result){
         if (activePoints[0]){
           if (result.label == activePoints[0]['label']){
-            //$('#'+element+'_complemento').html('');
             if (result.complemento){
+              closePopovers = false;
+              $('#'+element+'_complemento').attr('data-original-title',result.label);
+              $('#'+element+'_complemento').attr('data-content','');
+              var testPopover = $('#canvas_'+element).parent();
+
               console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
-              //$('#'+element+'_complemento').html('<div id="'+element+'_complemento_area" class="col-md-12" style="height:100px;overflow: scroll;"></div>');
               result.complemento.forEach(function (complemento){
-                //$('#'+element+'_complemento_area').append(complemento.total + ' - ' + complemento.comp + '<br/>') ;
+                $('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
               });
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+              $('#'+element+'_complemento').popover('show');
             }
           }
         }
       });
+      if (closePopovers){
+        $('[data-toggle="popover"]').popover('hide');
+      }
   };
 }
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
 /*Fin funciones resultados*/
