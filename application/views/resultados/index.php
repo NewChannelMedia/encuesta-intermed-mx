@@ -115,8 +115,7 @@
             <?php
               echo '<div class="col-md-12" id="'. $divId .'" class="ContenedorGrafica">';
               echo '</div>';
-              echo '<div class="col-md-1" ></div>';
-              echo '<div class="col-md-2 complemento" id="'. $divId .'_complemento" data-toggle="popover" title="" data-content="" data-html="true" data-placement="bottom"></div>';
+              echo '<div class="col-md-12 complemento" id="'. $divId .'_complemento" data-toggle="popover" title="" data-content="" data-html="true" data-placement="bottom"></div>';
             echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { Chart'. $tipo .'('.json_encode($enviar).') })</script>';
         ?>
         </div>
