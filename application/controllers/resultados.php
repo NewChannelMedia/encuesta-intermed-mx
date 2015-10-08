@@ -4,7 +4,7 @@
 
     public function __construct(){
       parent::__construct();
-      $this->load->model('Encuestasm_model');
+      $this->load->model('Encuestam_model');
       $this->load->model('Categorias_model');
       $this->load->model('Preguntasm_model');
       $this->load->model('Respuestasm_model');

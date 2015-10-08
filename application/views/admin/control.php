@@ -24,7 +24,7 @@
 <div id="admin-page" class="container">
 
   <div class="starter-template">
-    <h1>Bienvenido administrador <?php echo $administrador; ?></h1>
+    <h1>Bienvenido administrador</h1>
     <h2 id="mensaje"></h2>
     <p class="lead">Esta es la pagina de inicio</p>
   </div>

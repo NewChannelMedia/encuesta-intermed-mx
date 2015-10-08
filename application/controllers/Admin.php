@@ -14,7 +14,7 @@
             $this->load->view('admin/Admin_vista');
             $this->load->view('templates/footer2');
           }
-          public function login(){
+          public function control(){
               // se carga el modelo para verificar si existen el usuario y password que se reciben por post
               $this->load->model('Admin_model');
               // se atrapan los post del formulario
@@ -29,15 +29,41 @@
                 $data['administrador'] = $this->session->user;
                 $this->load->view('templates/header', $data);
                 $this->load->view('admin/control', $data);
-                $this->load->view('templates/footer2');
+                $this->load->view('templates/footerAdmin');
               }else{
                 $ingresado = false;
                 $data['title'] = "Control";
                 $this->load->view('templates/header', $data);
                 $this->load->view('admin/error');
-                $this->load->view('templates/footer2');
+                $this->load->view('templates/footerAdmin');
               }
           }
+
+          public function control2(){
+              // se carga el modelo para verificar si existen el usuario y password que se reciben por post
+              $this->load->model('Admin_model');
+              // se atrapan los post del formulario
+              $usuario = $this->input->post('user');
+              $password = $this->input->post('password');
+              if( $this->Admin_model->login($usuario, $password) != false ){
+                $ingresado = true;
+                $this->load->library('session');
+                $datosAca = array('user'=>$usuario,'ingresado'=>$ingresado);
+                $this->session->set_userdata($datosAca);
+                $data['title'] = "Control";
+                $data['administrador'] = $this->session->user;
+                $this->load->view('templates/headerAdmin', $data);
+                $this->load->view('admin/control2', $data);
+                $this->load->view('templates/footerAdmin');
+              }else{
+                $ingresado = false;
+                $data['title'] = "Control";
+                $this->load->view('templates/header', $data);
+                $this->load->view('admin/error');
+                $this->load->view('templates/footerAdmin');
+              }
+          }
+
           //carga los datos a la tabla por aceptar
           public function porAceptar(){
             $this->load->model('Admin_model');
