@@ -34,7 +34,7 @@
               $opciones = array();
               $resultadoTextEnum = array();
               $resultadoRadioComplemento = array();
-              if ($preg['tipo'] == 'text|enum' || $preg['tipo'] == 'radio' || $preg['tipo'] == 'checkbox'){
+              if ($preg['tipo'] == 'text|enum' || $preg['tipo'] == 'radio'){
                 $opciones = explode('|', $preg['opciones'] );
                 $num = 0;
                 foreach ($opciones as $key) {
@@ -49,10 +49,18 @@
                     $resultadoTextEnum[$value] = 0;
                   }
                 }
+              } else if ($preg['tipo'] == 'checkbox'){
+                $opciones = explode('|', $preg['opciones'] );
+                foreach ($opciones as $key) {
+                  if (!(stripos($key,"comp:") === 0)){
+                    $resultadoTextEnum[$key] = array();
+                  }
+                }
               }
 
               foreach ($respuestas as $resp) {
                 $respFinal = array();
+
                 if ($preg['tipo'] == "radio"){
 
                   $resp['respuesta'] = explode(':|comp:', $resp['respuesta']);
@@ -94,10 +102,34 @@
                 } elseif ($preg['tipo'] == "checkbox"){
                   $resp['respuesta'] = explode('|', $resp['respuesta'] );
                   for ($i = 0; $i < count($resp['respuesta']); $i++) {
-                    if (array_key_exists($resp['respuesta'][$i],$resultadoTextEnum)){
-                      $resultadoTextEnum[$resp['respuesta'][$i]] = $resultadoTextEnum[$resp['respuesta'][$i]] + $resp['total'];
-                    } else {
-                      $resultadoTextEnum[$resp['respuesta'][$i]] = $resp['total'];
+                    if (stripos($resp['respuesta'][$i],'comp:') === false){
+                      $respuestaf = $resp['respuesta'][$i];
+                      $complemento = '';
+                      if (substr($resp['respuesta'][$i],-1) == ":" && array_key_exists($i+1,$resp['respuesta']) && stripos($resp['respuesta'][$i+1],'comp:') === 0){
+                          $complemento = explode('comp:',$resp['respuesta'][$i+1])[1];
+                      }
+                      if (!empty($respuestaf) && $respuestaf != ""){
+                        if (array_key_exists($respuestaf,$resultadoTextEnum)){
+                          if (!(array_key_exists('total',$resultadoTextEnum[$respuestaf]))){
+                            $resultadoTextEnum[$respuestaf]['total'] = 0;
+                          }
+                          $cant = intval($resultadoTextEnum[$respuestaf]['total']);
+                          $resultadoTextEnum[$respuestaf]['total'] = $cant + $resp['total'];
+                        } else {
+                          $resultadoTextEnum[$respuestaf]['total'] =  $resp['total'];
+                        }
+                        if (!empty($complemento)){
+                          if (!array_key_exists('comp',$resultadoTextEnum[$respuestaf])){
+                            $resultadoTextEnum[$respuestaf]['comp'] = array();
+                          }
+                          if (array_key_exists($complemento,$resultadoTextEnum[$respuestaf]['comp'])){
+                            $cant = intval($resultadoTextEnum[$respuestaf]['comp'][$complemento]);
+                            $resultadoTextEnum[$respuestaf]['comp'][$complemento] = $cant +  $resp['total'];
+                          } else {
+                            $resultadoTextEnum[$respuestaf]['comp'][$complemento] =  $resp['total'];
+                          }
+                        }
+                      }
                     }
                   }
                   arsort($resultadoTextEnum);

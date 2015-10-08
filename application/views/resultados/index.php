@@ -22,7 +22,7 @@
                       }
                     } else {
                       if (!empty($resp)){
-                        if (count($total['comp'])>0){
+                        if (array_key_exists('comp',$total) &&  count($total['comp'])>0){
                           $complemento = [];
                           foreach ($total['comp'] as $comp => $compt) {
                             array_push($complemento, array('total' => $compt, 'comp' => $comp));
@@ -31,6 +31,9 @@
                           //echo '<pre>'. print_r(array('label' => $resp, 'value' => $total['total'], 'complemento' => $complemento),1) .'</pre>';
                           $complemento = true;
                         } else {
+                          if (!array_key_exists('total',$total)){
+                            $total['total'] =0;
+                          }
                           $data[] = array('label' => $resp, 'value' => $total['total']);
                         }
                       }
