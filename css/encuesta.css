@@ -488,8 +488,7 @@ html>body .sortable li { height: 2em; line-height: 1.2em; }
   margin-top:40px;
 }
 
-.complemento {
-  background-color: #EEE;
-  padding: 20px;
+canvas {
+  height: 300px;
 }
 /* development */

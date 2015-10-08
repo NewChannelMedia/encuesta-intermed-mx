@@ -198,6 +198,17 @@ function LimpiarComplementos( id, comp ) {
   }
 }
 
+function HabilitarComplementos( id, comp ) {
+  if($('#respuesta_' + id + '_' + comp).is(':checked')){
+    $( '#complemento_' + id + '_' + comp ).prop( 'required', true );
+    $( '#complemento_' + id + '_' + comp ).prop( 'disabled', false );
+  } else {
+    $( '#complemento_' + id + '_' + comp ).val('');
+    $( '#complemento_' + id + '_' + comp ).prop( 'required', false );
+    $( '#complemento_' + id + '_' + comp ).prop( 'disabled', true );
+  }
+}
+
 function aceptarPromocion() {
   var value = $( '#promo' ).prop( 'checked' );
   if ( value == true ) {
@@ -290,12 +301,19 @@ function ChartBar(data){
   var element = data.element;
   var labels = [];
   var values = [];
-  var height = 20;
+  var height = 100;
+  var largo = 0;
+  var count = 0;
+  var long = 0;
   data.data.forEach(function (result){
+    if (result.label.length > 15) largo++;
+    if (result.value > 20) long = 100;
     labels.push(result.label);
     values.push(result.value);
-    height = height +20;
+    count++;
   });
+
+  height = (150+(30*largo) +50 + long);
 
   var r = (Math.floor(Math.random() * 256));
   var g = (Math.floor(Math.random() * 256));
@@ -313,7 +331,7 @@ function ChartBar(data){
       }
     ]
   }
-  $('#'+element).html('<canvas id="canvas_'+element+'" height="' + height +'" width="500"></canvas>');
+  $('#'+element).html('<canvas id="canvas_'+element+'" class="col-lg-12 col-md-12"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
   var ctx = canvas.getContext("2d");
   var MyChart = new Chart(ctx).Bar(barChartData, {
@@ -323,11 +341,16 @@ function ChartBar(data){
   canvas.onclick = function(evt){
       var activePoints = MyChart.getBarsAtEvent(evt);
       data.data.forEach(function (result){
-        if (result.label == activePoints[0]['label']){
-          if (result.complemento){
-            $('#'+element+'_complemento').html('Tiene complemento');
-          } else {
-            $('#'+element+'_complemento').html('');
+        if (activePoints[0]){
+          if (result.label == activePoints[0]['label']){
+            //$('#'+element+'_complemento').html('');
+            if (result.complemento){
+              console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
+              //$('#'+element+'_complemento').html('<div id="'+element+'_complemento_area" class="col-md-12" style="height:100px;overflow: scroll;"></div>');
+              result.complemento.forEach(function (complemento){
+                //$('#'+element+'_complemento_area').append(complemento.total + ' - ' + complemento.comp + '<br/>') ;
+              });
+            }
           }
         }
       });
@@ -361,12 +384,30 @@ function ChartRadar(data){
     ]
   }
 
-  $('#'+element).html('<canvas id="canvas_'+element+'" height="100" width="500"></canvas>');
-
-  var ctx = document.getElementById('canvas_'+element).getContext("2d");
-  window.myBar = new Chart(ctx).Radar(barChartData, {
+  $('#'+element).html('<canvas id="canvas_'+element+'" class="col-lg-12 col-md-12"></canvas>');
+  var canvas = document.getElementById('canvas_'+element);
+  var ctx = canvas.getContext("2d");
+  var MyChart = new Chart(ctx).Radar(barChartData, {
     responsive : true
   });
+
+  canvas.onclick = function(evt){
+      var activePoints = MyChart.getPointsAtEvent(evt);
+      data.data.forEach(function (result){
+        if (activePoints[0]){
+          if (result.label == activePoints[0]['label']){
+            //$('#'+element+'_complemento').html('');
+            if (result.complemento){
+              console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
+              //$('#'+element+'_complemento').html('<div id="'+element+'_complemento_area" class="col-md-12" style="height:100px;overflow: scroll;"></div>');
+              result.complemento.forEach(function (complemento){
+                //$('#'+element+'_complemento_area').append(complemento.total + ' - ' + complemento.comp + '<br/>') ;
+              });
+            }
+          }
+        }
+      });
+  };
 }
 
 function ChartPie(data){
@@ -385,12 +426,30 @@ function ChartPie(data){
     });
   });
 
-  $('#'+element).html('<canvas id="canvas_'+element+'" height="100" width="500"></canvas>');
-
-  var ctx = document.getElementById('canvas_'+element).getContext("2d");
-  window.myBar = new Chart(ctx).Pie(values, {
+  $('#'+element).html('<canvas id="canvas_'+element+'" class="col-lg-12 col-md-12"></canvas>');
+  var canvas = document.getElementById('canvas_'+element);
+  var ctx = canvas.getContext("2d");
+  var MyChart =  new Chart(ctx).Pie(values, {
     responsive : true
   });
+
+  canvas.onclick = function(evt){
+      var activePoints = MyChart.getSegmentsAtEvent(evt);
+      data.data.forEach(function (result){
+        if (activePoints[0]){
+          if (result.label == activePoints[0]['label']){
+            //$('#'+element+'_complemento').html('');
+            if (result.complemento){
+              console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
+              //$('#'+element+'_complemento').html('<div id="'+element+'_complemento_area" class="col-md-12" style="height:100px;overflow: scroll;"></div>');
+              result.complemento.forEach(function (complemento){
+                //$('#'+element+'_complemento_area').append(complemento.total + ' - ' + complemento.comp + '<br/>') ;
+              });
+            }
+          }
+        }
+      });
+  };
 }
 
 function ChartDoughnut(data){
@@ -409,29 +468,95 @@ function ChartDoughnut(data){
     });
   });
 
-  $('#'+element).html('<canvas id="canvas_'+element+'" height="100" width="500"></canvas>');
-
-  var ctx = document.getElementById('canvas_'+element).getContext("2d");
-  window.myBar = new Chart(ctx).Doughnut(values, {
+  $('#'+element).html('<canvas id="canvas_'+element+'" class="col-lg-12 col-md-12"></canvas>');
+  var canvas = document.getElementById('canvas_'+element);
+  var ctx = canvas.getContext("2d");
+  var MyChart = new Chart(ctx).Doughnut(values, {
     responsive : true
   });
+
+  canvas.onclick = function(evt){
+      var activePoints = MyChart.getSegmentsAtEvent(evt);
+      data.data.forEach(function (result){
+        if (activePoints[0]){
+          if (result.label == activePoints[0]['label']){
+            //$('#'+element+'_complemento').html('');
+            if (result.complemento){
+              console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
+              //$('#'+element+'_complemento').html('<div id="'+element+'_complemento_area" class="col-md-12" style="height:100px;overflow: scroll;"></div>');
+              result.complemento.forEach(function (complemento){
+                //$('#'+element+'_complemento_area').append(complemento.total + ' - ' + complemento.comp + '<br/>') ;
+              });
+            }
+          }
+        }
+      });
+  };
+}
+
+function ChartPolar(data){
+  var element = data['element'];
+  var values = [];
+
+  var b = (Math.floor(Math.random() * 256));
+  var g = (Math.floor(Math.random() * 256));
+  data.data.forEach(function (result){
+    var r = (Math.floor(Math.random() * 256));
+    values.push({
+      value: result.value,
+      color: "rgba("+r+","+g+","+b+",0.7)",
+      highlight: "rgba("+r+","+g+","+b+",0.5)",
+      label: result.label
+    });
+  });
+  $('#'+element).html('<canvas id="canvas_'+element+'" class="col-lg-12 col-md-12"></canvas>');
+  var canvas = document.getElementById('canvas_'+element);
+  var ctx = canvas.getContext("2d");
+  var MyChart = new Chart(ctx).PolarArea(values, {
+    responsive : true
+  });
+
+  canvas.onclick = function(evt){
+      var activePoints = MyChart.getSegmentsAtEvent(evt);
+      data.data.forEach(function (result){
+        if (activePoints[0]){
+          if (result.label == activePoints[0]['label']){
+            //$('#'+element+'_complemento').html('');
+            if (result.complemento){
+              console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
+              //$('#'+element+'_complemento').html('<div id="'+element+'_complemento_area" class="col-md-12" style="height:100px;overflow: scroll;"></div>');
+              result.complemento.forEach(function (complemento){
+                //$('#'+element+'_complemento_area').append(complemento.total + ' - ' + complemento.comp + '<br/>') ;
+              });
+            }
+          }
+        }
+      });
+  };
 }
 
 function ChartLine(data){
   var element = data['element'];
   var labels = [];
   var values = [];
-  var height = 20;
+  var height = 100;
+  var largo = false;
+  var count = 0;
   data.data.forEach(function (result){
+    if (result.label.length > 10) largo = true;
     labels.push(result.label);
     values.push(result.value);
-    height = height + 20;
+    count++;
   });
+
+  if (count>3 && largo){
+    height = 50*count;
+  }
 
   var r = (Math.floor(Math.random() * 256));
   var g = (Math.floor(Math.random() * 256));
   var b = (Math.floor(Math.random() * 256));
-  var data = {
+  var data2 = {
     labels: labels,
     datasets: [
         {
@@ -446,11 +571,29 @@ function ChartLine(data){
     ]
   };
 
-  $('#'+element).html('<canvas id="canvas_'+element+'" height="' + height +'" width="500"></canvas>');
-
-  var ctx = document.getElementById('canvas_'+element).getContext("2d");
-  window.myBar = new Chart(ctx).Line(data, {
+  $('#'+element).html('<canvas id="canvas_'+element+'"  class="col-lg-12 col-md-12"></canvas>');
+  var canvas = document.getElementById('canvas_'+element);
+  var ctx = canvas.getContext("2d");
+  var MyChart =  new Chart(ctx).Line(data2, {
     responsive : true
   });
+
+  canvas.onclick = function(evt){
+      var activePoints = MyChart.getPointsAtEvent(evt);
+      data.data.forEach(function (result){
+        if (activePoints[0]){
+          if (result.label == activePoints[0]['label']){
+            //$('#'+element+'_complemento').html('');
+            if (result.complemento){
+              console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
+              //$('#'+element+'_complemento').html('<div id="'+element+'_complemento_area" class="col-md-12" style="height:100px;overflow: scroll;"></div>');
+              result.complemento.forEach(function (complemento){
+                //$('#'+element+'_complemento_area').append(complemento.total + ' - ' + complemento.comp + '<br/>') ;
+              });
+            }
+          }
+        }
+      });
+  };
 }
 /*Fin funciones resultados*/
