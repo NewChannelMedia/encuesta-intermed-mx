@@ -28,19 +28,18 @@
       <div class="collapse navbar-collapse pull-left nav-btn" id="bs-example-navbar-collapse-1">
         <span class="navbar-toggle collapse in glyphicon glyphicon-menu-hamburger nav-icon" data-toggle="collapse" id="menu-toggle-2"></span>
       </div>
-      <a class="navbar-brand pull-left">Encuesta Intermed</a>
-      </div>
+      <a href="" class="navbar-brand">Encuesta Intermed</a>
     </div>
   </nav>
   <div id="wrapper">
     <div id="sidebar-wrapper">
-      <ul class="sidebar-nav nav-stacked" id="menu">
+      <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
         <li class="active">
           <a href="#"><span class="glyphicon glyphicon-dashboard nav-icon"></span> Dashboard</a>
         </li>
         <li>
           <a href="#"><span class="glyphicon glyphicon-list-alt nav-icon"></span> Solicitudes</a>
-          <ul class="nav-pills nav-stacked">
+          <ul class="nav-pills nav-stacked secondLevel-ul">
             <li>
               <a href="#">test</a>
             </li>
@@ -51,7 +50,7 @@
         </li>
         <li>
           <a href="#"><span class="glyphicon glyphicon-signal nav-icon"></span> Resultados</a>
-          <ul class="nav-stacked">
+          <ul class="nav-pills nav-stacked secondLevel-ul">
             <li>
               <a href="#">test</a>
             </li>
