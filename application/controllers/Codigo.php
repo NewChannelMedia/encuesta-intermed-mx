@@ -35,16 +35,28 @@
       * @param: $subject: el Asunto del correo
       * @param: file la plantilla que se enviara al usuario
       **/
-      public function sendMail($to,$subject,$file){
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= 'From: <intermed.encuestas@newchannel.mx>'."\r\n";
-        // se lee el archivo para guardarlo en una variable y poderlo enviar
-        $archivo = "";
-        $archivo .= "/application/views/correos/".$file;
-        $fichero_texto = "".file_get_contents($archivo);
-        print_r($fichero_texto);
-        //return mail($to,$subject,$fichero_texto,$headers);
+      public function sendMail(){
+          $campo = $this->input->post('campo');
+          $correo = $this->input->post('correo');
+          $titulo = $this->input->post('titulo');
+          $archivo = $this->input->post('archivo');
+          if( $campo != "uno" ){
+            $mensaje = $this->input->post('mensaje');
+          }
+          $this->load->library('session');
+          $this->session->set_userdata('mensaje',$mensaje);
+          // se lee el archivo
+          $archivo = realpath(APPPATH.'views/correos/'."mensaje.php");
+          $fp = fopen( $archivo,'r');
+          $html = "";
+          while($line = fgets($fp)){
+            $html .= $line;
+          }
+          fclose($fp);
+          $headers = "MIME-Version: 1.0" . "\r\n";
+          $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+          $headers .= 'From: <intermed.encuestas@newchannel.mx>'."\r\n";
+          return mail($correo,$titulo,$html,$headers);
       }
       /**
       * Se valida la cedula, en ser real se le envia un correo con el codigo, nuevo, y ese codigo quedara registrado
@@ -106,6 +118,28 @@
           return false;
         }
       }
-
+      /**
+      * La siguiente funcion es para cuando le de click el administrados
+      * en el boton de envio de codigo se actualize el status a 1 para que deje de aparecer y ademas
+      * borre toda la linea
+      *
+      *
+      **/
+      public function actualizaStatus(){
+        // se carga el modelo
+        $this->load->model('PorValidar_model');
+        $correo = $this->input->post('correo');
+        $this->PorValidar_model->actualizaStatus($correo);
+      }
+      public function negado(){
+        $this->load->model('PorValidar_model');
+        $correo = $this->input->post('correo');
+        $this->PorValidar_model->negado($correo);
+      }
+      public function mensajeStatus(){
+        $this->load->model('PorValidar_model');
+        $correo -> $this->input->post('correo');
+        $this->PorValidar_model->actualizaStatus($correo);
+      }
   }
 ?>

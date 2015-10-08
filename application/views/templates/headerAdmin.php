@@ -1,3 +1,8 @@
+<?php
+	//inicio de session
+  $_SESSION['user'] = "prueba";
+	$_SESSION['status'] = true;
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
