@@ -257,15 +257,15 @@
                 $opciones = explode('|', $pregunta['opciones']);
                 switch ($pregunta['tipo']) {
                   case 'text':
-                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
+                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
                       $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" id="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control block-container-table-respuesta" >';
                       break;
                   case 'money':
-                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
+                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
                       $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" id="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control block-container-table-respuesta" onkeypress="return validarMoneda(event, this)" onblur="formatoMoneda(this)">';
                       break;
                   case 'radio':
-                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '</div>';
                       $contenido .= '<div class="block-container-table-respuesta">';
                       $total = 0;
                       foreach ($opciones as $opcion) {
@@ -287,7 +287,7 @@
                       }
                       break;
                   case 'checkbox':
-                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '</div>';
                       $contenido .= '<div class="block-container-table-respuesta">';
                       $total = 0;
 
@@ -306,7 +306,7 @@
                           }
                           $num++;
                         }
-                        $contenido .= '<input type="checkbox" name="respuesta_' . $pregunta['id'] . '_'. ($index+1) .'" id="respuesta_' . $pregunta['id'] . '_' . ++$total .'" value="' . $opcion . '" required  onchange="HabilitarComplementos('. $pregunta['id'] .','. $total .')" '. $checked .'  > ' . $opcion . '&nbsp;&nbsp;';
+                        $contenido .= '<label style="font-weight: normal;"><input type="checkbox" name="respuesta_' . $pregunta['id'] . '_'. ($index+1) .'" id="respuesta_' . $pregunta['id'] . '_' . ++$total .'" value="' . $opcion . '" required  onchange="HabilitarComplementos('. $pregunta['id'] .','. $total .')" '. $checked .'  > ' . $opcion . '</label>&nbsp;&nbsp;';
                         if (substr($opcion, -1) == ":"){
                           $disabled = 'disabled';
                           $required = '';
@@ -322,7 +322,7 @@
                       }
                       break;
                   case 'text|enum':
-                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '</div>';
                       $contenido .= '<div class="block-container-table-respuesta">';
                       $contenido .= '<ul class="sortable">';
                       if (count($respuestas) > 1){

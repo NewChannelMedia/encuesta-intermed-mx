@@ -90,7 +90,6 @@
                       </button>
                       <ul class="dropdown-menu list-inline" role="menu">
                         <?php
-                            if ($complemento) echo '<span style="color:white">***</span>';
                             $enviar = array('element' => $divId, 'data' => $data,'pregunta'=>$pregunta['pregunta']);
                             $checked = ($tipo == "Bar")? 'checked':'';
                             echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartBar('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Barras</label>';
@@ -110,14 +109,14 @@
                 </div>
               </div>
             </div>
-            <div class="panel-body">
+            <div class="panel-body ContenedorGrafica">
 
             <?php
-              echo '<div class="col-md-12" id="'. $divId .'" class="ContenedorGrafica">';
+              echo '<div class="col-md-12" id="'. $divId .'">';
               echo '</div>';
               echo '<div class="col-md-12 complemento" id="'. $divId .'_complemento" data-toggle="popover" title="" data-content="" data-html="true" data-placement="bottom"></div>';
             echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { Chart'. $tipo .'('.json_encode($enviar).') })</script>';
-        ?>
+            ?>
         </div>
         </div>
         </div>
