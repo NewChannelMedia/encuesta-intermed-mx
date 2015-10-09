@@ -34,7 +34,7 @@
               $opciones = array();
               $resultadoTextEnum = array();
               $resultadoRadioComplemento = array();
-              if ($preg['tipo'] == 'text|enum' || $preg['tipo'] == 'radio'){
+              if ($preg['tipo'] == 'text|enum'){
                 $opciones = explode('|', $preg['opciones'] );
                 $num = 0;
                 foreach ($opciones as $key) {
@@ -45,16 +45,14 @@
                     $value = $opciones[$num];
                   }
                   if (strlen($value) > 0){
-                    $resultadoRadioComplemento[$value] = 0;
                     $resultadoTextEnum[$value] = 0;
                   }
                 }
-              } else if ($preg['tipo'] == 'checkbox'){
+              } else if ($preg['tipo'] == 'checkbox' || $preg['tipo'] == 'checkbox'){
                 $opciones = explode('|', $preg['opciones'] );
                 foreach ($opciones as $key) {
-                  if (!(stripos($key,"comp:") === 0)){
-                    $resultadoTextEnum[$key] = array();
-                  }
+                  $resultadoTextEnum[$key] = array();
+                  $resultadoRadioComplemento[$key] = 0;
                 }
               }
 
@@ -63,7 +61,7 @@
 
                 if ($preg['tipo'] == "radio"){
 
-                  $resp['respuesta'] = explode(':|comp:', $resp['respuesta']);
+                  $resp['respuesta'] = explode('|comp:', $resp['respuesta']);
 
                   if (count($resp['respuesta']) == 1){
                     $resultadoRadioComplemento[$resp['respuesta'][0]] = $resp['total'];

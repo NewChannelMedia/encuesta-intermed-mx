@@ -434,7 +434,7 @@ function ChartBar(data){
                   }
                 ]
               }
-              $('#'+element+'_complemento').attr('data-original-title',result.label);
+              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
               $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
               //var testPopover = $('#canvas_'+element).parent();
 
@@ -487,7 +487,8 @@ function ChartRadar(data){
   var canvas = document.getElementById('canvas_'+element);
   var ctx = canvas.getContext("2d");
   var MyChart = new Chart(ctx).Radar(barChartData, {
-    responsive : true
+    responsive : true,
+    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
   });
 
   canvas.onclick = function(evt){
@@ -522,7 +523,7 @@ function ChartRadar(data){
                   }
                 ]
               }
-              $('#'+element+'_complemento').attr('data-original-title',result.label);
+              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
               $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
               //var testPopover = $('#canvas_'+element).parent();
 
@@ -565,7 +566,8 @@ function ChartPie(data){
   var canvas = document.getElementById('canvas_'+element);
   var ctx = canvas.getContext("2d");
   var MyChart =  new Chart(ctx).Pie(values, {
-    responsive : true
+    responsive : true,
+    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
   });
 
   canvas.onclick = function(evt){
@@ -588,7 +590,7 @@ function ChartPie(data){
                   label: complemento.comp
                 });
               });
-              $('#'+element+'_complemento').attr('data-original-title',result.label);
+              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
               $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
               //var testPopover = $('#canvas_'+element).parent();
 
@@ -631,7 +633,8 @@ function ChartDoughnut(data){
   var canvas = document.getElementById('canvas_'+element);
   var ctx = canvas.getContext("2d");
   var MyChart = new Chart(ctx).Doughnut(values, {
-    responsive : true
+    responsive : true,
+    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
   });
 
   canvas.onclick = function(evt){
@@ -654,7 +657,7 @@ function ChartDoughnut(data){
                   label: complemento.comp
                 });
               });
-              $('#'+element+'_complemento').attr('data-original-title',result.label);
+              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
               $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
               //var testPopover = $('#canvas_'+element).parent();
 
@@ -696,7 +699,8 @@ function ChartPolar(data){
   var canvas = document.getElementById('canvas_'+element);
   var ctx = canvas.getContext("2d");
   var MyChart = new Chart(ctx).PolarArea(values, {
-    responsive : true
+    responsive : true,
+    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
   });
 
   canvas.onclick = function(evt){
@@ -719,7 +723,7 @@ function ChartPolar(data){
                   label: complemento.comp
                 });
               });
-              $('#'+element+'_complemento').attr('data-original-title',result.label);
+              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
               $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
               //var testPopover = $('#canvas_'+element).parent();
 
@@ -782,7 +786,8 @@ function ChartLine(data){
   var canvas = document.getElementById('canvas_'+element);
   var ctx = canvas.getContext("2d");
   var MyChart =  new Chart(ctx).Line(data2, {
-    responsive : true
+    responsive : true,
+    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
   });
 
   canvas.onclick = function(evt){
@@ -819,7 +824,7 @@ function ChartLine(data){
                   }
                 ]
               }
-              $('#'+element+'_complemento').attr('data-original-title',result.label);
+              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
               $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
               //var testPopover = $('#canvas_'+element).parent();
 
@@ -845,4 +850,13 @@ function ChartLine(data){
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();
 });
+
+$('#resultTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+
+function cerrarPopovers(){
+  $('[data-toggle="popover"]').popover('hide');
+}
 /*Fin funciones resultados*/

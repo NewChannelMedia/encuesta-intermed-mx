@@ -974,7 +974,6 @@
 								xPositions.push(element.x);
 								yPositions.push(element.y);
 
-
 								//Include any colour information about the element
 								tooltipLabels.push(helpers.template(this.options.multiTooltipTemplate, element));
 								tooltipColors.push({
@@ -1781,8 +1780,20 @@
 			 *
 			 * https://dl.dropboxusercontent.com/u/34601363/yeahscience.gif
 			 */
-
-
+/*
+       var int = 0;
+       var labels = this.labels;
+       labels.forEach(function (label){
+         var length = label.length;
+         var comp = '';
+         if (length>15){
+           length=12;
+           comp = '...';
+         }
+         labels[int] = label.substring(0,length) + comp;
+         int++;
+       });
+*/
 			// Get maximum radius of the polygon. Either half the height (minus the text width) or half the width.
 			// Use this to calculate the offset + change. - Make sure L/R protrusion is at least 0 to stop issues with centre points
 			var largestPossibleRadius = min([(this.height/2 - this.pointLabelFontSize - 5), this.width/2]),
@@ -2198,6 +2209,18 @@
 			return barsArray;
 		},
 		buildScale : function(labels){
+      var int = 0;
+      labels.forEach(function (label){
+        var length = label.length;
+        var comp = '';
+        if (length>15){
+          length=12;
+          comp = '...';
+        }
+        labels[int] = label.substring(0,length) + comp;
+        int++;
+      });
+
 			var self = this;
 
 			var dataTotal = function(){
@@ -2668,6 +2691,19 @@
 			return pointsArray;
 		},
 		buildScale : function(labels){
+
+      var int = 0;
+      labels.forEach(function (label){
+        var length = label.length;
+        var comp = '';
+        if (length>15){
+          length=12;
+          comp = '...';
+        }
+        labels[int] = label.substring(0,length) + comp;
+        int++;
+      });
+
 			var self = this;
 
 			var dataTotal = function(){
@@ -3242,9 +3278,12 @@
 					points : []
 				};
 
+        //console.log('DATASETS: ' + JSON.stringify(this.datasets));
+        //console.log('DATASETS: ' + JSON.stringify(datasetObject));
 				this.datasets.push(datasetObject);
 
 				helpers.each(dataset.data,function(dataPoint,index){
+          //console.log(data.labels[index])
 					//Add a new point for each piece of data, passing any required data to draw.
 					var pointPosition;
 					if (!this.scale.animation){
@@ -3299,6 +3338,7 @@
 		},
 
 		buildScale : function(data){
+
 			this.scale = new Chart.RadialScale({
 				display: this.options.showScale,
 				fontStyle: this.options.scaleFontStyle,
