@@ -1,4 +1,4 @@
-<?php if( isset($_SESSION['status']) == 1 ){?>
+<?php if( isset($_SESSION['status']) && $_SESSION['status'] == 1 ){?>
   <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
@@ -22,7 +22,7 @@
   </nav>
   <div id="admin-page" class="container">
     <div class="starter-template">
-      <h1>Bienvenido administrador <?php echo "SESSION: ".$_SESSION['status']." ".$administrador; ?></h1>
+      <h1>Bienvenido administrador <?php $administrador; ?></h1>
       <h2 id="mensaje"></h2>
       <p class="lead">Esta es la pagina de inicio</p>
     </div>
@@ -126,7 +126,7 @@
             </button>
             <h4 class = "modal-title">Rechazados</h4>
             <label>Enviar correo de rechazo a: <span id="rechazos"></span>
-            <span id = "rechazosID"></span></label>
+            <span class = "hidden" id = "rechazosID"></span></label>
           </div>
           <div class = "modal-body">
             <div class ="">

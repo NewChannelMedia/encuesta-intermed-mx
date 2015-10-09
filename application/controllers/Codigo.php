@@ -36,27 +36,47 @@
       * @param: file la plantilla que se enviara al usuario
       **/
       public function sendMail(){
-          $campo = $this->input->post('campo');
           $correo = $this->input->post('correo');
           $titulo = $this->input->post('titulo');
-          $archivo = $this->input->post('archivo');
-          if( $campo != "uno" ){
-            $mensaje = $this->input->post('mensaje');
-          }
-          $this->load->library('session');
-          $this->session->set_userdata('mensaje',$mensaje);
+          $codigo = $this->input->post('codigo');
+          $mensaje = $this->input->post('mensaje');
           // se lee el archivo
-          $archivo = realpath(APPPATH.'views/correos/'."mensaje.php");
-          $fp = fopen( $archivo,'r');
-          $html = "";
-          while($line = fgets($fp)){
-            $html .= $line;
+          $fileh = realpath(APPPATH.'views/correos/headerCorreo.php');
+          $fileb = realpath(APPPATH.'views/correos/bodyCorreo.php');
+          $filef = realpath(APPPATH.'views/correos/footerCorreo.php');
+          $fpH = fopen( $fileh,'r');
+          $fpB = fopen( $fileb,'r');
+          $fpF = fopen( $filef,'r');
+          $html1 = "";
+          $html2 = "";
+          $html3 = "";
+          while( $line = fgets($fpH) ){
+            $html1 .= $line;
           }
-          fclose($fp);
+          while( $line = fgets($fpB) ){
+            $html2 .= $line;
+          }
+          while( $line = fgets($fpF) ){
+            $html3 .= $line;
+          }
+          fclose($fpH);
+          fclose($fpB);
+          fclose($fpF);
+          $mensajeCompleto = "";
+          if( $codigo != "" ){
+            $sustituir = '<h2 style = "{color:red;}">'.$codigo.'</h2>';
+            $conCodigo = str_replace('<h2 id = "codigo"></h2>',$sustituir, $html2);
+            $mensajeCompleto = $html1.$conCodigo.$html3;
+          }
+          if( $mensaje != "" ){
+            $sustituir2 = "<p style = 'color:red;'>".$mensaje."</p>";
+            $conCodigo2 = str_replace('<p id ="mes"></p>',$sustituir2, $html2);
+            $mensajeCompleto = $html1.$conCodigo2.$html3;
+          }
           $headers = "MIME-Version: 1.0" . "\r\n";
           $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
           $headers .= 'From: <intermed.encuestas@newchannel.mx>'."\r\n";
-          return mail($correo,$titulo,$html,$headers);
+          return mail($correo,$titulo,$mensajeCompleto,$headers);
       }
       /**
       * Se valida la cedula, en ser real se le envia un correo con el codigo, nuevo, y ese codigo quedara registrado

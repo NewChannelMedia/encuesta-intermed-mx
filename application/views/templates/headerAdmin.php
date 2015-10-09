@@ -1,7 +1,9 @@
 <?php
-	//inicio de session
-  $_SESSION['user'] = "prueba";
-	$_SESSION['status'] = true;
+  if( !isset($_SESSION)){
+    session_start();
+    $_SESSION['user'] = "prueba";
+  	$_SESSION['status'] = true;
+  }
 ?>
 <!DOCTYPE html>
 <html lang="es">
