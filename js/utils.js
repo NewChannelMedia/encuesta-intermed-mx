@@ -388,6 +388,7 @@ $( document ).ready( function () {
   } );
   //envia el codigo genera a la tabla correspondiente y lo envia por correo
   $( "#enviaCodigoGenerado" ).click( function () {
+    var codigo = $( "#aleatorioDato" ).val();console.log("Coigo " +codigo);
     var correo = $( "#codigoCorreo" ).text();
     var titulo = 'Cedula valida';
     var archivo = 'prueba.php';
@@ -396,11 +397,11 @@ $( document ).ready( function () {
     var id = '#t'+valor;
     if( $("#aleatorioDato").val() != "" ){
       $.post('/encuesta-intermed/admin/insertaCodigo/'+ $( "#aleatorioDato" ).val(), function(data){
-          $.post('/encuesta-intermed/codigo/sendMail/',{correo:correo,titulo:titulo,archivo:archivo},function(datas){
+          $.post('/encuesta-intermed/codigo/sendMail/',{codigo:codigo,correo:correo,titulo:titulo,archivo:archivo},function(datas){
               $.post('/encuesta-intermed/codigo/actualizaStatus/',{correo:correo},function(actualizado){
               });
           }).done(function(){
-            alert("Campo actualizado y se envio el correo"+ $("tr").attr('otro'));
+            alert("Campo actualizado y se envio el correo");
             $(ids).hide('slow');
             $(id).hide('slow');
           });
@@ -413,11 +414,11 @@ $( document ).ready( function () {
   $("#envioRechazado").click(function(){
     var mail = $("#rechazos").text();
     var titulo = 'Por el momento no joven';
-    var archivo = 'rechazo.php';
+    var mensaje = $("#areaRechazado").val();
     var valor = parseInt($("#rechazosID").text())-1;
     var ids = '#tr'+valor;
     var id = '#t'+valor;
-    $.post('/encuesta-intermed/codigo/sendMail/',{campo:"uno",correo:mail,titulo:titulo,archivo:archivo}, function(data){
+    $.post('/encuesta-intermed/codigo/sendMail/',{correo:mail,titulo:titulo,mensaje:mensaje}, function(data){
       $.post('/encuesta-intermed/codigo/negado',{correo:mail},function(negado){
       }).done(function(){
         alert("Usuario rechazado, correo enviado....");
@@ -429,12 +430,11 @@ $( document ).ready( function () {
   $("#enviarMensaje").click(function(){
     var mail = $("#codigoCorreo").text();
     var titulo = 'debes de leer esto';
-    var archivo = 'mensaje.php';
-    var mensaje = $("#mensajeAceptado").val();
+    var mensaje = $("#mensajeAceptado").val();console.log("MENSAJE: "+mensaje);
     var valor = parseInt($("#codigoUser").text())-1;
     var ids = '#tr'+valor;
     var id = '#t'+valor;
-    $.post('/encuesta-intermed/codigo/sendMail/',{campo:"dos",correo:mail,titulo:titulo,archivo:archivo, mensaje:mensaje}, function(data){
+    $.post('/encuesta-intermed/codigo/sendMail/',{correo:mail,titulo:titulo, mensaje:mensaje}, function(data){
       $.post('/encuesta-intermed/codigo/actualizaStatus/',{correo:mail},function(actualiza){
       }).done(function(){
         alert("Actualizado y se envio el correo");
