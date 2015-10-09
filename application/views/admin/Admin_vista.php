@@ -16,11 +16,20 @@
 <section class="main2">
   <div class="main-body-intern">
     <div class="container">
+      <?php if($errorM != "") {?>
+        <div class="row">
+          <div class="alert alert-danger" role="alert">
+            <p>
+              <?= $errorM ?>
+            </p>
+          </div>
+        </div>
+      <?php }?>
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10 col-lg-offset-3 col-md-offset-3 col-sm-offset-1 col-xs-offset-1">
           <div class="row">
             <div class="mensaje Flama-normal s20 white col-md-10 col-md-offset-1">
-              <form method="POST" action ="<?= base_url()?>admin/control2" id="loginAdmin">
+              <form method="POST" action ="<?= base_url()?>admin/control" id="loginAdmin">
                 <div class="form-group">
                   <input type="text" class="form-control input-lg" id="userLog" name="user" placeholder="Usuario:"/>
                 </div>
@@ -32,7 +41,7 @@
                     <button type="submit" class="btn btn-success btn-lg btn-block">Sign in</button>
                   </div>
                   <div class="form-group col-md-6 pull-left">
-                    <a href="<?echo base_url();; ?>" class="btn btn-danger btn-lg btn-block">Regresar</a>
+                    <a href="<?echo base_url(); ?>" class="btn btn-danger btn-lg btn-block">Regresar</a>
                   </div>
                 </div>
               </form>

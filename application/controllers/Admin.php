@@ -10,58 +10,72 @@
           // carga del constructor
           public function index(){
             $data['title'] = "Administradores";
+            $data['login_status'] = true;
+            $data['errorM'] = "";
             $this->load->view('templates/header', $data);
             $this->load->view('admin/Admin_vista');
             $this->load->view('templates/footer2');
           }
+
           public function control(){
               // se carga el modelo para verificar si existen el usuario y password que se reciben por post
               $this->load->model('Admin_model');
               // se atrapan los post del formulario
               $usuario = $this->input->post('user');
               $password = $this->input->post('password');
-              if( $this->Admin_model->login($usuario, $password) != false ){
-                $ingresado = true;
-                $this->load->library('session');
-                $datosAca = array('user'=>$usuario,'ingresado'=>$ingresado);
-                $this->session->set_userdata($datosAca);
-                $data['title'] = "Control";
-                $data['administrador'] = $this->session->user;
-                $this->load->view('templates/header', $data);
+
+              if( ($this->Admin_model->login($usuario, $password) != false) || ($_SESSION['status']!=false) ){
+                $data['title'] = "Dashboard";
+                $data['administrador'] = $usuario;
+                $data['user'] = $usuario;
+                $_SESSION['status'] = true;
+                $data['session'] = $_SESSION['status'];
+                $data['errorM'] = "";
+                $this->load->view('templates/headerAdmin', $data);
                 $this->load->view('admin/control', $data);
                 $this->load->view('templates/footerAdmin');
               }else{
-                $ingresado = false;
-                $data['title'] = "Control";
+                $data['title'] = "Dashboard";
+                $_SESSION['status'] = false;
+                $data['status'] = $_SESSION['status'];
+                $data['errorM'] = "Revisa tus credenciales de acceso, o la sesión ha sido cerrada.";
                 $this->load->view('templates/header', $data);
-                $this->load->view('admin/error');
+                $this->load->view('admin/Admin_vista', $data);
                 $this->load->view('templates/footerAdmin');
               }
           }
 
-          public function control2(){
+          public function solicitudes(){
               // se carga el modelo para verificar si existen el usuario y password que se reciben por post
               $this->load->model('Admin_model');
-              // se atrapan los post del formulario
-              $usuario = $this->input->post('user');
-              $password = $this->input->post('password');
-              if( $this->Admin_model->login($usuario, $password) != false ){
-                $ingresado = true;
-                $this->load->library('session');
-                $datosAca = array('user'=>$usuario,'ingresado'=>$ingresado);
-                $this->session->set_userdata($datosAca);
-                $data['title'] = "Control";
-                $data['administrador'] = $this->session->user;
+              $session = $_SESSION['status'];
+              if($session!=false){
+                $data['title'] = "Solicitud true";
+                $_SESSION['status'] = true;
+                $data['errorM'] = "";
                 $this->load->view('templates/headerAdmin', $data);
-                $this->load->view('admin/control2', $data);
+                $this->load->view('admin/solicitudes', $data);
                 $this->load->view('templates/footerAdmin');
               }else{
-                $ingresado = false;
-                $data['title'] = "Control";
+                $data['title'] = "Solicitud false";
+                $data['error'] = "no sesion";
+                $_SESSION['status'] = false;
+                $data['status'] = $_SESSION['status'];
+                $data['errorM'] = "Revisa tus credenciales de acceso, o la sesión ha sido cerrada.";
                 $this->load->view('templates/header', $data);
-                $this->load->view('admin/error');
+                $this->load->view('admin/Admin_vista', $data);
                 $this->load->view('templates/footerAdmin');
               }
+          }
+
+          //cerrar sesion
+          public function cerrar(){
+            $_SESSION['status'] = false;
+            $data['errorM'] = "";
+            $this->load->view('templates/header');
+            $this->load->view('admin/Admin_vista', $data);
+            $this->load->view('templates/footer2');
+            //return session_destroy();
           }
 
           //carga los datos a la tabla por aceptar
@@ -82,6 +96,27 @@
             }
             print_r(json_encode($aceptar));
           }
+
+          public function suscritos(){
+            $this->load->model('Admin_model');
+            $query = $this->Admin_model->suscripcionNewsletter();
+            $newsletter = array();
+            $i = 0;
+            foreach( $query->result() as $row ){
+              $newsletter[$i]['id'] = $row->id;
+              $newsletter[$i]['nombre'] = $row->nombre;
+              $newsletter[$i]['correo'] = $row->correo;
+              $i++;
+            }
+            $data["newsletter"] = $newsletter;
+
+            $this->load->view('templates/headerAdmin', $data);
+            $this->load->view('admin/suscritos', $data);
+            $this->load->view('templates/footerAdmin');
+
+            return json_encode($newsletter);
+          }
+
           //inserta el codigo
           public function insertaCodigo($codigo){
             $this->load->model('Admin_model');

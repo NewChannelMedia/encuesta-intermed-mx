@@ -240,103 +240,133 @@ function enviarSucces( mail ) {
   $( "#codigoCorreo" ).html( mail );
 }
 
+function cargaPorAceptar() {
+  $.ajax( {
+    url: '/encuesta-intermed/admin/porAceptar',
+    type: 'POST',
+    dataType: 'JSON',
+    success: function ( data ) {
+      //cara de los datos
+      $( "#datosPa" ).html( '' );
+      $.each( data, function ( i, item ) {
+        if ( item.status == "0" ) {
+          if ( item.medico != "1" ) {
+            $( "#datosPa" ).append( '<tr class="bg-medico" id="tr' + i + '"></tr>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td >' + item.id + '</td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td>' + item.nombre + '</td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td>' + item.correo + '</td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td>' + item.cedula + '</td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td>' + item.justificacion + '</td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\')" type="button" id="enviarSucces" class="btn btn-success btn-block" data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td><button noMalTo="' + item.correo + '" type="button" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
+          }
+          else {
+            $( "#datosPa" ).append( '<tr class="bg-otro" id="t' + i + '"></tr>' );
+            $( '#datosPa #t' + i + '' ).append( '<td >' + item.id + '</td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td >' + item.nombre + '</td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td >' + item.correo + '</td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td >' + item.cedula + '</td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td >' + item.justificacion + '</td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td ><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\')"  type="button" id="enviarSucces' + i + '" class="btn btn-success btn-block"data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td ><button noMalTo="' + item.correo + '" type="button" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
+          }
+        }
+      } );
+    },
+    error: function ( e ) {
+      console.log( "Error a cargar la tabla por aceptar: Error 1023: " + e );
+    }
+  } );
+}
+
+function cargaNoAceptados() {
+  $.ajax( {
+    url: '/encuesta-intermed/admin/porAceptar',
+    type: 'POST',
+    dataType: 'JSON',
+    success: function ( data ) {
+      $( "#datosNa" ).html( '' );
+      $.each( data, function ( i, item ) {
+        if ( item.status == "2" ) {
+          $( "#datosNa" ).append( '<tr  id="pt' + i + '"></tr>' );
+          $( '#datosNa #pt' + i + '' ).append( '<td >' + item.id + '</td>' );
+          $( '#datosNa #pt' + i + '' ).append( '<td>' + item.nombre + '</td>' );
+          $( '#datosNa #pt' + i + '' ).append( '<td>' + item.correo + '</td>' );
+          $( '#datosNa #pt' + i + '' ).append( '<td>' + item.cedula + '</td>' );
+          $( '#datosNa #pt' + i + '' ).append( '<td>' + item.justificacion + '</td>' );
+        }
+      } );
+    },
+    error: function ( e ) {
+      console.log( "Error: no se pudo load la tabla: " + e );
+    }
+  } );
+}
+
+function cargaAceptados() {
+  $.ajax( {
+    url: '/encuesta-intermed/admin/porAceptar',
+    type: 'POST',
+    dataType: 'JSON',
+    success: function ( data ) {
+      $( "#datosSa" ).html( '' );
+      $.each( data, function ( i, item ) {
+        if ( item.status == "1" ) {
+          $( "#datosSa" ).append( '<tr  id="te' + i + '"></tr>' );
+          $( '#datosSa #te' + i + '' ).append( '<td >' + item.id + '</td>' );
+          $( '#datosSa #te' + i + '' ).append( '<td >' + item.nombre + '</td>' );
+          $( '#datosSa #te' + i + '' ).append( '<td >' + item.correo + '</td>' );
+          $( '#datosSa #te' + i + '' ).append( '<td >' + item.cedula + '</td>' );
+          $( '#datosSa #te' + i + '' ).append( '<td >' + item.justificacion + '</td>' );
+        }
+      } );
+    },
+    error: function ( e ) {
+      console.log( "Error al cargar los aceptados: " + e );
+    }
+  } );
+}
+
+$( document ).ready( function () {
+  cargaPorAceptar();
+} );
+
 $( document ).ready( function () {
   $( "#pAceptar" ).click( function () {
+    $( "#pAceptar" ).parent().addClass( 'active' );
+    $( "#nAceptar" ).parent().removeClass( 'active' );
+    $( "#paceptados" ).parent().removeClass( 'active' );
+
     $( "#porAceptar" ).removeClass( 'hidden' );
     $( "#noAceptadas" ).addClass( 'hidden' );
     $( "#aceptados" ).addClass( 'hidden' );
 
     //se carga el ajax para la carga de las tablas
-    $.ajax( {
-      url: '/encuesta-intermed/admin/porAceptar',
-      type: 'POST',
-      dataType: 'JSON',
-      success: function ( data ) {
-        //cara de los datos
-        $( "#datosPa" ).html( '' );
-        $.each( data, function ( i, item ) {
-          if ( item.status == "0" ) {
-            if ( item.medico != "1" ) {
-              $( "#datosPa" ).append( '<tr class = "danger" id="tr' + i + '"></tr>' );
-              $( '#datosPa #tr' + i + '' ).append( '<td >' + item.id + '</td>' );
-              $( '#datosPa #tr' + i + '' ).append( '<td>' + item.nombre + '</td>' );
-              $( '#datosPa #tr' + i + '' ).append( '<td>' + item.correo + '</td>' );
-              $( '#datosPa #tr' + i + '' ).append( '<td>' + item.cedula + '</td>' );
-              $( '#datosPa #tr' + i + '' ).append( '<td>' + item.justificacion + '</td>' );
-              $( '#datosPa #tr' + i + '' ).append( '<td><button malto = "' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\')" type = "button" id = "enviarSucces" class = "btn btn-primary" data-toggle="modal" data-target="#aceptarModal">Aceptar</button></td>' );
-              $( '#datosPa #tr' + i + '' ).append( '<td><button noMalTo = "' + item.correo + '" type = "button" id = "enviarNoSucces" class = "btn btn-danger" data-toggle="modal" data-target="#NoaceptarModal">Rechazar</button></td>' );
-            }
-            else {
-              $( "#datosPa" ).append( '<tr  id = "t' + i + '"></tr>' );
-              $( '#datosPa #t' + i + '' ).append( '<td >' + item.id + '</td>' );
-              $( '#datosPa #t' + i + '' ).append( '<td >' + item.nombre + '</td>' );
-              $( '#datosPa #t' + i + '' ).append( '<td >' + item.correo + '</td>' );
-              $( '#datosPa #t' + i + '' ).append( '<td >' + item.cedula + '</td>' );
-              $( '#datosPa #t' + i + '' ).append( '<td >' + item.justificacion + '</td>' );
-              $( '#datosPa #t' + i + '' ).append( '<td ><button malto = "' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\')"  type = "button" id = "enviarSucces' + i + '" class = "btn btn-primary"data-toggle="modal" data-target="#aceptarModal">Aceptar</button></td>' );
-              $( '#datosPa #t' + i + '' ).append( '<td ><button noMalTo = "' + item.correo + '" type = "button" id = "enviarNoSucces" class = "btn btn-danger" data-toggle="modal" data-target="#NoaceptarModal">Rechazar</button></td>' );
-            }
-          }
-        } );
-      },
-      error: function ( e ) {
-        console.log( "Error a cargar la tabla por aceptar: Error 1023: " + e );
-      }
-    } );
+    cargaPorAceptar();
   } );
+
   $( "#nAceptar" ).click( function () {
+    $( "#pAceptar" ).parent().removeClass( 'active' );
+    $( "#nAceptar" ).parent().addClass( 'active' );
+    $( "#paceptados" ).parent().removeClass( 'active' );
+
     $( "#noAceptadas" ).removeClass( 'hidden' );
     $( "#aceptados" ).addClass( 'hidden' );
     $( "#porAceptar" ).addClass( 'hidden' );
-    $.ajax( {
-      url: '/encuesta-intermed/admin/porAceptar',
-      type: 'POST',
-      dataType: 'JSON',
-      success: function ( data ) {
-        $( "#nAceptados" ).html( '' );
-        $.each( data, function ( i, item ) {
-          if ( item.status == "2" ) {
-            $( "#nAceptados" ).append( '<tr  id = "pt' + i + '"></tr>' );
-            $( '#nAceptados #pt' + i + '' ).append( '<td >' + item.id + '</td>' );
-            $( '#nAceptados #pt' + i + '' ).append( '<td>' + item.nombre + '</td>' );
-            $( '#nAceptados #pt' + i + '' ).append( '<td>' + item.correo + '</td>' );
-            $( '#nAceptados #pt' + i + '' ).append( '<td>' + item.cedula + '</td>' );
-            $( '#nAceptados #pt' + i + '' ).append( '<td>' + item.justificacion + '</td>' );
-          }
-        } );
-      },
-      error: function ( e ) {
-        console.log( "Error: no se pudo load la tabla: " + e );
-      }
-    } );
+    cargaNoAceptados();
   } );
+
   $( "#paceptados" ).click( function () {
+    $( "#pAceptar" ).parent().removeClass( 'active' );
+    $( "#nAceptar" ).parent().removeClass( 'active' );
+    $( "#paceptados" ).parent().addClass( 'active' );
+
     $( "#aceptados" ).removeClass( 'hidden' );
     $( "#porAceptar" ).addClass( 'hidden' );
     $( "#noAceptadas" ).addClass( 'hidden' );
-    $.ajax( {
-      url: '/encuesta-intermed/admin/porAceptar',
-      type: 'POST',
-      dataType: 'JSON',
-      success: function ( data ) {
-        $( "#idAceptados" ).html( '' );
-        $.each( data, function ( i, item ) {
-          if ( item.status == "1" ) {
-            $( "#idAceptados" ).append( '<tr  id = "te' + i + '"></tr>' );
-            $( '#idAceptados #te' + i + '' ).append( '<td >' + item.id + '</td>' );
-            $( '#idAceptados #te' + i + '' ).append( '<td >' + item.nombre + '</td>' );
-            $( '#idAceptados #te' + i + '' ).append( '<td >' + item.correo + '</td>' );
-            $( '#idAceptados #te' + i + '' ).append( '<td >' + item.cedula + '</td>' );
-            $( '#idAceptados #te' + i + '' ).append( '<td >' + item.justificacion + '</td>' );
-          }
-        } );
-      },
-      error: function ( e ) {
-        console.log( "Error al cargar los aceptados: " + e );
-      }
-    } );
+    cargaAceptados();
   } );
-  //genera el codigo y lo mete en el input
+
   $( "#generaCodigo" ).click( function () {
     //carga ajax para generar el codigo
     $.ajax( {
@@ -344,7 +374,6 @@ $( document ).ready( function () {
       type: "POST",
       dataType: "JSON",
       success: function ( data ) {
-        console.log( "dato: " + data );
         $( "#aleatorioDato" ).attr( 'value', data );
       },
       error: function ( e ) {
@@ -392,6 +421,11 @@ $( document ).ready( function () {
 $( "#menu-toggle" ).click( function ( e ) {
   e.preventDefault();
   $( "#wrapper" ).toggleClass( "toggled" );
+} );
+$( ".navbar-brand" ).click( function ( e ) {
+  e.preventDefault();
+  $( "#wrapper" ).toggleClass( "toggled-2" );
+  $( '#menu ul' ).hide();
 } );
 $( "#menu-toggle-2" ).click( function ( e ) {
   e.preventDefault();
