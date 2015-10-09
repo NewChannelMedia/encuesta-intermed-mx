@@ -62,9 +62,7 @@ $( function () {
 
 /*Funciones encuesta*/
 
-$( '#progress-bar-current' ).popover( {
-  animation: false
-} );
+
 $( '#progress-bar-current' ).popover( 'show' );
 $( '.popover.top.in' ).each( function ( index, element ) {
   $( element ).css( 'left', ( parseInt( $( element ).css( 'left' ) ) - 25 + parseInt( $( '#progress-bar-current' ).css( 'width' ) ) / 2 ) );
@@ -79,6 +77,9 @@ $( window ).resize( function () {
 
 $( document ).ready( function () {
   validarFormulario();
+  $( '#progress-bar-current' ).popover( {
+    animation: false
+  } );
 } );
 
 $( function () {
