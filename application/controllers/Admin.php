@@ -53,6 +53,7 @@
                 }
                 $enviar = array('element' => 'div_encuestasPorPeriodo', 'data' => $env);
                 echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { ChartLine('.json_encode($enviar).') })</script>';
+                $data['drop_encPer'] = encuestas_dropDown($enviar,'Line');
                 /*GRAFICA PRECIOS PROPUESTOS*/
                 $respuestas = $this->Respuestasm_model->get_respuestamByPregunta(40);
                 $env = array();
@@ -61,6 +62,7 @@
                 }
                 $enviar = array('element' => 'div_preciosPropuestos', 'data' => $env);
                 echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { ChartPolar('.json_encode($enviar).') })</script>';
+                $data['drop_precios'] = encuestas_dropDown($enviar,'Polar');
                 /*GRAFICA POR ESPECIALIDADES*/
                 $respuestas = $this->Respuestasm_model->get_respuestamByPregunta(1);
                 $env = array();
@@ -69,6 +71,7 @@
                 }
                 $enviar = array('element' => 'div_especialidades', 'data' => $env);
                 echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { ChartBar('.json_encode($enviar).') })</script>';
+                $data['drop_especialidades'] = encuestas_dropDown($enviar,'Bar');
                 /*GRAFICA POR NIVEL DE INFLUENCIA DE LA TECNOLOGIA EN LA VIDA PROFESIONAL*/
                 $respuestas = $this->Respuestasm_model->get_respuestamByPregunta(4);
                 $env = array();
@@ -77,6 +80,7 @@
                 }
                 $enviar = array('element' => 'div_influenciaTecnologia', 'data' => $env);
                 echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { ChartRadar('.json_encode($enviar).') })</script>';
+                $data['drop_tecnologia'] = encuestas_dropDown($enviar,'Radar');
                 /*GRAFICA POR EDADES*/
                 $respuestas = $this->Respuestasm_model->get_respuestamByPregunta(2);
                 $env = array();
@@ -85,6 +89,7 @@
                 }
                 $enviar = array('element' => 'div_edades', 'data' => $env);
                 echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { ChartPie('.json_encode($enviar).') })</script>';
+                $data['drop_edades'] = encuestas_dropDown($enviar,'Pie');
                 /*GRAFICA POR DISPOSITIVOS*/
                 $respuestas = $this->Respuestasm_model->get_dispositivos();
                 $env = array();
@@ -93,7 +98,7 @@
                 }
                 $enviar = array('element' => 'div_dispositivos', 'data' => $env);
                 echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { ChartDoughnut('.json_encode($enviar).') })</script>';
-
+                $data['drop_dispositivos'] = encuestas_dropDown($enviar,'Doughnut');
 
 
                 $this->load->view('templates/headerAdmin', $data);
@@ -335,5 +340,23 @@
 
           }
 
+      }
+
+      function encuestas_dropDown($enviar, $tipo){
+        $checked = '';
+        $data = '';
+        $checked = ($tipo == "Bar")? 'checked':'';
+        $data .= '<label class="col-md-12"><input type="radio" name="radio'. $enviar['element'] .'" ' . $checked . ' onclick="ChartBar('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Barras</label>';
+        $checked = ($tipo == "Radar")? 'checked':'';
+        $data .= '<label class="col-md-12"><input type="radio" name="radio'. $enviar['element'] .'" ' . $checked . ' onclick="ChartRadar('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Radio</label>';
+        $checked = ($tipo == "Pie")? 'checked':'';
+        $data .= '<label class="col-md-12"><input type="radio" name="radio'. $enviar['element'] .'" ' . $checked . ' onclick="ChartPie('.htmlspecialchars(print_r(json_encode($enviar),1)).')" > Circular</label>';
+        $checked = ($tipo == "Doughnut")? 'checked':'';
+        $data .= '<label class="col-md-12"><input type="radio" name="radio'. $enviar['element'] .'" ' . $checked . ' onclick="ChartDoughnut('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Dona</label>';
+        $checked = ($tipo == "Polar")? 'checked':'';
+        $data .= '<label class="col-md-12"><input type="radio" name="radio'. $enviar['element'] .'" ' . $checked . ' onclick="ChartPolar('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Polar</label>';
+        $checked = ($tipo == "Line")? 'checked':'';
+        $data .= '<label class="col-md-12"><input type="radio" name="radio'. $enviar['element'] .'" ' . $checked . ' onclick="ChartLine('.htmlspecialchars(print_r(json_encode($enviar),1)).')" > Linea</label>';
+        return $data;
       }
   ?>
