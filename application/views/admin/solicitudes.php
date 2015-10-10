@@ -75,7 +75,12 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title">Enviar correo a: <small><span id="codigoCorreo"></span></small></h4>
+            <h4 class="modal-title">Enviar correo a:
+              <small>
+                <span id="codigoCorreo"></span>
+              </small>
+              <span id = "codigoUser" class ="hidden"></span>
+            </h4>
           </div>
           <div class="modal-body">
             <div class="row">
@@ -97,8 +102,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" id="enviaCodigoGenerado" class="btn btn-primary pull-left">Enviar codigo</button>
-            <button type="button" id="enviarMensaje" class="btn btn-danger pull-right">Enviar mensaje</button>
+            <button type = "button" id = "enviarTodo" class = "btn btn-warning">Enviar mensaje y código</button>
           </div>
         </div>
       </div>
@@ -111,7 +115,12 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title">Enviar correo a: <small><span id="codigoCorreo"></span></small></h4>
+            <h4 class="modal-title">Enviar correo a:
+              <small>
+                <span id="rechazos"></span>
+              </small>
+            </h4>
+            <span class = "hidden" id = "rechazosID"></span></label>
           </div>
           <div class="modal-body">
             <div class="row">
