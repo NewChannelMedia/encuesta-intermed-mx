@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title><?php echo $title ?></title>
     <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>css/encuesta.css">
@@ -18,6 +17,5 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-
 <body id="page-top" class="index Flama">
   <!-- Aqui empieza el body de la pagina -->

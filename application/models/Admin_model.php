@@ -38,6 +38,12 @@
             $query = $this->db->get('porValidar');
             return $query;
           }
+
+          public function suscripcionNewsletter(){
+            $query = $this->db->get('newsletter');
+            return $query;
+          }
+
           // inserta el codigo en la db
           public function insertaCodigoGenerado($codigo){
             $data = array('codigo' => $codigo);

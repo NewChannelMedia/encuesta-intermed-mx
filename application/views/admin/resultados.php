@@ -1,8 +1,4 @@
-<div class="container">
-<div class="row text-center" style="padding: 50px;">
-<h2>Resultado de las encuestas</h2>
-</div>
-
+<div class="container-fluid resultados-contanier">
 <!--IMPRIMIR EL TAB NAV-->
 <?php
 $first = true;
@@ -144,9 +140,9 @@ echo '</ul>';
             <div class="panel-body ContenedorGrafica">
 
             <?php
-              echo '<div class="col-md-12" id="'. $divId .'">';
+              echo '<div class="grafica" id="'. $divId .'">';
               echo '</div>';
-              echo '<div class="col-md-12 complemento" id="'. $divId .'_complemento" data-toggle="popover" title="" data-content="" data-html="true" data-placement="bottom"></div>';
+              echo '<div class="col-md-12 complemento" id="'. $divId .'_complemento" data-toggle="popover" data-placement="top" itle="" data-content="" data-html="true" data-placement="bottom"></div>';
               echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { Chart'. $tipo .'('.json_encode($enviar).') })</script>';
               echo '<script type="text/javascript">document.getElementById("resultTabs").addEventListener("click", function(event) { Chart'. $tipo .'('.json_encode($enviar).') })</script>';
             ?>

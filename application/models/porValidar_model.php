@@ -36,5 +36,19 @@
       $this->db->update('porValidar', $obj);
       return true;
     }
+    /**
+    * function para actualizar el status del usuario aceptado o rechazado
+    * @param $correo para la condicion
+    */
+    public function actualizaStatus($correo){
+      $obj = array('status'=>1);
+      $this->db->where('correo',$correo);
+      $this->db->update('porValidar',$obj);
+    }
+    public function negado($correo){
+      $obj= array('status'=>2);
+      $this->db->where('correo',$correo);
+      $this->db->update('porValidar',$obj);
+    }
   }
 ?>

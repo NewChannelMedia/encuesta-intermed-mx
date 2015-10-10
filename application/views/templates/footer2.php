@@ -15,7 +15,6 @@
     <script src="<?echo base_url(); ?>js/jquery.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="<?echo base_url(); ?>js/bootstrap.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="<?echo base_url(); ?>js/utils.js"></script>
   </body>
 </html>
