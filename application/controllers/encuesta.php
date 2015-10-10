@@ -65,7 +65,7 @@
             break;
       }
       /**/
-      $this->load->view('templates/footer2', $data);
+      $this->load->view('templates/footer', $data);
     }
 
     public function newsletter(){
@@ -369,7 +369,7 @@
         $data['contenido'] = $contenido;
 
         $this->load->view('encuesta/encuesta', $data);
-        $this->load->view('templates/footer2', $data);
+        $this->load->view('templates/footer', $data);
         //Redirect /about o index
       }
 
