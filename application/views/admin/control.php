@@ -15,7 +15,7 @@
                 <span class="glyphicon glyphicon-ok-sign s60"></span>
               </div>
               <div class="col-xs-8 text-right">
-                <div class="huge">26</div>
+                <div class="huge"><?php echo $totalContestadas; ?></div>
                 <div>Encuestas contestadas</div>
               </div>
             </div>
@@ -37,7 +37,7 @@
                 <span class="glyphicon glyphicon-info-sign s60"></span>
               </div>
               <div class="col-xs-8 text-right">
-                <div class="huge">12</div>
+                <div class="huge"><?php echo $totalPorValidar;?></div>
                 <div>Solicitudes por aceptar</div>
               </div>
             </div>
@@ -59,7 +59,7 @@
                 <span class="glyphicon glyphicon-plus-sign s60"></span>
               </div>
               <div class="col-xs-8 text-right">
-                <div class="huge">124</div>
+                <div class="huge"><?php echo $totalAceptados;?></div>
                 <div>Suscripciones nuevas</div>
               </div>
             </div>
@@ -81,7 +81,7 @@
                 <span class="glyphicon glyphicon-question-sign s60"></span>
               </div>
               <div class="col-xs-8 text-right">
-                <div class="huge">13</div>
+                <div class="huge"><?php echo $totalRechazados;?></div>
                 <div>Solcitud de informacion</div>
               </div>
             </div>
@@ -103,7 +103,7 @@
             <h3 class="panel-title">Encuestas por periodo</h3>
           </div>
           <div class="panel-body">
-
+            <div class="grafica dashboard" id="div_encuestasPorPeriodo"></div>
           </div>
         </div>
       </div>
@@ -113,7 +113,7 @@
             <h3 class="panel-title">Precios propuestos</h3>
           </div>
           <div class="panel-body">
-
+            <div class="grafica dashboard" id="div_preciosPropuestos"></div>
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@
             <h3 class="panel-title">Especialidades</h3>
           </div>
           <div class="panel-body">
-
+            <div class="grafica dashboard" id="div_especialidades"></div>
           </div>
         </div>
       </div>
@@ -133,7 +133,7 @@
             <h3 class="panel-title">Dispositivos</h3>
           </div>
           <div class="panel-body">
-
+            <div class="grafica dashboard" id="div_dispositivos"></div>
           </div>
         </div>
       </div>
@@ -143,7 +143,7 @@
             <h3 class="panel-title">Nivel de influencia</h3>
           </div>
           <div class="panel-body">
-
+            <div class="grafica dashboard" id="div_influenciaTecnologia"></div>
           </div>
         </div>
       </div>
@@ -153,7 +153,7 @@
             <h3 class="panel-title">Edades</h3>
           </div>
           <div class="panel-body">
-
+            <div class="grafica dashboard" id="div_edades"></div>
           </div>
         </div>
       </div>

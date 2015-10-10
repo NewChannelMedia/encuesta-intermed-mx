@@ -874,10 +874,6 @@ canvas {
   padding-bottom: 10px;
 }
 
-.ContenedorGrafica {
-
-}
-
-.grafica {
-
+.grafica.dashboard{
+  height: 300px;
 }

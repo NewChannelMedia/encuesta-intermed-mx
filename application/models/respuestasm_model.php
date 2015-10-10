@@ -73,7 +73,6 @@ class Respuestasm_model extends CI_Model {
 
   }
 
-
   public function get_respuestaByEncuestaPregunta($encuestasM_id = FALSE, $pregunta_id = FALSE)
   {
     if ($encuestasM_id === FALSE || $pregunta_id === FALSE)
@@ -83,5 +82,13 @@ class Respuestasm_model extends CI_Model {
     $this->db->select('pregunta_' . $pregunta_id);
     $query = $this->db->get_where('respuestasM', array('encuestaM_id' => $encuestasM_id));
     return $query->row_array();
+  }
+
+  public function get_dispositivos()
+  {
+    $this->db->select('SUBSTRING(pregunta_12,24) AS "dispositivo", COUNT(*) AS "total" FROM respuestasM WHERE LENGTH(pregunta_12) > 3', FALSE);
+    $this->db->group_by('SUBSTRING(pregunta_12,24)');
+    $query = $this->db->get();
+    return $query->result_array();
   }
 }

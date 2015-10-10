@@ -50,5 +50,38 @@
       $this->db->where('correo',$correo);
       $this->db->update('porValidar',$obj);
     }
+
+    public function get_totalPorValidar()
+    {
+      $select =   array(
+                  'count(*) as total'
+              );
+      $this->db->select($select);
+      $this->db->where('status', "0");
+      $query = $this->db->get('porValidar');
+      return $query->row_array();
+    }
+
+    public function get_totalAceptados()
+    {
+      $select =   array(
+                  'count(*) as total'
+              );
+      $this->db->select($select);
+      $this->db->where('status', "1");
+      $query = $this->db->get('porValidar');
+      return $query->row_array();
+    }
+
+    public function get_totalRechazados()
+    {
+      $select =   array(
+                  'count(*) as total'
+              );
+      $this->db->select($select);
+      $this->db->where('status', "2");
+      $query = $this->db->get('porValidar');
+      return $query->row_array();
+    }
   }
 ?>
