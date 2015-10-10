@@ -63,15 +63,19 @@
           fclose($fpB);
           fclose($fpF);
           $mensajeCompleto = "";
-          if( $codigo != "" ){
+          if( $codigo != ""){
             $sustituir = '<h2 style = "{color:red;}">'.$codigo.'</h2>';
             $conCodigo = str_replace('<h2 id = "codigo"></h2>',$sustituir, $html2);
+            if($mensaje != ""){
+              $sustituir2 = "<p style = 'color:red;'>".$mensaje."</p>";
+              $conCodigo = str_replace('<p id ="mes"></p>',$sustituir2, $html2);
+            }
             $mensajeCompleto = $html1.$conCodigo.$html3;
           }
-          if( $mensaje != "" ){
+          if( $codigo == "" ){
             $sustituir2 = "<p style = 'color:red;'>".$mensaje."</p>";
-            $conCodigo2 = str_replace('<p id ="mes"></p>',$sustituir2, $html2);
-            $mensajeCompleto = $html1.$conCodigo2.$html3;
+            $conCodigo = str_replace('<p id ="mes"></p>',$sustituir2, $html2);
+            $mensajeCompleto = $html1.$conCodigo.$html3;
           }
           $headers = "MIME-Version: 1.0" . "\r\n";
           $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
