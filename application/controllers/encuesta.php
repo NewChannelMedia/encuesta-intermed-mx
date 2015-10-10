@@ -121,33 +121,57 @@
         foreach ($POSTS as $post => $value) {
           if (substr($post,0,9) == "respuesta"){
             $id = explode('_', $post)[1];
+            $pregunta = $this->Preguntasm_model->get_preguntam($id);
             if ($last != $id){
-              if (array_key_exists("respuesta_" . $id . '_1',$POSTS)){
-                $value = '';
-                $last = $id;
-                $next = true;
-                $total = 1;
-                $value =  $POSTS["respuesta_" . $id . '_' . $total];
-                $total++;
-                while ($next == true){
-                  if (array_key_exists("respuesta_" . $id . '_' . $total,$POSTS)){
-                    $value .= '|' . $POSTS["respuesta_" . $id . '_' . $total];
-                    $total++;
-                  } else {
-                    $next = false;
+              if ($pregunta['tipo'] == "checkbox"){
+                  $value = '';
+                  $last = $id;
+                  $next = true;
+                  $total = 1;
+                  $opc = explode('|', $pregunta['opciones']);
+                  while ($next == true){
+                    if (array_key_exists("respuesta_" . $id . '_' . $total,$POSTS)){
+                      if (array_key_exists("complemento_" . $id . '_' . $total,$POSTS) && !empty($POSTS["complemento_" . $id . '_' . $total])){
+                        $POSTS["respuesta_" . $id . '_' . $total] .= '|comp:' . $POSTS['complemento_' . $id . '_' . $total];
+                      }
+                      if (empty($value)){
+                        $value .= $POSTS["respuesta_" . $id . '_' . $total];
+                      }else {
+                        $value .= '|' . $POSTS["respuesta_" . $id . '_' . $total];
+                      }
+                    }
+                    if ($total == count($opc)){
+                      $next = false;
+                    } else {
+                      $total++;
+                    }
                   }
-                }
+                  //echo 'value: ' .  $value . '<br/>';
+              } else {
+                if (array_key_exists("respuesta_" . $id . '_1',$POSTS)){
+                  $value = '';
+                  $last = $id;
+                  $next = true;
+                  $total = 1;
+                  $value =  $POSTS["respuesta_" . $id . '_' . $total];
+                  $total++;
+                  while ($next == true){
+                    if (array_key_exists("respuesta_" . $id . '_' . $total,$POSTS)){
+                      $value .= '|' . $POSTS["respuesta_" . $id . '_' . $total];
+                      $total++;
+                    } else {
+                      $next = false;
+                    }
+                  }
                 if (array_key_exists("complemento_" . $id,$POSTS) && !empty($POSTS['complemento_' . $id])){
                   $value .= '|comp:' . $POSTS['complemento_' . $id];
                 }
               } else {
                 if (array_key_exists("complemento_" . $id,$POSTS) && !empty($POSTS['complemento_' . $id])){
                   $value .= '|comp:' . $POSTS['complemento_' . $id];
-                  //echo "Es una respuesta! de la pregunta: ". $id ." y tiene complemento<br/>";
-                } else {
-                  //echo "Es una respuesta! de la pregunta: ". $id ."<br/>";
                 }
               }
+            }
               //echo $id . ': ' . $value .'<br/>';
               $update = array(
                  'pregunta_' . $id => $value,
@@ -213,13 +237,16 @@
             foreach ($preguntas as $pregunta) {
                 $respuesta = $this->Respuestasm_model->get_respuestaByEncuestaPregunta($data['encuesta_id'], $pregunta['id']);
                 $respuesta = explode('|',$respuesta['pregunta_' . $pregunta['id']]);
-                $respuestas = array();
-                $complemento = '';
-                foreach ($respuesta as $resp) {
-                  if (substr($resp, 0, 5) === "comp:"){
-                      $complemento = substr($resp, 5);
-                  } else {
-                    $respuestas[] = $resp;
+                //echo 'respuesta: <pre>' . print_r($respuesta,1) . '</pre>';
+                if (!($pregunta['tipo'] == 'checkbox')){
+                  $respuestas = array();
+                  $complemento = '';
+                  foreach ($respuesta as $resp) {
+                    if (substr($resp, 0, 5) === "comp:"){
+                        $complemento = substr($resp, 5);
+                    } else {
+                      $respuestas[] = $resp;
+                    }
                   }
                 }
                 //echo 'respuesta: <pre>' . print_r($respuestas, 1) . '</pre>';
@@ -230,15 +257,15 @@
                 $opciones = explode('|', $pregunta['opciones']);
                 switch ($pregunta['tipo']) {
                   case 'text':
-                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
+                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
                       $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" id="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control block-container-table-respuesta" >';
                       break;
                   case 'money':
-                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
+                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
                       $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" id="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control block-container-table-respuesta" onkeypress="return validarMoneda(event, this)" onblur="formatoMoneda(this)">';
                       break;
                   case 'radio':
-                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '</div>';
                       $contenido .= '<div class="block-container-table-respuesta">';
                       $total = 0;
                       foreach ($opciones as $opcion) {
@@ -246,7 +273,7 @@
                         if ($opcion === $respuestas[0]){
                             $checked = 'checked';
                         }
-                        $contenido .= '<input type="radio" name="respuesta_' . $pregunta['id'] . '" value="' . $opcion . '" required  onchange="LimpiarComplementos('. $pregunta['id'] .','. ++$total .')" '. $checked .' class="form-control"> '. $opcion . '&nbsp;&nbsp;';
+                        $contenido .= '<label style="font-weight: normal;"><input type="radio" name="respuesta_' . $pregunta['id'] . '" value="' . $opcion . '" required  onchange="LimpiarComplementos('. $pregunta['id'] .','. ++$total .')" '. $checked .' > '. $opcion . '</label>&nbsp;&nbsp;';
                         if (substr($opcion, -1) == ":"){
                           $valorComp = '';
                           $disabled = 'disabled';
@@ -259,8 +286,43 @@
                         $contenido .= '&nbsp;&nbsp;';
                       }
                       break;
+                  case 'checkbox':
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-respuesta">';
+                      $total = 0;
+
+                      foreach ($opciones as $index => $opcion) {
+                        $checked = '';
+                        $disabled = 'disabled';
+                        $valorComp = '';
+                        $num = 0;
+                        foreach ($respuesta as $rep) {
+                          if ($rep == $opcion){
+                            $checked = 'checked';
+                            $disabled = '';
+                            if (substr($rep,-1) == ':' && array_key_exists($num+1, $respuesta) && stripos($respuesta[$num+1],"comp:") == 0){
+                              $valorComp = explode('comp:',$respuesta[$num+1])[1];
+                            }
+                          }
+                          $num++;
+                        }
+                        $contenido .= '<label style="font-weight: normal;"><input type="checkbox" name="respuesta_' . $pregunta['id'] . '_'. ($index+1) .'" id="respuesta_' . $pregunta['id'] . '_' . ++$total .'" value="' . $opcion . '" required  onchange="HabilitarComplementos('. $pregunta['id'] .','. $total .')" '. $checked .'  > ' . $opcion . '</label>&nbsp;&nbsp;';
+                        if (substr($opcion, -1) == ":"){
+                          $disabled = 'disabled';
+                          $required = '';
+                          if ($checked){
+                            $disabled = '';
+                            $required = 'required';
+                          } else {
+                            $valorComp = '';
+                          }
+                          $contenido .= '<input type="text" ' . $disabled . ' ' . $required . ' onkeyup="validarFormulario()" onpaste="validarFormulario()" name="complemento_' . $pregunta['id'] . '_' . $total . '" id="complemento_' . $pregunta['id'] . '_' . $total . '" value="' . $valorComp . '" class="form-control" >';
+                        }
+                        $contenido .= '&nbsp;&nbsp;';
+                      }
+                      break;
                   case 'text|enum':
-                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '</div>';
                       $contenido .= '<div class="block-container-table-respuesta">';
                       $contenido .= '<ul class="sortable">';
                       if (count($respuestas) > 1){

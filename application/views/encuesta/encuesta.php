@@ -43,25 +43,29 @@
         <a class="nav-enc pull-right" onclick="siguiente()" type="submit">Siguiente<span class="glyphicon glyphicon-chevron-right"></span></a>
       </div>
     <?php } ?>
-    <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5">
+    <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7 pull-right">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
+          <input onclick="guardarycont()" id="btnguardarycontinuar"  class="btn notEnabled" type="button" value="Guardar y continuar">
+        </div>
+        <div class="col-lg-4 col-md-4  col-xs-8 pull-right">
+          <input onclick="guardarysal()" id="btnguardarysalir"  class="btn notEnabled" type="button" value="Guardar y salir"><br/>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
+          <span class="pull-right">Retoma la encuesta volviendo a ingresar con tu código</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5 pull-left">
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-10 col-xs-12">
           <input onclick="salir()" id="btnsalir" class="btn col-lg-12" type="button" value="Salir" >
         </div>
       </div>
     </div>
-    <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7">
-      <div class="row">
-        <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
-          <input onclick="guardarycont()" id="btnguardarycontinuar"  class="btn" disabled type="button" value="Guardar y continuar">
-        </div>
-        <div class="col-lg-4 col-md-4  col-xs-8 pull-right">
-          <input onclick="guardarysal()" id="btnguardarysalir"  class="btn" disabled type="button" value="Guardar y salir"><br/>
-        </div>
-        <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
-          <span class="pull-right">Retoma la encuesta volviendo a ingresar con tu código</span>
-        </div>
-      </div>
+  </div>
+  <div class="row" style="margin-top:10px">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs12 pull-right" id="encError">
     </div>
   </div>
 </div>

@@ -18,7 +18,7 @@ class Preguntasm_model extends CI_Model {
       return false;
     }
     $query = $this->db->get_where('preguntasM', array('id' => $id));
-    return $query->result_array();
+    return $query->row_array();
   }
 
   public function get_preguntamByCategoria($categoria_id = FALSE)

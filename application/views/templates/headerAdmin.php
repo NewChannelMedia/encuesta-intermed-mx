@@ -25,8 +25,8 @@
     <![endif]-->
 </head>
 
-<body id="page-top" class="index flamaBook-Normal">
-  <nav class="navbar navbar-inverse navbar-static-top no-margin">
+<body id="bodyAdmin" class="index flamaBook-Normal">
+  <nav class="navbar navbar-inverse navbar-fixed-top no-margin">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed nav-btn-toggle" id="menu-toggle">
         <span class="glyphicon glyphicon-menu-hamburger nav-icon" aria-hidden="true"></span>
@@ -47,7 +47,7 @@
           <a href="#"><span class="glyphicon glyphicon-stats nav-icon"></span> Resultados</a>
           <ul class="nav-pills nav-stacked secondLevel-ul">
             <li>
-              <a href="#">Por Categorías</a>
+              <a href="<?= base_url() ?>admin/resultados">Por Categorías</a>
             </li>
             <li>
               <a href="#">Cross Reference</a>
