@@ -65,7 +65,7 @@
             break;
       }
       /**/
-      $this->load->view('templates/footer', $data);
+      $this->load->view('templates/footer2', $data);
     }
 
     public function newsletter(){
@@ -356,6 +356,7 @@
         $this->load->view('templates/footer', $data);
       } else if ($data['status'] != 0) {
         $this->load->view('templates/header', $data);
+        /*
         $contenido .= '<h1 class="Flama-normal s40 text-center">Gracias por contestar la encuesta</h1>';
         $contenido .= '<div class="row"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">';
         $contenido .= '<input type="checkbox" id="promo" value="si" onchange="aceptarPromocion()">';
@@ -366,10 +367,9 @@
           </br><a href="'. base_url() .'" class="btn btn-danger btn-lg btn-block">Regresar</a>
           </div>
         </div>';
-        $data['contenido'] = $contenido;
-
-        $this->load->view('encuesta/encuesta', $data);
-        $this->load->view('templates/footer', $data);
+        $data['contenido'] = $contenido;*/
+        $this->load->view('encuesta/encuestaFin', $data);
+        $this->load->view('templates/footer2', $data);
         //Redirect /about o index
       }
 

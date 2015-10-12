@@ -28,6 +28,7 @@
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10 col-lg-offset-3 col-md-offset-3 col-sm-offset-1 col-xs-offset-1">
           <div class="row">
+            <h4 class="Flama-normal s20 text-center white">Login como administrador</h4>
             <div class="mensaje Flama-normal s20 white col-md-10 col-md-offset-1">
               <form method="POST" action ="<?= base_url()?>admin/control" id="loginAdmin">
                 <div class="form-group">

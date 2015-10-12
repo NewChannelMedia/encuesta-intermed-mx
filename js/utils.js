@@ -275,19 +275,21 @@ function HabilitarComplementos( id, comp ) {
 }
 
 function aceptarPromocion() {
-  var value = $( '#promo' ).prop( 'checked' );
-  if ( value == true ) {
+  var promo = $( '#promo' ).prop( 'checked' );
+  var invitacion = $( '#invitacion' ).prop( 'checked' );
+  if ( promo == true || invitacion == true ) {
     var contenido = '<form method="POST" action="newsletter">' +
       '<div class="form-group">' +
       '<label for="nombre">Nombre:</label>' +
-      '<input type="text" class="form-control" id="nombre" name="nombre" required>' +
+      '<input type="text" class="form-control input-lg" id="nombre" name="nombre" required>' +
       '</div>' +
       '<div class="form-group">' +
       '<label for="email">Correo:</label>' +
-      '<input type="email" name="email" class="form-control" id="email" required>' +
+      '<input type="email" name="email" class="form-control input-lg" id="email" required>' +
       '</div>' +
+      '<div class="form-group">' +
       '<input type="submit" value="Enviar" class="btn btn-success btn-lg btn-block"></form>' +
-      '</div>';
+      '</div></div>';
     $( '#contenido' ).html( contenido );
   }
   else {
