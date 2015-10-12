@@ -1,4 +1,4 @@
-  <?php
+<?php
       /**
       * Controlador para trabajar con la informacion que puede ver los administradores,
       * del sitio, la tabla para aceptar las solicitudes que nos lleguen.
