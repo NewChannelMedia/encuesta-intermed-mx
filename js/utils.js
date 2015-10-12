@@ -274,11 +274,23 @@ function HabilitarComplementos( id, comp ) {
   }
 }
 
-function aceptarPromocion() {
-  var promo = $( '#promo' ).prop( 'checked' );
-  var invitacion = $( '#invitacion' ).prop( 'checked' );
-  if ( promo == true || invitacion == true ) {
+function aceptarNewsletter() {
+  var pruebasCheck = $( '#pruebasCheck' ).prop( 'checked' );
+  var newsCheck = $( '#newsCheck' ).prop( 'checked' );
+  var pruebas = 0;
+  var news = 0;
+  if(pruebasCheck == true) {
+    pruebas = 1;
+  }
+  if(newsCheck == true) {
+    news = 1;
+  }
+
+  if ( pruebasCheck == true || newsCheck == true ) {
+
     var contenido = '<form method="POST" action="newsletter">' +
+      '<input type="hidden" name="newsletter" id="newsletter" value="'+news+'">'+
+      '<input type="hidden" name="pruebas" id="pruebas" value="'+pruebas+'">'+
       '<div class="form-group">' +
       '<label for="nombre">Nombre:</label>' +
       '<input type="text" class="form-control input-lg" id="nombre" name="nombre" required>' +

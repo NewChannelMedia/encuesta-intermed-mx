@@ -72,13 +72,15 @@
       $this->load->helper('url');
       $nombre = $this->input->post('nombre');
       $email = $this->input->post('email');
+      $newsletter = $this->input->post('newsletter');
+      $pruebas = $this->input->post('pruebas');
 
       if (!$nombre){
         header('Location: ' .  base_url() );
         die();
       }
 
-      $this->Newsletter_model->create_newsletter($nombre,$email);
+      $this->Newsletter_model->create_newsletter($nombre,$email,$newsletter,$pruebas);
 
       echo '<script type="text/javascript">
       history.pushState(null, null, location.href);

@@ -27,11 +27,11 @@
                 </p>
                 <p class="s15 white text-center">
                   <label class="col-md-12">
-                    <input type="checkbox" id="invitacion" value="si" onchange="aceptarPromocion()">
+                    <input type="checkbox" id="pruebasCheck" value="si" onchange="aceptarNewsletter()">
                     Quiero formar parte del grupo de pruebas beta del proyecto.
                   </label>
                   <label class="col-md-12">
-                    <input type="checkbox" id="promo" value="si" onchange="aceptarPromocion()">
+                    <input type="checkbox" id="newsCheck" value="si" onchange="aceptarNewsletter()">
                     Deseo recibir correos y promociones por parte de Intermed.
                   </label>
                 </p>

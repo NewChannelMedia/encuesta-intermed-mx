@@ -2,7 +2,7 @@
 <!--IMPRIMIR EL TAB NAV-->
 <?php
 $first = true;
-echo '<ul class="nav nav-tabs" role="tablist" id="resultTabs">';
+echo '<div class="row"><ul class="nav nav-tabs" role="tablist" id="resultTabs">';
 foreach ($resultado as $categoria){
   foreach ($categoria as $preguntas){
     if (!is_array($preguntas)){
@@ -15,11 +15,12 @@ foreach ($resultado as $categoria){
     }
   }
 }
-echo '</ul>';
+echo '</ul></div>';
 ?>
 <!--IMPRIMIR LOS DIV DE LOS TAB NAV-->
 
 <?php  $totalChar = 0; $primero = true;$clase="active";?>
+<div class="row">
 <div class="tab-content">
 <?php foreach ($resultado as $categoria){?>
   <?php foreach ($categoria as $preguntas){ ?>
@@ -153,6 +154,7 @@ echo '</ul>';
     <?php } ?>
   <?php } ?>
 <?php } ?>
+</div>
 </div>
 </div>
 </div>
