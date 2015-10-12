@@ -24,8 +24,6 @@
         $codigo = array_slice($posible, 0,6);
         $str = implode('', $codigo);
         print_r(json_encode($str));
-        /*$data['numero'] = $str;
-        $this->load->view('codigo/genera', $data);*/
       }
       /**
       * funcion para enviar el correo
@@ -68,14 +66,11 @@
             $conCodigo = str_replace('<h2 id = "codigo"></h2>',$sustituir, $html2);
             if($mensaje != ""){
               $sustituir2 = "<p style = 'color:red;'>".$mensaje."</p>";
-              $conCodigo = str_replace('<p id ="mes"></p>',$sustituir2, $html2);
+              $conCodigo2 = str_replace('<p id ="mes"></p>',$sustituir2, $conCodigo);
+              $mensajeCompleto = $html1.$conCodigo2.$html3;
+            }else{
+              $mensajeCompleto = $html1.$conCodigo.$html3;
             }
-            $mensajeCompleto = $html1.$conCodigo.$html3;
-          }
-          if( $codigo == "" ){
-            $sustituir2 = "<p style = 'color:red;'>".$mensaje."</p>";
-            $conCodigo = str_replace('<p id ="mes"></p>',$sustituir2, $html2);
-            $mensajeCompleto = $html1.$conCodigo.$html3;
           }
           $headers = "MIME-Version: 1.0" . "\r\n";
           $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -105,10 +100,10 @@
         $this->load->view('templates/footer2');
       }
       public function dataPostCorreo(){
-        $this->load->model('PorValidar_model');
+        $this->load->model('Porvalidar_model');
         $correo = $this->input->post('email');
         $data['correito'] = $correo;
-        if( $this->PorValidar_model->insertData($correo)){
+        if( $this->Porvalidar_model->insertData($correo)){
           $this->load->view('templates/header');
           $this->load->view('codigo/medico',$data);
           $this->load->view('templates/footer2');
@@ -119,7 +114,7 @@
       }
 
       public function dataPost(){
-        $this->load->model('PorValidar_model');
+        $this->load->model('Porvalidar_model');
         $nombre = $this->input->post('nombre');
         $correo = $this->input->post('email');
         $medico = $this->input->post('medico');
@@ -133,7 +128,7 @@
         $data['cedula'] = $cedula;
         $data['justificacion'] = $justificacion;
 
-        if( $this->PorValidar_model->insertData($nombre, $correo, $medico, $cedula, $justificacion)){
+        if( $this->Porvalidar_model->insertData($nombre, $correo, $medico, $cedula, $justificacion)){
           $this->load->view('templates/header', $data);
           $this->load->view('codigo/mensaje',$data);
           $this->load->view('templates/footer2');
@@ -151,19 +146,21 @@
       **/
       public function actualizaStatus(){
         // se carga el modelo
-        $this->load->model('PorValidar_model');
+        $this->load->model('Porvalidar_model');
+        $id = $this->input->post('ids');
         $correo = $this->input->post('correo');
-        $this->PorValidar_model->actualizaStatus($correo);
+        $this->Porvalidar_model->actualizaStatus($correo, $id);
       }
       public function negado(){
-        $this->load->model('PorValidar_model');
+        $this->load->model('Porvalidar_model');
         $correo = $this->input->post('correo');
-        $this->PorValidar_model->negado($correo);
+        $id = $this->input->post('ids');
+        $this->Porvalidar_model->negado($correo, $id);
       }
       public function mensajeStatus(){
-        $this->load->model('PorValidar_model');
+        $this->load->model('Porvalidar_model');
         $correo -> $this->input->post('correo');
-        $this->PorValidar_model->actualizaStatus($correo);
+        $this->Porvalidar_model->actualizaStatus($correo);
       }
   }
 ?>

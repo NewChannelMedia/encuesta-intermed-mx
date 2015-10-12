@@ -338,8 +338,8 @@ function cargaPorAceptar() {
             $( '#datosPa #tr' + i + '' ).append( '<td>' + item.correo + '</td>' );
             $( '#datosPa #tr' + i + '' ).append( '<td>' + item.cedula + '</td>' );
             $( '#datosPa #tr' + i + '' ).append( '<td>' + item.justificacion + '</td>' );
-            $( '#datosPa #tr' + i + '' ).append( '<td><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\')" type="button" id="enviarSucces" class="btn btn-success btn-block" data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></td>' );
-            $( '#datosPa #tr' + i + '' ).append( '<td><button noMalTo="' + item.correo + '" type="button" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\') id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\',\'' + item.id + '\')" type="button" id="enviarSucces" class="btn btn-success btn-block" data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td><button noMalTo="' + item.correo + '" type="button" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\')" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
           }
           else {
             $( "#datosPa" ).append( '<tr class="bg-otro" id="t' + i + '"></tr>' );
@@ -349,7 +349,7 @@ function cargaPorAceptar() {
             $( '#datosPa #t' + i + '' ).append( '<td >' + item.cedula + '</td>' );
             $( '#datosPa #t' + i + '' ).append( '<td >' + item.justificacion + '</td>' );
             $( '#datosPa #t' + i + '' ).append( '<td ><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\',\'' + item.id + '\')"  type="button" id="enviarSucces' + i + '" class="btn btn-success btn-block"data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></td>' );
-            $( '#datosPa #t' + i + '' ).append( '<td ><button noMalTo="' + item.correo + '" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\') "type="button" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td ><button noMalTo="' + item.correo + '" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\')" "type="button" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
           }
         }
       } );
@@ -470,6 +470,7 @@ $( document ).ready( function () {
     var mensaje = $("#mensajeAceptado").val();
     var ids = '#tr'+valor;
     var id = '#t'+valor;
+    var spanId = $("#codigoUser").text();
     if( $("#aleatorioDato").val() != "" ){
       $.post('/encuesta-intermed/admin/insertaCodigo/'+ $( "#aleatorioDato" ).val(),function(data){
         $.post('/encuesta-intermed/codigo/sendMail/',{
@@ -478,7 +479,7 @@ $( document ).ready( function () {
           titulo:titulo,
           mensaje:mensaje
         },function(datas){
-          $.post('/encuesta-intermed/codigo/actualizaStatus/',{correo:correo},function(datase){
+          $.post('/encuesta-intermed/codigo/actualizaStatus/',{correo:correo, ids:spanId},function(datase){
 
           }).done(function(){
             alert("Campo actualizado y se envio el correo");
@@ -502,16 +503,21 @@ $( document ).ready( function () {
     var valor = parseInt($("#rechazosID").text())-1;
     var ids = '#tr'+valor;
     var id = '#t'+valor;
-    $.post('/encuesta-intermed/codigo/sendMail/',{correo:mail,titulo:titulo,mensaje:mensaje}, function(data){
-      $.post('/encuesta-intermed/codigo/negado',{correo:mail},function(negado){
+    var spanId = $("#rechazosID").text();
+    $.post('/encuesta-intermed/codigo/sendMail/',{
+        correo:mail,
+        titulo:titulo,
+        mensaje:mensaje
+      }, function(data){
+      $.post('/encuesta-intermed/codigo/negado/',{correo:mail,ids:spanId},function(negado){
       }).done(function(){
         alert("Usuario rechazado, correo enviado....");
         $("#areaRechazado").val('') ;
         $('.modal').modal('hide');
         $(ids).hide('slow');
         $(id).hide('slow');
-      });
-    });
+      }).fail(function(){console.log('acabado')});
+    }).fail(function(){console.log("No acabado")});
   });
   //cerrar session
   $("#salir").click(function(){

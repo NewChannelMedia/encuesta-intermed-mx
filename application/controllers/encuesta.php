@@ -17,7 +17,6 @@
         show_404();
       }
       $data['title']=ucfirst($page);
-
       $this->load->view('templates/header', $data);
       $this->load->view('encuesta/'.$page, $data);
       $this->load->view('templates/footer', $data);
@@ -42,7 +41,7 @@
       $this->session->set_userdata('codigo', $codigo);
 
       $data = $this->checkStatus($codigo);
-
+      $data['title'] = "About";
       $this->load->view('templates/header', $data);
       /*Cargar la vista correspondiente al status de la encuesta*/
       switch ($data['status']) {
@@ -65,7 +64,7 @@
             break;
       }
       /**/
-      $this->load->view('templates/footer', $data);
+      $this->load->view('templates/footer2', $data);
     }
 
     public function newsletter(){
