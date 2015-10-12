@@ -61,16 +61,26 @@
           fclose($fpB);
           fclose($fpF);
           $mensajeCompleto = "";
-          if( $codigo != ""){
-            $sustituir = '<h2 style = "{color:red;}">'.$codigo.'</h2>';
-            $conCodigo = str_replace('<h2 id = "codigo"></h2>',$sustituir, $html2);
-            if($mensaje != ""){
-              $sustituir2 = "<p style = 'color:red;'>".$mensaje."</p>";
-              $conCodigo2 = str_replace('<p id ="mes"></p>',$sustituir2, $conCodigo);
-              $mensajeCompleto = $html1.$conCodigo2.$html3;
-            }else{
-              $mensajeCompleto = $html1.$conCodigo.$html3;
-            }
+          if($estado == 1){
+          	$sustituir = '<h2 style = "{color:red;}">'.$codigo.'</h2>';
+            	$conCodigo = str_replace('<h2 id = "codigo"></h2>',$sustituir, $html2);
+            	if($mensaje != ""){
+	              $sustituir2 = "<p style = 'color:red;'>".$mensaje."</p>";
+	              $conCodigo2 = str_replace('<p id ="mes"></p>',$sustituir2, $conCodigo);
+	              $mensajeCompleto = $html1.$conCodigo2.$html3;
+	        }else{
+	        	$mensajeCompleto = $html1.$conCodigo.$html3;
+	        }
+          }else{
+          	$borrar = array(
+          		'<span>Este es tu c贸digo de acceso al sistema: <h2 id = "codigo"></h2></span>',
+          		'<span><p>con el Cual puedes entrar en la siguiente liga</p></span>',
+          		'<a href = "http://www.newchannel.mx/encuesta-intermed">Usar mi c贸digo</a>'
+          	);
+              $sustituir3 = "<p style = '{color:red;}'>".$mensaje."</p>";
+              $conCodigo5 = str_replace('<p id ="mes"></p>',$sustituir3,$html2);
+              $conCodigo4 = str_replace($borrar,'',$conCodigo5);
+              $mensajeCompleto = $html1.$conCodigo4.$html3;
           }
           $headers = "MIME-Version: 1.0" . "\r\n";
           $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
