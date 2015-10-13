@@ -3,7 +3,6 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
-
 // jQuery for page scrolling feature - requires jQuery Easing plugin
 $( function () {
   $( 'a.page-scroll' ).bind( 'click', function ( event ) {
@@ -280,14 +279,13 @@ function aceptarPromocion() {
     var contenido = '<form method="POST" action="newsletter">' +
       '<div class="form-group">' +
       '<label for="nombre">Nombre:</label>' +
-      '<input type="text" class="form-control" id="nombre" name="nombre" required>' +
+      '<input type="text" class="form-control validada" id="nombre" name="nombre" required>' +
       '</div>' +
       '<div class="form-group">' +
       '<label for="email">Correo:</label>' +
-      '<input type="email" name="email" class="form-control" id="email" required>' +
+      '<input type="email" name="email" class="form-control validada" id="email" required>' +
       '</div>' +
-      '<input type="submit" value="Enviar" class="btn btn-success btn-lg btn-block"></form>' +
-      '</div>';
+      '<input type="submit" value="Enviar" class="btn btn-success btn-lg btn-block"></form>';
     $( '#contenido' ).html( contenido );
   }
   else {
@@ -470,16 +468,18 @@ $( document ).ready( function () {
     var mensaje = $("#mensajeAceptado").val();
     var ids = '#tr'+valor;
     var id = '#t'+valor;
+    var estado = 1;
+    var spanId = $("#codigoUser").text();
     if( $("#aleatorioDato").val() != "" ){
       $.post('/encuesta-intermed/admin/insertaCodigo/'+ $( "#aleatorioDato" ).val(),function(data){
         $.post('/encuesta-intermed/codigo/sendMail/',{
           codigo:codigo,
           correo:correo,
           titulo:titulo,
-          mensaje:mensaje
+          mensaje:mensaje,
+          estado:estado
         },function(datas){
-          $.post('/encuesta-intermed/codigo/actualizaStatus/',{correo:correo},function(datase){
-
+          $.post('/encuesta-intermed/codigo/actualizaStatus/',{correo:correo, ids:spanId},function(datase){
           }).done(function(){
             alert("Campo actualizado y se envio el correo");
             $(ids).hide('slow');
@@ -495,6 +495,7 @@ $( document ).ready( function () {
     }
   });
   // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
+  // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
   $("#envioRechazado").click(function(){
     var mail = $("#rechazos").text();
     var titulo = 'Por el momento no joven';
@@ -502,8 +503,9 @@ $( document ).ready( function () {
     var valor = parseInt($("#rechazosID").text())-1;
     var ids = '#tr'+valor;
     var id = '#t'+valor;
+    var spanId = $("#rechazosID").text();
     $.post('/encuesta-intermed/codigo/sendMail/',{correo:mail,titulo:titulo,mensaje:mensaje}, function(data){
-      $.post('/encuesta-intermed/codigo/negado',{correo:mail},function(negado){
+      $.post('/encuesta-intermed/codigo/negado',{correo:mail, ids:spanId},function(negado){
       }).done(function(){
         alert("Usuario rechazado, correo enviado....");
         $("#areaRechazado").val('') ;
@@ -523,7 +525,7 @@ $( document ).ready( function () {
   $( "#enviarNoSucces" ).click( function () {
     $( "#NoaceptarModal" ).modal( 'show' );
   } );
-} );
+});
 
 /* ---------- */
 /* admin menu */
@@ -1125,4 +1127,25 @@ $('#resultTabs a').click(function (e) {
 function cerrarPopovers(){
   $('[data-toggle="popover"]').popover('hide');
 }
+//validacion de los formularios
+$(function(){
+  $('input.validada').focusout(function(){
+    if( $(this).val() == "" ){
+      $( this ).parent().addClass('has-error');
+      $( this ).after('<span>Recuerda que debe de estar lleno este campo</span>');
+    }else{
+      $( this ).next('span').remove();
+      $( this ).parent().removeClass('has-error');
+    }
+  });
+  $('textarea.validada').focusout(function(){
+    if( $( "textarea" ).val() == "" ){
+      $( this ).parent().addClass('has-error');
+      $( this ).after('<span>Danos tu justificación por favor</span>');
+    }else{
+      $( this ).next('span').remove();
+      $( this ).parent().removeClass('has-error');
+    }
+  });
+});
 /*Fin funciones resultados*/

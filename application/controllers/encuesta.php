@@ -65,7 +65,7 @@
             break;
       }
       /**/
-      $this->load->view('templates/footer', $data);
+      $this->load->view('templates/footer2', $data);
     }
 
     public function newsletter(){

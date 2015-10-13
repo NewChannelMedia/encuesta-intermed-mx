@@ -22,10 +22,10 @@
             <div class="h400">
               <h4 class="Flama-normal s20 text-center white">Ingresa los siguientes datos para procesar tu solicitud:</h4>
               <div class="form-group col-md-8 col-md-offset-2 usuarioSolcitud">
-                <input class="form-control" type="text" placeholder="Nombre" name="nombre" id="nombre">
+                <input class="validada form-control" type="text" placeholder="Nombre" name="nombre" id="nombre">
               </div>
               <div class="form-group col-md-8 col-md-offset-2">
-                <input class="form-control" type="mail" placeholder="E-mail:" name="email" id="e-mail"/>
+                <input class="validada form-control" type="mail" placeholder="E-mail" name="email" id="e-mail"/>
               </div>
             <div id = "doctor"></div>
               <div class="form-group col-md-8 col-md-offset-2">
@@ -41,10 +41,10 @@
                 </div>
               </div>
               <div id="medicoSolicitud" class="form-group col-md-8 col-md-offset-2 ">
-                <input class="form-control" type="text" placeholder="Ingresa tu cedula profesional, por favor" name="cedula" id="cedula">
+                <input class="validada form-control" type="text" placeholder="Ingresa tu cedula profesional, por favor" name="cedula" id="cedula">
               </div>
               <div id=usuarioSolicitud class="form-group col-md-8 col-md-offset-2 hidden">
-                <textarea class="form-control" rows="5" id="justificacion" name="justificacion" placeholder="Por favor, dinos por qué te gustaría saber mas de Intermed"></textarea>
+                <textarea class="validada form-control" rows="5" id="justificacion" name="justificacion" placeholder="Por favor, dinos por qué te gustaría saber mas de Intermed"></textarea>
               </div>
               </br>
               <div class="form-group col-md-8 col-md-offset-2 ">
