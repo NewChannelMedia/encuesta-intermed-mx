@@ -91,4 +91,9 @@ class Respuestasm_model extends CI_Model {
     $query = $this->db->get();
     return $query->result_array();
   }
+
+  public function get_ejecutarConsulta($query){
+    $query = $this->db->query($query);
+    return $query->row_array();
+  }
 }

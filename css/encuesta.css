@@ -520,10 +520,10 @@ html>body .sortable li { height: 2em; line-height: 1.2em; }
 #admin-page {
   margin-top: 40px;
 }
-
+/*
 canvas {
   height: 300px;
-}
+}*/
 
 .has-error{
   color: #8A0808;
@@ -864,10 +864,6 @@ canvas {
   width: 100%!important;
 }
 
-.tab-content .panel {
-  height: 322px;
-}
-
 .tab-content .panel .panel-body {
   padding: 0;
   padding-top: 10px;
@@ -876,4 +872,53 @@ canvas {
 
 .grafica.dashboard{
   height: 300px;
+}
+
+.modal-xl {
+  width: 80%;
+  text-align: center;
+}
+.column {
+  padding: 10px;
+  padding-right: 0px;
+  padding-bottom: 50px;
+}
+
+.portlet {
+  margin: 0 1em 1em 0;
+}
+
+.portlet-header {
+  padding: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  position: relative;
+}
+
+.portlet-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-top: -8px;
+}
+.portlet-content {
+  padding: 0.4em;
+}
+.portlet-placeholder {
+  border: 1px dotted black;
+  margin: 0 1em 1em 0;
+  height: 50px;
+}
+
+.column#columna_preguntas{
+  background-color: rgb(100%, 88%, 88%);
+  font-size: 90%;
+}
+
+.column#columna_preguntas .portlet-content{
+  display: none;
+}
+
+.column#columna_preguntas_filtradas {
+  background-color: rgb(227, 255, 224);
 }

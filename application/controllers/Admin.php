@@ -14,6 +14,7 @@
           $this->load->model('Preguntasm_model');
           $this->load->model('Respuestasm_model');
           $this->load->model('Porvalidar_model');
+          $this->load->model('Newsletter_model');
           header('Cache-Control: no cache');
         }
 
@@ -34,7 +35,7 @@
               $usuario = $this->input->post('user');
               $password = $this->input->post('password');
 
-              if( ($this->Admin_model->login($usuario, $password) != false) || ($_SESSION['status']!=false) ){
+              if( ($this->Admin_model->login($usuario, $password) != false) || ( isset($_SESSION['status']) && $_SESSION['status']!=false) ){
                 $data['title'] = "Dashboard";
                 $data['administrador'] = $usuario;
                 $data['user'] = $usuario;
@@ -43,7 +44,7 @@
                 $data['errorM'] = "";
                 $data['totalContestadas'] = $this->Encuestam_model->get_totalEncuestasM()['total'];
                 $data['totalPorValidar'] = $this->Porvalidar_model->get_totalPorValidar()['total'];
-                $data['totalAceptados'] = $this->Porvalidar_model->get_totalAceptados()['total'];
+                $data['totalAceptados'] = $this->Newsletter_model->get_totalNewsletter()['total'];
                 $data['totalRechazados'] = $this->Porvalidar_model->get_totalRechazados()['total'];
                 /*GRAFICA ENCUESTAS POR FECHA*/
                 $porfecha = $this->Encuestam_model->get_totalEncuestasMPorFecha();
@@ -195,7 +196,20 @@
             return $this->Admin_model->insertaCodigoGenerado($codigo);
           }
 
-          // ---------------
+
+          public function consultacrossreference(){
+            $consultas = $this->input->post('consultas');
+            $universo = $this->Encuestam_model->get_totalEncuestasM()['total'];
+            $data = array('universo'=>$universo);
+            foreach ($consultas as $key => $query) {
+              $pregunta = '';
+              $pregunta_id = explode('_',$query['pregunta'])[1];
+              $pregunta = $this->Preguntasm_model->get_preguntam($pregunta_id)['pregunta'];
+              $data['preguntas'][$pregunta] = $this->Respuestasm_model->get_ejecutarConsulta($query['query'])['total'];
+            }
+            echo json_encode($data);
+          }
+
           public function resultados(){
             if(!file_exists('application/views/resultados/index.php')){
               show_404();
@@ -338,6 +352,149 @@
             $this->load->view('admin/resultados', $data);
             $this->load->view('templates/footerAdmin', $data);
 
+          }
+
+          public function crossreference(){
+            if(!file_exists('application/views/resultados/index.php')){
+              show_404();
+            }
+
+            $resultado = array();
+
+            $categorias = $this->Categorias_model->get_categorias();
+
+            $total = 0;
+            foreach ($categorias as $cat) {
+                $categoriasArray = array();
+                $categoriasArray['name'] = $cat['categoria'];
+                $preguntas = $this->Preguntasm_model->get_preguntamByCategoria($cat['id']);
+                $preguntasArray = array();
+                foreach ($preguntas as $preg) {
+                    $pregArray = array();
+                    $pregArray['pregunta'] = $preg['pregunta'];
+                    $pregArray['respuestas'] = array();
+                    $respuestas = $this->Respuestasm_model->get_respuestamByPregunta($preg['id']);
+                    $opciones = array();
+                    $resultadoTextEnum = array();
+                    $resultadoRadioComplemento = array();
+                    if ($preg['tipo'] == 'text|enum'){
+                      $opciones = explode('|', $preg['opciones'] );
+                      $num = 0;
+                      foreach ($opciones as $key) {
+                        $value = $key;
+                        if (substr($key,-1) == ':'){
+                          $opciones[$num] = substr($key,0,strlen($key)-1);
+                          $num++;
+                          $value = $opciones[$num];
+                        }
+                        if (strlen($value) > 0){
+                          $resultadoTextEnum[$value] = 0;
+                        }
+                      }
+                    } else if ($preg['tipo'] == 'checkbox' || $preg['tipo'] == 'checkbox'){
+                      $opciones = explode('|', $preg['opciones'] );
+                      foreach ($opciones as $key) {
+                        $resultadoTextEnum[$key] = array();
+                        $resultadoRadioComplemento[$key] = 0;
+                      }
+                    }
+
+                    foreach ($respuestas as $resp) {
+                      $respFinal = array();
+
+                      if ($preg['tipo'] == "radio"){
+
+                        $resp['respuesta'] = explode('|comp:', $resp['respuesta']);
+
+                        if (count($resp['respuesta']) == 1){
+                          $resultadoRadioComplemento[$resp['respuesta'][0]] = $resp['total'];
+                        } else {
+                          $resp['respuesta'][1] = strtolower($resp['respuesta'][1]);
+                          if (array_key_exists($resp['respuesta'][0],$resultadoRadioComplemento)){
+                            $resultadoRadioComplemento[$resp['respuesta'][0]]['total'] =  $resultadoRadioComplemento[$resp['respuesta'][0]]['total'] + $resp['total'];
+                            if (array_key_exists($resp['respuesta'][1], $resultadoRadioComplemento[$resp['respuesta'][0]]['comp'])){
+                              $cant =   $resultadoRadioComplemento[$resp['respuesta'][0]]['comp'][$resp['respuesta'][1]];
+                              $resultadoRadioComplemento[$resp['respuesta'][0]]['comp'][$resp['respuesta'][1]] = $cant + $resp['total'];
+                            } else {
+                              $resultadoRadioComplemento[$resp['respuesta'][0]]['comp'][$resp['respuesta'][1]] = $resp['total'];
+                            }
+                          } else {
+                            $resultadoRadioComplemento[$resp['respuesta'][0]]['total'] = $resp['total'];
+                            $resultadoRadioComplemento[$resp['respuesta'][0]]['comp'][$resp['respuesta'][1]] = $resp['total'];
+                          }
+                        }
+                        $respFinal['respuesta'] = $resultadoRadioComplemento;
+                        $pregArray['respuestas'][0] = $respFinal;
+
+                      } elseif ($preg['tipo'] == "text|enum"){
+                        //SPLIT con |
+                        $resp['respuesta'] = explode('|', $resp['respuesta'] );
+                        for ($i = 0; $i < count($resp['respuesta']); $i++) {
+                          if (array_key_exists($opciones[$i],$resultadoTextEnum)){
+                            $resultadoTextEnum[$opciones[$i]] = $resultadoTextEnum[$opciones[$i]] + (count($opciones) + 1 - $resp['respuesta'][$i]);
+                          } else {
+                            $resultadoTextEnum[$opciones[$i]] = (count($opciones) + 1 - $resp['respuesta'][$i]);
+                          }
+                        }
+                        arsort($resultadoTextEnum);
+                        $respFinal['respuesta'] = $resultadoTextEnum;
+                        $respFinal['total'] = '';
+                        $pregArray['respuestas'][0] = $respFinal;
+                      } elseif ($preg['tipo'] == "checkbox"){
+                        $resp['respuesta'] = explode('|', $resp['respuesta'] );
+                        for ($i = 0; $i < count($resp['respuesta']); $i++) {
+                          if (stripos($resp['respuesta'][$i],'comp:') === false){
+                            $respuestaf = $resp['respuesta'][$i];
+                            $complemento = '';
+                            if (substr($resp['respuesta'][$i],-1) == ":" && array_key_exists($i+1,$resp['respuesta']) && stripos($resp['respuesta'][$i+1],'comp:') === 0){
+                                $complemento = explode('comp:',$resp['respuesta'][$i+1])[1];
+                            }
+                            if (!empty($respuestaf) && $respuestaf != ""){
+                              if (array_key_exists($respuestaf,$resultadoTextEnum)){
+                                if (!(array_key_exists('total',$resultadoTextEnum[$respuestaf]))){
+                                  $resultadoTextEnum[$respuestaf]['total'] = 0;
+                                }
+                                $cant = intval($resultadoTextEnum[$respuestaf]['total']);
+                                $resultadoTextEnum[$respuestaf]['total'] = $cant + $resp['total'];
+                              } else {
+                                $resultadoTextEnum[$respuestaf]['total'] =  $resp['total'];
+                              }
+                              if (!empty($complemento)){
+                                if (!array_key_exists('comp',$resultadoTextEnum[$respuestaf])){
+                                  $resultadoTextEnum[$respuestaf]['comp'] = array();
+                                }
+                                if (array_key_exists($complemento,$resultadoTextEnum[$respuestaf]['comp'])){
+                                  $cant = intval($resultadoTextEnum[$respuestaf]['comp'][$complemento]);
+                                  $resultadoTextEnum[$respuestaf]['comp'][$complemento] = $cant +  $resp['total'];
+                                } else {
+                                  $resultadoTextEnum[$respuestaf]['comp'][$complemento] =  $resp['total'];
+                                }
+                              }
+                            }
+                          }
+                        }
+                        arsort($resultadoTextEnum);
+                        $respFinal['respuesta'] = $resultadoTextEnum;
+                        $respFinal['total'] = '';
+                        $pregArray['respuestas'][0] = $respFinal;
+                      } else {
+                        $respFinal['respuesta'] = $resp['respuesta'];
+                        $respFinal['total'] = $resp['total'];
+                        $pregArray['respuestas'][] = $respFinal;
+                      }
+                    }
+                    $preguntasArray[] = $pregArray;
+                }
+                $categoriasArray['preguntas'] = $preguntasArray;
+                $resultado[] = $categoriasArray;
+            }
+
+            $data = array('resultado'=> $resultado);
+            $data['title'] = "Resultados";
+
+            $this->load->view('templates/headerAdmin', $data);
+            $this->load->view('admin/crossreference', $data);
+            $this->load->view('templates/footerAdmin', $data);
           }
 
       }

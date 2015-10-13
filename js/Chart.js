@@ -2209,17 +2209,30 @@
 			return barsArray;
 		},
 		buildScale : function(labels){
-      var int = 0;
-      labels.forEach(function (label){
-        var length = label.length;
-        var comp = '';
-        if (length>15){
-          length=12;
-          comp = '...';
-        }
-        labels[int] = label.substring(0,length) + comp;
-        int++;
-      });
+      if (this.options.overridelabel != false){
+        var int = 0;
+        labels.forEach(function (label){
+          var length = label.length;
+          var comp = '';
+          if (length>20){
+            length=17;
+            comp = '...';
+          }
+          labels[int] = label.substring(0,length) + comp;
+          int++;
+        });
+      } else {var int = 0;
+        labels.forEach(function (label){
+          var length = label.length;
+          var comp = '';
+          if (length>25){
+            length=22;
+            comp = '...';
+          }
+          labels[int] = label.substring(0,length) + comp;
+          int++;
+        });
+      }
 
 			var self = this;
 
@@ -2692,17 +2705,30 @@
 		},
 		buildScale : function(labels){
 
-      var int = 0;
-      labels.forEach(function (label){
-        var length = label.length;
-        var comp = '';
-        if (length>15){
-          length=12;
-          comp = '...';
-        }
-        labels[int] = label.substring(0,length) + comp;
-        int++;
-      });
+      if (this.options.overridelabel != false){
+        var int = 0;
+        labels.forEach(function (label){
+          var length = label.length;
+          var comp = '';
+          if (length>15){
+            length=12;
+            comp = '...';
+          }
+          labels[int] = label.substring(0,length) + comp;
+          int++;
+        });
+      } else {var int = 0;
+        labels.forEach(function (label){
+          var length = label.length;
+          var comp = '';
+          if (length>25){
+            length=22;
+            comp = '...';
+          }
+          labels[int] = label.substring(0,length) + comp;
+          int++;
+        });
+      }
 
 			var self = this;
 

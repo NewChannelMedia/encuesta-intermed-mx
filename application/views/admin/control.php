@@ -20,7 +20,7 @@
               </div>
             </div>
           </div>
-          <a href="#">
+          <a href="<?=base_url()?>admin/resultados">
             <div class="panel-footer">
               <span class="pull-left">Ver Detalles</span>
               <span class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span></span>
@@ -42,7 +42,7 @@
               </div>
             </div>
           </div>
-          <a href="#">
+          <a href="<?=base_url()?>admin/solicitudes">
             <div class="panel-footer">
               <span class="pull-left">Ver Detalles</span>
               <span class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span></span>
@@ -64,7 +64,7 @@
               </div>
             </div>
           </div>
-          <a href="#">
+          <a href="<?=base_url()?>admin/suscritos">
             <div class="panel-footer">
               <span class="pull-left">Ver Detalles</span>
               <span class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span></span>
@@ -81,7 +81,7 @@
                 <span class="glyphicon glyphicon-question-sign s60"></span>
               </div>
               <div class="col-xs-8 text-right">
-                <div class="huge"><?php echo $totalRechazados;?></div>
+                <div class="huge">0</div>
                 <div>Solcitud de informacion</div>
               </div>
             </div>
