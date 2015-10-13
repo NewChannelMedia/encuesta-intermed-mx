@@ -688,6 +688,8 @@ function ejecutarConsulta(finalQuery){
         console.log( "Error: "  + JSON.stringify(e));
       }
     } );
+  } else {
+    $('#crossreference').html('');
   }
 }
 
