@@ -583,7 +583,12 @@ $( document ).ready( function () {
 
 
 function modificarConsulta(comp){
-  console.log('comp:' + JSON.stringify(comp));
+  /*Eliminar complementos que sean pasados a 'columna_preguntas'*/
+  $('#columna_preguntas .portlet').each( function ( index, element ) {
+    if ($(element).attr('id').indexOf('_comp') === true || $(element).attr('id').indexOf('_comp') > 0){
+      $(element).remove();
+    }
+  });
 
   if (comp && comp.complemento && comp.complemento.length>0){
     if ($('#'+comp.id).prop('checked')){
@@ -653,19 +658,15 @@ function modificarConsulta(comp){
     finalQuery.push({'query' : query, 'pregunta' : clase, 'label': lastlabel});
     temp = '';
   }
-  console.log(JSON.stringify(finalQuery));
   ejecutarConsulta(finalQuery);
 }
-
-$('.portlet').bind('moveend', function() {
-  console.log('Se movio');
-});
 
 function ejecutarConsulta(finalQuery){
   if (finalQuery.length > 0){
     int = 0;
     finalQuery.forEach(function (result){
-      finalQuery[int].query = 'SELECT COUNT(*) AS \'total\' FROM respuestasM where ' + result['query'];
+      finalQuery[int].query = 'SELECT COUNT(*) AS \'total\' FROM  respuestasM, encuestasM where ' + result['query'] + ' AND respuestasM.encuestaM_id = encuestasM.id AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1;';
+      console.log(finalQuery[int].query);
       finalQuery[int].pregunta = result['pregunta'];
       int++;
     });
