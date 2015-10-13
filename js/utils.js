@@ -274,20 +274,34 @@ function HabilitarComplementos( id, comp ) {
   }
 }
 
-function aceptarPromocion() {
-  var value = $( '#promo' ).prop( 'checked' );
-  if ( value == true ) {
+function aceptarNewsletter() {
+  var pruebasCheck = $( '#pruebasCheck' ).prop( 'checked' );
+  var newsCheck = $( '#newsCheck' ).prop( 'checked' );
+  var pruebas = 0;
+  var news = 0;
+  if(pruebasCheck == true) {
+    pruebas = 1;
+  }
+  if(newsCheck == true) {
+    news = 1;
+  }
+
+  if ( pruebasCheck == true || newsCheck == true ) {
+
     var contenido = '<form method="POST" action="newsletter">' +
+      '<input type="hidden" name="newsletter" id="newsletter" value="'+news+'">'+
+      '<input type="hidden" name="pruebas" id="pruebas" value="'+pruebas+'">'+
       '<div class="form-group">' +
       '<label for="nombre">Nombre:</label>' +
-      '<input type="text" class="form-control" id="nombre" name="nombre" required>' +
+      '<input type="text" class="form-control input-lg" id="nombre" name="nombre" required>' +
       '</div>' +
       '<div class="form-group">' +
       '<label for="email">Correo:</label>' +
-      '<input type="email" name="email" class="form-control" id="email" required>' +
+      '<input type="email" name="email" class="form-control input-lg" id="email" required>' +
       '</div>' +
+      '<div class="form-group">' +
       '<input type="submit" value="Enviar" class="btn btn-success btn-lg btn-block"></form>' +
-      '</div>';
+      '</div></div>';
     $( '#contenido' ).html( contenido );
   }
   else {
