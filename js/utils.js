@@ -582,14 +582,22 @@ $( document ).ready( function () {
 /*Resultados*/
 
 
-function modificarConsulta(comp){
+function modificarConsulta(comp, tipo){
+  if (!tipo){
+    tipo = $('#tipoGrafica').val();
+    if (!tipo){
+      tipo = 'Bar';
+    }
+  }
+  $('#tipoGrafica').val(tipo);
+
+
+
   /*Eliminar complementos que sean pasados a 'columna_preguntas'*/
   $('#columna_preguntas .portlet').each( function ( index, element ) {
     if ($(element).attr('id').indexOf('_comp') === true || $(element).attr('id').indexOf('_comp') > 0){
       $('#'+$(element).attr('id').substring(0,$(element).attr('id').length-5)).prop('checked',false);
       $(element).remove();
-    } else {
-
     }
   });
 
@@ -661,10 +669,10 @@ function modificarConsulta(comp){
     finalQuery.push({'query' : query, 'pregunta' : clase, 'label': lastlabel});
     temp = '';
   }
-  ejecutarConsulta(finalQuery);
+  ejecutarConsulta(finalQuery, tipo);
 }
 
-function ejecutarConsulta(finalQuery){
+function ejecutarConsulta(finalQuery, tipo){
   if (finalQuery.length > 0){
     int = 0;
     finalQuery.forEach(function (result){
@@ -685,7 +693,20 @@ function ejecutarConsulta(finalQuery){
         for(var k in data.preguntas) {
            enviar['data'].push({'label':k,'value': data.preguntas[k]})
         }
-        ChartBarCross(enviar,universo);
+        switch (tipo) {
+          case 'Bar':
+            ChartBarCross(enviar,universo);
+            break;
+          case 'Radar':
+          ChartRadarCross(enviar,universo);
+            break;
+          case 'Line':
+            ChartLineCross(enviar,universo);
+            break;
+          case 'Polar':
+            ChartPolarCross(enviar,universo);
+            break;
+        }
       },
       error: function (e) {
         console.log( "Error: "  + JSON.stringify(e));
@@ -1320,4 +1341,149 @@ function ChartBarCross(data, universo){
     tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
   });
 }
+
+function ChartRadarCross(data,universo){
+  var element = data['element'];
+  var labels = [];
+  var values = [];
+  data.data.forEach(function (result){
+    labels.push(result.label);
+    values.push(result.value);
+  });
+
+  var r = (Math.floor(Math.random() * 256));
+  var g = (Math.floor(Math.random() * 256));
+  var b = (Math.floor(Math.random() * 256));
+
+  var barChartData = {
+    labels : labels,
+    datasets : [
+      {
+        fillColor : "rgba("+r+","+g+","+b+",0.5)",
+        strokeColor : "rgba("+r+","+g+","+b+",0.8)",
+        highlightFill : "rgba("+r+","+g+","+b+",0.75)",
+        highlightStroke : "rgba("+r+","+g+","+b+",1)",
+        data : values
+      }
+    ]
+  }
+
+  $('#'+element+'_tipo').val('Radar');
+
+  $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
+  var canvas = document.getElementById('canvas_'+element);
+
+  var num = 1;
+  if (universo > 20){
+    num = (universo / 20) >> 0;
+  }
+  universo = universo/num;
+  var ctx = canvas.getContext("2d");
+  var MyChart = new Chart(ctx).Radar(barChartData, {
+    responsive : true,
+    scaleStartValue: 0,
+    scaleOverride: true,
+    scaleSteps: universo,
+    scaleStepWidth: num,
+    overridelabel: false,
+    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+  });
+
+}
+
+
+function ChartLineCross(data, universo){
+  var element = data['element'];
+  var labels = [];
+  var values = [];
+  var height = 100;
+  var largo = false;
+  var count = 0;
+  data.data.forEach(function (result){
+    if (result.label.length > 10) largo = true;
+    labels.push(result.label);
+    values.push(result.value);
+    count++;
+  });
+
+  if (count>3 && largo){
+    height = 50*count;
+  }
+
+  var r = (Math.floor(Math.random() * 256));
+  var g = (Math.floor(Math.random() * 256));
+  var b = (Math.floor(Math.random() * 256));
+  var data2 = {
+    labels: labels,
+    datasets: [
+        {
+            fillColor : "rgba("+r+","+g+","+b+",0.5)",
+            strokeColor : "rgba("+r+","+g+","+b+",0.8)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: values
+        }
+    ]
+  };
+  $('#'+element+'_tipo').val('Line');
+
+  $('#'+element).html('<canvas id="canvas_'+element+'" ></canvas>');
+
+  var num = 1;
+  if (universo > 20){
+    num = (universo / 20) >> 0;
+  }
+  universo = universo/num;
+  var canvas = document.getElementById('canvas_'+element);
+  var ctx = canvas.getContext("2d");
+  var MyChart =  new Chart(ctx).Line(data2, {
+    responsive : true,
+    scaleStartValue: 0,
+    scaleOverride: true,
+    scaleSteps: universo,
+    scaleStepWidth: num,
+    overridelabel: false,
+    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+  });
+}
+
+
+function ChartPolarCross(data,universo){
+  var element = data['element'];
+  var values = [];
+
+  var b = (Math.floor(Math.random() * 256));
+  var g = (Math.floor(Math.random() * 256));
+  data.data.forEach(function (result){
+    var r = (Math.floor(Math.random() * 256));
+    values.push({
+      value: result.value,
+      color: "rgba("+r+","+g+","+b+",0.7)",
+      highlight: "rgba("+r+","+g+","+b+",0.5)",
+      label: result.label
+    });
+  });
+
+  var num = 1;
+  if (universo > 10){
+    num = (universo / 10) >> 0;
+  }
+  universo = universo/num;
+  $('#'+element+'_tipo').val('Polar');
+  $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
+  var canvas = document.getElementById('canvas_'+element);
+  var ctx = canvas.getContext("2d");
+  var MyChart = new Chart(ctx).PolarArea(values, {
+    responsive : true,
+    scaleStartValue: 0,
+    scaleOverride: true,
+    scaleSteps: universo,
+    scaleStepWidth: num,
+    overridelabel: false,
+    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+  });
+}
+
 /*Fin funciones resultados*/

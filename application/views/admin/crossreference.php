@@ -96,6 +96,19 @@ foreach ($resultado as $categoria){
 <div class="panel panel-default">
 <div class="panel-heading">
   Resultado
+  <!-- Single button -->
+  <div class="btn-group pull-right">
+    <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <input type="hidden" value="" id="tipoGrafica">
+      <li><label class="col-md-12"><input type="radio" name="radio" checked onclick="modificarConsulta('','Bar')"> Barras</label></li>
+      <li><label class="col-md-12"><input type="radio" name="radio" onclick="modificarConsulta('','Radar')"> Radio</label></li>
+      <li><label class="col-md-12"><input type="radio" name="radio" onclick="modificarConsulta('','Polar')"> Polar</label></li>
+      <li><label class="col-md-12"><input type="radio" name="radio" onclick="modificarConsulta('','Line')" > Linea</label></li>
+    </ul>
+  </div>
 </div>
 <div class="panel-body" id="crossreference">
 </div>
