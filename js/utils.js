@@ -1306,6 +1306,7 @@ function ChartBarCross(data, universo){
   if (universo > 20){
     num = (universo / 20) >> 0;
   }
+  universo = universo/num;
 
   var canvas = document.getElementById('canvas_'+element);
   var ctx = canvas.getContext("2d");
