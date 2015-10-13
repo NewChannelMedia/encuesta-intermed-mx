@@ -666,7 +666,6 @@ function ejecutarConsulta(finalQuery){
     int = 0;
     finalQuery.forEach(function (result){
       finalQuery[int].query = 'SELECT COUNT(*) AS \'total\' FROM  respuestasM, encuestasM where ' + result['query'] + ' AND respuestasM.encuestaM_id = encuestasM.id AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1;';
-      console.log(finalQuery[int].query);
       finalQuery[int].pregunta = result['pregunta'];
       int++;
     });
