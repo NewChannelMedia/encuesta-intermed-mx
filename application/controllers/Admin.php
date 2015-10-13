@@ -203,8 +203,18 @@
             $data = array('universo'=>$universo);
             foreach ($consultas as $key => $query) {
               $pregunta = '';
+
+              $explode = explode('_',$query['pregunta']);
               $pregunta_id = explode('_',$query['pregunta'])[1];
-              $pregunta = $this->Preguntasm_model->get_preguntam($pregunta_id)['pregunta'];
+              $pregunta = $this->Preguntasm_model->get_preguntam($pregunta_id);
+              if (count($explode) === 2){
+                $pregunta = $pregunta['pregunta'];
+              }
+              else {
+                $explode2 = explode('|',$pregunta['opciones']);
+                $pregunta = $explode2[$explode[3]];
+              }
+              $pregunta = $query['label'];
               $data['preguntas'][$pregunta] = $this->Respuestasm_model->get_ejecutarConsulta($query['query'])['total'];
             }
             echo json_encode($data);

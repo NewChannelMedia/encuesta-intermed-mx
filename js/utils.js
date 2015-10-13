@@ -583,30 +583,57 @@ $( document ).ready( function () {
 
 
 function modificarConsulta(comp){
+  console.log('comp:' + JSON.stringify(comp));
+
   if (comp && comp.complemento && comp.complemento.length>0){
-    console.log('COMPLEMENTO: ' + JSON.stringify(comp.complemento));
+    if ($('#'+comp.id).prop('checked')){
+      var nuevoPanel =  '<div class=\'portlet panel panel-info\' id=\'' + comp.id + '_comp\'><div class=\'portlet-header panel-heading\'>';
+      nuevoPanel += '***' + comp.pregunta +' <strong>['+ comp.respuesta +']</strong>';
+      nuevoPanel +=  '</div><div class=\'portlet-content panel-body\'>';
+      nuevoPanel +=  '<ul style=\'list-style:none;\'>';
+      var int = 0;
+      comp.complemento.forEach(function(result){
+        nuevoPanel +=  "<li><label style='font-weight:normal;margin-top:5px;'><input type='checkbox' name='"+comp.pregunta_id+"' id='"+result.comp+"_"+ 1 +"' class='"+ comp.pregunta_id + "_comp_"+ comp.opcion + "' value='" + result.comp + "' onchange='modificarConsulta()' label= '" + comp.respuesta + "'> " +result.comp+ "</label></li>";
+      });
+      nuevoPanel += '</ul></div></div>';
+      $('#' + comp.pregunta_id+'_div').after(nuevoPanel);
+    } else {
+      if ($('#'+comp.id + '_comp')){
+        $('#'+comp.id + '_comp').remove();
+      }
+    }
   }
 
   var clase = '';
+  var label = '';
   var query = '';
   var temp = '';
   var finalQuery = [];
+  var lastlabel ='';
   $( "#columna_preguntas_filtradas input[type=checkbox]" ).each( function ( index, element ) {
     var continuar = false;
     if (clase === ''){
       clase = $( element ).attr('class');
+      label = $( element ).attr('name');
+      lastlabel = $( element ).attr('label');
       //console.log('CLASE: ' + clase);
     }
-    if (!(clase === $( element ).attr('class'))){
+    var cambiar = false;
+    if (!$(element).attr('id').substring(0, clase.length) == clase){
+      cambiar = true;
+    }
+    if (!(clase === $( element ).attr('class')) || cambiar){
       if (temp != ''){
         if (query != ''){
           query += ' AND ';
         }
         query += '( ' + temp + ')';
-        finalQuery.push({'query' : query, 'pregunta' : clase});
+        finalQuery.push({'query' : query, 'pregunta' : clase, 'label': lastlabel});
         temp = '';
       }
       clase = $( element ).attr('class');
+      label = $( element ).attr('name');
+      lastlabel = $( element ).attr('label');
       //console.log('CLASE: ' + clase);
     }
     if ($( "input:checked." + clase ).length > 0){
@@ -614,7 +641,7 @@ function modificarConsulta(comp){
         if (temp != ''){
           temp += ' OR ';
         }
-        temp += $( element ).attr('class') + ' LIKE "%' + $( element ).val() + '%"';
+        temp += label + ' LIKE "%' + $( element ).val() + '%"';
       }
     }
   });
@@ -623,11 +650,16 @@ function modificarConsulta(comp){
       query += ' AND ';
     }
     query += '( ' + temp + ')';
-    finalQuery.push({'query' : query, 'pregunta' : clase});
+    finalQuery.push({'query' : query, 'pregunta' : clase, 'label': lastlabel});
     temp = '';
   }
+  console.log(JSON.stringify(finalQuery));
   ejecutarConsulta(finalQuery);
 }
+
+$('.portlet').bind('moveend', function() {
+  console.log('Se movio');
+});
 
 function ejecutarConsulta(finalQuery){
   if (finalQuery.length > 0){

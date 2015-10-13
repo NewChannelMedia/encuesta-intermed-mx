@@ -13,7 +13,9 @@ foreach ($resultado as $categoria){
         foreach ($preguntas as $pregunta){
           if (stripos($pregunta['pregunta'],'ordene') === false ){
             $data = array(); $complemento=false;
-            echo '<div class="portlet panel panel-default"><div class="portlet-header panel-heading">';
+
+            $divId = 'pregunta_' . ++$totalChar;
+            echo '<div class="portlet panel panel-default" id="' . $divId .'_div"><div class="portlet-header panel-heading">';
             echo '<b >' .$pregunta['pregunta'] . '</b>';
             echo '</div><div class="portlet-content panel-body">';
             echo '<ul style="list-style:none;">';
@@ -57,19 +59,23 @@ foreach ($resultado as $categoria){
                 }
               }
 
-              $divId = 'pregunta_' . ++$totalChar;
-
               foreach ($data as $key => $value){
                 $compl = array();
-                $compl['id'] = $divId;
+                $compl['pregunta'] = $pregunta['pregunta'];
+                $compl['pregunta_id'] = $divId;
+                $compl['id'] = $divId.'_'. $key;
+                $compl['opcion'] = $key;
+                $compl['respuesta'] = $value['label'];
                 if (array_key_exists('complemento',$value)){
                   $compl['complemento'] = $value['complemento'];
                 }
-                echo '<li><label style="font-weight:normal;margin-top:5px;"><input type="checkbox" class="'.$divId.'" id="'.$divId.'_'. $key .'" value="' . $value['label'] . '" onchange="modificarConsulta('. htmlspecialchars(print_r(json_encode($compl),1)) .')" > ' . $value['label'] . '</label></li>';
+                echo '<li><label style="font-weight:normal;margin-top:5px;"><input type="checkbox" class="'.$divId.'" name="'.$divId.'" id="'.$divId.'_'. $key .'" value="' . $value['label'] . '" onchange="modificarConsulta('. htmlspecialchars(print_r(json_encode($compl),1)) .')" label = "'. $pregunta['pregunta'] .'"> ' . $value['label'] . '</label></li>';
               }
               echo '</ul>';
               echo '</div>';
               echo '</div>';
+            } else {
+              ++$totalChar;
             }
           }
         }
