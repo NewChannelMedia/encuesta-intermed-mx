@@ -588,6 +588,8 @@ function modificarConsulta(comp){
     if ($(element).attr('id').indexOf('_comp') === true || $(element).attr('id').indexOf('_comp') > 0){
       $('#'+$(element).attr('id').substring(0,$(element).attr('id').length-5)).prop('checked',false);
       $(element).remove();
+    } else {
+
     }
   });
 
@@ -1311,7 +1313,7 @@ function ChartBarCross(data, universo){
     responsive : true,
     scaleStartValue: 0,
     scaleOverride: true,
-    scaleSteps: 9,
+    scaleSteps: universo,
     scaleStepWidth: num,
     overridelabel: false,
     tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
