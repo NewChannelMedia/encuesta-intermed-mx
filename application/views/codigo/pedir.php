@@ -21,10 +21,10 @@
           <form method="post" action="<?php echo base_url(); ?>codigo/dataPost" id="datosSolicitud"><!-- main-body-intern-container -->
             <h4 class="Flama-normal s20 text-center white">Ingresa los siguientes datos para procesar tu solicitud:</h4>
             <div class="form-group col-md-8 col-md-offset-2 usuarioSolcitud">
-              <input class="form-control input-lg" type="text" placeholder="Nombre" name="nombre" id="nombre">
+              <input class="form-control input-lg validada" type="text" placeholder="Nombre" name="nombre" id="nombre">
             </div>
             <div class="form-group col-md-8 col-md-offset-2">
-              <input class="form-control input-lg" type="mail" placeholder="E-mail:" name="email" id="e-mail"/>
+              <input class="form-control input-lg validada" type="mail" placeholder="E-mail:" name="email" id="e-mail"/>
             </div>
           <div id = "doctor"></div>
             <div class="form-group col-md-8 col-md-offset-2">
@@ -40,10 +40,10 @@
               </div>
             </div>
             <div id="medicoSolicitud" class="form-group col-md-8 col-md-offset-2 ">
-              <input class="form-control input-lg" type="text" placeholder="Ingresa tu cedula profesional, por favor" name="cedula" id="cedula">
+              <input class="form-control input-lg validada" type="text" placeholder="Ingresa tu cedula profesional, por favor" name="cedula" id="cedula">
             </div>
             <div id=usuarioSolicitud class="form-group col-md-8 col-md-offset-2 hidden">
-              <textarea class="form-control input-lg" rows="5" id="justificacion" name="justificacion" placeholder="Por favor, dinos por qué te gustaría saber mas de Intermed"></textarea>
+              <textarea class="form-control input-lg validada" rows="5" id="justificacion" name="justificacion" placeholder="Por favor, dinos por qué te gustaría saber mas de Intermed"></textarea>
             </div>
             </br>
             <div class="form-group col-md-8 col-md-offset-2 ">
