@@ -46,8 +46,9 @@
       $this->db->where('correo',$correo);
       $this->db->update('porValidar',$obj);
     }
-    public function negado($correo){
+    public function negado($correo,$id){
       $obj= array('status'=>2);
+      $this->db->where('id',$id);
       $this->db->where('correo',$correo);
       $this->db->update('porValidar',$obj);
     }
@@ -83,6 +84,11 @@
       $this->db->where('status', "2");
       $query = $this->db->get('porValidar');
       return $query->row_array();
+    }
+    public function insertMensaje($id,$mensaje){
+      $obj = array('mensaje'=>$mensaje);
+      $this->db->where('id',$id);
+      $this->db->update('porValidar',$obj);
     }
   }
 ?>

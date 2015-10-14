@@ -464,6 +464,7 @@ $( document ).ready( function () {
     var codigo = $( "#aleatorioDato" ).val();
     var correo = $( "#codigoCorreo" ).text();
     var titulo = 'Cedula valida';
+    var idMensaje = $("#codigoUser").text();
     var valor = parseInt($("#codigoUser").text())-1;
     var mensaje = $("#mensajeAceptado").val();
     var ids = '#tr'+valor;
@@ -479,14 +480,16 @@ $( document ).ready( function () {
           mensaje:mensaje,
           estado:estado
         },function(datas){
-          $.post('/encuesta-intermed/codigo/actualizaStatus/',{correo:correo, ids:spanId},function(datase){
-          }).done(function(){
-            alert("Campo actualizado y se envio el correo");
-            $(ids).hide('slow');
-            $(id).hide('slow');
-            $('.modal').modal('hide');
-            $("#aleatorioDato").attr('value','');
-            $("#mensajeAceptado").val('');
+          $.post('/encuesta-intermed/codigo/insertMensaje',{mensaje:mensaje, id:idMensaje},function(dataM){
+            $.post('/encuesta-intermed/codigo/actualizaStatus/',{correo:correo, ids:spanId},function(datasA){
+            }).done(function(){
+              alert("Campo actualizado y se envio el correo");
+              $(ids).hide('slow');
+              $(id).hide('slow');
+              $('.modal').modal('hide');
+              $("#aleatorioDato").attr('value','');
+              $("#mensajeAceptado").val('');
+            });
           });
         });
       });
@@ -501,11 +504,13 @@ $( document ).ready( function () {
     var titulo = 'Por el momento no joven';
     var mensaje = $("#areaRechazado").val();
     var valor = parseInt($("#rechazosID").text())-1;
+    var idMensaje = $("#rechazosID").text();
     var ids = '#tr'+valor;
     var id = '#t'+valor;
     var spanId = $("#rechazosID").text();
-    $.post('/encuesta-intermed/codigo/sendMail/',{correo:mail,titulo:titulo,mensaje:mensaje}, function(data){
+    $.post('/encuesta-intermed/codigo/sendMail/',{correo:mail,titulo:titulo,mensaje:mensaje},function(data){
       $.post('/encuesta-intermed/codigo/negado',{correo:mail, ids:spanId},function(negado){
+        $.post('/encuesta-intermed/codigo/insertMensaje',{mensaje:mensaje, id:idMensaje},function(dataM){});
       }).done(function(){
         alert("Usuario rechazado, correo enviado....");
         $("#areaRechazado").val('') ;
@@ -1129,23 +1134,44 @@ function cerrarPopovers(){
 }
 //validacion de los formularios
 $(function(){
-  $('input.validada').focusout(function(){
-    if( $(this).val() == "" ){
-      $( this ).parent().addClass('has-error');
-      $( this ).after('<span>Recuerda que debe de estar lleno este campo</span>');
-    }else{3
-      $( this ).next('span').remove();
-      $( this ).parent().removeClass('has-error');
-    }
-  });
-  $('textarea.validada').focusout(function(){
-    if( $( "textarea" ).val() == "" ){
-      $( this ).parent().addClass('has-error');
-      $( this ).after('<span>Danos tu justificación por favor</span>');
-    }else{
-      $( this ).next('span').remove();
-      $( this ).parent().removeClass('has-error');
-    }
-  });
+    $('input.validada').focusout(function(){
+      if( $(this).val() == "" ){
+        $(".error-message").html('');
+        $("input:submit").attr('disabled','disabled');
+        $( this ).parent().addClass('has-error');
+        $( this ).after('<span class="error-message">Recuerda que debe de estar lleno este campo el boton se deshabilito</span>');
+      }else{
+        $("input:submit").removeAttr('disabled');
+        $( this ).next('span').remove();
+        $( this ).parent().removeClass('has-error');
+        $( 'form input.validada' ).each(function(index, data){
+          if( $( this ).val() == "" ){
+            $("input:submit").attr('disabled','disabled');
+          }else{
+            $("input:submit").removeAttr('disabled');
+          }
+        });
+      }
+    });//fin input
+    $('textarea.validada').focusout(function(){
+      if( $( "textarea" ).val() == "" ){
+        $(".error-justificacion").html('');
+        $("input:submit").attr('disabled','disabled');
+        $( this ).parent().addClass('has-error');
+        $( this ).after('<span class = "error-justificacion">Danos tu justificación por favor el boton se deshabilito</span>');
+      }else{
+        $("input:submit").removeAttr('disabled');
+        $( this ).next('span').remove();
+        $( this ).parent().removeClass('has-error');
+        $( 'form textarea.validada' ).each(function(index, data){
+          if( $( this ).val() == "" ){
+            $("input:submit").attr('disabled','disabled');
+          }else{
+            $("input:submit").removeAttr('disabled');
+          }
+        });
+      }
+    });
+    //checa que los inputs text no esten vacios
 });
 /*Fin funciones resultados*/
