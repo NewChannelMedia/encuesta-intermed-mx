@@ -953,3 +953,13 @@ canvas {
 .column#columna_preguntas_filtradas {
   background-color: rgb(227, 255, 224);
 }
+
+#contacto {
+  background-color: rgba(10,10,10,.6);
+  background-image: url("../img/map-image.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
