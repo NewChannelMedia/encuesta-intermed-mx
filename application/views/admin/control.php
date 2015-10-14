@@ -59,7 +59,7 @@
                 <span class="glyphicon glyphicon-plus-sign s60"></span>
               </div>
               <div class="col-xs-8 text-right">
-                <div class="huge"><?php echo $totalAceptados;?></div>
+                <div class="huge"><?php echo $totalNewsletter;?></div>
                 <div>Suscripciones nuevas</div>
               </div>
             </div>
@@ -81,12 +81,12 @@
                 <span class="glyphicon glyphicon-question-sign s60"></span>
               </div>
               <div class="col-xs-8 text-right">
-                <div class="huge">0</div>
-                <div>Solcitud de informacion</div>
+                <div class="huge"><?php echo $totalMensajes;?></div>
+                <div>Mensajes nuevos</div>
               </div>
             </div>
           </div>
-          <a href="#">
+          <a href="<?=base_url()?>admin/mensajes">
             <div class="panel-footer">
               <span class="pull-left">Ver Detalles</span>
               <span class="pull-right"><span class="glyphicon glyphicon-chevron-right"></span></span>

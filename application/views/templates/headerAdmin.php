@@ -61,6 +61,9 @@
           <a href="<?= base_url();?>admin/suscritos"><span class="glyphicon glyphicon-plus nav-icon"></span> Newsletter</a>
         </li>
         <li>
+          <a href="<?= base_url();?>admin/mensajes"><span class="glyphicon glyphicon-envelope nav-icon"></span> Mensajes</a>
+        </li>
+        <li>
           <a href="<?= base_url();?>admin/cerrar"><span class="glyphicon glyphicon-log-out nav-icon"></span> salir</a>
         </li>
       </ul>

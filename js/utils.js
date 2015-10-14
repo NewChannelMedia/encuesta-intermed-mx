@@ -72,15 +72,19 @@ $( window ).resize( function () {
 } );
 
 $( document ).ready( function () {
-  validarFormulario();
-  //Popover de progreso
-  $( '#progress-bar-current' ).popover( {
-    animation: false
-  } );
-  $( '#progress-bar-current' ).popover( 'show' );
-  $( '.popover.top.in' ).each( function ( index, element ) {
-    $( element ).css( 'left', ( parseInt( $( element ).css( 'left' ) ) - 25 + parseInt( $( '#progress-bar-current' ).css( 'width' ) ) / 2 ) );
-  } );
+  setTimeout(
+      function(){
+        validarFormulario();
+        //Popover de progreso
+        $( '#progress-bar-current' ).popover( {
+          animation: false
+        } );
+        $( '#progress-bar-current' ).popover( 'show' );
+        $( '.popover.top.in' ).each( function ( index, element ) {
+          $( element ).css( 'left', ( parseInt( $( element ).css( 'left' ) ) - 25 + parseInt( $( '#progress-bar-current' ).css( 'width' ) ) / 2 ) );
+        } );
+      }
+    ,200);
 } );
 
 $( function () {
@@ -353,7 +357,7 @@ function cargaPorAceptar() {
             $( '#datosPa #tr' + i + '' ).append( '<td>' + item.cedula + '</td>' );
             $( '#datosPa #tr' + i + '' ).append( '<td>' + item.justificacion + '</td>' );
             $( '#datosPa #tr' + i + '' ).append( '<td><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\')" type="button" id="enviarSucces" class="btn btn-success btn-block" data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></td>' );
-            $( '#datosPa #tr' + i + '' ).append( '<td><button noMalTo="' + item.correo + '" type="button" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\') id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td><button noMalTo="' + item.correo + '" type="button" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\')" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
           }
           else {
             $( "#datosPa" ).append( '<tr class="bg-otro" id="t' + i + '"></tr>' );
@@ -363,7 +367,7 @@ function cargaPorAceptar() {
             $( '#datosPa #t' + i + '' ).append( '<td >' + item.cedula + '</td>' );
             $( '#datosPa #t' + i + '' ).append( '<td >' + item.justificacion + '</td>' );
             $( '#datosPa #t' + i + '' ).append( '<td ><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\',\'' + item.id + '\')"  type="button" id="enviarSucces' + i + '" class="btn btn-success btn-block"data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></td>' );
-            $( '#datosPa #t' + i + '' ).append( '<td ><button noMalTo="' + item.correo + '" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\') "type="button" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td ><button noMalTo="' + item.correo + '" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\')" type="button" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
           }
         }
       } );
@@ -1519,3 +1523,56 @@ $(function(){
   });
 });
 /*Fin funciones resultados*/
+
+$('#frm_contacto').on("submit", function(e){
+  var data = $('#frm_contacto').serializeArray();
+  $.ajax( {
+    url: '/encuesta-intermed/main/contacto',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    data: data,
+    success: function (data) {
+      console.log('DATA: ' + JSON.stringify(data));
+      $('#frm_contacto')[0].reset();
+      $("#frm_contacto-success").show();
+      setTimeout(function(){
+        $("#frm_contacto-success").fadeTo(2000, 500).slideUp(500, function(){
+            $("#frm_contacto-success").hide();
+        });
+      },3000);
+    },
+    error: function (err) {
+      console.log('ERROR: ' + JSON.stringify(err));
+    }
+  });
+  return false;
+});
+
+function responderMensaje(row){
+  $('#responder_id').val(row.id);
+  $('#responder_email').val(row.correo);
+  $('#responder_mensaje').val('');
+  $('#frm_responder').unbind('submit');
+  $('#frm_responder').on("submit", function(e){
+    var data = $('#frm_responder').serializeArray();
+    $.ajax( {
+      url: '/encuesta-intermed/admin/enviarCorreo',
+      type: "POST",
+      dataType: 'JSON',
+      async: true,
+      data: data,
+      success: function (data) {
+        $('#tr_porcontestar_'+row.id).remove();
+        var newRow = '<tr id="tr_contestados_'+row.id+'"><td>'+ row.fecha +'</td><td>'+ row.nombre +'</td><td>'+row.correo+'</td><td>'+row.mensaje+'</td><td>'+ $('#responder_mensaje').val() +'</td></tr>';
+        $('#table_contestados').prepend(newRow);
+        $('#modal_contestar').modal('hide');
+        $('#frm_responder')[0].reset();
+      },
+      error: function (err) {
+        console.log('ERROR: ' + JSON.stringify(err));
+      }
+    });
+    return false;
+  })
+}
