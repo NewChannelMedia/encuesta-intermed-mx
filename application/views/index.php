@@ -58,13 +58,12 @@
       </div>
     </div>
   </div>
-  <div class="container">
-
+  <div class="container-fluid" id="contacto">
       <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-          <h2>Contácto</h2>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3 text-center">
+          <h2 class="flamaBook-Normal s30 uppr white">Contácto</h2>
           <form id="frm_contacto" method="POST">
-            <h4 class="Flama-normal s20 text-center">Use el siguiente formulario para enviarnos un mensaje:</h4>
+            <h4 class="flamaBook-Normal s20 text-center white">Quieres información de que es <strong>intermed<sup>&reg;</sup></strong>? <br>Usa el siguiente formulario para enviarnos un mensaje:</h4>
             <div class="form-group col-md-12">
               <div class="alert alert-success collapse" role="alert" id="frm_contacto-success">
                 Su mensaje ha sido enviado
