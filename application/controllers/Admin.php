@@ -548,8 +548,8 @@
 
             $result= mail($email,$asunto,$asunto,$headers);
 
-            $array['success'] = $result;
             $array = array();
+            $array['success'] = $result;
             if ($result){
               $query = $this->Contacto_model->set_respuesta($id,$mensaje);
             }

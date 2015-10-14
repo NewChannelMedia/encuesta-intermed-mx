@@ -1554,11 +1554,15 @@ function responderMensaje(row){
       async: true,
       data: data,
       success: function (data) {
-        $('#tr_porcontestar_'+row.id).remove();
-        var newRow = '<tr id="tr_contestados_'+row.id+'"><td>'+ row.fecha +'</td><td>'+ row.nombre +'</td><td>'+row.correo+'</td><td>'+row.mensaje+'</td><td>'+ $('#responder_mensaje').val() +'</td></tr>';
-        $('#table_contestados').prepend(newRow);
-        $('#modal_contestar').modal('hide');
-        $('#frm_responder')[0].reset();
+        if (data.success){
+          $('#tr_porcontestar_'+row.id).remove();
+          var newRow = '<tr id="tr_contestados_'+row.id+'"><td>'+ row.fecha +'</td><td>'+ row.nombre +'</td><td>'+row.correo+'</td><td>'+row.mensaje+'</td><td>'+ $('#responder_mensaje').val() +'</td></tr>';
+          $('#table_contestados').prepend(newRow);
+          $('#modal_contestar').modal('hide');
+          $('#frm_responder')[0].reset();
+        } else {
+          alert('Hubo un error al enviar el mensaje');
+        }
       },
       error: function (err) {
         console.log('ERROR: ' + JSON.stringify(err));
