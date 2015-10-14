@@ -48,8 +48,10 @@
       switch ($data['status']) {
         case 0:
             //No existe la encuesta con ese código
-            $data['error'] = 'La encuesta no existe';
-            $this->load->view('about',$data);
+            $data['title'] = "Error";
+            $data['encabezado'] = "Error de código";
+            $data['mensaje'] = 'El código que ingresaste es incorrecto, o hubo un error al procesar tu solicitud, por favor intenta de nuevo.';
+            $this->load->view('encuesta/alert', $data);
             break;
         case 1:
             //Encuesta sin iniciar
@@ -59,8 +61,12 @@
             break;
         case 3:
             //Encuesta ya contestada
-            header('Location: '. base_url() .'encuesta');
-            die();
+            //No existe la encuesta con ese código
+            $data['title'] = "Error";
+            $data['encabezado'] = "Atención";
+            $data['mensaje'] = 'El codigo que ingresaste ya ha sido usado anteriormente. <br>Puedes solicitar uno nuevo dando click a continuación:<br><br><a href="codigo/pedir" class="btn btn-default s20">Solicitar un código nuevo</a>';
+            $this->load->view('encuesta/alert', $data);
+            break;
         default:
             break;
       }
@@ -87,9 +93,16 @@
       window.onpopstate = function(event) {
           history.go(1);
       };</script>';
-      echo 'Hola ' . $nombre. ', ya estas registrado en el newsletter<br/>';
-      echo '<a href="' . base_url() . '">Ir a inicio</a>';
-
+      $data['title'] = "Newsletter";
+      $data['nombre'] = $nombre;
+      $data['correo'] = $email;
+      $data['encabezado'] = "¡Gracias por tu colaboración!";
+      $data['mensaje'] = "Gracias <strong>".$nombre."</strong> por suscribirse a nuestra lista de correos.<br>".
+      "Recibiras dentro de poco información y promociones.<br>Hasta pronto.";
+      $this->load->view('templates/header', $data);
+      $this->load->view('encuesta/alert', $data);
+      $this->load->view('templates/footer2', $data);
+/*cache*/
     }
 
     public function encuesta(){
