@@ -311,7 +311,7 @@ function cargaPorAceptar() {
             $( '#datosPa #tr' + i + '' ).append( '<td>' + item.correo + '</td>' );
             $( '#datosPa #tr' + i + '' ).append( '<td>' + item.cedula + '</td>' );
             $( '#datosPa #tr' + i + '' ).append( '<td>' + item.justificacion + '</td>' );
-            $( '#datosPa #tr' + i + '' ).append( '<td><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\')" type="button" id="enviarSucces" class="btn btn-success btn-block" data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\',\'' + item.id + '\')" type="button" id="enviarSucces" class="btn btn-success btn-block" data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></td>' );
             $( '#datosPa #tr' + i + '' ).append( '<td><button noMalTo="' + item.correo + '" type="button" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\')" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
           }
           else {

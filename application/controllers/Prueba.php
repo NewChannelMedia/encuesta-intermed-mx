@@ -13,4 +13,8 @@
       $this->load->view('correos/bodyCorreo',$data);
       $this->load->view('correos/footerCorreo');
     }
+
+    public function correo(){
+      $this->load->view('correos/correo');
+    }
   }
