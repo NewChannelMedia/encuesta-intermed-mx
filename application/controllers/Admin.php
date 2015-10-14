@@ -547,8 +547,6 @@
 
             $result= mail($email,$asunto,$asunto,$headers);
 
-            $result = true;
-
             $array['success'] = $result;
             $array = array();
             if ($result){
