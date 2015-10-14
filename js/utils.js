@@ -41,15 +41,19 @@ $( window ).resize( function () {
 } );
 
 $( document ).ready( function () {
-  validarFormulario();
-  //Popover de progreso
-  $( '#progress-bar-current' ).popover( {
-    animation: false
-  } );
-  $( '#progress-bar-current' ).popover( 'show' );
-  $( '.popover.top.in' ).each( function ( index, element ) {
-    $( element ).css( 'left', ( parseInt( $( element ).css( 'left' ) ) - 25 + parseInt( $( '#progress-bar-current' ).css( 'width' ) ) / 2 ) );
-  } );
+  setTimeout(
+      function(){
+        validarFormulario();
+        //Popover de progreso
+        $( '#progress-bar-current' ).popover( {
+          animation: false
+        } );
+        $( '#progress-bar-current' ).popover( 'show' );
+        $( '.popover.top.in' ).each( function ( index, element ) {
+          $( element ).css( 'left', ( parseInt( $( element ).css( 'left' ) ) - 25 + parseInt( $( '#progress-bar-current' ).css( 'width' ) ) / 2 ) );
+        } );
+      }
+    ,200);
 } );
 
 $( function () {
@@ -788,10 +792,10 @@ function ChartBar( data ) {
                   data: valuescomp
                   }
                 ]
-            }
-            $( '#' + element + '_complemento' ).attr( 'data-original-title', result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>' );
-            $( '#' + element + '_complemento' ).attr( 'data-content', '<canvas id="canvas_complemento_' + element + '" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>' );
-            //var testPopover = $('#canvas_'+element).parent();
+              }
+              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
+              $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" style="margin-bottom:30px;"></canvas>');
+              //var testPopover = $('#canvas_'+element).parent();
 
             $( '[data-toggle="popover"]' ).not( $( '#' + element + '_complemento' ) ).popover( 'hide' );
             $( '#' + element + '_complemento' ).popover( 'show' );
@@ -1504,3 +1508,56 @@ $( function () {
   } );
 } );
 /*Fin funciones resultados*/
+
+$('#frm_contacto').on("submit", function(e){
+  var data = $('#frm_contacto').serializeArray();
+  $.ajax( {
+    url: '/encuesta-intermed/main/contacto',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    data: data,
+    success: function (data) {
+      console.log('DATA: ' + JSON.stringify(data));
+      $('#frm_contacto')[0].reset();
+      $("#frm_contacto-success").show();
+      setTimeout(function(){
+        $("#frm_contacto-success").fadeTo(2000, 500).slideUp(500, function(){
+            $("#frm_contacto-success").hide();
+        });
+      },3000);
+    },
+    error: function (err) {
+      console.log('ERROR: ' + JSON.stringify(err));
+    }
+  });
+  return false;
+});
+
+function responderMensaje(row){
+  $('#responder_id').val(row.id);
+  $('#responder_email').val(row.correo);
+  $('#responder_mensaje').val('');
+  $('#frm_responder').unbind('submit');
+  $('#frm_responder').on("submit", function(e){
+    var data = $('#frm_responder').serializeArray();
+    $.ajax( {
+      url: '/encuesta-intermed/admin/enviarCorreo',
+      type: "POST",
+      dataType: 'JSON',
+      async: true,
+      data: data,
+      success: function (data) {
+        $('#tr_porcontestar_'+row.id).remove();
+        var newRow = '<tr id="tr_contestados_'+row.id+'"><td>'+ row.fecha +'</td><td>'+ row.nombre +'</td><td>'+row.correo+'</td><td>'+row.mensaje+'</td><td>'+ $('#responder_mensaje').val() +'</td></tr>';
+        $('#table_contestados').prepend(newRow);
+        $('#modal_contestar').modal('hide');
+        $('#frm_responder')[0].reset();
+      },
+      error: function (err) {
+        console.log('ERROR: ' + JSON.stringify(err));
+      }
+    });
+    return false;
+  })
+}

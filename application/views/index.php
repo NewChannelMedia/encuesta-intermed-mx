@@ -58,5 +58,33 @@
       </div>
     </div>
   </div>
+  <div class="container">
+
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+          <h2>Contácto</h2>
+          <form id="frm_contacto" method="POST">
+            <h4 class="Flama-normal s20 text-center">Use el siguiente formulario para enviarnos un mensaje:</h4>
+            <div class="form-group col-md-12">
+              <div class="alert alert-success collapse" role="alert" id="frm_contacto-success">
+                Su mensaje ha sido enviado
+              </div>
+            </div>
+            <div class="form-group col-md-12">
+              <input class="form-control input-lg" type="text" placeholder="Nombre" name="nombre" id="nombre" required>
+            </div>
+            <div class="form-group col-md-12">
+              <input class="form-control input-lg" type="email" placeholder="E-mail" name="email" id="email" required>
+            </div>
+            <div class="form-group col-md-12">
+              <textarea class="form-control input-lg" rows="5" id="mensaje" name="mensaje" placeholder="Mensaje" required></textarea>
+            </div>
+            <div class="form-group col-md-12">
+              <input class="btn btn-success btn-lg btn-block" type="submit" value="Enviar">
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
 </section>
 <div class="main-bg"></div>

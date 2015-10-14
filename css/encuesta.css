@@ -422,8 +422,14 @@ body {
 }
 
 .ContenedorGrafica .popover{
-  max-width: 500px!important;
-  width: 500px!important;
+  max-width: 90%!important;
+  width: 90%!important;
+}
+
+
+.ContenedorGraficaZoom .popover{
+  max-width: 90%!important;
+  width: 90%!important;
 }
 
 .block-container-category {
@@ -521,10 +527,10 @@ body {
 /*Sortable format*/
 
 .sortable {
-  list-style-type: none;
+  list-style-type: decimal;
   margin: 0;
   padding: 0;
-  width: 100%;
+  width: 60%;
 }
 
 .sortable li {

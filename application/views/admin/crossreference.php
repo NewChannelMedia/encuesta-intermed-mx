@@ -1,6 +1,6 @@
 <div class="container-fluid resultados-contanier">
-
-<div class="col-lg-2 col-md-2">
+<div class="row">
+<div class="col-lg-2 col-md-6">
 <div class="column" id="columna_preguntas">
 <!--IMPRIMIR EL TAB NAV-->
 <?php  $totalChar = 0; $primero = true;$clase="active";?>
@@ -85,14 +85,13 @@ foreach ($resultado as $categoria){
 </div>
 </div>
 
-
-<div class="col-lg-2 col-md-2">
+<div class="col-lg-3 col-md-6">
   <div class="column" id="columna_preguntas_filtradas">
 
   </div>
 </div>
 
-<div class="col-lg-8 col-md-8">
+<div class="col-lg-7 col-md-12">
 <div class="panel panel-default">
 <div class="panel-heading">
   Resultado
@@ -111,4 +110,8 @@ foreach ($resultado as $categoria){
   </div>
 </div>
 <div class="panel-body" id="crossreference">
+</div>
+
+</div>
+
 </div>

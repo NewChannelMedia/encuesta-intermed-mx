@@ -114,6 +114,9 @@ echo '</ul></div>';
                 </div>
                 <div class="col-lg-3 col-md-3">
                   <div class="btn-group pull-right" role="group">
+                      <?php
+                        $pregunta['pregunta'] = strip_tags($pregunta['pregunta']);
+                      ?>
                       <?php $enviar = array('element' => $divId, 'data' => $data,'pregunta'=>$pregunta['pregunta']); ?>
                       <button type="button" class="btn btn-default btn-xs" onclick="ampliarGrafica('<?php echo $pregunta['pregunta'] ?>',<?php echo htmlspecialchars(print_r(json_encode($enviar),1))?>);"><span class="glyphicon glyphicon-resize-full"></span></button>
                       <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -170,9 +173,10 @@ echo '</ul></div>';
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="graficaAmpliadaLabel"></h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body ContenedorGraficaZoom">
             <div id="graficaAmpliadaBody" style="width:100%;">
             </div>
+            <div class="col-md-12" id="graficaAmpliadaBody_complemento" data-toggle="popover" data-placement="top" itle="" data-content="" data-html="true" data-original-title="" title="" ></div>
       </div>
     </div>
   </div>

@@ -15,17 +15,22 @@
         $this->load->model('Respuestasm_model');
         $this->load->model('Porvalidar_model');
         $this->load->model('Newsletter_model');
+        $this->load->model('Contacto_model');
         header('Cache-Control: no cache');
       }
 
         // carga del constructor
         public function index(){
-          $data['title'] = "Administradores";
-          $data['login_status'] = true;
-          $data['errorM'] = "";
-          $this->load->view('templates/header', $data);
-          $this->load->view('admin/Admin_vista');
-          $this->load->view('templates/footer2');
+          if (isset($_SESSION['status']) && $_SESSION['status']!=false){
+            redirect(base_url() . 'admin/control');
+          } else {
+            $data['title'] = "Administradores";
+            $data['login_status'] = true;
+            $data['errorM'] = "";
+            $this->load->view('templates/header', $data);
+            $this->load->view('admin/Admin_vista');
+            $this->load->view('templates/footer2');
+          }
         }
 
         public function control(){
@@ -36,17 +41,21 @@
             $password = $this->input->post('password');
 
             if( ($this->Admin_model->login($usuario, $password) != false) || ( isset($_SESSION['status']) && $_SESSION['status']!=false) ){
+              if ($usuario){
+                $_SESSION['status'] = true;
+                redirect(base_url() . 'admin/control');
+              }
               $data['title'] = "Dashboard";
               $data['administrador'] = $usuario;
               $data['user'] = $usuario;
-              $_SESSION['status'] = true;
               $data['session'] = $_SESSION['status'];
               $data['errorM'] = "";
 
               $data['totalContestadas'] = $this->Encuestam_model->get_totalEncuestasM()['total'];
               $data['totalPorValidar'] = $this->Porvalidar_model->get_totalPorValidar()['total'];
-              $data['totalAceptados'] = $this->Newsletter_model->get_totalNewsletter()['total'];
-              $data['totalRechazados'] = $this->Porvalidar_model->get_totalRechazados()['total'];
+              $data['totalMensajes'] = $this->Contacto_model->get_totalNuevos()['total'];
+              $data['totalNewsletter'] = $this->Newsletter_model->get_totalNewsletter()['total'];
+
               /*GRAFICA ENCUESTAS POR FECHA*/
               $porfecha = $this->Encuestam_model->get_totalEncuestasMPorFecha();
               $env = array();
@@ -147,6 +156,7 @@
           $this->load->view('templates/header', $data);
           $this->load->view('admin/Admin_vista', $data);
           $this->load->view('templates/footer2');
+          redirect(base_url() . 'admin');
           //return session_destroy();
         }
 
@@ -507,6 +517,42 @@
           $this->load->view('templates/headerAdmin', $data);
           $this->load->view('admin/crossreference', $data);
           $this->load->view('templates/footerAdmin', $data);
+        }
+
+
+
+        public function mensajes(){
+          $this->load->model('Admin_model');
+          $query = $this->Contacto_model->get_mensajes();
+          $this->Contacto_model->set_leidos();
+          $mensajes = array();
+          $i = 0;
+          $data['title'] = "Mensajes";
+          $data['mensajes'] = $query;
+
+          $this->load->view('templates/headerAdmin', $data);
+          $this->load->view('admin/mensajes', $data);
+          $this->load->view('templates/footerAdmin');
+        }
+
+        public function enviarCorreo(){
+            $asunto = $this->input->post('asunto');
+            $id = $this->input->post('id');
+            $email = $this->input->post('email');
+            $mensaje = $this->input->post('mensaje');
+
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers .= 'From: <intermed.encuestas@newchannel.mx>'."\r\n";
+
+            $result= mail($email,$asunto,$asunto,$headers);
+
+            $array['success'] = $result;
+            $array = array();
+            if ($result){
+              $query = $this->Contacto_model->set_respuesta($id,$mensaje);
+            }
+        		echo json_encode($array);
         }
 
     }
