@@ -114,6 +114,9 @@ echo '</ul></div>';
                 </div>
                 <div class="col-lg-3 col-md-3">
                   <div class="btn-group pull-right" role="group">
+                      <?php
+                        $pregunta['pregunta'] = strip_tags($pregunta['pregunta']);
+                      ?>
                       <?php $enviar = array('element' => $divId, 'data' => $data,'pregunta'=>$pregunta['pregunta']); ?>
                       <button type="button" class="btn btn-default btn-xs" onclick="ampliarGrafica('<?php echo $pregunta['pregunta'] ?>',<?php echo htmlspecialchars(print_r(json_encode($enviar),1))?>);"><span class="glyphicon glyphicon-resize-full"></span></button>
                       <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
