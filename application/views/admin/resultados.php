@@ -109,17 +109,19 @@ echo '</ul></div>';
             <div class="panel panel-default">
             <div class="panel-heading" style="height:60px;<?php if ($complemento) echo 'background-color:#DBA901' ?>">
               <div class="row" style="height:50px;">
-                <div class="col-lg-10 col-md-11" style="font-size:80%;height:50px;overflow:hidden;">
+                <div class="col-lg-9 col-md-9" style="font-size:80%;height:50px;overflow:hidden;">
                   <?php echo $pregunta['pregunta'] ?>
                 </div>
-                <div class="col-lg-1 col-md-1 pull-right">
-                  <div class="btn-group pull-right">
-                      <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" style="height:40px;">
+                <div class="col-lg-3 col-md-3">
+                  <div class="btn-group pull-right" role="group">
+                      <?php $enviar = array('element' => $divId, 'data' => $data,'pregunta'=>$pregunta['pregunta']); ?>
+                      <button type="button" class="btn btn-default btn-xs" onclick="ampliarGrafica('<?php echo $pregunta['pregunta'] ?>',<?php echo htmlspecialchars(print_r(json_encode($enviar),1))?>);"><span class="glyphicon glyphicon-resize-full"></span></button>
+                      <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                           <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu list-inline" role="menu">
                         <?php
-                            $enviar = array('element' => $divId, 'data' => $data,'pregunta'=>$pregunta['pregunta']);
+                            echo '<input type="hidden" id="'. $divId .'_tipo" value="'. $tipo .'">';
                             $checked = ($tipo == "Bar")? 'checked':'';
                             echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartBar('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Barras</label>';
                             $checked = ($tipo == "Radar")? 'checked':'';
@@ -158,4 +160,20 @@ echo '</ul></div>';
 </div>
 </div>
 </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="graficaAmpliada" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content" style="position:relative">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="graficaAmpliadaLabel"></h4>
+      </div>
+      <div class="modal-body">
+            <div id="graficaAmpliadaBody" style="width:100%;">
+            </div>
+      </div>
+    </div>
+  </div>
 </div>

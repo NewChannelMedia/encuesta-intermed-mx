@@ -122,6 +122,7 @@ echo '</ul>';
                       </button>
                       <ul class="dropdown-menu list-inline" role="menu">
                         <?php
+                            echo '<input type="hidden" id="'. $divId .'_tipo" value="'. $divId .'>">';
                             $enviar = array('element' => $divId, 'data' => $data,'pregunta'=>$pregunta['pregunta']);
                             $checked = ($tipo == "Bar")? 'checked':'';
                             echo '<label class="col-md-12"><input type="radio" name="radio'. $divId .'" ' . $checked . ' onclick="ChartBar('.htmlspecialchars(print_r(json_encode($enviar),1)).')"> Barras</label>';

@@ -30,4 +30,15 @@ class Newsletter_model extends CI_Model {
       return $this->db->insert('newsletter');
     }
   }
+
+
+  public function get_totalNewsletter()
+  {
+    $select =   array(
+                'count(*) as total'
+            );
+    $this->db->select($select);
+    $query = $this->db->get('newsletter');
+    return $query->row_array();
+  }
 }
