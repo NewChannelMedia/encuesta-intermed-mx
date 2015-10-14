@@ -50,7 +50,7 @@
               <a href="<?= base_url() ?>admin/resultados">Por Categorías</a>
             </li>
             <li>
-              <a href="#">Cross Reference</a>
+              <a href="<?= base_url() ?>admin/crossreference">Cross Reference</a>
             </li>
           </ul>
         </li>
@@ -58,10 +58,13 @@
           <a href="<?= base_url() ?>admin/solicitudes"><span class="glyphicon glyphicon-list-alt nav-icon"></span> Solicitudes</a>
         </li>
         <li>
-          <a href="<?= base_url();?>Admin/suscritos"><span class="glyphicon glyphicon-plus nav-icon"></span> Newsletter</a>
+          <a href="<?= base_url();?>admin/suscritos"><span class="glyphicon glyphicon-plus nav-icon"></span> Newsletter</a>
         </li>
         <li>
-          <a href="<?= base_url();?>Admin/cerrar"><span class="glyphicon glyphicon-log-out nav-icon"></span> salir</a>
+          <a href="<?= base_url();?>admin/mensajes"><span class="glyphicon glyphicon-envelope nav-icon"></span> Mensajes</a>
+        </li>
+        <li>
+          <a href="<?= base_url();?>admin/cerrar"><span class="glyphicon glyphicon-log-out nav-icon"></span> salir</a>
         </li>
       </ul>
     </div>

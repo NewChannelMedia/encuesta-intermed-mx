@@ -11,9 +11,9 @@ class Newsletter_model extends CI_Model {
     return $query->result_array();
   }
 
-  public function create_newsletter($nombre = FALSE, $correo = FALSE)
+  public function create_newsletter($nombre = FALSE, $correo = FALSE, $news = FALSE, $pruebas = FALSE)
   {
-    if ($nombre === FALSE || $correo === FALSE)
+    if ($nombre === FALSE || $correo === FALSE || $news === FALSE || $pruebas === FALSE)
     {
       return false;
     }
@@ -25,7 +25,20 @@ class Newsletter_model extends CI_Model {
     else {
       $this->db->set('nombre', $nombre);
       $this->db->set('correo', $correo);
+      $this->db->set('news', $news);
+      $this->db->set('pruebas', $pruebas);
       return $this->db->insert('newsletter');
     }
+  }
+
+
+  public function get_totalNewsletter()
+  {
+    $select =   array(
+                'count(*) as total'
+            );
+    $this->db->select($select);
+    $query = $this->db->get('newsletter');
+    return $query->row_array();
   }
 }

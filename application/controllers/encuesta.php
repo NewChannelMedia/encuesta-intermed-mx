@@ -46,8 +46,10 @@
       switch ($data['status']) {
         case 0:
             //No existe la encuesta con ese código
-            $data['error'] = 'La encuesta no existe';
-            $this->load->view('about',$data);
+            $data['title'] = "Error";
+            $data['encabezado'] = "Error de código";
+            $data['mensaje'] = 'El código que ingresaste es incorrecto, o hubo un error al procesar tu solicitud, por favor intenta de nuevo.';
+            $this->load->view('encuesta/alert', $data);
             break;
         case 1:
             //Encuesta sin iniciar
@@ -57,35 +59,48 @@
             break;
         case 3:
             //Encuesta ya contestada
-            header('Location: '. base_url() .'encuesta');
-            die();
+            //No existe la encuesta con ese código
+            $data['title'] = "Error";
+            $data['encabezado'] = "Atención";
+            $data['mensaje'] = 'El codigo que ingresaste ya ha sido usado anteriormente. <br>Puedes solicitar uno nuevo dando click a continuación:<br><br><a href="codigo/pedir" class="btn btn-default s20">Solicitar un código nuevo</a>';
+            $this->load->view('encuesta/alert', $data);
+            break;
         default:
             break;
       }
       /**/
-      $this->load->view('templates/footer', $data);
+      $this->load->view('templates/footer2', $data);
     }
 
     public function newsletter(){
       $this->load->helper('url');
       $nombre = $this->input->post('nombre');
       $email = $this->input->post('email');
+      $newsletter = $this->input->post('newsletter');
+      $pruebas = $this->input->post('pruebas');
 
       if (!$nombre){
         header('Location: ' .  base_url() );
         die();
       }
 
-      $this->Newsletter_model->create_newsletter($nombre,$email);
+      $this->Newsletter_model->create_newsletter($nombre,$email,$newsletter,$pruebas);
 
       echo '<script type="text/javascript">
       history.pushState(null, null, location.href);
       window.onpopstate = function(event) {
           history.go(1);
       };</script>';
-      echo 'Hola ' . $nombre. ', ya estas registrado en el newsletter<br/>';
-      echo '<a href="' . base_url() . '">Ir a inicio</a>';
-
+      $data['title'] = "Newsletter";
+      $data['nombre'] = $nombre;
+      $data['correo'] = $email;
+      $data['encabezado'] = "¡Gracias por tu colaboración!";
+      $data['mensaje'] = "Gracias <strong>".$nombre."</strong> por suscribirse a nuestra lista de correos.<br>".
+      "Recibiras dentro de poco información y promociones.<br>Hasta pronto.";
+      $this->load->view('templates/header', $data);
+      $this->load->view('encuesta/alert', $data);
+      $this->load->view('templates/footer2', $data);
+/*cache*/
     }
 
     public function encuesta(){
@@ -354,6 +369,7 @@
         $this->load->view('templates/footer', $data);
       } else if ($data['status'] != 0) {
         $this->load->view('templates/header', $data);
+        /*
         $contenido .= '<h1 class="Flama-normal s40 text-center">Gracias por contestar la encuesta</h1>';
         $contenido .= '<div class="row"><div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-4">';
         $contenido .= '<input type="checkbox" id="promo" value="si" onchange="aceptarPromocion()">';
@@ -364,10 +380,9 @@
           </br><a href="'. base_url() .'" class="btn btn-danger btn-lg btn-block">Regresar</a>
           </div>
         </div>';
-        $data['contenido'] = $contenido;
-
-        $this->load->view('encuesta/encuesta', $data);
-        $this->load->view('templates/footer', $data);
+        $data['contenido'] = $contenido;*/
+        $this->load->view('encuesta/encuestaFin', $data);
+        $this->load->view('templates/footer2', $data);
         //Redirect /about o index
       }
 

@@ -40,14 +40,54 @@
     * function para actualizar el status del usuario aceptado o rechazado
     * @param $correo para la condicion
     */
-    public function actualizaStatus($correo){
+    public function actualizaStatus($correo, $id){
       $obj = array('status'=>1);
+      $this->db->where('id',$id);
       $this->db->where('correo',$correo);
       $this->db->update('porValidar',$obj);
     }
-    public function negado($correo){
+    public function negado($correo,$id){
       $obj= array('status'=>2);
+      $this->db->where('id',$id);
       $this->db->where('correo',$correo);
+      $this->db->update('porValidar',$obj);
+    }
+
+    public function get_totalPorValidar()
+    {
+      $select =   array(
+                  'count(*) as total'
+              );
+      $this->db->select($select);
+      $this->db->where('status', "0");
+      $query = $this->db->get('porValidar');
+      return $query->row_array();
+    }
+
+    public function get_totalAceptados()
+    {
+      $select =   array(
+                  'count(*) as total'
+              );
+      $this->db->select($select);
+      $this->db->where('status', "1");
+      $query = $this->db->get('porValidar');
+      return $query->row_array();
+    }
+
+    public function get_totalRechazados()
+    {
+      $select =   array(
+                  'count(*) as total'
+              );
+      $this->db->select($select);
+      $this->db->where('status', "2");
+      $query = $this->db->get('porValidar');
+      return $query->row_array();
+    }
+    public function insertMensaje($id,$mensaje){
+      $obj = array('mensaje'=>$mensaje);
+      $this->db->where('id',$id);
       $this->db->update('porValidar',$obj);
     }
   }

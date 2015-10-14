@@ -1119,3 +1119,7 @@
 .white{
   color: #ffffff;
 }
+
+.shadow {
+  text-shadow: 0 0 10px rgba(10,10,10,.5);
+}
