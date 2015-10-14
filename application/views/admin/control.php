@@ -101,11 +101,11 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <div class="row">
-              <div class="col-md-11">
+              <div class="col-lg-10 col-md-10">
                 <h3 class="panel-title">Encuestas por periodo</h3>
               </div>
-              <div class="col-md-1 pull-right">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <div class="col-lg-2 col-md-2 pull-right">
+                <button type="button" class="btn btn-default dropdown-toggle pull-right" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu list-inline" role="menu">
@@ -123,11 +123,11 @@
         <div class="panel panel-default">
           <div class="panel-heading">
               <div class="row">
-                <div class="col-md-11">
+                <div class="col-lg-10 col-md-10">
                   <h3 class="panel-title">Precios propuestos</h3>
                 </div>
-                <div class="col-md-1 pull-right">
-                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <div class="col-lg-2 col-md-2 pull-right">
+                  <button type="button" class="btn btn-default dropdown-toggle pull-right" data-toggle="dropdown">
                       <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu list-inline" role="menu">
@@ -145,11 +145,11 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <div class="row">
-              <div class="col-md-11">
+              <div class="col-lg-10 col-md-10">
                 <h3 class="panel-title">Especialidades</h3>
               </div>
-              <div class="col-md-1 pull-right">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <div class="col-lg-2 col-md-2 pull-right">
+                <button type="button" class="btn btn-default dropdown-toggle pull-right" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu list-inline" role="menu">
@@ -167,11 +167,11 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <div class="row">
-              <div class="col-md-11">
+              <div class="col-lg-10 col-md-10">
                 <h3 class="panel-title">Dispositivos</h3>
               </div>
-              <div class="col-md-1 pull-right">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <div class="col-lg-2 col-md-2 pull-right">
+                <button type="button" class="btn btn-default dropdown-toggle pull-right" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu list-inline" role="menu">
@@ -189,11 +189,11 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <div class="row">
-              <div class="col-md-11">
+              <div class="col-lg-10 col-md-10">
                 <h3 class="panel-title">Nivel de influencia</h3>
               </div>
-              <div class="col-md-1 pull-right">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <div class="col-lg-2 col-md-2 pull-right">
+                <button type="button" class="btn btn-default dropdown-toggle pull-right" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu list-inline" role="menu">
@@ -211,11 +211,11 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <div class="row">
-              <div class="col-md-11">
+              <div class="col-lg-10 col-md-10">
                 <h3 class="panel-title">Edades</h3>
               </div>
-              <div class="col-md-1 pull-right">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <div class="col-lg-2 col-md-2 pull-right">
+                <button type="button" class="btn btn-default dropdown-toggle pull-right" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu list-inline" role="menu">
