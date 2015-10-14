@@ -422,8 +422,14 @@ body {
 }
 
 .ContenedorGrafica .popover{
-  max-width: 500px!important;
-  width: 500px!important;
+  max-width: 90%!important;
+  width: 90%!important;
+}
+
+
+.ContenedorGraficaZoom .popover{
+  max-width: 90%!important;
+  width: 90%!important;
 }
 
 .block-container-category {

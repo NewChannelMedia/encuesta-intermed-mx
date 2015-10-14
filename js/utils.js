@@ -808,7 +808,7 @@ function ChartBar(data){
                 ]
               }
               $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
-              $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
+              $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" style="margin-bottom:30px;"></canvas>');
               //var testPopover = $('#canvas_'+element).parent();
 
               $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
