@@ -373,6 +373,11 @@ function cargaNoAceptados() {
           $( '#datosNa #pt' + i + '' ).append( '<td>' + item.correo + '</td>' );
           $( '#datosNa #pt' + i + '' ).append( '<td>' + item.cedula + '</td>' );
           $( '#datosNa #pt' + i + '' ).append( '<td>' + item.justificacion + '</td>' );
+          if( item.mensaje == null || item.mensaje == null){
+            $( '#datosNa #pt' + i + '').append('<td >' + "Sin mensaje" + '</td>' );
+          }else{
+            $( '#datosNa #pt' + i + '').append('<td >' + item.mensaje + '</td>' );
+          }
         }
       } );
     },
@@ -397,6 +402,11 @@ function cargaAceptados() {
           $( '#datosSa #te' + i + '' ).append( '<td >' + item.correo + '</td>' );
           $( '#datosSa #te' + i + '' ).append( '<td >' + item.cedula + '</td>' );
           $( '#datosSa #te' + i + '' ).append( '<td >' + item.justificacion + '</td>' );
+          if( item.mensaje == "" || item.mensaje == null ){
+            $( '#datosSa #te' + i + '').append('<td >' + "Sin mensaje" + '</td>' );
+          }else{
+            $( '#datosSa #te' + i + '').append('<td >' + item.mensaje + '</td>' );
+          }
         }
       } );
     },
