@@ -3,6 +3,8 @@
     session_start();
     $_SESSION['user'] = "prueba";
   	$_SESSION['status'] = true;
+  } else {
+    redirect(base_url().'admin');
   }
 ?>
 <!DOCTYPE html>
