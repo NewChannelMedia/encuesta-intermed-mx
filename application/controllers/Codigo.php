@@ -40,6 +40,7 @@
           $titulo = $this->input->post('titulo');
           $codigo = $this->input->post('codigo');
           $mensaje = $this->input->post('mensaje');
+          $estado = $this->input->post('estado');
           // se lee el archivo
           $fileh = realpath(APPPATH.'views/correos/headerCorreo.php');
           $fileb = realpath(APPPATH.'views/correos/bodyCorreo.php');
@@ -156,7 +157,8 @@
         // se carga el modelo
         $this->load->model('PorValidar_model');
         $correo = $this->input->post('correo');
-        $this->PorValidar_model->actualizaStatus($correo);
+        $spanId = $this->input->post('id');
+        $this->PorValidar_model->actualizaStatus($correo, $id);
       }
       public function negado(){
         $this->load->model('PorValidar_model');

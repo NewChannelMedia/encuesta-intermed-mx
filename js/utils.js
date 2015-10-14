@@ -3,7 +3,6 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
-
 // jQuery for page scrolling feature - requires jQuery Easing plugin
 $( function () {
   $( 'a.page-scroll' ).bind( 'click', function ( event ) {
@@ -274,34 +273,19 @@ function HabilitarComplementos( id, comp ) {
   }
 }
 
-function aceptarNewsletter() {
-  var pruebasCheck = $( '#pruebasCheck' ).prop( 'checked' );
-  var newsCheck = $( '#newsCheck' ).prop( 'checked' );
-  var pruebas = 0;
-  var news = 0;
-  if(pruebasCheck == true) {
-    pruebas = 1;
-  }
-  if(newsCheck == true) {
-    news = 1;
-  }
-
-  if ( pruebasCheck == true || newsCheck == true ) {
-
+function aceptarPromocion() {
+  var value = $( '#promo' ).prop( 'checked' );
+  if ( value == true ) {
     var contenido = '<form method="POST" action="newsletter">' +
-      '<input type="hidden" name="newsletter" id="newsletter" value="'+news+'">'+
-      '<input type="hidden" name="pruebas" id="pruebas" value="'+pruebas+'">'+
       '<div class="form-group">' +
       '<label for="nombre">Nombre:</label>' +
-      '<input type="text" class="form-control input-lg validada" id="nombre" name="nombre" required>' +
+      '<input type="text" class="form-control validada" id="nombre" name="nombre" required>' +
       '</div>' +
       '<div class="form-group">' +
       '<label for="email">Correo:</label>' +
-      '<input type="email" name="email" class="form-control input-lg validada" id="email" required>' +
+      '<input type="email" name="email" class="form-control validada" id="email" required>' +
       '</div>' +
-      '<div class="form-group">' +
-      '<input type="submit" value="Enviar" class="btn btn-success btn-lg btn-block"></form>' +
-      '</div></div>';
+      '<input type="submit" value="Enviar" class="btn btn-success btn-lg btn-block"></form>';
     $( '#contenido' ).html( contenido );
   }
   else {
@@ -353,7 +337,7 @@ function cargaPorAceptar() {
             $( '#datosPa #tr' + i + '' ).append( '<td>' + item.cedula + '</td>' );
             $( '#datosPa #tr' + i + '' ).append( '<td>' + item.justificacion + '</td>' );
             $( '#datosPa #tr' + i + '' ).append( '<td><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\')" type="button" id="enviarSucces" class="btn btn-success btn-block" data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></td>' );
-            $( '#datosPa #tr' + i + '' ).append( '<td><button noMalTo="' + item.correo + '" type="button" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\') id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td><button noMalTo="' + item.correo + '" type="button" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\')" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
           }
           else {
             $( "#datosPa" ).append( '<tr class="bg-otro" id="t' + i + '"></tr>' );
@@ -363,7 +347,7 @@ function cargaPorAceptar() {
             $( '#datosPa #t' + i + '' ).append( '<td >' + item.cedula + '</td>' );
             $( '#datosPa #t' + i + '' ).append( '<td >' + item.justificacion + '</td>' );
             $( '#datosPa #t' + i + '' ).append( '<td ><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\',\'' + item.id + '\')"  type="button" id="enviarSucces' + i + '" class="btn btn-success btn-block"data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></td>' );
-            $( '#datosPa #t' + i + '' ).append( '<td ><button noMalTo="' + item.correo + '" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\') "type="button" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td ><button noMalTo="' + item.correo + '" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\')" type="button" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
           }
         }
       } );
@@ -511,6 +495,7 @@ $( document ).ready( function () {
     }
   });
   // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
+  // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
   $("#envioRechazado").click(function(){
     var mail = $("#rechazos").text();
     var titulo = 'Por el momento no joven';
@@ -592,141 +577,56 @@ $( document ).ready( function () {
 
 /*Resultados*/
 
-
-function modificarConsulta(comp, tipo){
-  if (!tipo){
-    tipo = $('#tipoGrafica').val();
-    if (!tipo){
-      tipo = 'Bar';
-    }
-  }
-  $('#tipoGrafica').val(tipo);
-
-
-
-  /*Eliminar complementos que sean pasados a 'columna_preguntas'*/
-  $('#columna_preguntas .portlet').each( function ( index, element ) {
-    if ($(element).attr('id').indexOf('_comp') === true || $(element).attr('id').indexOf('_comp') > 0){
-      $('#'+$(element).attr('id').substring(0,$(element).attr('id').length-5)).prop('checked',false);
-      $(element).remove();
-    }
-  });
-
-  if (comp && comp.complemento && comp.complemento.length>0){
-    if ($('#'+comp.id).prop('checked')){
-      var nuevoPanel =  '<div class=\'portlet panel panel-info\' id=\'' + comp.id + '_comp\'><div class=\'portlet-header panel-heading\'>';
-      nuevoPanel += '***' + comp.pregunta +' <strong>['+ comp.respuesta +']</strong>';
-      nuevoPanel +=  '</div><div class=\'portlet-content panel-body\'>';
-      nuevoPanel +=  '<ul style=\'list-style:none;\'>';
-      var int = 0;
-      comp.complemento.forEach(function(result){
-        nuevoPanel +=  "<li><label style='font-weight:normal;margin-top:5px;'><input type='checkbox' name='"+comp.pregunta_id+"' id='"+result.comp+"_"+ 1 +"' class='"+ comp.pregunta_id + "_comp_"+ comp.opcion + "' value='" + result.comp + "' onchange='modificarConsulta()' label= '" + comp.respuesta + "'> " +result.comp+ "</label></li>";
-      });
-      nuevoPanel += '</ul></div></div>';
-      $('#' + comp.pregunta_id+'_div').after(nuevoPanel);
-    } else {
-      if ($('#'+comp.id + '_comp')){
-        $('#'+comp.id + '_comp').remove();
-      }
-    }
-  }
-
-  var clase = '';
-  var label = '';
-  var query = '';
-  var temp = '';
-  var finalQuery = [];
-  var lastlabel ='';
-  $( "#columna_preguntas_filtradas input[type=checkbox]" ).each( function ( index, element ) {
-    var continuar = false;
-    if (clase === ''){
-      clase = $( element ).attr('class');
-      label = $( element ).attr('name');
-      lastlabel = $( element ).attr('label');
-      //console.log('CLASE: ' + clase);
-    }
-    var cambiar = false;
-    if (!$(element).attr('id').substring(0, clase.length) == clase){
-      cambiar = true;
-    }
-    if (!(clase === $( element ).attr('class')) || cambiar){
-      if (temp != ''){
-        if (query != ''){
-          query += ' AND ';
-        }
-        query += '( ' + temp + ')';
-        finalQuery.push({'query' : query, 'pregunta' : clase, 'label': lastlabel});
-        temp = '';
-      }
-      clase = $( element ).attr('class');
-      label = $( element ).attr('name');
-      lastlabel = $( element ).attr('label');
-      //console.log('CLASE: ' + clase);
-    }
-    if ($( "input:checked." + clase ).length > 0){
-      if ($(element).prop('checked')){
-        if (temp != ''){
-          temp += ' OR ';
-        }
-        temp += label + ' LIKE "%' + $( element ).val() + '%"';
-      }
-    }
-  });
-  if (temp != ''){
-    if (query != ''){
-      query += ' AND ';
-    }
-    query += '( ' + temp + ')';
-    finalQuery.push({'query' : query, 'pregunta' : clase, 'label': lastlabel});
-    temp = '';
-  }
-  ejecutarConsulta(finalQuery, tipo);
-}
-
-function ejecutarConsulta(finalQuery, tipo){
-  if (finalQuery.length > 0){
-    int = 0;
-    finalQuery.forEach(function (result){
-      finalQuery[int].query = 'SELECT COUNT(*) AS \'total\' FROM  respuestasM, encuestasM where ' + result['query'] + ' AND respuestasM.encuestaM_id = encuestasM.id AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1;';
-      finalQuery[int].pregunta = result['pregunta'];
-      int++;
+function MorrisDonut(element, data){
+  if(document.getElementById(element) !== null){
+    new Morris.Donut({
+      // ID of the element in which to draw the chart.
+      element: element,
+      // Chart data records -- each entry in this array corresponds to a point on
+      // the chart.
+      data: data,
+      // The name of the data record attribute that contains x-values.
+      hideHover: 'auto',
+      resize: true
     });
-    $.ajax( {
-      url: '/encuesta-intermed/admin/consultacrossreference',
-      type: "POST",
-      dataType: 'JSON',
-      data: { 'consultas' : finalQuery },
-      success: function (data) {
-        var enviar = [];
-        enviar['element'] = 'crossreference';
-        enviar['data'] = [];
-        var universo = data.universo;
-        for(var k in data.preguntas) {
-           enviar['data'].push({'label':k,'value': data.preguntas[k]})
-        }
-        switch (tipo) {
-          case 'Bar':
-            ChartBarCross(enviar,universo);
-            break;
-          case 'Radar':
-          ChartRadarCross(enviar,universo);
-            break;
-          case 'Line':
-            ChartLineCross(enviar,universo);
-            break;
-          case 'Polar':
-            ChartPolarCross(enviar,universo);
-            break;
-        }
-      },
-      error: function (e) {
-        console.log( "Error: "  + JSON.stringify(e));
-      }
-    } );
-  } else {
-    $('#crossreference').html('');
   }
 }
+
+function MorrisBar(element, data, ykeys){
+  if(document.getElementById(element) !== null){
+    new Morris.Bar({
+    // ID of the element in which to draw the chart.
+    element: element,
+      data: [{
+          label: '2006',
+          value: 100
+      }, {
+          label: '2007',
+          value: 75
+      }, {
+          label: '2008',
+          value: 50
+      }, {
+          label: '2009',
+          value: 75
+      }, {
+          label: '2010',
+          value: 50
+      }, {
+          label: '2011',
+          value: 75
+      }, {
+          label: '2012',
+          value: 100
+      }],
+      xkey: 'label',
+      ykeys: ['value'],
+      hideHover: 'auto',
+      resize: true
+  });
+  }
+}
+
 
 function ChartBar(data){
   var element = data.element;
@@ -762,12 +662,7 @@ function ChartBar(data){
       }
     ]
   }
-
-  $('#'+element+'_tipo').val('Bar');
-
-  $('#'+element).html('<canvas id="canvas_'+element+'" style="z-index:3000">');
-  $('#'+element).append('</canvas>');
-
+  $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
   var ctx = canvas.getContext("2d");
   var MyChart = new Chart(ctx).Bar(barChartData, {
@@ -856,8 +751,6 @@ function ChartRadar(data){
     ]
   }
 
-  $('#'+element+'_tipo').val('Radar');
-
   $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
   var ctx = canvas.getContext("2d");
@@ -937,11 +830,8 @@ function ChartPie(data){
     });
   });
 
-  $('#'+element+'_tipo').val('Pie');
-
   $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
-
   var ctx = canvas.getContext("2d");
   var MyChart =  new Chart(ctx).Pie(values, {
     responsive : true,
@@ -1006,8 +896,6 @@ function ChartDoughnut(data){
       label: result.label
     });
   });
-
-  $('#'+element+'_tipo').val('Doughnut');
 
   $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
@@ -1075,8 +963,6 @@ function ChartPolar(data){
       label: result.label
     });
   });
-
-  $('#'+element+'_tipo').val('Polar');
   $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
   var ctx = canvas.getContext("2d");
@@ -1163,7 +1049,6 @@ function ChartLine(data){
         }
     ]
   };
-  $('#'+element+'_tipo').val('Line');
 
   $('#'+element).html('<canvas id="canvas_'+element+'" ></canvas>');
   var canvas = document.getElementById('canvas_'+element);
@@ -1242,268 +1127,13 @@ $('#resultTabs a').click(function (e) {
 function cerrarPopovers(){
   $('[data-toggle="popover"]').popover('hide');
 }
-
-function ampliarGrafica(pregunta, enviar){
-  var tipo = $('#'+ enviar.element+'_tipo').val();
-  enviar.element = 'graficaAmpliadaBody';
-  $('#graficaAmpliadaLabel').html(pregunta);
-  $('#graficaAmpliada').modal('show');
-  switch (tipo) {
-      case "Bar":
-          ChartBar(enviar);
-          break;
-      case "Radar":
-          ChartRadar(enviar);
-          break;
-      case "Pie":
-          ChartPie(enviar);
-          break;
-      case "Polar":
-          ChartPolar(enviar);
-          break;
-      case "Doughnut":
-          ChartDoughnut(enviar);
-          break;
-      case "Line":
-          ChartLine(enviar);
-          break;
-  }
-}
-
-
-$(function() {
-  $( ".column" ).sortable({
-    connectWith: ".column",
-    handle: ".portlet-header",
-    cancel: ".portlet-toggle",
-    placeholder: "portlet-placeholder ui-corner-all",
-    stop: function(event, ui) {
-      modificarConsulta();
-    }});
-
-  $( ".portlet" )
-    .addClass( "ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" )
-    .find( ".portlet-header" )
-      .addClass( "ui-widget-header ui-corner-all" )
-      .prepend( "<span class='ui-icon ui-icon-minusthick portlet-toggle'></span>");
-
-  $( ".portlet-toggle" ).click(function() {
-    var icon = $( this );
-    icon.toggleClass( "ui-icon-minusthick ui-icon-plusthick" );
-    icon.closest( ".portlet" ).find( ".portlet-content" ).toggle();
-  });
-});
-
-
-function ChartBarCross(data, universo){
-  var element = data.element;
-  var labels = [];
-  var values = [];
-  var height = 100;
-  var largo = 0;
-  var count = 0;
-  var long = 0;
-  data.data.forEach(function (result){
-    if (result.label.length > 15) largo++;
-    if (result.value > 20) long = 100;
-    labels.push(result.label);
-    values.push(result.value);
-    count++;
-  });
-
-  height = (150+(30*largo) +50 + long);
-
-  var r = (Math.floor(Math.random() * 256));
-  var g = (Math.floor(Math.random() * 256));
-  var b = (Math.floor(Math.random() * 256));
-
-  var barChartData = {
-    labels : labels,
-    datasets : [
-      {
-        fillColor : "rgba("+r+","+g+","+b+",0.5)",
-        strokeColor : "rgba("+r+","+g+","+b+",0.8)",
-        highlightFill : "rgba("+r+","+g+","+b+",0.75)",
-        highlightStroke : "rgba("+r+","+g+","+b+",1)",
-        data : values
-      }
-    ]
-  }
-
-  $('#'+element+'_tipo').val('Bar');
-
-  $('#'+element).html('<canvas id="canvas_'+element+'" style="z-index:3000">');
-  $('#'+element).append('</canvas>');
-  var num = 1;
-  if (universo > 20){
-    num = (universo / 20) >> 0;
-  }
-  universo = universo/num;
-
-  var canvas = document.getElementById('canvas_'+element);
-  var ctx = canvas.getContext("2d");
-  var MyChart = new Chart(ctx).Bar(barChartData, {
-    responsive : true,
-    scaleStartValue: 0,
-    scaleOverride: true,
-    scaleSteps: universo,
-    scaleStepWidth: num,
-    overridelabel: false,
-    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-  });
-}
-
-function ChartRadarCross(data,universo){
-  var element = data['element'];
-  var labels = [];
-  var values = [];
-  data.data.forEach(function (result){
-    labels.push(result.label);
-    values.push(result.value);
-  });
-
-  var r = (Math.floor(Math.random() * 256));
-  var g = (Math.floor(Math.random() * 256));
-  var b = (Math.floor(Math.random() * 256));
-
-  var barChartData = {
-    labels : labels,
-    datasets : [
-      {
-        fillColor : "rgba("+r+","+g+","+b+",0.5)",
-        strokeColor : "rgba("+r+","+g+","+b+",0.8)",
-        highlightFill : "rgba("+r+","+g+","+b+",0.75)",
-        highlightStroke : "rgba("+r+","+g+","+b+",1)",
-        data : values
-      }
-    ]
-  }
-
-  $('#'+element+'_tipo').val('Radar');
-
-  $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
-  var canvas = document.getElementById('canvas_'+element);
-
-  var num = 1;
-  if (universo > 20){
-    num = (universo / 20) >> 0;
-  }
-  universo = universo/num;
-  var ctx = canvas.getContext("2d");
-  var MyChart = new Chart(ctx).Radar(barChartData, {
-    responsive : true,
-    scaleStartValue: 0,
-    scaleOverride: true,
-    scaleSteps: universo,
-    scaleStepWidth: num,
-    overridelabel: false,
-    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-  });
-
-}
-
-
-function ChartLineCross(data, universo){
-  var element = data['element'];
-  var labels = [];
-  var values = [];
-  var height = 100;
-  var largo = false;
-  var count = 0;
-  data.data.forEach(function (result){
-    if (result.label.length > 10) largo = true;
-    labels.push(result.label);
-    values.push(result.value);
-    count++;
-  });
-
-  if (count>3 && largo){
-    height = 50*count;
-  }
-
-  var r = (Math.floor(Math.random() * 256));
-  var g = (Math.floor(Math.random() * 256));
-  var b = (Math.floor(Math.random() * 256));
-  var data2 = {
-    labels: labels,
-    datasets: [
-        {
-            fillColor : "rgba("+r+","+g+","+b+",0.5)",
-            strokeColor : "rgba("+r+","+g+","+b+",0.8)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: values
-        }
-    ]
-  };
-  $('#'+element+'_tipo').val('Line');
-
-  $('#'+element).html('<canvas id="canvas_'+element+'" ></canvas>');
-
-  var num = 1;
-  if (universo > 20){
-    num = (universo / 20) >> 0;
-  }
-  universo = universo/num;
-  var canvas = document.getElementById('canvas_'+element);
-  var ctx = canvas.getContext("2d");
-  var MyChart =  new Chart(ctx).Line(data2, {
-    responsive : true,
-    scaleStartValue: 0,
-    scaleOverride: true,
-    scaleSteps: universo,
-    scaleStepWidth: num,
-    overridelabel: false,
-    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-  });
-}
-
-
-function ChartPolarCross(data,universo){
-  var element = data['element'];
-  var values = [];
-
-  var b = (Math.floor(Math.random() * 256));
-  var g = (Math.floor(Math.random() * 256));
-  data.data.forEach(function (result){
-    var r = (Math.floor(Math.random() * 256));
-    values.push({
-      value: result.value,
-      color: "rgba("+r+","+g+","+b+",0.7)",
-      highlight: "rgba("+r+","+g+","+b+",0.5)",
-      label: result.label
-    });
-  });
-
-  var num = 1;
-  if (universo > 10){
-    num = (universo / 10) >> 0;
-  }
-  universo = universo/num;
-  $('#'+element+'_tipo').val('Polar');
-  $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
-  var canvas = document.getElementById('canvas_'+element);
-  var ctx = canvas.getContext("2d");
-  var MyChart = new Chart(ctx).PolarArea(values, {
-    responsive : true,
-    scaleStartValue: 0,
-    scaleOverride: true,
-    scaleSteps: universo,
-    scaleStepWidth: num,
-    overridelabel: false,
-    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-  });
-}
-
 //validacion de los formularios
 $(function(){
   $('input.validada').focusout(function(){
     if( $(this).val() == "" ){
       $( this ).parent().addClass('has-error');
       $( this ).after('<span>Recuerda que debe de estar lleno este campo</span>');
-    }else{
+    }else{3
       $( this ).next('span').remove();
       $( this ).parent().removeClass('has-error');
     }

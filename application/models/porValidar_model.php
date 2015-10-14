@@ -40,8 +40,9 @@
     * function para actualizar el status del usuario aceptado o rechazado
     * @param $correo para la condicion
     */
-    public function actualizaStatus($correo){
+    public function actualizaStatus($correo, $id){
       $obj = array('status'=>1);
+      $this->db->where('id',$id);
       $this->db->where('correo',$correo);
       $this->db->update('porValidar',$obj);
     }
