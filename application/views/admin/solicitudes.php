@@ -39,6 +39,7 @@
                   <th>Correo</th>
                   <th>Cedula</th>
                   <th>Justificacion</th>
+                  <th>Mensaje</th>
                 </tr>
               </thead>
               <tbody id="datosNa"></tbody>
@@ -56,6 +57,7 @@
                   <th>Correo</th>
                   <th>Cedula</th>
                   <th>Justificacion</th>
+                  <th>Mensaje</th>
                 </tr>
               </thead>
               <tbody id="datosSa"></tbody>

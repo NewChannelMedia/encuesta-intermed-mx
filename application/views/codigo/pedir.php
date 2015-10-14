@@ -47,7 +47,7 @@
             </div>
             </br>
             <div class="form-group col-md-8 col-md-offset-2 ">
-              <input class="btn btn-success btn-lg btn-block" type="submit" value="Solicitar" id="envioDatos">
+              <input class="btn btn-success btn-lg btn-block" type="submit" value="Solicitar" id="envioDatos" disabled>
             </div>
           </form>
         </div>

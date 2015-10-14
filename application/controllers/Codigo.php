@@ -40,6 +40,7 @@
           $titulo = $this->input->post('titulo');
           $codigo = $this->input->post('codigo');
           $mensaje = $this->input->post('mensaje');
+          $estado = $this->input->post('estado');
           // se lee el archivo
           $fileh = realpath(APPPATH.'views/correos/headerCorreo.php');
           $fileb = realpath(APPPATH.'views/correos/bodyCorreo.php');
@@ -84,6 +85,10 @@
               $conCodigo4 = str_replace($borrar,'',$conCodigo5);
               $mensajeCompleto = $html1.$conCodigo4.$html3;
           }
+          $headers = "MIME-Version: 1.0" . "\r\n";
+          $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+          $headers .= 'From: <intermed.encuestas@newchannel.mx>'."\r\n";
+          return mail($correo,$titulo,$mensajeCompleto,$headers);
       }
       /**
       * Se valida la cedula, en ser real se le envia un correo con el codigo, nuevo, y ese codigo quedara registrado
@@ -156,17 +161,25 @@
         // se carga el modelo
         $this->load->model('PorValidar_model');
         $correo = $this->input->post('correo');
-        $this->PorValidar_model->actualizaStatus($correo);
+        $id = $this->input->post('ids');
+        $this->PorValidar_model->actualizaStatus($correo, $id);
       }
       public function negado(){
         $this->load->model('PorValidar_model');
+        $id = $this->input->post('ids');
         $correo = $this->input->post('correo');
-        $this->PorValidar_model->negado($correo);
+        $this->PorValidar_model->negado($correo,$id);
       }
       public function mensajeStatus(){
         $this->load->model('PorValidar_model');
         $correo -> $this->input->post('correo');
         $this->PorValidar_model->actualizaStatus($correo);
+      }
+      public function insertMensaje(){
+        $this->load->model('PorValidar_model');
+        $mensaje = $this->input->post('mensaje');
+        $id = $this->input->post('id');
+        $this->PorValidar_model->insertMensaje($id,$mensaje);
       }
   }
 ?>

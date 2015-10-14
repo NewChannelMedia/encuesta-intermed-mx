@@ -174,6 +174,7 @@
             $aceptar[$i]['cedula'] = $row->cedula;
             $aceptar[$i]['justificacion'] = $row->justificacion;
             $aceptar[$i]['status'] = $row->status;
+            $aceptar[$i]['mensaje'] = $row->mensaje;
             $i++;
           }
           print_r(json_encode($aceptar));
