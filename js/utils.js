@@ -85,7 +85,7 @@ $( document ).ready( function () {
 } );
 
 $( function () {
-  $( "·sortable" ).sortable( {
+  $( ".sortable" ).sortable( {
     placeholder: "ui-state-highlight"
   } );
   $( ".sortable" ).disableSelection();
@@ -101,7 +101,7 @@ $( ".sortable" ).sortable( {
 } );
 
 function guardarysal() {
-  if (!($( '#btnguardarysalir' ).hasClass( 'notEnabled' ))){
+  if (!($( '#btnguardarycontinuar' ).hasClass( 'notEnabled' ))){
     $( '#continuar' ).val( '0' );
     $( "#formEnc" ).submit();
   } else {
@@ -476,7 +476,7 @@ $( document ).ready( function () {
   $("#enviarTodo").click(function(){
     var codigo = $( "#aleatorioDato" ).val();
     var correo = $( "#codigoCorreo" ).text();
-    var titulo = 'Cedula valida';
+    var titulo = 'INFORMACION INTERMED-SOLICITUD ACEPTADA';
     var idMensaje = $("#codigoUser").text();
     var valor = parseInt($("#codigoUser").text())-1;
     var mensaje = $("#mensajeAceptado").val();
@@ -514,7 +514,7 @@ $( document ).ready( function () {
   // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
   $("#envioRechazado").click(function(){
     var mail = $("#rechazos").text();
-    var titulo = 'Por el momento no joven';
+    var titulo = 'INFORMACION INTERMED';
     var mensaje = $("#areaRechazado").val();
     var valor = parseInt($("#rechazosID").text())-1;
     var idMensaje = $("#rechazosID").text();
@@ -1443,6 +1443,7 @@ function ChartPolarCross(data,universo){
   });
 }
 
+
 function modificarConsulta(comp, tipo){
   if (!tipo){
     tipo = $('#tipoGrafica').val();
@@ -1537,7 +1538,7 @@ function ejecutarConsulta(finalQuery, tipo){
   if (finalQuery.length > 0){
     int = 0;
     finalQuery.forEach(function (result){
-      finalQuery[int].query = 'SELECT COUNT(*) AS \'total\' FROM  respuestasM, encuestasM where ' + result['query'] + ' AND respuestasM.encuestaM_id = encuestasM.id AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1;';
+      finalQuery[int].query = 'SELECT COUNT(*) AS \'total\' FROM  respuestasM, encuestasM where ' + result['query'] + ' AND respuestasM.encuestaM_id = encuestasM.id AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_2 = 1 AND encuestasM.etapa_3 = 1 AND encuestasM.etapa_4 = 1;';
       finalQuery[int].pregunta = result['pregunta'];
       int++;
     });

@@ -208,28 +208,30 @@
         return $this->Admin_model->insertaCodigoGenerado($codigo);
       }
 
-      public function consultacrossreference(){
-        $consultas = $this->input->post('consultas');
-        $universo = $this->Encuestam_model->get_totalEncuestasM()['total'];
-        $data = array('universo'=>$universo);
-        foreach ($consultas as $key => $query) {
-          $pregunta = '';
 
-          $explode = explode('_',$query['pregunta']);
-          $pregunta_id = explode('_',$query['pregunta'])[1];
-          $pregunta = $this->Preguntasm_model->get_preguntam($pregunta_id);
-          if (count($explode) === 2){
-            $pregunta = $pregunta['pregunta'];
+      public function consultacrossreference(){
+          $consultas = $this->input->post('consultas');
+          $universo = $this->Encuestam_model->get_totalEncuestasM()['total'];
+          $data = array('universo'=>$universo);
+          foreach ($consultas as $key => $query) {
+            $pregunta = '';
+
+            $explode = explode('_',$query['pregunta']);
+            $pregunta_id = explode('_',$query['pregunta'])[1];
+            $pregunta = $this->Preguntasm_model->get_preguntam($pregunta_id);
+            if (count($explode) === 2){
+              $pregunta = $pregunta['pregunta'];
+            }
+            else {
+              $explode2 = explode('|',$pregunta['opciones']);
+              $pregunta = $explode2[$explode[3]];
+            }
+            $pregunta = $query['label'];
+            $data['preguntas'][$pregunta] = $this->Respuestasm_model->get_ejecutarConsulta($query['query'])['total'];
           }
-          else {
-            $explode2 = explode('|',$pregunta['opciones']);
-            $pregunta = $explode2[$explode[3]];
-          }
-          $pregunta = $query['label'];
-          $data['preguntas'][$pregunta] = $this->Respuestasm_model->get_ejecutarConsulta($query['query'])['total'];
-        }
-        echo json_encode($data);
+          echo json_encode($data);
       }
+
 
       // ---------------
       public function resultados(){
@@ -545,7 +547,7 @@
           $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
           $headers .= 'From: <intermed.encuestas@newchannel.mx>'."\r\n";
 
-          $result= mail($email,$asunto,$asunto,$headers);
+          $result= mail($email,$asunto,$mensaje,$headers);
 
           $array = array();
           $array['success'] = $result;

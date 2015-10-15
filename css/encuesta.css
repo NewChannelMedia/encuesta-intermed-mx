@@ -972,7 +972,7 @@ canvas {
 .homepage-hero-module {
     border-right: none;
     border-left: none;
-    position: absolute;
+    position: fixed;
     top:0px;
     bottom: 0px;
     left: 0px;

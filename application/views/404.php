@@ -1,7 +1,7 @@
 <div class="container-404">
   <div class="container-vertical text-center">
     <img class="center-block" src="<?=base_url()?>img/logos/intermedWhite.png">
-    <h1 class="Flama-Bold s200 white text-center shadow">404</h1>
+    <h1 class="Flama-w900 s200 white text-center shadow">404</h1>
     <h3 class="Flama-Bold white text-center">La página no existe</h3><br/>
     <a href="<?= base_url()?>" class="Flama-Bold s15 btn btn-default">Regresar</a>
   </div>

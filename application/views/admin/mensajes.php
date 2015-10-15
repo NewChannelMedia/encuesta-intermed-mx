@@ -103,7 +103,7 @@
       <div class="modal-body">
         <div class="row">
           <form id="frm_responder" method="POST">
-            <input type="hidden" value="Respuesta a tu mensaje para contactarnos" name="asunto">
+            <input type="hidden" value="INFORMACIÓN INTERMED" name="asunto">
             <input type="hidden" value="" name="id" id="responder_id">
             <div class="form-group col-md-12">
               <input class="form-control input-lg" type="email" name="email" id="responder_email" required readonly>
