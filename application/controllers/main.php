@@ -27,5 +27,14 @@
       $array['result'] = $result;
       echo json_encode($array);
     }
+
+    public function override404(){
+        $data = array(
+          "title" => "Intermed - Página no encontrada"
+        );
+        $this->load->view('templates/header', $data);
+        $this->load->view('404');
+        $this->load->view('templates/footerAdmin');
+    }
   }
 ?>

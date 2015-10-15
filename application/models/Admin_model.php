@@ -1,4 +1,4 @@
-  <?php
+<?php
       /**
       * Modelo para cargar los datos de las tablas que se ocupen de la base de datos
       * en este caso de la tabla porValidar y encuestaM
@@ -50,4 +50,4 @@
             return $this->db->insert('encuestasM',$data);
           }
       }
-  ?>
+?>
