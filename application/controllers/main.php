@@ -10,7 +10,6 @@
       $this->load->view('templates/header', $data);
       $this->load->view('index', $data);
       $this->load->view('templates/footer', $data);
-
     }
 
     public function contacto(){
@@ -27,6 +26,15 @@
       $array = array();
       $array['result'] = $result;
       echo json_encode($array);
+    }
+
+    public function override404(){
+        $data = array(
+          "title" => "Intermed - Página no encontrada"
+        );
+        $this->load->view('templates/header', $data);
+        $this->load->view('404');
+        $this->load->view('templates/footerAdmin');
     }
   }
 ?>

@@ -17,8 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://localhost/encuesta-intermed';
-
+$config['base_url'] = 'http://localhost/encuesta-intermed/';
 /*
 |--------------------------------------------------------------------------
 | Index File

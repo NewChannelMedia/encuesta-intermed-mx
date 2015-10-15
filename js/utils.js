@@ -71,6 +71,7 @@ $( window ).resize( function () {
 } );
 
 $( document ).ready( function () {
+  setTimeout(function(){
   validarFormulario();
   //Popover de progreso
   $( '#progress-bar-current' ).popover( {
@@ -80,6 +81,7 @@ $( document ).ready( function () {
   $( '.popover.top.in' ).each( function ( index, element ) {
     $( element ).css( 'left', ( parseInt( $( element ).css( 'left' ) ) - 25 + parseInt( $( '#progress-bar-current' ).css( 'width' ) ) / 2 ) );
   } );
+},200);
 } );
 
 $( function () {
@@ -1185,4 +1187,509 @@ $(function(){
     });
     //checa que los inputs text no esten vacios
 });
+
+
+function ampliarGrafica(pregunta, enviar){
+  var tipo = $('#'+ enviar.element+'_tipo').val();
+  enviar.element = 'graficaAmpliadaBody';
+  $('#graficaAmpliadaLabel').html(pregunta);
+  $('#graficaAmpliada').modal('show');
+  switch (tipo) {
+      case "Bar":
+          ChartBar(enviar);
+          break;
+      case "Radar":
+          ChartRadar(enviar);
+          break;
+      case "Pie":
+          ChartPie(enviar);
+          break;
+      case "Polar":
+          ChartPolar(enviar);
+          break;
+      case "Doughnut":
+          ChartDoughnut(enviar);
+          break;
+      case "Line":
+          ChartLine(enviar);
+          break;
+  }
+}
+
+
+$(function() {
+  $( ".column" ).sortable({
+    connectWith: ".column",
+    handle: ".portlet-header",
+    cancel: ".portlet-toggle",
+    placeholder: "portlet-placeholder ui-corner-all",
+    stop: function(event, ui) {
+      modificarConsulta();
+    }});
+
+  $( ".portlet" )
+    .addClass( "ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" )
+    .find( ".portlet-header" )
+      .addClass( "ui-widget-header ui-corner-all" )
+      .prepend( "<span class='ui-icon ui-icon-minusthick portlet-toggle'></span>");
+
+  $( ".portlet-toggle" ).click(function() {
+    var icon = $( this );
+    icon.toggleClass( "ui-icon-minusthick ui-icon-plusthick" );
+    icon.closest( ".portlet" ).find( ".portlet-content" ).toggle();
+  });
+});
+
+
+function ChartBarCross(data, universo){
+  var element = data.element;
+  var labels = [];
+  var values = [];
+  var height = 100;
+  var largo = 0;
+  var count = 0;
+  var long = 0;
+  data.data.forEach(function (result){
+    if (result.label.length > 15) largo++;
+    if (result.value > 20) long = 100;
+    labels.push(result.label);
+    values.push(result.value);
+    count++;
+  });
+
+  height = (150+(30*largo) +50 + long);
+
+  var r = (Math.floor(Math.random() * 256));
+  var g = (Math.floor(Math.random() * 256));
+  var b = (Math.floor(Math.random() * 256));
+
+  var barChartData = {
+    labels : labels,
+    datasets : [
+      {
+        fillColor : "rgba("+r+","+g+","+b+",0.5)",
+        strokeColor : "rgba("+r+","+g+","+b+",0.8)",
+        highlightFill : "rgba("+r+","+g+","+b+",0.75)",
+        highlightStroke : "rgba("+r+","+g+","+b+",1)",
+        data : values
+      }
+    ]
+  }
+
+  $('#'+element+'_tipo').val('Bar');
+
+  $('#'+element).html('<canvas id="canvas_'+element+'" style="z-index:3000">');
+  $('#'+element).append('</canvas>');
+  var num = 1;
+  if (universo > 20){
+    num = (universo / 20) >> 0;
+  }
+  universo = universo/num;
+
+  var canvas = document.getElementById('canvas_'+element);
+  var ctx = canvas.getContext("2d");
+  var MyChart = new Chart(ctx).Bar(barChartData, {
+    responsive : true,
+    scaleStartValue: 0,
+    scaleOverride: true,
+    scaleSteps: universo,
+    scaleStepWidth: num,
+    overridelabel: false,
+    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+  });
+}
+
+function ChartRadarCross(data,universo){
+  var element = data['element'];
+  var labels = [];
+  var values = [];
+  data.data.forEach(function (result){
+    labels.push(result.label);
+    values.push(result.value);
+  });
+
+  var r = (Math.floor(Math.random() * 256));
+  var g = (Math.floor(Math.random() * 256));
+  var b = (Math.floor(Math.random() * 256));
+
+  var barChartData = {
+    labels : labels,
+    datasets : [
+      {
+        fillColor : "rgba("+r+","+g+","+b+",0.5)",
+        strokeColor : "rgba("+r+","+g+","+b+",0.8)",
+        highlightFill : "rgba("+r+","+g+","+b+",0.75)",
+        highlightStroke : "rgba("+r+","+g+","+b+",1)",
+        data : values
+      }
+    ]
+  }
+
+  $('#'+element+'_tipo').val('Radar');
+
+  $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
+  var canvas = document.getElementById('canvas_'+element);
+
+  var num = 1;
+  if (universo > 20){
+    num = (universo / 20) >> 0;
+  }
+  universo = universo/num;
+  var ctx = canvas.getContext("2d");
+  var MyChart = new Chart(ctx).Radar(barChartData, {
+    responsive : true,
+    scaleStartValue: 0,
+    scaleOverride: true,
+    scaleSteps: universo,
+    scaleStepWidth: num,
+    overridelabel: false,
+    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+  });
+
+}
+
+
+function ChartLineCross(data, universo){
+  var element = data['element'];
+  var labels = [];
+  var values = [];
+  var height = 100;
+  var largo = false;
+  var count = 0;
+  data.data.forEach(function (result){
+    if (result.label.length > 10) largo = true;
+    labels.push(result.label);
+    values.push(result.value);
+    count++;
+  });
+
+  if (count>3 && largo){
+    height = 50*count;
+  }
+
+  var r = (Math.floor(Math.random() * 256));
+  var g = (Math.floor(Math.random() * 256));
+  var b = (Math.floor(Math.random() * 256));
+  var data2 = {
+    labels: labels,
+    datasets: [
+        {
+            fillColor : "rgba("+r+","+g+","+b+",0.5)",
+            strokeColor : "rgba("+r+","+g+","+b+",0.8)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: values
+        }
+    ]
+  };
+  $('#'+element+'_tipo').val('Line');
+
+  $('#'+element).html('<canvas id="canvas_'+element+'" ></canvas>');
+
+  var num = 1;
+  if (universo > 20){
+    num = (universo / 20) >> 0;
+  }
+  universo = universo/num;
+  var canvas = document.getElementById('canvas_'+element);
+  var ctx = canvas.getContext("2d");
+  var MyChart =  new Chart(ctx).Line(data2, {
+    responsive : true,
+    scaleStartValue: 0,
+    scaleOverride: true,
+    scaleSteps: universo,
+    scaleStepWidth: num,
+    overridelabel: false,
+    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+  });
+}
+
+
+function ChartPolarCross(data,universo){
+  var element = data['element'];
+  var values = [];
+
+  var b = (Math.floor(Math.random() * 256));
+  var g = (Math.floor(Math.random() * 256));
+  data.data.forEach(function (result){
+    var r = (Math.floor(Math.random() * 256));
+    values.push({
+      value: result.value,
+      color: "rgba("+r+","+g+","+b+",0.7)",
+      highlight: "rgba("+r+","+g+","+b+",0.5)",
+      label: result.label
+    });
+  });
+
+  var num = 1;
+  if (universo > 10){
+    num = (universo / 10) >> 0;
+  }
+  universo = universo/num;
+  $('#'+element+'_tipo').val('Polar');
+  $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
+  var canvas = document.getElementById('canvas_'+element);
+  var ctx = canvas.getContext("2d");
+  var MyChart = new Chart(ctx).PolarArea(values, {
+    responsive : true,
+    scaleStartValue: 0,
+    scaleOverride: true,
+    scaleSteps: universo,
+    scaleStepWidth: num,
+    overridelabel: false,
+    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+  });
+}
+
+function modificarConsulta(comp, tipo){
+  if (!tipo){
+    tipo = $('#tipoGrafica').val();
+    if (!tipo){
+      tipo = 'Bar';
+    }
+  }
+  $('#tipoGrafica').val(tipo);
+
+
+
+  /*Eliminar complementos que sean pasados a 'columna_preguntas'*/
+  $('#columna_preguntas .portlet').each( function ( index, element ) {
+    if ($(element).attr('id').indexOf('_comp') === true || $(element).attr('id').indexOf('_comp') > 0){
+      $('#'+$(element).attr('id').substring(0,$(element).attr('id').length-5)).prop('checked',false);
+      $(element).remove();
+    }
+  });
+
+  if (comp && comp.complemento && comp.complemento.length>0){
+    if ($('#'+comp.id).prop('checked')){
+      var nuevoPanel =  '<div class=\'portlet panel panel-info\' id=\'' + comp.id + '_comp\'><div class=\'portlet-header panel-heading\'>';
+      nuevoPanel += '***' + comp.pregunta +' <strong>['+ comp.respuesta +']</strong>';
+      nuevoPanel +=  '</div><div class=\'portlet-content panel-body\'>';
+      nuevoPanel +=  '<ul style=\'list-style:none;\'>';
+      var int = 0;
+      comp.complemento.forEach(function(result){
+        nuevoPanel +=  "<li><label style='font-weight:normal;margin-top:5px;'><input type='checkbox' name='"+comp.pregunta_id+"' id='"+result.comp+"_"+ 1 +"' class='"+ comp.pregunta_id + "_comp_"+ comp.opcion + "' value='" + result.comp + "' onchange='modificarConsulta()' label= '" + comp.respuesta + "'> " +result.comp+ "</label></li>";
+      });
+      nuevoPanel += '</ul></div></div>';
+      $('#' + comp.pregunta_id+'_div').after(nuevoPanel);
+    } else {
+      if ($('#'+comp.id + '_comp')){
+        $('#'+comp.id + '_comp').remove();
+      }
+    }
+  }
+
+  var clase = '';
+  var label = '';
+  var query = '';
+  var temp = '';
+  var finalQuery = [];
+  var lastlabel ='';
+  $( "#columna_preguntas_filtradas input[type=checkbox]" ).each( function ( index, element ) {
+    var continuar = false;
+    if (clase === ''){
+      clase = $( element ).attr('class');
+      label = $( element ).attr('name');
+      lastlabel = $( element ).attr('label');
+      //console.log('CLASE: ' + clase);
+    }
+    var cambiar = false;
+    if (!$(element).attr('id').substring(0, clase.length) == clase){
+      cambiar = true;
+    }
+    if (!(clase === $( element ).attr('class')) || cambiar){
+      if (temp != ''){
+        if (query != ''){
+          query += ' AND ';
+        }
+        query += '( ' + temp + ')';
+        finalQuery.push({'query' : query, 'pregunta' : clase, 'label': lastlabel});
+        temp = '';
+      }
+      clase = $( element ).attr('class');
+      label = $( element ).attr('name');
+      lastlabel = $( element ).attr('label');
+      //console.log('CLASE: ' + clase);
+    }
+    if ($( "input:checked." + clase ).length > 0){
+      if ($(element).prop('checked')){
+        if (temp != ''){
+          temp += ' OR ';
+        }
+        temp += label + ' LIKE "%' + $( element ).val() + '%"';
+      }
+    }
+  });
+  if (temp != ''){
+    if (query != ''){
+      query += ' AND ';
+    }
+    query += '( ' + temp + ')';
+    finalQuery.push({'query' : query, 'pregunta' : clase, 'label': lastlabel});
+    temp = '';
+  }
+  ejecutarConsulta(finalQuery, tipo);
+}
+
+function ejecutarConsulta(finalQuery, tipo){
+  if (finalQuery.length > 0){
+    int = 0;
+    finalQuery.forEach(function (result){
+      finalQuery[int].query = 'SELECT COUNT(*) AS \'total\' FROM  respuestasM, encuestasM where ' + result['query'] + ' AND respuestasM.encuestaM_id = encuestasM.id AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1;';
+      finalQuery[int].pregunta = result['pregunta'];
+      int++;
+    });
+    $.ajax( {
+      url: '/encuesta-intermed/admin/consultacrossreference',
+      type: "POST",
+      dataType: 'JSON',
+      data: { 'consultas' : finalQuery },
+      success: function (data) {
+        var enviar = [];
+        enviar['element'] = 'crossreference';
+        enviar['data'] = [];
+        var universo = data.universo;
+        for(var k in data.preguntas) {
+           enviar['data'].push({'label':k,'value': data.preguntas[k]})
+        }
+        switch (tipo) {
+          case 'Bar':
+            ChartBarCross(enviar,universo);
+            break;
+          case 'Radar':
+          ChartRadarCross(enviar,universo);
+            break;
+          case 'Line':
+            ChartLineCross(enviar,universo);
+            break;
+          case 'Polar':
+            ChartPolarCross(enviar,universo);
+            break;
+        }
+      },
+      error: function (e) {
+        console.log( "Error: "  + JSON.stringify(e));
+      }
+    } );
+  } else {
+    $('#crossreference').html('');
+  }
+}
 /*Fin funciones resultados*/
+
+
+$('#frm_contacto').on("submit", function(e){
+  var data = $('#frm_contacto').serializeArray();
+  $.ajax( {
+    url: '/encuesta-intermed/main/contacto',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    data: data,
+    success: function (data) {
+      console.log('DATA: ' + JSON.stringify(data));
+      $('#frm_contacto')[0].reset();
+      $("#frm_contacto-success").show();
+      setTimeout(function(){
+        $("#frm_contacto-success").fadeTo(2000, 500).slideUp(500, function(){
+            $("#frm_contacto-success").hide();
+        });
+      },3000);
+    },
+    error: function (err) {
+      console.log('ERROR: ' + JSON.stringify(err));
+    }
+  });
+  return false;
+});
+
+function responderMensaje(row){
+  $('#responder_id').val(row.id);
+  $('#responder_email').val(row.correo);
+  $('#responder_mensaje').val('');
+  $('#frm_responder').unbind('submit');
+  $('#frm_responder').on("submit", function(e){
+    var data = $('#frm_responder').serializeArray();
+    $.ajax( {
+      url: '/encuesta-intermed/admin/enviarCorreo',
+      type: "POST",
+      dataType: 'JSON',
+      async: true,
+      data: data,
+      success: function (data) {
+        $('#tr_porcontestar_'+row.id).remove();
+        var newRow = '<tr id="tr_contestados_'+row.id+'"><td>'+ row.fecha +'</td><td>'+ row.nombre +'</td><td>'+row.correo+'</td><td>'+row.mensaje+'</td><td>'+ $('#responder_mensaje').val() +'</td></tr>';
+        $('#table_contestados').prepend(newRow);
+        $('#modal_contestar').modal('hide');
+        $('#frm_responder')[0].reset();
+      },
+      error: function (err) {
+        console.log('ERROR: ' + JSON.stringify(err));
+      }
+    });
+    return false;
+  })
+}
+//jQuery is required to run this code
+$( document ).ready(function() {
+
+    scaleVideoContainer();
+
+    initBannerVideoSize('.video-container .poster img');
+    initBannerVideoSize('.video-container .filter');
+    initBannerVideoSize('.video-container video');
+
+    $(window).on('resize', function() {
+        scaleVideoContainer();
+        scaleBannerVideoSize('.video-container .poster img');
+        scaleBannerVideoSize('.video-container .filter');
+        scaleBannerVideoSize('.video-container video');
+    });
+
+});
+
+function scaleVideoContainer() {
+
+    var height = $(window).height() + 5;
+    var unitHeight = parseInt(height) + 'px';
+    $('.homepage-hero-module').css('height',unitHeight);
+
+}
+
+function initBannerVideoSize(element){
+
+    $(element).each(function(){
+        $(this).data('height', $(this).height());
+        $(this).data('width', $(this).width());
+    });
+
+    scaleBannerVideoSize(element);
+
+}
+
+function scaleBannerVideoSize(element){
+
+    var windowWidth = $(window).width(),
+    windowHeight = $(window).height() + 5,
+    videoWidth,
+    videoHeight;
+
+    $(element).each(function(){
+        var videoAspectRatio = $(this).data('height')/$(this).data('width');
+
+        $(this).width(windowWidth);
+
+        if(windowWidth < 1000){
+            videoHeight = windowHeight;
+            videoWidth = videoHeight / videoAspectRatio;
+            $(this).css({'margin-top' : 0, 'margin-left' : -(videoWidth - windowWidth) / 2 + 'px'});
+
+            $(this).width(videoWidth).height(videoHeight);
+        }
+
+        $('.homepage-hero-module .video-container video').addClass('fadeIn animated');
+
+    });
+}
