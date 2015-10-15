@@ -1,9 +1,5 @@
 <?php
-  if( !isset($_SESSION)){
-    session_start();
-    $_SESSION['user'] = "prueba";
-  	$_SESSION['status'] = true;
-  } else {
+  if(!(isset($_SESSION) && isset($_SESSION['status']) && $_SESSION['status'] === true)){
     redirect(base_url().'admin');
   }
 ?>

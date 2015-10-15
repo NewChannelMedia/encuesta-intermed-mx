@@ -129,9 +129,8 @@
             // se carga el modelo para verificar si existen el usuario y password que se reciben por post
             $this->load->model('Admin_model');
             $session = $_SESSION['status'];
-            if($session!=false){
+            if($session===true){
               $data['title'] = "Solicitudes";
-              $_SESSION['status'] = true;
               $data['errorM'] = "";
               $this->load->view('templates/headerAdmin', $data);
               $this->load->view('admin/solicitudes', $data);

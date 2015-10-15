@@ -273,23 +273,24 @@ function HabilitarComplementos( id, comp ) {
   }
 }
 
-function aceptarPromocion() {
-  var value = $( '#promo' ).prop( 'checked' );
-  if ( value == true ) {
-    var contenido = '<form method="POST" action="newsletter">' +
-      '<div class="form-group">' +
-      '<label for="nombre">Nombre:</label>' +
-      '<input type="text" class="form-control validada" id="nombre" name="nombre" required>' +
-      '</div>' +
-      '<div class="form-group">' +
-      '<label for="email">Correo:</label>' +
-      '<input type="email" name="email" class="form-control validada" id="email" required>' +
-      '</div>' +
-      '<input type="submit" value="Enviar" class="btn btn-success btn-lg btn-block"></form>';
-    $( '#contenido' ).html( contenido );
+function aceptarNewsletter() {
+  var pruebasCheck = $( '#pruebasCheck' ).prop( 'checked' );
+  var newsCheck = $( '#newsCheck' ).prop( 'checked' );
+  if ( pruebasCheck == true ) {
+    $('#pruebas').val(1);
+  } else{
+    $('#pruebas').val(0);
+  }
+  if ( newsCheck == true ) {
+    $('#newsletter').val(1);
+  } else{
+    $('#newsletter').val(0);
+  }
+  if ( pruebasCheck == true || newsCheck == true ) {
+    $( '#contenido' ).removeClass('hidden invisible');
   }
   else {
-    $( '#contenido' ).html( '' );
+    $( '#contenido' ).addClass('hidden invisible');
   }
 }
 
