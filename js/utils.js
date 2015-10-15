@@ -1145,7 +1145,7 @@ function cerrarPopovers(){
 }
 //validacion de los formularios
 $(function(){
-    $('input.validada').focusout(function(){
+    $('input.validada').change(function(){
       if( $(this).val() == "" ){
         $(".error-message").html('');
         $("input:submit").attr('disabled','disabled');
@@ -1164,7 +1164,7 @@ $(function(){
         });
       }
     });//fin input
-    $('textarea.validada').focusout(function(){
+    $('textarea.validada').change(function(){
       if( $( "textarea" ).val() == "" ){
         $(".error-justificacion").html('');
         $("input:submit").attr('disabled','disabled');
