@@ -101,7 +101,7 @@ $( ".sortable" ).sortable( {
 } );
 
 function guardarysal() {
-  if (!($( '#btnguardarysalir' ).hasClass( 'notEnabled' ))){
+  if (!($( '#btnguardarycontinuar' ).hasClass( 'notEnabled' ))){
     $( '#continuar' ).val( '0' );
     $( "#formEnc" ).submit();
   } else {
