@@ -8,7 +8,10 @@
         </a>
       </div>
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 texts text-right hidden-xs">
-        <img class="center-block" src="<?=base_url()?>img/textos-top.png"></a>
+        <p >
+          <span class="ag-light s15 white">Atención y contacto: 52 (33) 3125-2200</span><br>
+          <span class="flamaBook-normal s15 white uppr ls1"><strong>Para:</strong> MÉDICOS PACIENTES INSTITUCIONES PROVEEDORES ASEGURADORAS</span>
+        </p>
       </div>
     </div>
   </div>
@@ -17,7 +20,10 @@
   <div class="main-header">
     <div class="container">
       <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-1">
-        <img class="center-block" src="<?echo base_url()?>img/Texto-header.png">
+        <p class="text-right">
+          <span class="ag-regular s65 shadow">Bienvenido a </span><span class="ag-medium s65 shadow">Intermed<sup><span class="shadow s35">&reg;</span></sup></span><br>
+          <span class="ag-light s25 shadow">¡Conéctate con tu entorno profesional como nunca antes!</span>
+        </p>
       </div>
     </div>
   </div>

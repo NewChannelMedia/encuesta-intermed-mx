@@ -1,3 +1,137 @@
+* {
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+  border: 0;
+  text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+  -webkit-font-smoothing: antialiased !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+  -webkit-text-stroke: .1pt;
+}
+
+.s10 {
+  font-size: 10px;
+}
+
+.s15 {
+  font-size: 15px;
+}
+
+.s20 {
+  font-size: 20px;
+}
+
+.s25 {
+  font-size: 25px;
+}
+
+.s30 {
+  font-size: 30px;
+}
+
+.s35 {
+  font-size: 35px;
+}
+
+.s40 {
+  font-size: 40px;
+}
+
+.s45 {
+  font-size: 45px;
+}
+
+.s50 {
+  font-size: 50px;
+}
+
+.s55 {
+  font-size: 55px;
+}
+
+.s60 {
+  font-size: 60px;
+}
+
+.s65 {
+  font-size: 65px;
+}
+
+.s200 {
+  font-size: 200px;
+}
+
+.uppr {
+  text-transform: uppercase;
+}
+
+.lwr {
+  text-transform: lowercase;
+}
+
+.cptlz {
+  text-transform: capitalize;
+}
+
+.notransform {
+  text-transform: none;
+}
+
+.ls-5 {
+  letter-spacing: -5px;
+}
+
+.ls-4 {
+  letter-spacing: -4px;
+}
+
+.ls-3 {
+  letter-spacing: -3px;
+}
+
+.ls-2 {
+  letter-spacing: -2px;
+}
+
+.ls-1 {
+  letter-spacing: -1px;
+}
+
+.ls0 {
+  letter-spacing: 0px;
+}
+
+.ls1 {
+  letter-spacing: 1px;
+}
+
+.ls2 {
+  letter-spacing: 2px;
+}
+
+.ls3 {
+  letter-spacing: 3px;
+}
+
+.ls4 {
+  letter-spacing: 4px;
+}
+
+.ls5 {
+  letter-spacing: 5px;
+}
+
+.white {
+  color: #ffffff;
+}
+
+.shadow {
+  text-shadow: 0 0 10px rgba(0, 0, 0, .6);
+}
+
+
 /* Helvetica Neue */
 
 @font-face {
@@ -571,207 +705,6 @@
 }
 
 
-/* Akzidenz Grotesk */
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE';
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-Light.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-Light.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Light.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Light.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Light.svg#AkzidenzGroteskBE-Light') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-Cn';
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightCn.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightCn.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightCn.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightCn.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightCn.svg#AkzidenzGroteskBE-LightCn') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE';
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-Regular.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-Regular.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Regular.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Regular.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Regular.svg#AkzidenzGroteskBE-Regular') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-XBd';
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBd.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBd.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBd.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBd.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBd.svg#AkzidenzGroteskBE-XBd') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-It';
-  font-weight: bold;
-  font-style: italic;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldIt.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldIt.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldIt.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldIt.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldIt.svg#AkzidenzGroteskBE-BoldIt') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-MdCnIt';
-  font-weight: 500;
-  font-style: italic;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdCnIt.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdCnIt.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdCnIt.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdCnIt.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdCnIt.svg#AkzidenzGroteskBE-MdCnIt') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE';
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-Bold.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-Bold.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Bold.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Bold.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Bold.svg#AkzidenzGroteskBE-Bold') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-Super';
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-Super.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-Super.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Super.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Super.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Super.svg#AkzidenzGroteskBE-Super') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-Cn';
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-Cn.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-Cn.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Cn.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Cn.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Cn.svg#AkzidenzGroteskBE-Cn') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-Ex';
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightEx.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightEx.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightEx.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightEx.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightEx.svg#AkzidenzGroteskBE-LightEx') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-XBdCn';
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBdCn.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBdCn.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBdCn.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBdCn.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBdCn.svg#AkzidenzGroteskBE-XBdCn') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-MdIt';
-  font-weight: 500;
-  font-style: italic;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdIt.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdIt.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdIt.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdIt.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdIt.svg#AkzidenzGroteskBE-MdIt') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-Cn';
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldCn.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldCn.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldCn.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldCn.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldCn.svg#AkzidenzGroteskBE-BoldCn') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-OsF';
-  font-weight: 300;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightOsF.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightOsF.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightOsF.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightOsF.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-LightOsF.svg#AkzidenzGroteskBE-LightOsF') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-Md';
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-Md.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-Md.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Md.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Md.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Md.svg#AkzidenzGroteskBE-Md') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-Ex';
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-Ex.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-Ex.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Ex.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Ex.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-Ex.svg#AkzidenzGroteskBE-Ex') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-Ex';
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldEx.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldEx.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldEx.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldEx.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldEx.svg#AkzidenzGroteskBE-BoldEx') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-MdCn';
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdCn.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdCn.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdCn.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdCn.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdCn.svg#AkzidenzGroteskBE-MdCn') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-XBdCnIt';
-  font-weight: normal;
-  font-style: italic;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBdCnIt.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBdCnIt.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBdCnIt.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBdCnIt.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-XBdCnIt.svg#AkzidenzGroteskBE-XBdCnIt') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-It';
-  font-weight: normal;
-  font-style: italic;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-It.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-It.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-It.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-It.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-It.svg#AkzidenzGroteskBE-It') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-MdEx';
-  font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdEx.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdEx.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdEx.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdEx.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-MdEx.svg#AkzidenzGroteskBE-MdEx') format('svg');
-}
-
-@font-face {
-  font-family: 'AkzidenzGroteskBE-ExIt';
-  font-weight: bold;
-  font-style: italic;
-  font-stretch: normal;
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldExIt.eot');
-  src: url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldExIt.eot?#iefix') format('embedded-opentype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldExIt.woff') format('woff'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldExIt.ttf') format('truetype'), url('/AkzidenzGrotesk/AkzidenzGroteskBE-BoldExIt.svg#AkzidenzGroteskBE-BoldExIt') format('svg');
-}
-
-
 /* flama classes */
 
 .Flama-w900 {
@@ -859,271 +792,312 @@
 }
 
 
-/* AkzidenzGrotezk classes */
+/* AkzidenzGrotezk */
 
-.Akzidenz {
-  font-family: 'AkzidenzGroteskBE';
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
+@font-face {
+  font-family: 'Akzidenz Grotesk BE XBdCn';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.eot');
+  src: local('AkzidenzGroteskBE-XBdCnIt'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.svg#AkzidenzGroteskBE-XBdCnIt') format('svg');
+  font-weight: 900;
+  font-style: italic;
 }
 
-.Akzidenz-bold {
-  font-family: 'AkzidenzGroteskBE';
+.ag-extra-bold-cond-it {
+  font-family: 'Akzidenz Grotesk BE XBdCn';
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.eot');
+  src: local('AkzidenzGroteskBE-Bold'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.svg#AkzidenzGroteskBE-Bold') format('svg');
   font-weight: bold;
   font-style: normal;
-  font-stretch: normal;
 }
 
-.Akzidenz-italic {
-  font-family: 'AkzidenzGroteskBE-XBdCnIt';
+.ag-bold {
+  font-family: 'Akzidenz Grotesk BE';
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE XBdCn';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.eot');
+  src: local('AkzidenzGroteskBE-XBdCn'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.svg#AkzidenzGroteskBE-XBdCn') format('svg');
+  font-weight: 900;
+  font-style: normal;
+}
+
+.ag-extra-bold-cond {
+  font-family: 'Akzidenz Grotesk BE XBdCn';
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-It.eot');
+  src: local('AkzidenzGroteskBE-It'), url('/Akzidenz/hinted-AkzidenzGroteskBE-It.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-It.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-It.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-It.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-It.svg#AkzidenzGroteskBE-It') format('svg');
   font-weight: normal;
   font-style: italic;
-  font-stretch: normal;
 }
 
-.Akzidenz-w300 {
-  font-family: 'AkzidenzGroteskBE';
+.ag-italic {
+  font-family: 'Akzidenz Grotesk BE';
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE BoldEx';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.eot');
+  src: local('AkzidenzGroteskBE-BoldExIt'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.svg#AkzidenzGroteskBE-BoldExIt') format('svg');
+  font-weight: bold;
+  font-style: italic;
+}
+
+.ag-bold-ext-it {
+  font-family: 'Akzidenz Grotesk BE BoldEx';
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE LightCn';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.eot');
+  src: local('AkzidenzGroteskBE-LightCn'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.svg#AkzidenzGroteskBE-LightCn') format('svg');
   font-weight: 300;
   font-style: normal;
-  font-stretch: normal;
 }
 
-.Akzidenz-cn {
-  font-family: 'AkzidenzGroteskBE-Cn';
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-}
-
-.Akzidenz-cn-bold {
-  font-family: 'AkzidenzGroteskBE-Cn';
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-}
-
-.Akzidenz-cn-w300 {
-  font-family: 'AkzidenzGroteskBE-Cn';
+.ag-light-cond {
+  font-family: 'Akzidenz Grotesk BE LightCn';
   font-weight: 300;
   font-style: normal;
-  font-stretch: normal;
 }
 
-.Akzidenz-it-bold-italic {
-  font-family: 'AkzidenzGroteskBE-It';
+@font-face {
+  font-family: 'Akzidenz Grotesk BE Cn';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.eot');
+  src: local('AkzidenzGroteskBE-Cn'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.svg#AkzidenzGroteskBE-Cn') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.ag-cond {
+  font-family: 'Akzidenz Grotesk BE Cn';
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE Cn';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.eot');
+  src: local('AkzidenzGroteskBE-BoldCn'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.svg#AkzidenzGroteskBE-BoldCn') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+.ag-bold-cond {
+  font-family: 'Akzidenz Grotesk BE Cn';
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.eot');
+  src: local('AkzidenzGroteskBE-BoldIt'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.svg#AkzidenzGroteskBE-BoldIt') format('svg');
   font-weight: bold;
   font-style: italic;
-  font-stretch: normal;
 }
 
-.demo-4 {
-  font-family: 'AkzidenzGroteskBE-XBd';
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-}
-
-.demo-6 {
-  font-family: 'AkzidenzGroteskBE-MdCnIt';
-  font-weight: 500;
+.ag-bold-italic {
+  font-family: 'Akzidenz Grotesk BE';
+  font-weight: bold;
   font-style: italic;
-  font-stretch: normal;
 }
 
-.demo-8 {
-  font-family: 'AkzidenzGroteskBE-Super';
+@font-face {
+  font-family: 'Akzidenz Grotesk BE Ex';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.eot');
+  src: local('AkzidenzGroteskBE-Ex'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.svg#AkzidenzGroteskBE-Ex') format('svg');
   font-weight: normal;
   font-style: normal;
-  font-stretch: normal;
 }
 
-.demo-10 {
-  font-family: 'AkzidenzGroteskBE-Ex';
+.ag-extended {
+  font-family: 'Akzidenz Grotesk BE Ex';
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE LightOsF';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.eot');
+  src: local('AkzidenzGroteskBE-LightOsF'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.svg#AkzidenzGroteskBE-LightOsF') format('svg');
   font-weight: 300;
   font-style: normal;
-  font-stretch: normal;
 }
 
-.demo-11 {
-  font-family: 'AkzidenzGroteskBE-XBdCn';
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-}
-
-.demo-12 {
-  font-family: 'AkzidenzGroteskBE-MdIt';
-  font-weight: 500;
-  font-style: italic;
-  font-stretch: normal;
-}
-
-.demo-14 {
-  font-family: 'AkzidenzGroteskBE-OsF';
+.ag-light-osf {
+  font-family: 'Akzidenz Grotesk BE LightOsF';
   font-weight: 300;
   font-style: normal;
-  font-stretch: normal;
 }
 
-.demo-15 {
-  font-family: 'AkzidenzGroteskBE-Md';
+@font-face {
+  font-family: 'Akzidenz Grotesk BE';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.eot');
+  src: local('AkzidenzGroteskBE-Md'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.svg#AkzidenzGroteskBE-Md') format('svg');
   font-weight: 500;
   font-style: normal;
-  font-stretch: normal;
 }
 
-.demo-16 {
-  font-family: 'AkzidenzGroteskBE-Ex';
+.ag-medium {
+  font-family: 'Akzidenz Grotesk BE';
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.eot');
+  src: local('AkzidenzGroteskBE-MdIt'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.svg#AkzidenzGroteskBE-MdIt') format('svg');
+  font-weight: 500;
+  font-style: italic;
+}
+
+.ag-medium-italic {
+  font-family: 'Akzidenz Grotesk BE';
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.eot');
+  src: local('AkzidenzGroteskBE-Regular'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.svg#AkzidenzGroteskBE-Regular') format('svg');
   font-weight: normal;
   font-style: normal;
-  font-stretch: normal;
 }
 
-.demo-17 {
-  font-family: 'AkzidenzGroteskBE-Ex';
-  font-weight: bold;
+.ag-regular {
+  font-family: 'Akzidenz Grotesk BE';
+  font-weight: normal;
   font-style: normal;
-  font-stretch: normal;
 }
 
-.demo-18 {
-  font-family: 'AkzidenzGroteskBE-MdCn';
+@font-face {
+  font-family: 'Akzidenz Grotesk BE Ex';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.eot');
+  src: local('AkzidenzGroteskBE-MdEx'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.svg#AkzidenzGroteskBE-MdEx') format('svg');
   font-weight: 500;
   font-style: normal;
-  font-stretch: normal;
 }
 
-.demo-21 {
-  font-family: 'AkzidenzGroteskBE-MdEx';
+.ag-medium-ext {
+  font-family: 'Akzidenz Grotesk BE Ex';
   font-weight: 500;
   font-style: normal;
-  font-stretch: normal;
 }
 
-.demo-22 {
-  font-family: 'AkzidenzGroteskBE-ExIt';
+@font-face {
+  font-family: 'Akzidenz Grotesk BE Super';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.eot');
+  src: local('AkzidenzGroteskBE-Super'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.svg#AkzidenzGroteskBE-Super') format('svg');
+  font-weight: 900;
+  font-style: normal;
+}
+
+.ag-super {
+  font-family: 'Akzidenz Grotesk BE Super';
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE XBd';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.eot');
+  src: local('AkzidenzGroteskBE-XBd'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.svg#AkzidenzGroteskBE-XBd') format('svg');
+  font-weight: 900;
+  font-style: normal;
+}
+
+.ag-extra-bold {
+  font-family: 'Akzidenz Grotesk BE XBd';
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE MdCn';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.eot');
+  src: local('AkzidenzGroteskBE-MdCn'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.svg#AkzidenzGroteskBE-MdCn') format('svg');
+  font-weight: 500;
+  font-style: normal;
+}
+
+.ag-medium-cond {
+  font-family: 'Akzidenz Grotesk BE MdCn';
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE LightEx';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.eot');
+  src: local('AkzidenzGroteskBE-LightEx'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.svg#AkzidenzGroteskBE-LightEx') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ag-light-extended {
+  font-family: 'Akzidenz Grotesk BE LightEx';
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE BoldEx';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.eot');
+  src: local('AkzidenzGroteskBE-BoldEx'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.svg#AkzidenzGroteskBE-BoldEx') format('svg');
   font-weight: bold;
+  font-style: normal;
+}
+
+.ag-bold-ext {
+  font-family: 'Akzidenz Grotesk BE BoldEx';
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.eot');
+  src: local('AkzidenzGroteskBE-Light'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.svg#AkzidenzGroteskBE-Light') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ag-light {
+  font-family: 'Akzidenz Grotesk BE';
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Akzidenz Grotesk BE MdCn';
+  src: url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.eot');
+  src: local('AkzidenzGroteskBE-MdCnIt'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.svg#AkzidenzGroteskBE-MdCnIt') format('svg');
+  font-weight: 500;
   font-style: italic;
-  font-stretch: normal;
 }
 
-.s10 {
-  font-size: 10px;
-}
-
-.s15 {
-  font-size: 15px;
-}
-
-.s20 {
-  font-size: 20px;
-}
-
-.s25 {
-  font-size: 25px;
-}
-
-.s30 {
-  font-size: 30px;
-}
-
-.s35 {
-  font-size: 35px;
-}
-
-.s40 {
-  font-size: 40px;
-}
-
-.s45 {
-  font-size: 45px;
-}
-
-.s50 {
-  font-size: 50px;
-}
-
-.s55 {
-  font-size: 55px;
-}
-
-.s60 {
-  font-size: 60px;
-}
-
-.s65 {
-  font-size: 65px;
-}
-
-.s200 {
-  font-size: 200px;
-}
-
-.uppr {
-  text-transform: uppercase;
-}
-
-.lwr {
-  text-transform: lowercase;
-}
-
-.cptlz {
-  text-transform: capitalize;
-}
-
-.notransform {
-  text-transform: none;
-}
-
-.ls-5 {
-  letter-spacing: -5px;
-}
-
-.ls-4 {
-  letter-spacing: -4px;
-}
-
-.ls-3 {
-  letter-spacing: -3px;
-}
-
-.ls-2 {
-  letter-spacing: -2px;
-}
-
-.ls-1 {
-  letter-spacing: -1px;
-}
-
-.ls0 {
-  letter-spacing: 0px;
-}
-
-.ls1 {
-  letter-spacing: 1px;
-}
-
-.ls2 {
-  letter-spacing: 2px;
-}
-
-.ls3 {
-  letter-spacing: 3px;
-}
-
-.ls4 {
-  letter-spacing: 4px;
-}
-
-.ls5 {
-  letter-spacing: 5px;
-}
-
-.white{
-  color: #ffffff;
-}
-
-.shadow {
-  text-shadow: 0 0 10px rgba(10,10,10,.5);
+.ag-medium-cond-it {
+  font-family: 'Akzidenz Grotesk BE MdCn';
+  font-weight: 500;
+  font-style: italic;
 }

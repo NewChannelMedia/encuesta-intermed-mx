@@ -52,12 +52,15 @@
             $data['encabezado'] = "Error de código";
             $data['mensaje'] = 'El código que ingresaste es incorrecto, o hubo un error al procesar tu solicitud, por favor intenta de nuevo.';
             $this->load->view('encuesta/alert', $data);
+            $this->load->view('templates/footer2', $data);
             break;
         case 1:
             //Encuesta sin iniciar
         case 2:
             //Encuesta sin terminar
+            $data['title'] = "About";
             $this->load->view('about', $data);
+            $this->load->view('templates/footer', $data);
             break;
         case 3:
             //Encuesta ya contestada
@@ -66,12 +69,12 @@
             $data['encabezado'] = "Atención";
             $data['mensaje'] = 'El codigo que ingresaste ya ha sido usado anteriormente. <br>Puedes solicitar uno nuevo dando click a continuación:<br><br><a href="codigo/pedir" class="btn btn-default s20">Solicitar un código nuevo</a>';
             $this->load->view('encuesta/alert', $data);
+            $this->load->view('templates/footer2', $data);
             break;
         default:
             break;
       }
       /**/
-      $this->load->view('templates/footer2', $data);
     }
 
     public function newsletter(){
