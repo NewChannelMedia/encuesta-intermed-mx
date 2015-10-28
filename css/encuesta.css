@@ -198,6 +198,10 @@ body {
   padding: 40px 0;
 }
 
+.main-body.intern {
+  background-image: url('../img/lapbg2.png');
+}
+
 @media(max-width:768px) {
   .main-body {
     background-size: cover;

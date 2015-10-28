@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-default navbarMain Flama">
+<nav class="navbar navbar-default navbarMain flama">
   <div class="navcontainer container">
     <div class="row upper-row">
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 logo text-left">
@@ -19,8 +19,8 @@
       <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
           <div class="row">
-            <div class="mensaje Flama-normal s20 white col-md-10 col-md-offset-1">
-              <h1 class="Flama-normal s40 white text-left">¡Gracias!</h1>
+            <div class="mensaje flama s20 white col-md-10 col-md-offset-1">
+              <h1 class="flama s40 white text-left">¡Gracias!</h1>
               <?php if( $medico == "0"){ ?>
                 <p>Hola <strong><?php echo $nombre ?></strong><br />
                   Tu solicitud será procesada por nuestro equipo de trabajo.<br>
@@ -35,7 +35,7 @@
                   Queremos pedirte paciencia en este proceso, y te agradecemos tu interés en nosotros.
                 </p>
               <?php } ?>
-              <h1 class="Flama-normal s40 white text-right">¡Hasta pronto!</h1>
+              <h1 class="flama s40 white text-right">¡Hasta pronto!</h1>
             </div>
           </div>
         </div>

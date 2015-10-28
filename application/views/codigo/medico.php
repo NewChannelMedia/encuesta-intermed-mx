@@ -1,4 +1,4 @@
-<div class = "seleccionador">
+<div class="seleccionador">
   <label>Elige una opción ¿ Es usted ?</label>
   Medico<input type = "radio" id = "medicoRadio" name = "check" /><br />
   Usuario<input type = "radio" id = "usuarioRadio" name = "check" /><br />
