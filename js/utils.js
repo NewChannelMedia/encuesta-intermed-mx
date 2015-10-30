@@ -1152,7 +1152,7 @@ $(function(){
         $(".error-message").html('');
         $("input:submit").attr('disabled','disabled');
         $( this ).parent().addClass('has-error');
-        $( this ).after('<span class="error-message">Recuerda que debe de estar lleno este campo el boton se deshabilito</span>');
+        $( this ).after('<span class="error-message">Recuerda que debe de estar lleno este campo.</span>');
       }else{
         $("input:submit").removeAttr('disabled');
         $( this ).next('span').remove();
@@ -1171,7 +1171,7 @@ $(function(){
         $(".error-justificacion").html('');
         $("input:submit").attr('disabled','disabled');
         $( this ).parent().addClass('has-error');
-        $( this ).after('<span class = "error-justificacion">Danos tu justificación por favor el boton se deshabilito</span>');
+        $( this ).after('<span class = "error-justificacion">Danos tu justificación por favor.</span>');
       }else{
         $("input:submit").removeAttr('disabled');
         $( this ).next('span').remove();

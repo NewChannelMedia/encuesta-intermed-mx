@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title><?php echo $title ?></title>
+    <link rel="icon" href="<?echo base_url(); ?>favicon.ico" >
     <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>css/encuesta.css">
     <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>fonts/fonts.css">

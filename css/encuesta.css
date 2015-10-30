@@ -306,7 +306,7 @@ body {
 }
 
 .code-input input[type="text"] {
-  letter-spacing: 10px;
+  letter-spacing: 5px;
   background-color: #224054;
   color: #fff;
 }
