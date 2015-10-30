@@ -3,15 +3,34 @@
   <div class="navcontainer container">
     <div class="row upper-row">
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 logo text-left">
-        <a class="page-scroll" href="#page-top">
+        <a href="<?=base_url()?>">
           <img class="center-block" src="<?=base_url()?>img/logos/intermedWhite.png">
         </a>
       </div>
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 texts text-right hidden-xs">
         <p >
           <span class="ag-light s15 white">Atención y contacto: 52 (33) 3125-2200</span><br>
-          <span class="flama-book s15 white uppr ls1"><strong>Para:</strong> MÉDICOS PACIENTES INSTITUCIONES PROVEEDORES ASEGURADORAS</span>
         </p>
+          <ul class="list-inline flama-book s15 white uppr">
+            <li>
+              <strong>Para:</strong>
+            </li>
+            <li>
+              MEDICOS
+            </li>
+            <li>
+              PACIENTES
+            </li>
+            <li>
+              INSTITUCIONES
+            </li>
+            <li>
+              PROVEEDORES
+            </li>
+            <li>
+              ASEGURADORAS
+            </li>
+          </ul>
       </div>
     </div>
   </div>
@@ -22,6 +41,9 @@
       <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-1">
         <p class="text-right">
           <span class="ag-regular s65 shadow">Bienvenido a </span><span class="ag-medium s65 shadow">Intermed<sup><span class="shadow s35">&reg;</span></sup></span><br>
+          <span class="ag-medium s30 shadow">La red social de la salud</span>
+        </p>
+        <p class="text-center">
           <span class="ag-light s25 shadow">¡Conéctate con tu entorno profesional como nunca antes!</span>
         </p>
       </div>
