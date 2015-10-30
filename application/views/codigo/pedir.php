@@ -3,12 +3,34 @@
   <div class="navcontainer container">
     <div class="row upper-row">
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 logo text-left">
-        <a class="page-scroll" href="#page-top">
+        <a href="<?=base_url()?>">
           <img class="center-block" src="<?=base_url()?>img/logos/intermedWhite.png">
         </a>
       </div>
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 texts text-right hidden-xs">
-        <img class="center-block" src="<?=base_url()?>img/textos-top.png"></a>
+        <p >
+          <span class="ag-light s15 white">Atención y contacto: 52 (33) 3125-2200</span><br>
+        </p>
+          <ul class="list-inline flama-book s15 white uppr">
+            <li>
+              <strong>Para:</strong>
+            </li>
+            <li>
+              MEDICOS
+            </li>
+            <li>
+              PACIENTES
+            </li>
+            <li>
+              INSTITUCIONES
+            </li>
+            <li>
+              PROVEEDORES
+            </li>
+            <li>
+              ASEGURADORAS
+            </li>
+          </ul>
       </div>
     </div>
   </div>

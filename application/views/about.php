@@ -14,10 +14,27 @@
           <img class="center-block" src="<?=base_url()?>img/logos/intermed.png">
         </a>
       </div>
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 texts text-right hidden-xs">
-        <p >
-          <span class="flama-book s15 uppr ls1"><strong>Para:</strong> MÉDICOS PACIENTES INSTITUCIONES PROVEEDORES ASEGURADORAS</span>
-        </p>
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 texts text-right hidden-xs" style="padding-top: 30px;">
+        <ul class="list-inline flama-book s15 uppr">
+          <li>
+            <strong>Para:</strong>
+          </li>
+          <li>
+            MEDICOS
+          </li>
+          <li>
+            PACIENTES
+          </li>
+          <li>
+            INSTITUCIONES
+          </li>
+          <li>
+            PROVEEDORES
+          </li>
+          <li>
+            ASEGURADORAS
+          </li>
+        </ul>
       </div>
     </div>
   </div>

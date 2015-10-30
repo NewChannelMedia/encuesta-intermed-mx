@@ -3,7 +3,7 @@
   <div class="navcontainer container">
     <div class="row upper-row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 logo text-center">
-        <a class="page-scroll" href="<?=base_url()?>">
+        <a href="<?=base_url()?>">
           <img class="center-block" src="<?=base_url()?>img/logos/intermedWhite.png">
         </a>
       </div>
