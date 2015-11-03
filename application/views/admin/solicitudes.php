@@ -1,5 +1,5 @@
 <?php if( isset($_SESSION['status']) && $_SESSION['status'] == 1 ){?>
-  <div id="solicitudes" class="container-fluid">
+  <div id="solicitudes" class="container-fluid flama">
     <div class="row">
       <ul class="solicitudes-tabs nav nav-tabs">
         <li class="active"><a href="#" id = "pAceptar">Por aceptar</a></li>

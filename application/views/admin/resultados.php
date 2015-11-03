@@ -1,4 +1,4 @@
-<div class="container-fluid resultados-contanier">
+<div class="container-fluid resultados-contanier flama">
 <!--IMPRIMIR EL TAB NAV-->
 <?php
 $first = true;

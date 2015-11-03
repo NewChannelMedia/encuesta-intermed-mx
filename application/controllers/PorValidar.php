@@ -11,14 +11,14 @@
             $nombre = $this->input->post('nombre');
             $cedula = $this->input->post('cedula');
             $oculto = $this->input->post('correoOculto');
-            if($this->PorValidar_model->updateData($oculto,$nombre,$cedula) == true){
+            if($this->PorValidar_model->updateData($oculto, $nombre, $cedula) == true){
               $data['title'] = "Revisar cedula";
               $data['nombre'] = $nombre;
               $data['correo'] = $oculto;
               $data['cedula'] = $cedula;
-              $this->load->view('templates/header',$data);
+              $this->load->view('templates/header', $data);
               $this->load->view('codigo/mensaje', $data);
-              $this->load->view('templates/footer2');
+              $this->load->view('templates/footer2', $data);
             }else{
 
             }
@@ -34,9 +34,9 @@
               $data['nombre'] = $nombre;
               $data['cedula'] = "";
               $data['correo'] = $oculto;
-              $this->load->view('templates/header',$data);
+              $this->load->view('templates/header', $data);
               $this->load->view('codigo/mensaje', $data);
-              $this->load->view('templates/footer2');
+              $this->load->view('templates/footer2', $data);
             }
           }
       }

@@ -1,5 +1,5 @@
 <?php if( isset($_SESSION['status']) && $_SESSION['status'] == 1 ){?>
-  <div class="container-fluid">
+  <div class="container-fluid flama-light">
     <div class="row">
       <div class="col-lg-12 col-md-12">
         <h3>Bienvenido <?php echo $administrador; ?></h3>

@@ -12,6 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title><?php echo $title ?></title>
+    <link rel="icon" href="<?echo base_url(); ?>favicon.ico" type="image/ico">
     <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>css/encuesta.css">
     <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>fonts/fonts.css">
@@ -23,7 +24,7 @@
     <![endif]-->
 </head>
 
-<body id="bodyAdmin" class="index flamaBook-Normal">
+<body id="bodyAdmin" class="index flama-book">
   <nav class="navbar navbar-inverse navbar-fixed-top no-margin">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed nav-btn-toggle" id="menu-toggle">

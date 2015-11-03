@@ -1,9 +1,9 @@
 <!-- Navigation -->
-<nav class="navbar navbar-default navbarMain2 Flama">
+<nav class="navbar navbar-default navbarMain2 flama">
   <div class="navcontainer container">
     <div class="row upper-row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 logo text-center">
-        <a class="page-scroll" href="<?=base_url()?>">
+        <a href="<?=base_url()?>">
           <img class="center-block" src="<?=base_url()?>img/logos/intermedWhite.png">
         </a>
       </div>
@@ -15,10 +15,10 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <h1 class="Flama-Bold s35 text-center white shadow"><strong><?= $encabezado ?></strong></h1>';
+          <h1 class="flama-Bold s35 text-center white shadow"><strong><?= $encabezado ?></strong></h1>';
           <div class="row message-container">
             <div class="col-lg-6 col-md-6 col-sm-8 col-xs-10 col-lg-offset-3 col-md-offset-3 col-sm-offset-2 col-xs-offset-1">
-              <p class="Flama-normal s20 white text-center">
+              <p class="flama s20 white text-center">
                 <?= $mensaje?>
               </p>
             </div>

@@ -1,14 +1,36 @@
 <!-- Navigation -->
-<nav class="navbar navbar-default navbarMain Flama">
+<nav class="navbar navbar-default navbarMain flama">
   <div class="navcontainer container">
     <div class="row upper-row">
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 logo text-left">
-        <a class="page-scroll" href="#page-top">
+        <a href="<?=base_url()?>">
           <img class="center-block" src="<?=base_url()?>img/logos/intermedWhite.png">
         </a>
       </div>
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 texts text-right hidden-xs">
-        <img class="center-block" src="<?=base_url()?>img/textos-top.png"></a>
+        <p >
+          <span class="ag-light s15 white">Atención y contacto: 52 (33) 3125-2200</span><br>
+        </p>
+          <ul class="list-inline flama-book s15 white uppr">
+            <li>
+              <strong>Para:</strong>
+            </li>
+            <li>
+              MEDICOS
+            </li>
+            <li>
+              PACIENTES
+            </li>
+            <li>
+              INSTITUCIONES
+            </li>
+            <li>
+              PROVEEDORES
+            </li>
+            <li>
+              ASEGURADORAS
+            </li>
+          </ul>
       </div>
     </div>
   </div>
@@ -19,7 +41,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
           <form method="post" action="<?php echo base_url(); ?>codigo/dataPost" id="datosSolicitud"><!-- main-body-intern-container -->
-            <h4 class="Flama-normal s20 text-center white">Ingresa los siguientes datos para procesar tu solicitud:</h4>
+            <h4 class="flama s20 text-center white">Ingresa los siguientes datos para procesar tu solicitud:</h4>
             <div class="form-group col-md-8 col-md-offset-2 usuarioSolcitud">
               <input class="form-control input-lg validada" type="text" placeholder="Nombre" name="nombre" id="nombre">
             </div>
@@ -47,7 +69,7 @@
             </div>
             </br>
             <div class="form-group col-md-8 col-md-offset-2 ">
-              <input class="btn btn-success btn-lg btn-block" type="submit" value="Solicitar" id="envioDatos" disabled>
+              <input class="btn btn-success btn-lg btn-block" type="submit" value="Solicitar" id="envioDatos">
             </div>
           </form>
         </div>

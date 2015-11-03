@@ -1,9 +1,9 @@
 <div class="container-404">
   <div class="container-vertical text-center">
     <img class="center-block" src="<?=base_url()?>img/logos/intermedWhite.png">
-    <h1 class="Flama-Bold s200 white text-center shadow">404</h1>
-    <h3 class="Flama-Bold white text-center">La página no existe</h3><br/>
-    <a href="<?= base_url()?>" class="Flama-Bold s15 btn btn-default">Regresar</a>
+    <h1 class="flama-bold s200 white text-center shadow">404</h1>
+    <h3 class="flama-bold white text-center">La página no existe</h3><br/>
+    <a href="<?= base_url()?>" class="flama-bold s15 btn btn-default">Regresar</a>
   </div>
 </div>
 <div class="homepage-hero-module">
