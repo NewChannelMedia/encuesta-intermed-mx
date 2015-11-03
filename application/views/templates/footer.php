@@ -17,5 +17,6 @@
     <script src="<?echo base_url(); ?>js/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="<?echo base_url(); ?>js/utils.js"></script>
+    <script src="<?echo base_url(); ?>js/FontUtils.js"></script>
   </body>
 </html>

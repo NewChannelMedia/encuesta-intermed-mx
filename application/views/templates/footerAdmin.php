@@ -7,6 +7,7 @@
     <script src="<?echo base_url(); ?>js/bootstrap.min.js"></script>
     <script src="<?echo base_url(); ?>js/Chart.js"></script>
     <script src="<?echo base_url(); ?>js/utils.js"></script>
+    <script src="<?echo base_url(); ?>js/FontUtils.js"></script>
   </body>
 </html>
 <!--<footer class="navbar-fixed-bottom footerAdmin">

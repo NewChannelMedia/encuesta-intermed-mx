@@ -133,14 +133,15 @@
 	font-family: 'Flama-BoldItalic';
 	src: url('/Flama/hinted-Flama-BoldItalic.eot');
 	src: local('Flama-BoldItalic'),
-		url('/Flama/hinted-Flama-BoldItalic.eot?#iefix') format('embedded-opentype'),
-		url('/Flama/hinted-Flama-BoldItalic.woff2') format('woff2'),
-		url('/Flama/hinted-Flama-BoldItalic.woff') format('woff'),
-		url('/Flama/hinted-Flama-BoldItalic.ttf') format('truetype'),
-		url('/Flama/hinted-Flama-BoldItalic.svg#Flama-BoldItalic') format('svg');
+	url('/Flama/hinted-Flama-BoldItalic.eot?#iefix') format('embedded-opentype'),
+	url('/Flama/hinted-Flama-BoldItalic.woff2') format('woff2'),
+	url('/Flama/hinted-Flama-BoldItalic.woff') format('woff'),
+	url('/Flama/hinted-Flama-BoldItalic.ttf') format('truetype'),
+	url('/Flama/hinted-Flama-BoldItalic.svg#Flama-BoldItalic') format('svg');
 	font-weight: bold;
 	font-style: italic;
 }
+
 .flama-bold-italic {
   font-family: 'Flama-BoldItalic';
   font-weight: bold;
@@ -151,14 +152,15 @@
 	font-family: 'Flama';
 	src: url('/Flama/hinted-Flama.eot');
 	src: local('Flama'),
-		url('/Flama/hinted-Flama.eot?#iefix') format('embedded-opentype'),
-		url('/Flama/hinted-Flama.woff2') format('woff2'),
-		url('/Flama/hinted-Flama.woff') format('woff'),
-		url('/Flama/hinted-Flama.ttf') format('truetype'),
-		url('/Flama/hinted-Flama.svg#Flama') format('svg');
+	url('/Flama/hinted-Flama.eot?#iefix') format('embedded-opentype'),
+	url('/Flama/hinted-Flama.woff2') format('woff2'),
+	url('/Flama/hinted-Flama.woff') format('woff'),
+	url('/Flama/hinted-Flama.ttf') format('truetype'),
+	url('/Flama/hinted-Flama.svg#Flama') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
+
 .flama {
   font-family: 'Flama';
   font-weight: normal;
@@ -169,14 +171,15 @@
 	font-family: 'FlamaBook';
 	src: url('/Flama/hinted-FlamaBook-Italic.eot');
 	src: local('FlamaBook-Italic'),
-		url('/Flama/hinted-FlamaBook-Italic.eot?#iefix') format('embedded-opentype'),
-		url('/Flama/hinted-FlamaBook-Italic.woff2') format('woff2'),
-		url('/Flama/hinted-FlamaBook-Italic.woff') format('woff'),
-		url('/Flama/hinted-FlamaBook-Italic.ttf') format('truetype'),
-		url('/Flama/hinted-FlamaBook-Italic.svg#FlamaBook-Italic') format('svg');
+	url('/Flama/hinted-FlamaBook-Italic.eot?#iefix') format('embedded-opentype'),
+	url('/Flama/hinted-FlamaBook-Italic.woff2') format('woff2'),
+	url('/Flama/hinted-FlamaBook-Italic.woff') format('woff'),
+	url('/Flama/hinted-FlamaBook-Italic.ttf') format('truetype'),
+	url('/Flama/hinted-FlamaBook-Italic.svg#FlamaBook-Italic') format('svg');
 	font-weight: normal;
 	font-style: italic;
 }
+
 .flama-book-italic {
   font-family: 'FlamaBook';
   font-weight: normal;
@@ -187,14 +190,15 @@
 	font-family: 'FlamaMedium';
 	src: url('/Flama/hinted-FlamaMedium.eot');
 	src: local('FlamaMedium'),
-		url('/Flama/hinted-FlamaMedium.eot?#iefix') format('embedded-opentype'),
-		url('/Flama/hinted-FlamaMedium.woff2') format('woff2'),
-		url('/Flama/hinted-FlamaMedium.woff') format('woff'),
-		url('/Flama/hinted-FlamaMedium.ttf') format('truetype'),
-		url('/Flama/hinted-FlamaMedium.svg#FlamaMedium') format('svg');
+	url('/Flama/hinted-FlamaMedium.eot?#iefix') format('embedded-opentype'),
+	url('/Flama/hinted-FlamaMedium.woff2') format('woff2'),
+	url('/Flama/hinted-FlamaMedium.woff') format('woff'),
+	url('/Flama/hinted-FlamaMedium.ttf') format('truetype'),
+	url('/Flama/hinted-FlamaMedium.svg#FlamaMedium') format('svg');
 	font-weight: 500;
 	font-style: normal;
 }
+
 .flama-medium {
   font-family: 'FlamaMedium';
   font-weight: 500;
@@ -205,14 +209,15 @@
 	font-family: 'FlamaMedium';
 	src: url('/Flama/hinted-FlamaMedium-Italic.eot');
 	src: local('FlamaMedium-Italic'),
-		url('/Flama/hinted-FlamaMedium-Italic.eot?#iefix') format('embedded-opentype'),
-		url('/Flama/hinted-FlamaMedium-Italic.woff2') format('woff2'),
-		url('/Flama/hinted-FlamaMedium-Italic.woff') format('woff'),
-		url('/Flama/hinted-FlamaMedium-Italic.ttf') format('truetype'),
-		url('/Flama/hinted-FlamaMedium-Italic.svg#FlamaMedium-Italic') format('svg');
+	url('/Flama/hinted-FlamaMedium-Italic.eot?#iefix') format('embedded-opentype'),
+	url('/Flama/hinted-FlamaMedium-Italic.woff2') format('woff2'),
+	url('/Flama/hinted-FlamaMedium-Italic.woff') format('woff'),
+	url('/Flama/hinted-FlamaMedium-Italic.ttf') format('truetype'),
+	url('/Flama/hinted-FlamaMedium-Italic.svg#FlamaMedium-Italic') format('svg');
 	font-weight: 500;
 	font-style: italic;
 }
+
 .flama-medium-italic {
   font-family: 'FlamaMedium';
   font-weight: 500;
@@ -223,14 +228,15 @@
 	font-family: 'FlamaLight';
 	src: url('/Flama/hinted-FlamaLight.eot');
 	src: local('FlamaLight'),
-		url('/Flama/hinted-FlamaLight.eot?#iefix') format('embedded-opentype'),
-		url('/Flama/hinted-FlamaLight.woff2') format('woff2'),
-		url('/Flama/hinted-FlamaLight.woff') format('woff'),
-		url('/Flama/hinted-FlamaLight.ttf') format('truetype'),
-		url('/Flama/hinted-FlamaLight.svg#FlamaLight') format('svg');
+	url('/Flama/hinted-FlamaLight.eot?#iefix') format('embedded-opentype'),
+	url('/Flama/hinted-FlamaLight.woff2') format('woff2'),
+	url('/Flama/hinted-FlamaLight.woff') format('woff'),
+	url('/Flama/hinted-FlamaLight.ttf') format('truetype'),
+	url('/Flama/hinted-FlamaLight.svg#FlamaLight') format('svg');
 	font-weight: 300;
 	font-style: normal;
 }
+
 .flama-light {
   font-family: 'FlamaLight';
   font-weight: 300;
@@ -241,14 +247,15 @@
 	font-family: 'FlamaBlack';
 	src: url('/Flama/hinted-FlamaBlack-Italic.eot');
 	src: local('FlamaBlack-Italic'),
-		url('/Flama/hinted-FlamaBlack-Italic.eot?#iefix') format('embedded-opentype'),
-		url('/Flama/hinted-FlamaBlack-Italic.woff2') format('woff2'),
-		url('/Flama/hinted-FlamaBlack-Italic.woff') format('woff'),
-		url('/Flama/hinted-FlamaBlack-Italic.ttf') format('truetype'),
-		url('/Flama/hinted-FlamaBlack-Italic.svg#FlamaBlack-Italic') format('svg');
+	url('/Flama/hinted-FlamaBlack-Italic.eot?#iefix') format('embedded-opentype'),
+	url('/Flama/hinted-FlamaBlack-Italic.woff2') format('woff2'),
+	url('/Flama/hinted-FlamaBlack-Italic.woff') format('woff'),
+	url('/Flama/hinted-FlamaBlack-Italic.ttf') format('truetype'),
+	url('/Flama/hinted-FlamaBlack-Italic.svg#FlamaBlack-Italic') format('svg');
 	font-weight: 900;
 	font-style: italic;
 }
+
 .flama-black-italic {
   font-family: 'FlamaBlack';
   font-weight: 900;
@@ -259,14 +266,15 @@
 	font-family: 'FlamaBlack';
 	src: url('/Flama/hinted-FlamaBlack.eot');
 	src: local('FlamaBlack'),
-		url('/Flama/hinted-FlamaBlack.eot?#iefix') format('embedded-opentype'),
-		url('/Flama/hinted-FlamaBlack.woff2') format('woff2'),
-		url('/Flama/hinted-FlamaBlack.woff') format('woff'),
-		url('/Flama/hinted-FlamaBlack.ttf') format('truetype'),
-		url('/Flama/hinted-FlamaBlack.svg#FlamaBlack') format('svg');
+	url('/Flama/hinted-FlamaBlack.eot?#iefix') format('embedded-opentype'),
+	url('/Flama/hinted-FlamaBlack.woff2') format('woff2'),
+	url('/Flama/hinted-FlamaBlack.woff') format('woff'),
+	url('/Flama/hinted-FlamaBlack.ttf') format('truetype'),
+	url('/Flama/hinted-FlamaBlack.svg#FlamaBlack') format('svg');
 	font-weight: 900;
 	font-style: normal;
 }
+
 .flama-black {
   font-family: 'FlamaBlack';
   font-weight: 900;
@@ -277,14 +285,15 @@
 	font-family: 'FlamaBook';
 	src: url('/Flama/hinted-FlamaBook.eot');
 	src: local('FlamaBook'),
-		url('/Flama/hinted-FlamaBook.eot?#iefix') format('embedded-opentype'),
-		url('/Flama/hinted-FlamaBook.woff2') format('woff2'),
-		url('/Flama/hinted-FlamaBook.woff') format('woff'),
-		url('/Flama/hinted-FlamaBook.ttf') format('truetype'),
-		url('/Flama/hinted-FlamaBook.svg#FlamaBook') format('svg');
+	url('/Flama/hinted-FlamaBook.eot?#iefix') format('embedded-opentype'),
+	url('/Flama/hinted-FlamaBook.woff2') format('woff2'),
+	url('/Flama/hinted-FlamaBook.woff') format('woff'),
+	url('/Flama/hinted-FlamaBook.ttf') format('truetype'),
+	url('/Flama/hinted-FlamaBook.svg#FlamaBook') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
+
 .flama-book {
   font-family: 'FlamaBook';
   font-weight: normal;
@@ -295,14 +304,15 @@
 	font-family: 'Flama';
 	src: url('/Flama/hinted-Flama-Italic.eot');
 	src: local('Flama-Italic'),
-		url('/Flama/hinted-Flama-Italic.eot?#iefix') format('embedded-opentype'),
-		url('/Flama/hinted-Flama-Italic.woff2') format('woff2'),
-		url('/Flama/hinted-Flama-Italic.woff') format('woff'),
-		url('/Flama/hinted-Flama-Italic.ttf') format('truetype'),
-		url('/Flama/hinted-Flama-Italic.svg#Flama-Italic') format('svg');
+	url('/Flama/hinted-Flama-Italic.eot?#iefix') format('embedded-opentype'),
+	url('/Flama/hinted-Flama-Italic.woff2') format('woff2'),
+	url('/Flama/hinted-Flama-Italic.woff') format('woff'),
+	url('/Flama/hinted-Flama-Italic.ttf') format('truetype'),
+	url('/Flama/hinted-Flama-Italic.svg#Flama-Italic') format('svg');
 	font-weight: normal;
 	font-style: italic;
 }
+
 .flama-italic {
   font-family: 'Flama';
   font-weight: normal;
@@ -313,14 +323,15 @@
 	font-family: 'Flama';
 	src: url('/Flama/hinted-Flama-Bold.eot');
 	src: local('Flama-Bold'),
-		url('/Flama/hinted-Flama-Bold.eot?#iefix') format('embedded-opentype'),
-		url('/Flama/hinted-Flama-Bold.woff2') format('woff2'),
-		url('/Flama/hinted-Flama-Bold.woff') format('woff'),
-		url('/Flama/hinted-Flama-Bold.ttf') format('truetype'),
-		url('/Flama/hinted-Flama-Bold.svg#Flama-Bold') format('svg');
+	url('/Flama/hinted-Flama-Bold.eot?#iefix') format('embedded-opentype'),
+	url('/Flama/hinted-Flama-Bold.woff2') format('woff2'),
+	url('/Flama/hinted-Flama-Bold.woff') format('woff'),
+	url('/Flama/hinted-Flama-Bold.ttf') format('truetype'),
+	url('/Flama/hinted-Flama-Bold.svg#Flama-Bold') format('svg');
 	font-weight: bold;
 	font-style: normal;
 }
+
 .flama-bold {
   font-family: 'Flama';
   font-weight: bold;
@@ -331,14 +342,15 @@
 	font-family: 'FlamaLight';
 	src: url('/Flama/hinted-FlamaLight-Italic.eot');
 	src: local('FlamaLight-Italic'),
-		url('/Flama/hinted-FlamaLight-Italic.eot?#iefix') format('embedded-opentype'),
-		url('/Flama/hinted-FlamaLight-Italic.woff2') format('woff2'),
-		url('/Flama/hinted-FlamaLight-Italic.woff') format('woff'),
-		url('/Flama/hinted-FlamaLight-Italic.ttf') format('truetype'),
-		url('/Flama/hinted-FlamaLight-Italic.svg#FlamaLight-Italic') format('svg');
+	url('/Flama/hinted-FlamaLight-Italic.eot?#iefix') format('embedded-opentype'),
+	url('/Flama/hinted-FlamaLight-Italic.woff2') format('woff2'),
+	url('/Flama/hinted-FlamaLight-Italic.woff') format('woff'),
+	url('/Flama/hinted-FlamaLight-Italic.ttf') format('truetype'),
+	url('/Flama/hinted-FlamaLight-Italic.svg#FlamaLight-Italic') format('svg');
 	font-weight: 300;
 	font-style: italic;
 }
+
 .flama-light-italic {
   font-family: 'FlamaLight';
   font-weight: 300;
@@ -352,7 +364,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE XBdCn';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.eot');
-  src: local('AkzidenzGroteskBE-XBdCnIt'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.svg#AkzidenzGroteskBE-XBdCnIt') format('svg');
+  src: local('AkzidenzGroteskBE-XBdCnIt'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCnIt.svg#AkzidenzGroteskBE-XBdCnIt') format('svg');
   font-weight: 900;
   font-style: italic;
 }
@@ -366,7 +383,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.eot');
-  src: local('AkzidenzGroteskBE-Bold'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.svg#AkzidenzGroteskBE-Bold') format('svg');
+  src: local('AkzidenzGroteskBE-Bold'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Bold.svg#AkzidenzGroteskBE-Bold') format('svg');
   font-weight: bold;
   font-style: normal;
 }
@@ -380,7 +402,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE XBdCn';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.eot');
-  src: local('AkzidenzGroteskBE-XBdCn'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.svg#AkzidenzGroteskBE-XBdCn') format('svg');
+  src: local('AkzidenzGroteskBE-XBdCn'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBdCn.svg#AkzidenzGroteskBE-XBdCn') format('svg');
   font-weight: 900;
   font-style: normal;
 }
@@ -394,7 +421,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-It.eot');
-  src: local('AkzidenzGroteskBE-It'), url('/Akzidenz/hinted-AkzidenzGroteskBE-It.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-It.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-It.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-It.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-It.svg#AkzidenzGroteskBE-It') format('svg');
+  src: local('AkzidenzGroteskBE-It'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-It.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-It.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-It.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-It.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-It.svg#AkzidenzGroteskBE-It') format('svg');
   font-weight: normal;
   font-style: italic;
 }
@@ -408,7 +440,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE BoldEx';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.eot');
-  src: local('AkzidenzGroteskBE-BoldExIt'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.svg#AkzidenzGroteskBE-BoldExIt') format('svg');
+  src: local('AkzidenzGroteskBE-BoldExIt'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldExIt.svg#AkzidenzGroteskBE-BoldExIt') format('svg');
   font-weight: bold;
   font-style: italic;
 }
@@ -422,7 +459,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE LightCn';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.eot');
-  src: local('AkzidenzGroteskBE-LightCn'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.svg#AkzidenzGroteskBE-LightCn') format('svg');
+  src: local('AkzidenzGroteskBE-LightCn'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightCn.svg#AkzidenzGroteskBE-LightCn') format('svg');
   font-weight: 300;
   font-style: normal;
 }
@@ -436,7 +478,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE Cn';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.eot');
-  src: local('AkzidenzGroteskBE-Cn'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.svg#AkzidenzGroteskBE-Cn') format('svg');
+  src: local('AkzidenzGroteskBE-Cn'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Cn.svg#AkzidenzGroteskBE-Cn') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -450,7 +497,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE Cn';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.eot');
-  src: local('AkzidenzGroteskBE-BoldCn'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.svg#AkzidenzGroteskBE-BoldCn') format('svg');
+  src: local('AkzidenzGroteskBE-BoldCn'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldCn.svg#AkzidenzGroteskBE-BoldCn') format('svg');
   font-weight: bold;
   font-style: normal;
 }
@@ -464,7 +516,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.eot');
-  src: local('AkzidenzGroteskBE-BoldIt'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.svg#AkzidenzGroteskBE-BoldIt') format('svg');
+  src: local('AkzidenzGroteskBE-BoldIt'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldIt.svg#AkzidenzGroteskBE-BoldIt') format('svg');
   font-weight: bold;
   font-style: italic;
 }
@@ -478,7 +535,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE Ex';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.eot');
-  src: local('AkzidenzGroteskBE-Ex'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.svg#AkzidenzGroteskBE-Ex') format('svg');
+  src: local('AkzidenzGroteskBE-Ex'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Ex.svg#AkzidenzGroteskBE-Ex') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -492,7 +554,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE LightOsF';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.eot');
-  src: local('AkzidenzGroteskBE-LightOsF'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.svg#AkzidenzGroteskBE-LightOsF') format('svg');
+  src: local('AkzidenzGroteskBE-LightOsF'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightOsF.svg#AkzidenzGroteskBE-LightOsF') format('svg');
   font-weight: 300;
   font-style: normal;
 }
@@ -506,21 +573,31 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.eot');
-  src: local('AkzidenzGroteskBE-Md'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.svg#AkzidenzGroteskBE-Md') format('svg');
+  src: local('☺'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Md.svg#AkzidenzGroteskBE-Md') format('svg');
   font-weight: 500;
   font-style: normal;
 }
 
-.ag-medium {
+/*.ag-medium {
   font-family: 'Akzidenz Grotesk BE';
   font-weight: 500;
   font-style: normal;
-}
+}*/
 
 @font-face {
   font-family: 'Akzidenz Grotesk BE';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.eot');
-  src: local('AkzidenzGroteskBE-MdIt'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.svg#AkzidenzGroteskBE-MdIt') format('svg');
+  src: local('AkzidenzGroteskBE-MdIt'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdIt.svg#AkzidenzGroteskBE-MdIt') format('svg');
   font-weight: 500;
   font-style: italic;
 }
@@ -531,24 +608,36 @@
   font-style: italic;
 }
 
+/* */
 @font-face {
   font-family: 'Akzidenz Grotesk BE';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.eot');
-  src: local('AkzidenzGroteskBE-Regular'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.svg#AkzidenzGroteskBE-Regular') format('svg');
+  src: local('☺'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Regular.svg#AkzidenzGroteskBE-Regular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-.ag-regular {
+/*.ag-regular {
   font-family: 'Akzidenz Grotesk BE';
   font-weight: normal;
   font-style: normal;
-}
+}*/
+/* */
 
 @font-face {
   font-family: 'Akzidenz Grotesk BE Ex';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.eot');
-  src: local('AkzidenzGroteskBE-MdEx'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.svg#AkzidenzGroteskBE-MdEx') format('svg');
+  src: local('AkzidenzGroteskBE-MdEx'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdEx.svg#AkzidenzGroteskBE-MdEx') format('svg');
   font-weight: 500;
   font-style: normal;
 }
@@ -562,7 +651,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE Super';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.eot');
-  src: local('AkzidenzGroteskBE-Super'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.svg#AkzidenzGroteskBE-Super') format('svg');
+  src: local('AkzidenzGroteskBE-Super'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Super.svg#AkzidenzGroteskBE-Super') format('svg');
   font-weight: 900;
   font-style: normal;
 }
@@ -576,7 +670,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE XBd';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.eot');
-  src: local('AkzidenzGroteskBE-XBd'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.svg#AkzidenzGroteskBE-XBd') format('svg');
+  src: local('AkzidenzGroteskBE-XBd'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-XBd.svg#AkzidenzGroteskBE-XBd') format('svg');
   font-weight: 900;
   font-style: normal;
 }
@@ -590,7 +689,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE MdCn';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.eot');
-  src: local('AkzidenzGroteskBE-MdCn'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.svg#AkzidenzGroteskBE-MdCn') format('svg');
+  src: local('AkzidenzGroteskBE-MdCn'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCn.svg#AkzidenzGroteskBE-MdCn') format('svg');
   font-weight: 500;
   font-style: normal;
 }
@@ -604,7 +708,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE LightEx';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.eot');
-  src: local('AkzidenzGroteskBE-LightEx'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.svg#AkzidenzGroteskBE-LightEx') format('svg');
+  src: local('AkzidenzGroteskBE-LightEx'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-LightEx.svg#AkzidenzGroteskBE-LightEx') format('svg');
   font-weight: 300;
   font-style: normal;
 }
@@ -618,7 +727,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE BoldEx';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.eot');
-  src: local('AkzidenzGroteskBE-BoldEx'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.svg#AkzidenzGroteskBE-BoldEx') format('svg');
+  src: local('AkzidenzGroteskBE-BoldEx'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-BoldEx.svg#AkzidenzGroteskBE-BoldEx') format('svg');
   font-weight: bold;
   font-style: normal;
 }
@@ -632,7 +746,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.eot');
-  src: local('AkzidenzGroteskBE-Light'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.svg#AkzidenzGroteskBE-Light') format('svg');
+  src: local('AkzidenzGroteskBE-Light'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-Light.svg#AkzidenzGroteskBE-Light') format('svg');
   font-weight: 300;
   font-style: normal;
 }
@@ -646,7 +765,12 @@
 @font-face {
   font-family: 'Akzidenz Grotesk BE MdCn';
   src: url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.eot');
-  src: local('AkzidenzGroteskBE-MdCnIt'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.eot?#iefix') format('embedded-opentype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.woff2') format('woff2'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.woff') format('woff'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.ttf') format('truetype'), url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.svg#AkzidenzGroteskBE-MdCnIt') format('svg');
+  src: local('AkzidenzGroteskBE-MdCnIt'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.eot?#iefix') format('embedded-opentype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.woff2') format('woff2'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.woff') format('woff'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.ttf') format('truetype'),
+  url('/Akzidenz/hinted-AkzidenzGroteskBE-MdCnIt.svg#AkzidenzGroteskBE-MdCnIt') format('svg');
   font-weight: 500;
   font-style: italic;
 }
