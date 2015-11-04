@@ -103,19 +103,11 @@
 /* ----------------------- */
 
 $(document).ready(function (){
-  $(".ag-regular").fontface({
-    fontName : "Akzidenz Grotesk BE",
-    fontFamily : ["Akzidenz Grotesk BE", "Akzidenz Grotesk BE", "Helvetica, Arial, sans-serif"],
-    filePath : "/fonts/All/",
-    fileName : "hinted-AkzidenzGroteskBE-Regular",
-    fontWeight : "normal"
-  });
+
 
   $(".ag-medium").fontface({
     fontName : "Akzidenz Grotesk BE",
-    fontFamily : ["Akzidenz Grotesk BE", "Akzidenz Grotesk BE", "Helvetica, Arial, sans-serif"],
-    filePath : "/fonts/All/",
     fileName : "hinted-AkzidenzGroteskBE-Md",
-    fontWeight: "500"
+    fontWeight : "500"
   });
 });

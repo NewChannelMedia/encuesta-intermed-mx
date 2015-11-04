@@ -40,7 +40,7 @@
     <div class="container">
       <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-1">
         <p class="text-right">
-          <span class="ag-regular s65 shadow">Bienvenido a </span><span class="ag-medium s65 w500 shadow">Intermed<sup><span class="shadow s35">&reg;</span></sup></span><br>
+          <span class="ag-regular s65 shadow">Bienvenido a </span><span class="ag-medium s65 shadow">Intermed<sup><span class="shadow s35">&reg;</span></sup></span><br>
           <span class="ag-medium s30 shadow">La red social de la salud</span>
         </p>
         <p class="text-center">
