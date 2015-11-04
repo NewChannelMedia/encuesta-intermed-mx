@@ -1367,3 +1367,7 @@ canvas {
 #subVersatilidad {
   margin-bottom: 360px
 }
+
+#opcionesAgregadas span{
+  cursor: pointer;
+}

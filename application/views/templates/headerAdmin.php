@@ -63,6 +63,17 @@
           <a href="<?= base_url();?>admin/mensajes"><span class="glyphicon glyphicon-envelope nav-icon"></span> Mensajes</a>
         </li>
         <li>
+          <a><span class="glyphicon glyphicon-wrench nav-icon"></span> Encuesta</a>
+          <ul class="nav-pills nav-stacked secondLevel-ul">
+            <li>
+              <a href="<?= base_url() ?>admin/categorias">Categorias</a>
+            </li>
+            <li>
+              <a href="<?= base_url() ?>admin/preguntas">Preguntas</a>
+            </li>
+          </ul>
+        </li>
+        <li>
           <a href="<?= base_url();?>admin/cerrar"><span class="glyphicon glyphicon-log-out nav-icon"></span> salir</a>
         </li>
       </ul>

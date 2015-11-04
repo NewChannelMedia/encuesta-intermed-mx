@@ -555,6 +555,22 @@
       		echo json_encode($array);
       }
 
+        public function categorias(){
+          $data['title'] = "Administrar categorias";
+          $this->load->view('templates/headerAdmin', $data);
+          $this->load->view('admin/adminCat', $data);
+          $this->load->view('templates/footerAdmin');
+        }
+
+        public function preguntas(){
+          $data['categorias'] = $this->Categorias_model->get_categorias();
+          $data['preguntas'] = $this->Preguntasm_model->get_preguntasm();
+          $data['title'] = "Administrar preguntas";
+          $this->load->view('templates/headerAdmin', $data);
+          $this->load->view('admin/adminPreg', $data);
+          $this->load->view('templates/footerAdmin');
+        }
+
   }
 
   function encuestas_dropDown($enviar, $tipo){
@@ -574,4 +590,5 @@
     $data .= '<label class="col-md-12"><input type="radio" name="radio'. $enviar['element'] .'" ' . $checked . ' onclick="ChartLine('.htmlspecialchars(print_r(json_encode($enviar),1)).')" > Linea</label>';
     return $data;
   }
+
 ?>
