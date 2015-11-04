@@ -5,7 +5,7 @@
 				sansserif : ", Helvetica, Arial, sans-serif"
 			},
 			 defaults = {
-				filePath: "/fonts/Akzidenz/",//change this to your font directory location
+				filePath: "/fonts/All/",//change this to your font directory location
 				fontFamily: "sans-serif",
 				fontStack: false,
 				fontStretch: "normal",
@@ -103,24 +103,19 @@
 /* ----------------------- */
 
 $(document).ready(function (){
-  $(".akzidenz").fontface({
-    fontName : "Akzidenz Grotesk BE",
-    fontFamily : ["Akzidenz Grotesk BE", "Akzidenz Grotesk BE", "Helvetica, Arial, sans-serif"],
-    filePath : "/fonts/Akzidenz/",
-  });
-
   $(".ag-regular").fontface({
     fontName : "Akzidenz Grotesk BE",
     fontFamily : ["Akzidenz Grotesk BE", "Akzidenz Grotesk BE", "Helvetica, Arial, sans-serif"],
-    filePath : "/fonts/Akzidenz/",
-    fileName : "hinted-AkzidenzGroteskBE-Regular"
+    filePath : "/fonts/All/",
+    fileName : "hinted-AkzidenzGroteskBE-Regular",
+    fontWeight : "normal"
   });
 
-  $(".akzidenz.ag-medium.bold").fontface({
+  $(".ag-medium").fontface({
     fontName : "Akzidenz Grotesk BE",
     fontFamily : ["Akzidenz Grotesk BE", "Akzidenz Grotesk BE", "Helvetica, Arial, sans-serif"],
-    filePath : "/fonts/Akzidenz/",
+    filePath : "/fonts/All/",
     fileName : "hinted-AkzidenzGroteskBE-Md",
-    fontWeight: "bold"
+    fontWeight: "500"
   });
 });
