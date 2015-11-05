@@ -84,4 +84,50 @@ class Encuestam_model extends CI_Model {
     //Revisar que el codigo de la encuesta no este registrado
     //Registrar la encuesta y relacionarla con el usuario_id obtenido al inicio
   }
+
+  public function delete_etapa($etapa){
+    if ($etapa === FALSE){
+      return FALSE;
+    }
+
+    $data = array(
+      'etapa' => 0
+    );
+
+    $this->db->where('etapa', $etapa);
+    if ($this->db->update('categorias', $data)){
+        $cant = 0;
+        $result = $this->db->list_fields('encuestasM');
+        foreach ($result as $field) {
+          if (stripos($field, 'etapa_') === 0){
+            $cant++;
+          }
+        }
+        for ($i=$etapa+1; $i <= $cant; $i++) {
+          $data = array(
+            'etapa' => $i-1
+          );
+          $this->db->where('etapa', $i);
+          $this->db->update('categorias', $data);
+        }
+
+        $cant = $cant-1;
+
+        $this->load->dbforge();
+        $result = $this->db->list_fields('encuestasM');
+        foreach ($result as $field) {
+          if (stripos($field, 'etapa_') === 0){
+            $this->dbforge->drop_column('encuestasM', $field);
+          }
+        }
+
+        for ($i=1; $i <= $cant; $i++) {
+          $fields = array(
+            'etapa_' . $i => array('type' =>'INT','default' => 0)
+          );
+          $this->dbforge->add_column('encuestasM', $fields);
+        }
+        return true;
+    }
+  }
 }

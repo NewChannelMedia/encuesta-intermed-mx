@@ -392,7 +392,6 @@
         $this->load->view('templates/footer2', $data);
         //Redirect /about o index
       }
-
     }
 
     public function checkStatus($codigo){
@@ -441,5 +440,6 @@
       $data['status'] = $status;
       return $data;
     }
+
   }
 ?>
