@@ -195,7 +195,7 @@
 
   function eliminarPregunta(id){
     bootbox.confirm({
-        size: 'medium',
+        size: 'small',
         message: "Pregunta: " + $('tr#'+id).find('td.pregunta').html(),
         title: "¿Estas seguro de querer eliminar la pregunta?",
         callback: function(result){
@@ -318,67 +318,86 @@
       }
     });
 
-    var data2 = {
-      pregunta_id: id,
-      categoria_id: categoria,
-      pregunta: pregunta,
-      tipo: tipo,
-      opciones: respuestas
+    if (tipo == "radio" || tipo == "checkbox" || tipo == "text|enum" ){
+      if (respuestas == ""){
+        guardar = false;
+      } else {
+        guardar = true;
+      }
+    } else {
+      guardar = true;
     }
 
-    $.ajax( {
-      url: '/encuesta-intermed/Admin/guardarPregunta',
-      type: "POST",
-      dataType: 'JSON',
-      data: data2,
-      async: true,
-      success: function (data) {
-        if (data.success){
-          id = data2.pregunta_id;
-          if (id != '' && parseInt(id) >= 0){
-            console.log('Modificar');
-            $('tr#'+id).find('td.pregunta').html(pregunta);
-            $('tr#'+id).find('td.categoria').find('input').prop('value',categoria);
-            $('tr#'+id).find('td.categoria').find('.value').html($('#categoriaPreg option:selected').text());
-            $('tr#'+id).find('td.tipo').find('input').prop('value',tipo);
-            $('tr#'+id).find('td.tipo').find('.value').html($('#tipoPreg option:selected').text());
-            $('tr#'+id).find('td.opciones').html('');
-            respuestas = respuestas.split("|");
-            respuestas.forEach(function(resp){
-              if ($('tr#'+id).find('td.opciones').html() == ''){
-                $('tr#'+id).find('td.opciones').append(resp);
-              } else {
-                $('tr#'+id).find('td.opciones').append('<br>' + resp);
-              }
-            });
-          } else {
-            id = data.pregunta_id;
-            console.log('Agregar');
-            //Insertar nuevo
-            $('#listapreguntas').append('<tr id="'+ id +'"></tr>');
-            $('tr#'+id).append('<td class="pregunta">'+ data2.pregunta +'</td>');
-            $('tr#'+id).append('<td class="text-center categoria"><input type="hidden" value="'+ data2.categoria_id +'">'+ $('#categoriaPreg option:selected').text() +'</td>');
-            $('tr#'+id).append('<td class="text-center tipo">'+ data2.tipo +'</td>');
-            var opciones = '';
-            data2.opciones.split("|").forEach(function(opc){
-              if (opciones == ''){
-                opciones += opc;
-              } else {
-                opciones += '<br>' + opc;
-              }
-            });
-            $('tr#'+id).append('<td class="text-center opciones">'+opciones + '</td>');
-            $('tr#'+id).append('<td class="text-center"><a onclick="cargarPregunta('+ id +')"><span class="glyphicon glyphicon-pencil"></span></a></td>');
-            $('tr#'+id).append('<td class="text-center"><a onclick="eliminarPregunta('+ id +')" style="color: red;"><span class="glyphicon glyphicon-trash"></span></a></td>');
-          }
-          $('#adminPregunta').modal('hide');
+    if (guardar){
 
-        }
-      },
-      error: function (err) {
-        console.log( "Error: AJax dead :" + JSON.stringify(err));
+      var data2 = {
+        pregunta_id: id,
+        categoria_id: categoria,
+        pregunta: pregunta,
+        tipo: tipo,
+        opciones: respuestas
       }
-    } );
+
+      $.ajax( {
+        url: '/encuesta-intermed/Admin/guardarPregunta',
+        type: "POST",
+        dataType: 'JSON',
+        data: data2,
+        async: true,
+        success: function (data) {
+          if (data.success){
+            id = data2.pregunta_id;
+            if (id != '' && parseInt(id) >= 0){
+              console.log('Modificar');
+              $('tr#'+id).find('td.pregunta').html(pregunta);
+              $('tr#'+id).find('td.categoria').find('input').prop('value',categoria);
+              $('tr#'+id).find('td.categoria').find('div').html($('#categoriaPreg option:selected').text());
+              $('tr#'+id).find('td.tipo').find('input').prop('value',tipo);
+              $('tr#'+id).find('td.tipo').find('div').html($('#tipoPreg option:selected').text());
+              $('tr#'+id).find('td.opciones').html('');
+              respuestas = respuestas.split("|");
+              respuestas.forEach(function(resp){
+                if ($('tr#'+id).find('td.opciones').html() == ''){
+                  $('tr#'+id).find('td.opciones').append(resp);
+                } else {
+                  $('tr#'+id).find('td.opciones').append('<br>' + resp);
+                }
+              });
+            } else {
+              id = data.pregunta_id;
+              console.log('Agregar');
+              //Insertar nuevo
+              $('#listapreguntas').append('<tr id="'+ id +'"></tr>');
+              $('tr#'+id).append('<td class="pregunta">'+ data2.pregunta +'</td>');
+              $('tr#'+id).append('<td class="text-center categoria"><input type="hidden" value="'+ data2.categoria_id +'">'+ $('#categoriaPreg option:selected').text() +'</td>');
+              $('tr#'+id).append('<td class="text-center tipo">'+ data2.tipo +'</td>');
+              var opciones = '';
+              data2.opciones.split("|").forEach(function(opc){
+                if (opciones == ''){
+                  opciones += opc;
+                } else {
+                  opciones += '<br>' + opc;
+                }
+              });
+              $('tr#'+id).append('<td class="text-center opciones">'+opciones + '</td>');
+              $('tr#'+id).append('<td class="text-center"><a onclick="cargarPregunta('+ id +')"><span class="glyphicon glyphicon-pencil"></span></a></td>');
+              $('tr#'+id).append('<td class="text-center"><a onclick="eliminarPregunta('+ id +')" style="color: red;"><span class="glyphicon glyphicon-trash"></span></a></td>');
+            }
+            $('#adminPregunta').modal('hide');
+
+          }
+        },
+        error: function (err) {
+          console.log( "Error: AJax dead :" + JSON.stringify(err));
+        }
+      } );
+    } else {
+      bootbox.alert({
+          size: 'small',
+          message: 'No puedes guardar una pregunta de tipo "ordenar" o "seleccion" sin opciones.',
+          title: "No se pueden guardar los cambios"
+        });
+    }
   }
 
   var frmOpciones = '<div class="col-sm-2"><label for="opcionAgregar">Opcion: </label></div><div class="col-sm-10"><div class="input-group" style="width: 100%"><input type="text" class="form-control" id="opcionAgregar"/><span class="input-group-btn"><button class="btn btn-success" onclick="agregarOpcion(); return false;"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></span></div></div><div class="col-sm-12"><ul class="list-inline text-center" style="margin-top:20px; overflow-x: hidden;" id="opcionesAgregadas"></ul></div>';

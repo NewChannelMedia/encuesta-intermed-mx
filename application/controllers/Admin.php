@@ -665,16 +665,18 @@
 
         public function guardarCambioscategorias(){
           $data = $this->input->post('data');
+          $int = 0;
+          $data = json_decode(json_encode($data),1);
           foreach ($data as $etapa) {
             $numEt = $etapa['etapa'];
-            echo '<pre>'.print_r($etapa['categorias'],1).'</pre>';
-            $categorias = $etapa['categorias'];
-
-            foreach ($categorias as $categoria) {
-              //echo //$categoria['id'];
+            if (array_key_exists('categorias',$etapa)){
+              $categorias = $etapa['categorias'];
+              foreach ($categorias as $categoria) {
+                $result = $this->Categorias_model->update_etapaCategoria($categoria['id'],$numEt,$int++);
+              }
             }
           }
-          //$result = $this->Categorias_model->delete_categoria($categoria_id);
+          $result = true;
           $respuesta = array(
              'success' => $result
           );

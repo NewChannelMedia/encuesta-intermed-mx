@@ -7,7 +7,7 @@ class Categorias_model extends CI_Model {
 
   public function get_categorias()
   {
-    $this->db->order_by("id", "asc");
+    $this->db->order_by("orden", "asc");
     $query = $this->db->get('categorias');
     return $query->result_array();
   }
@@ -18,6 +18,7 @@ class Categorias_model extends CI_Model {
     {
       return false;
     }
+      $this->db->order_by("orden", "asc");
     $query = $this->db->get_where('categorias', array('etapa' => $etapa));
     return $query->result_array();
   }
@@ -73,5 +74,40 @@ class Categorias_model extends CI_Model {
     }
     return $result;
   }
+
+  public function update_etapaCategoria($categoria_id = FALSE,$etapa=FALSE, $orden){
+    if ($categoria_id === FALSE || $etapa === FALSE){
+      return FALSE;
+    }
+    $data = array(
+      'etapa'=>$etapa,
+      'orden'=> $orden
+    );
+    $result = false;
+    $this->db->where('id', $categoria_id);
+    $result = $this->db->update('categorias', $data);
+    return $result;
+  }
+
+  public function mdate($format, $microtime = null) {
+        $microtime = explode(' ', ($microtime ? $microtime : microtime()));
+        if (count($microtime) != 2) return false;
+        $microtime[0] = $microtime[0] * 1000000;
+        $format = str_replace('u', $microtime[0], $format);
+        return date($format, $microtime[1]);
+    }
+
+
+    public function existe_etapa($etapa){
+      $existe = false;
+      $this->load->dbforge();
+      $result = $this->db->list_fields('encuestasM');
+      foreach ($result as $field) {
+        if ($field == "etapa_".$etapa){
+          $existe = true;
+        }
+      }
+      return $existe;
+    }
 
 }
