@@ -49,10 +49,18 @@ class Encuestam_model extends CI_Model {
                 'count(*) as total'
             );
     $this->db->select($select);
-    $this->db->where('etapa_1', "1");
-    $this->db->where('etapa_2', "1");
-    $this->db->where('etapa_3', "1");
-    $this->db->where('etapa_4', "1");
+
+    $cant = 0;
+    $result = $this->db->list_fields('encuestasM');
+    foreach ($result as $field) {
+      if (stripos($field, 'etapa_') === 0){
+        $cant++;
+      }
+    }
+
+    for ($i=1; $i <= $cant; $i++) {
+      $this->db->where('etapa_'.$i, "1");
+    }
     $query = $this->db->get('encuestasM');
     return $query->row_array();
   }
@@ -66,10 +74,17 @@ class Encuestam_model extends CI_Model {
     $this->db->select($select);
     $this->db->from('encuestasM');
 
-    $this->db->where('etapa_1', "1");
-    $this->db->where('etapa_2', "1");
-    $this->db->where('etapa_3', "1");
-    $this->db->where('etapa_4', "1");
+    $cant = 0;
+    $result = $this->db->list_fields('encuestasM');
+    foreach ($result as $field) {
+      if (stripos($field, 'etapa_') === 0){
+        $cant++;
+      }
+    }
+
+    for ($i=1; $i <= $cant; $i++) {
+      $this->db->where('etapa_'.$i, "1");
+    }
     $this->db->join('respuestasM', 'respuestasM.encuestaM_id = encuestasM.id');
 
     $this->db->group_by('DATE(respuestasM.fecha)');

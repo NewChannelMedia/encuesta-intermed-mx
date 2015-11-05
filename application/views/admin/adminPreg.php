@@ -40,7 +40,7 @@
                                 echo "Selección multiple";
                                 break;
                             case "radio":
-                                echo "Seleccion unica";
+                                echo "Selección única";
                                 break;
                           }
                         ?>
@@ -120,7 +120,7 @@
                   <option value='text'>Abierta</option>
                   <option value='money'>Dinero</option>
                   <option value='text|enum'>Ordenar</option>
-                  <option value='radio'>Selección unica</option>
+                  <option value='radio'>Selección única</option>
                   <option value='checkbox'>Selección multiple</option>
                 </select>
               </div>

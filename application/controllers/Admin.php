@@ -243,7 +243,7 @@
 
         $total = 0;
         foreach ($categorias as $cat) {
-            if ($cat['id']>0){
+            if ($cat['id']>0 && $cat['etapa']>0){
             $categoriasArray = array();
             $categoriasArray['name'] = $cat['categoria'];
             $preguntas = $this->Preguntasm_model->get_preguntamByCategoria($cat['id']);
@@ -389,7 +389,7 @@
 
         $total = 0;
         foreach ($categorias as $cat) {
-            if ($cat['id']>0){
+            if ($cat['id']>0 && $cat['etapa']>0){
             $categoriasArray = array();
             $categoriasArray['name'] = $cat['categoria'];
             $preguntas = $this->Preguntasm_model->get_preguntamByCategoria($cat['id']);
