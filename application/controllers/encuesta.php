@@ -267,17 +267,18 @@
 
         $resultado = $this->Categorias_model->get_categoriasByEtapa($etapa);
 
+        $data['contestada'] = 'contestada';
+
         foreach ($resultado as $categoria) {
           if ($categoria){
             $contenido .= '<div class="block-container-category"><span class="glyphicon glyphicon-asterisk"></span><span class="category">' . $categoria['categoria'] . '</span></div>';
             $contenido .= '<table class="table table-striped block-container-table">';
             $preguntas = $this->Preguntasm_model->get_preguntamByCategoria($categoria['id']);
 
-            $data['contestada'] = '';
             foreach ($preguntas as $pregunta) {
                 $respuesta = $this->Respuestasm_model->get_respuestaByEncuestaPregunta($data['encuesta_id'], $pregunta['id']);
-                if (strlen($respuesta['pregunta_' . $pregunta['id']])>0){
-                  $data['contestada'] = 'contestada';
+                if (strlen($respuesta['pregunta_' . $pregunta['id']])==0){
+                  $data['contestada'] = '';
                 }
                 $respuesta = explode('|',$respuesta['pregunta_' . $pregunta['id']]);
                 //echo 'respuesta: <pre>' . print_r($respuesta,1) . '</pre>';

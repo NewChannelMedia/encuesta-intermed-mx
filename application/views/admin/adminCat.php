@@ -189,7 +189,7 @@
         };
         categorias.push(li);
       });
-      if (categorias.length == 0){
+      if (categorias.length == 0 && $(this).prop('id').split("_")[1] != 0){
         guardar = false;
       }
       ul = {

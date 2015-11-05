@@ -243,6 +243,7 @@
 
         $total = 0;
         foreach ($categorias as $cat) {
+            if ($cat['id']>0){
             $categoriasArray = array();
             $categoriasArray['name'] = $cat['categoria'];
             $preguntas = $this->Preguntasm_model->get_preguntamByCategoria($cat['id']);
@@ -365,6 +366,7 @@
             }
             $categoriasArray['preguntas'] = $preguntasArray;
             $resultado[] = $categoriasArray;
+          }
         }
 
         $data = array('resultado'=> $resultado);
@@ -387,6 +389,7 @@
 
         $total = 0;
         foreach ($categorias as $cat) {
+            if ($cat['id']>0){
             $categoriasArray = array();
             $categoriasArray['name'] = $cat['categoria'];
             $preguntas = $this->Preguntasm_model->get_preguntamByCategoria($cat['id']);
@@ -509,6 +512,7 @@
             }
             $categoriasArray['preguntas'] = $preguntasArray;
             $resultado[] = $categoriasArray;
+          }
         }
 
         $data = array('resultado'=> $resultado);
