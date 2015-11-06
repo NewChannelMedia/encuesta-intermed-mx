@@ -1,7 +1,7 @@
 <!-- Formulario para agregar contactos al directorio -->
 <section id="capturaDirectorio" class="directorioSection">
   <div id="nombreDatos" class="container-fluid nombreDatosContainer" >
-    <form method="post" onsubmit="return false;" id="registroMedico" class="panel">
+    <form method="post" onsubmit="guardarMedico();return false;" id="registroMedico" class="panel">
       <div class="panel-body">
 	      <input type="hidden" id="medico_id" value="">
         <div class="row">
@@ -20,19 +20,29 @@
                 <input type="email" class="form-control" id="email" placeholder="E-mail:">
               </div>
               <div class="form-group col-md-6">
-                                <select class="form-control" id="especialidad" >
+                <!--
+                <select class="form-control" id="especialidad" >
                   <option value=""></option>
                   <?php
-                    foreach ($especialidades as $especialidad) {
+                    /*foreach ($especialidades as $especialidad) {
                       echo '<option value="' . $especialidad['id'] . '">'. $especialidad['especialidad'] .'</option>';
-                    }
+                    }*/
                   ?>
                 </select>
+                -->
+                <input type="text" class="form-control" id="especialidad" placeholder="Especialidad:">
+                <?php
+                  echo '<script type="text/javascript">var autocompleteEspecialidades = [];</script>';
+                  foreach ($especialidades as $especialidad) {
+                    echo '<script type="text/javascript">autocompleteEspecialidades.push("'.$especialidad['especialidad'].'")</script>';
+                  }
+                ?>
+
               </div>
             </div>
           </div>
           <div class="col-md-4">
-            <button class="form-control btn btn-info" id="agregarDatos" onclick="guardarMedico();">
+            <button class="form-control btn btn-info" id="agregarDatos" type="submit">
               <span class="glyphicon glyphicon-star-empty"></span>
             </button>
           </div>
@@ -91,13 +101,22 @@
 <section id="telefonos">
   <div class="container">
     <div class="row">
-      <form>
+      <form method="post" onsubmit="guardarTelefono();return false;" id="registroTelefonos" class="panel">
         <div class="col-md-8">
           <div class="col-md-12">
+            <h3>Números de teléfono</h3>
+            <div class="row">
+            <div class="col-md-4">
+              <select class="form-control" id="tipoTelefono">
+                <option value="casa">Casa</option>
+                <option value="celular">Celular</option>
+                <option value="oficina">Oficina</option>
+                <option value="localizador">Localizador</option>
+              </select>
+            </div>
             <div class="col-md-4">
               <div class="form-group">
-                <label for="lada">Lada:</label>
-                <input type="number" id="lada" class="form-control" placeholder="Lada:"/>
+                <input type="number" id="ladaTelefono" class="form-control" placeholder="Lada:"/>
               </div>
             </div>
             <div class="col-md-4">
@@ -105,15 +124,11 @@
                 <input type="number" id="numTelefono" class="form-control" placeholder="numero telefono" />
               </div>
             </div>
-            <div class="col-md-4">
-              <select class="form-control">
-                <option value="0"></option>
-              </select>
-            </div>
           </div>
         </div>
+        </div>
         <div class="col-md-4">
-          <button type="button" id="enviarFon" class="form-control">
+          <button type="submit" id="enviarFon" class="form-control">
             <span class="glyphicon glyphicon-leaf"></span>
           </button>
         </div>
@@ -122,4 +137,3 @@
   </div>
 </section>
 <!-- FIN TERCER SECCION -->
-<script src="<?echo base_url(); ?>js/utils-capturista.js"></script>
