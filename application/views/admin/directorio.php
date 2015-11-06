@@ -1,6 +1,6 @@
 <!-- Formulario para agregar contactos al directorio -->
 <section id="nombreDatos">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row"><!-- inicio row -->
       <form>
         <div class="col-md-8">
@@ -53,7 +53,7 @@
 </section>
 <!-- segunda seccion -->
 <section id="calles">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row"><!-- Inicio row -->
       <form>
         <div class="col-md-8">
@@ -98,7 +98,7 @@
 <!-- Fin segunda seccion -->
 <!--- INICIO TERCER SECCION -->
 <section id="telefonos">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <form>
         <div class="col-md-8">
