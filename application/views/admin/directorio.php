@@ -1,8 +1,9 @@
 <!-- Formulario para agregar contactos al directorio -->
 <section id="capturaDirectorio" class="directorioSection">
   <div id="nombreDatos" class="container-fluid nombreDatosContainer" >
-    <div class="panel guardado"><!-- inicio row -->
-      <form class="panel-body">
+    <form method="post" onsubmit="return false;" id="registroMedico" class="panel">
+      <div class="panel-body">
+	      <input type="hidden" id="medico_id" value="">
         <div class="row">
           <div class="col-md-8">
             <div class="row">
@@ -19,12 +20,19 @@
                 <input type="email" class="form-control" id="email" placeholder="E-mail:">
               </div>
               <div class="form-group col-md-6">
-                <input type="email" class="form-control" id="especialidad" placeholder="Especialidad:">
+                                <select class="form-control" id="especialidad" >
+                  <option value=""></option>
+                  <?php
+                    foreach ($especialidades as $especialidad) {
+                      echo '<option value="' . $especialidad['id'] . '">'. $especialidad['especialidad'] .'</option>';
+                    }
+                  ?>
+                </select>
               </div>
             </div>
           </div>
           <div class="col-md-4">
-            <button class="btn btn-info btn-lg btn-block" id="agregarDatos">
+            <button class="form-control btn btn-info" id="agregarDatos" onclick="guardarMedico();">
               <span class="glyphicon glyphicon-star-empty"></span>
             </button>
           </div>
@@ -114,3 +122,4 @@
   </div>
 </section>
 <!-- FIN TERCER SECCION -->
+<script src="<?echo base_url(); ?>js/utils-capturista.js"></script>
