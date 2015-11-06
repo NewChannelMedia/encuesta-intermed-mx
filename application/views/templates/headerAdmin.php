@@ -73,6 +73,19 @@
             </li>
           </ul>
         </li>
+        <!-- Directorios -->
+        <li>
+          <a><span class="glyphicon glyphicon-plane nav-icon"></span> Directorio </a>
+          <ul class="nav-pills nav-stacked secondLevel-ul">
+            <li>
+              <a href="<?= base_url() ?>admin/directorio">Agregar datos</a>
+            </li>
+            <li>
+              <a href="<?= base_url() ?>admin/preguntas">Llamadas</a>
+            </li>
+          </ul>
+        </li>
+        <!-- Fin directorios -->
         <li>
           <a href="<?= base_url();?>admin/cerrar"><span class="glyphicon glyphicon-log-out nav-icon"></span> salir</a>
         </li>
