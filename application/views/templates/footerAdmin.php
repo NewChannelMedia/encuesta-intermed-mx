@@ -7,6 +7,7 @@
     <script src="<?echo base_url(); ?>js/bootstrap.min.js"></script>
     <script src="<?echo base_url(); ?>js/Chart.js"></script>
     <script src="<?echo base_url(); ?>js/bootbox.min.js"></script>
+    <script src="<?echo base_url(); ?>js/jquery-ui-touch-punch.min.js"></script>
     <script src="<?echo base_url(); ?>js/utils.js"></script>
   </body>
 </html>

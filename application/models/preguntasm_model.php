@@ -7,7 +7,7 @@ class Preguntasm_model extends CI_Model {
 
   public function get_preguntasm()
   {
-    $this->db->select('preguntasM.id, preguntasM.pregunta,preguntasM.tipo,preguntasM.opciones,preguntasM.categoria_id,categorias.categoria FROM preguntasM,categorias WHERE preguntasM.categoria_id = categorias.id', FALSE);
+    $this->db->select('preguntasM.id, preguntasM.pregunta,preguntasM.tipo,preguntasM.opciones,preguntasM.categoria_id,categorias.categoria FROM preguntasM,categorias WHERE preguntasM.categoria_id = categorias.id ORDER BY categorias.orden', FALSE);
     $query = $this->db->get();
     return $query->result_array();
   }
