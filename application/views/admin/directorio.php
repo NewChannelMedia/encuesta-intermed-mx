@@ -1,54 +1,36 @@
 <!-- Formulario para agregar contactos al directorio -->
-<section id="nombreDatos">
-  <div class="container">
-    <div class="row"><!-- inicio row -->
-      <form>
-        <div class="col-md-8">
-          <div class="row">
-            <!-- Datos nombre -->
-            <div class="col-md-12">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="nombre">Usuario datos</label>
-                  <input type="text" class="form-control" id="nombre" placeholder="Nombre/s:"/>
-                </div>
+<section id="capturaDirectorio" class="directorioSection">
+  <div id="nombreDatos" class="container-fluid nombreDatosContainer" >
+    <div class="panel guardado"><!-- inicio row -->
+      <form class="panel-body">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="row">
+              <div class="form-group col-md-4">
+                <input type="text" class="form-control" id="nombre" placeholder="Nombre(s)">
               </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="apellidoP" placeholder="Apellido paterno:"/>
-                </div>
+              <div class="form-group col-md-4">
+                <input type="text" class="form-control" id="apellidoP" placeholder="Apellido paterno">
               </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="apellidoM" placeholder="Apellido materno:"/>
-                </div>
+              <div class="form-group col-md-4">
+                <input type="text" class="form-control" id="apellidoM" placeholder="Apellido materno">
+              </div>
+              <div class="form-group col-md-6">
+                <input type="email" class="form-control" id="email" placeholder="E-mail:">
+              </div>
+              <div class="form-group col-md-6">
+                <input type="email" class="form-control" id="especialidad" placeholder="Especialidad:">
               </div>
             </div>
-            <!-- FIN DATOS NOMBRE: -->
-            <!-- CORREO -->
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="correo">Correo:</label>
-                <input type="email" class="form-control" id="email" placeholder="E-mail:"/>
-              </div>
-            </div>
-            <!-- FIN CORREO -->
           </div>
-        </div>
-        <!-- BOTON PARA AGREGAR -->
-        <div class="col-md-4">
-          <div class="form-group">
-            <div class="col-md-12"></div>
-            <div class="col-md-12">
-              <button class="form-control btn btn-danger" id="agregarDatos">
-                <span class="glyphicon glyphicon-star-empty"></span>
-              </button>
-            </div>
-            <div class="col-md-12"></div>
+          <div class="col-md-4">
+            <button class="btn btn-info btn-lg btn-block" id="agregarDatos">
+              <span class="glyphicon glyphicon-star-empty"></span>
+            </button>
           </div>
         </div>
       </form>
-    </div><!-- fin row -->
+    </div>
   </div>
 </section>
 <!-- segunda seccion -->
@@ -60,6 +42,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="direccion">Direccion/es:</label>
+              <input type="text" id="nombreDireccion" class="form-control" placeholder="nombre"/>
               <input type="text" id="direccion" class="form-control" placeholder="Calle/s:"/>
             </div>
             <div class="col-md-3">
