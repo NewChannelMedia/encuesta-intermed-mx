@@ -2,12 +2,12 @@
 class Encuestam_model extends CI_Model {
   public function __construct()
   {
-    $this->load->database();
+      $this->db_encuesta = $this->load->database('encuesta', TRUE);
   }
 
   public function get_encuestasm()
   {
-    $query = $this->db->get('encuestasM');
+    $query = $this->db_encuesta->get('encuestasM');
     return $query->result_array();
   }
 
@@ -17,7 +17,7 @@ class Encuestam_model extends CI_Model {
     {
       return FALSE;
     }
-    $query = $this->db->get_where('encuestasM', array('codigo' => $codigo));
+    $query = $this->db_encuesta->get_where('encuestasM', array('codigo' => $codigo));
     return $query->row_array();
   }
 
@@ -27,7 +27,7 @@ class Encuestam_model extends CI_Model {
     {
       return FALSE;
     }
-    $query = $this->db->get_where('encuestasM', array('usuario_id' => $usuario_id));
+    $query = $this->db_encuesta->get_where('encuestasM', array('usuario_id' => $usuario_id));
     return $query->row_array();
   }
 
@@ -39,8 +39,8 @@ class Encuestam_model extends CI_Model {
 
     $this->load->helper('url');
 
-    $this->db->where('id', $id);
-    return $this->db->update('encuestasM', $data);
+    $this->db_encuesta->where('id', $id);
+    return $this->db_encuesta->update('encuestasM', $data);
   }
 
   public function get_totalEncuestasM()
@@ -48,10 +48,10 @@ class Encuestam_model extends CI_Model {
     $select =   array(
                 'count(*) as total'
             );
-    $this->db->select($select);
+    $this->db_encuesta->select($select);
 
     $cant = 0;
-    $result = $this->db->list_fields('encuestasM');
+    $result = $this->db_encuesta->list_fields('encuestasM');
     foreach ($result as $field) {
       if (stripos($field, 'etapa_') === 0){
         $cant++;
@@ -59,9 +59,9 @@ class Encuestam_model extends CI_Model {
     }
 
     for ($i=1; $i <= $cant; $i++) {
-      $this->db->where('etapa_'.$i, "1");
+      $this->db_encuesta->where('etapa_'.$i, "1");
     }
-    $query = $this->db->get('encuestasM');
+    $query = $this->db_encuesta->get('encuestasM');
     return $query->row_array();
   }
 
@@ -71,11 +71,11 @@ class Encuestam_model extends CI_Model {
                 'count(*) as total',
                 'DATE(respuestasM.fecha) as fecha',
             );
-    $this->db->select($select);
-    $this->db->from('encuestasM');
+    $this->db_encuesta->select($select);
+    $this->db_encuesta->from('encuestasM');
 
     $cant = 0;
-    $result = $this->db->list_fields('encuestasM');
+    $result = $this->db_encuesta->list_fields('encuestasM');
     foreach ($result as $field) {
       if (stripos($field, 'etapa_') === 0){
         $cant++;
@@ -83,13 +83,13 @@ class Encuestam_model extends CI_Model {
     }
 
     for ($i=1; $i <= $cant; $i++) {
-      $this->db->where('etapa_'.$i, "1");
+      $this->db_encuesta->where('etapa_'.$i, "1");
     }
-    $this->db->join('respuestasM', 'respuestasM.encuestaM_id = encuestasM.id');
+    $this->db_encuesta->join('respuestasM', 'respuestasM.encuestaM_id = encuestasM.id');
 
-    $this->db->group_by('DATE(respuestasM.fecha)');
+    $this->db_encuesta->group_by('DATE(respuestasM.fecha)');
 
-    $query = $this->db->get();
+    $query = $this->db_encuesta->get();
     return $query->result_array();
   }
 
@@ -109,10 +109,10 @@ class Encuestam_model extends CI_Model {
       'etapa' => 0
     );
 
-    $this->db->where('etapa', $etapa);
-    if ($this->db->update('categorias', $data)){
+    $this->db_encuesta->where('etapa', $etapa);
+    if ($this->db_encuesta->update('categorias', $data)){
         $cant = 0;
-        $result = $this->db->list_fields('encuestasM');
+        $result = $this->db_encuesta->list_fields('encuestasM');
         foreach ($result as $field) {
           if (stripos($field, 'etapa_') === 0){
             $cant++;
@@ -122,14 +122,14 @@ class Encuestam_model extends CI_Model {
           $data = array(
             'etapa' => $i-1
           );
-          $this->db->where('etapa', $i);
-          $this->db->update('categorias', $data);
+          $this->db_encuesta->where('etapa', $i);
+          $this->db_encuesta->update('categorias', $data);
         }
 
         $cant = $cant-1;
 
         $this->load->dbforge();
-        $result = $this->db->list_fields('encuestasM');
+        $result = $this->db_encuesta->list_fields('encuestasM');
         foreach ($result as $field) {
           if (stripos($field, 'etapa_') === 0){
             $this->dbforge->drop_column('encuestasM', $field);
