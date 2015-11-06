@@ -38,5 +38,15 @@
         echo json_encode(array('success'=>true,'medico_id'=>$id));
       }
 
+
+      /**
+      * Recibe los valores por post para su envio al modelo y los inserte en su
+      * correspondiente tabla en la base de datos
+      * @param NO PARAMS
+      **/
+      public function insertDireccion(){
+        $valor = $this->input->post('prueba');
+        var_dump("Hola mundo ".$valor);
+      }
   }
 ?>
