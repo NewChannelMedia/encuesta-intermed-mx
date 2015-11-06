@@ -2,12 +2,12 @@
 class Newsletter_model extends CI_Model {
   public function __construct()
   {
-    $this->load->database();
+      $this->db_encuesta = $this->load->database('encuesta', TRUE);
   }
 
   public function get_newsletter()
   {
-    $query = $this->db->get('newsletter');
+    $query = $this->db_encuesta->get('newsletter');
     return $query->result_array();
   }
 
@@ -18,16 +18,16 @@ class Newsletter_model extends CI_Model {
       return false;
     }
 
-    $query = $this->db->get_where('newsletter', array('correo' => $correo));
+    $query = $this->db_encuesta->get_where('newsletter', array('correo' => $correo));
     $result = $query->row_array();
 
     if ($result) return $result;
     else {
-      $this->db->set('nombre', $nombre);
-      $this->db->set('correo', $correo);
-      $this->db->set('news', $news);
-      $this->db->set('pruebas', $pruebas);
-      return $this->db->insert('newsletter');
+      $this->db_encuesta->set('nombre', $nombre);
+      $this->db_encuesta->set('correo', $correo);
+      $this->db_encuesta->set('news', $news);
+      $this->db_encuesta->set('pruebas', $pruebas);
+      return $this->db_encuesta->insert('newsletter');
     }
   }
 
@@ -37,8 +37,8 @@ class Newsletter_model extends CI_Model {
     $select =   array(
                 'count(*) as total'
             );
-    $this->db->select($select);
-    $query = $this->db->get('newsletter');
+    $this->db_encuesta->select($select);
+    $query = $this->db_encuesta->get('newsletter');
     return $query->row_array();
   }
 }
