@@ -14,6 +14,7 @@
         $this->load->helpers('url');
         $this->load->model('Capespecialidades_model');
         $this->load->model('Capmedicos_model');
+        $this->load->model('Capdirecciones_model');
       }
 
       public function index(){
@@ -45,8 +46,27 @@
       * @param NO PARAMS
       **/
       public function insertDireccion(){
-        $valor = $this->input->post('prueba');
-        var_dump("Hola mundo ".$valor);
+        $consultorio = $this->input->post('consultorio');
+        $calle = $this->input->post('calle');
+        $estado = $this->input->post('estado');
+        $municipio = $this->input->post('municipio');
+        $ciudad = $this->input->post('ciudad');
+        $localidad = $this->input->post('localidad');
+        $id_medico = $this->input->post('id_medico');
+        $cp = $this->input->post('cp');
+        $numero = $this->input->post('numero');
+        $data = array(
+          'nombre'=>$consultorio,
+          'estado'=>$estado,
+          'municipio'=>$municipio,
+          'ciudad'=>$ciudad,
+          'localidad'=>$localidad,
+          'cp'=>$cp,
+          'calle'=>$calle,
+          'numero'=>$numero,
+          'medico_id'=>$id_medico
+        );
+        return $this->Capdirecciones_model->insertDireccion($data);
       }
   }
 ?>

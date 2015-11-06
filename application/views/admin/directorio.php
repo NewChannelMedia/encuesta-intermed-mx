@@ -45,16 +45,18 @@
 <section id="calles">
   <div class="container">
     <div class="row"><!-- Inicio row -->
-      <form>
+      <form >
         <div class="col-md-8">
           <div class="col-md-6">
             <div class="form-group">
               <label for="direccion">Direccion/es:</label>
               <input type="text" id="nombreDireccion" class="form-control" placeholder="nombre"/>
               <input type="text" id="direccion" class="form-control" placeholder="Calle/s:"/>
+              <input type="text" id="numero" class="form-control" placeholder="Numero del domicilio" />
             </div>
             <div class="col-md-3">
               <div class="form-group">
+                <input type="text" id="cp" class="form-control" placeholder="Codigo postal" />
                 <input type="text" id="estado" class="form-control" placeholder="Estado:"/>
               </div>
             </div>
@@ -78,7 +80,7 @@
           </div>
         </div>
         <div class="col-md-4">
-          <button type="button" id="agregaCalles" class="form-control">
+          <button type="button" id="agregarDireccion" onclick=""class="form-control">
             <span class="glyphicon glyphicon-upload"></span>
           </button>
         </div>
@@ -122,4 +124,3 @@
   </div>
 </section>
 <!-- FIN TERCER SECCION -->
-<script src="<?echo base_url(); ?>js/utils-capturista.js"></script>

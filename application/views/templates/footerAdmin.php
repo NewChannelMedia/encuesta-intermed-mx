@@ -9,6 +9,7 @@
     <script src="<?echo base_url(); ?>js/bootbox.min.js"></script>
     <script src="<?echo base_url(); ?>js/jquery-ui-touch-punch.min.js"></script>
     <script src="<?echo base_url(); ?>js/utils.js"></script>
+    <script src="<?echo base_url(); ?>js/utils-capturista.js"></script>
   </body>
 </html>
 <!--<footer class="navbar-fixed-bottom footerAdmin">
