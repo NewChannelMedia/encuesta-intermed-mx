@@ -2,25 +2,28 @@
 <section id="nombreDatos">
   <div class="container">
     <div class="row"><!-- inicio row -->
-      <form>
+      <form method="post" onsubmit="return false;" id="registroMedico">
         <div class="col-md-8">
           <div class="row">
             <!-- Datos nombre -->
             <div class="col-md-12">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="nombre">Usuario datos</label>
-                  <input type="text" class="form-control" id="nombre" placeholder="Nombre/s:"/>
+              <h3>Datos de usuario</h3>
+              <div class="row">
+                <input type="hidden" id="medico_id" value="">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="nombre" placeholder="Nombre/s:"/>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="apellidoP" placeholder="Apellido paterno:"/>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="apellidoP" placeholder="Apellido paterno:"/>
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="apellidoM" placeholder="Apellido materno:"/>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="apellidoM" placeholder="Apellido materno:"/>
+                  </div>
                 </div>
               </div>
             </div>
@@ -32,6 +35,19 @@
                 <input type="email" class="form-control" id="email" placeholder="E-mail:"/>
               </div>
             </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="correo">Especialidad:</label>
+                <select class="form-control" id="especialidad" >
+                  <option value=""></option>
+                  <?php
+                    foreach ($especialidades as $especialidad) {
+                      echo '<option value="' . $especialidad['id'] . '">'. $especialidad['especialidad'] .'</option>';
+                    }
+                  ?>
+                </select>
+              </div>
+            </div>
             <!-- FIN CORREO -->
           </div>
         </div>
@@ -40,7 +56,7 @@
           <div class="form-group">
             <div class="col-md-12"></div>
             <div class="col-md-12">
-              <button class="form-control btn btn-danger" id="agregarDatos">
+              <button class="form-control btn btn-danger" id="agregarDatos" onclick="guardarMedico();">
                 <span class="glyphicon glyphicon-star-empty"></span>
               </button>
             </div>
@@ -51,6 +67,7 @@
     </div><!-- fin row -->
   </div>
 </section>
+<hr>
 <!-- segunda seccion -->
 <section id="calles">
   <div class="container">
@@ -131,3 +148,4 @@
   </div>
 </section>
 <!-- FIN TERCER SECCION -->
+<script src="<?echo base_url(); ?>js/utils-capturista.js"></script>
