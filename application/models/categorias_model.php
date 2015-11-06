@@ -2,13 +2,13 @@
 class Categorias_model extends CI_Model {
   public function __construct()
   {
-    $this->load->database();
+      $this->db_encuesta = $this->load->database('encuesta', TRUE);
   }
 
   public function get_categorias()
   {
-    $this->db->order_by("orden", "asc");
-    $query = $this->db->get('categorias');
+    $this->db_encuesta->order_by("orden", "asc");
+    $query = $this->db_encuesta->get('categorias');
     return $query->result_array();
   }
 
@@ -18,14 +18,14 @@ class Categorias_model extends CI_Model {
     {
       return false;
     }
-      $this->db->order_by("orden", "asc");
-    $query = $this->db->get_where('categorias', array('etapa' => $etapa));
+      $this->db_encuesta->order_by("orden", "asc");
+    $query = $this->db_encuesta->get_where('categorias', array('etapa' => $etapa));
     return $query->result_array();
   }
 
   public function get_etapas(){
     $cant = 0;
-    $result = $this->db->list_fields('encuestasM');
+    $result = $this->db_encuesta->list_fields('encuestasM');
     foreach ($result as $field) {
       if (stripos($field, 'etapa_') === 0){
         $cant++;
@@ -36,7 +36,7 @@ class Categorias_model extends CI_Model {
 
   public function set_etapas($cant){
     $this->load->dbforge();
-    $result = $this->db->list_fields('encuestasM');
+    $result = $this->db_encuesta->list_fields('encuestasM');
     foreach ($result as $field) {
       if (stripos($field, 'etapa_') === 0){
         $this->dbforge->drop_column('encuestasM', $field);
@@ -57,7 +57,7 @@ class Categorias_model extends CI_Model {
      'etapa' => 0
     );
 
-    return $this->db->insert('categorias', $data);
+    return $this->db_encuesta->insert('categorias', $data);
   }
 
   public function delete_categoria($categoria_id){
@@ -68,9 +68,9 @@ class Categorias_model extends CI_Model {
       'categoria_id'=>0
     );
     $result = false;
-    $this->db->where('categoria_id', $categoria_id);
-    if ( $this->db->update('preguntasM', $data)){
-      $result = $this->db->delete('categorias', array('id' => $categoria_id));
+    $this->db_encuesta->where('categoria_id', $categoria_id);
+    if ( $this->db_encuesta->update('preguntasM', $data)){
+      $result = $this->db_encuesta->delete('categorias', array('id' => $categoria_id));
     }
     return $result;
   }
@@ -84,8 +84,8 @@ class Categorias_model extends CI_Model {
       'orden'=> $orden
     );
     $result = false;
-    $this->db->where('id', $categoria_id);
-    $result = $this->db->update('categorias', $data);
+    $this->db_encuesta->where('id', $categoria_id);
+    $result = $this->db_encuesta->update('categorias', $data);
     return $result;
   }
 
@@ -101,7 +101,7 @@ class Categorias_model extends CI_Model {
     public function existe_etapa($etapa){
       $existe = false;
       $this->load->dbforge();
-      $result = $this->db->list_fields('encuestasM');
+      $result = $this->db_encuesta->list_fields('encuestasM');
       foreach ($result as $field) {
         if ($field == "etapa_".$etapa){
           $existe = true;

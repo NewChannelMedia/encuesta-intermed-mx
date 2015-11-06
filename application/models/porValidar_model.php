@@ -3,7 +3,7 @@
   {
     //constructor
     function __construct(){
-      $this->load->database();
+        $this->db_encuesta = $this->load->database('encuesta', TRUE);
     }
 
     //metodos para las inserciones
@@ -17,13 +17,13 @@
         'justificacion'=> $justificacion,
         'status'=>0
       );
-      return $this->db->insert('porValidar', $obj);
+      return $this->db_encuesta->insert('porValidar', $obj);
     }
 
     public function updateData( $condicion, $nombre, $cedula ){
       $object = array('nombre'=>$nombre,'cedula'=>$cedula, 'medico' => 1);
-      $this->db->where('correo', $condicion);
-      $this->db->update('porValidar',$object);
+      $this->db_encuesta->where('correo', $condicion);
+      $this->db_encuesta->update('porValidar',$object);
       return true;
     }
 
@@ -32,8 +32,8 @@
         'nombre' => $nombre,
         'justificacion'=> $justificacion
       );
-      $this->db->where('correo', $condicion);
-      $this->db->update('porValidar', $obj);
+      $this->db_encuesta->where('correo', $condicion);
+      $this->db_encuesta->update('porValidar', $obj);
       return true;
     }
     /**
@@ -42,15 +42,15 @@
     */
     public function actualizaStatus($correo, $id){
       $obj = array('status'=>1);
-      $this->db->where('id',$id);
-      $this->db->where('correo',$correo);
-      $this->db->update('porValidar',$obj);
+      $this->db_encuesta->where('id',$id);
+      $this->db_encuesta->where('correo',$correo);
+      $this->db_encuesta->update('porValidar',$obj);
     }
     public function negado($correo,$id){
       $obj= array('status'=>2);
-      $this->db->where('id',$id);
-      $this->db->where('correo',$correo);
-      $this->db->update('porValidar',$obj);
+      $this->db_encuesta->where('id',$id);
+      $this->db_encuesta->where('correo',$correo);
+      $this->db_encuesta->update('porValidar',$obj);
     }
 
     public function get_totalPorValidar()
@@ -58,9 +58,9 @@
       $select =   array(
                   'count(*) as total'
               );
-      $this->db->select($select);
-      $this->db->where('status', "0");
-      $query = $this->db->get('porValidar');
+      $this->db_encuesta->select($select);
+      $this->db_encuesta->where('status', "0");
+      $query = $this->db_encuesta->get('porValidar');
       return $query->row_array();
     }
 
@@ -69,9 +69,9 @@
       $select =   array(
                   'count(*) as total'
               );
-      $this->db->select($select);
-      $this->db->where('status', "1");
-      $query = $this->db->get('porValidar');
+      $this->db_encuesta->select($select);
+      $this->db_encuesta->where('status', "1");
+      $query = $this->db_encuesta->get('porValidar');
       return $query->row_array();
     }
 
@@ -80,15 +80,15 @@
       $select =   array(
                   'count(*) as total'
               );
-      $this->db->select($select);
-      $this->db->where('status', "2");
-      $query = $this->db->get('porValidar');
+      $this->db_encuesta->select($select);
+      $this->db_encuesta->where('status', "2");
+      $query = $this->db_encuesta->get('porValidar');
       return $query->row_array();
     }
     public function insertMensaje($id,$mensaje){
       $obj = array('mensaje'=>$mensaje);
-      $this->db->where('id',$id);
-      $this->db->update('porValidar',$obj);
+      $this->db_encuesta->where('id',$id);
+      $this->db_encuesta->update('porValidar',$obj);
     }
   }
 ?>
