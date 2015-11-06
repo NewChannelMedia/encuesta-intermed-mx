@@ -13,6 +13,7 @@
         parent::__construct();
         $this->load->helpers('url');
         $this->load->model('Capespecialidades_model');
+        $this->load->model('Capmedicos_model');
       }
 
       public function index(){
@@ -21,6 +22,31 @@
           # code...
           echo $value['id'] . ' - ' . $value['especialidad'] . '<br/>';
         }
+      }
+
+      public function guardarMedico(){
+        //$usuario = $this->input->post('user');
+        $data = array(
+          'nombre'=>$this->input->post('nombre'),
+          'apellidop'=>$this->input->post('apellidoP'),
+          'apellidom'=>$this->input->post('apellidoM'),
+          'correo'=>$this->input->post('email'),
+          'especialidad_id'=>$this->input->post('especialidad'),
+        );
+
+        $id = $this->Capmedicos_model->create_medico($data);
+        echo json_encode(array('success'=>true,'medico_id'=>$id));
+      }
+
+
+      /**
+      * Recibe los valores por post para su envio al modelo y los inserte en su
+      * correspondiente tabla en la base de datos
+      * @param NO PARAMS
+      **/
+      public function insertDireccion(){
+        $valor = $this->input->post('prueba');
+        var_dump("Hola mundo ".$valor);
       }
   }
 ?>
