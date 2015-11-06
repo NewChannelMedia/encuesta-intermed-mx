@@ -211,7 +211,7 @@
           $this->Encuestam_model->update_encuestam($data['encuesta_id'], $update);
           $data = $this->checkStatus($codigo);
           $guardado = true;
-          if ($data['terminado'] == 4){
+          if ($data['terminado'] == $this->Categorias_model->get_etapas()){
             $finalizar = true;
           }
         }
@@ -230,9 +230,28 @@
       if (($data['status'] == 1 || $data['status'] == 2) && !$finalizar){
         //Mostrar la encuesta
         $this->load->view('templates/header', $data);
+        $cantEtapas = $this->Categorias_model->get_etapas();
 
         if (!$irEtapa){
-          if ($etapaResp && $etapaResp < 4) $etapa = ++$etapaResp;
+          if ($etapaResp && $etapaResp < $cantEtapas){
+            $resultado = $this->Encuestam_model->get_encuestamByCodigo($codigo);
+             $buscarEtapa = true;
+            $etapa = ++$etapaResp;
+             while ($buscarEtapa){
+               if ($etapaResp <= $cantEtapas){
+                 if (array_key_exists('etapa_'.$etapa,$resultado)){
+                    if ($resultado['etapa_'.$etapa] == 1){
+                      $etapa = ++$etapaResp;
+                    } else {
+                      $buscarEtapa = false;
+                    }
+                 }
+               } else {
+                 $etapa = $data['paso'];
+                 $buscarEtapa = false;
+               }
+             }
+           }
           else {
             $etapa = '1';
             if (isset($data['paso'])){
@@ -248,6 +267,8 @@
 
         $resultado = $this->Categorias_model->get_categoriasByEtapa($etapa);
 
+        $data['contestada'] = 'contestada';
+
         foreach ($resultado as $categoria) {
           if ($categoria){
             $contenido .= '<div class="block-container-category"><span class="glyphicon glyphicon-asterisk"></span><span class="category">' . $categoria['categoria'] . '</span></div>';
@@ -256,6 +277,9 @@
 
             foreach ($preguntas as $pregunta) {
                 $respuesta = $this->Respuestasm_model->get_respuestaByEncuestaPregunta($data['encuesta_id'], $pregunta['id']);
+                if (strlen($respuesta['pregunta_' . $pregunta['id']])==0){
+                  $data['contestada'] = '';
+                }
                 $respuesta = explode('|',$respuesta['pregunta_' . $pregunta['id']]);
                 //echo 'respuesta: <pre>' . print_r($respuesta,1) . '</pre>';
                 if (!($pregunta['tipo'] == 'checkbox')){
@@ -371,6 +395,7 @@
           }
           $data['contenido'] = $contenido;
         }
+        $data['cantEtapas'] = $cantEtapas;
 
         $this->load->view('encuesta/encuesta', $data);
         $this->load->view('templates/footer', $data);
@@ -392,7 +417,6 @@
         $this->load->view('templates/footer2', $data);
         //Redirect /about o index
       }
-
     }
 
     public function checkStatus($codigo){
@@ -404,35 +428,43 @@
       3-La encuesta existe y ya la terminaron de contenstar
       */
       $data = array();
+      $cantEtapas = $this->Categorias_model->get_etapas();
       $resultado = $this->Encuestam_model->get_encuestamByCodigo($codigo);
 
+      $etapa = 0;
       $status = -1;
+      $etapas = array();
+
       if ($resultado){
+        foreach ($resultado as $field => $value) {
+          $fieldEsperado = "etapa_" . ($etapa+1);
+          if ($field == $fieldEsperado){
+            $etapa++;
+            $etapas[$field] = $value;
+          }
+        }
+      }
+
+      $paso = 0;
+      $etapa = 1;
+      $terminado = 0;
+      if (count($etapas) >0){
         $data['encuesta_id'] = $resultado['id'];
-        $paso = 0;
-        $terminado = 0;
-        if ($resultado['etapa_1'] == 1) {
-          $paso = 1;
-          $terminado++;
-        }
-        if ($resultado['etapa_2'] == 1){
-          if ($paso == 1) $paso = 2;
-          $terminado++;
-        }
-        if ($resultado['etapa_3'] == 1) {
-          if ($paso == 2) $paso = 3;
-          $terminado++;
-        }
-        if ($resultado['etapa_4'] == 1){
-          if ($paso == 3) $paso = 4;
-          $terminado++;
+        foreach ($etapas as $etapaKey => $resp) {
+          if ($resp == 0 && $paso == 0){
+            $paso = $etapa;
+          }
+          if ($resp == 1) {
+            $terminado++;
+          }
+          $etapa++;
         }
         $data['terminado'] = $terminado;
-        if ($paso == 4) $status = 3;
-        else if ($paso > 0) {
+        if ($terminado == $cantEtapas) $status = 3; //Encuesta terminada
+        else if ($paso > 0) { //Encuesta por empezar
           $status = 2;
-          $data['paso'] = ++$paso;
-        } else $status = 1;
+          $data['paso'] = $paso;
+        } else $status = 1; //Encuesta sin empezar
       } else {
         $status = 0;
       }
@@ -441,5 +473,6 @@
       $data['status'] = $status;
       return $data;
     }
+
   }
 ?>

@@ -243,6 +243,7 @@
 
         $total = 0;
         foreach ($categorias as $cat) {
+            if ($cat['id']>0 && $cat['etapa']>0){
             $categoriasArray = array();
             $categoriasArray['name'] = $cat['categoria'];
             $preguntas = $this->Preguntasm_model->get_preguntamByCategoria($cat['id']);
@@ -365,6 +366,7 @@
             }
             $categoriasArray['preguntas'] = $preguntasArray;
             $resultado[] = $categoriasArray;
+          }
         }
 
         $data = array('resultado'=> $resultado);
@@ -387,6 +389,7 @@
 
         $total = 0;
         foreach ($categorias as $cat) {
+            if ($cat['id']>0 && $cat['etapa']>0){
             $categoriasArray = array();
             $categoriasArray['name'] = $cat['categoria'];
             $preguntas = $this->Preguntasm_model->get_preguntamByCategoria($cat['id']);
@@ -509,6 +512,7 @@
             }
             $categoriasArray['preguntas'] = $preguntasArray;
             $resultado[] = $categoriasArray;
+          }
         }
 
         $data = array('resultado'=> $resultado);
@@ -555,6 +559,134 @@
       		echo json_encode($array);
       }
 
+        public function categorias(){
+          $data['etapas'] = $this->Categorias_model->get_etapas();
+          //$this->Categorias_model->set_etapas(4);
+          $data['categorias'] = $this->Categorias_model->get_categorias();
+          $data['title'] = "Administrar preguntas";
+          $this->load->view('templates/headerAdmin', $data);
+          $this->load->view('admin/adminCat', $data);
+          $this->load->view('templates/footerAdmin');
+        }
+
+        public function preguntas(){
+          $data['categorias'] = $this->Categorias_model->get_categorias();
+          $data['preguntas'] = $this->Preguntasm_model->get_preguntasm();
+          $data['title'] = "Administrar preguntas";
+          $this->load->view('templates/headerAdmin', $data);
+          $this->load->view('admin/adminPreg', $data);
+          $this->load->view('templates/footerAdmin');
+        }
+
+
+        public function guardarPregunta(){
+          $pregunta_id = $this->input->post('pregunta_id');
+          $categoria_id = $this->input->post('categoria_id');
+          $pregunta = $this->input->post('pregunta');
+          $tipo = $this->input->post('tipo');
+          $opciones = $this->input->post('opciones');
+
+          $data = array(
+            'pregunta_id' => $pregunta_id,
+            'pregunta' => $pregunta,
+            'tipo' => $tipo,
+            'opciones' => $opciones,
+            'categoria_id' => $categoria_id
+          );
+
+          if ($pregunta_id != ''){
+            //Modificar pregunta
+            $result = $this->Preguntasm_model->update_pregunta($data);
+          } else {
+            //Agregar nueva pregunta
+            $result = $this->Preguntasm_model->create_pregunta($data);
+            if ($result) $pregunta_id = $result['id'];
+          }
+
+          if ($result){
+            $success = true;
+          } else {
+            $success = false;
+          }
+
+          $respuesta = array(
+             'success' => $success,
+             'pregunta_id' => $pregunta_id
+          );
+          echo json_encode($respuesta);
+        }
+
+        public function eliminarPregunta(){
+          $id = $this->input->post('id');
+          $data = array('id'=>$id);
+          $result = $this->Preguntasm_model->delete_pregunta($data);
+
+          $respuesta = array(
+             'success' => $result
+          );
+          echo json_encode($respuesta);
+        }
+
+        public function eliminarEtapa(){
+          $etapa = $this->input->post('etapa');
+
+          $this->Encuestam_model->delete_etapa($etapa);
+          $respuesta = array(
+             'success' => true
+          );
+          echo json_encode($respuesta);
+        }
+
+        public function nuevaEtapa(){
+          $etapas = $this->Categorias_model->get_etapas();
+          $etapas++;
+          $this->Categorias_model->set_etapas($etapas);
+          $respuesta = array(
+             'success' => true
+          );
+          echo json_encode($respuesta);
+        }
+
+        public function nuevaCategoria(){
+          $categoria = $this->input->post('categoria');
+          $result = $this->Categorias_model->create_categoria($categoria);
+          $respuesta = array(
+             'success' => $result
+          );
+          echo json_encode($respuesta);
+
+        }
+
+        public function eliminarCategoria(){
+          $categoria_id = $this->input->post('categoria_id');
+          $result = $this->Categorias_model->delete_categoria($categoria_id);
+          $respuesta = array(
+             'success' => $result
+          );
+          echo json_encode($respuesta);
+
+        }
+
+        public function guardarCambioscategorias(){
+          $data = $this->input->post('data');
+          $int = 0;
+          $data = json_decode(json_encode($data),1);
+          foreach ($data as $etapa) {
+            $numEt = $etapa['etapa'];
+            if (array_key_exists('categorias',$etapa)){
+              $categorias = $etapa['categorias'];
+              foreach ($categorias as $categoria) {
+                $result = $this->Categorias_model->update_etapaCategoria($categoria['id'],$numEt,$int++);
+              }
+            }
+          }
+          $result = true;
+          $respuesta = array(
+             'success' => $result
+          );
+          echo json_encode($respuesta);
+        }
+
   }
 
   function encuestas_dropDown($enviar, $tipo){
@@ -574,4 +706,5 @@
     $data .= '<label class="col-md-12"><input type="radio" name="radio'. $enviar['element'] .'" ' . $checked . ' onclick="ChartLine('.htmlspecialchars(print_r(json_encode($enviar),1)).')" > Linea</label>';
     return $data;
   }
+
 ?>
