@@ -348,7 +348,6 @@
           if (data.success){
             id = data2.pregunta_id;
             if (id != '' && parseInt(id) >= 0){
-              console.log('Modificar');
               $('tr#'+id).find('td.pregunta').html(pregunta);
               $('tr#'+id).find('td.categoria').find('input').prop('value',categoria);
               $('tr#'+id).find('td.categoria').find('div').html($('#categoriaPreg option:selected').text());
@@ -365,7 +364,6 @@
               });
             } else {
               id = data.pregunta_id;
-              console.log('Agregar');
               //Insertar nuevo
               $('#listapreguntas').append('<tr id="'+ id +'"></tr>');
               $('tr#'+id).append('<td class="pregunta">'+ data2.pregunta +'</td>');
