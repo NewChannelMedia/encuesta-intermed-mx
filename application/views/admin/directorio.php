@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row"><!-- inicio row -->
       <form method="post" onsubmit="return false;" id="registroMedico">
-        <div class="col-md-8">
+        <div class="col-md-8" id="formGuardarMedico">
           <div class="row">
             <!-- Datos nombre -->
             <div class="col-md-12">
@@ -52,7 +52,7 @@
           </div>
         </div>
         <!-- BOTON PARA AGREGAR -->
-        <div class="col-md-4">
+        <div class="col-md-4" id="buttonGuardarMedico">
           <div class="form-group">
             <div class="col-md-12"></div>
             <div class="col-md-12">

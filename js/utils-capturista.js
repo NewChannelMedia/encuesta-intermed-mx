@@ -23,6 +23,9 @@ function guardarMedico(){
         if (result.success){
           $('#medico_id').val(result.medico_id);
           $('#registroMedico').find('input,select,button').attr("disabled","disabled");
+          $('#buttonGuardarMedico').remove();
+          $('#formGuardarMedico').removeClass('col-md-8');
+          $('#formGuardarMedico').addClass('col-md-12');
         }
       },
       error: function (err) {
