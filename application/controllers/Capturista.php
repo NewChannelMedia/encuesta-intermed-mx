@@ -16,7 +16,7 @@
         $this->load->model('Capmedicos_model');
         $this->load->model('Captelefonos_model');
       }
-
+      /*
       public function index(){
         $especialides = $this->Capespecialidades_model->get_especialidades();
         foreach ($especialides as $value) {
@@ -24,7 +24,7 @@
           echo $value['id'] . ' - ' . $value['especialidad'] . '<br/>';
         }
       }
-
+      */
       public function guardarMedico(){
         //$usuario = $this->input->post('user');
         $data = array(

@@ -116,12 +116,12 @@
             </div>
             <div class="col-md-4">
               <div class="form-group">
-                <input type="number" id="ladaTelefono" class="form-control" placeholder="Lada:"/>
+                <input type="text" id="ladaTelefono" class="form-control solo-numero" placeholder="Lada:" maxlength="5" onpaste="soloNumeros()"/>
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
-                <input type="number" id="numTelefono" class="form-control" placeholder="numero telefono" />
+                <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="numero telefono" maxlength="8" onpaste="soloNumeros()"/>
               </div>
             </div>
           </div>
