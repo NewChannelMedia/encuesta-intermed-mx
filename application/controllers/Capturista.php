@@ -22,5 +22,15 @@
           echo $value['id'] . ' - ' . $value['especialidad'] . '<br/>';
         }
       }
+
+      /**
+      * Recibe los valores por post para su envio al modelo y los inserte en su
+      * correspondiente tabla en la base de datos
+      * @param NO PARAMS
+      **/
+      public function insertDireccion(){
+        $valor = $this->input->post('prueba');
+        var_dump("Hola mundo ".$valor);
+      }
   }
 ?>

@@ -60,6 +60,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label for="direccion">Direccion/es:</label>
+              <input type="text" id="nombreDireccion" class="form-control"placeholder="Nombre Consultorio" />
               <input type="text" id="direccion" class="form-control" placeholder="Calle/s:"/>
             </div>
             <div class="col-md-3">
