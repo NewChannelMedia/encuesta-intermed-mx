@@ -103,11 +103,32 @@
 /* ----------------------- */
 
 $(document).ready(function (){
+  $(".flama-bold-italic").fontface({
+    fontName : "Flama-BoldItalic",
+    fileName : "hinted-Flama-BoldItalic",
+    fontWeight : "bold"
+  });
+  $(".flama").fontface({
+    fontName : "Flama",
+    fileName : "hinted-Flama",
+    fontWeight : "bold"
+  });
+  $(".flama-book-italic").fontface({
+    fontName : "FlamaBook",
+    fileName : "hinted-Flama-Medium",
+    fontWeight : "normal",
+    fontStyle: "italic"
+  });
 
 
   $(".ag-medium").fontface({
     fontName : "Akzidenz Grotesk BE",
     fileName : "hinted-AkzidenzGroteskBE-Md",
     fontWeight : "500"
+  });
+  $(".ag-regular").fontface({
+    fontName : "Akzidenz Grotesk BE",
+    fileName : "hinted-AkzidenzGroteskBE-Regular",
+    fontWeight : "normal"
   });
 });
