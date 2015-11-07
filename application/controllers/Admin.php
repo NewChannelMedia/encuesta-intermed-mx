@@ -733,6 +733,8 @@
             $this->load->model('Admin_model');
             $session = $_SESSION['status'];
             if($session===true){
+              $this->load->model('Capmuestramed_model');
+              $data['total'] = $this->Capmuestramed_model->get_countMuestra();
               $data['title'] = "Directorio";
               $data['errorM'] = "";
               $data['rol'] = "capturista";

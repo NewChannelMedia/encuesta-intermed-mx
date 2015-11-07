@@ -108,10 +108,6 @@ $(function(){
 });
 });
 
-function soloNumeros(){
-
-}
-
 $(document).ready(function (){
    $('.solo-numero').bind("paste", function(e){
     // access the clipboard using the api
@@ -188,3 +184,20 @@ $(document).ready(function(){
     }
   });
 });
+
+function generarMuestraMedicos(){
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/generarMuestraMedicos',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      if (result.success){
+        console.log('DATA: ' + JSON.stringify(result));
+      }
+    },
+    error: function (err) {
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  } );
+}

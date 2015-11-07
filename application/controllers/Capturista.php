@@ -16,6 +16,7 @@
         $this->load->model('Capmedicos_model');
         $this->load->model('Capdirecciones_model');
         $this->load->model('Captelefonos_model');
+        $this->load->model('Capmuestramed_model');
       }
       /*
       public function index(){
@@ -93,6 +94,38 @@
           'medico_id'=>$id_medico
         );
         return $this->Capdirecciones_model->insertDireccion($data);
+      }
+
+      public function generarMuestraMedicos(){
+        $data = array('success'=>true);
+        $total = $this->Capmuestramed_model->get_countMuestra();
+        $data['count'] = $total;
+
+        if ($total == 0){
+          //Generar muestra
+          $min = intval($this->Capmuestramed_model->get_minIdMedicos());
+          $max = intval($this->Capmuestramed_model->get_maxIdMedicos());
+          $data['min']= $min;
+          $data['max']= $max;
+
+          if ($min == $max){
+            //No hay medicos registrados
+            $result = false;
+            $data['error'] = 'No hay médicos registrados';
+          } else if (($max-$min) < 999){
+            //Medicos registrados insuficientes (mínimo 1000)
+            $result = false;
+            $data['error'] = 'Médicos registrados insuficientes (mínimo 1000)';
+          } else {
+            $result = $this->Capmuestramed_model->create_muestra($min,$max);
+            if ($result){
+              $data['muestra'] =  $this->Capmuestramed_model->get_muestra();
+            } else {
+              $data['error'] = 'Error al crear la muestra';
+            }
+          }
+        } else $data['muestra'] =  $this->Capmuestramed_model->get_muestra();
+        echo json_encode($data);
       }
   }
 ?>
