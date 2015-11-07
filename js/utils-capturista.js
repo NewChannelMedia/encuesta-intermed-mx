@@ -1,41 +1,70 @@
 function guardarMedico(){
-  var nombre = $('#nombre').val();
-  var apellidoP = $('#apellidoP').val();
-  var apellidoM = $('#apellidoM').val();
-  var especialidad = $('#especialidad').val();
-  var email = $('#email').prop('value');
-  var data = {
-              'nombre': nombre,
-              'apellidoP': apellidoP,
-              'apellidoM': apellidoM,
-              'email': email,
-              'especialidad': especialidad
-            };
-
-  if (nombre != '' && apellidoP != ''){
-    $.ajax( {
-      url: '/encuesta-intermed/Capturista/guardarMedico',
-      type: "POST",
-      data: data,
-      dataType: 'JSON',
-      async: true,
-      success: function (result) {
-        if (result.success){
-          $('#medico_id').val(result.medico_id);
-          $('#registroMedico').find('input,select,button').attr("disabled","disabled");
-          $('#registroMedico').addClass('panel-success guardado');
-          $('#nombreDireccion').focus();
-        }
-      },
-      error: function (err) {
-        console.log( "Error: AJax dead :" + JSON.stringify(err) );
-      }
-    } );
-  } else {
-    bootbox.alert({
-        message: "El nombre y apellido paterno del médico son obligatorios.",
-        title: "No se puede guardar el médico"
+  if( $("#medico_id").val() != "" ){
+    var nombre = $('#nombre').val();
+    var apellidoP = $('#apellidoP').val();
+    var apellidoM = $('#apellidoM').val();
+    var especialidad = $('#especialidad').val();
+    var email = $('#email').prop('value');
+    var medico_id = $("#medico_id").val();
+    $.post('/encuesta-intermed/capturista/editDatos/',{
+      nombre:nombre,
+      apellidoP: apellidoP,
+      apellidoM: apellidoM,
+      especialidad: especialidad,
+      email: email,
+      medico_id: medico_id
+    },function(datos){
+        $('#nombre').attr('disabled',true);
+        $('#apellidoP').attr('disabled',true);
+        $('#especialidad').attr('disabled',true);
+        $('#email').attr('disabled',true);
+        $("#especialidad").attr('disabled',true);
+        $("#editarDatos").attr('disabled',false);
+        $("#apellidoM").attr('disabled',true);
+        $("#agregarDatos").attr('disabled',true);
+    }).fail(function(e){
+      alert("Fallo en actualizar datos: "+JSON.stringify(e));
     });
+  }else{
+    var nombre = $('#nombre').val();
+    var apellidoP = $('#apellidoP').val();
+    var apellidoM = $('#apellidoM').val();
+    var especialidad = $('#especialidad').val();
+    var email = $('#email').prop('value');
+    var data = {
+                'nombre': nombre,
+                'apellidoP': apellidoP,
+                'apellidoM': apellidoM,
+                'email': email,
+                'especialidad': especialidad
+              };
+
+    if (nombre != '' && apellidoP != ''){
+      $.ajax( {
+        url: '/encuesta-intermed/Capturista/guardarMedico',
+        type: "POST",
+        data: data,
+        dataType: 'JSON',
+        async: true,
+        success: function (result) {
+          if (result.success){
+            $('#medico_id').val(result.medico_id);
+            $('#registroMedico').find('input,select,button').attr("disabled","disabled");
+            $('#registroMedico').addClass('panel-success guardado');
+            $('#nombreDireccion').focus();
+            $("#editarDatos").attr('disabled',false);
+          }
+        },
+        error: function (err) {
+          console.log( "Error: AJax dead :" + JSON.stringify(err) );
+        }
+      } );
+    } else {
+      bootbox.alert({
+          message: "El nombre y apellido paterno del médico son obligatorios.",
+          title: "No se puede guardar el médico"
+      });
+    }
   }
 }
 
@@ -158,6 +187,7 @@ $(document).ready(function(){
     // post
     if( id_medico != "" ){
       if( nombreConsultorio != "" && numero != "" && calle != "" && cp != "" && estado != "" && municipio != "" && ciudad != "" && localidad != "" ){
+        $("#editDinamico ul").html('');
         $.post('/encuesta-intermed/capturista/insertDireccion/',{
           consultorio:nombreConsultorio,
           calle: calle,
@@ -169,6 +199,25 @@ $(document).ready(function(){
           numero: numero,
           id_medico: id_medico
         },function(datas){
+            /**
+            * en la siguiente funcion cuando se presione el boton se hara una consulta a la db
+            * donde me retornara el nombre del consultorio, y al presionarlo se llenaran los input para poderlos editar
+            *
+            *
+            */
+            $.post('/encuesta-intermed/capturista/editarDirecciones',{
+              medico_id: id_medico
+            },function(d){
+              console.log("DATAS: "+ JSON.stringify(d));
+              var html="";
+              console.log("datas: "+ d.length);
+              for( var i = 0; i < d.length; i++ ){
+                html += '<li at="'+d[i].id+'">';
+                html += '<button id="direccionGuardada-1" class="btn btn-sm editar">'+d[i].nombre+'</button>';
+                html += '</li>';
+              }
+              $("#editDinamico ul").append(html);
+            });
             $("#nombreDireccion").val('');
             $("#direccion").val('');
             $("#estado").val('');
@@ -186,5 +235,20 @@ $(document).ready(function(){
     }else{
       alert("Por favor llene primero la seccion de arriba");
     }
+  });
+  /**
+  * El siguiente evento click es para el boton de editar donde el cual habilitara todos los
+  * inputs de la seccion que esten deshabilitados para poderlos editar tambien
+  * se habilitara el boton de guardar para guardar los cambios hechos
+  *
+  **/
+  $("#editarDatos").click(function(){
+    $("#nombre").attr('disabled',false);
+    $("#apellidoP").attr('disabled',false);
+    $("#apellidoM").attr('disabled',false);
+    $("#email").attr('disabled',false);
+    $("#especialidad").attr('disabled',false);
+    $("#agregarDatos").attr('disabled',false);
+    $( this ).attr('disabled',true);
   });
 });

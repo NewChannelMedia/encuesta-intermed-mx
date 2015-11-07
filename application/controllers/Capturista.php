@@ -94,5 +94,39 @@
         );
         return $this->Capdirecciones_model->insertDireccion($data);
       }
+      /**
+      * Funcion para poder editar todos los campos de la vista
+      * donde aparecen los datos generales del medico, al presionar
+      * el boton de guardar se habilitara el boton de editar y se podran
+      * editar todos los campos.
+      **/
+      public function editDatos(){
+        //variables atrapadas por post
+        $nombre = $this->input->post('nombre');
+        $apellidoP = $this->input->post('apellidoP');
+        $apellidoM = $this->input->post('apellidoM');
+        $especialidad = $this->input->post('especialidad');
+        $email = $this->input->post('email');
+        $medico_id = $this->input->post('medico_id');
+        $arreglo = array(
+          'nombre' => $nombre,
+          'apellidoP' => $apellidoP,
+          'apellidoM' => $apellidoM,
+          'especialidad_id' => $especialidad,
+          'correo' => $email
+        );
+        //llamado a la funcion del modelo para hacer la actualizacion
+         $this->Capmedicos_model->updateMedico($arreglo, $medico_id);
+         return true;
+      }
+      /**
+      * function para retornar todos los datos del usuario recien insertado
+      */
+      public function editarDirecciones(){
+        $medico_id = $this->input->post('medico_id');
+        //llamada a la funcion del modelo
+        $arreglo = $this->Capdirecciones_model->editarDirecciones($medico_id);
+        echo json_encode($arreglo);
+      }
   }
 ?>

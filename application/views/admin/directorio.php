@@ -38,7 +38,7 @@
               <button class="btn btn-info btn-block" id="agregarDatos" type="submit">Guardar Medico</button>
             </div>
             <div class="form-group">
-              <button class="btn btn-warning btn-block" id="agregarDireccion">Editar</button>
+              <button class="btn btn-warning btn-block" id="editarDatos" disabled=true>Editar</button>
             </div>
           </div>
         </div>
@@ -84,15 +84,8 @@
             <div class="form-group">
               <button class="btn btn-info btn-block" id="agregarDireccion">Añadir Dirección</button>
             </div>
-            <div class="form-group">
-              <ul class="list-inline">
-                <li>
-                  <button id="direccionGuardada-1" class="btn btn-sm editar">Direccion 1</button>
-                </li>
-                <li>
-                  <button id="direccionGuardada-2" class="btn btn-sm borrar">Direccion 2</button>
-                </li>
-              </ul>
+            <div id="editDinamico" class="form-group">
+              <ul class="list-inline"></ul>
             </div>
           </div>
         </div>
