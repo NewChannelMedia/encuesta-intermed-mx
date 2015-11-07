@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="col-md-4">
-            <button class="btn btn-info bnt-block" id="agregarDatos" type="submit">
+            <button class="btn btn-info bnt-block btn-block" id="agregarDatos" type="submit">
 				Guardar Medico
             </button>
           </div>
@@ -42,7 +42,7 @@
       </form>
     </div>
   </div>
-  <div id="direccion" class="container-fluid " >
+  <div id="direccionDatos" class="container-fluid " >
     <form method="post" onsubmit="return false;" id="registroDireccion" class="panel">
       <div class="panel-heading">
         <h3 class="panel-title">Direcciones</h3>
@@ -67,13 +67,13 @@
                 <input type="text" class="form-control" id="estado" placeholder="Estado">
               </div>
               <div class="form-group col-md-4">
-                <input type="email" class="form-control" id="municipio" placeholder="Municipio">
+                <input type="text" class="form-control" id="municipio" placeholder="Municipio">
               </div>
               <div class="form-group col-md-6">
-                <input type="email" class="form-control" id="ciudad" placeholder="Ciudad">
+                <input type="text" class="form-control" id="ciudad" placeholder="Ciudad">
               </div>
               <div class="form-group col-md-6">
-                <input type="email" class="form-control" id="localidad" placeholder="Colonia / Localidad">
+                <input type="text" class="form-control" id="localidad" placeholder="Colonia / Localidad">
               </div>
             </div>
           </div>

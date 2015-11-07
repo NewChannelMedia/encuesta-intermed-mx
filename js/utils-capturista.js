@@ -62,7 +62,7 @@ function guardarTelefono(){
         if (result.success){
           $('#registroTelefonos').find('input').prop('value','');
           document.getElementById("tipoTelefono").selectedIndex = "0";
-          $('#tipoTelefono').focus();
+          $('#ladaTelefono').focus();
         }
       },
       error: function (err) {
@@ -133,6 +133,58 @@ $(document).ready(function (){
         } else {
             evt.returnValue = false;
         }
+    }
+  });
+});
+
+/**
+* En la siguiente funcion cuando le den click al boton
+* se enviaran los datos por post con ajax para que se inserten
+*
+*
+**/
+$(document).ready(function(){
+  $("#agregarDireccion").click(function(){
+    //variables
+    var nombreConsultorio = $("#nombreDireccion").val();
+    var calle = $("#direccion").val();
+    var estado = $("#estado").val();
+    var municipio = $("#municipio").val();
+    var ciudad = $("#ciudad").val();
+    var localidad = $("#localidad").val();
+    var id_medico = $("#medico_id").val();
+    var cp = $("#cp").val();
+    var numero = $("#numero").val();
+    // post
+    if( id_medico != "" ){
+      if( nombreConsultorio != "" && numero != "" && calle != "" && cp != "" && estado != "" && municipio != "" && ciudad != "" && localidad != "" ){
+        $.post('/encuesta-intermed/capturista/insertDireccion/',{
+          consultorio:nombreConsultorio,
+          calle: calle,
+          cp: cp,
+          estado: estado,
+          municipio: municipio,
+          ciudad: ciudad,
+          localidad: localidad,
+          numero: numero,
+          id_medico: id_medico
+        },function(datas){
+            $("#nombreDireccion").val('');
+            $("#direccion").val('');
+            $("#estado").val('');
+            $("#municipio").val('');
+            $("#ciudad").val('');
+            $("#localidad").val('');
+            $('#cp').val('');
+            $('#numero').val('');
+        }).fail(function(e){
+          alert("Error al insertar: "+JSON.stringify(e));
+        });
+      }else{
+        alert("Favor de no dejar campos vacíos :D");
+      }
+    }else{
+      alert("Por favor llene primero la seccion de arriba");
     }
   });
 });
