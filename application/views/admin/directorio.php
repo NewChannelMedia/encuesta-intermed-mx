@@ -20,16 +20,6 @@
                 <input type="email" class="form-control" id="email" placeholder="E-mail:">
               </div>
               <div class="form-group col-md-6">
-                <!--
-                <select class="form-control" id="especialidad" >
-                  <option value=""></option>
-                  <?php
-                    /*foreach ($especialidades as $especialidad) {
-                      echo '<option value="' . $especialidad['id'] . '">'. $especialidad['especialidad'] .'</option>';
-                    }*/
-                  ?>
-                </select>
-                -->
                 <input type="text" class="form-control" id="especialidad" placeholder="Especialidad:">
                 <?php
                   echo '<script type="text/javascript">var autocompleteEspecialidades = [];</script>';
@@ -37,7 +27,6 @@
                     echo '<script type="text/javascript">autocompleteEspecialidades.push("'.$especialidad['especialidad'].'")</script>';
                   }
                 ?>
-
               </div>
             </div>
           </div>
@@ -121,7 +110,7 @@
             </div>
             <div class="col-md-4">
               <div class="form-group">
-                <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="numero telefono" maxlength="8" onpaste="soloNumeros()"/>
+                <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="8" onpaste="soloNumeros()"/>
               </div>
             </div>
           </div>
