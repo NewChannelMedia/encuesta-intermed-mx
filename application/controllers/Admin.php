@@ -691,7 +691,11 @@
 
             // se carga el modelo para verificar si existen el usuario y password que se reciben por post
             $this->load->model('Admin_model');
-            $session = $_SESSION['status'];
+            if (array_key_exists('status',$_SESSION)){
+              $session = $_SESSION['status'];
+            } else {
+              $session = false;
+            }
             if($session===true){
               $data['title'] = "Directorio";
               $data['errorM'] = "";

@@ -1,7 +1,7 @@
 <!-- Formulario para agregar contactos al directorio -->
 <section class="directorioSection container">
   <div id="nombreDatos" class="container-fluid" >
-    <form method="post" onsubmit="return false;" id="registroMedico" class="panel">
+    <form method="post" onsubmit="guardarMedico();return false;" id="registroMedico" class="panel">
       <div class="panel-heading">
         <h3 class="panel-title">Datos Generales del Medico</h3>
       </div>
@@ -23,19 +23,20 @@
                 <input type="email" class="form-control" id="email" placeholder="E-mail:">
               </div>
               <div class="form-group col-md-6">
-                                <select class="form-control" id="especialidad" >
-                  <option class="defoption" value="">Especialidad</option>
-                  <?php
-                    foreach ($especialidades as $especialidad) {
-                      echo '<option value="' . $especialidad['id'] . '">'. $especialidad['especialidad'] .'</option>';
-                    }
-                  ?>
-                </select>
+                <input type="text" class="form-control" id="especialidad" placeholder="Especialidad:">
+                <?php
+                  echo '<script type="text/javascript">var autocompleteEspecialidades = [];</script>';
+                  foreach ($especialidades as $especialidad) {
+                    echo '<script type="text/javascript">autocompleteEspecialidades.push("'.$especialidad['especialidad'].'")</script>';
+                  }
+                ?>
               </div>
             </div>
           </div>
           <div class="col-md-4">
-            <button class="btn btn-info btn-block" id="agregarDatos" onclick="guardarMedico()">Guardar Medico</button>
+            <button class="btn btn-info bnt-block" id="agregarDatos" type="submit">
+				Guardar Medico
+            </button>
           </div>
         </div>
       </form>
@@ -84,7 +85,7 @@
     </div>
   </div>
   <div id="telefonos" class="container-fluid " >
-    <form method="post" onsubmit="return false;" id="registroMedico" class="panel">
+      <form method="post" onsubmit="guardarTelefono();return false;" id="registroTelefonos" class="panel">
       <div class="panel-heading">
         <h3 class="panel-title">Teléfonos</h3>
       </div>
@@ -93,20 +94,23 @@
           <div class="col-md-8">
             <div class="row">
               <div class="form-group col-md-3">
-                <input type="text" id="lada" class="form-control" placeholder="Lada"/>
+                <input type="text" id="ladaTelefono" class="form-control solo-numero" placeholder="Lada:" maxlength="5" onpaste="soloNumeros()"/>
               </div>
               <div class="form-group col-md-4">
-                <input type="text" id="numTelefono" class="form-control" placeholder="Número" />
+                <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="8" onpaste="soloNumeros()"/>
               </div>
               <div class="form-group col-md-5">
-                <select class="form-control">
-                  <option value="">Tipo</option>
+                <select class="form-control" id="tipoTelefono">
+                  <option value="casa">Casa</option>
+                  <option value="celular">Celular</option>
+                  <option value="oficina">Oficina</option>
+                  <option value="localizador">Localizador</option>
                 </select>
               </div>
             </div>
           </div>
           <div class="col-md-4">
-            <button class="btn btn-info btn-block" id="enviarFon">Añadir Telefono</button>
+            <button type="submit" class="btn btn-info btn-block" id="enviarFon">Añadir Telefono</button>
           </div>
         </form>
       </div>
@@ -121,4 +125,3 @@
   </div>
 </section>
 <!-- FIN TERCER SECCION -->
-<script src="<?echo base_url(); ?>js/utils-capturista.js"></script>
