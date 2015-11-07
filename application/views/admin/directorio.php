@@ -34,9 +34,12 @@
             </div>
           </div>
           <div class="col-md-4">
-            <button class="btn btn-info bnt-block btn-block" id="agregarDatos" type="submit">
-				Guardar Medico
-            </button>
+            <div class="form-group">
+              <button class="btn btn-info btn-block" id="agregarDatos" type="submit">Guardar Medico</button>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-warning btn-block" id="agregarDireccion">Editar</button>
+            </div>
           </div>
         </div>
       </form>
@@ -78,7 +81,19 @@
             </div>
           </div>
           <div class="col-md-4">
-            <button class="btn btn-info btn-block" id="agregarDireccion">Añadir Dirección</button>
+            <div class="form-group">
+              <button class="btn btn-info btn-block" id="agregarDireccion">Añadir Dirección</button>
+            </div>
+            <div class="form-group">
+              <ul class="list-inline">
+                <li>
+                  <button id="direccionGuardada-1" class="btn btn-sm editar">Direccion 1</button>
+                </li>
+                <li>
+                  <button id="direccionGuardada-2" class="btn btn-sm borrar">Direccion 2</button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </form>
@@ -110,7 +125,19 @@
             </div>
           </div>
           <div class="col-md-4">
-            <button type="submit" class="btn btn-info btn-block" id="enviarFon">Añadir Telefono</button>
+            <div class="form-group">
+              <button type="submit" class="btn btn-info btn-block" id="enviarFon">Añadir Telefono</button>
+            </div>
+            <div class="form-group">
+              <ul class="list-inline">
+                <li>
+                  <button id="telefonoGuardado-1" class="btn btn-sm editar">Telefono 1</button>
+                </li>
+                <li>
+                  <button id="telefonoGuardado-2" class="btn btn-sm editar">Telefono 2</button>
+                </li>
+              </ul>
+            </div>
           </div>
         </form>
       </div>
