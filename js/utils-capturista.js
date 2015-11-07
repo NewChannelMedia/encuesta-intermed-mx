@@ -23,7 +23,7 @@ function guardarMedico(){
         if (result.success){
           $('#medico_id').val(result.medico_id);
           $('#registroMedico').find('input,select,button').attr("disabled","disabled");
-          $('#registroMedico').addClass('guardado');
+          $('#registroMedico').addClass('panel-success guardado');
           $('#buttonGuardarMedico').remove();
           $('#formGuardarMedico').removeClass('col-md-8');
           $('#formGuardarMedico').addClass('col-md-12');
