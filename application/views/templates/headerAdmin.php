@@ -39,53 +39,61 @@
   <div id="wrapper">
     <div id="sidebar-wrapper">
       <ul class="sidebar-nav nav-stacked" id="menu">
-        <li>
-          <a href="<?= base_url() ?>admin/control"><span class="glyphicon glyphicon-dashboard nav-icon"></span> Dashboard</a>
-        </li>
-        <li>
-          <a href="#"><span class="glyphicon glyphicon-stats nav-icon"></span> Resultados</a>
-          <ul class="nav-pills nav-stacked secondLevel-ul">
-            <li>
-              <a href="<?= base_url() ?>admin/resultados">Por Categorías</a>
-            </li>
-            <li>
-              <a href="<?= base_url() ?>admin/crossreference">Cross Reference</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="<?= base_url() ?>admin/solicitudes"><span class="glyphicon glyphicon-list-alt nav-icon"></span> Solicitudes</a>
-        </li>
-        <li>
-          <a href="<?= base_url();?>admin/suscritos"><span class="glyphicon glyphicon-plus nav-icon"></span> Newsletter</a>
-        </li>
-        <li>
-          <a href="<?= base_url();?>admin/mensajes"><span class="glyphicon glyphicon-envelope nav-icon"></span> Mensajes</a>
-        </li>
-        <li>
-          <a><span class="glyphicon glyphicon-wrench nav-icon"></span> Encuesta</a>
-          <ul class="nav-pills nav-stacked secondLevel-ul">
-            <li>
-              <a href="<?= base_url() ?>admin/categorias">Categorias</a>
-            </li>
-            <li>
-              <a href="<?= base_url() ?>admin/preguntas">Preguntas</a>
-            </li>
-          </ul>
-        </li>
-        <!-- Directorios -->
-        <li>
-          <a><span class="glyphicon glyphicon-plane nav-icon"></span> Directorio </a>
-          <ul class="nav-pills nav-stacked secondLevel-ul">
-            <li>
-              <a href="<?= base_url() ?>admin/directorio">Agregar datos</a>
-            </li>
-            <li>
-              <a href="<?= base_url() ?>admin/preguntas">Llamadas</a>
-            </li>
-          </ul>
-        </li>
-        <!-- Fin directorios -->
+
+        <?php if($rol == "admin"){ ?>
+          <li>
+            <a href="<?= base_url() ?>admin/control"><span class="glyphicon glyphicon-dashboard nav-icon"></span> Dashboard</a>
+          </li>
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-stats nav-icon"></span> Resultados</a>
+            <ul class="nav-pills nav-stacked secondLevel-ul">
+              <li>
+                <a href="<?= base_url() ?>admin/resultados">Por Categorías</a>
+              </li>
+              <li>
+                <a href="<?= base_url() ?>admin/crossreference">Cross Reference</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="<?= base_url() ?>admin/solicitudes"><span class="glyphicon glyphicon-list-alt nav-icon"></span> Solicitudes</a>
+          </li>
+          <li>
+            <a href="<?= base_url();?>admin/suscritos"><span class="glyphicon glyphicon-plus nav-icon"></span> Newsletter</a>
+          </li>
+          <li>
+            <a href="<?= base_url();?>admin/mensajes"><span class="glyphicon glyphicon-envelope nav-icon"></span> Mensajes</a>
+          </li>
+          <li>
+            <a><span class="glyphicon glyphicon-wrench nav-icon"></span> Encuesta</a>
+            <ul class="nav-pills nav-stacked secondLevel-ul">
+              <li>
+                <a href="<?= base_url() ?>admin/categorias">Categorias</a>
+              </li>
+              <li>
+                <a href="<?= base_url() ?>admin/preguntas">Preguntas</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a><span class="glyphicon glyphicon-user nav-icon"></span> Directorio</a>
+            <ul class="nav-pills nav-stacked secondLevel-ul">
+              <li>
+                <a href="<?= base_url() ?>admin/directorio">Agregar</a>
+              </li>
+              <li>
+                <a href="<?= base_url() ?>admin/preguntas">Llamadas</a>
+              </li>
+            </ul>
+          </li>
+        <?php } elseif ($rol=="capturista"){ ?>
+          <li>
+            <a href="<?= base_url() ?>admin/directorio"><span class="glyphicon glyphicon-user nav-icon"></span> Directorio</a>
+          </li>
+          <li>
+            <a href="<?= base_url() ?>admin/preguntas"><span class="glyphicon glyphicon-earphone nav-icon"></span> Llamadas</a>
+          </li>
+        <?php } ?>
         <li>
           <a href="<?= base_url();?>admin/cerrar"><span class="glyphicon glyphicon-log-out nav-icon"></span> salir</a>
         </li>
