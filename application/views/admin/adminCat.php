@@ -1,3 +1,9 @@
+<?php
+//Si no tiene permisos de rol admin, redirect a pagina principal
+if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
+  redirect(base_url().'admin');
+}
+?>
 <input type="hidden" id="totalEtapas" value="<?php echo $etapas; ?>">
 <div class="container-fluid flama">
     <div class="row" style="padding:30px;">

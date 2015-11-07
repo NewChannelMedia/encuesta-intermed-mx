@@ -41,7 +41,7 @@
     <div id="sidebar-wrapper">
       <ul class="sidebar-nav nav-stacked" id="menu">
 
-        <?php if($rol == "admin"){ ?>
+        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 'admin'){ ?>
           <li>
             <a href="<?= base_url() ?>admin/control"><span class="glyphicon glyphicon-dashboard nav-icon"></span> Dashboard</a>
           </li>
@@ -87,12 +87,12 @@
               </li>
             </ul>
           </li>
-        <?php } elseif ($rol=="capturista"){ ?>
+        <?php } elseif(isset($_SESSION['rol']) && $_SESSION['rol'] == 'capturista'){ ?>
           <li>
             <a href="<?= base_url() ?>admin/directorio"><span class="glyphicon glyphicon-user nav-icon"></span> Directorio</a>
           </li>
           <li>
-            <a href="<?= base_url() ?>admin/preguntas"><span class="glyphicon glyphicon-earphone nav-icon"></span> Llamadas</a>
+            <a href="<?= base_url() ?>admin/llamadas"><span class="glyphicon glyphicon-earphone nav-icon"></span> Llamadas</a>
           </li>
         <?php } ?>
         <li>

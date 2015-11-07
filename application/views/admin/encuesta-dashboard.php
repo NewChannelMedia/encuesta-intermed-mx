@@ -1,3 +1,9 @@
+<?php
+//Si no tiene permisos de rol admin, redirect a pagina principal
+if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
+  redirect(base_url().'admin');
+}
+?>
 <div class="row">
   <div class="col-md-4">
     <div class="panel panel-default">
