@@ -21,14 +21,15 @@
         public function login($usuario, $password){
             $this->db_encuesta->where('usuario',$usuario);
             $this->db_encuesta->where('password',$password);
+            $this->db_encuesta->select('usuario, rol');
             $query = $this->db_encuesta->get('master');
-            if( $query->num_rows() == 1 ){
-              foreach( $query->result() as $row ){
-                if( $row->usuario == $usuario && $row->password == $password )
-                  return $row->id;
-                else
-                  return false;
-              }
+            $row = $query->row_array();
+            if(count($row) > 0){
+              $data = array(
+                'usuario' => $row['usuario'],
+                'rol' => $row['rol']
+              );
+              return $data;
             }else{
               return false;
             }

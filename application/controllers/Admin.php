@@ -40,10 +40,21 @@
           $usuario = $this->input->post('user');
           $password = $this->input->post('password');
 
-          if( ($this->Admin_model->login($usuario, $password) != false) || ( isset($_SESSION['status']) && $_SESSION['status']!=false) ){
-            if ($usuario){
+          if ($usuario != '' && $password != ''){
+            $session = $this->Admin_model->login($usuario, $password);
+
+            if ($session != false){
               $_SESSION['status'] = true;
-              redirect(base_url() . 'admin/control');
+              $_SESSION['usuario'] = $session['usuario'];
+              $_SESSION['rol'] = $session['rol'];
+            } else {
+              session_destroy();
+            }
+          }
+
+          if(isset($_SESSION['status']) && $_SESSION['status'] === true){
+            if ($_SESSION['rol'] == "capturista"){
+              redirect(base_url() . 'admin/directorio');
             }
             $data['title'] = "Dashboard";
             $data['administrador'] = $usuario;
@@ -149,14 +160,14 @@
 
       //cerrar sesion
       public function cerrar(){
-        $_SESSION['status'] = false;
+        unset($_SESSION);
+        session_destroy();
         $data['errorM'] = "";
         $data['title'] = "Admin";
         $this->load->view('templates/header', $data);
         $this->load->view('admin/Admin_vista', $data);
         $this->load->view('templates/footer2');
         redirect(base_url() . 'admin');
-        //return session_destroy();
       }
 
       //carga los datos a la tabla por aceptar
@@ -700,8 +711,6 @@
               $data['title'] = "Directorio";
               $data['errorM'] = "";
               $data['especialidades'] = $this->Capespecialidades_model->get_especialidades();
-              //$data['rol'] = "admin";
-              $data['rol'] = "capturista";
               $this->load->view('templates/headerAdmin', $data);
               $this->load->view('admin/directorio', $data);
               $this->load->view('templates/footerAdmin');
