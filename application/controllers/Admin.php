@@ -691,11 +691,17 @@
 
             // se carga el modelo para verificar si existen el usuario y password que se reciben por post
             $this->load->model('Admin_model');
-            $session = $_SESSION['status'];
+            if (array_key_exists('status',$_SESSION)){
+              $session = $_SESSION['status'];
+            } else {
+              $session = false;
+            }
             if($session===true){
               $data['title'] = "Directorio";
               $data['errorM'] = "";
               $data['especialidades'] = $this->Capespecialidades_model->get_especialidades();
+              //$data['rol'] = "admin";
+              $data['rol'] = "capturista";
               $this->load->view('templates/headerAdmin', $data);
               $this->load->view('admin/directorio', $data);
               $this->load->view('templates/footerAdmin');
@@ -718,6 +724,7 @@
             if($session===true){
               $data['title'] = "Directorio";
               $data['errorM'] = "";
+              $data['rol'] = "capturista";
               $this->load->view('templates/headerAdmin', $data);
               $this->load->view('admin/llamadas', $data);
               $this->load->view('templates/footerAdmin');
