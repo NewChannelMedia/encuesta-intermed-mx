@@ -711,8 +711,33 @@
               $data['title'] = "Directorio";
               $data['errorM'] = "";
               $data['especialidades'] = $this->Capespecialidades_model->get_especialidades();
+              //$data['rol'] = "admin";
+              $data['rol'] = "capturista";
               $this->load->view('templates/headerAdmin', $data);
               $this->load->view('admin/directorio', $data);
+              $this->load->view('templates/footerAdmin');
+            }else{
+              $data['title'] = "Directorio";
+              $data['error'] = "no sesion";
+              $_SESSION['status'] = false;
+              $data['status'] = $_SESSION['status'];
+              $data['errorM'] = "Revisa tus credenciales de acceso, o la sesión ha sido cerrada.";
+              $this->load->view('templates/header', $data);
+              $this->load->view('admin/Admin_vista', $data);
+              $this->load->view('templates/footerAdmin');
+            }
+        }
+        public function llamadas(){
+
+            // se carga el modelo para verificar si existen el usuario y password que se reciben por post
+            $this->load->model('Admin_model');
+            $session = $_SESSION['status'];
+            if($session===true){
+              $data['title'] = "Directorio";
+              $data['errorM'] = "";
+              $data['rol'] = "capturista";
+              $this->load->view('templates/headerAdmin', $data);
+              $this->load->view('admin/llamadas', $data);
               $this->load->view('templates/footerAdmin');
             }else{
               $data['title'] = "Directorio";
