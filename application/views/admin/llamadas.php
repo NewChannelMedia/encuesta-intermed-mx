@@ -65,16 +65,16 @@
         <h3 class="panel-title">Realizar llamadas</h3>
       </div>
       <div class="panel-body">
-        <table class="table table-striped table-hover">
+        <table class="table">
           <thead>
             <tr>
               <th>Nombre</th>
-              <th>Teléfono</th>
-              <th>Correo</th>
-              <th>Conf. correo</th>
-              <th>Autorizo</th>
-              <th>No autorizo</th>
-              <th>Guardar</th>
+              <th class="text-center">Teléfono</th>
+              <th class="text-center">Correo</th>
+              <th class="text-center">Conf. correo</th>
+              <th class="text-center">Autorizo</th>
+              <th class="text-center">No autorizo</th>
+              <th class="text-center">Guardar</th>
             </tr>
           </thead>
           <tbody id="muestraMed">

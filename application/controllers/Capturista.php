@@ -127,5 +127,96 @@
         } else $data['muestra'] =  $this->Capmuestramed_model->get_muestra();
         echo json_encode($data);
       }
+
+      public function guardarMuestraMedico(){
+        $id = $this->input->post('id');
+        $telefono_id = $this->input->post('telefono_id');
+        $correo = $this->input->post('correo');
+        $correo2 = $this->input->post('correo2');
+        $aut = $this->input->post('aut');
+
+        if ($correo != ""){
+          //Actualizar correo del medico
+          $medico_id = $this->Capmuestramed_model->get_muestraMedicoId($id);
+          $this->Capmedicos_model->update_medico($medico_id,$correo);
+        }
+
+        $result = false;
+        if ($aut == "true"){
+          $result = $this->Capmuestramed_model->update_muestra($id, $telefono_id);
+
+          if ($result){
+            if ($correo == ""){
+              $this->enviarCodigo($correo2);
+            } else $this->enviarCodigo($correo);
+          }
+        } else {
+          //Eliminar de muestra el id
+          $result = $this->Capmuestramed_model->delete_muestraId($id);
+        }
+
+        $array = array('success'=>$result);
+
+        echo json_encode($array);
+      }
+
+      public function enviarCodigo($email){
+        $mensaje = '';
+        $correo = $email;
+        $titulo = 'Mensaje de Intermed';
+        $codigo = $this->generarCodigo();
+        $estado = 1;
+        // se lee el archivo
+        $fileh = realpath(APPPATH.'views/correos/headerCorreo.php');
+        $fileb = realpath(APPPATH.'views/correos/bodyCorreo.php');
+        $filef = realpath(APPPATH.'views/correos/footerCorreo.php');
+        $fpH = fopen( $fileh,'r');
+        $fpB = fopen( $fileb,'r');
+        $fpF = fopen( $filef,'r');
+        $html1 = "";
+        $html2 = "";
+        $html3 = "";
+        while( $line = fgets($fpH) ){
+          $html1 .= $line;
+        }
+        while( $line = fgets($fpB) ){
+          $html2 .= $line;
+        }
+        while( $line = fgets($fpF) ){
+          $html3 .= $line;
+        }
+        fclose($fpH);
+        fclose($fpB);
+        fclose($fpF);
+        $mensajeCompleto = "";
+        $sustituir = '<h2 style = "{color:red;}">'.$codigo.'</h2>';
+        $conCodigo = str_replace('<h2 id = "codigo"></h2>',$sustituir, $html2);
+        if($mensaje != ""){
+              $sustituir2 = "<p style = 'color:red;'>".$mensaje."</p>";
+              $conCodigo2 = str_replace('<p id ="mes"></p>',$sustituir2, $conCodigo);
+              $mensajeCompleto = $html1.$conCodigo2.$html3;
+        }else{
+          $mensajeCompleto = $html1.$conCodigo.$html3;
+        }
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= 'From: <intermed.encuestas@newchannel.mx>'."\r\n";
+        return mail($correo,$titulo,$mensajeCompleto,$headers);
+      }
+
+      public function generarCodigo(){
+        $this->load->model('Encuestam_model');
+        $posible = str_split("abcdefghijklmnopqrstuvwxyz0123456789");
+        shuffle($posible);
+        $codigo = array_slice($posible, 0,6);
+        $str = implode('', $codigo);
+        while ($this->Encuestam_model->get_encuestamId($str)>0){
+          shuffle($posible);
+          $codigo = array_slice($posible, 0,6);
+          $str = implode('', $codigo);
+        }
+        $this->Encuestam_model->create_encuestam($str);
+        return $str;
+      }
   }
 ?>

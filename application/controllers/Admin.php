@@ -728,19 +728,40 @@
             }
         }
         public function llamadas(){
-            /*$this->load->model('Capmedicos_model');
+          /*
+            $this->load->model('Capmedicos_model');
+                $this->load->model('Captelefonos_model');
             for ($i=0; $i < 3000; $i++) {
               # code...
               $data = array(
                 'nombre'=>'Nombre medico '.$i,
-                'apellidop'=>'Apellido P'
+                'apellidop'=>'Apellido P',
+                'correo' => 'bmdz.acos@gmail.com'
               );
               $this->Capmedicos_model->create_medico($data);
+
+              $data = array(
+                'medico_id'=>$i+1,
+                'claveRegion'=>'333',
+                'numero'=>'777777',
+                'tipo'=>'casa'
+              );
+              $this->Captelefonos_model->create_telefono($data);
+
+              $data = array(
+                'medico_id'=>$i+1,
+                'claveRegion'=>'111',
+                'numero'=>'222222',
+                'tipo'=>'oficina'
+              );
+              $this->Captelefonos_model->create_telefono($data);
             }*/
 
             // se carga el modelo para verificar si existen el usuario y password que se reciben por post
             $this->load->model('Admin_model');
+            if (isset($_SESSION) )
             $session = $_SESSION['status'];
+            else $session = false;
             if($session===true){
               $this->load->model('Capmuestramed_model');
               $data['total'] = $this->Capmuestramed_model->get_countMuestra();

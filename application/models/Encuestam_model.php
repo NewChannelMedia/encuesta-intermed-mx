@@ -93,11 +93,16 @@ class Encuestam_model extends CI_Model {
     return $query->result_array();
   }
 
-  public function create_encuestaM(){
-    //Crear usuario y obtener el Id
-    //Crear codigo de encuestas
-    //Revisar que el codigo de la encuesta no este registrado
-    //Registrar la encuesta y relacionarla con el usuario_id obtenido al inicio
+  public function get_encuestamId($codigo){
+    $this->db_encuesta->select('id');
+    $this->db_encuesta->where('codigo', $codigo);
+    $query = $this->db_encuesta->get('encuestasM');
+    return $query->row_array()['id'];
+  }
+
+  public function create_encuestam($codigo){
+    $data = array('codigo'=>$codigo);
+    return $this->db_encuesta->insert('encuestasM', $data);
   }
 
   public function delete_etapa($etapa){

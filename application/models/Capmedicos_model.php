@@ -25,5 +25,14 @@
           }
         }
 
+        public function update_medico($medico_id,$correo){
+          $data = array(
+                         'correo' => $correo
+                      );
+
+          $this->db_capturista->where('id', $medico_id);
+          return $this->db_capturista->update('medicos', $data);
+        }
+
     }
 ?>

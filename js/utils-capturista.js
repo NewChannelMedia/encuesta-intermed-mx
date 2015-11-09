@@ -194,28 +194,32 @@ function generarMuestraMedicos(){
     async: true,
     success: function (result) {
       if (result.success){
-        console.log('DATA: ' + JSON.stringify(result));
         result.muestra.forEach(function(val){
-          var nombre = val.medico.nombre + ' ' + val.medico.apellidop;
-          if (val.medico.apellidom){
-            nombre +=  ' ' + val.medico.apellidom;
-          }
-          var correo = '';
-          if (val.medico.correo){
-            correo = val.medico.correo;
-          }
-          var telefonos = '<table>';
-          val.telefonos.forEach(function(telefono){
-            telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120">(' + telefono.claveRegion + ') ' + telefono.numero +'</td><td><input type="checkbox"></td></tr>';
-          });
-          telefonos+='</table>'
+          if (val.aut == 0){
+            var nombre = val.medico.nombre + ' ' + val.medico.apellidop;
+            if (val.medico.apellidom){
+              nombre +=  ' ' + val.medico.apellidom;
+            }
+            var correo = '';
+            if (val.medico.correo){
+              correo = val.medico.correo;
+            }
+            var telefonos = '<table width="100%">';
+            var checked = ' checked';
+            val.telefonos.forEach(function(telefono){
+              telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center">(' + telefono.claveRegion + ') ' + telefono.numero +'</td><td class="text-center"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></td></tr>';
+              checked = '';
+            });
+            telefonos+='</table>'
 
-          var guardar = '<button class="btn btn-success" onclick="guardarMuestra('+ val.muestra_id+')"><span class="glyphicon glyphicon-saved"></button>'
+            var guardar = '<button class="btn btn-success" onclick="guardarMuestra('+ val.muestra_id+')"><span class="glyphicon glyphicon-saved"></button>'
 
-          var confirmCorreo = '<input type="text" value="" class="confirmCorreo">';
-          var autorizo = '<input type="checkbox" class="autorizo">';
-          var noautorizo = '<input type="checkbox" class="noautorizo">';
-          $('#muestraMed').append('<tr class="muestra" id="'+ val.muestra_id+'"><td>'+nombre+'</td><td>'+telefonos+'</td><td>'+correo+'</td><td>'+confirmCorreo+'</td><td>'+autorizo+'</td><td>'+noautorizo+'</td><td>'+guardar+'</td></tr>');
+            var confirmCorreo = '<input type="text" value="" class="confirmCorreo">';
+            var autorizo = '<input type="radio" name="autorizo_'+val.muestra_id+'" value="true" checked>';
+            var noautorizo = '<input type="radio" name="autorizo_'+val.muestra_id+'" value="false">';
+            $('#muestraMed').append('<tr class="muestra" id="'+ val.muestra_id+'"><td>'+nombre+'</td><td class="text-center">'+telefonos+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+confirmCorreo+'</td><td class="autorizo text-center">'+autorizo+'</td><td class="autorizo text-center">'+noautorizo+'</td><td class="text-center">'+guardar+'</td></tr>');
+            $('#muestraMed').find('tr').first().addClass('active');
+          }
         });
       }
     },
@@ -226,6 +230,46 @@ function generarMuestraMedicos(){
 }
 
 function guardarMuestra(id){
-  console.log('Guardar muestra_id: ' + $('tr.muestra#'+id).html());
+  var trmuestra = $('tr.muestra#'+id);
+  var telefono_id = trmuestra.find('tr.telefono>td>input:checked').prop('value');
+  var correo = trmuestra.find('input.confirmCorreo').prop('value');
+  var correo2 =  trmuestra.find('td.email').html();
+  var autorizo = trmuestra.find('td.autorizo>input:checked').prop('value');
 
+  var guardar = true;
+
+  if (correo != ""){
+    guardar = validarEmail(correo);
+  }
+
+  if (guardar){
+    $.ajax( {
+      url: '/encuesta-intermed/Capturista/guardarMuestraMedico',
+      type: "POST",
+      dataType: 'JSON',
+      data: {'id':id,'telefono_id':telefono_id,'correo':correo,'correo2':correo2,'aut':autorizo},
+      async: true,
+      success: function (result) {
+        if (result.success){
+          trmuestra.fadeOut(300, function(){ $(this).remove();$('#muestraMed').find('tr').first().addClass('active');});
+
+        }
+      },
+      error: function (err){
+        console.log( "Error: AJax dead :" + JSON.stringify(err) );
+      }
+    });
+  } else {
+    bootbox.alert({
+      message: "Formato incorrecto del correo: " + correo,
+      title: "No se pueden guardar los cambios"
+    });
+  }
+}
+
+function validarEmail( email ) {
+    expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if ( !expr.test(email) )
+        return false;
+    else return true;
 }
