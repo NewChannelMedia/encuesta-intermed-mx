@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="panel-body">
       <div class="row">
-        <?php if ($total === 0){ ?>
+        <?php if ($total <= 0){ ?>
         <div class="col-md-12">
           <div class="col-md-6" id="generar">
             <div class="jumbotron">
@@ -15,33 +15,27 @@
           echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) {
             generarMuestraMedicos();
           });</script>';
+          ?>
+          <div class="col-md-12">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Teléfono</th>
+                  <th>Correo</th>
+                  <th>Conf. correo</th>
+                  <th>Autorizo</th>
+                  <th>No autorizo</th>
+                  <th>Guardar</th>
+                </tr>
+              </thead>
+              <tbody id="muestraMed">
+
+              </tbody>
+            </table>
+          </div>
+        <?php
         }?>
-        <div class="col-md-12">
-          <table class="table table-hover table-condensed">
-            <thead id="cabecera">
-              <tr>
-                <td>#</td>
-                <td>nombre</td>
-                <td>apellido paterno</td>
-                <td>apellido materno</td>
-                <td>correo</td>
-                <td>direccion</td>
-                <td>boton</td>
-              </tr>
-            </thead>
-            <tbody id="cuerpo">
-              <tr>
-                <td>1</td>
-                <td>oscar</td>
-                <td>munoz</td>
-                <td>barajas</td>
-                <td>lestat_kerveros</td>
-                <td>por hay</td>
-                <td><button type="button"class="btn btn-success">Enviar</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>
   </div>

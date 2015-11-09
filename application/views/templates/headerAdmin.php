@@ -83,7 +83,7 @@
                 <a href="<?= base_url() ?>admin/directorio">Agregar</a>
               </li>
               <li>
-                <a href="<?= base_url() ?>admin/preguntas">Llamadas</a>
+                <a href="<?= base_url() ?>admin/llamadas">Llamadas</a>
               </li>
             </ul>
           </li>

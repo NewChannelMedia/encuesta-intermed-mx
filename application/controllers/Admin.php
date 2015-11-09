@@ -728,6 +728,15 @@
             }
         }
         public function llamadas(){
+            /*$this->load->model('Capmedicos_model');
+            for ($i=0; $i < 3000; $i++) {
+              # code...
+              $data = array(
+                'nombre'=>'Nombre medico '.$i,
+                'apellidop'=>'Apellido P'
+              );
+              $this->Capmedicos_model->create_medico($data);
+            }*/
 
             // se carga el modelo para verificar si existen el usuario y password que se reciben por post
             $this->load->model('Admin_model');
