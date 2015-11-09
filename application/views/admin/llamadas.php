@@ -1,4 +1,5 @@
 <section class="helpSection">
+  <?php if ($total <= 0){ ?>
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
@@ -6,6 +7,7 @@
         </div>
       </div>
     </div>
+    <?php } else { ?>
     <div class="row">
       <div class="col-md-2">
         <p class="text-muted"><span class="glyphicon glyphicon-chevron-right"></span> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
@@ -46,39 +48,44 @@
         <p class="text-muted"><span class="glyphicon glyphicon-chevron-right"></span> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
       </div>
     </div>
+  <?php } ?>
 </section>
+
 <section class="llamadasSection container-fluid">
   <div class="contaer-fluid">
     <div class="panel">
+      <?php if ($total <= 0){ ?>
+        <div class="panel-body text-center">
+          <span class="glyphicon glyphicon-triangle-bottom s20 white"></span>
+        </div>
+      <?php } else {
+        echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) {
+          generarMuestraMedicos();
+        });</script>';
+      ?>
       <div class="panel-heading">
         <h3 class="panel-title">Realizar llamadas</h3>
       </div>
       <div class="panel-body">
-        <table class="table table-hover table-condensed">
-          <thead id="cabecera">
+        <table class="table table-striped table-hover">
+          <thead>
             <tr>
-              <td>#</td>
-              <td>nombre</td>
-              <td>apellido paterno</td>
-              <td>apellido materno</td>
-              <td>correo</td>
-              <td>direccion</td>
-              <td>boton</td>
+              <th>Nombre</th>
+              <th>Teléfono</th>
+              <th>Correo</th>
+              <th>Conf. correo</th>
+              <th>Autorizo</th>
+              <th>No autorizo</th>
+              <th>Guardar</th>
             </tr>
           </thead>
-          <tbody id="cuerpo">
-            <tr>
-              <td>1</td>
-              <td>oscar</td>
-              <td>munoz</td>
-              <td>barajas</td>
-              <td>lestat_kerveros</td>
-              <td>por hay</td>
-              <td><button type="button"class="btn btn-success">Enviar</button></td>
-            </tr>
+          <tbody id="muestraMed">
+
           </tbody>
         </table>
       </div>
+
+      <?php } ?>
     </div>
   </div>
 </section>
