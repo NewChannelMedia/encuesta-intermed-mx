@@ -108,10 +108,6 @@ $(function(){
 });
 });
 
-function soloNumeros(){
-
-}
-
 $(document).ready(function (){
    $('.solo-numero').bind("paste", function(e){
     // access the clipboard using the api
@@ -188,3 +184,48 @@ $(document).ready(function(){
     }
   });
 });
+
+function generarMuestraMedicos(){
+  $('#muestraMed').html('');
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/generarMuestraMedicos',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      if (result.success){
+        console.log('DATA: ' + JSON.stringify(result));
+        result.muestra.forEach(function(val){
+          var nombre = val.medico.nombre + ' ' + val.medico.apellidop;
+          if (val.medico.apellidom){
+            nombre +=  ' ' + val.medico.apellidom;
+          }
+          var correo = '';
+          if (val.medico.correo){
+            correo = val.medico.correo;
+          }
+          var telefonos = '<table>';
+          val.telefonos.forEach(function(telefono){
+            telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120">(' + telefono.claveRegion + ') ' + telefono.numero +'</td><td><input type="checkbox"></td></tr>';
+          });
+          telefonos+='</table>'
+
+          var guardar = '<button class="btn btn-success" onclick="guardarMuestra('+ val.muestra_id+')"><span class="glyphicon glyphicon-saved"></button>'
+
+          var confirmCorreo = '<input type="text" value="" class="confirmCorreo">';
+          var autorizo = '<input type="checkbox" class="autorizo">';
+          var noautorizo = '<input type="checkbox" class="noautorizo">';
+          $('#muestraMed').append('<tr class="muestra" id="'+ val.muestra_id+'"><td>'+nombre+'</td><td>'+telefonos+'</td><td>'+correo+'</td><td>'+confirmCorreo+'</td><td>'+autorizo+'</td><td>'+noautorizo+'</td><td>'+guardar+'</td></tr>');
+        });
+      }
+    },
+    error: function (err) {
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  } );
+}
+
+function guardarMuestra(id){
+  console.log('Guardar muestra_id: ' + $('tr.muestra#'+id).html());
+
+}

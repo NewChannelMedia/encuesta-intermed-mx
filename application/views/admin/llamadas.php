@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
-          <button class="btn btn-success btn-lg center-block">Generar</button>
+          <button class="btn btn-success btn-lg center-block" onclick="generarMuestraMedicos()">Generar</button>
         </div>
       </div>
     </div>
@@ -50,19 +50,17 @@
     </div>
   <?php } ?>
 </section>
-
+<?php if ($total <= 0){ ?>
+<hr>
+<?php } else {
+  echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) {
+    generarMuestraMedicos();
+  });</script>';
+?>
 <section class="llamadasSection container-fluid">
   <div class="contaer-fluid">
     <div class="panel">
-      <?php if ($total <= 0){ ?>
-        <div class="panel-body text-center">
-          <span class="glyphicon glyphicon-triangle-bottom s20 white"></span>
-        </div>
-      <?php } else {
-        echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) {
-          generarMuestraMedicos();
-        });</script>';
-      ?>
+
       <div class="panel-heading">
         <h3 class="panel-title">Realizar llamadas</h3>
       </div>
@@ -84,8 +82,7 @@
           </tbody>
         </table>
       </div>
-
-      <?php } ?>
     </div>
   </div>
 </section>
+<?php } ?>
