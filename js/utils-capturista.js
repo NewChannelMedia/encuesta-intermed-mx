@@ -181,7 +181,7 @@ $(document).ready(function(){
           alert("Error al insertar: "+JSON.stringify(e));
         });
       }else{
-        alert("Favor de no dejar campos vacíos :D");
+        alert("Favor de no dejar campos vacíos.");
       }
     }else{
       alert("Por favor llene primero la seccion de arriba");
