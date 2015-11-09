@@ -38,6 +38,7 @@
           foreach ($result as $muestraMedico) {
             $medico = array();
             $medico['muestra_id'] = $muestraMedico['id'];
+            $medico['aut'] = $muestraMedico['aut'];
             $this->db_capturista->where('id', $muestraMedico['medico_id']);
             $medico['medico'] = $this->db_capturista->get('medicos')->row_array();
             $this->db_capturista->where('medico_id', $muestraMedico['medico_id']);
@@ -78,5 +79,24 @@
           return true;
         }
 
+        public function delete_muestraId($id){
+          return $this->db_capturista->delete('muestraMedicos', array('id' => $id));
+        }
+
+        public function update_muestra($id, $telefono_id){
+          $data = array(
+                         'telefono_id' => $telefono_id,
+                         'aut' => 1
+                      );
+
+          $this->db_capturista->where('id', $id);
+          return $this->db_capturista->update('muestraMedicos', $data);
+        }
+
+        public function get_muestraMedicoId($id){
+          $this->db_capturista->select('medico_id');
+          $this->db_capturista->where('id', $id);
+          return $this->db_capturista->get('muestraMedicos')->row_array()['medico_id'];
+        }
     }
 ?>
