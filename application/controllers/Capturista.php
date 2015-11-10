@@ -129,11 +129,11 @@
       * function para retornar todos los datos del usuario recien insertado
       */
       public function editarDirecciones(){
-        $consultorio = $this->input->post('consultorio');
+        $medico_id = $this->input->post('medico_id');
         //llamada a la funcion del modelo
         $arreglo = array();
         $i = 0;
-        $iterar = $this->Capdirecciones_model->editarDirecciones($consultorio);
+        $iterar = $this->Capdirecciones_model->editarDirecciones($medico_id);
         foreach( $iterar->result() as $row ){
           $arreglo[ $i ]['id'] = $row->id;
           $arreglo[ $i ]['nombre'] = $row->nombre;
@@ -195,6 +195,19 @@
           $i++;
         }
         print_r(json_encode($arreglo));
+      }
+      public function actualizarFon(){
+        $id = $this->input->post('id');
+        $numero = $this->input->post('numero');
+        $tipo = $this->input->post('tipo');
+        $clave = $this->input->post('clave');
+        $envio = array(
+          'numero' => $numero,
+          'tipo' => $tipo,
+          'claveRegion' => $clave
+        );
+        $result = $this->Capdirecciones_model->actualizarFon($id,$envio);
+        echo json_encode(array('success'=>$result));
       }
   }
 ?>

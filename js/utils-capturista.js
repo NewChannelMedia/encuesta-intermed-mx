@@ -73,53 +73,70 @@ function guardarTelefono(){
   var clave = $('#ladaTelefono').val();
   var numero = $('#numTelefono').val();
   var tipo = $('#tipoTelefono').val();
+  var telefono_id = $('#fonOculto').val();
   var data = {
               'medico_id': id,
               'claveRegion': clave,
               'numero': numero,
               'tipo': tipo
             };
-
-  if (id != '' && numero != '' && clave != '' && tipo != ''){
-    $.ajax( {
-      url: '/encuesta-intermed/Capturista/guardarTelefono',
-      type: "POST",
-      data: data,
-      dataType: 'JSON',
-      async: true,
-      success: function (result) {
-        if (result.success){
-          $('#registroTelefonos').find('input').prop('value','');
-          document.getElementById("tipoTelefono").selectedIndex = "0";
-          $('#ladaTelefono').focus();
-          //LI
-          var html2 = "";
-          $.post('/encuesta-intermed/capturista/anadirFon/',{
-            id: $('#medico_id').val()
-          },function(datas){
-            var idBoton;
-            $.each(JSON.parse(datas), function(i, item){
-              idBoton = "fon"+item.id;
-              html2 += '<li id="">';
-              html2 += '<input type="button" id="'+idBoton+'" onclick="fondAdd(\''+idBoton+'\');" class="btn btn-sm editar" value="'+item.numero+'" />';
-              html2 += '<span class="hidden" id="lada'+idBoton+'">'+item.claveRegion+'</span>';
-              html2 += '<span class="hidden" id="num'+idBoton+'">'+item.numero+'</span>';
-              html2 += '<span class="hidden" id="tipo'+idBoton+'">'+item.tipo+'</span>';
-              html2 += '</li>';
-            });
-            $("#fonAgregado ul").append(html2);
-          });
-        }
-      },
-      error: function (err) {
-        console.log( "Error: AJax dead :" + JSON.stringify(err) );
-      }
-    } );
-  } else {
-    bootbox.alert({
-        message: "Falta llenar algún campo para el registro.",
-        title: "No se puede guardar el número de teléfono"
+  if( $("#fonOculto").val() != "" ){
+    $.post('/encuesta-intermed/capturista/actualizarFon/',{
+      id: telefono_id,
+      clave: clave,
+      numero: numero,
+      tipo: tipo
+    },function(data){
+      $('#ladaTelefono').val('');
+      $('#numTelefono').val('');
+      $('#tipoTelefono').val('');
+      $('#fonOculto').val('');
+    }).fail(function(e){
+      alert("Error: "+JSON.stringify(e));
     });
+  }else{
+    if (id != '' && numero != '' && clave != '' && tipo != ''){
+      $.ajax( {
+        url: '/encuesta-intermed/Capturista/guardarTelefono',
+        type: "POST",
+        data: data,
+        dataType: 'JSON',
+        async: true,
+        success: function (result) {
+          if (result.success){
+            $('#registroTelefonos').find('input').prop('value','');
+            document.getElementById("tipoTelefono").selectedIndex = "0";
+            $('#ladaTelefono').focus();
+            //LI
+            var html2 = "";
+            $.post('/encuesta-intermed/capturista/anadirFon/',{
+              id: $('#medico_id').val()
+            },function(datas){
+              var idBoton;
+              $.each(JSON.parse(datas), function(i, item){
+                idBoton = "fon"+item.id;
+                html2 += '<li id="">';
+                html2 += '<input type="button" id="'+idBoton+'" onclick="fondAdd(\''+idBoton+'\');" class="btn btn-sm editar" value="'+item.numero+'" />';
+                html2 += '<span class="hidden" id="lada'+idBoton+'">'+item.claveRegion+'</span>';
+                html2 += '<span class="hidden" id="num'+idBoton+'">'+item.numero+'</span>';
+                html2 += '<span class="hidden" id="tipo'+idBoton+'">'+item.tipo+'</span>';
+                html2 += '<span class="hidden" id="id'+idBoton+'">'+item.id+'</span>';
+                html2 += '</li>';
+              });
+              $("#fonAgregado ul").append(html2);
+            });
+          }
+        },
+        error: function (err) {
+          console.log( "Error: AJax dead :" + JSON.stringify(err) );
+        }
+      } );
+    } else {
+      bootbox.alert({
+          message: "Falta llenar algún campo para el registro.",
+          title: "No se puede guardar el número de teléfono"
+      });
+    }
   }
 }
 
@@ -282,8 +299,7 @@ $(document).ready(function(){
               *
               */
               $.post('/encuesta-intermed/capturista/editarDirecciones',{
-                medico_id: id_medico,
-                consultorio:nombreConsultorio
+                medico_id: id_medico
               },function(d){
                 var html="";
                 $.each(JSON.parse(d), function(i, item){
@@ -357,8 +373,12 @@ function traerID(dato){
   $("#"+dato).addClass('borrar');
 }
 function fondAdd(dato){
-  var lada = $("#lada"+dato).val();
-  var numero = $("#num"+dato).val();
-  var tipo = $("#tipo"+dato).val();
-  //$.post('/encuesta-intermed/capturista/')
+  var lada = $("#lada"+dato).text();
+  var numero = $("#num"+dato).text();
+  var tipo = $("#tipo"+dato).text();
+  var id = $('#id'+dato).text();
+  $("#ladaTelefono").val(lada);
+  $("#fonOculto").val(id);
+  $("#numTelefono").val(numero);
+  $("#tipoTelefono").val(tipo);
 }
