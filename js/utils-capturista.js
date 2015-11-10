@@ -281,3 +281,21 @@ function validarEmail( email ) {
         return false;
     else return true;
 }
+
+/* funcion que habilita el boton de borrar de un input-group-btn */
+$('.input-group-btn .btnChk').click(function(){
+  $(this).parent().parent().find('.borrar').prop('disabled', true);
+  $(this).parent().find('.borrar').prop('disabled', false);
+  $(this).parent().parent().parent().find('#agregarDireccion').html('Guardar Cambios');
+});
+
+/* funcion que regresa el estado de los inputs en la seccion de agregar direcciones y telefonos */
+function limpiaSection(section){
+  console.log(section);
+  $(section).find('input').not(':button, :submit, :reset, :hidden').val('');
+  $(section).find('.btnChk').removeClass('active');
+  $(section).find(':radio').prop('checked',false);
+  $(section).find('.borrar').prop('disabled', true);
+  $(section).find('#agregarDireccion').html('Añadir Dirección');
+  $(section).find('input').first().focus();
+}

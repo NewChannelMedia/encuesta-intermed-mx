@@ -84,16 +84,34 @@
             <div class="form-group">
               <button class="btn btn-info btn-block" id="agregarDireccion">Añadir Dirección</button>
             </div>
-            <div class="form-group">
-              <ul class="list-inline">
-                <li>
-                  <button id="direccionGuardada-1" class="btn btn-sm editar">Direccion 1</button>
-                </li>
-                <li>
-                  <button id="direccionGuardada-2" class="btn btn-sm borrar">Direccion 2</button>
-                </li>
-              </ul>
+            <!--empiezan los botones de edicion-->
+            <div class="btn-group edit-btns text-center" data-toggle="buttons">
+              <div class="input-group-btn">
+                <label class="btn btn-sm editar btnChk">
+                  <input type="radio" name="editDirecciones" id="option1" autocomplete="off" class=""> Direccion 1
+                </label>
+                <button class="btn btn-sm borrar" disabled="disabled"><span class="glyphicon glyphicon-remove"></span></button>
+              </div>
+              <div class="input-group-btn">
+                <label class="btn btn-sm editar btnChk">
+                  <input type="radio" name="editDirecciones" id="option2" autocomplete="off" class=""> Direccion 2
+                </label>
+                <button class="btn btn-sm borrar" disabled="disabled"><span class="glyphicon glyphicon-remove"></span></button>
+              </div>
+              <div class="input-group-btn">
+                <label class="btn btn-sm editar btnChk">
+                  <input type="radio" name="editDirecciones" id="option3" autocomplete="off" class=""> Direccion 3
+                </label>
+                <button class="btn btn-sm borrar" disabled="disabled"><span class="glyphicon glyphicon-remove"></span></button>
+              </div>
+
+              <!-- este boton es para terminar de editar entradas y añadir nuevas-->
+              <!-- debe quitar los checked de cada radio, limpiar el formulario y dejar activo el boton de añadir -->
+              <div class="input-group-btn">
+                <button class="btn btn-success btn-sm btnClean hidden" onclick="limpiaSection('#direccionDatos');">Añadir Nuevo &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></button>
+              </div>
             </div>
+            <!--terminan los botones de edicion-->
           </div>
         </div>
       </form>
