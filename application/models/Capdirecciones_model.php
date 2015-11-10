@@ -7,10 +7,10 @@
         public function insertDireccion($arreglo){
           return $this->db_capturista->insert('direcciones',$arreglo);
         }
-        public function editarDirecciones($consultorio){
-          $this->db_capturista->where('nombre',$consultorio);
+        public function editarDirecciones($medico_id){
+          $this->db_capturista->where('medico_id',$medico_id);
           $this->db_capturista->order_by("id", "desc");
-          $query = $this->db_capturista->get('direcciones');
+          $query = $this->db_capturista->get('direcciones',1);
           return $query;
         }
         public function actualizaDireccion($id,$arreglo){
@@ -29,5 +29,10 @@
           $query = $this->db_capturista->get('telefonos',1);
           return $query;
         }
+
+        public function eliminarDireccion($id){
+          return $this->db_capturista->delete('direcciones', array('id' => $id));
+        }
+
     }
 ?>

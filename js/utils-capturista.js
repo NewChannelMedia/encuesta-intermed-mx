@@ -93,21 +93,22 @@ function guardarTelefono(){
           document.getElementById("tipoTelefono").selectedIndex = "0";
           $('#ladaTelefono').focus();
           //LI
-          var html2 = "";
           $.post('/encuesta-intermed/capturista/anadirFon/',{
             id: $('#medico_id').val()
           },function(datas){
             var idBoton;
+            var html2 = "";
             $.each(JSON.parse(datas), function(i, item){
               idBoton = "fon"+item.id;
-              html2 += '<li id="">';
+              html2 += '<li id="atel'+item.id+'">';
               html2 += '<input type="button" id="'+idBoton+'" onclick="fondAdd(\''+idBoton+'\');" class="btn btn-sm editar" value="'+item.numero+'" />';
               html2 += '<span class="hidden" id="lada'+idBoton+'">'+item.claveRegion+'</span>';
               html2 += '<span class="hidden" id="num'+idBoton+'">'+item.numero+'</span>';
               html2 += '<span class="hidden" id="tipo'+idBoton+'">'+item.tipo+'</span>';
+              html2 += '<input type="button" onclick="eliminarTelefono(\''+item.id+'\');" value="eliminar">';
               html2 += '</li>';
             });
-            $("#fonAgregado ul").append(html2);
+            $("#fonAgregado>ul").append(html2);
           });
         }
       },
@@ -282,8 +283,7 @@ $(document).ready(function(){
               *
               */
               $.post('/encuesta-intermed/capturista/editarDirecciones',{
-                medico_id: id_medico,
-                consultorio:nombreConsultorio
+                medico_id: id_medico
               },function(d){
                 var html="";
                 $.each(JSON.parse(d), function(i, item){
@@ -301,6 +301,7 @@ $(document).ready(function(){
                   html += '<span class="hidden" id="ciudad'+BotonId+'">'+item.ciudad+'</span>';
                   html += '<span class="hidden" id="colonia'+BotonId+'">'+item.colonia+'</span>';
                   html += '<span class="hidden" id="localidad'+BotonId+'">'+item.localidad+'</span>';
+                  html += '<input type="button" onclick="eliminarDireccion(\''+item.id+'\');" value="eliminar">';
                   html += '</li>';
                 });
                 $("#editDinamico ul").append(html);
@@ -361,4 +362,72 @@ function fondAdd(dato){
   var numero = $("#num"+dato).val();
   var tipo = $("#tipo"+dato).val();
   //$.post('/encuesta-intermed/capturista/')
+}
+
+function eliminarDireccion(id){
+  bootbox.confirm({
+      message: "¿Estas seguro de querer borrar la dirección?",
+      title: "Mensaje de Intermed",
+      callback: function(result) {
+          if (result){
+            $.ajax( {
+              url: '/encuesta-intermed/Capturista/eliminarDireccion',
+              type: "POST",
+              dataType: 'JSON',
+              data: {'id':id},
+              async: true,
+              success: function (result) {
+                if (result.success){
+                  $('#at'+id).remove();
+                }
+              },
+              error : function (err){
+                console.log( "Error: AJax dead :" + JSON.stringify(err) );
+              }
+            });
+          }
+        },
+      buttons: {
+        cancel: {
+          label: "No"
+        },
+        confirm: {
+          label: "Si"
+        }
+      }
+    });
+}
+
+function eliminarTelefono(id){
+  bootbox.confirm({
+      message: "¿Estas seguro de querer borrar el teléfono?",
+      title: "Mensaje de Intermed",
+      callback: function(result) {
+          if (result){
+            $.ajax( {
+              url: '/encuesta-intermed/Capturista/eliminarTelefono',
+              type: "POST",
+              dataType: 'JSON',
+              data: {'id':id},
+              async: true,
+              success: function (result) {
+                if (result.success){
+                  $('#atel'+id).remove();
+                }
+              },
+              error : function (err){
+                console.log( "Error: AJax dead :" + JSON.stringify(err) );
+              }
+            });
+          }
+        },
+      buttons: {
+        cancel: {
+          label: "No"
+        },
+        confirm: {
+          label: "Si"
+        }
+      }
+    });
 }

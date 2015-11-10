@@ -8,6 +8,10 @@
         public function create_telefono($data){
           return $this->db_capturista->insert('telefonos', $data);
         }
+        
+        public function eliminarTelefono($id){
+          return $this->db_capturista->delete('telefonos', array('id' => $id));
+        }
 
     }
 ?>
