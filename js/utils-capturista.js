@@ -185,6 +185,10 @@ $(document).ready(function(){
   });
 });
 
+$('#muestraMed .muestra').click(function(){
+  $('#muestraMed .muestra').addClass('active');
+});
+
 function generarMuestraMedicos(){
   $('#muestraMed').html('');
   $.ajax( {
