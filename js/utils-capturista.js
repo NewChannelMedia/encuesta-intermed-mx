@@ -185,6 +185,7 @@ $(document).ready(function(){
   });
 });
 
+
 function generarMuestraMedicos(){
   $('#muestraMed').html('');
   $.ajax( {
@@ -219,6 +220,7 @@ function generarMuestraMedicos(){
             var noautorizo = '<input type="radio" name="autorizo_'+val.muestra_id+'" value="false">';
             $('#muestraMed').append('<tr class="muestra" id="'+ val.muestra_id+'"><td>'+nombre+'</td><td class="text-center">'+telefonos+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+confirmCorreo+'</td><td class="autorizo text-center">'+autorizo+'</td><td class="autorizo text-center">'+noautorizo+'</td><td class="text-center">'+guardar+'</td></tr>');
             $('#muestraMed').find('tr').first().addClass('active');
+            $('#muestraMed .active').find(':input').filter(':visible:first').focus();
           }
         });
       }
@@ -249,12 +251,18 @@ function guardarMuestra(id){
       dataType: 'JSON',
       data: {'id':id,'telefono_id':telefono_id,'correo':correo,'correo2':correo2,'aut':autorizo},
       async: true,
-      success: function (result) {
-        if (result.success){
-          trmuestra.fadeOut(300, function(){ $(this).remove();$('#muestraMed').find('tr').first().addClass('active');});
+      success: function ( result ) {
+        if ( result.success ) {
+          trmuestra.fadeOut( 300, function () {
+            $( this ).remove();
+            $( '#muestraMed' ).find( 'tr' ).first().addClass( 'active' );
+            $('#muestraMed .active').find(':input').filter(':visible:first').focus();
+
+          } );
 
         }
       },
+
       error: function (err){
         console.log( "Error: AJax dead :" + JSON.stringify(err) );
       }
