@@ -148,6 +148,7 @@
         print_r( json_encode($arreglo));
       }
       public function actualizaDireccion(){
+        $id = $this->input->post('id');
         $consultorio = $this->input->post('consultorio');
         $calle = $this->input->post('calle');
         $estado = $this->input->post('estado');
@@ -168,6 +169,32 @@
           'numero'=>$numero,
           'medico_id'=>$id_medico
         );
+        $this->Capdirecciones_model->actualizaDireccion($id,$data);
+      }
+      public function ponerNombre(){
+        $id = $this->input->post('id');
+        $iterar = $this->Capdirecciones_model->ponerNombre($id);
+        $datos = array();
+        $i = 0;
+        foreach( $iterar->result() as $row ){
+          $datos[ $i ]['nombre'] = $row->nombre;
+          $i++;
+        }
+        print_r(json_encode($datos));
+      }
+      public function anadirFon(){
+        $id = $this->input->post('id');
+        $iterar = $this->Capdirecciones_model->anadirFon($id);
+        $i = 0;
+        $arreglo = array();
+        foreach( $iterar->result() as $row ){
+          $arreglo[ $i ]['id'] = $row->id;
+          $arreglo[ $i ]['tipo'] = $row->tipo;
+          $arreglo[ $i ]['numero'] = $row->numero;
+          $arreglo[ $i ]['claveRegion'] = $row->claveRegion;
+          $i++;
+        }
+        print_r(json_encode($arreglo));
       }
   }
 ?>

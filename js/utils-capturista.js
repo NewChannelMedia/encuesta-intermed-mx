@@ -92,6 +92,23 @@ function guardarTelefono(){
           $('#registroTelefonos').find('input').prop('value','');
           document.getElementById("tipoTelefono").selectedIndex = "0";
           $('#ladaTelefono').focus();
+          //LI
+          var html2 = "";
+          $.post('/encuesta-intermed/capturista/anadirFon/',{
+            id: $('#medico_id').val()
+          },function(datas){
+            var idBoton;
+            $.each(JSON.parse(datas), function(i, item){
+              idBoton = "fon"+item.id;
+              html2 += '<li id="">';
+              html2 += '<input type="button" id="'+idBoton+'" onclick="fondAdd(\''+idBoton+'\');" class="btn btn-sm editar" value="'+item.numero+'" />';
+              html2 += '<span class="hidden" id="lada'+idBoton+'">'+item.claveRegion+'</span>';
+              html2 += '<span class="hidden" id="num'+idBoton+'">'+item.numero+'</span>';
+              html2 += '<span class="hidden" id="tipo'+idBoton+'">'+item.tipo+'</span>';
+              html2 += '</li>';
+            });
+            $("#fonAgregado ul").append(html2);
+          });
         }
       },
       error: function (err) {
@@ -186,11 +203,10 @@ $(document).ready(function(){
     var id_medico = $("#medico_id").val();
     var cp = $("#cp").val();
     var numero = $("#numero").val();
-    // post
-    //checa si este campo esta lleno, en caso que lo este manda a actualizar los campos
-    // caso contrario los inserta
     if( $("#superOculto").val() != "" ){
-      $("/encuesta-intermed/capturista/actualizaDireccion/",{
+      var id = $("#superOculto").val();
+      $.post('/encuesta-intermed/capturista/actualizaDireccion/',{
+        id: id,
         consultorio:nombreConsultorio,
         calle: calle,
         cp: cp,
@@ -200,69 +216,104 @@ $(document).ready(function(){
         localidad: localidad,
         numero: numero,
         id_medico: id_medico
-      },function(){});
-    }else{
-      if( id_medico != "" ){
-        if( nombreConsultorio != "" && numero != "" && calle != "" && cp != "" && estado != "" && municipio != "" && ciudad != "" && localidad != "" ){
-          $.post('/encuesta-intermed/capturista/insertDireccion/',{
-            consultorio:nombreConsultorio,
-            calle: calle,
-            cp: cp,
-            estado: estado,
-            municipio: municipio,
-            ciudad: ciudad,
-            localidad: localidad,
-            numero: numero,
-            id_medico: id_medico
-          },function(datas){
-              $("#superOculto").text();
-              $("#nombreDireccion").val('');
-              $("#direccion").val('');
-              $("#estado").val('');
-              $("#municipio").val('');
-              $("#ciudad").val('');
-              $("#localidad").val('');
-              $('#cp').val('');
-              $('#numero').val('');
-          }).done(function(){
-            /**
-            * en la siguiente funcion cuando se presione el boton se hara una consulta a la db
-            * donde me retornara el nombre del consultorio, y al presionarlo se llenaran los input para poderlos editar
-            *
-            *
-            */
-            $.post('/encuesta-intermed/capturista/editarDirecciones',{
-              medico_id: id_medico,
-              consultorio:nombreConsultorio
-            },function(d){
-              var html="";
-              $.each(JSON.parse(d), function(i, item){
-                LiBoton = "at"+item.id;
-                BotonId = "direccionGuardada"+item.id;
-                html += '<li id="'+LiBoton+'">';
-                html += '<button id="'+BotonId+'" onclick="traerID(\''+BotonId+'\');" class="btn btn-sm editar">'+item.nombre+'</button>';
-                html += '<span class="hidden" id="id'+BotonId+'">'+item.id+'</span>';
-                html += '<span class="hidden" id="nombre'+BotonId+'">'+item.nombre+'</span>';
-                html += '<span class="hidden" id="calle'+BotonId+'">'+item.calle+'</span>';
-                html += '<span class="hidden" id="numero'+BotonId+'">'+item.numero+'</span>';
-                html += '<span class="hidden" id="cp'+BotonId+'">'+item.cp+'</span>';
-                html += '<span class="hidden" id="estado'+BotonId+'">'+item.estado+'</span>';
-                html += '<span class="hidden" id="municipio'+BotonId+'">'+item.municipio+'</span>';
-                html += '<span class="hidden" id="ciudad'+BotonId+'">'+item.ciudad+'</span>';
-                html += '<span class="hidden" id="colonia'+BotonId+'">'+item.colonia+'</span>';
-                html += '<span class="hidden" id="localidad'+BotonId+'">'+item.localidad+'</span>';
-                html += '</li>';
-              });
-              $("#editDinamico ul").append(html);
-            });
-          }).fail(function(e){
-            alert("Error al insertar: "+JSON.stringify(e));
+      },function(){
+        $.post('/encuesta-intermed/capturista/ponerNombre/',{id:id},function(datos){
+          $.each(JSON.parse(datos), function(i, item){
+            $("#editDinamico ul li button.borrar").html(item.nombre);
+            $("#editDinamico ul li button.borrar").removeClass('borrar');
+            $("#editDinamico ul li button.borrar").addClass('editar');
           });
-        }else{
-          alert("Favor de no dejar campos vacíos :D");
-        }
+        }).fail(function(e){
+          alert("Error al cargar la actualizacion del nombre: Err->"+JSON.stringify(e));
+        });
+        $("#nombreDireccion").val('');
+        $("#direccion").val('');
+        $("#estado").val('');
+        $("#municipio").val('');
+        $("#ciudad").val('');
+        $("#localidad").val('');
+        $("#superOculto").val('');
+        $("#numero").val('');
+        $("#cp").val('');
+      });
+    }else{
+      //checa si este campo esta lleno, en caso que lo este manda a actualizar los campos
+      // caso contrario los inserta
+      if( $("#superOculto").val() != "" ){
+        $("/encuesta-intermed/capturista/actualizaDireccion/",{
+          consultorio:nombreConsultorio,
+          calle: calle,
+          cp: cp,
+          estado: estado,
+          municipio: municipio,
+          ciudad: ciudad,
+          localidad: localidad,
+          numero: numero,
+          id_medico: id_medico
+        },function(){});
       }else{
-        alert("Por favor llene primero la seccion de arriba");
+        if( id_medico != "" ){
+          if( nombreConsultorio != "" && numero != "" && calle != "" && cp != "" && estado != "" && municipio != "" && ciudad != "" && localidad != "" ){
+            $.post('/encuesta-intermed/capturista/insertDireccion/',{
+              consultorio:nombreConsultorio,
+              calle: calle,
+              cp: cp,
+              estado: estado,
+              municipio: municipio,
+              ciudad: ciudad,
+              localidad: localidad,
+              numero: numero,
+              id_medico: id_medico
+            },function(datas){
+                $("#superOculto").text();
+                $("#nombreDireccion").val('');
+                $("#direccion").val('');
+                $("#estado").val('');
+                $("#municipio").val('');
+                $("#ciudad").val('');
+                $("#localidad").val('');
+                $('#cp').val('');
+                $('#numero').val('');
+            }).done(function(){
+              /**
+              * en la siguiente funcion cuando se presione el boton se hara una consulta a la db
+              * donde me retornara el nombre del consultorio, y al presionarlo se llenaran los input para poderlos editar
+              *
+              *
+              */
+              $.post('/encuesta-intermed/capturista/editarDirecciones',{
+                medico_id: id_medico,
+                consultorio:nombreConsultorio
+              },function(d){
+                var html="";
+                $.each(JSON.parse(d), function(i, item){
+                  LiBoton = "at"+item.id;
+                  BotonId = "direccionGuardada"+item.id;
+                  html += '<li id="'+LiBoton+'">';
+                  html += '<button id="'+BotonId+'" onclick="traerID(\''+BotonId+'\');" class="btn btn-sm editar">'+item.nombre+'</button>';
+                  html += '<span class="hidden" id="id'+BotonId+'">'+item.id+'</span>';
+                  html += '<span class="hidden" id="nombre'+BotonId+'">'+item.nombre+'</span>';
+                  html += '<span class="hidden" id="calle'+BotonId+'">'+item.calle+'</span>';
+                  html += '<span class="hidden" id="numero'+BotonId+'">'+item.numero+'</span>';
+                  html += '<span class="hidden" id="cp'+BotonId+'">'+item.cp+'</span>';
+                  html += '<span class="hidden" id="estado'+BotonId+'">'+item.estado+'</span>';
+                  html += '<span class="hidden" id="municipio'+BotonId+'">'+item.municipio+'</span>';
+                  html += '<span class="hidden" id="ciudad'+BotonId+'">'+item.ciudad+'</span>';
+                  html += '<span class="hidden" id="colonia'+BotonId+'">'+item.colonia+'</span>';
+                  html += '<span class="hidden" id="localidad'+BotonId+'">'+item.localidad+'</span>';
+                  html += '</li>';
+                });
+                $("#editDinamico ul").append(html);
+              });
+            }).fail(function(e){
+              alert("Error al insertar: "+JSON.stringify(e));
+            });
+          }else{
+            alert("Favor de no dejar campos vacíos :D");
+          }
+        }else{
+          alert("Por favor llene primero la seccion de arriba");
+        }
       }
     }
   });
@@ -304,4 +355,10 @@ function traerID(dato){
   $("#localidad").val(localidad);
   $("#"+dato).removeClass('editar');
   $("#"+dato).addClass('borrar');
+}
+function fondAdd(dato){
+  var lada = $("#lada"+dato).val();
+  var numero = $("#num"+dato).val();
+  var tipo = $("#tipo"+dato).val();
+  //$.post('/encuesta-intermed/capturista/')
 }

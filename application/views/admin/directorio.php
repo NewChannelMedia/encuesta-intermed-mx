@@ -97,6 +97,7 @@
       <form method="post" onsubmit="guardarTelefono();return false;" id="registroTelefonos" class="panel">
       <div class="panel-heading">
         <h3 class="panel-title">Teléfonos</h3>
+        <input type="hidden" class="hidden" id="fonOculto" value=""/>
       </div>
       <div class="panel-body">
         <div class="row">
@@ -122,14 +123,8 @@
             <div class="form-group">
               <button type="submit" class="btn btn-info btn-block" id="enviarFon">Añadir Telefono</button>
             </div>
-            <div class="form-group">
+            <div id="fonAgregado" class="form-group">
               <ul class="list-inline">
-                <li>
-                  <button id="telefonoGuardado-1" class="btn btn-sm editar">Telefono 1</button>
-                </li>
-                <li>
-                  <button id="telefonoGuardado-2" class="btn btn-sm editar">Telefono 2</button>
-                </li>
               </ul>
             </div>
           </div>

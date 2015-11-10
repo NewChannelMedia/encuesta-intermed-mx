@@ -13,8 +13,21 @@
           $query = $this->db_capturista->get('direcciones');
           return $query;
         }
-        public function actualizaDireccion($arreglo){
-          
+        public function actualizaDireccion($id,$arreglo){
+          $this->db_capturista->where('id',$id);
+          $this->db_capturista->update('direcciones',$arreglo);
+        }
+        public function ponerNombre($id){
+          $this->db_capturista->where('id',$id);
+          $this->db_capturista->select('nombre');
+          $nombre = $this->db_capturista->get('direcciones');
+          return $nombre;
+        }
+        public function anadirFon($numero){
+          $this->db_capturista->where('medico_id',$numero);
+          $this->db_capturista->order_by("id", "desc");
+          $query = $this->db_capturista->get('telefonos',1);
+          return $query;
         }
     }
 ?>
