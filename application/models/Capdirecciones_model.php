@@ -33,5 +33,10 @@
           $this->db_capturista->where('id', $id);
           return $this->db_capturista->update('telefonos', $arreglo);
         }
+
+        public function eliminarDireccion($id){
+          return $this->db_capturista->delete('direcciones', array('id' => $id));
+        }
+
     }
 ?>

@@ -333,5 +333,18 @@
         $result = $this->Capdirecciones_model->actualizarFon($id,$envio);
         echo json_encode(array('success'=>$result));
       }
+
+
+      public function eliminarDireccion(){
+        $id = $this->input->post('id');
+        $result = $this->Capdirecciones_model->eliminarDireccion($id);
+        echo json_encode(array('success'=>$result));
+      }
+
+      public function eliminarTelefono(){
+        $id = $this->input->post('id');
+        $result = $this->Captelefonos_model->eliminarTelefono($id);
+        echo json_encode(array('success'=>$result));
+      }
   }
 ?>
