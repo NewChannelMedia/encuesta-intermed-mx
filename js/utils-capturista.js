@@ -273,3 +273,109 @@ function validarEmail( email ) {
         return false;
     else return true;
 }
+
+function obtenerSeleccionados(){
+  $('#seleccionadosList').html('');
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/generarMuestraMedicos',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      if (result.success){
+        result.muestra.forEach(function(val){
+          if (val.aut == 0){
+            var nombre = val.medico.nombre + ' ' + val.medico.apellidop;
+            if (val.medico.apellidom){
+              nombre +=  ' ' + val.medico.apellidom;
+            }
+            var correo = '';
+            if (val.medico.correo){
+              correo = val.medico.correo;
+            }
+            var telefonos = '';
+            val.telefonos.forEach(function(telefono){
+              if (telefonos != "")
+                telefonos+='<br/>';
+              telefonos += '(' + telefono.claveRegion + ') ' + telefono.numero;
+            });
+
+            var especialidad ='';
+            if (val.especialidad && val.especialidad.especialidad)
+              especialidad = val.especialidad.especialidad;
+
+            var direcciones = '';
+            val.direcciones.forEach(function(direccion){
+              if (direcciones != "")
+                direcciones+='<br/>';
+              direcciones += '<strong>' + direccion.nombre + '</strong><br/>' + direccion.calle + ' ' + direccion.numero + ', '+ direccion.localidad + '<br/>' + direccion.cp + ', '+ direccion.municipio+ ', '+ direccion.estado +'<br/>';
+            });
+
+            var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-pencil"></button>'
+
+            $('#seleccionadosList').append('<tr class="muestra" id="'+ val.medico.id+'"><td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td></tr>');
+          }
+        });
+      }
+    },
+    error: function (err) {
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  } );
+}
+
+
+
+function obtenerNoSeleccionados(){
+  $('#noSeleccionadosList').html('');
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/obtenerNoSeleccionados',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      if (result.success){
+        result.muestra.forEach(function(val){
+            var nombre = val.medico.nombre + ' ' + val.medico.apellidop;
+            if (val.medico.apellidom){
+              nombre +=  ' ' + val.medico.apellidom;
+            }
+            var correo = '';
+            if (val.medico.correo){
+              correo = val.medico.correo;
+            }
+            var telefonos = '';
+            val.telefonos.forEach(function(telefono){
+              if (telefonos != "")
+                telefonos+='<br/>';
+              telefonos += '(' + telefono.claveRegion + ') ' + telefono.numero;
+            });
+
+            var especialidad ='';
+            if (val.especialidad && val.especialidad.especialidad)
+              especialidad = val.especialidad.especialidad;
+
+            var direcciones = '';
+            val.direcciones.forEach(function(direccion){
+              if (direcciones != "")
+                direcciones+='<br/>';
+              direcciones += '<strong>' + direccion.nombre + '</strong><br/>' + direccion.calle + ' ' + direccion.numero + ', '+ direccion.localidad + '<br/>' + direccion.cp + ', '+ direccion.municipio+ ', '+ direccion.estado +'<br/>';
+            });
+
+            var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-pencil"></button>'
+
+            $('#noSeleccionadosList').append('<tr class="muestra" id="'+ val.medico.id+'"><td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td></tr>');
+        });
+      }
+    },
+    error: function (err) {
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  } );
+}
+
+
+function modificarMedico(id){
+  console.log('Modificar medico_id: ' + id);
+  $('#ActualizarMedico').modal('show');
+}

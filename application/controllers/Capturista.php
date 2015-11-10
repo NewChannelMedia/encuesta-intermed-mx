@@ -218,5 +218,12 @@
         $this->Encuestam_model->create_encuestam($str);
         return $str;
       }
+
+      public function obtenerNoSeleccionados(){
+        //Select * from t1 where not exists (select 1 from t2 where t2.id = t1.id)
+        $noSeleccionados = $this->Capmuestramed_model->get_noSeleccionados();
+        $array = array('success'=>true,'muestra'=>$noSeleccionados);
+        echo json_encode($array);
+      }
   }
 ?>

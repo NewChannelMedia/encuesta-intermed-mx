@@ -782,6 +782,15 @@
               $this->load->view('templates/footerAdmin');
             }
         }
+
+        public function registrados(){
+          $this->load->model('Capespecialidades_model');
+          $data['especialidades'] = $this->Capespecialidades_model->get_especialidades();
+          $data['title'] = "Médicos registrados";
+          $this->load->view('templates/headerAdmin', $data);
+          $this->load->view('admin/registrados', $data);
+          $this->load->view('templates/footerAdmin');
+        }
   }
 
   function encuestas_dropDown($enviar, $tipo){
