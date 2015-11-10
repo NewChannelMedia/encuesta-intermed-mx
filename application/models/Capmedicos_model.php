@@ -34,5 +34,14 @@
           return $this->db_capturista->update('medicos', $data);
         }
 
+        /**
+        * funcion para actualizar los datos generales del medico
+        * @param array, este arreglo traera todos los inputs para su actualizacion
+        * @param medico_id este campo sera la condicion para el update
+        **/
+        public function updateMedico($arreglo, $medico_id){
+          $this->db_capturista->where('id',$medico_id);
+          $this->db_capturista->update('medicos',$arreglo);
+        }
     }
 ?>

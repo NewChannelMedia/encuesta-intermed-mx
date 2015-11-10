@@ -218,5 +218,120 @@
         $this->Encuestam_model->create_encuestam($str);
         return $str;
       }
+      /**
+      * Funcion para poder editar todos los campos de la vista
+      * donde aparecen los datos generales del medico, al presionar
+      * el boton de guardar se habilitara el boton de editar y se podran
+      * editar todos los campos.
+      **/
+      public function editDatos(){
+        //variables atrapadas por post
+        $nombre = $this->input->post('nombre');
+        $apellidoP = $this->input->post('apellidoP');
+        $apellidoM = $this->input->post('apellidoM');
+        $especialidad = $this->input->post('especialidad');
+        $email = $this->input->post('email');
+        $medico_id = $this->input->post('medico_id');
+        if( $especialidad != '' ){
+          //llamado a la funcion del modelo para hacer la actualizacion
+          $id = $this->Capespecialidades_model->get_especialidadId($especialidad);
+          if( $id <= 0 ){
+            $id = $this->Capespecialidades_model->create_especialidad($especialidad);
+          }
+            $arreglo = array(
+              'nombre' => $nombre,
+              'apellidoP' => $apellidoP,
+              'apellidoM' => $apellidoM,
+              'especialidad_id' => $id,
+              'correo' => $email
+            );
+            $this->Capmedicos_model->updateMedico($arreglo, $medico_id);
+            return true;
+        }
+      }
+      /**
+      * function para retornar todos los datos del usuario recien insertado
+      */
+      public function editarDirecciones(){
+        $medico_id = $this->input->post('medico_id');
+        //llamada a la funcion del modelo
+        $arreglo = array();
+        $i = 0;
+        $iterar = $this->Capdirecciones_model->editarDirecciones($medico_id);
+        foreach( $iterar->result() as $row ){
+          $arreglo[ $i ]['id'] = $row->id;
+          $arreglo[ $i ]['nombre'] = $row->nombre;
+          $arreglo[ $i ]['estado'] = $row->estado;
+          $arreglo[ $i ]['municipio'] = $row->municipio;
+          $arreglo[ $i ]['localidad'] = $row->localidad;
+          $arreglo[ $i ]['ciudad'] = $row->ciudad;
+          $arreglo[ $i ]['cp'] = $row->cp;
+          $arreglo[ $i ]['calle'] = $row->calle;
+          $arreglo[ $i ]['numero'] = $row->numero;
+        }
+        print_r( json_encode($arreglo));
+      }
+      public function actualizaDireccion(){
+        $id = $this->input->post('id');
+        $consultorio = $this->input->post('consultorio');
+        $calle = $this->input->post('calle');
+        $estado = $this->input->post('estado');
+        $municipio = $this->input->post('municipio');
+        $ciudad = $this->input->post('ciudad');
+        $localidad = $this->input->post('localidad');
+        $id_medico = $this->input->post('id_medico');
+        $cp = $this->input->post('cp');
+        $numero = $this->input->post('numero');
+        $data = array(
+          'nombre'=>$consultorio,
+          'estado'=>$estado,
+          'municipio'=>$municipio,
+          'ciudad'=>$ciudad,
+          'localidad'=>$localidad,
+          'cp'=>$cp,
+          'calle'=>$calle,
+          'numero'=>$numero,
+          'medico_id'=>$id_medico
+        );
+        $this->Capdirecciones_model->actualizaDireccion($id,$data);
+      }
+      public function ponerNombre(){
+        $id = $this->input->post('id');
+        $iterar = $this->Capdirecciones_model->ponerNombre($id);
+        $datos = array();
+        $i = 0;
+        foreach( $iterar->result() as $row ){
+          $datos[ $i ]['nombre'] = $row->nombre;
+          $i++;
+        }
+        print_r(json_encode($datos));
+      }
+      public function anadirFon(){
+        $id = $this->input->post('id');
+        $iterar = $this->Capdirecciones_model->anadirFon($id);
+        $i = 0;
+        $arreglo = array();
+        foreach( $iterar->result() as $row ){
+          $arreglo[ $i ]['id'] = $row->id;
+          $arreglo[ $i ]['tipo'] = $row->tipo;
+          $arreglo[ $i ]['numero'] = $row->numero;
+          $arreglo[ $i ]['claveRegion'] = $row->claveRegion;
+          $i++;
+        }
+        print_r(json_encode($arreglo));
+      }
+      public function actualizarFon(){
+        $id = $this->input->post('id');
+        $numero = $this->input->post('numero');
+        $tipo = $this->input->post('tipo');
+        $clave = $this->input->post('clave');
+        $envio = array(
+          'numero' => $numero,
+          'tipo' => $tipo,
+          'claveRegion' => $clave
+        );
+        $result = $this->Capdirecciones_model->actualizarFon($id,$envio);
+        echo json_encode(array('success'=>$result));
+      }
   }
 ?>
