@@ -129,7 +129,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                     <button class="btn btn-info btn-block" id="agregarDatos" type="submit">Guardar Medico</button>
                   </div>
                   <div class="form-group">
-                    <button class="btn btn-warning btn-block" id="agregarDireccion">Editar</button>
+                    <button class="btn btn-warning btn-block" id="editarDatos">Editar</button>
                   </div>
                 </div>
               </div>
@@ -176,7 +176,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                     <button class="btn btn-info btn-block" id="agregarDireccion">Añadir Dirección</button>
                   </div>
                   <div class="form-group">
-                    <ul class="list-inline">
+                    <ul class="list-inline" id="direccionesGuardadas">
                       <li>
                         <button id="direccionGuardada-1" class="btn btn-sm editar">Direccion 1</button>
                       </li>
@@ -220,13 +220,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                     <button type="submit" class="btn btn-info btn-block" id="enviarFon">Añadir Telefono</button>
                   </div>
                   <div class="form-group">
-                    <ul class="list-inline">
-                      <li>
-                        <button id="telefonoGuardado-1" class="btn btn-sm editar">Telefono 1</button>
-                      </li>
-                      <li>
-                        <button id="telefonoGuardado-2" class="btn btn-sm editar">Telefono 2</button>
-                      </li>
+                    <ul class="list-inline" id="telefonosGuardados">
                     </ul>
                   </div>
                 </div>

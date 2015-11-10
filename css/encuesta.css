@@ -1539,3 +1539,7 @@ canvas {
   background-color: #d9534f;
   border-color: #d43f3a;
 }
+
+ul.ui-autocomplete{
+  z-index: 2000;
+}

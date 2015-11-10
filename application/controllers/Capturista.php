@@ -225,5 +225,21 @@
         $array = array('success'=>true,'muestra'=>$noSeleccionados);
         echo json_encode($array);
       }
+
+      public function obtenerDatosMedicoId(){
+        $id = $this->input->post('id');
+        $medico = $this->Capmedicos_model->get_medico($id);
+        echo json_encode($medico);
+      }
+
+      public function eliminarDireccion(){
+        $id = $this->input->post('id');
+        echo json_encode(array('success'=>TRUE));
+      }
+
+      public function eliminarTelefono(){
+        $id = $this->input->post('id');
+        echo json_encode(array('success'=>TRUE));
+      }
   }
 ?>

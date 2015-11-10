@@ -311,7 +311,7 @@ function obtenerSeleccionados(){
               direcciones += '<strong>' + direccion.nombre + '</strong><br/>' + direccion.calle + ' ' + direccion.numero + ', '+ direccion.localidad + '<br/>' + direccion.cp + ', '+ direccion.municipio+ ', '+ direccion.estado +'<br/>';
             });
 
-            var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-pencil"></button>'
+            var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
 
             $('#seleccionadosList').append('<tr class="muestra" id="'+ val.medico.id+'"><td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td></tr>');
           }
@@ -362,7 +362,7 @@ function obtenerNoSeleccionados(){
               direcciones += '<strong>' + direccion.nombre + '</strong><br/>' + direccion.calle + ' ' + direccion.numero + ', '+ direccion.localidad + '<br/>' + direccion.cp + ', '+ direccion.municipio+ ', '+ direccion.estado +'<br/>';
             });
 
-            var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-pencil"></button>'
+            var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
 
             $('#noSeleccionadosList').append('<tr class="muestra" id="'+ val.medico.id+'"><td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td></tr>');
         });
@@ -376,6 +376,142 @@ function obtenerNoSeleccionados(){
 
 
 function modificarMedico(id){
+  $('#ActualizarMedico').find('input').prop('value','');
+  $('#ActualizarMedico').find('#registroMedico').find('input,button#agregarDatos').attr('disabled','disabled');
   console.log('Modificar medico_id: ' + id);
-  $('#ActualizarMedico').modal('show');
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/obtenerDatosMedicoId',
+    type: "POST",
+    dataType: 'JSON',
+    data: {'id':id},
+    async: true,
+    success: function (result) {
+      console.log('RESULT: ' + JSON.stringify(result));
+      //nombre
+      $('#ActualizarMedico').find('#medico_id').prop('value',result.medico.id);
+      $('#ActualizarMedico').find('#nombre').prop('value',result.medico.nombre);
+      //apellidoP
+      $('#ActualizarMedico').find('#apellidoP').prop('value',result.medico.apellidop);
+      //apellidoM
+      $('#ActualizarMedico').find('#apellidoM').prop('value',result.medico.apellidom);
+      //email
+      $('#ActualizarMedico').find('#email').prop('value',result.medico.correo);
+      //especialidad
+      $('#ActualizarMedico').find('#especialidad').prop('value',result.especialidad.especialidad);
+
+      var direccionesGuardadas = '';
+      result.direcciones.forEach(function(direccion){
+        direccionesGuardadas += '<li><input type="button" id="'+ direccion.id +'" class="btn btn-sm editar" value="'+direccion.nombre+'"></li>';
+      });
+      $('#direccionesGuardadas').html(direccionesGuardadas);
+
+      $('#direccionesGuardadas').find('input').click(function(){
+        traerBorrarDireccion(this);
+      });
+
+      var telefonosGuardadas = '';
+      result.telefonos.forEach(function(telefono){
+        telefonosGuardadas += '<li><input type="button" id="'+ telefono.id +'" class="btn btn-sm editar" value="'+telefono.tipo+'"></li>';
+      });
+      $('#telefonosGuardados').html(telefonosGuardadas);
+
+      $('#telefonosGuardados').find('input').click(function(){
+        traerBorrarTelefono(this);
+      });
+
+
+      $('#ActualizarMedico').modal('show');
+    },
+    error: function(err){
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  });
+}
+
+function traerBorrarDireccion(element){
+  if ($(element).hasClass('editar')){
+    $('#direccionesGuardadas input').removeClass('borrar');
+    $('#direccionesGuardadas input').addClass('editar');
+    $(element).removeClass('editar');
+    $(element).addClass('borrar');
+    console.log('Traer direccion: ' + $(element).prop('id'));
+  } else {
+    console.log('Borrar direccion: ' + $(element).prop('id'));
+    bootbox.confirm({
+        message: "¿Estas seguro de querer borrar la dirección?",
+        title: "Mensaje de Intermed",
+        callback: function(result) {
+            if (result){
+              $.ajax( {
+                url: '/encuesta-intermed/Capturista/eliminarDireccion',
+                type: "POST",
+                dataType: 'JSON',
+                data: {'id':$(element).prop('id')},
+                async: true,
+                success: function (result) {
+                  if (result.success){
+                    $(element).parent().remove();
+                  }
+                },
+                error : function (err){
+                  console.log( "Error: AJax dead :" + JSON.stringify(err) );
+                }
+              });
+            }
+          },
+        buttons: {
+          cancel: {
+            label: "No"
+          },
+          confirm: {
+            label: "Si"
+          }
+        }
+      });
+  }
+}
+
+function traerBorrarTelefono(element){
+  if ($(element).hasClass('editar')){
+    $('#telefonosGuardados input').removeClass('borrar');
+    $('#telefonosGuardados input').addClass('editar');
+    $(element).removeClass('editar');
+    $(element).addClass('borrar');
+    console.log('Traer telefono: ' + $(element).prop('id'));
+  } else {
+    console.log('Borrar telefono: ' + $(element).prop('id'));
+    bootbox.confirm({
+        message: "¿Estas seguro de querer borrar el teléfono?",
+        title: "Mensaje de Intermed",
+        callback: function(result) {
+            if (result){
+              if (result){
+                $.ajax( {
+                  url: '/encuesta-intermed/Capturista/eliminarTelefono',
+                  type: "POST",
+                  dataType: 'JSON',
+                  data: {'id':$(element).prop('id')},
+                  async: true,
+                  success: function (result) {
+                    if (result.success){
+                      $(element).parent().remove();
+                    }
+                  },
+                  error : function (err){
+                    console.log( "Error: AJax dead :" + JSON.stringify(err) );
+                  }
+                });
+              }
+            }
+          },
+        buttons: {
+          cancel: {
+            label: "No"
+          },
+          confirm: {
+            label: "Si"
+          }
+        }
+      });
+  }
 }
