@@ -161,11 +161,9 @@
       }
 
       public function enviarCodigo($email){
-        $mensaje = '';
         $correo = $email;
         $titulo = 'Mensaje de Intermed';
         $codigo = $this->generarCodigo();
-        $estado = 1;
         // se lee el archivo
         $fileh = realpath(APPPATH.'views/correos/headerCorreo.php');
         $fileb = realpath(APPPATH.'views/correos/bodyCorreo.php');
@@ -173,6 +171,7 @@
         $fpH = fopen( $fileh,'r');
         $fpB = fopen( $fileb,'r');
         $fpF = fopen( $filef,'r');
+
         $html1 = "";
         $html2 = "";
         $html3 = "";
@@ -189,15 +188,11 @@
         fclose($fpB);
         fclose($fpF);
         $mensajeCompleto = "";
-        $sustituir = '<h2 style = "{color:red;}">'.$codigo.'</h2>';
-        $conCodigo = str_replace('<h2 id = "codigo"></h2>',$sustituir, $html2);
-        if($mensaje != ""){
-              $sustituir2 = "<p style = 'color:red;'>".$mensaje."</p>";
-              $conCodigo2 = str_replace('<p id ="mes"></p>',$sustituir2, $conCodigo);
-              $mensajeCompleto = $html1.$conCodigo2.$html3;
-        }else{
-          $mensajeCompleto = $html1.$conCodigo.$html3;
-        }
+        $sustituir = '<span id="codigo">'.$codigo.'</span>';
+        $conCodigo = str_replace('<span id = "codigo"></span>',$sustituir, $html2);
+        $mensajeCompleto = $html1.$conCodigo.$html3;
+        echo 'mensaje completo: '.$mensajeCompleto;
+
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= 'From: <intermed.encuestas@newchannel.mx>'."\r\n";
