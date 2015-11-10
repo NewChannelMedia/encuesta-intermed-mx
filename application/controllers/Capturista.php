@@ -108,25 +108,66 @@
         $especialidad = $this->input->post('especialidad');
         $email = $this->input->post('email');
         $medico_id = $this->input->post('medico_id');
-        $arreglo = array(
-          'nombre' => $nombre,
-          'apellidoP' => $apellidoP,
-          'apellidoM' => $apellidoM,
-          'especialidad_id' => $especialidad,
-          'correo' => $email
-        );
-        //llamado a la funcion del modelo para hacer la actualizacion
-         $this->Capmedicos_model->updateMedico($arreglo, $medico_id);
-         return true;
+        if( $especialidad != '' ){
+          //llamado a la funcion del modelo para hacer la actualizacion
+          $id = $this->Capespecialidades_model->get_especialidadId($especialidad);
+          if( $id <= 0 ){
+            $id = $this->Capespecialidades_model->create_especialidad($especialidad);
+          }
+            $arreglo = array(
+              'nombre' => $nombre,
+              'apellidoP' => $apellidoP,
+              'apellidoM' => $apellidoM,
+              'especialidad_id' => $id,
+              'correo' => $email
+            );
+            $this->Capmedicos_model->updateMedico($arreglo, $medico_id);
+            return true;
+        }
       }
       /**
       * function para retornar todos los datos del usuario recien insertado
       */
       public function editarDirecciones(){
-        $medico_id = $this->input->post('medico_id');
+        $consultorio = $this->input->post('consultorio');
         //llamada a la funcion del modelo
-        $arreglo = $this->Capdirecciones_model->editarDirecciones($medico_id);
-        echo json_encode($arreglo);
+        $arreglo = array();
+        $i = 0;
+        $iterar = $this->Capdirecciones_model->editarDirecciones($consultorio);
+        foreach( $iterar->result() as $row ){
+          $arreglo[ $i ]['id'] = $row->id;
+          $arreglo[ $i ]['nombre'] = $row->nombre;
+          $arreglo[ $i ]['estado'] = $row->estado;
+          $arreglo[ $i ]['municipio'] = $row->municipio;
+          $arreglo[ $i ]['localidad'] = $row->localidad;
+          $arreglo[ $i ]['ciudad'] = $row->ciudad;
+          $arreglo[ $i ]['cp'] = $row->cp;
+          $arreglo[ $i ]['calle'] = $row->calle;
+          $arreglo[ $i ]['numero'] = $row->numero;
+        }
+        print_r( json_encode($arreglo));
+      }
+      public function actualizaDireccion(){
+        $consultorio = $this->input->post('consultorio');
+        $calle = $this->input->post('calle');
+        $estado = $this->input->post('estado');
+        $municipio = $this->input->post('municipio');
+        $ciudad = $this->input->post('ciudad');
+        $localidad = $this->input->post('localidad');
+        $id_medico = $this->input->post('id_medico');
+        $cp = $this->input->post('cp');
+        $numero = $this->input->post('numero');
+        $data = array(
+          'nombre'=>$consultorio,
+          'estado'=>$estado,
+          'municipio'=>$municipio,
+          'ciudad'=>$ciudad,
+          'localidad'=>$localidad,
+          'cp'=>$cp,
+          'calle'=>$calle,
+          'numero'=>$numero,
+          'medico_id'=>$id_medico
+        );
       }
   }
 ?>

@@ -173,6 +173,8 @@ $(document).ready(function (){
 *
 **/
 $(document).ready(function(){
+  var BotonId = "";
+  var LiBoton = "";
   $("#agregarDireccion").click(function(){
     //variables
     var nombreConsultorio = $("#nombreDireccion").val();
@@ -185,20 +187,44 @@ $(document).ready(function(){
     var cp = $("#cp").val();
     var numero = $("#numero").val();
     // post
-    if( id_medico != "" ){
-      if( nombreConsultorio != "" && numero != "" && calle != "" && cp != "" && estado != "" && municipio != "" && ciudad != "" && localidad != "" ){
-        $("#editDinamico ul").html('');
-        $.post('/encuesta-intermed/capturista/insertDireccion/',{
-          consultorio:nombreConsultorio,
-          calle: calle,
-          cp: cp,
-          estado: estado,
-          municipio: municipio,
-          ciudad: ciudad,
-          localidad: localidad,
-          numero: numero,
-          id_medico: id_medico
-        },function(datas){
+    //checa si este campo esta lleno, en caso que lo este manda a actualizar los campos
+    // caso contrario los inserta
+    if( $("#superOculto").val() != "" ){
+      $("/encuesta-intermed/capturista/actualizaDireccion/",{
+        consultorio:nombreConsultorio,
+        calle: calle,
+        cp: cp,
+        estado: estado,
+        municipio: municipio,
+        ciudad: ciudad,
+        localidad: localidad,
+        numero: numero,
+        id_medico: id_medico
+      },function(){});
+    }else{
+      if( id_medico != "" ){
+        if( nombreConsultorio != "" && numero != "" && calle != "" && cp != "" && estado != "" && municipio != "" && ciudad != "" && localidad != "" ){
+          $.post('/encuesta-intermed/capturista/insertDireccion/',{
+            consultorio:nombreConsultorio,
+            calle: calle,
+            cp: cp,
+            estado: estado,
+            municipio: municipio,
+            ciudad: ciudad,
+            localidad: localidad,
+            numero: numero,
+            id_medico: id_medico
+          },function(datas){
+              $("#superOculto").text();
+              $("#nombreDireccion").val('');
+              $("#direccion").val('');
+              $("#estado").val('');
+              $("#municipio").val('');
+              $("#ciudad").val('');
+              $("#localidad").val('');
+              $('#cp').val('');
+              $('#numero').val('');
+          }).done(function(){
             /**
             * en la siguiente funcion cuando se presione el boton se hara una consulta a la db
             * donde me retornara el nombre del consultorio, y al presionarlo se llenaran los input para poderlos editar
@@ -206,34 +232,38 @@ $(document).ready(function(){
             *
             */
             $.post('/encuesta-intermed/capturista/editarDirecciones',{
-              medico_id: id_medico
+              medico_id: id_medico,
+              consultorio:nombreConsultorio
             },function(d){
-              console.log("DATAS: "+ JSON.stringify(d));
               var html="";
-              console.log("datas: "+ d.length);
-              for( var i = 0; i < d.length; i++ ){
-                html += '<li at="'+d[i].id+'">';
-                html += '<button id="direccionGuardada-1" class="btn btn-sm editar">'+d[i].nombre+'</button>';
+              $.each(JSON.parse(d), function(i, item){
+                LiBoton = "at"+item.id;
+                BotonId = "direccionGuardada"+item.id;
+                html += '<li id="'+LiBoton+'">';
+                html += '<button id="'+BotonId+'" onclick="traerID(\''+BotonId+'\');" class="btn btn-sm editar">'+item.nombre+'</button>';
+                html += '<span class="hidden" id="id'+BotonId+'">'+item.id+'</span>';
+                html += '<span class="hidden" id="nombre'+BotonId+'">'+item.nombre+'</span>';
+                html += '<span class="hidden" id="calle'+BotonId+'">'+item.calle+'</span>';
+                html += '<span class="hidden" id="numero'+BotonId+'">'+item.numero+'</span>';
+                html += '<span class="hidden" id="cp'+BotonId+'">'+item.cp+'</span>';
+                html += '<span class="hidden" id="estado'+BotonId+'">'+item.estado+'</span>';
+                html += '<span class="hidden" id="municipio'+BotonId+'">'+item.municipio+'</span>';
+                html += '<span class="hidden" id="ciudad'+BotonId+'">'+item.ciudad+'</span>';
+                html += '<span class="hidden" id="colonia'+BotonId+'">'+item.colonia+'</span>';
+                html += '<span class="hidden" id="localidad'+BotonId+'">'+item.localidad+'</span>';
                 html += '</li>';
-              }
+              });
               $("#editDinamico ul").append(html);
             });
-            $("#nombreDireccion").val('');
-            $("#direccion").val('');
-            $("#estado").val('');
-            $("#municipio").val('');
-            $("#ciudad").val('');
-            $("#localidad").val('');
-            $('#cp').val('');
-            $('#numero').val('');
-        }).fail(function(e){
-          alert("Error al insertar: "+JSON.stringify(e));
-        });
+          }).fail(function(e){
+            alert("Error al insertar: "+JSON.stringify(e));
+          });
+        }else{
+          alert("Favor de no dejar campos vacíos :D");
+        }
       }else{
-        alert("Favor de no dejar campos vacíos :D");
+        alert("Por favor llene primero la seccion de arriba");
       }
-    }else{
-      alert("Por favor llene primero la seccion de arriba");
     }
   });
   /**
@@ -252,3 +282,26 @@ $(document).ready(function(){
     $( this ).attr('disabled',true);
   });
 });
+function traerID(dato){
+  var nombre = $("#nombre"+dato).text();
+  var calle = $("#calle"+dato).text();
+  var numero = $("#numero"+dato).text();
+  var cp = $("#cp"+dato).text();
+  var estado = $("#estado"+dato).text();
+  var municipio = $("#municipio"+dato).text();
+  var ciudad = $("#ciudad"+dato).text();
+  var colonia = $("#colonia"+dato).text();
+  var localidad = $("#localidad"+dato).text();
+  var id= $("#id"+dato).text();
+  $("#superOculto").attr('value',id);
+  $("#nombreDireccion").val(nombre);
+  $("#direccion").val(calle);
+  $("#numero").val(numero);
+  $("#cp").val(cp);
+  $("#estado").val(estado);
+  $("#municipio").val(municipio);
+  $("#ciudad").val(ciudad);
+  $("#localidad").val(localidad);
+  $("#"+dato).removeClass('editar');
+  $("#"+dato).addClass('borrar');
+}

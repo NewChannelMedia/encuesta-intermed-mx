@@ -49,6 +49,7 @@
     <form method="post" onsubmit="return false;" id="registroDireccion" class="panel">
       <div class="panel-heading">
         <h3 class="panel-title">Direcciones</h3>
+        <input type="hidden" class="hidden" id="superOculto" value="">
       </div>
       <div class="panel-body">
         <div class="row">

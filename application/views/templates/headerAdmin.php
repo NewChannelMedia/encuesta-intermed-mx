@@ -40,8 +40,6 @@
   <div id="wrapper">
     <div id="sidebar-wrapper">
       <ul class="sidebar-nav nav-stacked" id="menu">
-
-        <?php if($rol == "admin"){ ?>
           <li>
             <a href="<?= base_url() ?>admin/control"><span class="glyphicon glyphicon-dashboard nav-icon"></span> Dashboard</a>
           </li>
@@ -87,14 +85,7 @@
               </li>
             </ul>
           </li>
-        <?php } elseif ($rol=="capturista"){ ?>
-          <li>
-            <a href="<?= base_url() ?>admin/directorio"><span class="glyphicon glyphicon-user nav-icon"></span> Directorio</a>
-          </li>
-          <li>
-            <a href="<?= base_url() ?>admin/preguntas"><span class="glyphicon glyphicon-earphone nav-icon"></span> Llamadas</a>
-          </li>
-        <?php } ?>
+
         <li>
           <a href="<?= base_url();?>admin/cerrar"><span class="glyphicon glyphicon-log-out nav-icon"></span> salir</a>
         </li>
