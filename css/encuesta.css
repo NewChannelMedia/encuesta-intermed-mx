@@ -1530,6 +1530,10 @@ canvas {
   margin: 3px;
 }
 
+.edit-btns {
+  display: block;
+}
+
 .edit-btns .btn {
   margin-right: 0;
   margin-bottom: 0;

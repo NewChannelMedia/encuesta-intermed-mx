@@ -208,6 +208,7 @@ $(document).ready(function(){
   var LiBoton = "";
   $("#agregarDireccion").click(function(){
     $(this).parent().parent().find('.btnClean').removeClass('hidden');
+    $(this).parent().parent().parent().find('input:visible:first').focus();
     //variables
     var nombreConsultorio = $("#nombreDireccion").val();
     var calle = $("#direccion").val();
@@ -236,8 +237,9 @@ $(document).ready(function(){
           $.each(JSON.parse(datos), function(i, item){
             var btntxt = "btntxt" + id;
             $("#editDinamico .editar #"+btntxt).html(item.nombre);
-            //$("#editDinamico button.borrar").removeClass('borrar');
-            //$("#editDinamico button.borrar").addClass('editar');
+            $('#editDinamico').find('.btnChk').removeClass('active');
+            $('#editDinamico').find(':radio').prop('checked',false);
+            $('#editDinamico').find('.borrar').prop('disabled', true);
           });
         }).fail(function(e){
           alert("Error al cargar la actualizacion del nombre: Err->"+JSON.stringify(e));
@@ -327,6 +329,7 @@ $(document).ready(function(){
 
                 });
                 $("#editDinamico").append(html);
+                limpiaSection('#direccionDatos');
               });
             }).fail(function(e){
               alert("Error al insertar: "+JSON.stringify(e));
@@ -356,6 +359,7 @@ $(document).ready(function(){
     $( this ).attr('disabled',true);
   });
 });
+
 function traerID(dato){
   var nombre = $("#nombre"+dato).text();
   var calle = $("#calle"+dato).text();
@@ -378,7 +382,12 @@ function traerID(dato){
   $("#localidad").val(localidad);
   /*$("#"+dato).removeClass('editar');
   $("#"+dato).addClass('borrar');*/
+  $('#'+dato).parent().parent().find('.borrar').prop('disabled', true);
+  $('#'+dato).parent().find('.borrar').prop('disabled', false);
+  $('#'+dato).parent().parent().parent().find('.btnAñade').html('Guardar');
+  $('#'+dato).parent().parent().parent().parent().find('input:visible:first').focus();
 }
+
 function fondAdd(dato){
   var lada = $("#lada"+dato).text();
   var numero = $("#num"+dato).text();
@@ -556,11 +565,11 @@ function eliminarTelefono(id){
 }
 
 /* funcion que habilita el boton de borrar de un input-group-btn */
-$('.input-group-btn .btnChk').click(function(){
+/*$('.input-group-btn .btnChk').click(function(){
   $(this).parent().parent().find('.borrar').prop('disabled', true);
   $(this).parent().find('.borrar').prop('disabled', false);
   $(this).parent().parent().parent().find('#agregarDireccion').html('Guardar Cambios');
-});
+});*/
 
 /* funcion que regresa el estado de los inputs en la seccion de agregar direcciones y telefonos */
 function limpiaSection(section){
@@ -569,6 +578,7 @@ function limpiaSection(section){
   $(section).find('.btnChk').removeClass('active');
   $(section).find(':radio').prop('checked',false);
   $(section).find('.borrar').prop('disabled', true);
-  $(section).find('#agregarDireccion').html('Añadir Dirección');
-  $(section).find('input').first().focus();
+  $(section).find('.btnAñade').html('Añadir');
+  $(section).find('input:visible:first').focus();
+  $(section).find('.btnClean').removeClass('active');
 }
