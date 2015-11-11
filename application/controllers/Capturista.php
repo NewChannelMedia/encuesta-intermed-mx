@@ -255,16 +255,16 @@
           if( $id <= 0 ){
             $id = $this->Capespecialidades_model->create_especialidad($especialidad);
           }
-            $arreglo = array(
-              'nombre' => $nombre,
-              'apellidoP' => $apellidoP,
-              'apellidoM' => $apellidoM,
-              'especialidad_id' => $id,
-              'correo' => $email
-            );
-            $this->Capmedicos_model->updateMedico($arreglo, $medico_id);
-            return true;
         }
+        $arreglo = array(
+          'nombre' => $nombre,
+          'apellidoP' => $apellidoP,
+          'apellidoM' => $apellidoM,
+          'especialidad_id' => $id,
+          'correo' => $email
+        );
+        $this->Capmedicos_model->updateMedico($arreglo, $medico_id);
+        return true;
       }
       /**
       * function para retornar todos los datos del usuario recien insertado

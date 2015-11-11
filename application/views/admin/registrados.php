@@ -200,8 +200,14 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
 
 
 <script type="text/javascript">
+var medicoSeleccionado_id;
+
 document.addEventListener("DOMContentLoaded", function(event) {
   obtenerSeleccionados();
+
+  $('#ActualizarMedico').on('hidden.bs.modal', function () {
+      actualizarInformacionMedico(medicoSeleccionado_id);
+  })
 });
 
 </script>

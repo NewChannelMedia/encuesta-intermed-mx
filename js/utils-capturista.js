@@ -712,9 +712,9 @@ function obtenerNoSeleccionados(){
 
 
 function modificarMedico(id){
+  medicoSeleccionado_id = id;
   $('#ActualizarMedico').find('input').prop('value','');
   $('#ActualizarMedico').find('#registroMedico').find('input,button#agregarDatos').attr('disabled','disabled');
-  console.log('Modificar medico_id: ' + id);
   $.ajax( {
     url: '/encuesta-intermed/Capturista/obtenerDatosMedicoId',
     type: "POST",
@@ -722,7 +722,6 @@ function modificarMedico(id){
     data: {'id':id},
     async: true,
     success: function (result) {
-      console.log('RESULT: ' + JSON.stringify(result));
       //nombre
       $('#ActualizarMedico').find('#medico_id').prop('value',result.medico.id);
       $('#ActualizarMedico').find('#nombre').prop('value',result.medico.nombre);
@@ -893,4 +892,50 @@ function LimpiarFormularios(){
   limpiaSection('#registroDireccion');
   limpiaSection('#registroTelefonos');
   limpiaSection('#registroMedico');
+}
+
+
+function actualizarInformacionMedico(id){
+    //console.log('medicoSeleccionado_id: ' +medicoSeleccionado_id);
+    $.ajax( {
+      url: '/encuesta-intermed/Capturista/obtenerDatosMedicoId',
+      type: "POST",
+      dataType: 'JSON',
+      data: {'id':id},
+      async: true,
+      success: function (val) {
+        var nombre = val.medico.nombre + ' ' + val.medico.apellidop;
+        if (val.medico.apellidom){
+          nombre +=  ' ' + val.medico.apellidom;
+        }
+        var correo = '';
+        if (val.medico.correo){
+          correo = val.medico.correo;
+        }
+        var telefonos = '';
+        val.telefonos.forEach(function(telefono){
+          if (telefonos != "")
+            telefonos+='<br/>';
+          telefonos += '(' + telefono.claveRegion + ') ' + telefono.numero;
+        });
+
+        var especialidad ='';
+        if (val.especialidad && val.especialidad.especialidad)
+          especialidad = val.especialidad.especialidad;
+
+        var direcciones = '';
+        val.direcciones.forEach(function(direccion){
+          if (direcciones != "")
+            direcciones+='<br/>';
+          direcciones += '<strong>' + direccion.nombre + '</strong><br/>' + direccion.calle + ' ' + direccion.numero + ', '+ direccion.localidad + '<br/>' + direccion.cp + ', '+ direccion.municipio+ ', '+ direccion.estado +'<br/>';
+        });
+
+        var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
+
+        $('tr.muestra#'+medicoSeleccionado_id).html('<td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td>');
+      },
+      error: function (err){
+        console.log('ERR: ' + JSON.stringify(err));
+      }
+    });
 }
