@@ -536,6 +536,7 @@ function eliminarDireccion(id){
               success: function (result) {
                 if (result.success){
                   $('#at'+id).remove();
+                  limpiaSection('#registroDireccion');
                 }
               },
               error : function (err){
@@ -570,6 +571,7 @@ function eliminarTelefono(id){
               success: function (result) {
                 if (result.success){
                   $('#atel'+id).remove();
+                  limpiaSection('#registroTelefonos');
                 }
               },
               error : function (err){
@@ -599,7 +601,7 @@ $('.input-group-btn .btnChk').click(function(){
 /* funcion que regresa el estado de los inputs en la seccion de agregar direcciones y telefonos */
 function limpiaSection(section){
   console.log(section);
-  $(section).find('input').not(':button, :submit, :reset, :hidden').val('');
+  $(section).find('input').not(':button, :submit, :reset').val('');
   $(section).find('.btnChk').removeClass('active');
   $(section).find(':radio').prop('checked',false);
   $(section).find('.borrar').prop('disabled', true);
@@ -734,25 +736,50 @@ function modificarMedico(id){
       if ( result.especialidad )$('#ActualizarMedico').find('#especialidad').prop('value',result.especialidad.especialidad);
 
       var direccionesGuardadas = '';
+      var html = '';
       result.direcciones.forEach(function(direccion){
-        direccionesGuardadas += '<li><input type="button" id="'+ direccion.id +'" class="btn btn-sm editar" value="'+direccion.nombre+'"></li>';
+          LiBoton = "at"+direccion.id;
+          BotonId = "direccionGuardada"+direccion.id;
+          html += '<div id="'+LiBoton+'" class="input-group-btn">';
+          html += '<label id="'+BotonId+'" onclick="traerID(\''+BotonId+'\');" class="btn btn-sm editar btnChk">';
+          html += '<input type="radio" name="editDirecciones" id="option1" autocomplete="off" class=""><span id="btntxt'+direccion.id+'" class="itemName">'+direccion.nombre+'</span>';
+          html += '</label>';
+          html += '<button class="btn btn-sm borrar" disabled="disabled" onclick="eliminarDireccion(\''+direccion.id+'\');"><span class="glyphicon glyphicon-remove"></span></button>';
+          html += '</div>';
+
+          html += '<span class="hidden" id="id'+BotonId+'">'+direccion.id+'</span>';
+          html += '<span class="hidden" id="nombre'+BotonId+'">'+direccion.nombre+'</span>';
+          html += '<span class="hidden" id="calle'+BotonId+'">'+direccion.calle+'</span>';
+          html += '<span class="hidden" id="numero'+BotonId+'">'+direccion.numero+'</span>';
+          html += '<span class="hidden" id="cp'+BotonId+'">'+direccion.cp+'</span>';
+          html += '<span class="hidden" id="estado'+BotonId+'">'+direccion.estado+'</span>';
+          html += '<span class="hidden" id="municipio'+BotonId+'">'+direccion.municipio+'</span>';
+          html += '<span class="hidden" id="ciudad'+BotonId+'">'+direccion.ciudad+'</span>';
+          html += '<span class="hidden" id="colonia'+BotonId+'">'+direccion.colonia+'</span>';
+          html += '<span class="hidden" id="localidad'+BotonId+'">'+direccion.localidad+'</span>';
       });
-      $('#direccionesGuardadas').html(direccionesGuardadas);
+      $("#editDinamico").html(html);
 
       $('#direccionesGuardadas').find('input').click(function(){
         traerBorrarDireccion(this);
       });
 
-      var telefonosGuardadas = '';
+      var html2 = '';
       result.telefonos.forEach(function(telefono){
-        telefonosGuardadas += '<li><input type="button" id="'+ telefono.id +'" class="btn btn-sm editar" value="'+telefono.tipo+'"></li>';
+        idBoton = "fon"+telefono.id;
+        html2 += '<div id="atel'+telefono.id+'" class="input-group-btn">';
+        html2 += '<label id="'+idBoton+'" onclick="fonAdd(\''+idBoton+'\');" class="btn btn-sm editar btnChk">';
+        html2 += '<input type="radio" name="editDirecciones" id="option1" autocomplete="off" class=""><span id="btntxt'+telefono.id+'" class="itemName">('+telefono.claveRegion+') '+telefono.numero+'</span>';
+        html2 += '</label>';
+        html2 += '<button class="btn btn-sm borrar" disabled="disabled" onclick="eliminarTelefono(\''+telefono.id+'\');"><span class="glyphicon glyphicon-remove"></span></button>';
+        html2 += '<span class="hidden" id="id'+idBoton+'">'+telefono.id+'</span>';
+        html2 += '</div>';
       });
-      $('#telefonosGuardados').html(telefonosGuardadas);
+      $("#fonAgregado").html(html2);
 
       $('#telefonosGuardados').find('input').click(function(){
         traerBorrarTelefono(this);
       });
-
 
       $('#ActualizarMedico').modal('show');
     },
@@ -848,4 +875,22 @@ function traerBorrarTelefono(element){
         }
       });
   }
+}
+
+function LimpiarFormularios(){
+  limpiaSection('#registroMedico');
+  $('#nombre').attr('disabled',false);
+  $('#apellidoP').attr('disabled',false);
+  $('#especialidad').attr('disabled',false);
+  $('#email').attr('disabled',false);
+  $("#especialidad").attr('disabled',false);
+  $("#editarDatos").attr('disabled',false);
+  $("#apellidoM").attr('disabled',false);
+  $("#agregarDatos").attr('disabled',false);
+  $('#registroMedico').removeClass('guardado');
+  $('#registroMedico').removeClass('panel-success');
+
+  limpiaSection('#registroDireccion');
+  limpiaSection('#registroTelefonos');
+  limpiaSection('#registroMedico');
 }
