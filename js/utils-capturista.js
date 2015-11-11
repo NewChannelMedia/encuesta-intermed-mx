@@ -426,6 +426,7 @@ function fonAdd(dato){
 
 
 function generarMuestraMedicos(){
+  $('.loader-container').removeClass('hidden');
   $('#muestraMed').html('');
   $.ajax( {
     url: '/encuesta-intermed/Capturista/generarMuestraMedicos',
@@ -460,6 +461,7 @@ function generarMuestraMedicos(){
             $('#muestraMed').append('<tr class="muestra" id="'+ val.muestra_id+'"><td>'+nombre+'</td><td class="text-center">'+telefonos+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+confirmCorreo+'</td><td class="autorizo text-center">'+autorizo+'</td><td class="autorizo text-center">'+noautorizo+'</td><td class="text-center">'+guardar+'</td></tr>');
             $('#muestraMed').find('tr').first().addClass('active');
             $('#muestraMed .active').find(':input').filter(':visible:first').focus();
+            $('.loader-container').addClass('hidden');
           }
         });
       }
@@ -611,6 +613,7 @@ function limpiaSection(section){
 }
 
 function obtenerSeleccionados(){
+  $('.loader-container').removeClass('hidden');
   $('#seleccionadosList').html('');
   $.ajax( {
     url: '/encuesta-intermed/Capturista/generarMuestraMedicos',
@@ -650,6 +653,7 @@ function obtenerSeleccionados(){
             var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
 
             $('#seleccionadosList').append('<tr class="muestra" id="'+ val.medico.id+'"><td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td></tr>');
+            $('.loader-container').addClass('hidden');
           }
         });
       }
@@ -663,6 +667,7 @@ function obtenerSeleccionados(){
 
 
 function obtenerNoSeleccionados(){
+  $('.loader-container').removeClass('hidden');
   $('#noSeleccionadosList').html('');
   $.ajax( {
     url: '/encuesta-intermed/Capturista/obtenerNoSeleccionados',
@@ -701,6 +706,7 @@ function obtenerNoSeleccionados(){
             var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
 
             $('#noSeleccionadosList').append('<tr class="muestra" id="'+ val.medico.id+'"><td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td></tr>');
+            $('.loader-container').addClass('hidden');
         });
       }
     },
