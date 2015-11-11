@@ -191,7 +191,6 @@
         $sustituir = '<span id="codigo">'.$codigo.'</span>';
         $conCodigo = str_replace('<span id="codigo"></span>',$sustituir, $html2);
         $mensajeCompleto = $html1.$conCodigo.$html3;
-        echo 'mensaje completo: '.$mensajeCompleto;
 
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
