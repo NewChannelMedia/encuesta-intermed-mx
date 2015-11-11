@@ -91,6 +91,11 @@ function guardarTelefono(){
       $('#numTelefono').val('');
       $('#tipoTelefono').val('');
       $('#fonOculto').val('');
+      $.post('/encuesta-intermed/capturista/traerFonsolo/',{id:telefono_id},function(numero){
+        $.each(JSON.parse(numero), function( i, item){
+          $("#fonAgregado ul.list-inline li input.editar").html(item.numero);
+        });
+      });
     }).fail(function(e){
       alert("Error: "+JSON.stringify(e));
     });
@@ -117,9 +122,6 @@ function guardarTelefono(){
                 idBoton = "fon"+item.id;
               	html2 += '<li id="atel'+item.id+'">';
                 html2 += '<input type="button" id="'+idBoton+'" onclick="fondAdd(\''+idBoton+'\');" class="btn btn-sm editar" value="'+item.numero+'" />';
-                html2 += '<span class="hidden" id="lada'+idBoton+'">'+item.claveRegion+'</span>';
-                html2 += '<span class="hidden" id="num'+idBoton+'">'+item.numero+'</span>';
-                html2 += '<span class="hidden" id="tipo'+idBoton+'">'+item.tipo+'</span>';
                 html2 += '<span class="hidden" id="id'+idBoton+'">'+item.id+'</span>';
 	            html2 += '<input type="button" onclick="eliminarTelefono(\''+item.id+'\');" value="eliminar">';
                 html2 += '</li>';
@@ -393,10 +395,18 @@ function fondAdd(dato){
   var numero = $("#num"+dato).text();
   var tipo = $("#tipo"+dato).text();
   var id = $('#id'+dato).text();
-  $("#ladaTelefono").val(lada);
   $("#fonOculto").val(id);
-  $("#numTelefono").val(numero);
-  $("#tipoTelefono").val(tipo);
+  var idConsulta = $("#fonOculto").val();
+  var medico_id = $("#medico_id").val();
+  $.post('/encuesta-intermed/capturista/sincFon/',{
+    id: idConsulta
+  },function(datas){
+    $.each(JSON.parse(datas),function(i, item){
+      $("#ladaTelefono").val(item.claveRegion);
+      $("#numTelefono").val(item.numero);
+      $("#tipoTelefono").val(item.tipo);
+    });
+  });
 }
 
 
