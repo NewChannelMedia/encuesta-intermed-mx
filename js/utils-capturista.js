@@ -68,6 +68,10 @@ function guardarMedico(){
   }
 }
 
+$('#registroTelefonos').click(function(){
+  $(this).parent().parent().parent().find('input:visible:first').focus();
+});
+
 function guardarTelefono(){
   var id = $('#medico_id').val();
   var clave = $('#ladaTelefono').val();
@@ -93,7 +97,12 @@ function guardarTelefono(){
       $('#fonOculto').val('');
       $.post('/encuesta-intermed/capturista/traerFonsolo/',{id:telefono_id},function(numero){
         $.each(JSON.parse(numero), function( i, item){
-          $("#fonAgregado ul.list-inline li input.editar").html(item.numero);
+          var btntxt = "btntxt" + id;
+          //$("#fonAgregado ul.list-inline li input.editar").html(item.numero);
+          $("#fonAgregado .editar #"+btntxt).html(item.numero);
+          $('#fonAgregado').find('.btnChk').removeClass('active');
+          $('#fonAgregado').find(':radio').prop('checked',false);
+          $('#fonAgregado').find('.borrar').prop('disabled', true);
         });
       });
     }).fail(function(e){
@@ -120,13 +129,16 @@ function guardarTelefono(){
               var idBoton;
               $.each(JSON.parse(datas), function(i, item){
                 idBoton = "fon"+item.id;
-              	html2 += '<li id="atel'+item.id+'">';
-                html2 += '<input type="button" id="'+idBoton+'" onclick="fondAdd(\''+idBoton+'\');" class="btn btn-sm editar" value="'+item.numero+'" />';
+                html2 += '<div id="atel'+item.id+'" class="input-group-btn">';
+                html2 += '<label id="'+idBoton+'" onclick="fonAdd(\''+idBoton+'\');" class="btn btn-sm editar btnChk">';
+                html2 += '<input type="radio" name="editDirecciones" id="option1" autocomplete="off" class=""><span id="btntxt'+item.id+'" class="itemName">'+item.numero+'</span>';
+                html2 += '</label>';
+                html2 += '<button class="btn btn-sm borrar" disabled="disabled" onclick="eliminarTelefono(\''+item.id+'\');"><span class="glyphicon glyphicon-remove"></span></button>';
                 html2 += '<span class="hidden" id="id'+idBoton+'">'+item.id+'</span>';
-	            html2 += '<input type="button" onclick="eliminarTelefono(\''+item.id+'\');" value="eliminar">';
-                html2 += '</li>';
+                html2 += '</div>';
               });
-              $("#fonAgregado ul").append(html2);
+              $("#fonAgregado").append(html2);
+              limpiaSection('#telefonos');
             });
           }
         },
@@ -209,7 +221,7 @@ $(document).ready(function(){
   var BotonId = "";
   var LiBoton = "";
   $("#agregarDireccion").click(function(){
-    $(this).parent().parent().find('.btnClean').removeClass('hidden');
+    //$(this).parent().parent().find('.btnClean').removeClass('hidden');
     $(this).parent().parent().parent().find('input:visible:first').focus();
     //variables
     var nombreConsultorio = $("#nombreDireccion").val();
@@ -390,7 +402,7 @@ function traerID(dato){
   $('#'+dato).parent().parent().parent().parent().find('input:visible:first').focus();
 }
 
-function fondAdd(dato){
+function fonAdd(dato){
   var lada = $("#lada"+dato).text();
   var numero = $("#num"+dato).text();
   var tipo = $("#tipo"+dato).text();
@@ -398,6 +410,10 @@ function fondAdd(dato){
   $("#fonOculto").val(id);
   var idConsulta = $("#fonOculto").val();
   var medico_id = $("#medico_id").val();
+  $('#'+dato).parent().parent().find('.borrar').prop('disabled', true);
+  $('#'+dato).parent().find('.borrar').prop('disabled', false);
+  $('#'+dato).parent().parent().parent().find('.btnAñade').html('Guardar');
+  $('#'+dato).parent().parent().parent().parent().find('input:visible:first').focus();
   $.post('/encuesta-intermed/capturista/sincFon/',{
     id: idConsulta
   },function(datas){
@@ -575,11 +591,11 @@ function eliminarTelefono(id){
 }
 
 /* funcion que habilita el boton de borrar de un input-group-btn */
-/*$('.input-group-btn .btnChk').click(function(){
+$('.input-group-btn .btnChk').click(function(){
   $(this).parent().parent().find('.borrar').prop('disabled', true);
   $(this).parent().find('.borrar').prop('disabled', false);
-  $(this).parent().parent().parent().find('#agregarDireccion').html('Guardar Cambios');
-});*/
+  $(this).parent().parent().parent().find('.btnAñade').html('Guardar');
+});
 
 /* funcion que regresa el estado de los inputs en la seccion de agregar direcciones y telefonos */
 function limpiaSection(section){
