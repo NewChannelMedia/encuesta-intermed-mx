@@ -80,13 +80,13 @@
             <a><span class="glyphicon glyphicon-user nav-icon"></span> Directorio</a>
             <ul class="nav-pills nav-stacked secondLevel-ul">
               <li>
-                <a href="<?= base_url() ?>admin/registrados">Registrados</a>
-              </li>
-              <li>
                 <a href="<?= base_url() ?>admin/directorio">Agregar</a>
               </li>
               <li>
                 <a href="<?= base_url() ?>admin/llamadas">Llamadas</a>
+              </li>
+              <li>
+                <a href="<?= base_url() ?>admin/registrados">Registrados</a>
               </li>
             </ul>
           </li>
