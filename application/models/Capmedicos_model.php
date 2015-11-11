@@ -43,5 +43,18 @@
           $this->db_capturista->where('id',$medico_id);
           $this->db_capturista->update('medicos',$arreglo);
         }
+        public function get_medico($medico_id){
+          $medico = array();
+          $this->db_capturista->where('id',$medico_id);
+          $medico['medico'] = $this->db_capturista->get('medicos')->row_array();
+          $this->db_capturista->where('id',$medico['medico']['especialidad_id']);
+          $medico['especialidad'] = $this->db_capturista->get('especialidades')->row_array();
+          $this->db_capturista->where('medico_id', $medico_id);
+          $medico['telefonos'] = $this->db_capturista->get('telefonos')->result_array();
+          $this->db_capturista->where('medico_id', $medico_id);
+          $medico['direcciones'] = $this->db_capturista->get('direcciones')->result_array();
+          return $medico;
+        }
+
     }
 ?>

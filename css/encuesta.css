@@ -1594,3 +1594,7 @@ canvas {
 .edit-btns .input-group-btn:first-child > .btn-group {
   margin-right: 0!important;
 }
+
+ul.ui-autocomplete{
+  z-index: 2000;
+}

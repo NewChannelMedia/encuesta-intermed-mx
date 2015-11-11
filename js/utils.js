@@ -476,7 +476,7 @@ $( document ).ready( function () {
   $("#enviarTodo").click(function(){
     var codigo = $( "#aleatorioDato" ).val();
     var correo = $( "#codigoCorreo" ).text();
-    var titulo = 'Cedula valida';
+    var titulo = 'Mensaje de Intermed';
     var idMensaje = $("#codigoUser").text();
     var valor = parseInt($("#codigoUser").text())-1;
     var mensaje = $("#mensajeAceptado").val();
@@ -514,7 +514,7 @@ $( document ).ready( function () {
   // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
   $("#envioRechazado").click(function(){
     var mail = $("#rechazos").text();
-    var titulo = 'Por el momento no joven';
+    var titulo = 'Mensaje de Intermed';
     var mensaje = $("#areaRechazado").val();
     var valor = parseInt($("#rechazosID").text())-1;
     var idMensaje = $("#rechazosID").text();

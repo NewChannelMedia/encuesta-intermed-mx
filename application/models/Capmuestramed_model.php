@@ -41,6 +41,8 @@
             $medico['aut'] = $muestraMedico['aut'];
             $this->db_capturista->where('id', $muestraMedico['medico_id']);
             $medico['medico'] = $this->db_capturista->get('medicos')->row_array();
+            $this->db_capturista->where('id',$medico['medico']['especialidad_id']);
+            $medico['especialidad'] = $this->db_capturista->get('especialidades')->row_array();
             $this->db_capturista->where('medico_id', $muestraMedico['medico_id']);
             $medico['telefonos'] = $this->db_capturista->get('telefonos')->result_array();
             $this->db_capturista->where('medico_id', $muestraMedico['medico_id']);
@@ -97,6 +99,28 @@
           $this->db_capturista->select('medico_id');
           $this->db_capturista->where('id', $id);
           return $this->db_capturista->get('muestraMedicos')->row_array()['medico_id'];
+        }
+
+        public function get_noSeleccionados(){
+          $this->db_capturista->select('medicos.*');
+          $this->db_capturista->where('medico_id',null);
+          $this->db_capturista->from('medicos');
+          $this->db_capturista->join('muestraMedicos', 'muestraMedicos.medico_id = medicos.id', 'left');
+          $result = $this->db_capturista->get();
+          $result = $result->result_array();
+          $muestra = array();
+          foreach ($result as $medico) {
+            $medicos = array();
+            $medicos['medico'] = $medico;
+            $this->db_capturista->where('id',$medico['especialidad_id']);
+            $medicos['especialidad'] = $this->db_capturista->get('especialidades')->row_array();
+            $this->db_capturista->where('medico_id', $medico['id']);
+            $medicos['telefonos'] = $this->db_capturista->get('telefonos')->result_array();
+            $this->db_capturista->where('medico_id', $medico['id']);
+            $medicos['direcciones'] = $this->db_capturista->get('direcciones')->result_array();
+            $muestra[] = $medicos;
+          }
+          return $muestra;
         }
     }
 ?>
