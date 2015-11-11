@@ -20,6 +20,7 @@
         public function traerFonsolo($id){
           $this->db_capturista->where('id',$id);
           $this->db_capturista->select('numero');
+          $this->db_capturista->select('claveRegion');
           $query= $this->db_capturista->get('telefonos');
           return $query->result_array();
         }

@@ -97,9 +97,9 @@ function guardarTelefono(){
       $('#fonOculto').val('');
       $.post('/encuesta-intermed/capturista/traerFonsolo/',{id:telefono_id},function(numero){
         $.each(JSON.parse(numero), function( i, item){
-          var btntxt = "btntxt" + id;
+          var btntxt = "btntxt" + telefono_id;
           //$("#fonAgregado ul.list-inline li input.editar").html(item.numero);
-          $("#fonAgregado .editar #"+btntxt).html(item.numero);
+          $("#fonAgregado .editar #"+btntxt).html('('+item.claveRegion +') ' + item.numero);
           $('#fonAgregado').find('.btnChk').removeClass('active');
           $('#fonAgregado').find(':radio').prop('checked',false);
           $('#fonAgregado').find('.borrar').prop('disabled', true);
