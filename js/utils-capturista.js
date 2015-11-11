@@ -397,7 +397,7 @@ function modificarMedico(id){
       //email
       $('#ActualizarMedico').find('#email').prop('value',result.medico.correo);
       //especialidad
-      $('#ActualizarMedico').find('#especialidad').prop('value',result.especialidad.especialidad);
+      if ( result.especialidad )$('#ActualizarMedico').find('#especialidad').prop('value',result.especialidad.especialidad);
 
       var direccionesGuardadas = '';
       result.direcciones.forEach(function(direccion){

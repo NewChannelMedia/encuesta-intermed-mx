@@ -53,36 +53,6 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
   </div>
 </div>
 
-<div class="modal fade" id="modal_contestar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Responder mensaje</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <form id="frm_responder" method="POST">
-            <input type="hidden" value="Respuesta a tu mensaje para contactarnos" name="asunto">
-            <input type="hidden" value="" name="id" id="responder_id">
-            <div class="form-group col-md-12">
-              <input class="form-control input-lg" type="email" name="email" id="responder_email" required readonly>
-            </div>
-            <div class="form-group col-md-12">
-              <textarea class="form-control input-lg" rows="5" id="responder_mensaje" name="mensaje" placeholder="Mensaje" required></textarea>
-            </div>
-            <div class="form-group col-md-12">
-              <button type="submit" class="btn btn-primary" id="responder_boton">Responder</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
 <div class="modal fade" id="ActualizarMedico">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
