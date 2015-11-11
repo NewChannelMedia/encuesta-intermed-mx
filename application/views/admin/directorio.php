@@ -85,9 +85,21 @@
             <div class="form-group">
               <button class="btn btn-info btn-block" id="agregarDireccion">Añadir Dirección</button>
             </div>
-            <div id="editDinamico" class="form-group">
-              <ul class="list-inline"></ul>
-            </div>
+            <!-- empiezan los botones de edicion -->
+            <div id="editDinamico" class="btn-group edit-btns text-center" data-toggle="buttons">
+
+              <!--<div class="input-group-btn"> Este es el div que se debe agregar por cada direccion agregada
+                <label class="btn btn-sm editar btnChk">
+                  <input type="radio" name="editDirecciones" id="option1" autocomplete="off" class=""><span class="itemName">Direccion 1</span>
+                </label>
+
+                <button class="btn btn-sm borrar" disabled="disabled"><span class="glyphicon glyphicon-remove"></span></button>
+              </div> fin de div -->
+
+              <div class="input-group-btn"><!-- este boton es para terminar de editar entradas y añadir nuevas -->
+                <button class="btn btn-success btn-sm btnClean hidden" onclick="limpiaSection('#direccionDatos');">Añadir Nuevo &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-plus"></span></button>
+              </div><!-- fin de boton limpiar -->
+            </div><!-- terminan los botones de edicion -->
           </div>
         </div>
       </form>

@@ -207,6 +207,7 @@ $(document).ready(function(){
   var BotonId = "";
   var LiBoton = "";
   $("#agregarDireccion").click(function(){
+    $(this).parent().parent().find('.btnClean').removeClass('hidden');
     //variables
     var nombreConsultorio = $("#nombreDireccion").val();
     var calle = $("#direccion").val();
@@ -233,9 +234,10 @@ $(document).ready(function(){
       },function(){
         $.post('/encuesta-intermed/capturista/ponerNombre/',{id:id},function(datos){
           $.each(JSON.parse(datos), function(i, item){
-            $("#editDinamico ul li button.borrar").html(item.nombre);
-            $("#editDinamico ul li button.borrar").removeClass('borrar');
-            $("#editDinamico ul li button.borrar").addClass('editar');
+            var btntxt = "btntxt" + id;
+            $("#editDinamico .editar #"+btntxt).html(item.nombre);
+            //$("#editDinamico button.borrar").removeClass('borrar');
+            //$("#editDinamico button.borrar").addClass('editar');
           });
         }).fail(function(e){
           alert("Error al cargar la actualizacion del nombre: Err->"+JSON.stringify(e));
@@ -302,8 +304,13 @@ $(document).ready(function(){
                 $.each(JSON.parse(d), function(i, item){
                   LiBoton = "at"+item.id;
                   BotonId = "direccionGuardada"+item.id;
-                  html += '<li id="'+LiBoton+'">';
-                  html += '<button id="'+BotonId+'" onclick="traerID(\''+BotonId+'\');" class="btn btn-sm editar">'+item.nombre+'</button>';
+                  html += '<div id="'+LiBoton+'" class="input-group-btn">';
+                  html += '<label id="'+BotonId+'" onclick="traerID(\''+BotonId+'\');" class="btn btn-sm editar btnChk">';
+                  html += '<input type="radio" name="editDirecciones" id="option1" autocomplete="off" class=""><span id="btntxt'+item.id+'" class="itemName">'+item.nombre+'</span>';
+                  html += '</label>';
+                  html += '<button class="btn btn-sm borrar" disabled="disabled" onclick="eliminarDireccion(\''+item.id+'\');"><span class="glyphicon glyphicon-remove"></span></button>';
+                  html += '</div>';
+
                   html += '<span class="hidden" id="id'+BotonId+'">'+item.id+'</span>';
                   html += '<span class="hidden" id="nombre'+BotonId+'">'+item.nombre+'</span>';
                   html += '<span class="hidden" id="calle'+BotonId+'">'+item.calle+'</span>';
@@ -314,10 +321,12 @@ $(document).ready(function(){
                   html += '<span class="hidden" id="ciudad'+BotonId+'">'+item.ciudad+'</span>';
                   html += '<span class="hidden" id="colonia'+BotonId+'">'+item.colonia+'</span>';
                   html += '<span class="hidden" id="localidad'+BotonId+'">'+item.localidad+'</span>';
-                  html += '<input type="button" onclick="eliminarDireccion(\''+item.id+'\');" value="eliminar">';
-                  html += '</li>';
+
+                  //html += '<input type="button" onclick="eliminarDireccion(\''+item.id+'\');" value="eliminar">';
+
+
                 });
-                $("#editDinamico ul").append(html);
+                $("#editDinamico").append(html);
               });
             }).fail(function(e){
               alert("Error al insertar: "+JSON.stringify(e));
@@ -367,8 +376,8 @@ function traerID(dato){
   $("#municipio").val(municipio);
   $("#ciudad").val(ciudad);
   $("#localidad").val(localidad);
-  $("#"+dato).removeClass('editar');
-  $("#"+dato).addClass('borrar');
+  /*$("#"+dato).removeClass('editar');
+  $("#"+dato).addClass('borrar');*/
 }
 function fondAdd(dato){
   var lada = $("#lada"+dato).text();
@@ -544,4 +553,22 @@ function eliminarTelefono(id){
         }
       }
     });
+}
+
+/* funcion que habilita el boton de borrar de un input-group-btn */
+$('.input-group-btn .btnChk').click(function(){
+  $(this).parent().parent().find('.borrar').prop('disabled', true);
+  $(this).parent().find('.borrar').prop('disabled', false);
+  $(this).parent().parent().parent().find('#agregarDireccion').html('Guardar Cambios');
+});
+
+/* funcion que regresa el estado de los inputs en la seccion de agregar direcciones y telefonos */
+function limpiaSection(section){
+  console.log(section);
+  $(section).find('input').not(':button, :submit, :reset, :hidden').val('');
+  $(section).find('.btnChk').removeClass('active');
+  $(section).find(':radio').prop('checked',false);
+  $(section).find('.borrar').prop('disabled', true);
+  $(section).find('#agregarDireccion').html('Añadir Dirección');
+  $(section).find('input').first().focus();
 }
