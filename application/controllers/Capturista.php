@@ -189,7 +189,7 @@
         fclose($fpF);
         $mensajeCompleto = "";
         $sustituir = '<span id="codigo">'.$codigo.'</span>';
-        $conCodigo = str_replace('<span id = "codigo"></span>',$sustituir, $html2);
+        $conCodigo = str_replace('<span id="codigo"></span>',$sustituir, $html2);
         $mensajeCompleto = $html1.$conCodigo.$html3;
         echo 'mensaje completo: '.$mensajeCompleto;
 
