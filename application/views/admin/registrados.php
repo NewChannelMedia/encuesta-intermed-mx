@@ -190,13 +190,6 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
               </div>
             </div>
           </div>
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
-                <button class="btn btn-success btn-lg btn-block s20 uppr" onclick="LimpiarFormularios()">Siguiente <span class="glyphicon glyphicon-arrow-right"</button>
-              </div>
-            </div>
-          </div>
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
