@@ -121,7 +121,6 @@ function guardarTelefono(){
             $('#registroTelefonos').find('input').prop('value','');
             document.getElementById("tipoTelefono").selectedIndex = "0";
             $('#ladaTelefono').focus();
-            //LI
             var html2 = "";
             $.post('/encuesta-intermed/capturista/anadirFon/',{
               id: $('#medico_id').val()
@@ -131,7 +130,7 @@ function guardarTelefono(){
                 idBoton = "fon"+item.id;
                 html2 += '<div id="atel'+item.id+'" class="input-group-btn">';
                 html2 += '<label id="'+idBoton+'" onclick="fonAdd(\''+idBoton+'\');" class="btn btn-sm editar btnChk">';
-                html2 += '<input type="radio" name="editDirecciones" id="option1" autocomplete="off" class=""><span id="btntxt'+item.id+'" class="itemName">'+item.numero+'</span>';
+                html2 += '<input type="radio" name="editDirecciones" id="option1" autocomplete="off" class=""><span id="btntxt'+item.id+'" class="itemName">('+item.claveRegion+') '+item.numero+'</span>';
                 html2 += '</label>';
                 html2 += '<button class="btn btn-sm borrar" disabled="disabled" onclick="eliminarTelefono(\''+item.id+'\');"><span class="glyphicon glyphicon-remove"></span></button>';
                 html2 += '<span class="hidden" id="id'+idBoton+'">'+item.id+'</span>';
