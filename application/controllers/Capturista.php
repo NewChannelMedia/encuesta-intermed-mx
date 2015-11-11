@@ -346,5 +346,15 @@
         $result = $this->Captelefonos_model->eliminarTelefono($id);
         echo json_encode(array('success'=>$result));
       }
+      public function sincFon(){
+        $id = $this->input->post('id');
+        $iterar = $this->Captelefonos_model->sincFon($id);
+        print_r(json_encode($iterar));
+      }
+      public function traerFonsolo(){
+        $id = $this->input->post('id');
+        $iterar = $this->Captelefonos_model->traerFonsolo($id);
+        print_r(json_encode($iterar));
+      }
   }
 ?>
