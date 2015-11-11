@@ -83,7 +83,7 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <button class="btn btn-info btn-block" id="agregarDireccion">Añadir Dirección</button>
+              <button class="btn btn-info btn-block btnAñade" id="agregarDireccion">Añadir</button>
             </div>
             <!-- empiezan los botones de edicion -->
             <div id="editDinamico" class="btn-group edit-btns text-center" data-toggle="buttons">
@@ -133,7 +133,7 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              <button type="submit" class="btn btn-info btn-block" id="enviarFon">Añadir Telefono</button>
+              <button type="submit" class="btn btn-info btnAñade btn-block" id="enviarFon">Añadir</button>
             </div>
             <div id="fonAgregado" class="form-group">
               <ul class="list-inline">
