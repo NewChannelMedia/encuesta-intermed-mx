@@ -892,4 +892,5 @@ function LimpiarFormularios(){
 
   limpiaSection('#registroDireccion');
   limpiaSection('#registroTelefonos');
+  limpiaSection('#registroMedico');
 }
