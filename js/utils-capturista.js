@@ -953,8 +953,8 @@ $('#estado').change(function () {
 
 function traerMunicipios(){
   var estado_id = $('#estado').prop('value');
-  $('#municipio').html('');
-  $('#localidad').html('');
+  $('#municipio').html('<option value="">Municipio/Ciudad</option>');
+  $('#localidad').html('<option value="">Localidad/Colonia</option>');
   $.ajax( {
     url: '/encuesta-intermed/Capturista/municipios',
     type: "POST",
@@ -981,7 +981,7 @@ $('#municipio').change(function () {
 function traerLocalidades(){
   var estado_id = $('#estado').prop('value');
   var municipio_id = $('#municipio').prop('value');
-  $('#localidades').html('');
+  $('#localidad').html('<option value="">Localidad/Colonia</option>');
   $.ajax( {
     url: '/encuesta-intermed/Capturista/localidades',
     type: "POST",
