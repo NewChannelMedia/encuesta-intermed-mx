@@ -17,6 +17,8 @@
         $this->load->model('Capdirecciones_model');
         $this->load->model('Captelefonos_model');
         $this->load->model('Capmuestramed_model');
+        $this->load->model('Capturista_model');
+        $this->load->model('Capcapturista_model');
       }
       /*
       public function index(){
@@ -394,6 +396,60 @@
         $localidad_id = $this->input->post('localidad_id');
         $localidad = $this->Capubicaciones_model->get_localidad($localidad_id);
         echo json_encode($localidad);
+      }
+
+      /***
+      * se atrapa el post de la vista y se manda al model de Capturista_model
+      * para hacer la insercion en la tabla de master
+      **/
+      public function usuarioPassword(){
+        $usuario = $this->input->post('usuario');
+        $password = $this->input->post('password');
+        $query = $this->Capturista_model->usuarioPassword($usuario, $password);
+        if( $query == true ){
+          echo true;
+        }else{
+          echo false;
+        }
+      }
+      public function getDatas(){
+        $usuario = $this->input->post('usuario');
+        $password = $this->input->post('password');
+        $iterar = $this->Capturista_model->getDatas($usuario, $password);
+        $arr = array();
+        $i = 0;
+        foreach($iterar->result() as $row ){
+          $arr[ $i ]['id'] = $row->id;
+          $arr[ $i ]['user'] = $row->usuario;
+          $arr[ $i ]['pass'] = $row->password;
+          $i++;
+        }
+        print_r(json_encode($arr));
+      }
+      public function insertDatosCapturista(){
+        $id = $this->input->post('id');
+        $nombre = $this->input->post('nombre');
+        $apellido = $this->input->post('apellido');
+        $correo = $this->input->post('correo');
+        $query = $this->Capcapturista_model->insertDatosCapturista($id,$nombre,$apellido,$correo);
+        if( $query == true ){
+          echo true;
+        }else{
+          echo false;
+        }
+      }
+      public function getDatosNombres(){
+        $id = $this->input->post('id');
+        $iterar = $this->Capcapturista_model->getDatosNombres($id);
+        $arre = array();
+        $i = 0;
+        foreach( $iterar->result() as $row ){
+          $arre[ $i ]['nombre'] = $row->nombre;
+          $arre[ $i ]['apellido'] = $row->apellido;
+          $arre[ $i ]['correo'] = $row->correo;
+          $i++;
+        }
+        print_r(json_encode($arre));
       }
   }
 ?>

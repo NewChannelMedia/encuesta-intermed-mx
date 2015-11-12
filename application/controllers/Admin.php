@@ -729,6 +729,31 @@
               $this->load->view('templates/footerAdmin');
             }
         }
+        public function anadirCapturista(){
+            if (array_key_exists('status',$_SESSION)){
+              $session = $_SESSION['status'];
+            } else {
+              $session = false;
+            }
+            if($session===true){
+              $data['title'] = "Capturista";
+              $data['errorM'] = "";
+              //$data['rol'] = "admin";
+              $data['rol'] = "admin";
+              $this->load->view('templates/headerAdmin', $data);
+              $this->load->view('admin/anadirCapturista', $data);
+              $this->load->view('templates/footerAdmin');
+            }else{
+              $data['title'] = "Directorio";
+              $data['error'] = "no sesion";
+              $_SESSION['status'] = false;
+              $data['status'] = $_SESSION['status'];
+              $data['errorM'] = "Revisa tus credenciales de acceso, o la sesión ha sido cerrada.";
+              $this->load->view('templates/header', $data);
+              $this->load->view('admin/Admin_vista', $data);
+              $this->load->view('templates/footerAdmin');
+            }
+        }
         public function llamadas(){
           /*
             $this->load->model('Capmedicos_model');
@@ -801,6 +826,12 @@
           $this->load->view('templates/headerAdmin', $data);
           $this->load->view('admin/capturistaStatus', $data);
           $this->load->view('templates/footerAdmin');
+        }
+        //inserta en la tabla master de la db capturista los datos
+        public function usuarioPassword(){
+          // se atrapa por post las variables enviadas por el ajax
+          $user = $this->input->post('usuario');
+          $password = $this->input->post('password');
         }
   }
 

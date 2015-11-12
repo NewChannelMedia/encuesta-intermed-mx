@@ -1018,3 +1018,124 @@ $('#localidad').change(function () {
     }
   });
 });
+
+/**
+* El siguiente evento insertara el usuario y password, ademas de
+* el nombre y apellido a sus correspondientes tablas
+*
+**/
+$(document).ready(function(){
+  $("#UserPass").click(function(){
+    // ajax para el envio de los inputs a su registro de su respectiva tabla
+    var usuario = $("#user").val();
+    var password = $("#password").val();
+    // se checa que no esten vacios estos campos para poderlos insertar
+    if( user != "" && password != "" ){
+      $.post('/encuesta-intermed/capturista/usuarioPassword/',{
+        usuario: usuario,
+        password: password
+      },function(data){
+        if( data ){
+          // si data es verdadero, se inserta en un div un span con un letrero de que su insercion fue hecha bien
+          $("#usuarioGuardado").addClass('guardado');
+          $.post('/encuesta-intermed/capturista/getDatas/',{
+            usuario:usuario,
+            password:password
+          },function(datas){
+            $.each(JSON.parse(datas), function(i, item){
+              $("#usuario_id").val(item.id);
+              $("#user").val(item.user);
+              $("#password").val(item.pass);
+            });
+          });
+        }else{
+          // en caso contrario se pondra en el span el error de que no se pudo insertar correctamente
+          bootbox.alert({
+                  message: "Se tiene que llenar todos los campos de usuario y password por favor.",
+                  title: "Campos vacios",
+                  callback: function() {setTimeout(function(){
+                    if( $("#user").val() == "" && $("#password").val() != "" ){
+                      $('#user').focus();
+                    }else if ( $("#password").val() == "" && $("#user").val() != "" ) {
+                      $('#password').focus();
+                    }else if( $("#user").val() == "" && $("#password").val() == "" ){
+                      $('#user').focus();
+                    }
+                  },300); }
+              });
+        }
+      });
+    }else{
+      bootbox.alert({
+              message: "Se tiene que llenar todos los campos de usuario y password por favor.",
+              title: "Campos vacios",
+              callback: function() {setTimeout(function(){
+                if( $("#user").val() == "" && $("#password").val() != "" ){
+                  $('#user').focus();
+                }else if ( $("#password").val() == "" && $("#user").val() != "" ) {
+                  $('#password').focus();
+                }else if( $("#user").val() == "" && $("#password").val() == "" ){
+                  $('#user').focus();
+                }
+              },300); }
+          });
+    }
+  });
+  $("#mandarNombre").click(function(){
+    if( $("#usuario_id").val() != "" ){
+      var nombre = $("#nombreCapturista").val();
+      var apellido = $("#apellidoCapturista").val();
+      var idUsuario = $("#usuario_id").val();
+      var correo = $("#mailCapturista").val();
+      if( nombre != "" && apellido != "" && correo != ""){
+        $.post('/encuesta-intermed/capturista/insertDatosCapturista/',{
+          id:idUsuario,
+          nombre:nombre,
+          correo: correo,
+          apellido: apellido
+        }, function(datas){
+          if(datas){
+            $("#usuarioGuardado").addClass('guardado');
+            $.post('/encuesta-intermed/capturista/getDatosNombres/',{
+              id: idUsuario
+            },function(d){
+              $.each(JSON.parse(d), function(i, item){
+                $("#nombreCapturista").val(item.nombre);
+                $("#apellidoCapturista").val(item.apellido);
+                $("#mailCapturista").val(item.correo);
+              });
+            });
+          }
+        });
+      }else{
+        bootbox.alert({
+                message: "Se tiene que llenar todos los campos de usuario y password primero por favor.",
+                title: "Campos vacios",
+                callback: function() {setTimeout(function(){
+                  if( $("#nombreCapturista").val() == "" && $("#apellidoCapturista").val() != "" ){
+                    $('#nombreCapturista').focus();
+                  }else if ( $("#apellidoCapturista").val() == "" && $("#nombreCapturista").val() != "" ) {
+                    $('#apellidoCapturista').focus();
+                  }else if( $("#nombreCapturista").val() == "" && $("#apellidoCapturista").val() == "" ){
+                    $('#nombreCapturista').focus();
+                  }
+                },300); }
+            });
+      }
+    }else{
+      bootbox.alert({
+              message: "Se tiene que llenar todos los campos de usuario y password primero por favor.",
+              title: "Campos vacios",
+              callback: function() {setTimeout(function(){
+                if( $("#user").val() == "" && $("#password").val() != "" ){
+                  $('#user').focus();
+                }else if ( $("#password").val() == "" && $("#user").val() != "" ) {
+                  $('#password').focus();
+                }else if( $("#user").val() == "" && $("#password").val() == "" ){
+                  $('#user').focus();
+                }
+              },300); }
+          });
+    }
+  });
+});
