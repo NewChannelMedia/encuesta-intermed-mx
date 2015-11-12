@@ -440,7 +440,11 @@ function generarMuestraMedicos(){
             var telefonos = '<table width="100%">';
             var checked = ' checked';
             val.telefonos.forEach(function(telefono){
-              telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center">(' + telefono.claveRegion + ') ' + telefono.numero +'</td><td class="text-center"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></td></tr>';
+              var icon = '<span class="glyphicon glyphicon-earphone" style="font-size:80%"></span>'
+              if (telefono.tipo == "celular"){
+                icon = '<span class="glyphicon glyphicon-phone" style="font-size:80%"></span>'
+              }
+              telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center">'+ icon +' (' + telefono.claveRegion + ') ' + telefono.numero +'</td><td class="text-center"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></td></tr>';
               checked = '';
             });
             telefonos+='</table>'
@@ -632,7 +636,11 @@ function obtenerSeleccionados(){
             val.telefonos.forEach(function(telefono){
               if (telefonos != "")
                 telefonos+='<br/>';
-              telefonos += '(' + telefono.claveRegion + ') ' + telefono.numero;
+              var icon = '<span class="glyphicon glyphicon-earphone" style="font-size:90%"></span>'
+              if (telefono.tipo == "celular"){
+                icon = '<span class="glyphicon glyphicon-phone" style="font-size:90%"></span>'
+              }
+              telefonos += icon + ' (' + telefono.claveRegion + ') ' + telefono.numero;
             });
 
             var especialidad ='';
@@ -685,7 +693,11 @@ function obtenerNoSeleccionados(){
             val.telefonos.forEach(function(telefono){
               if (telefonos != "")
                 telefonos+='<br/>';
-              telefonos += '(' + telefono.claveRegion + ') ' + telefono.numero;
+              var icon = '<span class="glyphicon glyphicon-earphone" style="font-size:90%"></span>'
+              if (telefono.tipo == "celular"){
+                icon = '<span class="glyphicon glyphicon-phone" style="font-size:90%"></span>'
+              }
+              telefonos += icon + ' (' + telefono.claveRegion + ') ' + telefono.numero;
             });
 
             var especialidad ='';
