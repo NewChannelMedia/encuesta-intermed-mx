@@ -8,21 +8,21 @@
       <div class="panel-body">
 	      <input type="hidden" id="medico_id" value="">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-8 col-sm-8">
             <div class="row">
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-4 col-sm-4">
                 <input type="text" class="form-control" id="nombre" placeholder="Nombre(s)">
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-4 col-sm-4">
                 <input type="text" class="form-control" id="apellidoP" placeholder="Apellido paterno">
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-4 col-sm-4">
                 <input type="text" class="form-control" id="apellidoM" placeholder="Apellido materno">
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-6 col-sm-6">
                 <input type="email" class="form-control" id="email" placeholder="E-mail:">
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-6 col-sm-6">
                 <input type="text" class="form-control" id="especialidad" placeholder="Especialidad:">
                 <?php
                   echo '<script type="text/javascript">var autocompleteEspecialidades = [];</script>';
@@ -33,7 +33,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-4">
             <div class="form-group">
               <button class="btn btn-info btn-block" id="agregarDatos" type="submit">Guardar Medico</button>
             </div>
@@ -53,23 +53,20 @@
       </div>
       <div class="panel-body">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-8 col-sm-8">
             <div class="row">
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-4 col-sm-4">
                 <input type="text" class="form-control" id="nombreDireccion" placeholder="Nombre">
               </div>
-              <div class="form-group col-md-5">
+              <div class="form-group col-md-5 col-sm-5">
                 <input type="text" class="form-control" id="direccion" placeholder="Calle">
               </div>
-              <div class="form-group col-md-3">
+              <div class="form-group col-md-3 col-sm-3">
                 <input type="text" class="form-control" id="numero" placeholder="Numero">
               </div>
-              <div class="form-group col-md-4">
-                <input type="text" class="form-control" id="cp" placeholder="Codigo Postal">
-              </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-4 col-sm-4">
                 <select class="form-control" id="estado" placeholder="Estado">
-                  <option value=""></option>
+                  <option value="">Estado</option>
                 <?php
                   foreach ($estados as $estado) {
                     echo '<option value="'.$estado['id'].'" onchange="treaerMunicipios()">'.$estado['estado'].'</option>';
@@ -77,15 +74,18 @@
                 ?>
                 </select>
               </div>
-              <div class="form-group col-md-4">
-                <select class="form-control" id="municipio" placeholder="Municipio"></select>
+              <div class="form-group col-md-4 col-sm-4">
+                <select class="form-control" id="municipio" placeholder="Municipio"><option value="">Municipio/Ciudad</option></select>
               </div>
-              <div class="form-group col-md-6">
-                <select class="form-control" id="localidad" placeholder="Colonia / Localidad"></select>
+              <div class="form-group col-md-4 col-sm-4">
+                <select class="form-control" id="localidad"><option value="">Localidad/Colonia</option></select>
+              </div>
+              <div class="form-group col-md-4 col-sm-4">
+                <input type="text" class="form-control" id="cp" placeholder="Codigo Postal">
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-4">
             <div class="form-group">
               <button class="btn btn-info btn-block btnAñade" id="agregarDireccion">Añadir</button>
             </div>
@@ -104,15 +104,15 @@
       </div>
       <div class="panel-body">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-8 col-sm-8">
             <div class="row">
-              <div class="form-group col-md-3">
+              <div class="form-group col-md-3 col-sm-3">
                 <input type="text" id="ladaTelefono" class="form-control solo-numero" placeholder="Lada:" maxlength="5" onpaste="soloNumeros()"/>
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-4 col-sm-4">
                 <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="8" onpaste="soloNumeros()"/>
               </div>
-              <div class="form-group col-md-5">
+              <div class="form-group col-md-5 col-sm-5">
                 <select class="form-control" id="tipoTelefono">
                   <option value="casa">Casa</option>
                   <option value="celular">Celular</option>
@@ -122,7 +122,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-4">
             <div class="form-group">
               <button type="submit" class="btn btn-info btnAñade btn-block" id="enviarFon">Añadir</button>
             </div>

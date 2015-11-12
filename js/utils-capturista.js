@@ -239,6 +239,7 @@ $(document).ready(function(){
           $.each(JSON.parse(datos), function(i, item){
             var btntxt = "btntxt" + id;
             var iddireccion = 'direccionGuardada' + id;
+            $("#editDinamico #nombre" + iddireccion).html(item.nombre);
             $("#editDinamico #calle" + iddireccion).html(calle);
             $("#editDinamico #numero" + iddireccion).html(numero);
             $("#editDinamico #municipio" + iddireccion).html(municipio);
@@ -381,13 +382,9 @@ function traerID(dato){
   $("#cp").val(cp);
   $("#estado").val(estado);
   traerMunicipios();
-  setTimeout(function(){
-    $("#municipio").val(municipio);
-    traerLocalidades();
-    setTimeout(function(){
-      $("#localidad").val(localidad);
-    },300);
-  },300);
+  $("#municipio").val(municipio);
+  traerLocalidades();
+  $("#localidad").val(localidad);
   /*$("#"+dato).removeClass('editar');
   $("#"+dato).addClass('borrar');*/
   $('#'+dato).parent().parent().find('.borrar').prop('disabled', true);
@@ -602,6 +599,7 @@ function limpiaSection(section){
   if (section == "#direccionDatos"){
     $('#estado')[0].selectedIndex = 0;
     traerMunicipios();
+    traerLocalidades();
   }
   $(section).find('.btnChk').removeClass('active');
   $(section).find(':radio').prop('checked',false);
@@ -720,6 +718,7 @@ function modificarMedico(id){
   $('#estado')[0].selectedIndex = 0;
   $('#tipoTelefono')[0].selectedIndex = 0;
   traerMunicipios();
+  traerLocalidades();
 
   medicoSeleccionado_id = id;
   $('#ActualizarMedico').find('input').prop('value','');
@@ -964,7 +963,7 @@ function traerMunicipios(){
     data: {'estado_id':estado_id},
     async: false,
     success: function (result) {
-      var municipios = '<option value=""></option>';
+      var municipios = '<option value="">Municipio/Ciudad</option>';
       result.forEach(function(municipio){
         municipios += '<option value="'+municipio.id+'">'+municipio.municipio+'</option>';
       });
@@ -991,7 +990,7 @@ function traerLocalidades(){
     data: {'estado_id':estado_id,'municipio_id':municipio_id},
     async: false,
     success: function (result) {
-      var localidades = '<option value=""></option>';
+      var localidades = '<option value="">Localidad/Colonia</option>';
       result.forEach(function(localidad){
         localidades += '<option value="'+localidad.id+'">'+localidad.localidad+'</option>';
       });
