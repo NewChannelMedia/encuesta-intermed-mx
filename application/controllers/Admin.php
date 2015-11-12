@@ -791,6 +791,13 @@
           $this->load->view('admin/registrados', $data);
           $this->load->view('templates/footerAdmin');
         }
+
+        public function statusCapturista(){
+          $data['title'] = "Status de Capturistas";
+          $this->load->view('templates/headerAdmin', $data);
+          $this->load->view('admin/capturistaStatus', $data);
+          $this->load->view('templates/footerAdmin');
+        }
   }
 
   function encuestas_dropDown($enviar, $tipo){
