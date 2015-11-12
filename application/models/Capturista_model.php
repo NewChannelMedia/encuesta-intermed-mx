@@ -32,5 +32,11 @@
         return false;
       }
     }
+    public function getDatas($usuario, $password){
+      $this->db_encuesta->where('usuario', $usuario);
+      $this->db_encuesta->where('password', $password);
+      $query = $this->db_encuesta->get('master');
+      return $query;
+    }
   }
 ?>

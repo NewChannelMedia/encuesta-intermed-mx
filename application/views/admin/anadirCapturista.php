@@ -34,17 +34,20 @@
               <fieldset>
                 <legend>Nombre y Apellido</legend>
                 <div class="form-group col-md-4 col-sm-4">
-                  <input type="text" class="form-control" id="Nombre" placeholder="Nombre(s):">
+                  <input type="text" class="form-control" id="nombreCapturista" placeholder="Nombre(s):">
                 </div>
                 <div class="form-group col-md-4 col-sm-4">
-                  <input type="text" class="form-control" id="Apellido" placeholder="Apellido(s):">
+                  <input type="text" class="form-control" id="apellidoCapturista" placeholder="Apellido(s):">
+                </div>
+                <div class="form-group col-md-4 col-sm-4">
+                  <input type="mail" class="form-control" id="mailCapturista" placeholder="Correo:">
                 </div>
               </fieldset>
             </div>
           </div>
           <div class="col-md-4 col-sm-4">
             <div class="form-group">
-              <button type="button" class="form-control btn btn-warning">Guardar informacion</button>
+              <button type="button" id="mandarNombre" class="form-control btn btn-warning">Guardar informacion</button>
             </div>
           </div>
         </div>
