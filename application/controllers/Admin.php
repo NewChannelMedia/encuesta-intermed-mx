@@ -560,7 +560,7 @@
           $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
           $headers .= 'From: <intermed.encuestas@newchannel.mx>'."\r\n";
 
-          $result= mail($email,$asunto,$asunto,$headers);
+          $result= mail($email,$asunto,$mensaje,$headers);
 
           $array = array();
           $array['success'] = $result;
