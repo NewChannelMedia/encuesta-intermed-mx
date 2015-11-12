@@ -68,16 +68,20 @@
                 <input type="text" class="form-control" id="cp" placeholder="Codigo Postal">
               </div>
               <div class="form-group col-md-4">
-                <input type="text" class="form-control" id="estado" placeholder="Estado">
+                <select class="form-control" id="estado" placeholder="Estado">
+                  <option value=""></option>
+                <?php
+                  foreach ($estados as $estado) {
+                    echo '<option value="'.$estado['id'].'" onchange="treaerMunicipios()">'.$estado['estado'].'</option>';
+                  }
+                ?>
+                </select>
               </div>
               <div class="form-group col-md-4">
-                <input type="text" class="form-control" id="municipio" placeholder="Municipio">
+                <select class="form-control" id="municipio" placeholder="Municipio"></select>
               </div>
               <div class="form-group col-md-6">
-                <input type="text" class="form-control" id="ciudad" placeholder="Ciudad">
-              </div>
-              <div class="form-group col-md-6">
-                <input type="text" class="form-control" id="localidad" placeholder="Colonia / Localidad">
+                <select class="form-control" id="localidad" placeholder="Colonia / Localidad"></select>
               </div>
             </div>
           </div>

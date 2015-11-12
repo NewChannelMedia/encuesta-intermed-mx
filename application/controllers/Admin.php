@@ -699,6 +699,7 @@
         }
         public function directorio(){
             $this->load->model('Capespecialidades_model');
+            $this->load->model('Capubicaciones_model');
 
             // se carga el modelo para verificar si existen el usuario y password que se reciben por post
             $this->load->model('Admin_model');
@@ -711,6 +712,7 @@
               $data['title'] = "Directorio";
               $data['errorM'] = "";
               $data['especialidades'] = $this->Capespecialidades_model->get_especialidades();
+              $data['estados'] = $this->Capubicaciones_model->get_estados();
               //$data['rol'] = "admin";
               $data['rol'] = "capturista";
               $this->load->view('templates/headerAdmin', $data);
@@ -785,6 +787,8 @@
 
         public function registrados(){
           $this->load->model('Capespecialidades_model');
+          $this->load->model('Capubicaciones_model');
+          $data['estados'] = $this->Capubicaciones_model->get_estados();
           $data['especialidades'] = $this->Capespecialidades_model->get_especialidades();
           $data['title'] = "Médicos registrados";
           $this->load->view('templates/headerAdmin', $data);

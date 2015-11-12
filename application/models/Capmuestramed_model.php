@@ -48,6 +48,22 @@
             $this->db_capturista->where('medico_id', $muestraMedico['medico_id']);
             $medico['direcciones'] = $this->db_capturista->get('direcciones')->result_array();
 
+            for ($i=0; $i < count($medicos['direcciones']); $i++) {
+              //Estado
+              $estado_id = $medicos['direcciones'][$i]['estado'];
+              $this->db_capturista->where('id', $estado_id);
+              $medicos['direcciones'][$i]['estado'] = $this->db_capturista->get('estados')->row_array()['estado'];
+              //Municipio
+              $municipio_id = $medicos['direcciones'][$i]['municipio'];
+              $this->db_capturista->where('estado_id', $estado_id);
+              $this->db_capturista->where('id', $municipio_id);
+              $medicos['direcciones'][$i]['municipio'] = $this->db_capturista->get('municipios')->row_array()['municipio'];
+              //Localidad
+              $localidad_id = $medicos['direcciones'][$i]['localidad'];
+              $this->db_capturista->where('id', $localidad_id);
+              $medicos['direcciones'][$i]['localidad'] = $this->db_capturista->get('localidades')->row_array()['localidad'];
+              //echo 'LOCALIDAD: '  . $medicos['direcciones'][$i]['localidad'] .'<br/>';
+            }
 
             $muestra[] = $medico;
           }
@@ -118,6 +134,22 @@
             $medicos['telefonos'] = $this->db_capturista->get('telefonos')->result_array();
             $this->db_capturista->where('medico_id', $medico['id']);
             $medicos['direcciones'] = $this->db_capturista->get('direcciones')->result_array();
+            for ($i=0; $i < count($medicos['direcciones']); $i++) {
+              //Estado
+              $estado_id = $medicos['direcciones'][$i]['estado'];
+              $this->db_capturista->where('id', $estado_id);
+              $medicos['direcciones'][$i]['estado'] = $this->db_capturista->get('estados')->row_array()['estado'];
+              //Municipio
+              $municipio_id = $medicos['direcciones'][$i]['municipio'];
+              $this->db_capturista->where('estado_id', $estado_id);
+              $this->db_capturista->where('id', $municipio_id);
+              $medicos['direcciones'][$i]['municipio'] = $this->db_capturista->get('municipios')->row_array()['municipio'];
+              //Localidad
+              $localidad_id = $medicos['direcciones'][$i]['localidad'];
+              $this->db_capturista->where('id', $localidad_id);
+              $medicos['direcciones'][$i]['localidad'] = $this->db_capturista->get('localidades')->row_array()['localidad'];
+              //echo 'LOCALIDAD: '  . $medicos['direcciones'][$i]['localidad'] .'<br/>';
+            }
             $muestra[] = $medicos;
           }
           return $muestra;
