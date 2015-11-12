@@ -1434,6 +1434,11 @@ canvas {
 .llamadasSection{
   margin-top: 15px;
 }
+@media(max-width:992px){
+  .directorioSection{
+    width: 100%;
+  }
+}
 
 @media(max-width:768px){
   .helpSection {
@@ -1442,8 +1447,8 @@ canvas {
   }
   .directorioSection{
     margin-top: 0;
-    margin-left: -15px;
-    margin-right: -15px;
+    padding-right: 0;
+    padding-left: 0;
   }
   .llamadasSection{
     margin-left: -15px;
