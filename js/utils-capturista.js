@@ -38,33 +38,25 @@ function guardarMedico(){
                 'email': email,
                 'especialidad': especialidad
               };
-
-    if (nombre != '' && apellidoP != ''){
-      $.ajax( {
-        url: '/encuesta-intermed/Capturista/guardarMedico',
-        type: "POST",
-        data: data,
-        dataType: 'JSON',
-        async: true,
-        success: function (result) {
-          if (result.success){
-            $('#medico_id').val(result.medico_id);
-            $('#registroMedico').find('input,select,button').attr("disabled","disabled");
-            $('#registroMedico').addClass('panel-success guardado');
-            $('#nombreDireccion').focus();
-            $("#editarDatos").attr('disabled',false);
-          }
-        },
-        error: function (err) {
-          console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    $.ajax( {
+      url: '/encuesta-intermed/Capturista/guardarMedico',
+      type: "POST",
+      data: data,
+      dataType: 'JSON',
+      async: true,
+      success: function (result) {
+        if (result.success){
+          $('#medico_id').val(result.medico_id);
+          $('#registroMedico').find('input,select,button').attr("disabled","disabled");
+          $('#registroMedico').addClass('panel-success guardado');
+          $('#nombreDireccion').focus();
+          $("#editarDatos").attr('disabled',false);
         }
-      } );
-    } else {
-      bootbox.alert({
-          message: "El nombre y apellido paterno del médico son obligatorios.",
-          title: "No se puede guardar el médico"
-      });
-    }
+      },
+      error: function (err) {
+        console.log( "Error: AJax dead :" + JSON.stringify(err) );
+      }
+    } );
   }
 }
 
@@ -105,7 +97,7 @@ function guardarTelefono(){
       alert("Error: "+JSON.stringify(e));
     });
   }else{
-    if (id != '' && numero != '' && clave != '' && tipo != ''){
+    if (id != ''){
       $.ajax( {
         url: '/encuesta-intermed/Capturista/guardarTelefono',
         type: "POST",
@@ -143,9 +135,9 @@ function guardarTelefono(){
       } );
     } else {
       bootbox.alert({
-          message: "Falta llenar algún campo para el registro.",
+          message: "Es necesario registrar un médico antes de agregar algún teléfono.",
           title: "No se puede guardar el número de teléfono",
-          callback: function() {setTimeout(function(){$('#ladaTelefono').focus();},300); }
+          callback: function() {setTimeout(function(){$('#nombre').focus();},300); }
       });
     }
   }
@@ -281,7 +273,6 @@ $(document).ready(function(){
         },function(){});
       }else{
         if( id_medico != "" ){
-          if( nombreConsultorio != "" && numero != "" && calle != "" && cp != "" && estado != "" && municipio != "" && ciudad != "" && localidad != "" ){
             $.post('/encuesta-intermed/capturista/insertDireccion/',{
               consultorio:nombreConsultorio,
               calle: calle,
@@ -344,11 +335,12 @@ $(document).ready(function(){
             }).fail(function(e){
               alert("Error al insertar: "+JSON.stringify(e));
             });
-          }else{
-            alert("Favor de no dejar campos vacíos :D");
-          }
         }else{
-          alert("Por favor llene primero la seccion de arriba");
+          bootbox.alert({
+              message: "Es necesario registrar un médico antes de agregar alguna dirección.",
+              title: "No se puede guardar la dirección",
+              callback: function() {setTimeout(function(){$('#nombre').focus();},300); }
+          });
         }
       }
     }
