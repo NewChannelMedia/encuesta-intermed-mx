@@ -17,6 +17,7 @@
         $this->load->model('Capdirecciones_model');
         $this->load->model('Captelefonos_model');
         $this->load->model('Capmuestramed_model');
+        $this->load->model('Capturista_model');
       }
       /*
       public function index(){
@@ -372,6 +373,20 @@
         $id = $this->input->post('id');
         $iterar = $this->Captelefonos_model->traerFonsolo($id);
         print_r(json_encode($iterar));
+      }
+      /***
+      * se atrapa el post de la vista y se manda al model de Capturista_model
+      * para hacer la insercion en la tabla de master
+      **/
+      public function usuarioPassword(){
+        $usuario = $this->input->post('usuario');
+        $password = $this->input->post('password');
+        $query = $this->Capturista_model->usuarioPassword($usuario, $password);
+        if( $query == true ){
+          echo true;
+        }else{
+          echo false;
+        }
       }
   }
 ?>

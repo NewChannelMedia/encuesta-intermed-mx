@@ -934,3 +934,48 @@ function actualizarInformacionMedico(id){
       }
     });
 }
+/**
+* El siguiente evento insertara el usuario y password, ademas de
+* el nombre y apellido a sus correspondientes tablas
+*
+**/
+$(document).ready(function(){
+  $("#UserPass").click(function(){
+    // ajax para el envio de los inputs a su registro de su respectiva tabla
+    var usuario = $("#user").val();
+    var password = $("#password").val();
+    // se checa que no esten vacios estos campos para poderlos insertar
+    if( user != "" && password != "" ){
+      $.post('/encuesta-intermed/capturista/usuarioPassword/',{
+        usuario: usuario,
+        password: password
+      },function(data){
+        if( data ){
+          // si data es verdadero, se inserta en un div un span con un letrero de que su insercion fue hecha bien
+          console.log("data si: "+data);
+          $("#user").val('');
+          $("#password").val('');
+          $("#usuarioGuardado").addClass('guardado');
+          $("#UserPass").attr('disabled','disabled');
+        }else{
+          // en caso contrario se pondra en el span el error de que no se pudo insertar correctamente
+          console.log("No data: "+data);
+        }
+      });
+    }else{
+      bootbox.alert({
+              message: "Se tiene que llenar todos los campos de usuario y password por favor.",
+              title: "Campos vacios",
+              callback: function() {setTimeout(function(){
+                if( $("#user").val() == "" && $("#password").val() != "" ){
+                  $('#user').focus();
+                }else if ( $("#password").val() == "" && $("#user").val() != "" ) {
+                  $('#password').focus();
+                }else if( $("#user").val() == "" && $("#password").val() == "" ){
+                  $('#user').focus();
+                }
+              },300); }
+          });
+    }
+  });
+});
