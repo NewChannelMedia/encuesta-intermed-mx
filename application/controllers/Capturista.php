@@ -373,5 +373,27 @@
         $iterar = $this->Captelefonos_model->traerFonsolo($id);
         print_r(json_encode($iterar));
       }
+
+      public function municipios(){
+        $this->load->model('Capubicaciones_model');
+        $estado_id = $this->input->post('estado_id');
+        $municipios = $this->Capubicaciones_model->get_municipios($estado_id);
+        echo json_encode($municipios);
+      }
+
+      public function localidades(){
+        $this->load->model('Capubicaciones_model');
+        $estado_id = $this->input->post('estado_id');
+        $municipio_id = $this->input->post('municipio_id');
+        $localidades = $this->Capubicaciones_model->get_localidades($estado_id,$municipio_id);
+        echo json_encode($localidades);
+      }
+
+      public function localidad(){
+        $this->load->model('Capubicaciones_model');
+        $localidad_id = $this->input->post('localidad_id');
+        $localidad = $this->Capubicaciones_model->get_localidad($localidad_id);
+        echo json_encode($localidad);
+      }
   }
 ?>

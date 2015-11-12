@@ -114,35 +114,39 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
               </div>
               <div class="panel-body">
                 <div class="row">
-                  <div class="col-md-8">
+                  <div class="col-md-8 col-sm-8">
                     <div class="row">
-                      <div class="form-group col-md-4">
+                      <div class="form-group col-md-4 col-sm-4">
                         <input type="text" class="form-control" id="nombreDireccion" placeholder="Nombre">
                       </div>
-                      <div class="form-group col-md-5">
+                      <div class="form-group col-md-5 col-sm-5">
                         <input type="text" class="form-control" id="direccion" placeholder="Calle">
                       </div>
-                      <div class="form-group col-md-3">
+                      <div class="form-group col-md-3 col-sm-3">
                         <input type="text" class="form-control" id="numero" placeholder="Numero">
                       </div>
-                      <div class="form-group col-md-4">
+                      <div class="form-group col-md-4 col-sm-4">
+                        <select class="form-control" id="estado" placeholder="Estado">
+                          <option value="">Estado</option>
+                        <?php
+                          foreach ($estados as $estado) {
+                            echo '<option value="'.$estado['id'].'" onchange="treaerMunicipios()">'.$estado['estado'].'</option>';
+                          }
+                        ?>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-4 col-sm-4">
+                        <select class="form-control" id="municipio" placeholder="Municipio"><option value="">Municipio/Ciudad</option></select>
+                      </div>
+                      <div class="form-group col-md-4 col-sm-4">
+                        <select class="form-control" id="localidad"><option value="">Localidad/Colonia</option></select>
+                      </div>
+                      <div class="form-group col-md-4 col-sm-4">
                         <input type="text" class="form-control" id="cp" placeholder="Codigo Postal">
-                      </div>
-                      <div class="form-group col-md-4">
-                        <input type="text" class="form-control" id="estado" placeholder="Estado">
-                      </div>
-                      <div class="form-group col-md-4">
-                        <input type="text" class="form-control" id="municipio" placeholder="Municipio">
-                      </div>
-                      <div class="form-group col-md-6">
-                        <input type="text" class="form-control" id="ciudad" placeholder="Ciudad">
-                      </div>
-                      <div class="form-group col-md-6">
-                        <input type="text" class="form-control" id="localidad" placeholder="Colonia / Localidad">
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-4">
                     <div class="form-group">
                       <button class="btn btn-info btn-block btnAñade" id="agregarDireccion">Añadir</button>
                     </div>

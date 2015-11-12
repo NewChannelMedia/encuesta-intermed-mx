@@ -238,6 +238,15 @@ $(document).ready(function(){
         $.post('/encuesta-intermed/capturista/ponerNombre/',{id:id},function(datos){
           $.each(JSON.parse(datos), function(i, item){
             var btntxt = "btntxt" + id;
+            var iddireccion = 'direccionGuardada' + id;
+            $("#editDinamico #nombre" + iddireccion).html(item.nombre);
+            $("#editDinamico #calle" + iddireccion).html(calle);
+            $("#editDinamico #numero" + iddireccion).html(numero);
+            $("#editDinamico #municipio" + iddireccion).html(municipio);
+            $("#editDinamico #estado" + iddireccion).html(estado);
+            $("#editDinamico #localidad" + iddireccion).html(localidad);
+            $("#editDinamico #cp" + iddireccion).html(cp);
+
             $("#editDinamico .editar #"+btntxt).html(item.nombre);
             $('#editDinamico').find('.btnChk').removeClass('active');
             $('#editDinamico').find(':radio').prop('checked',false);
@@ -246,15 +255,7 @@ $(document).ready(function(){
         }).fail(function(e){
           alert("Error al cargar la actualizacion del nombre: Err->"+JSON.stringify(e));
         });
-        $("#nombreDireccion").val('');
-        $("#direccion").val('');
-        $("#estado").val('');
-        $("#municipio").val('');
-        $("#ciudad").val('');
-        $("#localidad").val('');
-        $("#superOculto").val('');
-        $("#numero").val('');
-        $("#cp").val('');
+        limpiaSection('#direccionDatos');
       });
     }else{
       //checa si este campo esta lleno, en caso que lo este manda a actualizar los campos
@@ -373,14 +374,16 @@ function traerID(dato){
   var colonia = $("#colonia"+dato).text();
   var localidad = $("#localidad"+dato).text();
   var id= $("#id"+dato).text();
+  $("#estado").val('');
   $("#superOculto").attr('value',id);
   $("#nombreDireccion").val(nombre);
   $("#direccion").val(calle);
   $("#numero").val(numero);
   $("#cp").val(cp);
   $("#estado").val(estado);
+  traerMunicipios();
   $("#municipio").val(municipio);
-  $("#ciudad").val(ciudad);
+  traerLocalidades();
   $("#localidad").val(localidad);
   /*$("#"+dato).removeClass('editar');
   $("#"+dato).addClass('borrar');*/
@@ -591,8 +594,12 @@ $('.input-group-btn .btnChk').click(function(){
 
 /* funcion que regresa el estado de los inputs en la seccion de agregar direcciones y telefonos */
 function limpiaSection(section){
-  console.log(section);
   $(section).find('input').not(':button, :submit, :reset').val('');
+  if (section == "#direccionDatos"){
+    $('#estado')[0].selectedIndex = 0;
+    traerMunicipios();
+    traerLocalidades();
+  }
   $(section).find('.btnChk').removeClass('active');
   $(section).find(':radio').prop('checked',false);
   $(section).find('.borrar').prop('disabled', true);
@@ -707,6 +714,11 @@ function obtenerNoSeleccionados(){
 
 
 function modificarMedico(id){
+  $('#estado')[0].selectedIndex = 0;
+  $('#tipoTelefono')[0].selectedIndex = 0;
+  traerMunicipios();
+  traerLocalidades();
+
   medicoSeleccionado_id = id;
   $('#ActualizarMedico').find('input').prop('value','');
   $('#ActualizarMedico').find('#registroMedico').find('input,button#agregarDatos').attr('disabled','disabled');
@@ -746,11 +758,11 @@ function modificarMedico(id){
           html += '<span class="hidden" id="calle'+BotonId+'">'+direccion.calle+'</span>';
           html += '<span class="hidden" id="numero'+BotonId+'">'+direccion.numero+'</span>';
           html += '<span class="hidden" id="cp'+BotonId+'">'+direccion.cp+'</span>';
-          html += '<span class="hidden" id="estado'+BotonId+'">'+direccion.estado+'</span>';
-          html += '<span class="hidden" id="municipio'+BotonId+'">'+direccion.municipio+'</span>';
+          html += '<span class="hidden" id="estado'+BotonId+'">'+direccion.estado_id+'</span>';
+          html += '<span class="hidden" id="municipio'+BotonId+'">'+direccion.municipio_id+'</span>';
           html += '<span class="hidden" id="ciudad'+BotonId+'">'+direccion.ciudad+'</span>';
           html += '<span class="hidden" id="colonia'+BotonId+'">'+direccion.colonia+'</span>';
-          html += '<span class="hidden" id="localidad'+BotonId+'">'+direccion.localidad+'</span>';
+          html += '<span class="hidden" id="localidad'+BotonId+'">'+direccion.localidad_id+'</span>';
       });
       $("#editDinamico").html(html);
 
@@ -934,3 +946,75 @@ function actualizarInformacionMedico(id){
       }
     });
 }
+
+$('#estado').change(function () {
+  traerMunicipios();
+});
+
+function traerMunicipios(){
+  var estado_id = $('#estado').prop('value');
+  $('#municipio').html('');
+  $('#localidad').html('');
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/municipios',
+    type: "POST",
+    dataType: 'JSON',
+    data: {'estado_id':estado_id},
+    async: false,
+    success: function (result) {
+      var municipios = '<option value="">Municipio/Ciudad</option>';
+      result.forEach(function(municipio){
+        municipios += '<option value="'+municipio.id+'">'+municipio.municipio+'</option>';
+      });
+      $('#municipio').html(municipios);
+    },
+    error: function (err){
+      console.log('ERR: ' + JSON.stringify(err));
+    }
+  });
+}
+
+$('#municipio').change(function () {
+  traerLocalidades();
+});
+
+function traerLocalidades(){
+  var estado_id = $('#estado').prop('value');
+  var municipio_id = $('#municipio').prop('value');
+  $('#localidades').html('');
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/localidades',
+    type: "POST",
+    dataType: 'JSON',
+    data: {'estado_id':estado_id,'municipio_id':municipio_id},
+    async: false,
+    success: function (result) {
+      var localidades = '<option value="">Localidad/Colonia</option>';
+      result.forEach(function(localidad){
+        localidades += '<option value="'+localidad.id+'">'+localidad.localidad+'</option>';
+      });
+      $('#localidad').html(localidades);
+    },
+    error: function (err){
+      console.log('ERR: ' + JSON.stringify(err));
+    }
+  });
+}
+
+$('#localidad').change(function () {
+  var localidad_id = this.value;
+  $('#localidades').html('');
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/localidad',
+    type: "POST",
+    dataType: 'JSON',
+    data: {'localidad_id':localidad_id},
+    async: true,
+    success: function (result) {
+      $('#cp').prop('value',result[0].CP);
+    },
+    error: function (err){
+      console.log('ERR: ' + JSON.stringify(err));
+    }
+  });
+});
