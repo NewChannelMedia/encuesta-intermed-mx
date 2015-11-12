@@ -1617,8 +1617,14 @@ ul.ui-autocomplete{
 .loader-container>.loader{
   text-align: center;
   vertical-align: middle;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
 }
 
 .loader-container>.loader>.spinner-loader{
   font-size: 40px;
+  color: red;
 }

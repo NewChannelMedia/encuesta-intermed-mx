@@ -68,10 +68,6 @@ function guardarMedico(){
   }
 }
 
-$('#registroTelefonos').click(function(){
-  $(this).parent().parent().parent().find('input:visible:first').focus();
-});
-
 function guardarTelefono(){
   var id = $('#medico_id').val();
   var clave = $('#ladaTelefono').val();
@@ -148,7 +144,8 @@ function guardarTelefono(){
     } else {
       bootbox.alert({
           message: "Falta llenar algún campo para el registro.",
-          title: "No se puede guardar el número de teléfono"
+          title: "No se puede guardar el número de teléfono",
+          callback: function() {setTimeout(function(){$('#ladaTelefono').focus();},300); }
       });
     }
   }
@@ -461,10 +458,10 @@ function generarMuestraMedicos(){
             $('#muestraMed').append('<tr class="muestra" id="'+ val.muestra_id+'"><td>'+nombre+'</td><td class="text-center">'+telefonos+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+confirmCorreo+'</td><td class="autorizo text-center">'+autorizo+'</td><td class="autorizo text-center">'+noautorizo+'</td><td class="text-center">'+guardar+'</td></tr>');
             $('#muestraMed').find('tr').first().addClass('active');
             $('#muestraMed .active').find(':input').filter(':visible:first').focus();
-            $('.loader-container').addClass('hidden');
           }
         });
       }
+      $('.loader-container').addClass('hidden');
     },
     error: function (err) {
       console.log( "Error: AJax dead :" + JSON.stringify(err) );
@@ -653,10 +650,10 @@ function obtenerSeleccionados(){
             var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
 
             $('#seleccionadosList').append('<tr class="muestra" id="'+ val.medico.id+'"><td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td></tr>');
-            $('.loader-container').addClass('hidden');
           }
         });
       }
+      $('.loader-container').addClass('hidden');
     },
     error: function (err) {
       console.log( "Error: AJax dead :" + JSON.stringify(err) );
@@ -706,9 +703,9 @@ function obtenerNoSeleccionados(){
             var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
 
             $('#noSeleccionadosList').append('<tr class="muestra" id="'+ val.medico.id+'"><td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td></tr>');
-            $('.loader-container').addClass('hidden');
         });
       }
+      $('.loader-container').addClass('hidden');
     },
     error: function (err) {
       console.log( "Error: AJax dead :" + JSON.stringify(err) );
