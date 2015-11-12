@@ -91,6 +91,17 @@
               </li>
             </ul>
           </li>
+          <li>
+            <a><span class="glyphicon glyphicon-headphones nav-icon"></span> Capturista</a>
+            <ul class="nav-pills nav-stacked secondLevel-ul">
+              <li>
+                <a href="<?= base_url() ?>admin/anadirCapturista">Añadir</a>
+              </li>
+              <li>
+                <a href="<?= base_url() ?>admin/statusCapturista">Status</a>
+              </li>
+            </ul>
+          </li>
         <?php } elseif(isset($_SESSION['rol']) && $_SESSION['rol'] == 'capturista'){ ?>
           <li>
             <a href="<?= base_url() ?>admin/directorio"><span class="glyphicon glyphicon-user nav-icon"></span> Directorio</a>

@@ -1634,3 +1634,31 @@ ul.ui-autocomplete{
   font-size: 40px;
   color: red;
 }
+
+.capturistaSection{
+  margin-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+
+}
+
+.statusProfileIcon{
+  height: 100px;
+  width: 100px;
+  display: table;
+  text-align: center;
+  background-color: #f3f3f3;
+}
+.statusProfileIcon .icon {
+  display: table-cell;
+  vertical-align: middle;
+  margin: 0 auto;
+  font-size: 40px;
+}
+
+.capturistaSection .tab-content .panel .panel-body {
+  padding: 15px;
+}
+.capturistaSection .row {
+  margin-bottom: 15px;
+}
