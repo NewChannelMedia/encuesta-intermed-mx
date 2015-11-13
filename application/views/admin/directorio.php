@@ -65,9 +65,6 @@
                 <input type="text" class="form-control" id="numero" placeholder="Numero">
               </div>
               <div class="form-group col-md-4 col-sm-4">
-                <input type="text" class="form-control" id="cp" placeholder="Codigo Postal">
-              </div>
-              <div class="form-group col-md-4 col-sm-4">
                 <select class="form-control" id="estado" placeholder="Estado">
                   <option value="">Estado</option>
                 <?php
@@ -85,6 +82,9 @@
               </div>
               <div class="form-group col-md-4 col-sm-4">
                 <input class="form-control" type="text" id="otralocalidad" placeholder="Otra localidad / colonia">
+              </div>
+              <div class="form-group col-md-4 col-sm-4">
+                <input type="text" class="form-control" id="cp" placeholder="Codigo Postal">
               </div>
             </div>
           </div>
@@ -109,13 +109,10 @@
         <div class="row">
           <div class="col-md-8 col-sm-8">
             <div class="row">
-              <div class="form-group col-md-3 col-sm-3">
-                <input type="text" id="ladaTelefono" class="form-control solo-numero" placeholder="Lada:" maxlength="5" onpaste="soloNumeros()"/>
-              </div>
-              <div class="form-group col-md-4 col-sm-4">
+              <div class="form-group col-md-6 col-sm-6">
                 <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="8" onpaste="soloNumeros()"/>
               </div>
-              <div class="form-group col-md-5 col-sm-5">
+              <div class="form-group col-md-6 col-sm-6">
                 <select class="form-control" id="tipoTelefono">
                   <option value="casa">Casa</option>
                   <option value="celular">Celular</option>
