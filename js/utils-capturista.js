@@ -962,6 +962,8 @@ function LimpiarFormularios(){
   $('#registroMedico').removeClass('panel-success');
 
   limpiaSection('#registroDireccion');
+  limpiaSection('#editDinamico');
+  limpiaSection('#fonAgregado');
   limpiaSection('#registroTelefonos');
   limpiaSection('#registroMedico');
 }
