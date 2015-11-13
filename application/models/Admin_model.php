@@ -26,6 +26,7 @@
             $row = $query->row_array();
             if(count($row) > 0){
               $data = array(
+                'id' => $row['id'],
                 'usuario' => $row['usuario'],
                 'rol' => $row['rol']
               );

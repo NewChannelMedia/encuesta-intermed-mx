@@ -50,6 +50,7 @@
           }
           $data['especialidad_id'] = $id;
         }
+        $data['usuario_capt_id'] = intval($_SESSION['id']);
 
         $id = $this->Capmedicos_model->create_medico($data);
         echo json_encode(array('success'=>true,'medico_id'=>$id));
@@ -286,6 +287,7 @@
           $arreglo[ $i ]['estado'] = $row->estado;
           $arreglo[ $i ]['municipio'] = $row->municipio;
           $arreglo[ $i ]['localidad'] = $row->localidad;
+          $arreglo[ $i ]['otralocalidad'] = $row->otralocalidad;
           $arreglo[ $i ]['ciudad'] = $row->ciudad;
           $arreglo[ $i ]['cp'] = $row->cp;
           $arreglo[ $i ]['calle'] = $row->calle;
