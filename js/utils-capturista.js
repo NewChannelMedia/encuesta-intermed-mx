@@ -640,25 +640,41 @@ function obtenerSeleccionados(){
             if (val.especialidad && val.especialidad.especialidad)
               especialidad = val.especialidad.especialidad;
 
+
             var direcciones = '';
             val.direcciones.forEach(function(direccion){
+              var dir = '';
+              if (direccion.calle != ""){
+                dir = direccion.calle;
+              }
+              if (direccion.numero != ""){
+                if (dir != "") dir += " ";
+                dir += direccion.numero;
+              }
+
               if (direcciones != "")
                 direcciones+='<br/>';
               var localidad = '';
               if (direccion.localidad && direccion.localidad != ""){
-                localidad = direccion.localidad ;
+                if (dir != "") localidad += ", ";
+                localidad += direccion.localidad ;
               } else if (direccion.otralocalidad && direccion.otralocalidad != "") {
-                localidad = direccion.otralocalidad;
+                if (dir != "") localidad += ", ";
+                localidad += direccion.otralocalidad;
               }
               var municipio = '';
               if (direccion.municipio){
-                municipio = direccion.municipio;
+                municipio = direccion.municipio + ', ';
               }
               var estado = '';
               if (direccion.estado){
                 estado = direccion.estado;
               }
-              direcciones += '<strong>' + direccion.nombre + '</strong><br/>' + direccion.calle + ' ' + direccion.numero + ', '+ localidad + '<br/>' + direccion.cp + ', '+ municipio + ', '+ estado +'<br/>';
+              var cp = '';
+              if (direccion.cp != ""){
+                cp = direccion.cp + ', ';
+              }
+              direcciones += '<strong>' + direccion.nombre + '</strong><br/>'+ dir + localidad + '<br/>' + cp + municipio + estado +'<br/>';
             });
 
             var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
@@ -713,13 +729,24 @@ function obtenerNoSeleccionados(){
 
             var direcciones = '';
             val.direcciones.forEach(function(direccion){
+              var dir = '';
+              if (direccion.calle != ""){
+                dir = direccion.calle;
+              }
+              if (direccion.numero != ""){
+                if (dir != "") dir += " ";
+                dir += direccion.numero;
+              }
+
               if (direcciones != "")
                 direcciones+='<br/>';
               var localidad = '';
               if (direccion.localidad && direccion.localidad != ""){
-                localidad = direccion.localidad ;
+                if (dir != "") localidad += ", ";
+                localidad += direccion.localidad ;
               } else if (direccion.otralocalidad && direccion.otralocalidad != "") {
-                localidad = direccion.otralocalidad;
+                if (dir != "") localidad += ", ";
+                localidad += direccion.otralocalidad;
               }
               var municipio = '';
               if (direccion.municipio){
@@ -733,7 +760,7 @@ function obtenerNoSeleccionados(){
               if (direccion.cp != ""){
                 cp = direccion.cp + ', ';
               }
-              direcciones += '<strong>' + direccion.nombre + '</strong><br/>' + direccion.calle + ' ' + direccion.numero + ', '+ localidad + '<br/>' + cp + municipio + estado +'<br/>';
+              direcciones += '<strong>' + direccion.nombre + '</strong><br/>'+ dir + localidad + '<br/>' + cp + municipio + estado +'<br/>';
             });
 
             var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
@@ -968,30 +995,41 @@ function actualizarInformacionMedico(id){
         if (val.especialidad && val.especialidad.especialidad)
           especialidad = val.especialidad.especialidad;
 
-        var direcciones = '';
-        val.direcciones.forEach(function(direccion){
-          if (direcciones != "")
-            direcciones+='<br/>';
-          var localidad = '';
-          if (direccion.localidad && direccion.localidad != ""){
-            localidad = direccion.localidad ;
-          } else if (direccion.otralocalidad && direccion.otralocalidad != "") {
-            localidad = direccion.otralocalidad;
-          }
-          var municipio = '';
-          if (direccion.municipio){
-            municipio = direccion.municipio + ', ';
-          }
-          var estado = '';
-          if (direccion.estado){
-            estado = direccion.estado;
-          }
-          var cp = '';
-          if (direccion.cp != ""){
-            cp = direccion.cp + ', ';
-          }
-          direcciones += '<strong>' + direccion.nombre + '</strong><br/>' + direccion.calle + ' ' + direccion.numero + ', '+ localidad + '<br/>' + cp + municipio + estado +'<br/>';
-        });
+          var direcciones = '';
+          val.direcciones.forEach(function(direccion){
+            var dir = '';
+            if (direccion.calle != ""){
+              dir = direccion.calle;
+            }
+            if (direccion.numero != ""){
+              if (dir != "") dir += " ";
+              dir += direccion.numero;
+            }
+
+            if (direcciones != "")
+              direcciones+='<br/>';
+            var localidad = '';
+            if (direccion.localidad && direccion.localidad != ""){
+              if (dir != "") localidad += ", ";
+              localidad += direccion.localidad ;
+            } else if (direccion.otralocalidad && direccion.otralocalidad != "") {
+              if (dir != "") localidad += ", ";
+              localidad += direccion.otralocalidad;
+            }
+            var municipio = '';
+            if (direccion.municipio){
+              municipio = direccion.municipio + ', ';
+            }
+            var estado = '';
+            if (direccion.estado){
+              estado = direccion.estado;
+            }
+            var cp = '';
+            if (direccion.cp != ""){
+              cp = direccion.cp + ', ';
+            }
+            direcciones += '<strong>' + direccion.nombre + '</strong><br/>'+ dir + localidad + '<br/>' + cp + municipio + estado +'<br/>';
+          });
 
         var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
 
