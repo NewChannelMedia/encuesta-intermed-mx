@@ -37,5 +37,35 @@
       }
       return $usuario;
     }
+
+    public function RegistrosHoy($id){
+      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "total" FROM medicos where medicos.usuario_capt_id = "'. $id .'" AND DATE(fecha) = DATE(NOW());');
+      $result = $this->db_capturista->get()->row_array();
+      $to_time = strtotime($result['MAX']);
+      $from_time = strtotime($result['MIN']);
+
+      $result['minutos'] = intval(round(abs($to_time - $from_time) / 60,2));
+      return $result;
+    }
+
+    public function Registros($id){
+      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "TOTAL" FROM medicos where medicos.usuario_capt_id = "'. $id .'" GROUP BY(DATE(fecha));');
+      $result = array();
+      $totalRegistros = 0;
+      $minutos = 0;
+      $Query = $this->db_capturista->get()->result_array();
+      $result = array();
+      for ($i = 0; $i < count($Query); $i++) {
+        $totalRegistros += intval($Query[$i]['TOTAL']);
+        $to_time = strtotime($Query[$i]['MAX']);
+        $from_time = strtotime($Query[$i]['MIN']);
+
+        $Query[$i]['minutos'] = intval(round(abs($to_time - $from_time) / 60,2));
+        $minutos += intval(round(abs($to_time - $from_time) / 60,2));
+      };
+      $result['total'] = $totalRegistros;
+      $result['minutos'] = $minutos;
+      return $result;
+    }
   }
 ?>

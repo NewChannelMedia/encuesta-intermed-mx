@@ -53,33 +53,83 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
             </div>
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">status</h3>
-                  </div>
-                  <div class="panel-body">
-                    <div class="media">
-                      <div class="media-body">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <p>
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#hoy<?php echo $capts; ?>" aria-controls="hoy<?php echo $capts; ?>" role="tab" data-toggle="tab">Hoy</a></li>
+                    <li role="presentation"><a href="#total<?php echo $capts; ?>" aria-controls="total<?php echo $capts; ?>" role="tab" data-toggle="tab">Totales</a></li>
+                  </ul>
 
-                            </p>
-                          </div>
-                          <div class="col-md-6">
-                            <p>
-                              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                          </div>
-                        </div>
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="hoy<?php echo $capts; ?>">
+                      <br/>
+                      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                        <table class="table">
+                        <thead>
+                          <tr>
+                            <th style="width:80%">Cualidad</th>
+                            <th class="text-center">Resultado</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Total de registros</td>
+                            <td class="text-center"><?php echo $dat['RegistrosHoy']['total']; ?></td>
+                          </tr>
+                          <tr>
+                            <td>Registros por hora</td>
+                            <td class="text-center"><?php if ($dat['RegistrosHoy']['total'] > 0) {echo round(intval($dat['RegistrosHoy']['total'])/(intval($dat['RegistrosHoy']['minutos'])/60),1); } else echo "0"; ?></td>
+                          </tr>
+                          <tr>
+                            <td>Tiempo promedio por registro</td>
+                            <td class="text-center"><?php if ($dat['RegistrosHoy']['total'] > 0) { echo round(intval($dat['RegistrosHoy']['minutos'])/intval($dat['RegistrosHoy']['total']),1); } else echo "0"; ?> min</td>
+                          </tr>
+                          <tr>
+                            <td>Efectividad</td>
+                            <td class="text-center"><?php if ($dat['RegistrosHoy']['total'] > 0 && $dat['Registros']['total'] > 0) { echo round(((intval($dat['Registros']['minutos'])/intval($dat['Registros']['total']))/(intval($dat['RegistrosHoy']['minutos'])/intval($dat['RegistrosHoy']['total'])))*100,2); } else echo "0"; ?> %</td>
+                          </tr>
+                        </tbody>
+                      </table>
                       </div>
-                      <div class="media-right text-center">
-                        <h1>100%</h1>
-                        <small class="s15">efectividad</small>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+                        TOTALES<br/><span style="font-size:500%">
+                        <?php echo $dat['RegistrosHoy']['total']; ?>
+                      </span>
+                      </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="total<?php echo $capts; ?>">
+                      <br/>
+                      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                        <table class="table">
+                        <thead>
+                          <tr>
+                            <th style="width:80%">Cualidad</th>
+                            <th class="text-center">Resultado</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Total de registros</td>
+                            <td class="text-center"><?php echo $dat['Registros']['total']; ?></td>
+                          </tr>
+                          <tr>
+                            <td>Registros por hora</td>
+                            <td class="text-center"><?php if ($dat['Registros']['total'] > 0) { echo round(intval($dat['Registros']['total'])/(intval($dat['Registros']['minutos'])/60),1); } else echo "0";?></td>
+                          </tr>
+                          <tr>
+                            <td>Tiempo promedio por registro</td>
+                            <td class="text-center"><?php if ($dat['Registros']['total'] > 0) { echo round(intval($dat['Registros']['minutos'])/intval($dat['Registros']['total']),1); } else echo "0";?> min</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+                        TOTALES<br/><span style="font-size:500%">
+                        <?php echo $dat['Registros']['total']; ?>
+                        </span>
                       </div>
                     </div>
                   </div>
-                </div>
               </div>
             </div>
           </div>

@@ -48,6 +48,7 @@
               $_SESSION['status'] = true;
               $_SESSION['usuario'] = $session['usuario'];
               $_SESSION['rol'] = $session['rol'];
+              $_SESSION['id'] = $session['id'];
             } else {
               session_destroy();
             }
@@ -832,7 +833,9 @@
             $arr[ $i ]['nombre'] = $row->nombre;
             $arr[ $i ]['apellido'] = $row->apellido;
             $arr[ $i ]['correo'] = $row->correo;
-            $arr[ $i ][ 'usuario' ] = $this->Capcapturista_model->usuarioInfo($row->id_master);
+            $arr[ $i ]['usuario'] = $this->Capcapturista_model->usuarioInfo($row->id_master);
+            $arr[ $i ]['RegistrosHoy'] = $this->Capcapturista_model->RegistrosHoy($row->id_master);
+            $arr[ $i ]['Registros'] = $this->Capcapturista_model->Registros($row->id_master);
             $i++;
            }
           $data['capturistas'] = $arr;
