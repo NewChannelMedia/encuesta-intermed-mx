@@ -84,6 +84,8 @@
         $id_medico = $this->input->post('id_medico');
         $cp = $this->input->post('cp');
         $numero = $this->input->post('numero');
+        $otralocalidad = $this->input->post('otralocalidad');
+        echo 'otralocalidad: ' . $otralocalidad;
         $data = array(
           'nombre'=>$consultorio,
           'estado'=>$estado,
@@ -93,7 +95,8 @@
           'cp'=>$cp,
           'calle'=>$calle,
           'numero'=>$numero,
-          'medico_id'=>$id_medico
+          'medico_id'=>$id_medico,
+          'otralocalidad'=>$otralocalidad
         );
         return $this->Capdirecciones_model->insertDireccion($data);
       }
@@ -301,6 +304,7 @@
         $id_medico = $this->input->post('id_medico');
         $cp = $this->input->post('cp');
         $numero = $this->input->post('numero');
+        $otralocalidad = $this->input->post('otralocalidad');
         $data = array(
           'nombre'=>$consultorio,
           'estado'=>$estado,
@@ -310,7 +314,8 @@
           'cp'=>$cp,
           'calle'=>$calle,
           'numero'=>$numero,
-          'medico_id'=>$id_medico
+          'medico_id'=>$id_medico,
+          'otralocalidad'=>$otralocalidad
         );
         $this->Capdirecciones_model->actualizaDireccion($id,$data);
       }
