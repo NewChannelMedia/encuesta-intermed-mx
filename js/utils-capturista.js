@@ -218,6 +218,7 @@ $(document).ready(function(){
     var municipio = $("#municipio").val();
     var ciudad = $("#ciudad").val();
     var localidad = $("#localidad").val();
+    var otralocalidad = $('#otralocalidad').val();
     var id_medico = $("#medico_id").val();
     var cp = $("#cp").val();
     var numero = $("#numero").val();
@@ -233,7 +234,8 @@ $(document).ready(function(){
         ciudad: ciudad,
         localidad: localidad,
         numero: numero,
-        id_medico: id_medico
+        id_medico: id_medico,
+        otralocalidad: otralocalidad
       },function(){
         $.post('/encuesta-intermed/capturista/ponerNombre/',{id:id},function(datos){
           $.each(JSON.parse(datos), function(i, item){
@@ -245,6 +247,7 @@ $(document).ready(function(){
             $("#editDinamico #municipio" + iddireccion).html(municipio);
             $("#editDinamico #estado" + iddireccion).html(estado);
             $("#editDinamico #localidad" + iddireccion).html(localidad);
+            $("#editDinamico #otralocalidad" + iddireccion).html(otralocalidad);
             $("#editDinamico #cp" + iddireccion).html(cp);
 
             $("#editDinamico .editar #"+btntxt).html(item.nombre);
@@ -258,91 +261,79 @@ $(document).ready(function(){
         limpiaSection('#direccionDatos');
       });
     }else{
-      //checa si este campo esta lleno, en caso que lo este manda a actualizar los campos
-      // caso contrario los inserta
-      if( $("#superOculto").val() != "" ){
-        $("/encuesta-intermed/capturista/actualizaDireccion/",{
-          consultorio:nombreConsultorio,
-          calle: calle,
-          cp: cp,
-          estado: estado,
-          municipio: municipio,
-          ciudad: ciudad,
-          localidad: localidad,
-          numero: numero,
-          id_medico: id_medico
-        },function(){});
-      }else{
-        if( id_medico != "" ){
-            $.post('/encuesta-intermed/capturista/insertDireccion/',{
-              consultorio:nombreConsultorio,
-              calle: calle,
-              cp: cp,
-              estado: estado,
-              municipio: municipio,
-              ciudad: ciudad,
-              localidad: localidad,
-              numero: numero,
-              id_medico: id_medico
-            },function(datas){
-                $("#superOculto").text();
-                $("#nombreDireccion").val('');
-                $("#direccion").val('');
-                $("#estado").val('');
-                $("#municipio").val('');
-                $("#ciudad").val('');
-                $("#localidad").val('');
-                $('#cp').val('');
-                $('#numero').val('');
-            }).done(function(){
-              /**
-              * en la siguiente funcion cuando se presione el boton se hara una consulta a la db
-              * donde me retornara el nombre del consultorio, y al presionarlo se llenaran los input para poderlos editar
-              *
-              *
-              */
-              $.post('/encuesta-intermed/capturista/editarDirecciones',{
-                medico_id: id_medico
-              },function(d){
-                var html="";
-                $.each(JSON.parse(d), function(i, item){
-                  LiBoton = "at"+item.id;
-                  BotonId = "direccionGuardada"+item.id;
-                  html += '<div id="'+LiBoton+'" class="input-group-btn">';
-                  html += '<label id="'+BotonId+'" onclick="traerID(\''+BotonId+'\');" class="btn btn-sm editar btnChk">';
-                  html += '<input type="radio" name="editDirecciones" id="option1" autocomplete="off" class=""><span id="btntxt'+item.id+'" class="itemName">'+item.nombre+'</span>';
-                  html += '</label>';
-                  html += '<button class="btn btn-sm borrar" disabled="disabled" onclick="eliminarDireccion(\''+item.id+'\');"><span class="glyphicon glyphicon-remove"></span></button>';
-                  html += '</div>';
+      if( id_medico != "" ){
+          $.post('/encuesta-intermed/capturista/insertDireccion/',{
+            consultorio:nombreConsultorio,
+            calle: calle,
+            cp: cp,
+            estado: estado,
+            municipio: municipio,
+            ciudad: ciudad,
+            localidad: localidad,
+            numero: numero,
+            id_medico: id_medico,
+            otralocalidad: otralocalidad
+          },function(datas){
+              $("#superOculto").text();
+              $("#nombreDireccion").val('');
+              $("#direccion").val('');
+              $("#estado").val('');
+              $("#municipio").val('');
+              $("#ciudad").val('');
+              $("#localidad").val('');
+              $('#cp').val('');
+              $('#numero').val('');
+          }).done(function(){
+            /**
+            * en la siguiente funcion cuando se presione el boton se hara una consulta a la db
+            * donde me retornara el nombre del consultorio, y al presionarlo se llenaran los input para poderlos editar
+            *
+            *
+            */
+            $.post('/encuesta-intermed/capturista/editarDirecciones',{
+              medico_id: id_medico
+            },function(d){
+              var html="";
+              $.each(JSON.parse(d), function(i, item){
+                LiBoton = "at"+item.id;
+                BotonId = "direccionGuardada"+item.id;
+                html += '<div id="'+LiBoton+'" class="input-group-btn">';
+                html += '<label id="'+BotonId+'" onclick="traerID(\''+BotonId+'\');" class="btn btn-sm editar btnChk">';
+                html += '<input type="radio" name="editDirecciones" id="option1" autocomplete="off" class=""><span id="btntxt'+item.id+'" class="itemName">'+item.nombre+'</span>';
+                html += '</label>';
+                html += '<button class="btn btn-sm borrar" disabled="disabled" onclick="eliminarDireccion(\''+item.id+'\');"><span class="glyphicon glyphicon-remove"></span></button>';
+                html += '</div>';
 
-                  html += '<span class="hidden" id="id'+BotonId+'">'+item.id+'</span>';
-                  html += '<span class="hidden" id="nombre'+BotonId+'">'+item.nombre+'</span>';
-                  html += '<span class="hidden" id="calle'+BotonId+'">'+item.calle+'</span>';
-                  html += '<span class="hidden" id="numero'+BotonId+'">'+item.numero+'</span>';
-                  html += '<span class="hidden" id="cp'+BotonId+'">'+item.cp+'</span>';
-                  html += '<span class="hidden" id="estado'+BotonId+'">'+item.estado+'</span>';
-                  html += '<span class="hidden" id="municipio'+BotonId+'">'+item.municipio+'</span>';
-                  html += '<span class="hidden" id="ciudad'+BotonId+'">'+item.ciudad+'</span>';
-                  html += '<span class="hidden" id="colonia'+BotonId+'">'+item.colonia+'</span>';
-                  html += '<span class="hidden" id="localidad'+BotonId+'">'+item.localidad+'</span>';
+                html += '<span class="hidden" id="id'+BotonId+'">'+item.id+'</span>';
+                html += '<span class="hidden" id="nombre'+BotonId+'">'+item.nombre+'</span>';
+                html += '<span class="hidden" id="calle'+BotonId+'">'+item.calle+'</span>';
+                html += '<span class="hidden" id="numero'+BotonId+'">'+item.numero+'</span>';
+                html += '<span class="hidden" id="cp'+BotonId+'">'+item.cp+'</span>';
+                html += '<span class="hidden" id="estado'+BotonId+'">'+item.estado+'</span>';
+                html += '<span class="hidden" id="municipio'+BotonId+'">'+item.municipio+'</span>';
+                html += '<span class="hidden" id="ciudad'+BotonId+'">'+item.ciudad+'</span>';
+                html += '<span class="hidden" id="colonia'+BotonId+'">'+item.colonia+'</span>';
+                html += '<span class="hidden" id="localidad'+BotonId+'">'+item.localidad+'</span>';
+                var otralocalidad = '';
+                if (item.otralocalidad) otralocalidad = item.otralocalidad;
+                html += '<span class="hidden" id="otralocalidad'+BotonId+'">'+otralocalidad+'</span>';
 
-                  //html += '<input type="button" onclick="eliminarDireccion(\''+item.id+'\');" value="eliminar">';
+                //html += '<input type="button" onclick="eliminarDireccion(\''+item.id+'\');" value="eliminar">';
 
 
-                });
-                $("#editDinamico").append(html);
-                limpiaSection('#direccionDatos');
               });
-            }).fail(function(e){
-              alert("Error al insertar: "+JSON.stringify(e));
+              $("#editDinamico").append(html);
+              limpiaSection('#direccionDatos');
             });
-        }else{
-          bootbox.alert({
-              message: "Es necesario registrar un médico antes de agregar alguna dirección.",
-              title: "No se puede guardar la dirección",
-              callback: function() {setTimeout(function(){$('#nombre').focus();},300); }
+          }).fail(function(e){
+            alert("Error al insertar: "+JSON.stringify(e));
           });
-        }
+      }else{
+        bootbox.alert({
+            message: "Es necesario registrar un médico antes de agregar alguna dirección.",
+            title: "No se puede guardar la dirección",
+            callback: function() {setTimeout(function(){$('#nombre').focus();},300); }
+        });
       }
     }
   });
@@ -374,6 +365,7 @@ function traerID(dato){
   var colonia = $("#colonia"+dato).text();
   var localidad = $("#localidad"+dato).text();
   var id= $("#id"+dato).text();
+  var otralocalidad= $("#otralocalidad"+dato).text();
   $("#estado").val('');
   $("#superOculto").attr('value',id);
   $("#nombreDireccion").val(nombre);
@@ -385,6 +377,7 @@ function traerID(dato){
   $("#municipio").val(municipio);
   traerLocalidades();
   $("#localidad").val(localidad);
+  $("#otralocalidad").val(otralocalidad);
   /*$("#"+dato).removeClass('editar');
   $("#"+dato).addClass('borrar');*/
   $('#'+dato).parent().parent().find('.borrar').prop('disabled', true);
@@ -432,7 +425,7 @@ function generarMuestraMedicos(){
             var nombre = val.medico.nombre + ' ' + val.medico.apellidop;
             if (val.medico.apellidom){
               nombre +=  ' ' + val.medico.apellidom;
-            }
+          modificarMedico  }
             var correo = '';
             if (val.medico.correo){
               correo = val.medico.correo;
@@ -647,11 +640,41 @@ function obtenerSeleccionados(){
             if (val.especialidad && val.especialidad.especialidad)
               especialidad = val.especialidad.especialidad;
 
+
             var direcciones = '';
             val.direcciones.forEach(function(direccion){
+              var dir = '';
+              if (direccion.calle != ""){
+                dir = direccion.calle;
+              }
+              if (direccion.numero != ""){
+                if (dir != "") dir += " ";
+                dir += direccion.numero;
+              }
+
               if (direcciones != "")
                 direcciones+='<br/>';
-              direcciones += '<strong>' + direccion.nombre + '</strong><br/>' + direccion.calle + ' ' + direccion.numero + ', '+ direccion.localidad + '<br/>' + direccion.cp + ', '+ direccion.municipio+ ', '+ direccion.estado +'<br/>';
+              var localidad = '';
+              if (direccion.localidad && direccion.localidad != ""){
+                if (dir != "") localidad += ", ";
+                localidad += direccion.localidad ;
+              } else if (direccion.otralocalidad && direccion.otralocalidad != "") {
+                if (dir != "") localidad += ", ";
+                localidad += direccion.otralocalidad;
+              }
+              var municipio = '';
+              if (direccion.municipio){
+                municipio = direccion.municipio + ', ';
+              }
+              var estado = '';
+              if (direccion.estado){
+                estado = direccion.estado;
+              }
+              var cp = '';
+              if (direccion.cp != ""){
+                cp = direccion.cp + ', ';
+              }
+              direcciones += '<strong>' + direccion.nombre + '</strong><br/>'+ dir + localidad + '<br/>' + cp + municipio + estado +'<br/>';
             });
 
             var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
@@ -706,9 +729,38 @@ function obtenerNoSeleccionados(){
 
             var direcciones = '';
             val.direcciones.forEach(function(direccion){
+              var dir = '';
+              if (direccion.calle != ""){
+                dir = direccion.calle;
+              }
+              if (direccion.numero != ""){
+                if (dir != "") dir += " ";
+                dir += direccion.numero;
+              }
+
               if (direcciones != "")
                 direcciones+='<br/>';
-              direcciones += '<strong>' + direccion.nombre + '</strong><br/>' + direccion.calle + ' ' + direccion.numero + ', '+ direccion.localidad + '<br/>' + direccion.cp + ', '+ direccion.municipio+ ', '+ direccion.estado +'<br/>';
+              var localidad = '';
+              if (direccion.localidad && direccion.localidad != ""){
+                if (dir != "") localidad += ", ";
+                localidad += direccion.localidad ;
+              } else if (direccion.otralocalidad && direccion.otralocalidad != "") {
+                if (dir != "") localidad += ", ";
+                localidad += direccion.otralocalidad;
+              }
+              var municipio = '';
+              if (direccion.municipio){
+                municipio = direccion.municipio + ', ';
+              }
+              var estado = '';
+              if (direccion.estado){
+                estado = direccion.estado;
+              }
+              var cp = '';
+              if (direccion.cp != ""){
+                cp = direccion.cp + ', ';
+              }
+              direcciones += '<strong>' + direccion.nombre + '</strong><br/>'+ dir + localidad + '<br/>' + cp + municipio + estado +'<br/>';
             });
 
             var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
@@ -775,6 +827,7 @@ function modificarMedico(id){
           html += '<span class="hidden" id="ciudad'+BotonId+'">'+direccion.ciudad+'</span>';
           html += '<span class="hidden" id="colonia'+BotonId+'">'+direccion.colonia+'</span>';
           html += '<span class="hidden" id="localidad'+BotonId+'">'+direccion.localidad_id+'</span>';
+          html += '<span class="hidden" id="otralocalidad'+BotonId+'">'+direccion.otralocalidad+'</span>';
       });
       $("#editDinamico").html(html);
 
@@ -942,12 +995,41 @@ function actualizarInformacionMedico(id){
         if (val.especialidad && val.especialidad.especialidad)
           especialidad = val.especialidad.especialidad;
 
-        var direcciones = '';
-        val.direcciones.forEach(function(direccion){
-          if (direcciones != "")
-            direcciones+='<br/>';
-          direcciones += '<strong>' + direccion.nombre + '</strong><br/>' + direccion.calle + ' ' + direccion.numero + ', '+ direccion.localidad + '<br/>' + direccion.cp + ', '+ direccion.municipio+ ', '+ direccion.estado +'<br/>';
-        });
+          var direcciones = '';
+          val.direcciones.forEach(function(direccion){
+            var dir = '';
+            if (direccion.calle != ""){
+              dir = direccion.calle;
+            }
+            if (direccion.numero != ""){
+              if (dir != "") dir += " ";
+              dir += direccion.numero;
+            }
+
+            if (direcciones != "")
+              direcciones+='<br/>';
+            var localidad = '';
+            if (direccion.localidad && direccion.localidad != ""){
+              if (dir != "") localidad += ", ";
+              localidad += direccion.localidad ;
+            } else if (direccion.otralocalidad && direccion.otralocalidad != "") {
+              if (dir != "") localidad += ", ";
+              localidad += direccion.otralocalidad;
+            }
+            var municipio = '';
+            if (direccion.municipio){
+              municipio = direccion.municipio + ', ';
+            }
+            var estado = '';
+            if (direccion.estado){
+              estado = direccion.estado;
+            }
+            var cp = '';
+            if (direccion.cp != ""){
+              cp = direccion.cp + ', ';
+            }
+            direcciones += '<strong>' + direccion.nombre + '</strong><br/>'+ dir + localidad + '<br/>' + cp + municipio + estado +'<br/>';
+          });
 
         var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
 
