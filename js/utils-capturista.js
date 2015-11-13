@@ -87,7 +87,7 @@ function guardarTelefono(){
         $.each(JSON.parse(numero), function( i, item){
           var btntxt = "btntxt" + telefono_id;
           //$("#fonAgregado ul.list-inline li input.editar").html(item.numero);
-          $("#fonAgregado .editar #"+btntxt).html('('+item.claveRegion +') ' + item.numero);
+          $("#fonAgregado .editar #"+btntxt).html(item.numero);
           $('#fonAgregado').find('.btnChk').removeClass('active');
           $('#fonAgregado').find(':radio').prop('checked',false);
           $('#fonAgregado').find('.borrar').prop('disabled', true);
@@ -118,7 +118,7 @@ function guardarTelefono(){
                 idBoton = "fon"+item.id;
                 html2 += '<div id="atel'+item.id+'" class="input-group-btn">';
                 html2 += '<label id="'+idBoton+'" onclick="fonAdd(\''+idBoton+'\');" class="btn btn-sm editar btnChk">';
-                html2 += '<input type="radio" name="editDirecciones" id="option1" autocomplete="off" class=""><span id="btntxt'+item.id+'" class="itemName">('+item.claveRegion+') '+item.numero+'</span>';
+                html2 += '<input type="radio" name="editDirecciones" id="option1" autocomplete="off" class=""><span id="btntxt'+item.id+'" class="itemName"> '+item.numero+'</span>';
                 html2 += '</label>';
                 html2 += '<button class="btn btn-sm borrar" disabled="disabled" onclick="eliminarTelefono(\''+item.id+'\');"><span class="glyphicon glyphicon-remove"></span></button>';
                 html2 += '<span class="hidden" id="id'+idBoton+'">'+item.id+'</span>';
@@ -437,7 +437,7 @@ function generarMuestraMedicos(){
               if (telefono.tipo == "celular"){
                 icon = '<span class="glyphicon glyphicon-phone" style="font-size:80%"></span>'
               }
-              telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center">'+ icon +' (' + telefono.claveRegion + ') ' + telefono.numero +'</td><td class="text-center"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></td></tr>';
+              telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center">'+ icon +' ' + telefono.numero +'</td><td class="text-center"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></td></tr>';
               checked = '';
             });
             telefonos+='</table>'
@@ -633,7 +633,7 @@ function obtenerSeleccionados(){
               if (telefono.tipo == "celular"){
                 icon = '<span class="glyphicon glyphicon-phone" style="font-size:90%"></span>'
               }
-              telefonos += icon + ' (' + telefono.claveRegion + ') ' + telefono.numero;
+              telefonos += icon + ' ' + telefono.numero;
             });
 
             var especialidad ='';
@@ -720,7 +720,7 @@ function obtenerNoSeleccionados(){
               if (telefono.tipo == "celular"){
                 icon = '<span class="glyphicon glyphicon-phone" style="font-size:90%"></span>'
               }
-              telefonos += icon + ' (' + telefono.claveRegion + ') ' + telefono.numero;
+              telefonos += icon + ' ' + telefono.numero;
             });
 
             var especialidad ='';
@@ -840,7 +840,7 @@ function modificarMedico(id){
         idBoton = "fon"+telefono.id;
         html2 += '<div id="atel'+telefono.id+'" class="input-group-btn">';
         html2 += '<label id="'+idBoton+'" onclick="fonAdd(\''+idBoton+'\');" class="btn btn-sm editar btnChk">';
-        html2 += '<input type="radio" name="editDirecciones" id="option1" autocomplete="off" class=""><span id="btntxt'+telefono.id+'" class="itemName">('+telefono.claveRegion+') '+telefono.numero+'</span>';
+        html2 += '<input type="radio" name="editDirecciones" id="option1" autocomplete="off" class=""><span id="btntxt'+telefono.id+'" class="itemName">'+telefono.numero+'</span>';
         html2 += '</label>';
         html2 += '<button class="btn btn-sm borrar" disabled="disabled" onclick="eliminarTelefono(\''+telefono.id+'\');"><span class="glyphicon glyphicon-remove"></span></button>';
         html2 += '<span class="hidden" id="id'+idBoton+'">'+telefono.id+'</span>';
@@ -961,6 +961,9 @@ function LimpiarFormularios(){
   $('#registroMedico').removeClass('guardado');
   $('#registroMedico').removeClass('panel-success');
 
+  $('#editDinamico').html('');
+  $('#fonAgregado').html('');
+
   limpiaSection('#registroDireccion');
   limpiaSection('#editDinamico');
   limpiaSection('#fonAgregado');
@@ -986,13 +989,17 @@ function actualizarInformacionMedico(id){
         if (val.medico.correo){
           correo = val.medico.correo;
         }
+
         var telefonos = '';
         val.telefonos.forEach(function(telefono){
           if (telefonos != "")
             telefonos+='<br/>';
-          telefonos += '(' + telefono.claveRegion + ') ' + telefono.numero;
+          var icon = '<span class="glyphicon glyphicon-earphone" style="font-size:90%"></span>'
+          if (telefono.tipo == "celular"){
+            icon = '<span class="glyphicon glyphicon-phone" style="font-size:90%"></span>'
+          }
+          telefonos += icon + ' ' + telefono.numero;
         });
-
         var especialidad ='';
         if (val.especialidad && val.especialidad.especialidad)
           especialidad = val.especialidad.especialidad;

@@ -171,11 +171,8 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                 <div class="row">
                   <div class="col-md-8">
                     <div class="row">
-                      <div class="form-group col-md-3">
-                        <input type="text" id="ladaTelefono" class="form-control solo-numero" placeholder="Lada:" maxlength="5" onpaste="soloNumeros()"/>
-                      </div>
                       <div class="form-group col-md-4">
-                        <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="8" onpaste="soloNumeros()"/>
+                        <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/>
                       </div>
                       <div class="form-group col-md-5">
                         <select class="form-control" id="tipoTelefono">

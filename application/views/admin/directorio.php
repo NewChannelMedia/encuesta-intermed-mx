@@ -110,7 +110,7 @@
           <div class="col-md-8 col-sm-8">
             <div class="row">
               <div class="form-group col-md-6 col-sm-6">
-                <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="8" onpaste="soloNumeros()"/>
+                <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/>
               </div>
               <div class="form-group col-md-6 col-sm-6">
                 <select class="form-control" id="tipoTelefono">

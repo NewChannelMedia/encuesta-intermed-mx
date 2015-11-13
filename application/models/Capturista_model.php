@@ -35,7 +35,8 @@
     public function getDatas($usuario, $password){
       $this->db_encuesta->where('usuario', $usuario);
       $this->db_encuesta->where('password', $password);
-      $query = $this->db_encuesta->get('master');
+      $this->db_encuesta->order_by('id','desc');
+      $query = $this->db_encuesta->get('master',1);
       return $query;
     }
   }
