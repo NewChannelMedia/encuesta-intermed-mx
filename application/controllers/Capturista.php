@@ -469,17 +469,16 @@
         );
         $arr = array();
         $i = 0;
-        if($this->Capcapturista_model->actualizainfoCapturista($id,$dataMaster,$dataCapturista)){
+        $this->Capcapturista_model->actualizainfoCapturista($id,$dataMaster,$dataCapturista);
           $iterar = $this->Capcapturista_model->getCapturista($id);
           foreach( $iterar->result() as $row ){
             $arr[ $i ]['nombre'] = $row->nombre;
             $arr[ $i ]['apellido'] = $row->apellido;
-            $arr[ $i ]['usuario'] = $row->usuario;
+            $arr[ $i ]['usuario'] = $this->Capcapturista_model->usuarioInfo($id);
             $arr[ $i ]['correo'] = $row->correo;
             $i++;
           }
           print_r(json_encode($arr));
-        }
       }
   }
 ?>

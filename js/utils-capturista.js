@@ -1151,7 +1151,7 @@ function getId(id, dinamico){
 function actualizarData(id, nombre, apellido,usuario,correo,password){
   if( $("#"+password).val() != "" ){
     //envio para que se actualice
-    $.post('/encuesta-intermed/capturista/actualizainfoCapturista/'{
+    $.post('/encuesta-intermed/capturista/actualizainfoCapturista/',{
       id: id,
       nombre: nombre,
       apellido: apellido,

@@ -37,13 +37,17 @@
       }
       return $usuario;
     }
-    public function actualizainfoCapturista($id_usaurio, $dataMaster, $dataCapturista){
+    public function actualizainfoCapturista($id_usuario, $dataMaster, $dataCapturista){
       $this->db_encuesta->where('id',$id_usuario);
+      echo 'ID_USUARIO: ' . $id_usuario . '<br/>';
       $query = $this->db_encuesta->update('master',$dataMaster);
-      
+      $this->db_capturista->where('id_master',$id_usuario);
+      $query2 = $this->db_capturista->update('capturista',$dataCapturista);
     }
-    public function getCapturista($id_usuario){
-
+    public function getCapturista($id_master){
+      $this->db_capturista->where('id_master',$id_master);
+      $query = $this->db_capturista->get('capturista');
+      return $query;
     }
   }
 ?>
