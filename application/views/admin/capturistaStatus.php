@@ -38,7 +38,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                   </div>
                   <div class="media-body" id="cuerpoConNombre">
                     <p>
-                      <span class="s20 text-uppercase"><?php echo $dat['nombre']; ?><small><?php $dat['apellido'];?></small></span>
+                      <span class="s20 text-uppercase"><?php echo $dat['nombre']; ?>&nbsp;<small><?php echo $dat['apellido'];?></small></span>
                     </br>
                       <span class="s15 text-muted"><?php echo $dat['usuario'];?></span>
                     </br>
@@ -46,7 +46,46 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                     </p>
                   </div>
                   <div class="media-right">
-                    <button class="btn btn-sm btn-default"><span class="glyphicon glyphicon-pencil s10 text-muted"></span></button>
+                    <button onclick="getId('<?php echo "edit-".$dat['id'];?>','<?php echo "dinamico-".$dat['id']; ?>');"id="edit-<?php echo $dat['id']; ?>" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-pencil s10 text-muted"></span></button>
+                  </div>
+                </div>
+              </div>
+              <!-- NOO -->
+              <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+                <div class="media hidden" id="<?php echo "dinamico-".$dat['id']; ?>">
+                  <div class="media-body">
+                      <?php
+                        $nombreCam = "nombre-".$dat['id'];
+                        $apellidoCam = "apellido-".$dat['id'];
+                        $usuarioCam = "usuario-".$dat['id'];
+                        $correoCam = "correo-".$dat['id'];
+                        $passwordCam = "pass-".$dat['id'];
+                      ?>
+                      <div class="form-group col-md-6">
+                        <label for="<?php echo $nombreCam; ?>">Nombre(s):</label>
+                        <input type="text" class="form-control" id="<?php echo $nombreCam; ?>" placeholder="Nombre(s):" value ="<?php echo $dat['nombre']; ?>"/>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="<?php echo $apellidoCam; ?>">Apellido(s):</label>
+                        <input type="text" class="form-control" id="<?php echo $apellidoCam; ?>" placeholder="Apellido(s):" value="<?php echo $dat['apellido'];?>" />
+                      </div>
+                    </br>
+                      <div class="form-group col-md-6">
+                        <label for="<?php echo $usuarioCam; ?>">Usuario:</label>
+                        <input type="text" class="form-control" id="<?php echo $usuarioCam; ?>" placeholder="Usuario:" value="<?php echo $dat['usuario']; ?>"/>
+                      </div>
+                    </br>
+                      <div class="form-group col-md-6">
+                        <label for="<?php echo $correoCam; ?>">Correo:</label>
+                        <input type="email" class="form-control" id="<?php echo $correoCam; ?>" placeholder="E-mail:" value="<?php echo $dat['correo']; ?>" />
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="<?php echo $passwordCam; ?>">Password:</label>
+                        <input type="password" class="form-control" id="<?php echo $passwordCam;?>" placeholder="Password:"/>
+                      </div>
+                  </div>
+                  <div class="media-right">
+                    <button onclick="actualizarData('<?php echo $dat["id"]; ?>','<?php echo $nombreCam; ?>','<?php echo $apellidoCam; ?>','<?php echo $usuarioCam; ?>','<?php echo $correoCam; ?>','<?php echo $passwordCam; ?>');"class="btn btn-sm btn-success"><span class="glyphicon glyphicon-eye-open s10"></span></button>
                   </div>
                 </div>
               </div>

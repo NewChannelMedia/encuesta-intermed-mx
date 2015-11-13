@@ -37,5 +37,13 @@
       }
       return $usuario;
     }
+    public function actualizainfoCapturista($id_usaurio, $dataMaster, $dataCapturista){
+      $this->db_encuesta->where('id',$id_usuario);
+      $query = $this->db_encuesta->update('master',$dataMaster);
+      
+    }
+    public function getCapturista($id_usuario){
+
+    }
   }
 ?>

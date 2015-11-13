@@ -1140,35 +1140,40 @@ $(document).ready(function(){
   });
 });
 /**
-* Carga los datos del status de capturista
+* Evento del click del boton para editar a los usuarios capturistas
 *
 *
 **/
-/*$(document).ready(function(){
-  var html = "";
-  var capts = "";
-  var html2 = "";
-  var html3 = "";
-  $.post('/encuesta-intermed/capturista/cargandoInfo/',function(datos){
-    $.each(JSON.parse(datos), function( i, item ){
-      var nombre = item.nombre+" "+item.apellido;
-      capts = 'capt-'+item.id;
-      html += '<li role="presentation" class=""><a href="#'+capts+'" aria-controls="capt-1" role="tab" data-toggle="tab"><span>'+nombre+'</span></a></li>';
-      html2 +='<div class="tab-pane fade in active" id="'+capts+'">';
-      html2 += '<p>';
-      html2 += '<span class="s20 text-uppercase">'+item.nombre+'<small>'+item.apellido+'</small></span>';
-      html2 += '</br>';
-      html2 += '<span class="s15 text-muted">Usuario</span>';
-      html2 += '</br>';
-      html2 += '<span class="s15 text-muted">'+item.correo+'</span>';
-      html2 += '</p>';
-      html2 +='</div>';
-      //se inserta la foto
-      html3 +='<div class="img-thumbnail statusProfileIcon">';
-      html3 +='<span class="glyphicon glyphicon-headphones icon text-muted"></span>';
-      html3 +='</div>';
+function getId(id, dinamico){
+  console.log("HOLA DESDE AQUI");
+  $("#"+dinamico).removeClass('hidden');
+}
+function actualizarData(id, nombre, apellido,usuario,correo,password){
+  if( $("#"+password).val() != "" ){
+    //envio para que se actualice
+    $.post('/encuesta-intermed/capturista/actualizainfoCapturista/'{
+      id: id,
+      nombre: nombre,
+      apellido: apellido,
+      usuario: usuario,
+      correo: correo,
+      password: password
+    },function(datas){
+
     });
-    $("#rolCapturistas").append(html);
-    $("#contenido").append(html2);
-  });
-});*/
+  }else {
+    bootbox.alert({
+            message: "EL campo password no puede estar vacio favor de llenarlo.",
+            title: "Campo vacio",
+            callback: function() {setTimeout(function(){
+              if( $("#user").val() == "" && $("#password").val() != "" ){
+                $('#user').focus();
+              }else if ( $("#password").val() == "" && $("#user").val() != "" ) {
+                $('#password').focus();
+              }else if( $("#user").val() == "" && $("#password").val() == "" ){
+                $('#user').focus();
+              }
+            },300); }
+        });
+  }
+}

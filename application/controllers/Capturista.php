@@ -451,5 +451,35 @@
         }
         print_r(json_encode($arre));
       }
+      public function actualizainfoCapturista(){
+        $id = $this->input->post('id');
+        $nombre = $this->input->post('nombre');
+        $apellido = $this->input->post('apellido');
+        $usuario = $this->input->post('usuario');
+        $correo = $this->input->post('correo');
+        $password = $this->input->post('password');
+        $dataMaster = array(
+          'usuario' => $usuario,
+          'password' => $password
+        );
+        $dataCapturista = array(
+          'nombre' => $nombre,
+          'apellido' => $apellido,
+          'correo' => $correo
+        );
+        $arr = array();
+        $i = 0;
+        if($this->Capcapturista_model->actualizainfoCapturista($id,$dataMaster,$dataCapturista)){
+          $iterar = $this->Capcapturista_model->getCapturista($id);
+          foreach( $iterar->result() as $row ){
+            $arr[ $i ]['nombre'] = $row->nombre;
+            $arr[ $i ]['apellido'] = $row->apellido;
+            $arr[ $i ]['usuario'] = $row->usuario;
+            $arr[ $i ]['correo'] = $row->correo;
+            $i++;
+          }
+          print_r(json_encode($arr));
+        }
+      }
   }
 ?>
