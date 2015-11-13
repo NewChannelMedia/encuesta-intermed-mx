@@ -460,6 +460,7 @@
       }
       public function actualizainfoCapturista(){
         $id = $this->input->post('id');
+        $id_master = $this->input->post('id_master');
         $nombre = $this->input->post('nombre');
         $apellido = $this->input->post('apellido');
         $usuario = $this->input->post('usuario');
@@ -476,12 +477,13 @@
         );
         $arr = array();
         $i = 0;
-        $this->Capcapturista_model->actualizainfoCapturista($id,$dataMaster,$dataCapturista);
-          $iterar = $this->Capcapturista_model->getCapturista($id);
+        $this->Capcapturista_model->actualizainfoMaster($id_master,$dataMaster);
+        $this->Capcapturista_model->actualizainfoCapturista($id,$dataCapturista);
+          $iterar = $this->Capcapturista_model->getCapturista($id_master);
           foreach( $iterar->result() as $row ){
             $arr[ $i ]['nombre'] = $row->nombre;
             $arr[ $i ]['apellido'] = $row->apellido;
-            $arr[ $i ]['usuario'] = $this->Capcapturista_model->usuarioInfo($id);
+            $arr[ $i ]['usuario'] = $this->Capcapturista_model->usuarioInfo($id_master);
             $arr[ $i ]['correo'] = $row->correo;
             $i++;
           }

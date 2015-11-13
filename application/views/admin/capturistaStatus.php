@@ -36,13 +36,13 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                       <span class="glyphicon glyphicon-headphones icon text-muted"></span>
                     </div>
                   </div>
-                  <div class="media-body" id="cuerpoConNombre">
+                  <div class="media-body">
                     <p>
-                      <span class="s20 text-uppercase"><?php echo $dat['nombre']; ?>&nbsp;<small><?php echo $dat['apellido'];?></small></span>
+                      <span id="<?php echo "spanNomre-".$dat['id']; ?>" class="s20 text-uppercase"><?php echo $dat['nombre']; ?>&nbsp;<small><?php echo $dat['apellido'];?></small></span>
                     </br>
-                      <span class="s15 text-muted"><?php echo $dat['usuario'];?></span>
+                      <span id="<?php echo "spanUser-".$dat['id']; ?>" class="s15 text-muted"><?php echo $dat['usuario'];?></span>
                     </br>
-                      <span class="s15 text-muted"><?php echo $dat['correo']; ?></span>
+                      <span id="<?php echo "spanMail-".$dat['id']; ?>" class="s15 text-muted"><?php echo $dat['correo']; ?></span>
                     </p>
                   </div>
                   <div class="media-right">
@@ -85,7 +85,13 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                       </div>
                   </div>
                   <div class="media-right">
-                    <button onclick="actualizarData('<?php echo $dat["id"]; ?>','<?php echo $nombreCam; ?>','<?php echo $apellidoCam; ?>','<?php echo $usuarioCam; ?>','<?php echo $correoCam; ?>','<?php echo $passwordCam; ?>');"class="btn btn-sm btn-success"><span class="glyphicon glyphicon-eye-open s10"></span></button>
+                    <?php
+                      $spanNomre = "spanNomre-".$dat['id'];
+                      $spanUser = "spanUser-".$dat["id"];
+                      $spanMail = "spanMail-".$dat["id"];
+                      $dinamico2 = "dinamico-".$dat['id'];
+                    ?>
+                    <button onclick="actualizarData('<?php echo $dat["id"]; ?>','<?php echo $dat["id_maestro"]; ?>','<?php echo $nombreCam; ?>','<?php echo $apellidoCam; ?>','<?php echo $usuarioCam; ?>','<?php echo $correoCam; ?>','<?php echo $passwordCam; ?>','<?php echo $spanNomre; ?>','<?php echo $spanUser; ?>','<?php echo $spanMail; ?>','<?php echo $dinamico2; ?>');"class="btn btn-sm btn-success"><span class="glyphicon glyphicon-eye-open s10"></span></button>
                   </div>
                 </div>
               </div>

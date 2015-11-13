@@ -1241,21 +1241,27 @@ $(document).ready(function(){
 *
 **/
 function getId(id, dinamico){
-  console.log("HOLA DESDE AQUI");
   $("#"+dinamico).removeClass('hidden');
 }
-function actualizarData(id, nombre, apellido,usuario,correo,password){
+function actualizarData(id,id_master, nombre, apellido,usuario,correo,password,spanNombre,spanUser,spanMail,dinamico){
   if( $("#"+password).val() != "" ){
     //envio para que se actualice
     $.post('/encuesta-intermed/capturista/actualizainfoCapturista/',{
       id: id,
-      nombre: nombre,
-      apellido: apellido,
-      usuario: usuario,
-      correo: correo,
-      password: password
+      id_master: id_master,
+      nombre: $("#"+nombre).val(),
+      apellido: $("#"+apellido).val(),
+      usuario: $("#"+usuario).val(),
+      correo: $("#"+correo).val(),
+      password: $("#"+password).val()
     },function(datas){
-
+      $.each(JSON.parse(datas), function(i, item){
+        $("#"+spanNombre).text(item.nombre+' '+item.apellido);
+        $("#"+spanUser).text(item.usuario);
+        $("#"+spanMail).text(item.correo);
+        $("#"+dinamico).addClass('hidden');
+        $("#"+password).val('');
+      });
     });
   }else {
     bootbox.alert({
