@@ -16,6 +16,7 @@
       $this->load->model('Porvalidar_model');
       $this->load->model('Newsletter_model');
       $this->load->model('Contacto_model');
+      $this->load->model('Capcapturista_model');
       header('Cache-Control: no cache');
     }
 
@@ -822,6 +823,19 @@
         }
 
         public function statusCapturista(){
+          $query = $this->Capcapturista_model->cargandoInfo();
+          $i = 0;
+          $arr = array();
+          foreach( $query->result() as $row ){
+            $arr[ $i ]['id'] = $row->id;
+            $arr[ $i ]['i_maestro'] = $row->id_master;
+            $arr[ $i ]['nombre'] = $row->nombre;
+            $arr[ $i ]['apellido'] = $row->apellido;
+            $arr[ $i ]['correo'] = $row->correo;
+            $arr[ $i ][ 'usuario' ] = $this->Capcapturista_model->usuarioInfo($row->id_master);
+            $i++;
+           }
+          $data['capturistas'] = $arr;
           $data['title'] = "Status de Capturistas";
           $this->load->view('templates/headerAdmin', $data);
           $this->load->view('admin/capturistaStatus', $data);

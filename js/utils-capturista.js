@@ -1235,3 +1235,41 @@ $(document).ready(function(){
     }
   });
 });
+/**
+* Evento del click del boton para editar a los usuarios capturistas
+*
+*
+**/
+function getId(id, dinamico){
+  console.log("HOLA DESDE AQUI");
+  $("#"+dinamico).removeClass('hidden');
+}
+function actualizarData(id, nombre, apellido,usuario,correo,password){
+  if( $("#"+password).val() != "" ){
+    //envio para que se actualice
+    $.post('/encuesta-intermed/capturista/actualizainfoCapturista/',{
+      id: id,
+      nombre: nombre,
+      apellido: apellido,
+      usuario: usuario,
+      correo: correo,
+      password: password
+    },function(datas){
+
+    });
+  }else {
+    bootbox.alert({
+            message: "EL campo password no puede estar vacio favor de llenarlo.",
+            title: "Campo vacio",
+            callback: function() {setTimeout(function(){
+              if( $("#user").val() == "" && $("#password").val() != "" ){
+                $('#user').focus();
+              }else if ( $("#password").val() == "" && $("#user").val() != "" ) {
+                $('#password').focus();
+              }else if( $("#user").val() == "" && $("#password").val() == "" ){
+                $('#user').focus();
+              }
+            },300); }
+        });
+  }
+}
