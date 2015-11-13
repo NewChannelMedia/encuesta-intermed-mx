@@ -1139,3 +1139,36 @@ $(document).ready(function(){
     }
   });
 });
+/**
+* Carga los datos del status de capturista
+*
+*
+**/
+/*$(document).ready(function(){
+  var html = "";
+  var capts = "";
+  var html2 = "";
+  var html3 = "";
+  $.post('/encuesta-intermed/capturista/cargandoInfo/',function(datos){
+    $.each(JSON.parse(datos), function( i, item ){
+      var nombre = item.nombre+" "+item.apellido;
+      capts = 'capt-'+item.id;
+      html += '<li role="presentation" class=""><a href="#'+capts+'" aria-controls="capt-1" role="tab" data-toggle="tab"><span>'+nombre+'</span></a></li>';
+      html2 +='<div class="tab-pane fade in active" id="'+capts+'">';
+      html2 += '<p>';
+      html2 += '<span class="s20 text-uppercase">'+item.nombre+'<small>'+item.apellido+'</small></span>';
+      html2 += '</br>';
+      html2 += '<span class="s15 text-muted">Usuario</span>';
+      html2 += '</br>';
+      html2 += '<span class="s15 text-muted">'+item.correo+'</span>';
+      html2 += '</p>';
+      html2 +='</div>';
+      //se inserta la foto
+      html3 +='<div class="img-thumbnail statusProfileIcon">';
+      html3 +='<span class="glyphicon glyphicon-headphones icon text-muted"></span>';
+      html3 +='</div>';
+    });
+    $("#rolCapturistas").append(html);
+    $("#contenido").append(html2);
+  });
+});*/

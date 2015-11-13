@@ -21,7 +21,7 @@
         public function login($usuario, $password){
             $this->db_encuesta->where('usuario',$usuario);
             $this->db_encuesta->where('password',$password);
-            $this->db_encuesta->select('usuario, rol');
+            $this->db_encuesta->select('usuario, rol, id');
             $query = $this->db_encuesta->get('master');
             $row = $query->row_array();
             if(count($row) > 0){

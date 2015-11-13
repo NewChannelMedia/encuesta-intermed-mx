@@ -3,6 +3,7 @@
   {
     public function __construct(){
         $this->db_capturista = $this->load->database('capturista', TRUE);
+        $this->db_encuesta = $this->load->database('encuesta', TRUE);
     }
     public function insertDatosCapturista($id,$nombre,$apellido,$correo){
       $data = array(
@@ -21,6 +22,20 @@
       $this->db_capturista->where('id_master',$id);
       $query = $this->db_capturista->get('capturista');
       return $query;
+    }
+    public function cargandoInfo(){
+      $query = $this->db_capturista->get('capturista');
+      return $query;
+    }
+    public function usuarioInfo($id){
+      $this->db_encuesta->where('id',$id);
+      $this->db_encuesta->select('usuario');
+      $query = $this->db_encuesta->get('master');
+      $usuario = "";
+      foreach( $query->result() as $row ){
+        $usuario = $row->usuario;
+      }
+      return $usuario;
     }
   }
 ?>
