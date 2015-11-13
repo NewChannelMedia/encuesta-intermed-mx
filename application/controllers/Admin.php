@@ -829,7 +829,7 @@
           $arr = array();
           foreach( $query->result() as $row ){
             $arr[ $i ]['id'] = $row->id;
-            $arr[ $i ]['i_maestro'] = $row->id_master;
+            $arr[ $i ]['id_maestro'] = $row->id_master;
             $arr[ $i ]['nombre'] = $row->nombre;
             $arr[ $i ]['apellido'] = $row->apellido;
             $arr[ $i ]['correo'] = $row->correo;
