@@ -38,7 +38,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                   </div>
                   <div class="media-body">
                     <p>
-                      <div class="s20 text-uppercase">
+                      <span class="s20 text-uppercase">
                         <span id="<?php echo "spanNomre-".$dat['id']; ?>" >
                           <?php echo $dat['nombre']; ?>&nbsp;
                         </span>
@@ -47,7 +47,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                             <?php echo $dat['apellido'];?>
                           </span>
                         </small>
-                      </div>
+                      </span>
                     </br>
                       <span id="<?php echo "spanUser-".$dat['id']; ?>" class="s15 text-muted"><?php echo $dat['usuario'];?></span>
                     </br>
