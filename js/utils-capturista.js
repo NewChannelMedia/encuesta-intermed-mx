@@ -1250,7 +1250,7 @@ $(document).ready(function(){
 function getId(id, dinamico){
   $("#"+dinamico).removeClass('hidden');
 }
-function actualizarData(id,id_master, nombre, apellido,usuario,correo,password,spanNombre,spanUser,spanMail,dinamico){
+function actualizarData(id,id_master, nombre, apellido,usuario,correo,password,spanNombre,spanApe,spanUser,spanMail,dinamico){
   if( $("#"+password).val() != "" ){
     //envio para que se actualice
     $.post('/encuesta-intermed/capturista/actualizainfoCapturista/',{
@@ -1263,7 +1263,9 @@ function actualizarData(id,id_master, nombre, apellido,usuario,correo,password,s
       password: $("#"+password).val()
     },function(datas){
       $.each(JSON.parse(datas), function(i, item){
-        $("#"+spanNombre).text(item.nombre+' '+item.apellido);
+        $("#"+spanNombre).text(item.nombre);
+        $('#'+spanApe).text(item.apellido);
+        console.log(spanApe);
         $("#"+spanUser).text(item.usuario);
         $("#"+spanMail).text(item.correo);
         $("#"+dinamico).addClass('hidden');
