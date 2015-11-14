@@ -419,7 +419,7 @@ function generarMuestraMedicos(){
     dataType: 'JSON',
     async: true,
     success: function (result) {
-      if (result.success){
+      if (result.success && result.muestra && result.muestra.length>0){
         result.muestra.forEach(function(val){
           if (val.aut == 0){
             var nombre = val.medico.nombre + ' ' + val.medico.apellidop;
