@@ -88,5 +88,16 @@
       $result['minutos'] = $minutos;
       return $result;
     }
+    //elimina
+    public function deleteMaster($idMaster){
+      $this->db_encuesta->where('id',$idMaster);
+      $query = $this->db_encuesta->delete('master');
+      return $query;
+    }
+    public function deleteCapturista($idCapturista){
+      $this->db_capturista->where('id',$idCapturista);
+      $query = $this->db_capturista->delete('capturista');
+      return $query;
+    }
   }
 ?>

@@ -489,5 +489,19 @@
           }
           print_r(json_encode($arr));
       }
+      //eliminar
+      public function deleteCapturista(){
+        $idCapturista = $this->input->post('idCapturista');
+        $idMaster = $this->input->post('idMaster');
+        //se borra de master
+          $query = $this->Capcapturista_model->deleteMaster($idMaster);
+        // se borra de capturista
+          $query2 = $this->Capcapturista_model->deleteCapturista($idCapturista);
+          if( $query == true && $query2 == true ){
+            echo true;
+          }else{
+            echo false;
+          }
+      }
   }
 ?>
