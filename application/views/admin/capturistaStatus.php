@@ -38,7 +38,16 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                   </div>
                   <div class="media-body">
                     <p>
-                      <span id="<?php echo "spanNomre-".$dat['id']; ?>" class="s20 text-uppercase"><?php echo $dat['nombre']; ?>&nbsp;<small><?php echo $dat['apellido'];?></small></span>
+                      <div class="s20 text-uppercase">
+                        <span id="<?php echo "spanNomre-".$dat['id']; ?>" >
+                          <?php echo $dat['nombre']; ?>&nbsp;
+                        </span>
+                        <small>
+                          <span id="<?php echo "spanApe-".$dat['id']; ?>" >
+                            <?php echo $dat['apellido'];?>
+                          </span>
+                        </small>
+                      </div>
                     </br>
                       <span id="<?php echo "spanUser-".$dat['id']; ?>" class="s15 text-muted"><?php echo $dat['usuario'];?></span>
                     </br>
@@ -91,8 +100,9 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                       $spanUser = "spanUser-".$dat["id"];
                       $spanMail = "spanMail-".$dat["id"];
                       $dinamico2 = "dinamico-".$dat['id'];
+                      $spanApe = "spanApe-".$dat['id'];
                     ?>
-                    <button onclick="actualizarData('<?php echo $dat["id"]; ?>','<?php echo $dat["id_maestro"]; ?>','<?php echo $nombreCam; ?>','<?php echo $apellidoCam; ?>','<?php echo $usuarioCam; ?>','<?php echo $correoCam; ?>','<?php echo $passwordCam; ?>','<?php echo $spanNomre; ?>','<?php echo $spanUser; ?>','<?php echo $spanMail; ?>','<?php echo $dinamico2; ?>');"class="btn btn-sm btn-success"><span class="glyphicon glyphicon-eye-open s10"></span></button>
+                    <button onclick="actualizarData('<?php echo $dat["id"]; ?>','<?php echo $dat["id_maestro"]; ?>','<?php echo $nombreCam; ?>','<?php echo $apellidoCam; ?>','<?php echo $usuarioCam; ?>','<?php echo $correoCam; ?>','<?php echo $passwordCam; ?>','<?php echo $spanNomre; ?>','<?php echo $spanApe; ?>','<?php echo $spanUser; ?>','<?php echo $spanMail; ?>','<?php echo $dinamico2; ?>');"class="btn btn-sm btn-success"><span class="glyphicon glyphicon-eye-open s10"></span></button>
                   </div>
                 </div>
               </div>
