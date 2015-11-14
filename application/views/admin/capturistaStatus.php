@@ -5,7 +5,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
 }
 ?>
 <!-- Formulario para agregar contactos al directorio -->
-<section class="capturistaSection container-fluid">
+<section class="capturistaSection container-fluid" id="prueba">
   <ul class="nav nav-tabs" id="rolCapturistas" role="tablist">
     <?php
       $capts = "";
@@ -47,6 +47,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                   </div>
                   <div class="media-right">
                     <button onclick="getId('<?php echo "edit-".$dat['id'];?>','<?php echo "dinamico-".$dat['id']; ?>');"id="edit-<?php echo $dat['id']; ?>" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-pencil s10 text-muted"></span></button>
+                    <button onclick="deleteCapturista('<?php echo $dat["id"]; ?>','<?php echo $dat["id_maestro"]; ?>');" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove-sign s10"></span></button>
                   </div>
                 </div>
               </div>

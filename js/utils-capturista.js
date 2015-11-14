@@ -1286,3 +1286,28 @@ function actualizarData(id,id_master, nombre, apellido,usuario,correo,password,s
         });
   }
 }
+//function para borrar
+function deleteCapturista(id_capturista, id_master ){
+  bootbox.confirm({
+    message: "<span class='glyphicon glyphicon-question-sign'>Usted esta apunto de eliminar un capturista ¿ esta seguro ?</span>",
+    title: "¿Eliminar capturista?",
+    callback: function(result) {
+      if (result){
+        $.post('/encuesta-intermed/capturista/deleteCapturista/',{
+          idCapturista: id_capturista,
+          idMaster: id_master
+        },function(data){
+          if(data){
+            location.reload();
+          }
+        }).fail(function(e){
+          bootbox.alert({
+                  message: "EL campo password no puede estar vacio favor de llenarlo.",
+                  title: "Campo vacio",
+                  callback: function() {setTimeout(function(){JSON.stringify(e)},300); }
+              });
+        });
+      }
+    }
+  });
+}
