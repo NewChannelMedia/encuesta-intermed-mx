@@ -179,9 +179,11 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                           <option value="localizador">Localizador</option>
                         </select>
                       </div>
-                      <div class="form-group col-md-8 col-sm-8" id="contTelefono">
-                        <div class="form-group col-md-12 col-sm-12">
-                          <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/>
+                      <div class="form-group col-md-8 col-sm-8" >
+                        <div class="row" id="contTelefono">
+                          <div class="form-group col-md-12 col-sm-12">
+                            <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/>
+                          </div>
                         </div>
                       </div>
                     </div>

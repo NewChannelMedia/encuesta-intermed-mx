@@ -7,6 +7,7 @@
       </div>
       <div class="panel-body">
 	      <input type="hidden" id="medico_id" value="">
+  	    <input type="hidden" id="medico_id_temp" value="">
         <div class="row">
           <div class="col-md-8 col-sm-8">
             <div class="row">
@@ -117,9 +118,11 @@
                   <option value="localizador">Localizador</option>
                 </select>
               </div>
-              <div class="form-group col-md-8 col-sm-8" id="contTelefono">
-                <div class="form-group col-md-12 col-sm-12">
-                  <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/>
+              <div class="form-group col-md-8 col-sm-8" >
+                <div class="row" id="contTelefono">
+                  <div class="form-group col-md-12 col-sm-12">
+                    <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/>
+                  </div>
                 </div>
               </div>
             </div>
