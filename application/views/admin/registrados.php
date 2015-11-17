@@ -169,12 +169,9 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
               </div>
               <div class="panel-body">
                 <div class="row">
-                  <div class="col-md-8">
+                  <div class="col-md-8 col-sm-8">
                     <div class="row">
-                      <div class="form-group col-md-4">
-                        <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/>
-                      </div>
-                      <div class="form-group col-md-5">
+                      <div class="form-group col-md-4 col-sm-4">
                         <select class="form-control" id="tipoTelefono">
                           <option value="casa">Casa</option>
                           <option value="celular">Celular</option>
@@ -182,9 +179,12 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                           <option value="localizador">Localizador</option>
                         </select>
                       </div>
+                      <div class="form-group col-md-8 col-sm-8" id="contTelefono">
+                        <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-4">
                     <div class="form-group">
                       <button type="submit" class="btn btn-info btnAñade btn-block" id="enviarFon">Añadir</button>
                     </div>
