@@ -118,7 +118,9 @@
                 </select>
               </div>
               <div class="form-group col-md-8 col-sm-8" id="contTelefono">
-                <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/>
+                <div class="form-group col-md-12 col-sm-12">
+                  <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/>
+                </div>
               </div>
             </div>
           </div>
