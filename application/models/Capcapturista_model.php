@@ -53,7 +53,21 @@
     }
 
     public function RegistrosHoy($id){
-      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "total" FROM medicos where medicos.usuario_capt_id = "'. $id .'" AND DATE(fecha) = DATE(NOW());');
+      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "total" FROM medicos where medicos.usuario_capt_id = "'. $id .'" AND DATE(fecha) = DATE(NOW()) AND medicos.terminado = 1;');
+      $result = $this->db_capturista->get()->row_array();
+      $to_time = strtotime($result['MAX']);
+      $from_time = strtotime($result['MIN']);
+      $min = intval(round(abs($to_time - $from_time) / 60,2));
+
+      if ($min > 120){
+        $min -= 120;
+      }
+      $result['minutos'] = $min;
+      return $result;
+    }
+
+    public function RegistrosAyer($id){
+      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "total" FROM medicos where medicos.usuario_capt_id = "'. $id .'" AND DATE(fecha) = DATE(SUBDATE(NOW(),1)) AND medicos.terminado = 1;');
       $result = $this->db_capturista->get()->row_array();
       $to_time = strtotime($result['MAX']);
       $from_time = strtotime($result['MIN']);
@@ -67,7 +81,7 @@
     }
 
     public function Registros($id){
-      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "TOTAL" FROM medicos where medicos.usuario_capt_id = "'. $id .'" GROUP BY(DATE(fecha));');
+      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "TOTAL" FROM medicos where medicos.usuario_capt_id = "'. $id .'"  AND medicos.terminado = 1 GROUP BY(DATE(fecha));');
       $result = array();
       $totalRegistros = 0;
       $minutos = 0;

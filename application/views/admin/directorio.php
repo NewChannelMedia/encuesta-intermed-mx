@@ -6,7 +6,7 @@
         <h3 class="panel-title">Datos Generales del Medico</h3>
       </div>
       <div class="panel-body">
-	      <input type="hidden" id="medico_id" value="">
+        <input type="hidden" id="medico_id" value="">
         <div class="row">
           <div class="col-md-8 col-sm-8">
             <div class="row">
@@ -109,16 +109,20 @@
         <div class="row">
           <div class="col-md-8 col-sm-8">
             <div class="row">
-              <div class="form-group col-md-6 col-sm-6">
-                <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/>
-              </div>
-              <div class="form-group col-md-6 col-sm-6">
+              <div class="form-group col-md-4 col-sm-4">
                 <select class="form-control" id="tipoTelefono">
                   <option value="casa">Casa</option>
                   <option value="celular">Celular</option>
                   <option value="oficina">Oficina</option>
                   <option value="localizador">Localizador</option>
                 </select>
+              </div>
+              <div class="form-group col-md-8 col-sm-8" >
+                <div class="row" id="contTelefono">
+                  <div class="form-group col-md-12 col-sm-12">
+                    <input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

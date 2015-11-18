@@ -63,8 +63,23 @@ function guardarMedico(){
 function guardarTelefono(){
   var id = $('#medico_id').val();
   var clave = $('#ladaTelefono').val();
-  var numero = $('#numTelefono').val();
   var tipo = $('#tipoTelefono').val();
+  var numero = '';
+  switch(tipo) {
+    case "casa":
+        numero = $('#numTelefono').val();
+        break;
+    case "celular":
+        numero = $('#numTelefono').val();
+        break;
+    case "oficina":
+        numero = $('#numTelefono').val() + '-' + $('#extTelefono').val();
+        break;
+    case "localizador":
+        numero = $('#numTelefono').val() + '-' + $('#locTelefono').val();
+        break;
+  }
+
   var telefono_id = $('#fonOculto').val();
   var data = {
               'medico_id': id,
@@ -79,10 +94,7 @@ function guardarTelefono(){
       numero: numero,
       tipo: tipo
     },function(data){
-      $('#ladaTelefono').val('');
-      $('#numTelefono').val('');
-      $('#tipoTelefono').val('');
-      $('#fonOculto').val('');
+      limpiaSection('#registroTelefonos');
       $.post('/encuesta-intermed/capturista/traerFonsolo/',{id:telefono_id},function(numero){
         $.each(JSON.parse(numero), function( i, item){
           var btntxt = "btntxt" + telefono_id;
@@ -125,7 +137,7 @@ function guardarTelefono(){
                 html2 += '</div>';
               });
               $("#fonAgregado").append(html2);
-              limpiaSection('#telefonos');
+              limpiaSection('#registroTelefonos');
             });
           }
         },
@@ -390,6 +402,7 @@ function fonAdd(dato){
   var lada = $("#lada"+dato).text();
   var numero = $("#num"+dato).text();
   var tipo = $("#tipo"+dato).text();
+
   var id = $('#id'+dato).text();
   $("#fonOculto").val(id);
   var idConsulta = $("#fonOculto").val();
@@ -402,8 +415,30 @@ function fonAdd(dato){
     id: idConsulta
   },function(datas){
     $.each(JSON.parse(datas),function(i, item){
-      $("#ladaTelefono").val(item.claveRegion);
-      $("#numTelefono").val(item.numero);
+      switch(item.tipo) {
+        case "casa":
+            console.log('casa');
+            $('#registroTelefonos #contTelefono').html('<div class="form-group col-md-12 col-sm-12"><input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/></div>');
+            $("#numTelefono").val(item.numero);
+            break;
+        case "celular":
+            console.log('celular');
+            $('#registroTelefonos #contTelefono').html('<div class="form-group col-md-12 col-sm-12"><input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/></div>');
+            $("#numTelefono").val(item.numero);
+            break;
+        case "oficina":
+            console.log('oficina');
+            $('#registroTelefonos #contTelefono').html('<div class="form-group col-md-8 col-sm-8"><input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/></div><div class="form-group col-md-4 col-sm-4"><input type="text" id="extTelefono" class="form-control solo-numero" placeholder="Ext:" maxlength="4" onpaste="soloNumeros()"/></div>');
+            $("#numTelefono").val(item.numero.split("-")[0]);
+            $("#extTelefono").val(item.numero.split("-")[1]);
+            break;
+        case "localizador":
+            console.log('Localizador');
+            $('#registroTelefonos #contTelefono').html('<div class="form-group col-md-6 col-sm-6"><input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/></div><div class="form-group col-md-6 col-sm-6"><input type="text" id="locTelefono" class="form-control solo-numero" placeholder="Localizador:" maxlength="8" onpaste="soloNumeros()"/></div>');
+            $("#numTelefono").val(item.numero.split("-")[0]);
+            $("#locTelefono").val(item.numero.split("-")[1]);
+            break;
+      }
       $("#tipoTelefono").val(item.tipo);
     });
   });
@@ -596,7 +631,11 @@ function limpiaSection(section){
     $('#estado')[0].selectedIndex = 0;
     traerMunicipios();
     traerLocalidades();
+  } else if (section == "#registroTelefonos"){
+    $('#tipoTelefono').prop('value','casa');
+    $('#registroTelefonos #contTelefono').html('<div class="form-group col-md-12 col-sm-12"><input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()"/></div>');
   }
+  $('select')[0].selectedIndex = 0;
   $(section).find('.btnChk').removeClass('active');
   $(section).find(':radio').prop('checked',false);
   $(section).find('.borrar').prop('disabled', true);
@@ -949,26 +988,40 @@ function traerBorrarTelefono(element){
 }
 
 function LimpiarFormularios(){
-  limpiaSection('#registroMedico');
-  $('#nombre').attr('disabled',false);
-  $('#apellidoP').attr('disabled',false);
-  $('#especialidad').attr('disabled',false);
-  $('#email').attr('disabled',false);
-  $("#especialidad").attr('disabled',false);
-  $("#editarDatos").attr('disabled',false);
-  $("#apellidoM").attr('disabled',false);
-  $("#agregarDatos").attr('disabled',false);
-  $('#registroMedico').removeClass('guardado');
-  $('#registroMedico').removeClass('panel-success');
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/terminarCaptura',
+    type: "POST",
+    dataType: 'JSON',
+    data: {'id':$('#medico_id').val()},
+    async: true,
+    success: function (result) {
+      if (result.success){
+        limpiaSection('#registroMedico');
+        $('#nombre').attr('disabled',false);
+        $('#apellidoP').attr('disabled',false);
+        $('#especialidad').attr('disabled',false);
+        $('#email').attr('disabled',false);
+        $("#especialidad").attr('disabled',false);
+        $("#editarDatos").attr('disabled',false);
+        $("#apellidoM").attr('disabled',false);
+        $("#agregarDatos").attr('disabled',false);
+        $('#registroMedico').removeClass('guardado');
+        $('#registroMedico').removeClass('panel-success');
 
-  $('#editDinamico').html('');
-  $('#fonAgregado').html('');
+        $('#editDinamico').html('');
+        $('#fonAgregado').html('');
 
-  limpiaSection('#registroDireccion');
-  limpiaSection('#editDinamico');
-  limpiaSection('#fonAgregado');
-  limpiaSection('#registroTelefonos');
-  limpiaSection('#registroMedico');
+        limpiaSection('#registroDireccion');
+        limpiaSection('#editDinamico');
+        limpiaSection('#fonAgregado');
+        limpiaSection('#registroTelefonos');
+        limpiaSection('#registroMedico');
+      }
+    },
+    error : function (err){
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  });
 }
 
 
@@ -1313,3 +1366,22 @@ function deleteCapturista(id_capturista, id_master ){
     }
   });
 }
+
+$('#registroTelefonos #tipoTelefono').change(function(){
+  var tipo =  $(this).prop('value');
+  var numero = $('#numTelefono').val();
+  switch(tipo) {
+    case "casa":
+        $('#registroTelefonos #contTelefono').html('<div class="form-group col-md-12 col-sm-12"><input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()" value="'+numero+'"/></div>');
+        break;
+    case "celular":
+        $('#registroTelefonos #contTelefono').html('<div class="form-group col-md-12 col-sm-12"><input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()" value="'+numero+'"/></div>');
+        break;
+    case "oficina":
+        $('#registroTelefonos #contTelefono').html('<div class="form-group col-md-8 col-sm-8"><input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()" value="'+numero+'"/></div><div class="form-group col-md-4 col-sm-4"><input type="text" id="extTelefono" class="form-control solo-numero" placeholder="Ext:" maxlength="4" onpaste="soloNumeros()"/></div>');
+        break;
+    case "localizador":
+        $('#registroTelefonos #contTelefono').html('<div class="form-group col-md-6 col-sm-6"><input type="text" id="numTelefono" class="form-control solo-numero" placeholder="Número:" maxlength="10" onpaste="soloNumeros()" value="'+numero+'"/></div><div class="form-group col-md-6 col-sm-6"><input type="text" id="locTelefono" class="form-control solo-numero" placeholder="Localizador:" maxlength="8" onpaste="soloNumeros()"/></div>');
+        break;
+  }
+});

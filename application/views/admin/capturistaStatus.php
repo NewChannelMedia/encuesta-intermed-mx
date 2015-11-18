@@ -112,6 +112,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                   <!-- Nav tabs -->
                   <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#hoy<?php echo $capts; ?>" aria-controls="hoy<?php echo $capts; ?>" role="tab" data-toggle="tab">Hoy</a></li>
+                    <li role="presentation"><a href="#ayer<?php echo $capts; ?>" aria-controls="ayer<?php echo $capts; ?>" role="tab" data-toggle="tab">Ayer</a></li>
                     <li role="presentation"><a href="#total<?php echo $capts; ?>" aria-controls="total<?php echo $capts; ?>" role="tab" data-toggle="tab">Totales</a></li>
                   </ul>
 
@@ -134,7 +135,13 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                           </tr>
                           <tr>
                             <td>Registros por hora</td>
-                            <td class="text-center"><?php if ($dat['RegistrosHoy']['total'] > 0) {echo round(intval($dat['RegistrosHoy']['total'])/(intval($dat['RegistrosHoy']['minutos'])/60),1); } else echo "0"; ?></td>
+                            <?php
+                            if ((intval($dat['RegistrosHoy']['minutos'])/60) > 0){
+                              $prom = (intval($dat['RegistrosHoy']['minutos'])/60);
+                            } else {
+                              $prom = 1;
+                            } ?>
+                            <td class="text-center"><?php if ($dat['RegistrosHoy']['total'] > 0) {echo round(intval($dat['RegistrosHoy']['total'])/$prom,1); } else echo "0"; ?></td>
                           </tr>
                           <tr>
                             <td>Tiempo promedio por registro</td>
@@ -142,7 +149,24 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                           </tr>
                           <tr>
                             <td>Efectividad</td>
-                            <td class="text-center"><?php if ($dat['RegistrosHoy']['total'] > 0 && $dat['Registros']['total'] > 0) { echo round(((intval($dat['Registros']['minutos'])/intval($dat['Registros']['total']))/(intval($dat['RegistrosHoy']['minutos'])/intval($dat['RegistrosHoy']['total'])))*100,2); } else echo "0"; ?> %</td>
+                            <?php
+                            if (intval($dat['RegistrosHoy']['total']) > 0){
+                              $prom = intval($dat['RegistrosHoy']['total']);
+                            } else {
+                              $prom = 1;
+                            }
+                            if (intval($dat['Registros']['total'])>0){
+                              $prom2 = intval($dat['Registros']['total']);
+                            } else {
+                              $prom2 = 1;
+                            }
+                            if (intval($dat['RegistrosHoy']['minutos'])>0){
+                              $prom3 = intval($dat['RegistrosHoy']['minutos']);
+                            } else {
+                              $prom3 = 1;
+                            }
+                            ?>
+                            <td class="text-center"><?php if ($dat['RegistrosHoy']['total'] > 0 && $dat['Registros']['total'] > 0) { echo round(((intval($dat['Registros']['minutos'])/$prom2)/($prom3/$prom))*100,2); } else echo "0"; ?> %</td>
                           </tr>
                         </tbody>
                       </table>
@@ -150,6 +174,61 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
                         TOTALES<br/><span style="font-size:500%">
                         <?php echo $dat['RegistrosHoy']['total']; ?>
+                      </span>
+                      </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="ayer<?php echo $capts; ?>">
+                      <br/>
+                      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                        <table class="table">
+                        <thead>
+                          <tr>
+                            <th style="width:80%">Cualidad</th>
+                            <th class="text-center">Resultado</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Total de registros</td>
+                            <td class="text-center"><?php echo $dat['RegistrosAyer']['total']; ?></td>
+                          </tr>
+                          <tr>
+                            <td>Registros por hora</td>
+                            <?php
+                              if ((intval($dat['RegistrosAyer']['minutos'])/60)>0){
+                                $prom = (intval($dat['RegistrosAyer']['minutos'])/60);
+                              } else {
+                                $prom = 1;
+                              }
+                             ?>
+                            <td class="text-center"><?php if ($dat['RegistrosAyer']['total'] > 0) {echo round(intval($dat['RegistrosAyer']['total'])/$prom,1); } else echo "0"; ?></td>
+                          </tr>
+                          <tr>
+                            <td>Tiempo promedio por registro</td>
+                            <td class="text-center"><?php if ($dat['RegistrosAyer']['total'] > 0) { echo round(intval($dat['RegistrosAyer']['minutos'])/intval($dat['RegistrosAyer']['total']),1); } else echo "0"; ?> min</td>
+                          </tr>
+                          <tr>
+                            <td>Efectividad</td>
+                            <?php
+                            if ((intval($dat['RegistrosAyer']['total'])) > 0){
+                              $prom = (intval($dat['RegistrosAyer']['minutos'])/intval($dat['RegistrosAyer']['total']));
+                            } else {
+                              $prom = intval($dat['RegistrosAyer']['minutos']);
+                            }
+                            if (intval($dat['Registros']['total'])>0){
+                              $prom2 = intval($dat['Registros']['total']);
+                            } else {
+                              $prom2 = 1;
+                            }
+                            ?>
+                            <td class="text-center"><?php if ($dat['RegistrosAyer']['total'] > 0 && $dat['Registros']['total'] > 0) { echo round(((intval($dat['Registros']['minutos'])/$prom2)/$prom)*100,2); } else echo "0"; ?> %</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>
+                      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+                        TOTALES<br/><span style="font-size:500%">
+                        <?php echo $dat['RegistrosAyer']['total']; ?>
                       </span>
                       </div>
                     </div>
@@ -170,7 +249,13 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                           </tr>
                           <tr>
                             <td>Registros por hora</td>
-                            <td class="text-center"><?php if ($dat['Registros']['total'] > 0) { echo round(intval($dat['Registros']['total'])/(intval($dat['Registros']['minutos'])/60),1); } else echo "0";?></td>
+                            <?php
+                            if ((intval($dat['Registros']['minutos'])/60) > 0){
+                              $prom = (intval($dat['Registros']['minutos'])/60);
+                            } else {
+                              $prom = 1;
+                            } ?>
+                            <td class="text-center"><?php if ($dat['Registros']['total'] > 0) { echo round(intval($dat['Registros']['total'])/$prom,1); } else echo "0";?></td>
                           </tr>
                           <tr>
                             <td>Tiempo promedio por registro</td>

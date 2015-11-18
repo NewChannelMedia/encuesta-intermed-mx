@@ -92,7 +92,9 @@
               $random = rand($min,$max);
             }
             $id[] = $random;
-            $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random));
+            if (count($this->db_capturista->get_where('medicos', array('id' => $random,'terminado'=>1))->row_array())>0){
+              $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random));
+            }
           }
           return true;
         }
@@ -120,6 +122,7 @@
         public function get_noSeleccionados(){
           $this->db_capturista->select('medicos.*');
           $this->db_capturista->where('medico_id',null);
+          $this->db_capturista->where('terminado',1);
           $this->db_capturista->from('medicos');
           $this->db_capturista->join('muestraMedicos', 'muestraMedicos.medico_id = medicos.id', 'left');
           $result = $this->db_capturista->get();

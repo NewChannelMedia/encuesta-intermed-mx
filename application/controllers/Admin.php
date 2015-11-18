@@ -836,6 +836,7 @@
             $arr[ $i ]['usuario'] = $this->Capcapturista_model->usuarioInfo($row->id_master);
             $arr[ $i ]['RegistrosHoy'] = $this->Capcapturista_model->RegistrosHoy($row->id_master);
             $arr[ $i ]['Registros'] = $this->Capcapturista_model->Registros($row->id_master);
+            $arr[ $i ]['RegistrosAyer'] = $this->Capcapturista_model->RegistrosAyer($row->id_master);
             $i++;
            }
           $data['capturistas'] = $arr;

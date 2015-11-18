@@ -76,5 +76,14 @@
           return $medico;
         }
 
+        public function terminar_captura($id){
+          $data = array(
+                         'terminado' => 1
+                      );
+          $this->db_capturista->where('id', $id);
+          return $this->db_capturista->update('medicos', $data);
+
+        }
+
     }
 ?>
