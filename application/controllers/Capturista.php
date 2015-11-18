@@ -503,5 +503,11 @@
             echo false;
           }
       }
+
+      public function terminarCaptura(){
+          $id = $this->input->post('id');
+          $result = $this->Capmedicos_model->terminar_captura($id);
+          echo json_encode(array('success'=>$result));
+      }
   }
 ?>

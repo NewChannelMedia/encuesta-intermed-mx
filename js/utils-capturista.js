@@ -988,26 +988,40 @@ function traerBorrarTelefono(element){
 }
 
 function LimpiarFormularios(){
-  limpiaSection('#registroMedico');
-  $('#nombre').attr('disabled',false);
-  $('#apellidoP').attr('disabled',false);
-  $('#especialidad').attr('disabled',false);
-  $('#email').attr('disabled',false);
-  $("#especialidad").attr('disabled',false);
-  $("#editarDatos").attr('disabled',false);
-  $("#apellidoM").attr('disabled',false);
-  $("#agregarDatos").attr('disabled',false);
-  $('#registroMedico').removeClass('guardado');
-  $('#registroMedico').removeClass('panel-success');
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/terminarCaptura',
+    type: "POST",
+    dataType: 'JSON',
+    data: {'id':$('#medico_id').val()},
+    async: true,
+    success: function (result) {
+      if (result.success){
+        limpiaSection('#registroMedico');
+        $('#nombre').attr('disabled',false);
+        $('#apellidoP').attr('disabled',false);
+        $('#especialidad').attr('disabled',false);
+        $('#email').attr('disabled',false);
+        $("#especialidad").attr('disabled',false);
+        $("#editarDatos").attr('disabled',false);
+        $("#apellidoM").attr('disabled',false);
+        $("#agregarDatos").attr('disabled',false);
+        $('#registroMedico').removeClass('guardado');
+        $('#registroMedico').removeClass('panel-success');
 
-  $('#editDinamico').html('');
-  $('#fonAgregado').html('');
+        $('#editDinamico').html('');
+        $('#fonAgregado').html('');
 
-  limpiaSection('#registroDireccion');
-  limpiaSection('#editDinamico');
-  limpiaSection('#fonAgregado');
-  limpiaSection('#registroTelefonos');
-  limpiaSection('#registroMedico');
+        limpiaSection('#registroDireccion');
+        limpiaSection('#editDinamico');
+        limpiaSection('#fonAgregado');
+        limpiaSection('#registroTelefonos');
+        limpiaSection('#registroMedico');
+      }
+    },
+    error : function (err){
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  });
 }
 
 

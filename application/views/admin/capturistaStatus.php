@@ -210,10 +210,10 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                           <tr>
                             <td>Efectividad</td>
                             <?php
-                            if ((intval($dat['RegistrosAyer']['minutos'])/intval($dat['RegistrosAyer']['total'])) > 0){
+                            if ((intval($dat['RegistrosAyer']['total'])) > 0){
                               $prom = (intval($dat['RegistrosAyer']['minutos'])/intval($dat['RegistrosAyer']['total']));
                             } else {
-                              $prom = 1;
+                              $prom = intval($dat['RegistrosAyer']['minutos']);
                             }
                             if (intval($dat['Registros']['total'])>0){
                               $prom2 = intval($dat['Registros']['total']);

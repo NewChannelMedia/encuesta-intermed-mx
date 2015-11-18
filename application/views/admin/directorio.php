@@ -6,8 +6,7 @@
         <h3 class="panel-title">Datos Generales del Medico</h3>
       </div>
       <div class="panel-body">
-	      <input type="hidden" id="medico_id" value="">
-  	    <input type="hidden" id="medico_id_temp" value="">
+        <input type="hidden" id="medico_id" value="">
         <div class="row">
           <div class="col-md-8 col-sm-8">
             <div class="row">
