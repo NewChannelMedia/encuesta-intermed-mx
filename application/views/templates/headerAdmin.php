@@ -109,6 +109,9 @@
           <li>
             <a href="<?= base_url() ?>admin/llamadas"><span class="glyphicon glyphicon-earphone nav-icon"></span> Llamadas</a>
           </li>
+          <li>
+            <a href="<?= base_url() ?>admin/registradosDelDia"><span class="glyphicon glyphicon-book nav-icon"></span>Registros del día</a>
+          </li>
         <?php } ?>
         <li>
           <a href="<?= base_url();?>admin/cerrar"><span class="glyphicon glyphicon-log-out nav-icon"></span> salir</a>

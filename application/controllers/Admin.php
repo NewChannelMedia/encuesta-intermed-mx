@@ -823,6 +823,17 @@
           $this->load->view('templates/footerAdmin');
         }
 
+        public function registradosDelDia(){
+          $this->load->model('Capespecialidades_model');
+          $this->load->model('Capubicaciones_model');
+          $data['estados'] = $this->Capubicaciones_model->get_estados();
+          $data['especialidades'] = $this->Capespecialidades_model->get_especialidades();
+          $data['title'] = "Médicos registrados";
+          $this->load->view('templates/headerAdmin', $data);
+          $this->load->view('admin/registradosDelDia', $data);
+          $this->load->view('templates/footerAdmin');
+        }
+
         public function statusCapturista(){
           $query = $this->Capcapturista_model->cargandoInfo();
           $i = 0;
