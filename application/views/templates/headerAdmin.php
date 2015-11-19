@@ -12,10 +12,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title><?php echo $title ?></title>
-    <link rel="icon" href="<?echo base_url(); ?>favicon.ico" type="image/ico">
-    <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>css/encuesta.css">
-    <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>fonts/fonts.css">
+    <link rel="icon" href="<?= base_url(); ?>favicon.ico" type="image/ico">
+    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>css/encuesta.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>fonts/fonts.css">
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js">
     <link rel="stylesheet" href="http://css-spinners.com/css/spinner/spinner.css" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
