@@ -10,7 +10,7 @@
         }
 
         public function get_municipios($estado_id){
-          $query = 'SELECT municipios.*,estados.estado FROM municipios,estados where municipios.estado_id = estados.id AND estados.id = "' . $estado_id . '";';
+          $query = 'SELECT municipios.*,estados.estado FROM municipios,estados where municipios.estado_id = estados.id AND estados.id = "' . $estado_id . '" ORDER BY municipios.municipio ASC;';
           $result = $this->db_capturista->query($query);
           return $result->result_array();
         }

@@ -120,11 +120,18 @@
         }
 
         public function get_noSeleccionados(){
+
           $this->db_capturista->select('medicos.*');
-          $this->db_capturista->where('medico_id',null);
           $this->db_capturista->where('terminado',1);
-          $this->db_capturista->from('medicos');
-          $this->db_capturista->join('muestraMedicos', 'muestraMedicos.medico_id = medicos.id', 'left');
+          if (isset($_SESSION['rol']) && $_SESSION['rol'] == "capturista"){
+            $this->db_capturista->where('DATE(fecha) = DATE(NOW())');
+            $this->db_capturista->where('usuario_capt_id',$_SESSION['id']);
+            $this->db_capturista->from('medicos');
+          } else {
+            $this->db_capturista->where('medico_id',null);
+            $this->db_capturista->from('medicos');
+            $this->db_capturista->join('muestraMedicos', 'muestraMedicos.medico_id = medicos.id', 'left');
+          }
           $result = $this->db_capturista->get();
           $result = $result->result_array();
           $muestra = array();
