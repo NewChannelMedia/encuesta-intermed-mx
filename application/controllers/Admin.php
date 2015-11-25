@@ -16,6 +16,7 @@
       $this->load->model('Porvalidar_model');
       $this->load->model('Newsletter_model');
       $this->load->model('Contacto_model');
+      $this->load->model('Capcapturista_model');
       header('Cache-Control: no cache');
     }
 
@@ -40,10 +41,22 @@
           $usuario = $this->input->post('user');
           $password = $this->input->post('password');
 
-          if( ($this->Admin_model->login($usuario, $password) != false) || ( isset($_SESSION['status']) && $_SESSION['status']!=false) ){
-            if ($usuario){
+          if ($usuario != '' && $password != ''){
+            $session = $this->Admin_model->login($usuario, $password);
+
+            if ($session != false){
               $_SESSION['status'] = true;
-              redirect(base_url() . 'admin/control');
+              $_SESSION['usuario'] = $session['usuario'];
+              $_SESSION['rol'] = $session['rol'];
+              $_SESSION['id'] = $session['id'];
+            } else {
+              session_destroy();
+            }
+          }
+
+          if(isset($_SESSION['status']) && $_SESSION['status'] === true){
+            if ($_SESSION['rol'] == "capturista"){
+              redirect(base_url() . 'admin/directorio');
             }
             $data['title'] = "Dashboard";
             $data['administrador'] = $usuario;
@@ -149,14 +162,14 @@
 
       //cerrar sesion
       public function cerrar(){
-        $_SESSION['status'] = false;
+        unset($_SESSION);
+        session_destroy();
         $data['errorM'] = "";
         $data['title'] = "Admin";
         $this->load->view('templates/header', $data);
         $this->load->view('admin/Admin_vista', $data);
         $this->load->view('templates/footer2');
         redirect(base_url() . 'admin');
-        //return session_destroy();
       }
 
       //carga los datos a la tabla por aceptar
@@ -245,6 +258,7 @@
 
         $total = 0;
         foreach ($categorias as $cat) {
+            if ($cat['id']>0 && $cat['etapa']>0){
             $categoriasArray = array();
             $categoriasArray['name'] = $cat['categoria'];
             $preguntas = $this->Preguntasm_model->get_preguntamByCategoria($cat['id']);
@@ -367,6 +381,7 @@
             }
             $categoriasArray['preguntas'] = $preguntasArray;
             $resultado[] = $categoriasArray;
+          }
         }
 
         $data = array('resultado'=> $resultado);
@@ -389,6 +404,7 @@
 
         $total = 0;
         foreach ($categorias as $cat) {
+            if ($cat['id']>0 && $cat['etapa']>0){
             $categoriasArray = array();
             $categoriasArray['name'] = $cat['categoria'];
             $preguntas = $this->Preguntasm_model->get_preguntamByCategoria($cat['id']);
@@ -511,6 +527,7 @@
             }
             $categoriasArray['preguntas'] = $preguntasArray;
             $resultado[] = $categoriasArray;
+          }
         }
 
         $data = array('resultado'=> $resultado);
@@ -557,6 +574,285 @@
       		echo json_encode($array);
       }
 
+        public function categorias(){
+          $data['etapas'] = $this->Categorias_model->get_etapas();
+          //$this->Categorias_model->set_etapas(4);
+          $data['categorias'] = $this->Categorias_model->get_categorias();
+          $data['title'] = "Administrar preguntas";
+          $this->load->view('templates/headerAdmin', $data);
+          $this->load->view('admin/adminCat', $data);
+          $this->load->view('templates/footerAdmin');
+        }
+
+        public function preguntas(){
+          $data['categorias'] = $this->Categorias_model->get_categorias();
+          $data['preguntas'] = $this->Preguntasm_model->get_preguntasm();
+          $data['title'] = "Administrar preguntas";
+          $this->load->view('templates/headerAdmin', $data);
+          $this->load->view('admin/adminPreg', $data);
+          $this->load->view('templates/footerAdmin');
+        }
+
+
+        public function guardarPregunta(){
+          $pregunta_id = $this->input->post('pregunta_id');
+          $categoria_id = $this->input->post('categoria_id');
+          $pregunta = $this->input->post('pregunta');
+          $tipo = $this->input->post('tipo');
+          $opciones = $this->input->post('opciones');
+
+          $data = array(
+            'pregunta_id' => $pregunta_id,
+            'pregunta' => $pregunta,
+            'tipo' => $tipo,
+            'opciones' => $opciones,
+            'categoria_id' => $categoria_id
+          );
+
+          if ($pregunta_id != ''){
+            //Modificar pregunta
+            $result = $this->Preguntasm_model->update_pregunta($data);
+          } else {
+            //Agregar nueva pregunta
+            $result = $this->Preguntasm_model->create_pregunta($data);
+            if ($result) $pregunta_id = $result['id'];
+          }
+
+          if ($result){
+            $success = true;
+          } else {
+            $success = false;
+          }
+
+          $respuesta = array(
+             'success' => $success,
+             'pregunta_id' => $pregunta_id
+          );
+          echo json_encode($respuesta);
+        }
+
+        public function eliminarPregunta(){
+          $id = $this->input->post('id');
+          $data = array('id'=>$id);
+          $result = $this->Preguntasm_model->delete_pregunta($data);
+
+          $respuesta = array(
+             'success' => $result
+          );
+          echo json_encode($respuesta);
+        }
+
+        public function eliminarEtapa(){
+          $etapa = $this->input->post('etapa');
+
+          $this->Encuestam_model->delete_etapa($etapa);
+          $respuesta = array(
+             'success' => true
+          );
+          echo json_encode($respuesta);
+        }
+
+        public function nuevaEtapa(){
+          $etapas = $this->Categorias_model->get_etapas();
+          $etapas++;
+          $this->Categorias_model->set_etapas($etapas);
+          $respuesta = array(
+             'success' => true
+          );
+          echo json_encode($respuesta);
+        }
+
+        public function nuevaCategoria(){
+          $categoria = $this->input->post('categoria');
+          $result = $this->Categorias_model->create_categoria($categoria);
+          $respuesta = array(
+             'success' => $result
+          );
+          echo json_encode($respuesta);
+
+        }
+
+        public function eliminarCategoria(){
+          $categoria_id = $this->input->post('categoria_id');
+          $result = $this->Categorias_model->delete_categoria($categoria_id);
+          $respuesta = array(
+             'success' => $result
+          );
+          echo json_encode($respuesta);
+
+        }
+
+        public function guardarCambioscategorias(){
+          $data = $this->input->post('data');
+          $int = 0;
+          $data = json_decode(json_encode($data),1);
+          foreach ($data as $etapa) {
+            $numEt = $etapa['etapa'];
+            if (array_key_exists('categorias',$etapa)){
+              $categorias = $etapa['categorias'];
+              foreach ($categorias as $categoria) {
+                $result = $this->Categorias_model->update_etapaCategoria($categoria['id'],$numEt,$int++);
+              }
+            }
+          }
+          $result = true;
+          $respuesta = array(
+             'success' => $result
+          );
+          echo json_encode($respuesta);
+        }
+        public function directorio(){
+            $this->load->model('Capespecialidades_model');
+            $this->load->model('Capubicaciones_model');
+
+            // se carga el modelo para verificar si existen el usuario y password que se reciben por post
+            $this->load->model('Admin_model');
+            if (array_key_exists('status',$_SESSION)){
+              $session = $_SESSION['status'];
+            } else {
+              $session = false;
+            }
+            if($session===true){
+              $data['title'] = "Directorio";
+              $data['errorM'] = "";
+              $data['especialidades'] = $this->Capespecialidades_model->get_especialidades();
+              $data['estados'] = $this->Capubicaciones_model->get_estados();
+              //$data['rol'] = "admin";
+              $data['rol'] = "capturista";
+              $this->load->view('templates/headerAdmin', $data);
+              $this->load->view('admin/directorio', $data);
+              $this->load->view('templates/footerAdmin');
+            }else{
+              $data['title'] = "Directorio";
+              $data['error'] = "no sesion";
+              $_SESSION['status'] = false;
+              $data['status'] = $_SESSION['status'];
+              $data['errorM'] = "Revisa tus credenciales de acceso, o la sesión ha sido cerrada.";
+              $this->load->view('templates/header', $data);
+              $this->load->view('admin/Admin_vista', $data);
+              $this->load->view('templates/footerAdmin');
+            }
+        }
+        public function anadirCapturista(){
+            if (array_key_exists('status',$_SESSION)){
+              $session = $_SESSION['status'];
+            } else {
+              $session = false;
+            }
+            if($session===true){
+              $data['title'] = "Capturista";
+              $data['errorM'] = "";
+              //$data['rol'] = "admin";
+              $data['rol'] = "admin";
+              $this->load->view('templates/headerAdmin', $data);
+              $this->load->view('admin/anadirCapturista', $data);
+              $this->load->view('templates/footerAdmin');
+            }else{
+              $data['title'] = "Directorio";
+              $data['error'] = "no sesion";
+              $_SESSION['status'] = false;
+              $data['status'] = $_SESSION['status'];
+              $data['errorM'] = "Revisa tus credenciales de acceso, o la sesión ha sido cerrada.";
+              $this->load->view('templates/header', $data);
+              $this->load->view('admin/Admin_vista', $data);
+              $this->load->view('templates/footerAdmin');
+            }
+        }
+        public function llamadas(){
+          /*
+            $this->load->model('Capmedicos_model');
+                $this->load->model('Captelefonos_model');
+            for ($i=0; $i < 3000; $i++) {
+              # code...
+              $data = array(
+                'nombre'=>'Nombre medico '.$i,
+                'apellidop'=>'Apellido P',
+                'correo' => 'bmdz.acos@gmail.com'
+              );
+              $this->Capmedicos_model->create_medico($data);
+
+              $data = array(
+                'medico_id'=>$i+1,
+                'claveRegion'=>'333',
+                'numero'=>'777777',
+                'tipo'=>'casa'
+              );
+              $this->Captelefonos_model->create_telefono($data);
+
+              $data = array(
+                'medico_id'=>$i+1,
+                'claveRegion'=>'111',
+                'numero'=>'222222',
+                'tipo'=>'oficina'
+              );
+              $this->Captelefonos_model->create_telefono($data);
+            }*/
+
+            // se carga el modelo para verificar si existen el usuario y password que se reciben por post
+            $this->load->model('Admin_model');
+            if (isset($_SESSION) )
+            $session = $_SESSION['status'];
+            else $session = false;
+            if($session===true){
+              $this->load->model('Capmuestramed_model');
+              $data['total'] = $this->Capmuestramed_model->get_countMuestra();
+              $data['title'] = "Directorio";
+              $data['errorM'] = "";
+              $data['rol'] = "capturista";
+              $this->load->view('templates/headerAdmin', $data);
+              $this->load->view('admin/llamadas', $data);
+              $this->load->view('templates/footerAdmin');
+            }else{
+              $data['title'] = "Directorio";
+              $data['error'] = "no sesion";
+              $_SESSION['status'] = false;
+              $data['status'] = $_SESSION['status'];
+              $data['errorM'] = "Revisa tus credenciales de acceso, o la sesión ha sido cerrada.";
+              $this->load->view('templates/header', $data);
+              $this->load->view('admin/Admin_vista', $data);
+              $this->load->view('templates/footerAdmin');
+            }
+        }
+
+        public function registrados(){
+          $this->load->model('Capespecialidades_model');
+          $this->load->model('Capubicaciones_model');
+          $data['estados'] = $this->Capubicaciones_model->get_estados();
+          $data['especialidades'] = $this->Capespecialidades_model->get_especialidades();
+          $data['title'] = "Médicos registrados";
+          $this->load->view('templates/headerAdmin', $data);
+          $this->load->view('admin/registrados', $data);
+          $this->load->view('templates/footerAdmin');
+        }
+
+        public function statusCapturista(){
+          $query = $this->Capcapturista_model->cargandoInfo();
+          $i = 0;
+          $arr = array();
+          foreach( $query->result() as $row ){
+            $arr[ $i ]['id'] = $row->id;
+            $arr[ $i ]['id_maestro'] = $row->id_master;
+            $arr[ $i ]['nombre'] = $row->nombre;
+            $arr[ $i ]['apellido'] = $row->apellido;
+            $arr[ $i ]['correo'] = $row->correo;
+            $arr[ $i ]['usuario'] = $this->Capcapturista_model->usuarioInfo($row->id_master);
+            $arr[ $i ]['RegistrosHoy'] = $this->Capcapturista_model->RegistrosHoy($row->id_master);
+            $arr[ $i ]['Registros'] = $this->Capcapturista_model->Registros($row->id_master);
+            $arr[ $i ]['RegistrosAyer'] = $this->Capcapturista_model->RegistrosAyer($row->id_master);
+            $i++;
+           }
+          $data['capturistas'] = $arr;
+          $data['title'] = "Status de Capturistas";
+          $this->load->view('templates/headerAdmin', $data);
+          $this->load->view('admin/capturistaStatus', $data);
+          $this->load->view('templates/footerAdmin');
+        }
+        //inserta en la tabla master de la db capturista los datos
+        public function usuarioPassword(){
+          // se atrapa por post las variables enviadas por el ajax
+          $user = $this->input->post('usuario');
+          $password = $this->input->post('password');
+        }
   }
 
   function encuestas_dropDown($enviar, $tipo){
@@ -576,4 +872,5 @@
     $data .= '<label class="col-md-12"><input type="radio" name="radio'. $enviar['element'] .'" ' . $checked . ' onclick="ChartLine('.htmlspecialchars(print_r(json_encode($enviar),1)).')" > Linea</label>';
     return $data;
   }
+
 ?>

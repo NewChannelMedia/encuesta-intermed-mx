@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container flama">
 <div class="encuesta-logo"><img src="<?=base_url()?>img/logos/intermed.png" class="img-responsive center-block"></div>
 
 <div class="encuesta-body">
 
-<?php if (($status === 1 || $status === 2) && !$finalizar) {?>
+<?php if (($encuesta_id != "" || $encuesta_id == null) && !$finalizar) {?>
   <div class="encuesta-title">
     Por favor conteste las siguientes preguntas seleccionando las opciones que correspondan.<br/>
     <span>(La encuesta es de carácter anónimo)</span>
@@ -20,14 +20,16 @@
       AVANCE.
       </div>
       <div class="progress" id="progress-bar" >
-        <div class="progress-bar" id="progress-bar-current" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $terminado*25 ?>%;" title=""  data-toggle="popover" data-content="<?php echo $terminado*25 ?>%" data-placement="top" >
+        <div class="progress-bar" id="progress-bar-current" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $terminado*(100/$cantEtapas) ?>%;" title=""  data-toggle="popover" data-content="<?php echo number_format((float)$terminado*(100/$cantEtapas), 0, '.', ''); ?>%" data-placement="top" >
         </div>
       </div>
     </div>
-    <?php echo $contenido; ?>
+    <div class="preguntas-container <?php echo $contestada; ?>">
+      <?php echo $contenido; ?>
+    </div>
   </div>
   <div class="row" id="btn-encuesta">
-    <?php if ($etapa > 1 && $etapa < 4){?>
+    <?php if ($etapa > 1 && $etapa < $cantEtapas){?>
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <a class="nav-enc pull-left" onclick="regresar()" type="submit"><span class="glyphicon glyphicon-chevron-left"></span>Anterior</a>
       </div>
@@ -38,7 +40,7 @@
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <a class="nav-enc pull-left" onclick="regresar()" type="submit"><span class="glyphicon glyphicon-chevron-left"></span>Anterior</a>
       </div>
-    <?php } elseif ($etapa < 4){ ?>
+    <?php } elseif ($etapa < $cantEtapas){ ?>
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
         <a class="nav-enc pull-right" onclick="siguiente()" type="submit">Siguiente<span class="glyphicon glyphicon-chevron-right"></span></a>
       </div>

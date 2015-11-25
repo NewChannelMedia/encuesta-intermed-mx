@@ -12,9 +12,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title><?php echo $title ?></title>
+    <link rel="icon" href="<?echo base_url(); ?>favicon.ico" type="image/ico">
     <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>css/encuesta.css">
     <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>fonts/fonts.css">
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js">
+    <link rel="stylesheet" href="http://css-spinners.com/css/spinner/spinner.css" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -23,7 +26,7 @@
     <![endif]-->
 </head>
 
-<body id="bodyAdmin" class="index flamaBook-Normal">
+<body id="bodyAdmin" class="index flama-book">
   <nav class="navbar navbar-inverse navbar-fixed-top no-margin">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed nav-btn-toggle" id="menu-toggle">
@@ -38,29 +41,75 @@
   <div id="wrapper">
     <div id="sidebar-wrapper">
       <ul class="sidebar-nav nav-stacked" id="menu">
-        <li>
-          <a href="<?= base_url() ?>admin/control"><span class="glyphicon glyphicon-dashboard nav-icon"></span> Dashboard</a>
-        </li>
-        <li>
-          <a href="#"><span class="glyphicon glyphicon-stats nav-icon"></span> Resultados</a>
-          <ul class="nav-pills nav-stacked secondLevel-ul">
-            <li>
-              <a href="<?= base_url() ?>admin/resultados">Por Categorías</a>
-            </li>
-            <li>
-              <a href="<?= base_url() ?>admin/crossreference">Cross Reference</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="<?= base_url() ?>admin/solicitudes"><span class="glyphicon glyphicon-list-alt nav-icon"></span> Solicitudes</a>
-        </li>
-        <li>
-          <a href="<?= base_url();?>admin/suscritos"><span class="glyphicon glyphicon-plus nav-icon"></span> Newsletter</a>
-        </li>
-        <li>
-          <a href="<?= base_url();?>admin/mensajes"><span class="glyphicon glyphicon-envelope nav-icon"></span> Mensajes</a>
-        </li>
+
+        <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 'admin'){ ?>
+          <li>
+            <a href="<?= base_url() ?>admin/control"><span class="glyphicon glyphicon-dashboard nav-icon"></span> Dashboard</a>
+          </li>
+          <li>
+            <a href="#"><span class="glyphicon glyphicon-stats nav-icon"></span> Resultados</a>
+            <ul class="nav-pills nav-stacked secondLevel-ul">
+              <li>
+                <a href="<?= base_url() ?>admin/resultados">Por Categorías</a>
+              </li>
+              <li>
+                <a href="<?= base_url() ?>admin/crossreference">Cross Reference</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="<?= base_url() ?>admin/solicitudes"><span class="glyphicon glyphicon-list-alt nav-icon"></span> Solicitudes</a>
+          </li>
+          <li>
+            <a href="<?= base_url();?>admin/suscritos"><span class="glyphicon glyphicon-plus nav-icon"></span> Newsletter</a>
+          </li>
+          <li>
+            <a href="<?= base_url();?>admin/mensajes"><span class="glyphicon glyphicon-envelope nav-icon"></span> Mensajes</a>
+          </li>
+          <li>
+            <a><span class="glyphicon glyphicon-wrench nav-icon"></span> Encuesta</a>
+            <ul class="nav-pills nav-stacked secondLevel-ul">
+              <li>
+                <a href="<?= base_url() ?>admin/categorias">Categorias</a>
+              </li>
+              <li>
+                <a href="<?= base_url() ?>admin/preguntas">Preguntas</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a><span class="glyphicon glyphicon-user nav-icon"></span> Directorio</a>
+            <ul class="nav-pills nav-stacked secondLevel-ul">
+              <li>
+                <a href="<?= base_url() ?>admin/directorio">Agregar</a>
+              </li>
+              <li>
+                <a href="<?= base_url() ?>admin/llamadas">Llamadas</a>
+              </li>
+              <li>
+                <a href="<?= base_url() ?>admin/registrados">Registrados</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a><span class="glyphicon glyphicon-headphones nav-icon"></span> Capturista</a>
+            <ul class="nav-pills nav-stacked secondLevel-ul">
+              <li>
+                <a href="<?= base_url() ?>admin/anadirCapturista">Añadir</a>
+              </li>
+              <li>
+                <a href="<?= base_url() ?>admin/statusCapturista">Status</a>
+              </li>
+            </ul>
+          </li>
+        <?php } elseif(isset($_SESSION['rol']) && $_SESSION['rol'] == 'capturista'){ ?>
+          <li>
+            <a href="<?= base_url() ?>admin/directorio"><span class="glyphicon glyphicon-user nav-icon"></span> Directorio</a>
+          </li>
+          <li>
+            <a href="<?= base_url() ?>admin/llamadas"><span class="glyphicon glyphicon-earphone nav-icon"></span> Llamadas</a>
+          </li>
+        <?php } ?>
         <li>
           <a href="<?= base_url();?>admin/cerrar"><span class="glyphicon glyphicon-log-out nav-icon"></span> salir</a>
         </li>
@@ -68,3 +117,10 @@
     </div>
   <div id="page-content-wrapper">
     <!-- Aqui empieza el body de la pagina -->
+  <div class="loader-container hidden">
+    <div class="loader">
+      <div class="spinner-loader">
+        Loading…
+      </div>
+    </div>
+  </div>

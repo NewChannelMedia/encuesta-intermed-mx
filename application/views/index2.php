@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-fixed-top Flama">
+<nav class="navbar navbar-default navbar-fixed-top flama">
   <div class="row upper-row">
     <div class="container">
       <p class="pull-right">
@@ -47,7 +47,7 @@
 <header>
   <div class="container">
     <div class="intro-text">
-      <div class="intro-lead-in Flama">Bienvenido a <strong>Intermed<sup>&reg;</sup></strong></div>
+      <div class="intro-lead-in flama">Bienvenido a <strong>Intermed<sup>&reg;</sup></strong></div>
       <div class="intro-heading">.</div>
       <a href="#services" class="page-scroll btn btn-xl">.</a>
     </div>

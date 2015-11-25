@@ -4,6 +4,8 @@
   * desde Generarlo hasta comprobar que exista. En caso que no exista,
   * se mandara a llamar otras funciones de otras clases para su uso, y
   * realice la tarea destinada que tiene el metodo que las esta llamando
+  *
+  *
   **/
   class Codigo extends CI_Controller
   {
@@ -66,18 +68,16 @@
           	$sustituir = '<span id="codigo">'.$codigo.'</span>';
             	$conCodigo = str_replace('<span id="codigo"></span>',$sustituir, $html2);
             	if($mensaje != ""){
-	              $sustituir2 = '<span id="mensaje"><p>'.$mensaje.'</p></span>';
-	              $conCodigo2 = str_replace('<span id="mensaje"><p></p></span>',$sustituir2, $conCodigo);
+	              $sustituir2 = "<p style = 'color:red;'>".$mensaje."</p>";
+	              $conCodigo2 = str_replace('<p id ="mes"></p>',$sustituir2, $conCodigo);
 	              $mensajeCompleto = $html1.$conCodigo2.$html3;
-	        }else{
-	        	$mensajeCompleto = $html1.$conCodigo.$html3;
-	        }
+    	        }else{
+    	        	$mensajeCompleto = $html1.$conCodigo.$html3;
+    	        }
           }else{
           	$borrar = array(
-          		'<div id="zonaCodigo">',
-          		'<h1>Este es tu codigo de acceso.</h1>',
-          		'<div class="codigoContainer"><span id="codigo"></span></div>',
-          		'</div>'
+          		'<h1>Este es tu código de acceso.</h1>',
+          		'<div class="codigoContainer" style="background-color: white;color: black;font-weight: bold;padding: 10px 20px;margin-top: 45px;margin-bottom: 30px;font-size: 30px;text-transform: uppercase;width: 200px;height: 45px;display: table;display: table-cell;vertical-align: middle;"><span id="codigo"></span></div>'
           	);
               $sustituir3 = "<span id='mensaje'><p>".$mensaje."</p></span>";
               $conCodigo5 = str_replace('<span id="mensaje"><p></p></span>',$sustituir3,$html2);

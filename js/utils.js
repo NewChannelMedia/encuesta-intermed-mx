@@ -85,7 +85,7 @@ $( document ).ready( function () {
 } );
 
 $( function () {
-  $( ".sortable" ).sortable( {
+  $( "·sortable" ).sortable( {
     placeholder: "ui-state-highlight"
   } );
   $( ".sortable" ).disableSelection();
@@ -476,7 +476,7 @@ $( document ).ready( function () {
   $("#enviarTodo").click(function(){
     var codigo = $( "#aleatorioDato" ).val();
     var correo = $( "#codigoCorreo" ).text();
-    var titulo = 'INFORMACION INTERMED-SOLICITUD ACEPTADA';
+    var titulo = 'Mensaje de Intermed';
     var idMensaje = $("#codigoUser").text();
     var valor = parseInt($("#codigoUser").text())-1;
     var mensaje = $("#mensajeAceptado").val();
@@ -514,7 +514,7 @@ $( document ).ready( function () {
   // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
   $("#envioRechazado").click(function(){
     var mail = $("#rechazos").text();
-    var titulo = 'INFORMACION INTERMED';
+    var titulo = 'Mensaje de Intermed';
     var mensaje = $("#areaRechazado").val();
     var valor = parseInt($("#rechazosID").text())-1;
     var idMensaje = $("#rechazosID").text();
@@ -682,65 +682,67 @@ function ChartBar(data){
   }
   $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
-  var ctx = canvas.getContext("2d");
-  var MyChart = new Chart(ctx).Bar(barChartData, {
-    responsive : true,
-    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-  });
+  if (canvas != null){
+    var ctx = canvas.getContext("2d");
+    var MyChart = new Chart(ctx).Bar(barChartData, {
+      responsive : true,
+      tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+    });
 
-  canvas.onclick = function(evt){
-      var activePoints = MyChart.getBarsAtEvent(evt);
-      var closePopovers = true;
-      data.data.forEach(function (result){
-        if (activePoints[0]){
-          if (result.label == activePoints[0]['label']){
-            if (result.complemento){
-              closePopovers = false;
+    canvas.onclick = function(evt){
+        var activePoints = MyChart.getBarsAtEvent(evt);
+        var closePopovers = true;
+        data.data.forEach(function (result){
+          if (activePoints[0]){
+            if (result.label == activePoints[0]['label']){
+              if (result.complemento){
+                closePopovers = false;
 
-              console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
-              var valuescomp = [];
-              var labelscomp = [];
-              result.complemento.forEach(function (complemento){
-                //$('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
-                labelscomp.push(complemento.comp);
-                valuescomp.push(complemento.total);
-              });
-              var r = (Math.floor(Math.random() * 256));
-              var g = (Math.floor(Math.random() * 256));
-              var b = (Math.floor(Math.random() * 256));
-              var barChartData = {
-                labels : labelscomp,
-                datasets : [
-                  {
-                    fillColor : "rgba("+r+","+g+","+b+",0.5)",
-                    strokeColor : "rgba("+r+","+g+","+b+",0.8)",
-                    highlightFill : "rgba("+r+","+g+","+b+",0.75)",
-                    highlightStroke : "rgba("+r+","+g+","+b+",1)",
-                    data : valuescomp
-                  }
-                ]
+                console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
+                var valuescomp = [];
+                var labelscomp = [];
+                result.complemento.forEach(function (complemento){
+                  //$('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
+                  labelscomp.push(complemento.comp);
+                  valuescomp.push(complemento.total);
+                });
+                var r = (Math.floor(Math.random() * 256));
+                var g = (Math.floor(Math.random() * 256));
+                var b = (Math.floor(Math.random() * 256));
+                var barChartData = {
+                  labels : labelscomp,
+                  datasets : [
+                    {
+                      fillColor : "rgba("+r+","+g+","+b+",0.5)",
+                      strokeColor : "rgba("+r+","+g+","+b+",0.8)",
+                      highlightFill : "rgba("+r+","+g+","+b+",0.75)",
+                      highlightStroke : "rgba("+r+","+g+","+b+",1)",
+                      data : valuescomp
+                    }
+                  ]
+                }
+                $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
+                $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
+                //var testPopover = $('#canvas_'+element).parent();
+
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+                $('#'+element+'_complemento').popover('show');
+
+                var canvas2 = document.getElementById('canvas_complemento_'+element);
+                var ctx2 = canvas2.getContext("2d");
+                var MyChart = new Chart(ctx2).Bar(barChartData, {
+                  responsive : true,
+                  tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+                });
               }
-              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
-              $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
-              //var testPopover = $('#canvas_'+element).parent();
-
-              $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
-              $('#'+element+'_complemento').popover('show');
-
-              var canvas2 = document.getElementById('canvas_complemento_'+element);
-              var ctx2 = canvas2.getContext("2d");
-              var MyChart = new Chart(ctx2).Bar(barChartData, {
-                responsive : true,
-                tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-              });
             }
           }
+        });
+        if (closePopovers){
+          $('[data-toggle="popover"]').popover('hide');
         }
-      });
-      if (closePopovers){
-        $('[data-toggle="popover"]').popover('hide');
-      }
-  };
+    };
+  }
 }
 
 function ChartRadar(data){
@@ -771,66 +773,68 @@ function ChartRadar(data){
 
   $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
-  var ctx = canvas.getContext("2d");
-  var MyChart = new Chart(ctx).Radar(barChartData, {
-    responsive : true,
-    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-  });
+  if (canvas != null){
+    var ctx = canvas.getContext("2d");
+    var MyChart = new Chart(ctx).Radar(barChartData, {
+      responsive : true,
+      tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+    });
 
-  canvas.onclick = function(evt){
-      var activePoints = MyChart.getPointsAtEvent(evt);
-      var closePopovers = true;
-      data.data.forEach(function (result){
-        if (activePoints[0]){
-          if (result.label == activePoints[0]['label']){
-            if (result.complemento){
-              closePopovers = false;
+    canvas.onclick = function(evt){
+        var activePoints = MyChart.getPointsAtEvent(evt);
+        var closePopovers = true;
+        data.data.forEach(function (result){
+          if (activePoints[0]){
+            if (result.label == activePoints[0]['label']){
+              if (result.complemento){
+                closePopovers = false;
 
-              console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
-              var valuescomp = [];
-              var labelscomp = [];
-              result.complemento.forEach(function (complemento){
-                //$('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
-                labelscomp.push(complemento.comp);
-                valuescomp.push(complemento.total);
-              });
-              var r = (Math.floor(Math.random() * 256));
-              var g = (Math.floor(Math.random() * 256));
-              var b = (Math.floor(Math.random() * 256));
-              var barChartData = {
-                labels : labelscomp,
-                datasets : [
-                  {
-                    fillColor : "rgba("+r+","+g+","+b+",0.5)",
-                    strokeColor : "rgba("+r+","+g+","+b+",0.8)",
-                    highlightFill : "rgba("+r+","+g+","+b+",0.75)",
-                    highlightStroke : "rgba("+r+","+g+","+b+",1)",
-                    data : valuescomp
-                  }
-                ]
+                console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
+                var valuescomp = [];
+                var labelscomp = [];
+                result.complemento.forEach(function (complemento){
+                  //$('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
+                  labelscomp.push(complemento.comp);
+                  valuescomp.push(complemento.total);
+                });
+                var r = (Math.floor(Math.random() * 256));
+                var g = (Math.floor(Math.random() * 256));
+                var b = (Math.floor(Math.random() * 256));
+                var barChartData = {
+                  labels : labelscomp,
+                  datasets : [
+                    {
+                      fillColor : "rgba("+r+","+g+","+b+",0.5)",
+                      strokeColor : "rgba("+r+","+g+","+b+",0.8)",
+                      highlightFill : "rgba("+r+","+g+","+b+",0.75)",
+                      highlightStroke : "rgba("+r+","+g+","+b+",1)",
+                      data : valuescomp
+                    }
+                  ]
+                }
+                $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
+                $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
+                //var testPopover = $('#canvas_'+element).parent();
+
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+                $('#'+element+'_complemento').popover('show');
+
+                var canvas2 = document.getElementById('canvas_complemento_'+element);
+                var ctx2 = canvas2.getContext("2d");
+                var MyChart = new Chart(ctx2).Radar(barChartData, {
+                  responsive : true,
+                  tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+                });
               }
-              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
-              $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
-              //var testPopover = $('#canvas_'+element).parent();
-
-              $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
-              $('#'+element+'_complemento').popover('show');
-
-              var canvas2 = document.getElementById('canvas_complemento_'+element);
-              var ctx2 = canvas2.getContext("2d");
-              var MyChart = new Chart(ctx2).Radar(barChartData, {
-                responsive : true,
-                tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-              });
             }
           }
+        });
+        if (closePopovers){
+          $('[data-toggle="popover"]').popover('hide');
         }
-      });
-      if (closePopovers){
-        $('[data-toggle="popover"]').popover('hide');
-      }
-  };
-}
+    };
+  }
+  }
 
 function ChartPie(data){
   var element = data['element'];
@@ -850,53 +854,55 @@ function ChartPie(data){
 
   $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
-  var ctx = canvas.getContext("2d");
-  var MyChart =  new Chart(ctx).Pie(values, {
-    responsive : true,
-    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-  });
+  if (canvas != null){
+    var ctx = canvas.getContext("2d");
+    var MyChart =  new Chart(ctx).Pie(values, {
+      responsive : true,
+      tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+    });
 
-  canvas.onclick = function(evt){
-      var activePoints = MyChart.getSegmentsAtEvent(evt);
-      var closePopovers = true;
-      data.data.forEach(function (result){
-        if (activePoints[0]){
-          if (result.label == activePoints[0]['label']){
-            if (result.complemento){
-              closePopovers = false;
+    canvas.onclick = function(evt){
+        var activePoints = MyChart.getSegmentsAtEvent(evt);
+        var closePopovers = true;
+        data.data.forEach(function (result){
+          if (activePoints[0]){
+            if (result.label == activePoints[0]['label']){
+              if (result.complemento){
+                closePopovers = false;
 
-              var valuescomp = [];
-              var labelscomp = [];
-              result.complemento.forEach(function (complemento){
-                var r = (Math.floor(Math.random() * 256));
-                valuescomp.push({
-                  value: complemento.total,
-                  color: "rgba("+r+","+g+","+b+",0.7)",
-                  highlight: "rgba("+r+","+g+","+b+",0.5)",
-                  label: complemento.comp
+                var valuescomp = [];
+                var labelscomp = [];
+                result.complemento.forEach(function (complemento){
+                  var r = (Math.floor(Math.random() * 256));
+                  valuescomp.push({
+                    value: complemento.total,
+                    color: "rgba("+r+","+g+","+b+",0.7)",
+                    highlight: "rgba("+r+","+g+","+b+",0.5)",
+                    label: complemento.comp
+                  });
                 });
-              });
-              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
-              $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
-              //var testPopover = $('#canvas_'+element).parent();
+                $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
+                $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
+                //var testPopover = $('#canvas_'+element).parent();
 
-              $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
-              $('#'+element+'_complemento').popover('show');
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+                $('#'+element+'_complemento').popover('show');
 
-              var canvas2 = document.getElementById('canvas_complemento_'+element);
-              var ctx2 = canvas2.getContext("2d");
-              var MyChart = new Chart(ctx2).Pie(valuescomp, {
-                responsive : true,
-                tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-              });
+                var canvas2 = document.getElementById('canvas_complemento_'+element);
+                var ctx2 = canvas2.getContext("2d");
+                var MyChart = new Chart(ctx2).Pie(valuescomp, {
+                  responsive : true,
+                  tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+                });
+              }
             }
           }
+        });
+        if (closePopovers){
+          $('[data-toggle="popover"]').popover('hide');
         }
-      });
-      if (closePopovers){
-        $('[data-toggle="popover"]').popover('hide');
-      }
-  };
+    };
+  }
 }
 
 function ChartDoughnut(data){
@@ -917,6 +923,7 @@ function ChartDoughnut(data){
 
   $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
+  if (canvas != null){
   var ctx = canvas.getContext("2d");
   var MyChart = new Chart(ctx).Doughnut(values, {
     responsive : true,
@@ -964,6 +971,8 @@ function ChartDoughnut(data){
         $('[data-toggle="popover"]').popover('hide');
       }
   };
+
+  }
 }
 
 function ChartPolar(data){
@@ -983,53 +992,55 @@ function ChartPolar(data){
   });
   $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
-  var ctx = canvas.getContext("2d");
-  var MyChart = new Chart(ctx).PolarArea(values, {
-    responsive : true,
-    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-  });
+  if (canvas != null){
+    var ctx = canvas.getContext("2d");
+    var MyChart = new Chart(ctx).PolarArea(values, {
+      responsive : true,
+      tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+    });
 
-  canvas.onclick = function(evt){
-      var activePoints = MyChart.getSegmentsAtEvent(evt);
-      var closePopovers = true;
-      data.data.forEach(function (result){
-        if (activePoints[0]){
-          if (result.label == activePoints[0]['label']){
-            if (result.complemento){
-              closePopovers = false;
+    canvas.onclick = function(evt){
+        var activePoints = MyChart.getSegmentsAtEvent(evt);
+        var closePopovers = true;
+        data.data.forEach(function (result){
+          if (activePoints[0]){
+            if (result.label == activePoints[0]['label']){
+              if (result.complemento){
+                closePopovers = false;
 
-              var valuescomp = [];
-              var labelscomp = [];
-              result.complemento.forEach(function (complemento){
-                var r = (Math.floor(Math.random() * 256));
-                valuescomp.push({
-                  value: complemento.total,
-                  color: "rgba("+r+","+g+","+b+",0.7)",
-                  highlight: "rgba("+r+","+g+","+b+",0.5)",
-                  label: complemento.comp
+                var valuescomp = [];
+                var labelscomp = [];
+                result.complemento.forEach(function (complemento){
+                  var r = (Math.floor(Math.random() * 256));
+                  valuescomp.push({
+                    value: complemento.total,
+                    color: "rgba("+r+","+g+","+b+",0.7)",
+                    highlight: "rgba("+r+","+g+","+b+",0.5)",
+                    label: complemento.comp
+                  });
                 });
-              });
-              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
-              $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
-              //var testPopover = $('#canvas_'+element).parent();
+                $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
+                $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
+                //var testPopover = $('#canvas_'+element).parent();
 
-              $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
-              $('#'+element+'_complemento').popover('show');
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+                $('#'+element+'_complemento').popover('show');
 
-              var canvas2 = document.getElementById('canvas_complemento_'+element);
-              var ctx2 = canvas2.getContext("2d");
-              var MyChart = new Chart(ctx2).PolarArea(valuescomp, {
-                responsive : true,
-                tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-              });
+                var canvas2 = document.getElementById('canvas_complemento_'+element);
+                var ctx2 = canvas2.getContext("2d");
+                var MyChart = new Chart(ctx2).PolarArea(valuescomp, {
+                  responsive : true,
+                  tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+                });
+              }
             }
           }
+        });
+        if (closePopovers){
+          $('[data-toggle="popover"]').popover('hide');
         }
-      });
-      if (closePopovers){
-        $('[data-toggle="popover"]').popover('hide');
-      }
-  };
+    };
+  }
 }
 
 function ChartLine(data){
@@ -1070,67 +1081,69 @@ function ChartLine(data){
 
   $('#'+element).html('<canvas id="canvas_'+element+'" ></canvas>');
   var canvas = document.getElementById('canvas_'+element);
-  var ctx = canvas.getContext("2d");
-  var MyChart =  new Chart(ctx).Line(data2, {
-    responsive : true,
-    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-  });
+  if (canvas != null){
+    var ctx = canvas.getContext("2d");
+    var MyChart =  new Chart(ctx).Line(data2, {
+      responsive : true,
+      tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+    });
 
-  canvas.onclick = function(evt){
-      var activePoints = MyChart.getPointsAtEvent(evt);
-      var closePopovers = true;
-      data.data.forEach(function (result){
-        if (activePoints[0]){
-          if (result.label == activePoints[0]['label']){
-            if (result.complemento){
-              closePopovers = false;
+    canvas.onclick = function(evt){
+        var activePoints = MyChart.getPointsAtEvent(evt);
+        var closePopovers = true;
+        data.data.forEach(function (result){
+          if (activePoints[0]){
+            if (result.label == activePoints[0]['label']){
+              if (result.complemento){
+                closePopovers = false;
 
-              console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
-              var valuescomp = [];
-              var labelscomp = [];
-              result.complemento.forEach(function (complemento){
-                //$('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
-                labelscomp.push(complemento.comp);
-                valuescomp.push(complemento.total);
-              });
-              var r = (Math.floor(Math.random() * 256));
-              var g = (Math.floor(Math.random() * 256));
-              var b = (Math.floor(Math.random() * 256));
-              var barChartData = {
-                labels : labelscomp,
-                datasets : [
-                  {
-                    fillColor : "rgba("+r+","+g+","+b+",0.5)",
-                    strokeColor : "rgba("+r+","+g+","+b+",0.8)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    data : valuescomp
-                  }
-                ]
+                console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
+                var valuescomp = [];
+                var labelscomp = [];
+                result.complemento.forEach(function (complemento){
+                  //$('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
+                  labelscomp.push(complemento.comp);
+                  valuescomp.push(complemento.total);
+                });
+                var r = (Math.floor(Math.random() * 256));
+                var g = (Math.floor(Math.random() * 256));
+                var b = (Math.floor(Math.random() * 256));
+                var barChartData = {
+                  labels : labelscomp,
+                  datasets : [
+                    {
+                      fillColor : "rgba("+r+","+g+","+b+",0.5)",
+                      strokeColor : "rgba("+r+","+g+","+b+",0.8)",
+                      pointColor: "rgba(151,187,205,1)",
+                      pointStrokeColor: "#fff",
+                      pointHighlightFill: "#fff",
+                      pointHighlightStroke: "rgba(151,187,205,1)",
+                      data : valuescomp
+                    }
+                  ]
+                }
+                $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
+                $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
+                //var testPopover = $('#canvas_'+element).parent();
+
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+                $('#'+element+'_complemento').popover('show');
+
+                var canvas2 = document.getElementById('canvas_complemento_'+element);
+                var ctx2 = canvas2.getContext("2d");
+                var MyChart = new Chart(ctx2).Line(barChartData, {
+                  responsive : true,
+                  tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+                });
               }
-              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
-              $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
-              //var testPopover = $('#canvas_'+element).parent();
-
-              $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
-              $('#'+element+'_complemento').popover('show');
-
-              var canvas2 = document.getElementById('canvas_complemento_'+element);
-              var ctx2 = canvas2.getContext("2d");
-              var MyChart = new Chart(ctx2).Line(barChartData, {
-                responsive : true,
-                tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-              });
             }
           }
+        });
+        if (closePopovers){
+          $('[data-toggle="popover"]').popover('hide');
         }
-      });
-      if (closePopovers){
-        $('[data-toggle="popover"]').popover('hide');
-      }
-  };
+    };
+  }
 }
 
 $(document).ready(function(){
@@ -1152,7 +1165,7 @@ $(function(){
         $(".error-message").html('');
         $("input:submit").attr('disabled','disabled');
         $( this ).parent().addClass('has-error');
-        $( this ).after('<span class="error-message">Recuerda que debe de estar lleno este campo el boton se deshabilito</span>');
+        $( this ).after('<span class="error-message">Recuerda que debe de estar lleno este campo.</span>');
       }else{
         $("input:submit").removeAttr('disabled');
         $( this ).next('span').remove();
@@ -1171,7 +1184,7 @@ $(function(){
         $(".error-justificacion").html('');
         $("input:submit").attr('disabled','disabled');
         $( this ).parent().addClass('has-error');
-        $( this ).after('<span class = "error-justificacion">Danos tu justificación por favor el boton se deshabilito</span>');
+        $( this ).after('<span class = "error-justificacion">Danos tu justificación por favor.</span>');
       }else{
         $("input:submit").removeAttr('disabled');
         $( this ).next('span').remove();
@@ -1443,7 +1456,6 @@ function ChartPolarCross(data,universo){
   });
 }
 
-
 function modificarConsulta(comp, tipo){
   if (!tipo){
     tipo = $('#tipoGrafica').val();
@@ -1538,7 +1550,7 @@ function ejecutarConsulta(finalQuery, tipo){
   if (finalQuery.length > 0){
     int = 0;
     finalQuery.forEach(function (result){
-      finalQuery[int].query = 'SELECT COUNT(*) AS \'total\' FROM  respuestasM, encuestasM where ' + result['query'] + ' AND respuestasM.encuestaM_id = encuestasM.id AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_2 = 1 AND encuestasM.etapa_3 = 1 AND encuestasM.etapa_4 = 1;';
+      finalQuery[int].query = 'SELECT COUNT(*) AS \'total\' FROM  respuestasM, encuestasM where ' + result['query'] + ' AND respuestasM.encuestaM_id = encuestasM.id AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1;';
       finalQuery[int].pregunta = result['pregunta'];
       int++;
     });
@@ -1694,3 +1706,38 @@ function scaleBannerVideoSize(element){
 
     });
 }
+
+//radio on change hide div del about
+$( function () {
+  $( '#btn1' ).click( function () {
+    if ( $( this ).prop( "checked", true ) ) {
+      $( "#comunicacion .info-section" ).removeClass( "hidden" );
+      $( "#funcionalidad .info-section" ).addClass( "hidden" );
+      $( "#versatilidad .info-section" ).addClass( "hidden" );
+      $( "#subComunicacion" ).removeClass( "hidden" );
+      $( "#subFuncionalidad" ).addClass( "hidden" );
+      $( "#subVersatilidad" ).addClass( "hidden" );
+
+    }
+  } );
+  $( '#btn2' ).click( function () {
+    if ( $( this ).prop( "checked", true ) ) {
+      $( "#comunicacion .info-section" ).addClass( "hidden" );
+      $( "#funcionalidad .info-section" ).removeClass( "hidden" );
+      $( "#versatilidad .info-section" ).addClass( "hidden" );
+      $( "#subComunicacion" ).addClass( "hidden" );
+      $( "#subFuncionalidad" ).removeClass( "hidden" );
+      $( "#subVersatilidad" ).addClass( "hidden" );
+    }
+  } );
+  $( '#btn3' ).click( function () {
+    if ( $( this ).prop( "checked", true ) ) {
+      $( "#comunicacion .info-section" ).addClass( "hidden" );
+      $( "#funcionalidad .info-section" ).addClass( "hidden" );
+      $( "#versatilidad .info-section" ).removeClass( "hidden" );
+      $( "#subComunicacion" ).addClass( "hidden" );
+      $( "#subFuncionalidad" ).addClass( "hidden" );
+      $( "#subVersatilidad" ).removeClass( "hidden" );
+    }
+  } );
+} );

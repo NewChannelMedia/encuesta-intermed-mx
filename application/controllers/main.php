@@ -4,7 +4,7 @@
   class Main extends CI_Controller {
     public function index() {
       $data = array(
-        "title" => "Bienvenido a Intermed!",
+        "title" => "¡Bienvenido a Intermed!",
       );
 
       $this->load->view('templates/header', $data);

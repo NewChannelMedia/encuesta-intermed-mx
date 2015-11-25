@@ -1,35 +1,4 @@
-<!--
-<table border = "1">
-  <tbody>
-    <tr>
-      <td>Dato aleatorio numero uno</td>
-    </tr>
-    <tr>
-      <td>Dato aleatorio numero dos</td>
-    </tr>
-    <tr>
-      <td>
-        <div class = "" id = "codigo">
-          <span>Este es tu codigo de acceso al sistema: <h2 id = "codigo"></h2></span>
-          <span><p>con el Cual puedes entrar en la siguiente liga</p></span>
-          <a href = "http://www.newchannel.mx/encuesta-intermed">Usar mi código</a>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <div class = "" id = "mensaje">
-          <span>
-              <p id ="mes"></p>
-          </span>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>-->
-
-<!-- aqui empieza el body bueno -->
-<table cellpadding="0" cellspacing="0" border="0" align="center" width="600" id="mainTable" class="container">
+<table cellpadding="0" cellspacing="0" border="0" align="center" width="600" id="mainTable" class="container" style="border-radius: 20px;border: solid 7px white;background-color: #50a7dd;padding: 0;margin: 0;overflow: hidden;background-image: url('http://newchannel.mx/encuesta-intermed/img/correo/bottom.png');background-position: center bottom;background-repeat: no-repeat;background-size: contain;">
   <tr>
     <td class='movableContentContainer bgItem'>
       <div class='movableContent'>
@@ -57,7 +26,10 @@
           </tr>
         </table>
       </div>
-      <hr class="separador">
+      <hr class="separador" style="width: 90%;
+        margin: 0 auto;
+        height:2px;
+        background-color: white;">
       <div class='movableContent'>
         <table cellpadding="0" cellspacing="0" border="0" align="center" width="600" class="container">
           <tr>
@@ -65,8 +37,8 @@
               <div class="contentEditableContainer contentTextEditable">
                 <div class="contentEditable" align='center'>
                   <div id="zonaCodigo">
-                    <h1>Este es tu codigo de acceso.</h1>
-                    <div class="codigoContainer"><span id="codigo"></span></div>
+                    <h1>Este es tu código de acceso.</h1>
+                    <div class="codigoContainer" style="background-color: white;color: black;font-weight: bold;padding: 10px 20px;margin-top: 45px;margin-bottom: 30px;font-size: 30px;text-transform: uppercase;width: 200px;height: 45px;display: table;display: table-cell;vertical-align: middle;"><span id="codigo"></span></div>
                   </div>
                 </div>
               </div>
@@ -92,7 +64,7 @@
       </div>
 
       <div class='movableContent'>
-        <table cellpadding="0" cellspacing="0" border="0" align="center" width="600" id="bottomBody" class="container">
+        <table cellpadding="0" cellspacing="0" border="0" align="center" width="600" id="bottomBody" class="container" style="height:467px;width: 100%;">
           <tr>
             <td width="100%" align="center" valign="top" style="padding-top:30px;">
               <a href="http://www.intermed.online" style="font-size:30px;color:white;text-transform:none;text-decoration:none;"><strong>www.intermed.online</strong></a>

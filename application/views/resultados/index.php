@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container flama">
 <div class="row text-center" style="padding: 50px;">
 <h2>Resultado de las encuestas</h2>
 </div>

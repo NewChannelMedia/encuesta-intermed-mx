@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title><?php echo $title ?></title>
+    <link rel="icon" href="<?echo base_url(); ?>favicon.ico" >
     <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>css/encuesta.css">
     <link rel="stylesheet" type="text/css" href="<?echo base_url(); ?>fonts/fonts.css">
@@ -17,5 +18,5 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body id="page-top" class="index Flama">
+<body id="page-top" class="index flama">
   <!-- Aqui empieza el body de la pagina -->
