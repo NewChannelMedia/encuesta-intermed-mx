@@ -5,7 +5,7 @@
         sansserif: ", Helvetica, Arial, sans-serif"
       },
       defaults = {
-        filePath: "/fonts/All/", //change this to your font directory location
+        filePath: "/fonts/IntermedFonts/", //change this to your font directory location
         fontFamily: "sans-serif",
         fontStack: false,
         fontStretch: "normal",
@@ -111,10 +111,10 @@ $( document ).ready( function () {
     fontStyle: "normal"
   } );
 
-  $( ".flama" ).fontface( {
+  $( ".flama-normal" ).fontface( {
     fontName: "Flama",
     fileName: "hinted-Flama",
-    fontWeight: "bold",
+    fontWeight: "normal",
     fontStyle: "normal"
   } );
 
@@ -195,48 +195,198 @@ $( document ).ready( function () {
     fontName: "Akzidenz Grotesk BE XBdCn",
     fileName: "hinted-AkzidenzGroteskBE-XBdCnIT",
     fontWeight: "900",
-    font - style: "italic"
+    fontStyle: "italic"
   } );
 
   $( ".ag-bold" ).fontface( {
     fontName: "Akzidenz Grotesk BE",
     fileName: "hinted-AkzidenzGroteskBE-Bold",
     fontWeight: "bold",
-    font - style: "normal"
+    fontStyle: "normal"
   } );
 
   $( ".ag-extra-bold-cond" ).fontface( {
     fontName: "Akzidenz Grotesk BE XBdCn",
     fileName: "hinted-AkzidenzGroteskBE-XBdCn",
     fontWeight: "900",
-    font - style: "normal"
+    fontStyle: "normal"
   } );
 
   $( ".ag-italic" ).fontface( {
     fontName: "Akzidenz Grotesk BE",
     fileName: "hinted-AkzidenzGroteskBE-It",
     fontWeight: "normal",
-    font - style: "italic"
+    fontStyle: "italic"
   } );
 
   $( ".ag-bold-ext-it" ).fontface( {
     fontName: "Akzidenz Grotesk BE BoldEx",
     fileName: "hinted-AkzidenzGroteskBE-BoldExIt",
     fontWeight: "900",
-    font - style: "normal"
+    fontStyle: "normal"
   } );
 
+  $( ".ag-light-cond" ).fontface( {
+    fontName: "Akzidenz Grotesk BE LightCn",
+    fileName: "hinted-AkzidenzGroteskBE-LightCn",
+    fontWeight: "300",
+    fontStyle: "normal"
+  } );
 
+  $( ".ag-cond" ).fontface( {
+    fontName: "Akzidenz Grotesk BE Cn",
+    fileName: "hinted-AkzidenzGroteskBE-Cn",
+    fontWeight: "normal",
+    fontStyle: "normal"
+  } );
 
+  $( ".ag-bold-cond" ).fontface( {
+    fontName: "Akzidenz Grotesk BE Cn",
+    fileName: "hinted-AkzidenzGroteskBE-BoldCn",
+    fontWeight: "bold",
+    fontStyle: "normal"
+  } );
+
+  $( ".ag-bold-italic" ).fontface( {
+    fontName: "Akzidenz Grotesk BE",
+    fileName: "hinted-AkzidenzGroteskBE-BoldIt",
+    fontWeight: "bold",
+    fontStyle: "italic"
+  } );
+
+  $( ".ag-extended" ).fontface( {
+    fontName: "Akzidenz Grotesk BE Ex",
+    fileName: "hinted-AkzidenzGroteskBE-Ex",
+    fontWeight: "normal",
+    fontStyle: "normal"
+  } );
 
   $( ".ag-medium" ).fontface( {
     fontName: "Akzidenz Grotesk BE",
     fileName: "hinted-AkzidenzGroteskBE-Md",
-    fontWeight: "500"
+    fontWeight: "500",
+    fontStyle: "normal"
   } );
+
+  $( ".ag-medum-italic" ).fontface( {
+    fontName: "Akzidenz Grotesk BE",
+    fileName: "hinted-AkzidenzGroteskBE-MdIt",
+    fontWeight: "500",
+    fontStyle: "italic"
+  } );
+
   $( ".ag-regular" ).fontface( {
     fontName: "Akzidenz Grotesk BE",
     fileName: "hinted-AkzidenzGroteskBE-Regular",
-    fontWeight: "normal"
+    fontWeight: "normal",
+    fontStyle: "normal"
   } );
+
+  $( ".ag-medium-ext" ).fontface( {
+    fontName: "Akzidenz Grotesk BE Ext",
+    fileName: "hinted-AkzidenzGroteskBE-MdEx",
+    fontWeight: "500",
+    fontStyle: "normal"
+  } );
+
+  $( ".ag-super" ).fontface( {
+    fontName: "Akzidenz Grotesk BE Super",
+    fileName: "hinted-AkzidenzGroteskBE-Super",
+    fontWeight: "900",
+    fontStyle: "normal"
+  } );
+
+  $( ".ag-extra-bold" ).fontface( {
+    fontName: "Akzidenz Grotesk BE XBd",
+    fileName: "hinted-AkzidenzGroteskBE-XBd",
+    fontWeight: "900",
+    fontStyle: "normal"
+  } );
+
+  $( ".ag-medium-cond" ).fontface( {
+    fontName: "Akzidenz Grotesk BE MdCn",
+    fileName: "hinted-AkzidenzGroteskBE-MdCn",
+    fontWeight: "500",
+    fontStyle: "normal"
+  } );
+
+  $( ".ag-light-extended" ).fontface( {
+    fontName: "Akzidenz Grotesk BE LightEx",
+    fileName: "hinted-AkzidenzGroteskBE-LightEx",
+    fontWeight: "300",
+    fontStyle: "normal"
+  } );
+
+  $( ".ag-bold-ext" ).fontface( {
+    fontName: "Akzidenz Grotesk BE BoldEx",
+    fileName: "hinted-AkzidenzGroteskBE-BoldEx",
+    fontWeight: "bold",
+    fontStyle: "normal"
+  } );
+
+  $( ".ag-light" ).fontface( {
+    fontName: "Akzidenz Grotesk BE",
+    fileName: "hinted-AkzidenzGroteskBE-Light",
+    fontWeight: "300",
+    fontStyle: "normal"
+  } );
+
+  $( ".ag-medium-cond-it" ).fontface( {
+    fontName: "Akzidenz Grotesk BE MdCn",
+    fileName: "hinted-AkzidenzGroteskBE-MdCnIt",
+    fontWeight: "500",
+    fontStyle: "italic"
+  } );
+
+  /* Helvetica */
+
+  $( ".h75-bold" ).fontface( {
+    fontName: "Helvetica Neue Bold",
+    fileName: "hinted-HelveticaNeue-Bold",
+    fontWeight: "bold",
+    fontStyle: "normal"
+  } );
+
+  $( ".h57-cond" ).fontface( {
+    fontName: "Helvetica Neue Condensed",
+    fileName: "hinted-HelveticaNeue-Condensed",
+    fontWeight: "normal",
+    fontStyle: "normal"
+  } );
+
+  $( ".h85-heavy" ).fontface( {
+    fontName: "Helvetica Neue Heavy",
+    fileName: "hinted-HelveticaNeue-Heavy",
+    fontWeight: "900",
+    fontStyle: "normal"
+  } );
+
+  $( ".h77-boldcond" ).fontface( {
+    fontName: "Helvetica Neue Bold Condensed",
+    fileName: "hinted-HelveticaNeue-BoldCond",
+    fontWeight: "bold",
+    fontStyle: "normal"
+  } );
+
+  $( ".h45-light" ).fontface( {
+    fontName: "Helvetica Neue Light",
+    fileName: "hinted-HelveticaNeue-Light",
+    fontWeight: "300",
+    fontStyle: "normal"
+  } );
+
+  $( ".h67-medcond" ).fontface( {
+    fontName: "Helvetica Neue Medium Condensed",
+    fileName: "hinted-HelveticaNeue-MediumCond",
+    fontWeight: "500",
+    fontStyle: "normal"
+  } );
+
+  $( ".h67-medcondobl" ).fontface( {
+    fontName: "Helvetica Neue Medium Condensed Oblique",
+    fileName: "hinted-HelveticaNeue-MediumCondObl",
+    fontWeight: "500",
+    fontStyle: "italic"
+  } );
+
 } );

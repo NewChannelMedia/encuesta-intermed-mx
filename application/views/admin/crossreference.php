@@ -1,4 +1,4 @@
-<div class="container-fluid resultados-contanier flama">
+<div class="container-fluid resultados-container flama-normal">
 <div class="row">
 <div class="col-lg-2 col-md-6">
 <div class="column" id="columna_preguntas">

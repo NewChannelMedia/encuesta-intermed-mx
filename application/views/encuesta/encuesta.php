@@ -1,4 +1,4 @@
-<div class="container flama">
+<div class="container flama-normal">
 <div class="encuesta-logo"><img src="<?=base_url()?>img/logos/intermed.png" class="img-responsive center-block"></div>
 
 <div class="encuesta-body">
