@@ -4,7 +4,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
   redirect(base_url().'admin');
 }
 ?>
-<div class="container-fluid resultados-contanier flama">
+<div class="container-fluid resultados-container flama-normal">
 <div class="row">
 <div class="col-lg-2 col-md-6">
 <div class="column" id="columna_preguntas">

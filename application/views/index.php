@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-default navbarMain flama">
+<nav class="navbar navbar-default navbarMain ">
   <div class="navcontainer container">
     <div class="row upper-row">
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 logo text-left">
@@ -9,11 +9,11 @@
       </div>
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 texts text-right hidden-xs">
         <p >
-          <span class="ag-light s15 white">Atención y contacto: 52 (33) 3125-2200</span><br>
+          <span class="ag-light s15 white-c">Atención y contacto: 52 (33) 3125-2200</span><br>
         </p>
-          <ul class="list-inline flama-book s15 white uppr">
-            <li>
-              <strong>Para:</strong>
+          <ul class="list-inline flama-normal s15 white-c text-uppercase">
+            <li class="flama-bold">
+              Para:
             </li>
             <li>
               MEDICOS
@@ -40,8 +40,8 @@
     <div class="container">
       <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-1">
         <p class="text-right">
-          <span class="ag-regular s65 shadow">Bienvenido a </span><span class="ag-medium s65 shadow">Intermed<sup><span class="shadow s35">&reg;</span></sup></span><br>
-          <span class="ag-medium s30 shadow">La red social de la salud</span>
+          <span class="ag-regular s65 shadow welcome">Bienvenido a </span><span class="ag-medium s65 shadow">Intermed<sup><span class="shadow s35">&reg;</span></sup></span><br>
+          <span class="ag-medium s30 shadow slogan">La red social de la salud</span>
         </p>
         <p class="text-center">
           <span class="ag-light s25 shadow">¡Conéctate con tu entorno profesional como nunca antes!</span>
@@ -54,8 +54,8 @@
       <div class="row">
         <div class="main-body-container col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
           <div class="col-md-12 col-sm-12 col-xs-12 code-info">
-            <h4 class="flama s20 text-center">
-              Intermed® se encuentra en  desarrollo. <br>
+            <h4 class="flama-normal s20 text-center">
+              <span class="ag-medium">Intermed<sup>®</sup></span> se encuentra en  desarrollo. <br>
               Si has recibido una invitación para participar en la encuesta, ingresa tu código para entrar y conocer mas acerca del proyecto y los servicios que tiene para ti.
             </h4>
           </div>
@@ -79,8 +79,8 @@
   <div class="main-extra">
     <div class="container">
       <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-        <p class="flama s20 extra-info text-center">
-          Si no has recibido un código de invitación pero estas interesado en obtener información acerca de <span class="flama-bold">intermed<sup>&reg;</sup></span>,
+        <p class="flama-normal s20 extra-info text-center">
+          Si no has recibido un código de invitación pero estas interesado en obtener información acerca de <span class="ag-medium">Intermed<sup>®</sup></span>,
           <a href = "<?php echo base_url(); ?>codigo/pedir" class="flama-bold s25">solicítalo aquí</a>
         </p>
       </div>
@@ -89,9 +89,9 @@
   <div class="container-fluid" id="contacto">
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3 text-center">
-          <h2 class="flama-book s30 uppr white">Contácto</h2>
+          <h2 class="flama-book s30 text-uppercase white-c">Contácto</h2>
           <form id="frm_contacto" method="POST">
-            <h4 class="flama-book s20 text-center white">Quieres información de que es <strong>intermed<sup>&reg;</sup></strong>? <br>Usa el siguiente formulario para enviarnos un mensaje:</h4>
+            <h4 class="flama-book s20 text-center white-c">Quieres información de que es <span class="ag-medium">Intermed<sup>®</sup></span></strong>? <br>Usa el siguiente formulario para enviarnos un mensaje:</h4>
             <div class="form-group col-md-12">
               <div class="alert alert-success collapse" role="alert" id="frm_contacto-success">
                 Su mensaje ha sido enviado

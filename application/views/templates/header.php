@@ -18,5 +18,5 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body id="page-top" class="index flama">
+<body id="page-top" class="index">
   <!-- Aqui empieza el body de la pagina -->

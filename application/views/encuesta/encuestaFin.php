@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-default navbarMain2 flama">
+<nav class="navbar navbar-default navbarMain2 flama-normal">
   <div class="navcontainer container">
     <div class="row upper-row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 logo text-center">
@@ -16,16 +16,16 @@
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <?php if ($status != 0){ ?>
-            <h1 class="flama-bold s35 text-center white shadow"><strong>¡Gracias por tu colaboración!</strong></h1>
+            <h1 class="flama-bold s35 text-center white-c shadow"><strong>¡Gracias por tu colaboración!</strong></h1>
             <div class="row message-container">
               <div class="col-lg-6 col-md-6 col-sm-8 col-xs-10 col-lg-offset-3 col-md-offset-3 col-sm-offset-2 col-xs-offset-1">
-                <p class="flama s15 white text-center">
+                <p class="flama s15 white-c text-center">
                   ¡En agradecimiento a tu apoyo, Intermed® te regala 3 meses<br>
                   de suscripción a su servicio!<br>
                   Registrate en nuestra lista de espera para recibir tu código de invitación<br>
                   en nuestra fecha de lanzamiento.
                 </p>
-                <p class="s15 white text-center">
+                <p class="s15 white-c text-center">
                   <label class="col-md-12">
                     <input type="checkbox" id="pruebasCheck" value="si" onchange="aceptarNewsletter()">
                     Quiero formar parte del grupo de pruebas beta del proyecto.

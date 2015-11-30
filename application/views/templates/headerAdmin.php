@@ -26,7 +26,7 @@
     <![endif]-->
 </head>
 
-<body id="bodyAdmin" class="index flama-book">
+<body id="bodyAdmin" class="index flama-normal">
   <nav class="navbar navbar-inverse navbar-fixed-top no-margin">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed nav-btn-toggle" id="menu-toggle">
