@@ -53,8 +53,7 @@
     }
 
     public function RegistrosHoy($id){
-      //$this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "total" FROM medicos where medicos.usuario_capt_id = "'. $id .'" AND DATE(fecha) = DATE(NOW()) AND medicos.terminado = 1;');
-      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "total" FROM medicos where medicos.usuario_capt_id = "'. $id .'" AND medicos.terminado = 1;');
+      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "total" FROM medicos where medicos.usuario_capt_id = "'. $id .'" AND DATE(fecha) = DATE(NOW()) AND medicos.terminado = 1;');
       $result = $this->db_capturista->get()->row_array();
       $to_time = strtotime($result['MAX']);
       $from_time = strtotime($result['MIN']);
