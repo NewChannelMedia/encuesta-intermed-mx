@@ -804,7 +804,9 @@ function obtenerNoSeleccionados(){
 
             var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
 
-            $('#noSeleccionadosList').append('<tr class="muestra" id="'+ val.medico.id+'"><td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td></tr>');
+            var eliminar = '<button class="btn btn-danger" onclick="eliminarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-remove"></button>'
+
+            $('#noSeleccionadosList').append('<tr class="muestra" id="'+ val.medico.id+'"><td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td><td class="text-center">'+eliminar+'</td></tr>');
         });
       }
       $('.loader-container').addClass('hidden');
@@ -1385,3 +1387,44 @@ $('#registroTelefonos #tipoTelefono').change(function(){
         break;
   }
 });
+
+function eliminarMedico(medico_id){
+  console.log('ELiminar medico:  ' + medico_id);
+
+    bootbox.confirm({
+      message: "¿Estas seguro de querer borrar al médico?",
+      title: "Mensaje de Intermed",
+      callback: function(result) {
+          if (result){
+            $.ajax( {
+              url: '/encuesta-intermed/Capturista/eliminarMedico',
+              type: "POST",
+              dataType: 'JSON',
+              data: {'medico_id':medico_id},
+              async: true,
+              success: function (result) {
+                if (result.success){
+                  $('tr.muestra#'+medico_id).remove();
+                } else {
+                  bootbox.alert({
+                      message: "Ocurrio un error al momento de eliminar al médico.",
+                      title: "No se elimino el médico"
+                  });
+                }
+              },
+              error : function (err){
+                console.log( "Error: AJax dead :" + JSON.stringify(err) );
+              }
+            });
+          }
+        },
+      buttons: {
+        cancel: {
+          label: "No"
+        },
+        confirm: {
+          label: "Si"
+        }
+      }
+    });
+}

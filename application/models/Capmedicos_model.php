@@ -85,5 +85,18 @@
 
         }
 
+        public function eliminar_medico($medico_id){
+          //Eliminar muestra
+          $success = FALSE;
+          $this->db_capturista->delete('muestraMedicos', array('medico_id' => $medico_id));
+          //Eliminar telefonos
+          $this->db_capturista->delete('telefonos', array('medico_id' => $medico_id));
+          //Eliminar direcciones
+          $this->db_capturista->delete('direcciones', array('medico_id' => $medico_id));
+          if ($this->db_capturista->delete('medicos', array('id' => $medico_id))){
+              $success = TRUE;
+          }
+          return $success;
+        }
     }
 ?>

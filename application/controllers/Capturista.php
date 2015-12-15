@@ -509,5 +509,11 @@
           $result = $this->Capmedicos_model->terminar_captura($id);
           echo json_encode(array('success'=>$result));
       }
+
+      public function eliminarMedico(){
+        $medico_id = $this->input->post('medico_id');
+        $result = $this->Capmedicos_model->eliminar_medico($medico_id);
+        echo json_encode(array('success'=>$result));
+      }
   }
 ?>
