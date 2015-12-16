@@ -1097,8 +1097,10 @@ function actualizarInformacionMedico(id){
 
         var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
 
-        var eliminar = '<button class="btn btn-danger" onclick="eliminarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-remove"></button>'
-
+        var eliminar = '';
+        if ($('tr.muestra#'+medicoSeleccionado_id).parent().prop('id') == "noSeleccionadosList"){
+          eliminar = '<button class="btn btn-danger" onclick="eliminarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-remove"></button>';
+        }
         $('tr.muestra#'+medicoSeleccionado_id).html('<td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td><td class="text-center">'+eliminar+'</td>');
       },
       error: function (err){
