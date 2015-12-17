@@ -128,12 +128,14 @@
             $this->db_capturista->where('usuario_capt_id',$_SESSION['id']);
             $this->db_capturista->from('medicos');
             */
+            $this->db_capturista->where('revisado',0);
             $this->db_capturista->from('medicos');
           } else {
             $this->db_capturista->where('medico_id',null);
             $this->db_capturista->from('medicos');
             $this->db_capturista->join('muestraMedicos', 'muestraMedicos.medico_id = medicos.id', 'left');
           }
+          $this->db_capturista->order_by("apellidop", "ASC"); 
           $result = $this->db_capturista->get();
           $result = $result->result_array();
           $muestra = array();

@@ -12,7 +12,8 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "capturista")){
         <table id="pa" class="table table-striped table-condensed">
           <thead>
             <tr>
-              <th style="width:30%">Nombre</th>
+              <th class="revisado text-center" style="width:5%"><span class="glyphicon glyphicon-ok"></span></th>
+              <th style="width:25%" class="text-center">Nombre</th>
               <th style="width:10%" class="text-center">Correo</th>
               <th style="width:10%" class="text-center">Especialidad</th>
               <th style="width:15%" class="text-center">Telefonos</th>

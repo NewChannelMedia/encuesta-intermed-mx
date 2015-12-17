@@ -98,5 +98,13 @@
           }
           return $success;
         }
+
+        public function marcarRevisado($medico_id){
+          $data = array(
+                         'revisado' => 1
+                      );
+          $this->db_capturista->where('id', $medico_id);
+          return $this->db_capturista->update('medicos', $data);
+        }
     }
 ?>

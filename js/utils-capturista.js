@@ -802,11 +802,16 @@ function obtenerNoSeleccionados(){
               direcciones += '<strong>' + direccion.nombre + '</strong><br/>'+ dir + localidad + '<br/>' + cp + municipio + estado +'<br/>';
             });
 
+            var revisado = '';
+            if ($('th.revisado').length>0){
+              revisado = '<td><input type="checkbox" onclick="MarcarRevisado('+val.medico.id+')"></td>';
+            }
+
             var guardar = '<button class="btn btn-success" onclick="modificarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-search"></button>'
 
             var eliminar = '<button class="btn btn-danger" onclick="eliminarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-remove"></button>'
 
-            $('#noSeleccionadosList').append('<tr class="muestra" id="'+ val.medico.id+'"><td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td><td class="text-center">'+eliminar+'</td></tr>');
+            $('#noSeleccionadosList').append('<tr class="muestra" id="'+ val.medico.id+'">'+revisado+'<td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td><td class="text-center">'+eliminar+'</td></tr>');
         });
       }
       $('.loader-container').addClass('hidden');
@@ -1101,7 +1106,11 @@ function actualizarInformacionMedico(id){
         if ($('tr.muestra#'+medicoSeleccionado_id).parent().prop('id') == "noSeleccionadosList"){
           eliminar = '<button class="btn btn-danger" onclick="eliminarMedico('+ val.medico.id+')"><span class="glyphicon glyphicon-remove"></button>';
         }
-        $('tr.muestra#'+medicoSeleccionado_id).html('<td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td><td class="text-center">'+eliminar+'</td>');
+        var revisado = '';
+        if ($('th.revisado').length>0){
+          revisado = '<td><input type="checkbox" onclick="MarcarRevisado('+val.medico.id+')"></td>';
+        }
+        $('tr.muestra#'+medicoSeleccionado_id).html(revisado+'<td>'+nombre+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+especialidad+'</td><td class="text-center">'+telefonos+'</td><td class="text-center">'+direcciones+'</td><td class="text-center">'+guardar+'</td><td class="text-center">'+eliminar+'</td>');
       },
       error: function (err){
         console.log('ERR: ' + JSON.stringify(err));
@@ -1393,9 +1402,7 @@ $('#registroTelefonos #tipoTelefono').change(function(){
 });
 
 function eliminarMedico(medico_id){
-  console.log('ELiminar medico:  ' + medico_id);
-
-    bootbox.confirm({
+  bootbox.confirm({
       message: "¿Estas seguro de querer borrar al médico?",
       title: "Mensaje de Intermed",
       callback: function(result) {
@@ -1420,6 +1427,50 @@ function eliminarMedico(medico_id){
                 console.log( "Error: AJax dead :" + JSON.stringify(err) );
               }
             });
+          }
+        },
+      buttons: {
+        cancel: {
+          label: "No"
+        },
+        confirm: {
+          label: "Si"
+        }
+      }
+    });
+}
+
+function MarcarRevisado(medico_id){
+    bootbox.confirm({
+      message: "¿Marcar como revisado?",
+      title: "Mensaje de Intermed",
+      callback: function(result) {
+          if (result){
+            $.ajax( {
+              url: '/encuesta-intermed/Capturista/marcarRevisado',
+              type: "POST",
+              dataType: 'JSON',
+              data: {'medico_id':medico_id},
+              async: true,
+              success: function (result) {
+                if (result.success){
+                  setTimeout(function(){
+                    $('tr.muestra#'+medico_id).remove();
+                  },500);
+                } else {
+                  bootbox.alert({
+                      message: "Ocurrio un error al momento de marcar como revisado.",
+                      title: "No se guardo el cambio"
+                  });
+                  $('tr.muestra#'+medico_id).find(':checkbox').prop('checked',false);
+                }
+              },
+              error : function (err){
+                console.log( "Error: AJax dead :" + JSON.stringify(err) );
+              }
+            });
+          } else {
+            $('tr.muestra#'+medico_id).find(':checkbox').prop('checked',false);
           }
         },
       buttons: {
