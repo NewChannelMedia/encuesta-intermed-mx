@@ -112,6 +112,9 @@
           <li>
             <a href="<?= base_url() ?>admin/registradosDelDia"><span class="glyphicon glyphicon-book nav-icon"></span>Registros del día</a>
           </li>
+          <li>
+            <a href="<?= base_url() ?>admin/revisados"><span class="glyphicon glyphicon-ok nav-icon"></span>Revisados</a>
+          </li>
         <?php } ?>
         <li>
           <a href="<?= base_url();?>admin/cerrar"><span class="glyphicon glyphicon-log-out nav-icon"></span> salir</a>

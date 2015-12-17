@@ -862,6 +862,17 @@
           $user = $this->input->post('usuario');
           $password = $this->input->post('password');
         }
+
+        public function revisados(){
+          $this->load->model('Capespecialidades_model');
+          $this->load->model('Capubicaciones_model');
+          $data['estados'] = $this->Capubicaciones_model->get_estados();
+          $data['especialidades'] = $this->Capespecialidades_model->get_especialidades();
+          $data['title'] = "Médicos registrados";
+          $this->load->view('templates/headerAdmin', $data);
+          $this->load->view('admin/revisados', $data);
+          $this->load->view('templates/footerAdmin');
+        }
   }
 
   function encuestas_dropDown($enviar, $tipo){

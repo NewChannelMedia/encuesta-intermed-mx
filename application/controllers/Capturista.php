@@ -226,6 +226,13 @@
         echo json_encode($array);
       }
 
+      public function obtenerNoSeleccionadosRevisados(){
+        //Select * from t1 where not exists (select 1 from t2 where t2.id = t1.id)
+        $noSeleccionados = $this->Capmuestramed_model->get_noSeleccionadosRevisados();
+        $array = array('success'=>true,'muestra'=>$noSeleccionados);
+        echo json_encode($array);
+      }
+
       public function obtenerDatosMedicoId(){
         $id = $this->input->post('id');
         $medico = $this->Capmedicos_model->get_medico($id);

@@ -735,8 +735,12 @@ function obtenerSeleccionados(){
 function obtenerNoSeleccionados(){
   $('.loader-container').removeClass('hidden');
   $('#noSeleccionadosList').html('');
+  var url = 'obtenerNoSeleccionados';
+  if ($('#revisados').length > 0){
+    url = 'obtenerNoSeleccionadosRevisados';
+  }
   $.ajax( {
-    url: '/encuesta-intermed/Capturista/obtenerNoSeleccionados',
+    url: '/encuesta-intermed/Capturista/'+url,
     type: "POST",
     dataType: 'JSON',
     async: true,

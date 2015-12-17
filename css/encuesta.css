@@ -773,6 +773,7 @@ canvas {
 .sidebar-nav li {
   text-indent: 20px;
   line-height: 40px;
+  display: table;
 }
 
 .sidebar-nav li a {
