@@ -7,7 +7,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "capturista")){
 <div id="revisados" class="container-fluid flama">
 <div class="row">
   <div class="text-center">
-      <h3>Médicos registrados</h3>
+      <h3>Médicos revisados</h3>
       <div class="table-responsive">
         <table id="pa" class="table table-striped table-condensed">
           <thead>
