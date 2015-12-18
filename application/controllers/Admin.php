@@ -865,6 +865,7 @@
         public function revisados(){
           $this->load->model('Capespecialidades_model');
           $this->load->model('Capubicaciones_model');
+          //test
           $data['estados'] = $this->Capubicaciones_model->get_estados();
           $data['especialidades'] = $this->Capespecialidades_model->get_especialidades();
           $data['title'] = "Médicos registrados";
