@@ -207,7 +207,6 @@
           $i++;
         }
         $data["newsletter"] = $newsletter;
-
         $this->load->view('templates/headerAdmin', $data);
         $this->load->view('admin/suscritos', $data);
         $this->load->view('templates/footerAdmin');
