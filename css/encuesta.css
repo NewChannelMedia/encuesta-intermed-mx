@@ -816,7 +816,7 @@ canvas {
   text-decoration: none;
   color: #999999;
   font-size: 20px;
-  letter-spacing: -1.5;
+  letter-spacing: -1.5px;
 }
 
 #menu li a:hover {
