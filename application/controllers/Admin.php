@@ -582,7 +582,7 @@
           $data['etapas'] = $this->Categorias_model->get_etapas();
           //$this->Categorias_model->set_etapas(4);
           $data['categorias'] = $this->Categorias_model->get_categorias();
-          $data['title'] = "Administrar preguntas";
+          $data['title'] = "Administrar categorias";
           $this->load->view('templates/headerAdmin', $data);
           $this->load->view('admin/adminCat', $data);
           $this->load->view('templates/footerAdmin');
