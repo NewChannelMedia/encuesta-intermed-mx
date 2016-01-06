@@ -220,9 +220,13 @@
               <?php if ($status != 0){ ?>
                 <form class="btn-empezar-encuesta" role="form" method="POST" action="<?php echo base_url(); ?>encuesta">
                       <input type="hidden" name="codigo" value="<?php echo $codigo ?>">
-                      <button type="submit" class="ag-medium s25 btn btn-contesta btn-block center-block">
-                        ¡Contesta la encuesta!
+                      <button type="submit" class="ag-bold s25 btn btn-contesta btn-block center-block">
+                        ¡Contesta la encuesta! *
                       </button>
+                      <p class="ag-medium white-c s15 text-center">
+                        <br>* La encuesta es de caracter anónimo.
+                        <br>Si quieres saber más lee nuestra <a href="#">política de privacidad</a>
+                      </p>
                 </form>
               <?php } else {?>
                 <?php echo $error ?>
