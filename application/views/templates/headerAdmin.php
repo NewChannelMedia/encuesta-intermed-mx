@@ -40,84 +40,63 @@
   </nav>
   <div id="wrapper">
     <div id="sidebar-wrapper">
-      <ul class="sidebar-nav nav-stacked" id="menu">
-
+      <ul class="nav nav-pills nav-stacked" id="menu">
         <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 'admin'){ ?>
           <li>
-            <a href="<?= base_url() ?>admin/control"><span class="glyphicon glyphicon-dashboard nav-icon"></span> Dashboard</a>
+            <a href="<?= base_url() ?>admin/control"><span class="glyphicon glyphicon-dashboard navicon"></span>Dashboard</a>
           </li>
           <li>
-            <a href="#"><span class="glyphicon glyphicon-stats nav-icon"></span> Resultados</a>
-            <ul class="nav-pills nav-stacked secondLevel-ul">
-              <li>
-                <a href="<?= base_url() ?>admin/resultados">Por Categorías</a>
-              </li>
-              <li>
-                <a href="<?= base_url() ?>admin/crossreference">Cross Reference</a>
-              </li>
-            </ul>
+            <a href="<?= base_url() ?>admin/resultados"><span class="glyphicon glyphicon-stats navicon"></span>Resultados</a>
           </li>
           <li>
-            <a href="<?= base_url() ?>admin/solicitudes"><span class="glyphicon glyphicon-list-alt nav-icon"></span> Solicitudes</a>
+            <a href="<?= base_url() ?>admin/crossreference"><span class="glyphicon glyphicon-stats navicon"></span>Cross Reference</a>
           </li>
           <li>
-            <a href="<?= base_url();?>admin/suscritos"><span class="glyphicon glyphicon-plus nav-icon"></span> Newsletter</a>
+            <a href="<?= base_url() ?>admin/solicitudes"><span class="glyphicon glyphicon-list-alt navicon"></span>Solicitudes</a>
           </li>
           <li>
-            <a href="<?= base_url();?>admin/mensajes"><span class="glyphicon glyphicon-envelope nav-icon"></span> Mensajes</a>
+            <a href="<?= base_url();?>admin/suscritos"><span class="glyphicon glyphicon-plus navicon"></span>Newsletter</a>
           </li>
           <li>
-            <a><span class="glyphicon glyphicon-wrench nav-icon"></span> Encuesta</a>
-            <ul class="nav-pills nav-stacked secondLevel-ul">
-              <li>
-                <a href="<?= base_url() ?>admin/categorias">Categorias</a>
-              </li>
-              <li>
-                <a href="<?= base_url() ?>admin/preguntas">Preguntas</a>
-              </li>
-            </ul>
+            <a href="<?= base_url();?>admin/mensajes"><span class="glyphicon glyphicon-envelope navicon"></span>Mensajes</a>
           </li>
           <li>
-            <a><span class="glyphicon glyphicon-user nav-icon"></span> Directorio</a>
-            <ul class="nav-pills nav-stacked secondLevel-ul">
-              <li>
-                <a href="<?= base_url() ?>admin/directorio">Agregar</a>
-              </li>
-              <li>
-                <a href="<?= base_url() ?>admin/llamadas">Llamadas</a>
-              </li>
-              <li>
-                <a href="<?= base_url() ?>admin/registrados">Registrados</a>
-              </li>
-            </ul>
+            <a href="<?= base_url() ?>admin/categorias"><span class="glyphicon glyphicon-wrench navicon"></span>Categorias</a>
           </li>
           <li>
-            <a><span class="glyphicon glyphicon-headphones nav-icon"></span> Capturista</a>
-            <ul class="nav-pills nav-stacked secondLevel-ul">
-              <li>
-                <a href="<?= base_url() ?>admin/anadirCapturista">Añadir</a>
-              </li>
-              <li>
-                <a href="<?= base_url() ?>admin/statusCapturista">Status</a>
-              </li>
-            </ul>
+            <a href="<?= base_url() ?>admin/preguntas"><span class="glyphicon glyphicon-wrench navicon"></span>Preguntas</a>
+          </li>
+          <li>
+            <a href="<?= base_url() ?>admin/directorio"><span class="glyphicon glyphicon-user navicon"></span>Agregar a Directorio</a>
+          </li>
+          <li>
+            <a href="<?= base_url() ?>admin/registrados"><span class="glyphicon glyphicon-user navicon"></span>Registrados</a>
+          </li>
+          <li>
+            <a href="<?= base_url() ?>admin/llamadas"><span class="glyphicon glyphicon-user navicon"></span>Llamadas</a>
+          </li>
+          <li>
+            <a href="<?= base_url() ?>admin/anadirCapturista"><span class="glyphicon glyphicon-headphones navicon"></span>Añadir Capturista</a>
+          </li>
+          <li>
+            <a href="<?= base_url() ?>admin/statusCapturista"><span class="glyphicon glyphicon-headphones navicon"></span>Status Capturista</a>
           </li>
         <?php } elseif(isset($_SESSION['rol']) && $_SESSION['rol'] == 'capturista'){ ?>
           <li>
-            <a href="<?= base_url() ?>admin/directorio"><span class="glyphicon glyphicon-user nav-icon"></span> Directorio</a>
+            <a href="<?= base_url() ?>admin/directorio"><span class="glyphicon glyphicon-user navicon"></span>Directorio</a>
           </li>
           <li>
-            <a href="<?= base_url() ?>admin/llamadas"><span class="glyphicon glyphicon-earphone nav-icon"></span> Llamadas</a>
+            <a href="<?= base_url() ?>admin/llamadas"><span class="glyphicon glyphicon-earphone navicon"></span>Llamadas</a>
           </li>
           <li>
-            <a href="<?= base_url() ?>admin/registradosDelDia"><span class="glyphicon glyphicon-book nav-icon"></span>Registros del día</a>
+            <a href="<?= base_url() ?>admin/registradosDelDia"><span class="glyphicon glyphicon-book navicon"></span>Registros del día</a>
           </li>
           <li>
             <a href="<?= base_url() ?>admin/revisados"><span class="glyphicon glyphicon-ok nav-icon"></span>Revisados</a>
           </li>
         <?php } ?>
         <li>
-          <a href="<?= base_url();?>admin/cerrar"><span class="glyphicon glyphicon-log-out nav-icon"></span> salir</a>
+          <a href="<?= base_url();?>admin/cerrar"><span class="glyphicon glyphicon-log-out navicon"></span>Salir</a>
         </li>
       </ul>
     </div>

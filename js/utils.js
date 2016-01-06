@@ -590,7 +590,7 @@ function initMenu() {
   );
 }
 $( document ).ready( function () {
-  initMenu();
+  /*initMenu();*/
 } );
 
 /*Resultados*/
@@ -1741,3 +1741,15 @@ $( function () {
     }
   } );
 } );
+
+$(document).ready(function(){
+  $('#lanzavideo1').click(function(){
+    $('#video1').modal('show');
+  });
+  $('#lanzavideo2').click(function(){
+    $('#video2').modal('show');
+  });
+  $('#lanzavideo3').click(function(){
+    $('#video3').modal('show');
+  });
+});
