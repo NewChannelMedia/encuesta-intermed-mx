@@ -49,23 +49,23 @@
       <div class="container">
         <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-1">
           <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-              <p class="text-right">
-                <span class="leftlogo ag-medium s45 shadow">Bienvenido a</span>
-              </p>
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-              <p class="text-justify logotxt">
-                <span class="logo ag-medium bold s130 shadow ls-4 bg-txt1">intermed<sup><span class="suplogo shadow s25">&reg;</span></sup></span><br>
-                <span class="slogan ag-medium s40 shadow">La red social de la salud</span>
-              </p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <p class="text-center txtbtm">
-                <span class="ag-light s30 shadow">¡Conéctate con tu entorno profesional como nunca antes!</span>
-              </p>
+            <div class="main-body-container clearfix">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <p class="text-right">
+                  <span class="leftlogo ag-medium s45 shadow">Bienvenido a</span>
+                </p>
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <p class="text-justify logotxt">
+                  <span class="logo ag-medium bold s130 shadow ls-4 bg-txt1">intermed<sup><span class="suplogo shadow s25">&reg;</span></sup></span><br>
+                  <span class="slogan ag-medium s40 shadow">La red social de la salud</span>
+                </p>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <p class="text-center">
+                  <span class="ag-light s30 shadow">¡Conéctate con tu entorno profesional como nunca antes!</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -76,10 +76,10 @@
 
       </div>
     </div>-->
-    <div class="main-body intern">
+    <div class="main-body intern hidden-xs">
       <div class="container">
         <div class="row">
-          <div class="main-body-container clearfix col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+          <div class="main-body-container clearfix col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@
       <div class="container">
         <div class="row">
           <div class="main-body-container clearfix col-lg-12 col-md-12  col-sm-12 col-xs-12">
-            <h1 class="ag-medium intern-header white-c s100 text-center bg-txt2">¡Bienvenido!</h1>
+            <h1 class="ag-medium intern-header white-c s100 text-center bg-txt2 hidden-xs">¡Bienvenido!</h1>
             <p class="ag-light s25 text-center white-c">
               <br>Hemos preparado los siguientes videos explicativos para ti.<br><br>
               ¡En tan solo unos minutos, conoceras más a fondo las ventajas que<br>
@@ -116,13 +116,13 @@
               <p class="white-c ag-medium s30">
                 Intermed. Una red social Funcional.
               </p>
-              <p class="white-c ag-light s15">
+              <p class="white-c ag-light s20">
                 Breve introducción general a la plataforma y sus funciones.<br>
                 Duración: 3mins.
               </p>
             </div>
             <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-              <img src="<?=base_url()?>img/about/v1.png" class="img-responsive" id="lanzavideo1">
+              <img src="<?=base_url()?>img/about/v1.png" class="img-responsive lanzavideo" id="v1">
             </div>
           </div>
         </div>
@@ -137,13 +137,13 @@
               <p class="white-c ag-medium s30">
                 Intermed. Oficina.
               </p>
-              <p class="white-c ag-light s15">
+              <p class="white-c ag-light s20">
                 Introducción a las funciones de tu oficina y tu agenda Intermed.<br>
                 Duración: 3mins.
               </p>
             </div>
             <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-              <img src="<?=base_url()?>img/about/v2.png" class="img-responsive" id="lanzavideo2">
+              <img src="<?=base_url()?>img/about/v2.png" class="img-responsive lanzavideo" id="v2" >
             </div>
           </div>
         </div>
@@ -156,15 +156,15 @@
             </div>
             <div class="col-lg-9 col-md-9 col-sm-10 col-xs-11">
               <p class="white-c ag-medium s30">
-                Intermed. Una red social Funcional.
+                Intermed. Historiales.
               </p>
-              <p class="white-c ag-light s15">
+              <p class="white-c ag-light s20">
                 Presentación de los Historiales en la Nube de Intermed.<br>
                 Duración: 3mins.
               </p>
             </div>
             <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-              <img src="<?=base_url()?>img/about/v3.png" class="img-responsive" id="lanzavideo3">
+              <img src="<?=base_url()?>img/about/v3.png" class="img-responsive lanzavideo" id="v3">
             </div>
           </div>
         </div>
@@ -179,17 +179,17 @@
         <div class="row">
           <div class="main-body-container clearfix">
             <div class="visible-xs-block col-xs-12">
-              <img src="<?=base_url()?>img/about/is9.png" class="img-circle img-responsive center-block img-wb">
+              <img src="<?=base_url()?>img/about/is9.png" class="img-circle img-responsive center-block img-wb"><br>
             </div>
             <div class="col-lg-12">
-              <p class="white-c ag-medium s50 text-center">
+              <p class="white-c ag-medium s60 text-center">
                 Además,
               </p>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs">
               <img src="<?=base_url()?>img/about/is9.png" class="img-circle img-responsive center-block img-wb">
             </div>
-            <div class="col-lg-7 col-md-7 col-sm-9 col-xs-12">
+            <div class="col-lg-6 col-md-7 col-sm-9 col-sm-offset-0 col-xs-10 col-xs-offset-1">
               <p class="white-c ag-light s20 text-justify">
                 <span class="ag-bold s25">Intermed<sup>®</sup></span> ofrece el módulo de <span class="ag-bold">Secretaria</span>, el cual te permite vincular tu perfil con el perfil de una tercera persona autorizada por ti y decidir cuales funciones quieres delegarle.
               <br>
@@ -215,10 +215,12 @@
               <p class="text-center white-c ag-medium s20">
                 ¡Al finalizar la encuesta podrás registrarte para obtener hasta 6 meses de suscripción gratis a Intermed<sup>®</sup>!<br><br>
               </p>
+            </div>
+            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
               <?php if ($status != 0){ ?>
                 <form class="btn-empezar-encuesta" role="form" method="POST" action="<?php echo base_url(); ?>encuesta">
                       <input type="hidden" name="codigo" value="<?php echo $codigo ?>">
-                      <button type="submit" class="ag-medium s25 btn btn-contesta center-block">
+                      <button type="submit" class="ag-medium s25 btn btn-contesta btn-block center-block">
                         ¡Contesta la encuesta!
                       </button>
                 </form>
@@ -451,47 +453,15 @@
   </section>
   <div class="main-bg about"><div class="grad"></div></div>
 
-
   <!-- Modal -->
-  <div class="modal fade" id="video1" tabindex="-1">
+  <div class="modal fade" id="videoModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title text-uppercase ag-medium">Intermed. Una red social funcional.</h4>
+          <h4 class="modal-title text-uppercase ag-medium"></h4>
         </div>
         <div class="modal-body">
-          <iframe src="https://player.vimeo.com/video/149526541" width="100%" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="video2" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title text-uppercase ag-medium">Intermed. Oficina.</h4>
-        </div>
-        <div class="modal-body">
-          <iframe src="https://player.vimeo.com/video/150442610" width="100%" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="video3" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title text-uppercase ag-medium">Intermed. Historiales.</h4>
-        </div>
-        <div class="modal-body">
-          <iframe src="https://player.vimeo.com/video/150510178" width="100%" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         </div>
       </div>
     </div>

@@ -25,10 +25,10 @@ body {
 }
 .navbarMain.about {
   background-color: #ffffff;
-  margin-bottom: 150px;
   color: #606060;
   padding: 0;
   height: 110px;
+  margin-bottom: 30px;
 }
 @media(max-width:768px) {
   .navbarMain.about {
@@ -127,14 +127,10 @@ body {
 .main2 {
   position: relative;
   width: 100%;
-  margin-top: 10px;
-  margin-bottom: 50px;
   padding: 0;
 }
 @media(max-width:992px){
-  .main2 {
-    margin-bottom: 250px;
-  }
+
 }
 
 .main-bg {
@@ -214,9 +210,6 @@ body {
 
 .main-header p {
   margin-bottom: 30px;
-}
-.main-header p.txtbtm {
-  margin-bottom: 70px;
 }
 
 .logotxt .slogan{
@@ -1200,14 +1193,10 @@ canvas {
   padding-top: 20px;
   background-color: #f3f3f3;
 }
-@media(max-width:992px){
-  #info{
-    margin-top: -250px;
-  }
-}
 
 .info-container {
   margin: 0 auto;
+  margin-top: 50px;
   padding: 0;
 }
 
@@ -1714,6 +1703,9 @@ ul.ui-autocomplete{
   text-align: center;
   padding: 10px;
 }
+.midsection2 .lanzavideo {
+  width: 100%;
+}
 
 .midsection3 {
   background-color: #bd0337;
@@ -1734,8 +1726,15 @@ ul.ui-autocomplete{
   border-radius: 50px;
 }
 
-.btn-contesta:hover,.btn-contesta:focus,.btn-contesta:active, {
+@media (max-width:768px) {
+  .btn-contesta {
+    padding: 15px!important;
+  }
+}
+
+.btn-contesta:hover,.btn-contesta:focus,.btn-contesta:active {
   color: #ffffff;
+  background-color: #bd0337;
 }
 
 .main-body-btnm {
@@ -1743,13 +1742,15 @@ ul.ui-autocomplete{
 }
 
 body.modal-open {
-    overflow: visible;
+  overflow: visible;
+  padding: 0!important;
 }
 
 #about .modal-content {
   background-color: #000000;
   color: #ffffff;
   border-radius: 0;
+  height: 100%;
 }
 #about .modal-content .close {
   color: #ffffff;
@@ -1758,11 +1759,44 @@ body.modal-open {
 
 #about .modal-header {
   border-bottom: none;
+  height: 10%;
+}
+#about .modal-body {
+  border-bottom: none;
+  height: 90%;
+}
+
+#about .modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+#about .modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+#about .modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+  height: 60%;
+}
+
+#about iframe {
+  height: 100%!important;
 }
 
 @media (max-width:992px) {
   .bg-txt1 {
     font-size: 120px!important;
+  }
+
+  #about .modal-dialog {
+    height: 90%;
   }
 }
 

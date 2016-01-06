@@ -1743,13 +1743,31 @@ $( function () {
 } );
 
 $(document).ready(function(){
-  $('#lanzavideo1').click(function(){
-    $('#video1').modal('show');
-  });
-  $('#lanzavideo2').click(function(){
-    $('#video2').modal('show');
-  });
-  $('#lanzavideo3').click(function(){
-    $('#video3').modal('show');
-  });
+  if ( $( '#about' ).length > 0 ) {
+    $('.lanzavideo').click(function(){
+      var id = this.id;
+      var video_src = '';
+      var video_title = '';
+      if(id == 'v1'){
+        video_src = '149526541';
+        video_title = 'Intermed. Una red social funcional.'
+      }
+      else if(id == 'v2'){
+        video_src = '150442610';
+        video_title = 'Intermed. Oficina.'
+      }
+      else if(id == 'v3'){
+        video_src = '150510178';
+        video_title = 'Intermed. Historiales.'
+      }
+      $('#videoModal .modal-header h4').append(video_title);
+      $('#videoModal .modal-body').append('<iframe src="https://player.vimeo.com/video/'+ video_src +'" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+      $('#videoModal').modal('show');
+    });
+  }
 });
+
+$('.modal').on('hide.bs.modal', function (e) {
+  $(this).find('.modal-header h4').html('');
+  $(this).find('iframe').remove();
+})
