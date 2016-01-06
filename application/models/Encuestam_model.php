@@ -133,11 +133,11 @@ class Encuestam_model extends CI_Model {
 
         $cant = $cant-1;
 
-        $this->load->dbforge();
+        $this->db_encuesta_dbforge = $this->load->dbforge($this->db_encuesta, TRUE);
         $result = $this->db_encuesta->list_fields('encuestasM');
         foreach ($result as $field) {
           if (stripos($field, 'etapa_') === 0){
-            $this->dbforge->drop_column('encuestasM', $field);
+            $this->db_encuesta_dbforge->drop_column('encuestasM', $field);
           }
         }
 
@@ -145,7 +145,7 @@ class Encuestam_model extends CI_Model {
           $fields = array(
             'etapa_' . $i => array('type' =>'INT','default' => 0)
           );
-          $this->dbforge->add_column('encuestasM', $fields);
+          $this->db_encuesta_dbforge->add_column('encuestasM', $fields);
         }
         return true;
     }
