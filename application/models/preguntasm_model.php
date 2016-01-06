@@ -1,7 +1,6 @@
 <?php
 class Preguntasm_model extends CI_Model {
-  public function __construct()
-  {
+  public function __construct(){
       $this->db_encuesta = $this->load->database('encuesta', TRUE);
   }
 
@@ -35,7 +34,7 @@ class Preguntasm_model extends CI_Model {
 
   public function create_pregunta($data)
   {
-    $this->load->dbforge();
+    $this->db_encuesta_dbforge = $this->load->dbforge($this->db_encuesta, TRUE);
     $this->db_encuesta->set('pregunta', $data['pregunta']);
     $this->db_encuesta->set('tipo', $data['tipo']);
     $this->db_encuesta->set('opciones', $data['opciones']);
@@ -48,7 +47,7 @@ class Preguntasm_model extends CI_Model {
       $fields = array(
         'pregunta_' . $query['id'] => array('type' => 'TEXT')
       );
-      $result = $this->dbforge->add_column('respuestasM', $fields);
+      $result = $this->db_encuesta_dbforge->add_column('respuestasM', $fields);
       return array('id'=>$query['id'],'result'=>$result);
     }
   }
@@ -67,7 +66,7 @@ class Preguntasm_model extends CI_Model {
   }
 
   public function delete_pregunta($data){
-    $this->load->dbforge();
+    $this->db_encuesta_dbforge = $this->load->dbforge($this->db_encuesta, TRUE);
     $result = $this->db_encuesta->delete('preguntasM', $data);
     if ($result){
       $result = $this->db_encuesta->list_fields('respuestasM');
@@ -79,7 +78,7 @@ class Preguntasm_model extends CI_Model {
         }
       }
       if ($existe){
-        $this->dbforge->drop_column('respuestasM', 'pregunta_' . $data['id']);
+        $this->db_encuesta_dbforge->drop_column('respuestasM', 'pregunta_' . $data['id']);
       }
 
       return true;
