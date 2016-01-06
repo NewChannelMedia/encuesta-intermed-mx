@@ -70,6 +70,7 @@
             $data['totalNewsletter'] = $this->Newsletter_model->get_totalNewsletter()['total'];
 
             /*GRAFICA ENCUESTAS POR FECHA*/
+            /*
             $porfecha = $this->Encuestam_model->get_totalEncuestasMPorFecha();
             $env = array();
             foreach ($porfecha as $key => $value) {
@@ -78,7 +79,9 @@
             $enviar = array('element' => 'div_encuestasPorPeriodo', 'data' => $env);
             echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { ChartLine('.json_encode($enviar).') })</script>';
             $data['drop_encPer'] = encuestas_dropDown($enviar,'Line');
+
             /*GRAFICA PRECIOS PROPUESTOS*/
+            /*
             $respuestas = $this->Respuestasm_model->get_respuestamByPregunta(40);
             $env = array();
             foreach ($respuestas as $key => $value) {
@@ -88,6 +91,7 @@
             echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { ChartPolar('.json_encode($enviar).') })</script>';
             $data['drop_precios'] = encuestas_dropDown($enviar,'Polar');
             /*GRAFICA POR ESPECIALIDADES*/
+            /*
             $respuestas = $this->Respuestasm_model->get_respuestamByPregunta(1);
             $env = array();
             foreach ($respuestas as $key => $value) {
@@ -97,6 +101,7 @@
             echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { ChartBar('.json_encode($enviar).') })</script>';
             $data['drop_especialidades'] = encuestas_dropDown($enviar,'Bar');
             /*GRAFICA POR NIVEL DE INFLUENCIA DE LA TECNOLOGIA EN LA VIDA PROFESIONAL*/
+            /*
             $respuestas = $this->Respuestasm_model->get_respuestamByPregunta(4);
             $env = array();
             foreach ($respuestas as $key => $value) {
@@ -106,6 +111,7 @@
             echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { ChartRadar('.json_encode($enviar).') })</script>';
             $data['drop_tecnologia'] = encuestas_dropDown($enviar,'Radar');
             /*GRAFICA POR EDADES*/
+            /*
             $respuestas = $this->Respuestasm_model->get_respuestamByPregunta(2);
             $env = array();
             foreach ($respuestas as $key => $value) {
@@ -115,6 +121,7 @@
             echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { ChartPie('.json_encode($enviar).') })</script>';
             $data['drop_edades'] = encuestas_dropDown($enviar,'Pie');
             /*GRAFICA POR DISPOSITIVOS*/
+            /*
             $respuestas = $this->Respuestasm_model->get_dispositivos();
             $env = array();
             foreach ($respuestas as $key => $value) {
@@ -123,7 +130,7 @@
             $enviar = array('element' => 'div_dispositivos', 'data' => $env);
             echo '<script type="text/javascript">document.addEventListener("DOMContentLoaded", function(event) { ChartDoughnut('.json_encode($enviar).') })</script>';
             $data['drop_dispositivos'] = encuestas_dropDown($enviar,'Doughnut');
-
+            */
             $this->load->view('templates/headerAdmin', $data);
             $this->load->view('admin/control', $data);
             $this->load->view('templates/footerAdmin');

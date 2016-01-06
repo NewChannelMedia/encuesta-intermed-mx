@@ -374,7 +374,28 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
               $('#listapreguntas').append('<tr id="'+ id +'"></tr>');
               $('tr#'+id).append('<td class="pregunta">'+ data2.pregunta +'</td>');
               $('tr#'+id).append('<td class="text-center categoria"><input type="hidden" value="'+ data2.categoria_id +'">'+ $('#categoriaPreg option:selected').text() +'</td>');
-              $('tr#'+id).append('<td class="text-center tipo">'+ data2.tipo +'</td>');
+
+              var tipodata2 = '';
+
+              switch (data2.tipo) {
+                case "text":
+                    tipodata2 = "Abierta";
+                    break;
+                case "money":
+                    tipodata2 = "Dinero";
+                    break;
+                case "text|enum":
+                    tipodata2 = "Ordenar";
+                    break;
+                case "checkbox":
+                    tipodata2 = "Selección multiple";
+                    break;
+                case "radio":
+                    tipodata2 = "Selección única";
+                    break;
+              }
+
+              $('tr#'+id).append('<td class="text-center tipo"><input type="hidden" value="'+ data2.tipo +'"><div clas="value">'+ tipodata2 +'</div></td>');
               var opciones = '';
               data2.opciones.split("|").forEach(function(opc){
                 if (opciones == ''){
