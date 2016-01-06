@@ -594,6 +594,7 @@ body {
 
 .block-container-table-pregunta {
   font-weight: bold;
+  font-size: 20px;
 }
 
 .block-container-table-respuesta {
@@ -601,6 +602,7 @@ body {
   padding-right: 25px;
   padding-top: 5px;
   padding-bottom: 5px;
+  font-size: 15px;
 }
 
 .encuesta-logo {
@@ -644,6 +646,7 @@ body {
   text-decoration: none;
   color: #8A8A8A;
   font-size: 120%;
+  cursor: pointer;
 }
 
 .nav-enc .glyphicon {
@@ -651,7 +654,6 @@ body {
 }
 
 #btn-encuesta span {
-  font-size: 80%;
   text-align: right;
 }
 
@@ -1391,7 +1393,6 @@ canvas {
 }
 
 #subVersatilidad {
-  margin-bottom: 360px
 }
 
 #opcionesAgregadas span{
@@ -1793,6 +1794,7 @@ body.modal-open {
 @media (max-width:992px) {
   .bg-txt1 {
     font-size: 120px!important;
+    letter-spacing: -1px!important;
   }
 
   #about .modal-dialog {

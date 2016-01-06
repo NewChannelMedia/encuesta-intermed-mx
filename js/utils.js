@@ -1750,15 +1750,15 @@ $(document).ready(function(){
       var video_title = '';
       if(id == 'v1'){
         video_src = '149526541';
-        video_title = 'Intermed. Una red social funcional.'
+        video_title = 'Intermed<sup>&reg;</sup>, una red social funcional.'
       }
       else if(id == 'v2'){
         video_src = '150442610';
-        video_title = 'Intermed. Oficina.'
+        video_title = 'Intermed<sup>&reg;</sup> oficina.'
       }
       else if(id == 'v3'){
         video_src = '150510178';
-        video_title = 'Intermed. Historiales.'
+        video_title = 'Intermed<sup>&reg;</sup> historiales.'
       }
       $('#videoModal .modal-header h4').append(video_title);
       $('#videoModal .modal-body').append('<iframe src="https://player.vimeo.com/video/'+ video_src +'" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');

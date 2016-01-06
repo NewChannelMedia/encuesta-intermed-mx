@@ -57,8 +57,8 @@
               </div>
               <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                 <p class="text-justify logotxt">
-                  <span class="logo ag-medium bold s130 shadow ls-4 bg-txt1">intermed<sup><span class="suplogo shadow s25">&reg;</span></sup></span><br>
-                  <span class="slogan ag-medium s40 shadow">La red social de la salud</span>
+                  <span class="logo ag-medium bold s130 shadow ls-7 bg-txt1">intermed<sup><span class="suplogo shadow s25">&reg;</span></sup></span><br>
+                  <span class="slogan ag-medium s40 shadow ls1">La red social de la salud</span>
                 </p>
               </div>
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -90,9 +90,9 @@
           <div class="main-body-container clearfix col-lg-12 col-md-12  col-sm-12 col-xs-12">
             <h1 class="ag-medium intern-header white-c s100 text-center bg-txt2 hidden-xs">¡Bienvenido!</h1>
             <p class="ag-light s25 text-center white-c">
-              <br>Hemos preparado los siguientes videos explicativos para ti.<br><br>
+              <br>Hemos preparado los siguientes videos para ti.<br><br>
               ¡En tan solo unos minutos, conoceras más a fondo las ventajas que<br>
-              <span class="ag-medium">intermed</span> te ofrece y podrás contestar nuestra encuesta para obtener 3<br>
+              <span class="ag-medium">intermed<sup>&reg;</sup></span> te ofrece y podrás contestar nuestra encuesta para obtener 3<br>
               meses de suscripción gratuita* a la red!
             </p>
             <p class="ag-light s15 text-center grey1-c">
@@ -114,11 +114,11 @@
             </div>
             <div class="col-lg-9 col-md-9 col-sm-10 col-xs-11">
               <p class="white-c ag-medium s30">
-                Intermed. Una red social Funcional.
+                Intermed<sup>&reg;</sup>, una red social Funcional.
               </p>
               <p class="white-c ag-light s20">
                 Breve introducción general a la plataforma y sus funciones.<br>
-                Duración: 3mins.
+                Duración: 3:26mins.
               </p>
             </div>
             <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-1">
@@ -135,11 +135,11 @@
             </div>
             <div class="col-lg-9 col-md-9 col-sm-10 col-xs-11">
               <p class="white-c ag-medium s30">
-                Intermed. Oficina.
+                Intermed<sup>&reg;</sup> oficina.
               </p>
               <p class="white-c ag-light s20">
-                Introducción a las funciones de tu oficina y tu agenda Intermed.<br>
-                Duración: 3mins.
+                Introducción a las funciones de tu oficina y tu agenda Intermed<sup>&reg;</sup>.<br>
+                Duración: 2:26mins.
               </p>
             </div>
             <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-1">
@@ -156,11 +156,11 @@
             </div>
             <div class="col-lg-9 col-md-9 col-sm-10 col-xs-11">
               <p class="white-c ag-medium s30">
-                Intermed. Historiales.
+                Intermed<sup>&reg;</sup> historiales.
               </p>
               <p class="white-c ag-light s20">
-                Presentación de los Historiales en la Nube de Intermed.<br>
-                Duración: 3mins.
+                Presentación de los Historiales en la Nube de Intermed<sup>&reg;</sup>.<br>
+                Duración: 2:25mins.
               </p>
             </div>
             <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-1">
@@ -192,7 +192,8 @@
             <div class="col-lg-6 col-md-7 col-sm-9 col-sm-offset-0 col-xs-10 col-xs-offset-1">
               <p class="white-c ag-light s20 text-justify">
                 <span class="ag-bold s25">Intermed<sup>&reg;</sup></span> ofrece el módulo de <span class="ag-bold">Secretaria</span>, el cual te permite vincular tu perfil con el perfil de una tercera persona autorizada por ti y decidir cuales funciones quieres delegarle.
-              <br>
+              </p>
+              <p class="white-c ag-light s20 text-justify">
                 Así, tu secretaria puede administrar tu agenda y  tus citas, moderar tus comentarios o redactar y compartir las publicaciones que tu le indiques, permitiendote disfrutar de todas las ventajas de estar inscrito en <span class="ag-bold">Intermed<sup>&reg;</sup></span> controlando el nivel de atención que quieras dedicarle.<br>
               </p>
               <p class="white-c ag-light s20 text-justify">
@@ -212,7 +213,7 @@
                 Para finalizar, te pedimos tu apoyo para contestar una <br>
                 pequeña encuesta que será de enorme ayuda para nuestro proyecto.<br><br>
               </p>
-              <p class="text-center white-c ag-medium s20">
+              <p class="text-center white-c ag-bold s20">
                 ¡Al finalizar la encuesta podrás registrarte para obtener hasta 6 meses de suscripción gratis a Intermed<sup>&reg;</sup>!<br><br>
               </p>
             </div>
@@ -357,7 +358,7 @@
               <h4 class="s20 flama-bold media-heading">Librería de Publicaciones</h4>
               <p class="flama s15">
                 Intermed<sup>&reg;</sup> tambien es una plataforma para compartir información y conocimientos.
-  Desde tu propia Oficina Intermed, publica y comparte artículos y publicaciones con tu comunidad.
+  Desde tu propia Oficina Intermed<sup>&reg;</sup>, publica y comparte artículos y publicaciones con tu comunidad.
               </p>
             </div>
           </div>

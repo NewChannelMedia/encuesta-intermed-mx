@@ -119,6 +119,14 @@ footer,header,hgroup,menu,nav,section {
   font-size: 200px;
 }
 
+.ls-7 {
+  letter-spacing: -7px;
+}
+
+.ls-6 {
+  letter-spacing: -6px;
+}
+
 .ls-5 {
   letter-spacing: -5px;
 }

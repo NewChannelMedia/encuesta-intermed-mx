@@ -4,9 +4,9 @@
 <div class="encuesta-body">
 
 <?php if (($encuesta_id != "" || $encuesta_id == null) && !$finalizar) {?>
-  <div class="encuesta-title">
+  <div class="encuesta-title s20">
     Por favor conteste las siguientes preguntas seleccionando las opciones que correspondan.<br/>
-    <span>(La encuesta es de carácter anónimo)</span>
+    <span class="">(La encuesta es de carácter anónimo)</span>
   </div>
 
   <form method="POST" action="<?= base_url() ?>encuesta" onsubmit="comprobar()" id="formEnc"  class="form-inline">
@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    <div class="preguntas-container <?php echo $contestada; ?>">
+    <div class="preguntas-container<?php echo $contestada; ?>">
       <?php echo $contenido; ?>
     </div>
   </div>
@@ -50,11 +50,11 @@
         <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
           <input onclick="guardarycont()" id="btnguardarycontinuar"  class="btn notEnabled" type="button" value="Guardar y continuar">
         </div>
-        <div class="col-lg-4 col-md-4  col-xs-8 pull-right">
+        <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
           <input onclick="guardarysal()" id="btnguardarysalir"  class="btn notEnabled" type="button" value="Guardar y salir"><br/>
         </div>
-        <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
-          <span class="pull-right">Retoma la encuesta volviendo a ingresar con tu código</span>
+        <div class="col-lg-4 col-md-4 col-xs-12 text-right">
+          <span class="text-right">Retoma la encuesta volviendo a ingresar con tu código</span>
         </div>
       </div>
     </div>
