@@ -913,13 +913,13 @@ canvas {
     width: 220px;
   }
   #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+    width: 220px;
   }
   #wrapper.toggled-2 #sidebar-wrapper {
     width: 55px;
   }
   #wrapper.toggled-2 #sidebar-wrapper:hover {
-    width: 250px;
+    width: 220px;
   }
   #page-content-wrapper {
     padding: 0px;
@@ -932,7 +932,7 @@ canvas {
   #wrapper.toggled #page-content-wrapper {
     position: relative;
     margin-right: 0;
-    padding-left: 250px;
+    padding-left: 220px;
   }
   #wrapper.toggled-2 #page-content-wrapper {
     position: relative;
