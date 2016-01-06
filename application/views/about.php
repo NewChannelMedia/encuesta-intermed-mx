@@ -97,7 +97,7 @@
             </p>
             <p class="ag-light s15 text-center grey1-c">
               <br>*Promoción válida para los primeros 500 participantes. La promoción se hara efectiva al momento del lanzamiento comercial de la plataforma.<br>
-              Puedes participar en las pruebas beta de Intermed® y ampliar tu periodo de cortesía por 3 meses más. Activa la opción al finalizar la encuesta.
+              Puedes participar en las pruebas beta de Intermed<sup>&reg;</sup> y ampliar tu periodo de cortesía por 3 meses más. Activa la opción al finalizar la encuesta.
             </p>
           </div>
         </div>
@@ -191,9 +191,9 @@
             </div>
             <div class="col-lg-6 col-md-7 col-sm-9 col-sm-offset-0 col-xs-10 col-xs-offset-1">
               <p class="white-c ag-light s20 text-justify">
-                <span class="ag-bold s25">Intermed<sup>®</sup></span> ofrece el módulo de <span class="ag-bold">Secretaria</span>, el cual te permite vincular tu perfil con el perfil de una tercera persona autorizada por ti y decidir cuales funciones quieres delegarle.
+                <span class="ag-bold s25">Intermed<sup>&reg;</sup></span> ofrece el módulo de <span class="ag-bold">Secretaria</span>, el cual te permite vincular tu perfil con el perfil de una tercera persona autorizada por ti y decidir cuales funciones quieres delegarle.
               <br>
-                Así, tu secretaria puede administrar tu agenda y  tus citas, moderar tus comentarios o redactar y compartir las publicaciones que tu le indiques, permitiendote disfrutar de todas las ventajas de estar inscrito en <span class="ag-bold">Intermed<sup>®</sup></span> controlando el nivel de atención que quieras dedicarle.<br>
+                Así, tu secretaria puede administrar tu agenda y  tus citas, moderar tus comentarios o redactar y compartir las publicaciones que tu le indiques, permitiendote disfrutar de todas las ventajas de estar inscrito en <span class="ag-bold">Intermed<sup>&reg;</sup></span> controlando el nivel de atención que quieras dedicarle.<br>
               </p>
               <p class="white-c ag-light s20 text-justify">
                 Una sola secretaría puede administrar y moderar los perfiles de varios médicos.
@@ -213,7 +213,7 @@
                 pequeña encuesta que será de enorme ayuda para nuestro proyecto.<br><br>
               </p>
               <p class="text-center white-c ag-medium s20">
-                ¡Al finalizar la encuesta podrás registrarte para obtener hasta 6 meses de suscripción gratis a Intermed<sup>®</sup>!<br><br>
+                ¡Al finalizar la encuesta podrás registrarte para obtener hasta 6 meses de suscripción gratis a Intermed<sup>&reg;</sup>!<br><br>
               </p>
             </div>
             <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
@@ -267,7 +267,7 @@
                 <div class="info-section">
                   <h3 class="flama-bold s20">Comunicación y difusión</h3>
                   <p class="flama s15">
-                    Intermed® es el mejor canal para dar a conocer tu trabajo,
+                    Intermed<sup>&reg;</sup> es el mejor canal para dar a conocer tu trabajo,
                     llegar a nuevos clientes y mantener una base de pacientes
                     en constante crecimiento. Deja que nuevos pacientes te
                     encuentren con nuestro directorio, que tus pacientes
@@ -284,7 +284,7 @@
                     ¡Hemos diseñado la mejor seleción de herramientas para ti!
                     Citas en línea, editor de expedientes en la nube, sistema de
                     publicaciones y estadísticas son algunas de las múltiples
-                    funciones de tu Oficina en Intermed®.
+                    funciones de tu Oficina en Intermed<sup>&reg;</sup>.
                   </p>
                 </div>
               </div>
@@ -292,7 +292,7 @@
                 <div class="info-section hidden">
                   <h3 class="flama-bold s20">Versatilidad</h3>
                   <p class="flama s15">
-                    ¿El tiempo es un problema? Intermed® esta diseñado para
+                    ¿El tiempo es un problema? Intermed<sup>&reg;</sup> esta diseñado para
                     permitirte delegar las funciones que desees a una tercera
                     persona, sin perder el control y la privacidad de tu
                     información, y nuestra aplicación móvil pone en tus manos
@@ -314,7 +314,7 @@
             <div class="media-body">
               <h4 class="s20 flama-bold media-heading">Red Social</h4>
               <p class="flama s15">
-                Intermed® es una comunidad que se basa en las mécanicas de las redes sociales, poniendo a tu disposición las funciones mas útiles de estás.
+                Intermed<sup>&reg;</sup> es una comunidad que se basa en las mécanicas de las redes sociales, poniendo a tu disposición las funciones mas útiles de estás.
   Además de incluir herramientas profesionales especificas para tus labores como médico, te permite mantenerte en contacto con tu entorno de trabajo. (Pacientes, colegas, proveedores, etc.)
               </p>
             </div>
@@ -342,7 +342,7 @@
             <div class="media-body">
               <h4 class="s20 flama-bold media-heading">Recomendaciones</h4>
               <p class="flama s15">
-                Nuestro sistema permite a los usuarios (pacientes) intercambiar recomendaciones con sus contactos dentro y fuera de la red Intermed®.
+                Nuestro sistema permite a los usuarios (pacientes) intercambiar recomendaciones con sus contactos dentro y fuera de la red Intermed<sup>&reg;</sup>.
   La nueva publicidad “de boca en boca”.
               </p>
             </div>
@@ -356,7 +356,7 @@
             <div class="media-body">
               <h4 class="s20 flama-bold media-heading">Librería de Publicaciones</h4>
               <p class="flama s15">
-                Intermed® tambien es una plataforma para compartir información y conocimientos.
+                Intermed<sup>&reg;</sup> tambien es una plataforma para compartir información y conocimientos.
   Desde tu propia Oficina Intermed, publica y comparte artículos y publicaciones con tu comunidad.
               </p>
             </div>
@@ -416,7 +416,7 @@
             <div class="media-body">
               <h4 class="s20 flama-bold media-heading">Facturación digital</h4>
               <p class="flama s15">
-                Intermed® incluye un sistema de facturación digital para que puedas expedir facturas desde tu perfil cuando tus pacientes así lo requieran.
+                Intermed<sup>&reg;</sup> incluye un sistema de facturación digital para que puedas expedir facturas desde tu perfil cuando tus pacientes así lo requieran.
   Lleva el control fiscal de tus actividades de una manera clara y sencilla.
               </p>
             </div>
@@ -446,7 +446,7 @@
             <div class="media-body">
               <h4 class="s20 flama-bold media-heading">Versión móvil</h4>
               <p class="flama s15">
-                Lleva contigo todos los beneficios de Intermed® con nuestra versión móvil.
+                Lleva contigo todos los beneficios de Intermed<sup>&reg;</sup> con nuestra versión móvil.
   Agenda y mofica citas, consulta y edita expedientes de tus pacientes y mantente en contacto con ellos desde cualquier parte y en cualquier momento con tu smartphone o tablet.
               </p>
             </div>
