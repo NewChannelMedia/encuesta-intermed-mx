@@ -136,6 +136,9 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
           <div class="modal-body">
             <div class="row">
               <div class="col-md-12">
+                <small><span id="mensajeAlerta"></span></small>
+              </div>
+              <div class="col-md-12">
                 <small>Caracteres escritos:&nbsp;<span class="" id="noCaracteres"></span></small>
               </div>
               <div class="col-md-12">

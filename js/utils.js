@@ -606,6 +606,8 @@ $( document ).ready( function () {
           alert("El mensaje debe de contener menos de 340 caracteres");
         }
       }else{
+        $("#mensajeAlerta").text('Presione el boton de enviar para refrescar la pagina');
+        $("#mensajeAlerta").css('color','red');
         var confirmado = confirm("No se cargo el correo,la pagina se refrescara al presionar \"ok\"");
         if( confirmado ){
           location.reload();
