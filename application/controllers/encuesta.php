@@ -17,11 +17,9 @@
         show_404();
       }
       $data['title']=ucfirst($page);
-
       $this->load->view('templates/header', $data);
       $this->load->view('encuesta/'.$page, $data);
       $this->load->view('templates/footer', $data);
-
     }
 
     public function view($page = 'encuesta'){
@@ -37,9 +35,7 @@
 
     public function existe(){
       $this->load->helper('url');
-      $this->session->set_userdata('codigo', '');
       $codigo = $this->input->post('codigo');
-      $this->session->set_userdata('codigo', $codigo);
 
       $data = $this->checkStatus($codigo);
 
@@ -58,6 +54,7 @@
             //Encuesta sin empezar
         case 2:
             //Encuesta sin terminar
+            $this->session->set_userdata('codigo', $codigo);
             $data['title'] = "Intermed | About";
             $this->load->view('templates/header', $data);
             $this->load->view('about', $data);
@@ -112,6 +109,9 @@
 
     public function encuesta(){
       $this->load->helper('url');
+      if ($this->session->userdata('codigo') == "" && $this->input->post('codigo') != ""){
+        $this->session->set_userdata('codigo',$this->input->post('codigo'));
+      }
       $codigo = $this->session->userdata('codigo');
 
       if(!$codigo){

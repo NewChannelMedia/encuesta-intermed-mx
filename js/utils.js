@@ -419,9 +419,11 @@ function cargaAceptados() {
   } );
 }
 
-$( document ).ready( function () {
-  cargaPorAceptar();
-} );
+if ($('#aceptarModal').length>0){
+  $( document ).ready( function () {
+    cargaPorAceptar();
+  } );
+}
 
 $( document ).ready( function () {
   $( "#pAceptar" ).click( function () {

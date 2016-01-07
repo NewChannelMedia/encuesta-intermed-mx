@@ -20,7 +20,7 @@ foreach ($resultado as $categoria){
           if (stripos($pregunta['pregunta'],'ordene') === false ){
             $data = array(); $complemento=false;
 
-            $divId = 'pregunta_' . ++$totalChar;
+            $divId = 'pregunta_' . $pregunta['id'];
             echo '<div class="portlet panel panel-default" id="' . $divId .'_div"><div class="portlet-header panel-heading">';
             echo '<b >' .$pregunta['pregunta'] . '</b>';
             echo '</div><div class="portlet-content panel-body">';
