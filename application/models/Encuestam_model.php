@@ -100,8 +100,8 @@ class Encuestam_model extends CI_Model {
     return $query->row_array()['id'];
   }
 
-  public function create_encuestam($codigo){
-    $data = array('codigo'=>$codigo);
+  public function create_encuestam($codigo,$tipoCodigo){
+    $data = array('codigo'=>$codigo,'tipoCodigo'=>$tipoCodigo);
     return $this->db_encuesta->insert('encuestasM', $data);
   }
 
