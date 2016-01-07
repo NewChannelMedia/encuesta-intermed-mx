@@ -56,7 +56,6 @@ class Categorias_model extends CI_Model {
      'categoria' => $categoria ,
      'etapa' => 0
     );
-
     return $this->db_encuesta->insert('categorias', $data);
   }
 
@@ -72,6 +71,7 @@ class Categorias_model extends CI_Model {
     if ( $this->db_encuesta->update('preguntasM', $data)){
       $result = $this->db_encuesta->delete('categorias', array('id' => $categoria_id));
     }
+    $this->actualizarNumPreg();
     return $result;
   }
 
@@ -86,6 +86,7 @@ class Categorias_model extends CI_Model {
     $result = false;
     $this->db_encuesta->where('id', $categoria_id);
     $result = $this->db_encuesta->update('categorias', $data);
+    $this->actualizarNumPreg();
     return $result;
   }
 
@@ -107,6 +108,31 @@ class Categorias_model extends CI_Model {
         }
       }
       return $existe;
+    }
+
+    public function actualizarNumPreg(){
+      $this->db_encuesta->order_by("orden", "asc");
+      $this->db_encuesta->where('id >', 0);
+      $this->db_encuesta->where('etapa >', 0);
+      $categorias = $this->db_encuesta->get('categorias')->result_array();
+
+      $indice = 1;
+      $dat = array(
+        'numPreg' => null
+      );
+      $query = $this->db_encuesta->update('preguntasM', $dat);
+      foreach ($categorias as $categoria) {
+        $this->db_encuesta->order_by("id", "asc");
+        $this->db_encuesta->where('categoria_id', $categoria['id']);
+        $preguntas = $this->db_encuesta->get('preguntasM')->result_array();
+        foreach ($preguntas as $pregunta) {
+            $dat = array(
+              'numPreg' => $indice++
+            );
+            $this->db_encuesta->where('id', $pregunta['id']);
+            $query = $this->db_encuesta->update('preguntasM', $dat);
+        }
+      }
     }
 
 }
