@@ -18,7 +18,7 @@
               <img class="center-block" src="<?=base_url()?>img/logos/intermed.png">
             </a>
           </div>
-          <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 texts text-right hidden-xs" style="padding-top: 30px;">
+          <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 texts text-right hidden-xs">
             <ul class="list-inline flama-book s15 uppr">
               <li>
                 <strong>Para:</strong>
@@ -46,40 +46,34 @@
   </nav>
   <section class="main2">
     <div class="main-header">
-      <div class="container">
-        <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-1">
+      <div class="container-fluid">
+        <div class="main-body-container clearfix">
           <div class="row">
-            <div class="main-body-container clearfix">
-              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <p class="text-right">
-                  <span class="leftlogo ag-medium s45 shadow">Bienvenido a</span>
-                </p>
-              </div>
-              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                <p class="text-justify logotxt">
-                  <span class="logo ag-medium bold s130 shadow ls-7 bg-txt1">intermed<sup><span class="suplogo shadow s25">&reg;</span></sup></span><br>
-                  <span class="slogan ag-medium s40 shadow ls1">La red social de la salud</span>
-                </p>
-              </div>
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <p class="text-center">
-                  <span class="ag-light s30 shadow">¡Conéctate con tu entorno profesional como nunca antes!</span>
-                </p>
+            <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-1">
+              <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                  <p class="text-right">
+                    <span class="leftlogo ag-medium shadow">Bienvenido a</span>
+                  </p>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                  <p class="logotxt">
+                    <span class="logo ag-medium bold s130 shadow">intermed<sup><span class="suplogo shadow s25">&reg;</span></sup></span><br>
+                    <span class="slogan ag-medium s40 shadow ">La red social de la salud</span>
+                  </p>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <p class="text-center">
+                    <span class="ag-light s30 shadow">¡Conéctate con tu entorno profesional como nunca antes!</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <!--<div class="main-body-intern">
-      <div class="container">
-
-      </div>
-    </div>-->
-    <div class="main-body intern hidden-xs">
-      <div class="container">
-        <div class="row">
-          <div class="main-body-container clearfix col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+          <div class="row">
+            <div class="header-img clearfix col-lg-10 col-md-12 col-sm-12 col-xs-12 hidden-xs col-lg-offset-1">
+              <img class="img-responsive" src="<?=base_url()?>img/lapbg3.png">
+            </div>
           </div>
         </div>
       </div>
@@ -88,14 +82,14 @@
       <div class="container">
         <div class="row">
           <div class="main-body-container clearfix col-lg-12 col-md-12  col-sm-12 col-xs-12">
-            <h1 class="ag-medium intern-header white-c s100 text-center bg-txt2 hidden-xs">¡Bienvenido!</h1>
+            <h1 class="ag-medium intern-header white-c s100 text-center bg-txt2">¡Bienvenido!</h1>
             <p class="ag-light s25 text-center white-c">
               <br>Hemos preparado los siguientes videos para ti.<br><br>
               ¡En tan solo unos minutos, conoceras más a fondo las ventajas que<br>
               <span class="ag-medium">intermed<sup>&reg;</sup></span> te ofrece y podrás contestar nuestra encuesta para obtener 3<br>
               meses de suscripción gratuita* a la red!
             </p>
-            <p class="ag-light s15 text-center grey1-c">
+            <p class="ag-light s15 text-center muted">
               <br>*Promoción válida para los primeros 500 participantes. La promoción se hara efectiva al momento del lanzamiento comercial de la plataforma.<br>
               Puedes participar en las pruebas beta de Intermed<sup>&reg;</sup> y ampliar tu periodo de cortesía por 3 meses más. Activa la opción al finalizar la encuesta.
             </p>
@@ -105,133 +99,169 @@
     </div>
     <div class="intern midsection2">
       <div class="container">
-        <div class="row">
-          <div class="intern-container">
-            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1">
-              <div class="number img-circle pull-right hidden-xs">
-                <span class="s55 ag-medium">1</span>
+        <div class="main-body-container clearfix">
+          <div class="row">
+            <div class="intern-container clearfix">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="row">
+                  <div class="intern-description clearfix">
+                    <div class="centered">
+                      <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1">
+                        <div class="number img-circle pull-right hidden-xs">
+                          <span class="s55 ag-medium">1</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-9 col-md-9 col-sm-10 col-xs-12">
+                        <p class="ag-medium s30">
+                          Intermed<sup>&reg;</sup>, una red social Funcional.
+                        </p>
+                        <p class="ag-light s20">
+                          Breve introducción general a la plataforma y sus funciones.<br>
+                          <small>Duración: 3:26mins.</small>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <img src="<?=base_url()?>img/about/v1.png" class="img-responsive lanzavideo" id="v1">
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-lg-9 col-md-9 col-sm-10 col-xs-11">
-              <p class="white-c ag-medium s30">
-                Intermed<sup>&reg;</sup>, una red social Funcional.
-              </p>
-              <p class="white-c ag-light s20">
-                Breve introducción general a la plataforma y sus funciones.<br>
-                Duración: 3:26mins.
-              </p>
-            </div>
-            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-              <img src="<?=base_url()?>img/about/v1.png" class="img-responsive lanzavideo" id="v1">
-            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="intern-container">
-            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1">
-              <div class="number img-circle pull-right hidden-xs">
-                <span class="s55 ag-medium">2</span>
+          <div class="row">
+            <div class="intern-container clearfix">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+                <div class="row">
+                  <div class="intern-description clearfix">
+                    <div class="centered">
+                      <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1 pull-right">
+                        <div class="number img-circle pull-left hidden-xs">
+                          <span class="s55 ag-medium">2</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-9 col-md-9 col-sm-10 col-xs-12 pull-left">
+                        <p class="ag-medium s30 text-right">
+                          Intermed<sup>&reg;</sup> oficina.
+                        </p>
+                        <p class="ag-light s20 text-right">
+                          Introducción a las funciones de tu oficina y tu agenda Intermed<sup>&reg;</sup>.<br>
+                          <small>Duración: 2:26mins.</small>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <img src="<?=base_url()?>img/about/v2.png" class="img-responsive lanzavideo" id="v2" >
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-lg-9 col-md-9 col-sm-10 col-xs-11">
-              <p class="white-c ag-medium s30">
-                Intermed<sup>&reg;</sup> oficina.
-              </p>
-              <p class="white-c ag-light s20">
-                Introducción a las funciones de tu oficina y tu agenda Intermed<sup>&reg;</sup>.<br>
-                Duración: 2:26mins.
-              </p>
-            </div>
-            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-              <img src="<?=base_url()?>img/about/v2.png" class="img-responsive lanzavideo" id="v2" >
-            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="intern-container">
-            <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1">
-              <div class="number img-circle pull-right hidden-xs">
-                <span class="s55 ag-medium">3</span>
+          <div class="row">
+            <div class="intern-container clearfix">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="row">
+                  <div class="intern-description clearfix">
+                    <div class="centered">
+                      <div class="col-lg-3 col-md-3 col-sm-2 col-xs-1">
+                        <div class="number img-circle pull-right hidden-xs">
+                          <span class="s55 ag-medium">3</span>
+                        </div>
+                      </div>
+                      <div class="col-lg-9 col-md-9 col-sm-10 col-xs-12">
+                        <p class="ag-medium s30">
+                          Intermed<sup>&reg;</sup> historiales.
+                        </p>
+                        <p class="ag-light s20">
+                          Presentación de los Historiales en la Nube de Intermed<sup>&reg;</sup>.<br>
+                          <small>Duración: 2:25mins.</small>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <img src="<?=base_url()?>img/about/v3.png" class="img-responsive lanzavideo" id="v3">
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="col-lg-9 col-md-9 col-sm-10 col-xs-11">
-              <p class="white-c ag-medium s30">
-                Intermed<sup>&reg;</sup> historiales.
-              </p>
-              <p class="white-c ag-light s20">
-                Presentación de los Historiales en la Nube de Intermed<sup>&reg;</sup>.<br>
-                Duración: 2:25mins.
-              </p>
-            </div>
-            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-              <img src="<?=base_url()?>img/about/v3.png" class="img-responsive lanzavideo" id="v3">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="main-body-btnm clearfix">
           </div>
         </div>
       </div>
     </div>
     <div class="intern midsection3">
-      <div class="container">
-        <div class="row">
-          <div class="main-body-container clearfix">
-            <div class="visible-xs-block col-xs-12">
-              <img src="<?=base_url()?>img/about/is9.png" class="img-circle img-responsive center-block img-wb"><br>
-            </div>
-            <div class="col-lg-12">
-              <p class="white-c ag-medium s60 text-center">
-                Además,
-              </p>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs">
-              <img src="<?=base_url()?>img/about/is9.png" class="img-circle img-responsive center-block img-wb">
-            </div>
-            <div class="col-lg-6 col-md-7 col-sm-9 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-              <p class="white-c ag-light s20 text-justify">
-                <span class="ag-bold s25">Intermed<sup>&reg;</sup></span> ofrece el módulo de <span class="ag-bold">Secretaria</span>, el cual te permite vincular tu perfil con el perfil de una tercera persona autorizada por ti y decidir cuales funciones quieres delegarle.
-              </p>
-              <p class="white-c ag-light s20 text-justify">
-                Así, tu secretaria puede administrar tu agenda y  tus citas, moderar tus comentarios o redactar y compartir las publicaciones que tu le indiques, permitiendote disfrutar de todas las ventajas de estar inscrito en <span class="ag-bold">Intermed<sup>&reg;</sup></span> controlando el nivel de atención que quieras dedicarle.<br>
-              </p>
-              <p class="white-c ag-light s20 text-justify">
-                Una sola secretaría puede administrar y moderar los perfiles de varios médicos.
-              </p>
+      <div class="midsection3a">
+        <div class="container">
+          <div class="row">
+            <div class="main-body-container clearfix">
+              <div class="visible-xs-block col-xs-12">
+                <img src="<?=base_url()?>img/about/is9.png" class="img-circle img-responsive center-block img-wb"><br>
+              </div>
+              <div class="col-lg-12">
+                <p class="white-c ag-medium s60 text-center">
+                  Además,
+                </p>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs">
+                <img src="<?=base_url()?>img/about/is9.png" class="img-circle img-responsive center-block img-wb">
+              </div>
+              <div class="col-lg-6 col-md-7 col-sm-9 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+                <p class="white-c ag-light s20 text-justify">
+                  <span class="ag-bold s25">Intermed<sup>&reg;</sup></span> ofrece el módulo de <span class="ag-bold">Secretaria</span>, el cual te permite vincular tu perfil con el perfil de una tercera persona autorizada por ti y decidir cuales funciones quieres delegarle.
+                </p>
+                <p class="white-c ag-light s20 text-justify">
+                  Así, tu secretaria puede administrar tu agenda y  tus citas, moderar tus comentarios o redactar y compartir las publicaciones que tu le indiques, permitiendote disfrutar de todas las ventajas de estar inscrito en <span class="ag-bold">Intermed<sup>&reg;</sup></span> controlando el nivel de atención que quieras dedicarle.<br>
+                </p>
+                <p class="white-c ag-light s20 text-justify">
+                  Una sola secretaría puede administrar y moderar los perfiles de varios médicos.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="intern midsection4">
-      <div class="container">
-        <div class="row">
-          <div class="main-body-container clearfix">
-            <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
-              <p class="text-center white-c ag-medium s20">
-                Para finalizar, te pedimos tu apoyo para contestar una <br>
-                pequeña encuesta que será de enorme ayuda para nuestro proyecto.<br><br>
-              </p>
-              <p class="text-center white-c ag-bold s20">
-                ¡Al finalizar la encuesta podrás registrarte para obtener hasta 6 meses de suscripción gratis a Intermed<sup>&reg;</sup>!<br><br>
-              </p>
-            </div>
-            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
-              <?php if ($status != 0){ ?>
-                <form class="btn-empezar-encuesta" role="form" method="POST" action="<?php echo base_url(); ?>encuesta">
-                      <input type="hidden" name="codigo" value="<?php echo $codigo ?>">
-                      <button type="submit" class="ag-bold s25 btn btn-contesta btn-block center-block">
-                        ¡Contesta la encuesta! *
-                      </button>
-                      <p class="ag-medium white-c s15 text-center">
-                        <br>* La encuesta es de caracter anónimo.
-                        <br>Si quieres saber más lee nuestra <a href="#">política de privacidad</a>
-                      </p>
-                </form>
-              <?php } else {?>
-                <?php echo $error ?>
-              <?php } ?>
+      <div class="midsection3b">
+        <div class="container">
+          <div class="row">
+            <div class="main-body-container clearfix">
+              <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
+                <p class="text-center white-c ag-medium s20">
+                  Para finalizar, te pedimos tu apoyo para contestar una <br>
+                  pequeña encuesta que será de enorme ayuda para nuestro proyecto.<br><br>
+                </p>
+                <p class="text-center white-c ag-bold s20">
+                  ¡Al finalizar la encuesta podrás registrarte para obtener hasta 6 meses de suscripción gratis a Intermed<sup>&reg;</sup>!<br><br>
+                </p>
+              </div>
+              <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
+                <?php if ($status != 0){ ?>
+                  <form class="btn-empezar-encuesta" role="form" method="POST" action="<?php echo base_url(); ?>encuesta">
+                    <input type="hidden" name="codigo" value="<?php echo $codigo ?>">
+                    <button type="submit" class="ag-bold s25 btn btn-contesta btn-block center-block">
+                      ¡Contesta la encuesta! *
+                    </button>
+                    <p class="ag-medium white-c s15 text-center">
+                      <br>* La encuesta es de caracter anónimo.
+                      <br>Si quieres saber más lee nuestra <a href="privacidad" class="btn-privacy">política de privacidad</a>
+                    </p>
+                  </form>
+                <?php } else {?>
+                  <?php echo $error ?>
+                <?php } ?>
+              </div>
             </div>
           </div>
         </div>
@@ -467,6 +497,11 @@
           <h4 class="modal-title text-uppercase ag-medium"></h4>
         </div>
         <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <div class="text-center">
+            Selecciona la opcion HD (720p/1080p) para tener una mejor experiencia al ver nuestros videos.
+          </div>
         </div>
       </div>
     </div>

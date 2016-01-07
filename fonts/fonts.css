@@ -23,6 +23,10 @@ footer,header,hgroup,menu,nav,section {
   color: #aaaaaa;
 }
 
+.blue-c {
+  color: #3690c8;
+}
+
 .s5 {
   font-size: 5px;
 }
@@ -114,6 +118,12 @@ footer,header,hgroup,menu,nav,section {
 .s130 {
   font-size: 130px;
 }
+.s140 {
+  font-size: 140px;
+}
+.s150 {
+  font-size: 150px;
+}
 
 .s200 {
   font-size: 200px;
@@ -178,16 +188,6 @@ footer,header,hgroup,menu,nav,section {
 .noTransform {
   text-decoration: none;
   text-transform: none;
-}
-
-.suplogo {
-  position: relative;
-  top: -46px;
-}
-
-.leftlogo {
-  position: relative;
-  top: 12px;
 }
 
 /* Flama classes */

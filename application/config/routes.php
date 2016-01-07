@@ -60,4 +60,5 @@ $route['newsletter'] = 'Encuesta/newsletter';
 $route['encuesta/(:any)'] = 'Encuesta/view/$1';
 $route['encuesta'] = 'Encuesta/encuesta';
 $route['about'] = 'Encuesta/existe';
+$route['privacidad'] = 'Main/privacidad';
 $route['default_controller'] = 'Main';

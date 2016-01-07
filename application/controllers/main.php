@@ -36,5 +36,14 @@
         $this->load->view('404');
         $this->load->view('templates/footerAdmin');
     }
+
+    public function privacidad(){
+        $data = array(
+          "title" => "Intermed - Política de privacidad"
+        );
+        $this->load->view('templates/header', $data);
+        $this->load->view('privacidad', $data);
+        $this->load->view('templates/footer', $data);
+    }
   }
 ?>
