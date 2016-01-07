@@ -37,9 +37,12 @@
 
     public function existe(){
       $this->load->helper('url');
-      $this->session->set_userdata('codigo', '');
       $codigo = $this->input->post('codigo');
-      $this->session->set_userdata('codigo', $codigo);
+      if ($codigo != ""){
+        $this->session->set_userdata('codigo', $codigo);
+      } else {
+        $codigo = $this->session->userdata('codigo');
+      }
 
       $data = $this->checkStatus($codigo);
 
@@ -223,6 +226,7 @@
 
       if ($continuarEnc === "0"){
         header('Location: ' .  base_url() );
+        session_destroy();
         die();
       }
 
@@ -301,15 +305,15 @@
                 $opciones = explode('|', $pregunta['opciones']);
                 switch ($pregunta['tipo']) {
                   case 'text':
-                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
+                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['numPreg'] . ' - ' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
                       $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" id="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control block-container-table-respuesta" >';
                       break;
                   case 'money':
-                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
+                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['numPreg'] . ' - ' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
                       $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" id="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control block-container-table-respuesta" onkeypress="return validarMoneda(event, this)" onblur="formatoMoneda(this)">';
                       break;
                   case 'radio':
-                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['numPreg'] . ' - ' . $pregunta['pregunta'] . '</div>';
                       $contenido .= '<div class="block-container-table-respuesta">';
                       $total = 0;
                       foreach ($opciones as $opcion) {
@@ -331,7 +335,7 @@
                       }
                       break;
                   case 'checkbox':
-                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['numPreg'] . ' - ' . $pregunta['pregunta'] . '</div>';
                       $contenido .= '<div class="block-container-table-respuesta">';
                       $total = 0;
 
@@ -366,7 +370,7 @@
                       }
                       break;
                   case 'text|enum':
-                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['numPreg'] . ' - ' . $pregunta['pregunta'] . '</div>';
                       $contenido .= '<div class="block-container-table-respuesta">';
                       $contenido .= '<ul class="sortable">';
                       if (count($respuestas) > 1){
@@ -400,6 +404,7 @@
         $this->load->view('encuesta/encuesta', $data);
         $this->load->view('templates/footer', $data);
       } else if ($data['status'] != 0) {
+        session_destroy();
         $this->load->view('templates/header', $data);
         /*
         $contenido .= '<h1 class="Flama-normal s40 text-center">Gracias por contestar la encuesta</h1>';

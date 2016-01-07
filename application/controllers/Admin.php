@@ -416,6 +416,8 @@
             foreach ($preguntas as $preg) {
                 $pregArray = array();
                 $pregArray['pregunta'] = $preg['pregunta'];
+                $pregArray['tipo'] = $preg['tipo'];
+                $pregArray['id'] = $preg['id'];
                 $pregArray['respuestas'] = array();
                 $respuestas = $this->Respuestasm_model->get_respuestamByPregunta($preg['id']);
                 $opciones = array();
