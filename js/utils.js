@@ -420,129 +420,133 @@ function cargaAceptados() {
 }
 
 $( document ).ready( function () {
-  cargaPorAceptar();
+  if( $("#solicitudes").length > 0 ){
+      cargaPorAceptar();
+  }
 } );
 
 $( document ).ready( function () {
-  $( "#pAceptar" ).click( function () {
-    $( "#pAceptar" ).parent().addClass( 'active' );
-    $( "#nAceptar" ).parent().removeClass( 'active' );
-    $( "#paceptados" ).parent().removeClass( 'active' );
+  if( $("#solicitudes").length > 0 ){
+    $( "#pAceptar" ).click( function () {
+      $( "#pAceptar" ).parent().addClass( 'active' );
+      $( "#nAceptar" ).parent().removeClass( 'active' );
+      $( "#paceptados" ).parent().removeClass( 'active' );
 
-    $( "#porAceptar" ).removeClass( 'hidden' );
-    $( "#noAceptadas" ).addClass( 'hidden' );
-    $( "#aceptados" ).addClass( 'hidden' );
+      $( "#porAceptar" ).removeClass( 'hidden' );
+      $( "#noAceptadas" ).addClass( 'hidden' );
+      $( "#aceptados" ).addClass( 'hidden' );
 
-    //se carga el ajax para la carga de las tablas
-    cargaPorAceptar();
-  } );
-
-  $( "#nAceptar" ).click( function () {
-    $( "#pAceptar" ).parent().removeClass( 'active' );
-    $( "#nAceptar" ).parent().addClass( 'active' );
-    $( "#paceptados" ).parent().removeClass( 'active' );
-
-    $( "#noAceptadas" ).removeClass( 'hidden' );
-    $( "#aceptados" ).addClass( 'hidden' );
-    $( "#porAceptar" ).addClass( 'hidden' );
-    cargaNoAceptados();
-  } );
-
-  $( "#paceptados" ).click( function () {
-    $( "#pAceptar" ).parent().removeClass( 'active' );
-    $( "#nAceptar" ).parent().removeClass( 'active' );
-    $( "#paceptados" ).parent().addClass( 'active' );
-
-    $( "#aceptados" ).removeClass( 'hidden' );
-    $( "#porAceptar" ).addClass( 'hidden' );
-    $( "#noAceptadas" ).addClass( 'hidden' );
-    cargaAceptados();
-  } );
-
-  $( "#generaCodigo" ).click( function () {
-    //carga ajax para generar el codigo
-    $.ajax( {
-      url: "/encuesta-intermed/codigo/makeCode",
-      type: "POST",
-      dataType: "JSON",
-      success: function ( data ) {
-        $( "#aleatorioDato" ).attr( 'value', data );
-      },
-      error: function ( e ) {
-        console.log( "Aleatorio fallo: " + e );
-      }
+      //se carga el ajax para la carga de las tablas
+      cargaPorAceptar();
     } );
-  } );
-  $("#enviarTodo").click(function(){
-    var codigo = $( "#aleatorioDato" ).val();
-    var correo = $( "#codigoCorreo" ).text();
-    var titulo = 'Mensaje de Intermed';
-    var idMensaje = $("#codigoUser").text();
-    var valor = parseInt($("#codigoUser").text())-1;
-    var mensaje = $("#mensajeAceptado").val();
-    var ids = '#tr'+valor;
-    var id = '#t'+valor;
-    var estado = 1;
-    var spanId = $("#codigoUser").text();
-    if( $("#aleatorioDato").val() != "" ){
-      $.post('/encuesta-intermed/admin/insertaCodigo/'+ $( "#aleatorioDato" ).val(),function(data){
-        $.post('/encuesta-intermed/codigo/sendMail/',{
-          codigo:codigo,
-          correo:correo,
-          titulo:titulo,
-          mensaje:mensaje,
-          estado:estado
-        },function(datas){
-          $.post('/encuesta-intermed/codigo/insertMensaje',{mensaje:mensaje, id:idMensaje},function(dataM){
-            $.post('/encuesta-intermed/codigo/actualizaStatus/',{correo:correo, ids:spanId},function(datasA){
-            }).done(function(){
-              alert("Campo actualizado y se envio el correo");
-              $(ids).hide('slow');
-              $(id).hide('slow');
-              $('.modal').modal('hide');
-              $("#aleatorioDato").attr('value','');
-              $("#mensajeAceptado").val('');
+
+    $( "#nAceptar" ).click( function () {
+      $( "#pAceptar" ).parent().removeClass( 'active' );
+      $( "#nAceptar" ).parent().addClass( 'active' );
+      $( "#paceptados" ).parent().removeClass( 'active' );
+
+      $( "#noAceptadas" ).removeClass( 'hidden' );
+      $( "#aceptados" ).addClass( 'hidden' );
+      $( "#porAceptar" ).addClass( 'hidden' );
+      cargaNoAceptados();
+    } );
+
+    $( "#paceptados" ).click( function () {
+      $( "#pAceptar" ).parent().removeClass( 'active' );
+      $( "#nAceptar" ).parent().removeClass( 'active' );
+      $( "#paceptados" ).parent().addClass( 'active' );
+
+      $( "#aceptados" ).removeClass( 'hidden' );
+      $( "#porAceptar" ).addClass( 'hidden' );
+      $( "#noAceptadas" ).addClass( 'hidden' );
+      cargaAceptados();
+    } );
+
+    $( "#generaCodigo" ).click( function () {
+      //carga ajax para generar el codigo
+      $.ajax( {
+        url: "/encuesta-intermed/codigo/makeCode",
+        type: "POST",
+        dataType: "JSON",
+        success: function ( data ) {
+          $( "#aleatorioDato" ).attr( 'value', data );
+        },
+        error: function ( e ) {
+          console.log( "Aleatorio fallo: " + e );
+        }
+      } );
+    } );
+    $("#enviarTodo").click(function(){
+      var codigo = $( "#aleatorioDato" ).val();
+      var correo = $( "#codigoCorreo" ).text();
+      var titulo = 'Mensaje de Intermed';
+      var idMensaje = $("#codigoUser").text();
+      var valor = parseInt($("#codigoUser").text())-1;
+      var mensaje = $("#mensajeAceptado").val();
+      var ids = '#tr'+valor;
+      var id = '#t'+valor;
+      var estado = 1;
+      var spanId = $("#codigoUser").text();
+      if( $("#aleatorioDato").val() != "" ){
+        $.post('/encuesta-intermed/admin/insertaCodigo/'+ $( "#aleatorioDato" ).val(),function(data){
+          $.post('/encuesta-intermed/codigo/sendMail/',{
+            codigo:codigo,
+            correo:correo,
+            titulo:titulo,
+            mensaje:mensaje,
+            estado:estado
+          },function(datas){
+            $.post('/encuesta-intermed/codigo/insertMensaje',{mensaje:mensaje, id:idMensaje},function(dataM){
+              $.post('/encuesta-intermed/codigo/actualizaStatus/',{correo:correo, ids:spanId},function(datasA){
+              }).done(function(){
+                alert("Campo actualizado y se envio el correo");
+                $(ids).hide('slow');
+                $(id).hide('slow');
+                $('.modal').modal('hide');
+                $("#aleatorioDato").attr('value','');
+                $("#mensajeAceptado").val('');
+              });
             });
           });
         });
-      });
-    }else{
-      alert("Se debe de generar un código primero");
-    }
-  });
-  // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
-  // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
-  $("#envioRechazado").click(function(){
-    var mail = $("#rechazos").text();
-    var titulo = 'Mensaje de Intermed';
-    var mensaje = $("#areaRechazado").val();
-    var valor = parseInt($("#rechazosID").text())-1;
-    var idMensaje = $("#rechazosID").text();
-    var ids = '#tr'+valor;
-    var id = '#t'+valor;
-    var spanId = $("#rechazosID").text();
-    $.post('/encuesta-intermed/codigo/sendMail/',{correo:mail,titulo:titulo,mensaje:mensaje},function(data){
-      $.post('/encuesta-intermed/codigo/negado',{correo:mail, ids:spanId},function(negado){
-        $.post('/encuesta-intermed/codigo/insertMensaje',{mensaje:mensaje, id:idMensaje},function(dataM){});
-      }).done(function(){
-        alert("Usuario rechazado, correo enviado....");
-        $("#areaRechazado").val('') ;
-        $('.modal').modal('hide');
-        $(ids).hide('slow');
-        $(id).hide('slow');
+      }else{
+        alert("Se debe de generar un código primero");
+      }
+    });
+    // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
+    // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
+    $("#envioRechazado").click(function(){
+      var mail = $("#rechazos").text();
+      var titulo = 'Mensaje de Intermed';
+      var mensaje = $("#areaRechazado").val();
+      var valor = parseInt($("#rechazosID").text())-1;
+      var idMensaje = $("#rechazosID").text();
+      var ids = '#tr'+valor;
+      var id = '#t'+valor;
+      var spanId = $("#rechazosID").text();
+      $.post('/encuesta-intermed/codigo/sendMail/',{correo:mail,titulo:titulo,mensaje:mensaje},function(data){
+        $.post('/encuesta-intermed/codigo/negado',{correo:mail, ids:spanId},function(negado){
+          $.post('/encuesta-intermed/codigo/insertMensaje',{mensaje:mensaje, id:idMensaje},function(dataM){});
+        }).done(function(){
+          alert("Usuario rechazado, correo enviado....");
+          $("#areaRechazado").val('') ;
+          $('.modal').modal('hide');
+          $(ids).hide('slow');
+          $(id).hide('slow');
+        });
       });
     });
-  });
-  //cerrar session
-  $("#salir").click(function(){
-    $.post('/encuesta-intermed/admin/cerrar/',function(data){
-    }).done(function(){
-      window.location = '/encuesta-intermed/admin/index';
-    }).fail(function(){console.log("ERROR AL CERRAR SESSION");});
-  });
-  $( "#enviarNoSucces" ).click( function () {
-    $( "#NoaceptarModal" ).modal( 'show' );
-  } );
+    //cerrar session
+    $("#salir").click(function(){
+      $.post('/encuesta-intermed/admin/cerrar/',function(data){
+      }).done(function(){
+        window.location = '/encuesta-intermed/admin/index';
+      }).fail(function(){console.log("ERROR AL CERRAR SESSION");});
+    });
+    $( "#enviarNoSucces" ).click( function () {
+      $( "#NoaceptarModal" ).modal( 'show' );
+    } );
+  }
 });
 
 /* ---------- */
