@@ -22,12 +22,12 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
               <thead>
                 <tr>
                   <th><center>#</center></th>
-                  <th>Nombre</th>
-                  <th>Correo</th>
-                  <th>Cedula</th>
-                  <th>Justificacion</th>
-                  <th></th>
-                  <th></th>
+                  <th><center><span class="glyphicon glyphicon-user">&nbsp;Nombre</span></center></th>
+                  <th><center><span class="glyphicon glyphicon-envelope">&nbsp;Correo</span></center></th>
+                  <th><center><span class="glyphicon glyphicon-th">&nbsp;Cedula</span></center></th>
+                  <th><center><span class="glyphicon glyphicon-align-justify">&nbsp;Justificacion</span></center></th>
+                  <th><center><span class="glyphicon glyphicon-ok-sign">&nbsp;Aceptar</span></center></th>
+                  <th><center><span class="glyphicon glyphicon-remove-sign">&nbsp;Rechazar</span></center></th>
                 </tr>
               </thead>
               <tbody id="datosPa"></tbody>
@@ -41,11 +41,11 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
               <thead>
                 <tr>
                   <th><center>#</center></th>
-                  <th>Nombre</th>
-                  <th>Correo</th>
-                  <th>Cedula</th>
-                  <th>Justificacion</th>
-                  <th>Mensaje</th>
+                  <th><center><span class="glyphicon glyphicon-user">&nbsp;Nombre</span></center></th>
+                  <th><center><span class="glyphicon glyphicon-envelope">&nbsp;Correo</span></center></th>
+                  <th><center><span class="glyphicon glyphicon-th">&nbsp;Cedula</span></center></th>
+                  <th><center><span class="glyphicon glyphicon-align-justify">&nbsp;Justificacion</span></center></th>
+                  <th><cente><span class="glyphicon glyphicon-envelope">&nbsp;Mensaje</span></center></th>
                 </tr>
               </thead>
               <tbody id="datosNa"></tbody>
@@ -59,11 +59,11 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
               <thead>
                 <tr>
                   <th><center>#</center></th>
-                  <th>Nombre</th>
-                  <th>Correo</th>
-                  <th>Cedula</th>
-                  <th>Justificacion</th>
-                  <th>Mensaje</th>
+                  <th><center><span class="glyphicon glyphicon-user">&nbsp;Nombre</span></center></th>
+                  <th><center><span class="glyphicon glyphicon-envelope">&nbsp;Correo</span></center></th>
+                  <th><center><span class="glyphicon glyphicon-th">&nbsp;Cedula</span></center></th>
+                  <th><center><span class="glyphicon glyphicon-align-justify">&nbsp;Justificacion</span></center></th>
+                  <th><cente><span class="glyphicon glyphicon-envelope">&nbsp;Mensaje</span></center></th>
                 </tr>
               </thead>
               <tbody id="datosSa"></tbody>
@@ -105,6 +105,9 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
             </div>
             <div class="row">
               <div class="col-md-12">
+                <small>Caracteres escritos:&nbsp;<span class="" id="counCaracteres"></span></small>
+              </div>
+              <div class="col-md-12">
                 <textarea rows="5" class="form-control" id="mensajeAceptado" placeholder="Escribe un mensaje personalizado."></textarea>
               </div>
             </div>
@@ -132,6 +135,9 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
           </div>
           <div class="modal-body">
             <div class="row">
+              <div class="col-md-12">
+                <small>Caracteres escritos:&nbsp;<span class="" id="noCaracteres"></span></small>
+              </div>
               <div class="col-md-12">
                 <textarea rows="5" class="form-control" id="areaRechazado" placeholder="Escribe un mensaje personalizado."></textarea>
               </div>
