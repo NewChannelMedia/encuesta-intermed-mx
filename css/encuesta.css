@@ -141,7 +141,7 @@ body {
 .main-bg {
   position: absolute;
   z-index: -1;
-  top: 0;
+  top: 110px;
   width: 100%;
   height: 500px;
   background-image: url('../img/header-bg.jpg');
@@ -159,7 +159,6 @@ body {
 
 .main-bg.about {
   background-image: url('../img/header-bg-2.jpg');
-  top: 110px;
 }
 
 .main-bg.about .grad{
@@ -391,7 +390,7 @@ body {
 
 .main-extra {
   padding-top: 80px;
-  padding-bottom: 100px;
+  padding-bottom: 0;
 }
 
 .extra-info {
@@ -1209,10 +1208,8 @@ canvas {
   background-size: contain;
   padding-top: 20px;
   padding-bottom: 20px;
-  margin-bottom: 70px;
   box-shadow: 0 0 15px rgba(0,0,0,.5);
   border-top: solid 7px rgba(0,0,0,.5);
-  border-bottom: solid 7px rgba(0,0,0,.5);
 }
 
 .OverrideNotFound{

@@ -45,7 +45,7 @@
     </div>
   </nav>
   <section class="main2">
-    <div class="main-header">
+    <header class="main-header">
       <div class="container-fluid">
         <div class="main-body-container clearfix">
           <div class="row">
@@ -77,7 +77,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </header>
     <div class="intern midsection1">
       <div class="container">
         <div class="row">
