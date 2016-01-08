@@ -82,7 +82,7 @@
                     <div class="col-md-12 code-info">
                       <h4 class="flama-bold s20 text-center">Ingresa tu código aquí:</h4>
                     </div>
-                    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 code-input">
+                    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 code-input">
                       <form role="form" method="POST" action="<?= base_url(); ?>about">
                         <div class="form-group">
                           <input type="text" class="form-control code-intput-control" placeholder="" name="codigo">

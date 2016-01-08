@@ -292,8 +292,8 @@ body {
   background-repeat: no-repeat;
   background-position: top center;
   background-size: contain;
-  min-height: 535px;
-  padding: 40px 0;
+  min-height: 635px;
+  padding: 90px 0;
 }
 
 .main-body.intern {
@@ -307,6 +307,7 @@ body {
     min-height: 300px;
     height: auto;
     background-position: center;
+    padding: 45px 0;
   }
   .main-body.intern{
     background-size: contain;
