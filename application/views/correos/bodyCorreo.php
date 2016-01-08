@@ -1,4 +1,4 @@
-<table cellpadding="0" cellspacing="0" border="0" align="center" width="600" id="mainTable" class="container" style="border-radius: 20px;border: solid 7px white;background-color: #50a7dd;padding: 0;margin: 0;overflow: hidden;background-image: url('http://newchannel.mx/encuesta-intermed/img/correo/bottom.png');background-position: center bottom;background-repeat: no-repeat;background-size: contain;">
+<table cellpadding="0" cellspacing="0" border="0" align="center" width="600" id="mainTable" class="container" style="border-radius: 20px;border: solid 7px white;background-color: #50a7dd;padding: 0;margin: 0;overflow: hidden;background-image: url('http://newchannel.mx/img/correo/bottom.png');background-position: center bottom;background-repeat: no-repeat;background-size: contain;">
   <tr>
     <td class='movableContentContainer bgItem'>
       <div class='movableContent'>
@@ -13,7 +13,7 @@
             <td width="200" valign="top" align="center">
               <div class="contentEditableContainer contentImageEditable">
                 <div class="contentEditable" align='center'>
-                  <img src="http://newchannel.mx/encuesta-intermed/img/logos/intermedWhite.png" height="65" alt='Logo' />
+                  <img src="http://newchannel.mx/img/logos/intermedWhite.png" height="65" alt='Logo' />
                 </div>
               </div>
             </td>

@@ -207,7 +207,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
         callback: function(result){
           if (result){
             $.ajax( {
-              url: '/encuesta-intermed/Admin/eliminarPregunta',
+              url: '/Admin/eliminarPregunta',
               type: "POST",
               dataType: 'JSON',
               data: {'id':id},
@@ -345,7 +345,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
       }
 
       $.ajax( {
-        url: '/encuesta-intermed/Admin/guardarPregunta',
+        url: '/Admin/guardarPregunta',
         type: "POST",
         dataType: 'JSON',
         data: data2,
