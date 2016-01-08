@@ -4,8 +4,9 @@
   class Main extends CI_Controller {
     public function index() {
       $data = array(
-        "title" => "Bienvenido a Intermed!",
+        "title" => "¡Bienvenido a Intermed!",
       );
+      session_destroy();
 
       $this->load->view('templates/header', $data);
       $this->load->view('index', $data);
@@ -35,6 +36,15 @@
         $this->load->view('templates/header', $data);
         $this->load->view('404');
         $this->load->view('templates/footerAdmin');
+    }
+
+    public function terminos(){
+        $data = array(
+          "title" => "Intermed - Política de privacidad"
+        );
+        $this->load->view('templates/header', $data);
+        $this->load->view('terminos', $data);
+        $this->load->view('templates/footer', $data);
     }
   }
 ?>

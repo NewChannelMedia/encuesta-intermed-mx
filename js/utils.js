@@ -85,7 +85,7 @@ $( document ).ready( function () {
 } );
 
 $( function () {
-  $( ".sortable" ).sortable( {
+  $( "·sortable" ).sortable( {
     placeholder: "ui-state-highlight"
   } );
   $( ".sortable" ).disableSelection();
@@ -334,23 +334,23 @@ function cargaPorAceptar() {
         if ( item.status == "0" ) {
           if ( item.medico != "1" ) {
             $( "#datosPa" ).append( '<tr class="bg-medico" id="tr' + i + '"></tr>' );
-            $( '#datosPa #tr' + i + '' ).append( '<td >' + item.id + '</td>' );
-            $( '#datosPa #tr' + i + '' ).append( '<td>' + item.nombre + '</td>' );
-            $( '#datosPa #tr' + i + '' ).append( '<td>' + item.correo + '</td>' );
-            $( '#datosPa #tr' + i + '' ).append( '<td>' + item.cedula + '</td>' );
-            $( '#datosPa #tr' + i + '' ).append( '<td>' + item.justificacion + '</td>' );
-            $( '#datosPa #tr' + i + '' ).append( '<td><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\',\'' + item.id + '\')" type="button" id="enviarSucces" class="btn btn-success btn-block" data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></td>' );
-            $( '#datosPa #tr' + i + '' ).append( '<td><button noMalTo="' + item.correo + '" type="button" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\')" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td ><center>' + item.id + '</center></td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td><center>' + item.nombre + '</center></td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td><center>' + item.correo + '</center></td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td></center>' + item.cedula + '</center></td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td><center>' + item.justificacion + '</center></td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td><center><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\',\'' + item.id + '\')" type="button" id="enviarSucces" class="btn btn-success btn-block" data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></center></td>' );
+            $( '#datosPa #tr' + i + '' ).append( '<td><center><button noMalTo="' + item.correo + '" type="button" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\')" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></center></td>' );
           }
           else {
             $( "#datosPa" ).append( '<tr class="bg-otro" id="t' + i + '"></tr>' );
-            $( '#datosPa #t' + i + '' ).append( '<td >' + item.id + '</td>' );
-            $( '#datosPa #t' + i + '' ).append( '<td >' + item.nombre + '</td>' );
-            $( '#datosPa #t' + i + '' ).append( '<td >' + item.correo + '</td>' );
-            $( '#datosPa #t' + i + '' ).append( '<td >' + item.cedula + '</td>' );
-            $( '#datosPa #t' + i + '' ).append( '<td >' + item.justificacion + '</td>' );
-            $( '#datosPa #t' + i + '' ).append( '<td ><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\',\'' + item.id + '\')"  type="button" id="enviarSucces' + i + '" class="btn btn-success btn-block"data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></td>' );
-            $( '#datosPa #t' + i + '' ).append( '<td ><button noMalTo="' + item.correo + '" type="button" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\')" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td ><center>' + item.id + '</center></td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td ><center>' + item.nombre + '</center></td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td ><center>' + item.correo + '</center></td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td ><center>' + item.cedula + '</center></td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td ><center>' + item.justificacion + '</center></td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td ><center><button malto="' + item.correo + '" onclick="enviarSucces(\'' + item.correo + '\',\'' + item.id + '\')"  type="button" id="enviarSucces' + i + '" class="btn btn-success btn-block"data-toggle="modal" data-target="#aceptarModal"><span class="glyphicon glyphicon-ok"></span></button></center></td>' );
+            $( '#datosPa #t' + i + '' ).append( '<td ><center><button noMalTo="' + item.correo + '" type="button" onclick="enviarNoSuccesL(\'' + item.correo + '\',\'' + item.id + '\')" id="enviarNoSucces" class="btn btn-danger btn-block" data-toggle="modal" data-target="#NoaceptarModal"><span class="glyphicon glyphicon-remove"></span></button></center></td>' );
           }
         }
       } );
@@ -371,15 +371,15 @@ function cargaNoAceptados() {
       $.each( data, function ( i, item ) {
         if ( item.status == "2" ) {
           $( "#datosNa" ).append( '<tr  id="pt' + i + '"></tr>' );
-          $( '#datosNa #pt' + i + '' ).append( '<td >' + item.id + '</td>' );
-          $( '#datosNa #pt' + i + '' ).append( '<td>' + item.nombre + '</td>' );
-          $( '#datosNa #pt' + i + '' ).append( '<td>' + item.correo + '</td>' );
-          $( '#datosNa #pt' + i + '' ).append( '<td>' + item.cedula + '</td>' );
-          $( '#datosNa #pt' + i + '' ).append( '<td>' + item.justificacion + '</td>' );
+          $( '#datosNa #pt' + i + '' ).append( '<td ><center>' + item.id + '</center></td>' );
+          $( '#datosNa #pt' + i + '' ).append( '<td><center>' + item.nombre + '</center></td>' );
+          $( '#datosNa #pt' + i + '' ).append( '<td><center>' + item.correo + '</center></td>' );
+          $( '#datosNa #pt' + i + '' ).append( '<td><center>' + item.cedula + '</center></td>' );
+          $( '#datosNa #pt' + i + '' ).append( '<td><center>' + item.justificacion + '</center></td>' );
           if( item.mensaje == null || item.mensaje == null){
-            $( '#datosNa #pt' + i + '').append('<td >' + "Sin mensaje" + '</td>' );
+            $( '#datosNa #pt' + i + '').append('<td ><center><span class="glyphicon glyphicon-envelope">&nsbp;' + "Sin mensaje" + '</span></center></td>' );
           }else{
-            $( '#datosNa #pt' + i + '').append('<td >' + item.mensaje + '</td>' );
+            $( '#datosNa #pt' + i + '').append('<td ><center>' + item.mensaje + '</center></td>' );
           }
         }
       } );
@@ -400,15 +400,15 @@ function cargaAceptados() {
       $.each( data, function ( i, item ) {
         if ( item.status == "1" ) {
           $( "#datosSa" ).append( '<tr  id="te' + i + '"></tr>' );
-          $( '#datosSa #te' + i + '' ).append( '<td >' + item.id + '</td>' );
-          $( '#datosSa #te' + i + '' ).append( '<td >' + item.nombre + '</td>' );
-          $( '#datosSa #te' + i + '' ).append( '<td >' + item.correo + '</td>' );
-          $( '#datosSa #te' + i + '' ).append( '<td >' + item.cedula + '</td>' );
-          $( '#datosSa #te' + i + '' ).append( '<td >' + item.justificacion + '</td>' );
+          $( '#datosSa #te' + i + '' ).append( '<td ><center>' + item.id + '</center></td>' );
+          $( '#datosSa #te' + i + '' ).append( '<td ><center>' + item.nombre + '</center></td>' );
+          $( '#datosSa #te' + i + '' ).append( '<td ><center>' + item.correo + '</center></td>' );
+          $( '#datosSa #te' + i + '' ).append( '<td ><center>' + item.cedula + '</center></td>' );
+          $( '#datosSa #te' + i + '' ).append( '<td ><center>' + item.justificacion + '</center></td>' );
           if( item.mensaje == "" || item.mensaje == null ){
-            $( '#datosSa #te' + i + '').append('<td >' + "Sin mensaje" + '</td>' );
+            $( '#datosSa #te' + i + '').append('<td ><center><span class="glyphicon glyphicon-envelope">&nsbp;' + "Sin mensaje" + '</span></center></td>' );
           }else{
-            $( '#datosSa #te' + i + '').append('<td >' + item.mensaje + '</td>' );
+            $( '#datosSa #te' + i + '').append('<td ><center>' + item.mensaje + '</center></td>' );
           }
         }
       } );
@@ -420,131 +420,222 @@ function cargaAceptados() {
 }
 
 $( document ).ready( function () {
-  cargaPorAceptar();
+  if( $("#solicitudes").length > 0 ){
+      cargaPorAceptar();
+  }
 } );
-
+var count = 0;
 $( document ).ready( function () {
-  $( "#pAceptar" ).click( function () {
-    $( "#pAceptar" ).parent().addClass( 'active' );
-    $( "#nAceptar" ).parent().removeClass( 'active' );
-    $( "#paceptados" ).parent().removeClass( 'active' );
+  if( $("#solicitudes").length > 0 ){
+    $( "#pAceptar" ).click( function () {
+      $( "#pAceptar" ).parent().addClass( 'active' );
+      $( "#nAceptar" ).parent().removeClass( 'active' );
+      $( "#paceptados" ).parent().removeClass( 'active' );
 
-    $( "#porAceptar" ).removeClass( 'hidden' );
-    $( "#noAceptadas" ).addClass( 'hidden' );
-    $( "#aceptados" ).addClass( 'hidden' );
+      $( "#porAceptar" ).removeClass( 'hidden' );
+      $( "#noAceptadas" ).addClass( 'hidden' );
+      $( "#aceptados" ).addClass( 'hidden' );
 
-    //se carga el ajax para la carga de las tablas
-    cargaPorAceptar();
-  } );
-
-  $( "#nAceptar" ).click( function () {
-    $( "#pAceptar" ).parent().removeClass( 'active' );
-    $( "#nAceptar" ).parent().addClass( 'active' );
-    $( "#paceptados" ).parent().removeClass( 'active' );
-
-    $( "#noAceptadas" ).removeClass( 'hidden' );
-    $( "#aceptados" ).addClass( 'hidden' );
-    $( "#porAceptar" ).addClass( 'hidden' );
-    cargaNoAceptados();
-  } );
-
-  $( "#paceptados" ).click( function () {
-    $( "#pAceptar" ).parent().removeClass( 'active' );
-    $( "#nAceptar" ).parent().removeClass( 'active' );
-    $( "#paceptados" ).parent().addClass( 'active' );
-
-    $( "#aceptados" ).removeClass( 'hidden' );
-    $( "#porAceptar" ).addClass( 'hidden' );
-    $( "#noAceptadas" ).addClass( 'hidden' );
-    cargaAceptados();
-  } );
-
-  $( "#generaCodigo" ).click( function () {
-    //carga ajax para generar el codigo
-    $.ajax( {
-      url: "/encuesta-intermed/codigo/makeCode",
-      type: "POST",
-      dataType: "JSON",
-      success: function ( data ) {
-        $( "#aleatorioDato" ).attr( 'value', data );
-      },
-      error: function ( e ) {
-        console.log( "Aleatorio fallo: " + e );
-      }
+      //se carga el ajax para la carga de las tablas
+      cargaPorAceptar();
     } );
-  } );
-  $("#enviarTodo").click(function(){
-    var codigo = $( "#aleatorioDato" ).val();
-    var correo = $( "#codigoCorreo" ).text();
-    var titulo = 'INFORMACION INTERMED-SOLICITUD ACEPTADA';
-    var idMensaje = $("#codigoUser").text();
-    var valor = parseInt($("#codigoUser").text())-1;
-    var mensaje = $("#mensajeAceptado").val();
-    var ids = '#tr'+valor;
-    var id = '#t'+valor;
-    var estado = 1;
-    var spanId = $("#codigoUser").text();
-    if( $("#aleatorioDato").val() != "" ){
-      $.post('/encuesta-intermed/admin/insertaCodigo/'+ $( "#aleatorioDato" ).val(),function(data){
-        $.post('/encuesta-intermed/codigo/sendMail/',{
-          codigo:codigo,
-          correo:correo,
-          titulo:titulo,
-          mensaje:mensaje,
-          estado:estado
-        },function(datas){
-          $.post('/encuesta-intermed/codigo/insertMensaje',{mensaje:mensaje, id:idMensaje},function(dataM){
-            $.post('/encuesta-intermed/codigo/actualizaStatus/',{correo:correo, ids:spanId},function(datasA){
-            }).done(function(){
-              alert("Campo actualizado y se envio el correo");
-              $(ids).hide('slow');
-              $(id).hide('slow');
-              $('.modal').modal('hide');
-              $("#aleatorioDato").attr('value','');
-              $("#mensajeAceptado").val('');
+
+    $( "#nAceptar" ).click( function () {
+      $( "#pAceptar" ).parent().removeClass( 'active' );
+      $( "#nAceptar" ).parent().addClass( 'active' );
+      $( "#paceptados" ).parent().removeClass( 'active' );
+
+      $( "#noAceptadas" ).removeClass( 'hidden' );
+      $( "#aceptados" ).addClass( 'hidden' );
+      $( "#porAceptar" ).addClass( 'hidden' );
+      cargaNoAceptados();
+    } );
+
+    $( "#paceptados" ).click( function () {
+      $( "#pAceptar" ).parent().removeClass( 'active' );
+      $( "#nAceptar" ).parent().removeClass( 'active' );
+      $( "#paceptados" ).parent().addClass( 'active' );
+
+      $( "#aceptados" ).removeClass( 'hidden' );
+      $( "#porAceptar" ).addClass( 'hidden' );
+      $( "#noAceptadas" ).addClass( 'hidden' );
+      cargaAceptados();
+    } );
+
+    $( "#generaCodigo" ).click( function () {
+      //carga ajax para generar el codigo
+      $.ajax( {
+        url: "/encuesta-intermed/codigo/makeCode",
+        type: "POST",
+        dataType: "JSON",
+        success: function ( data ) {
+          $( "#aleatorioDato" ).attr( 'value', data );
+        },
+        error: function ( e ) {
+          console.log( "Aleatorio fallo: " + e );
+        }
+      } );
+    } );
+    //contador de caracteres
+    $("#mensajeAceptado").keyup(function(e){
+      if( e.which == 8 ){
+        count--;
+        $( "#counCaracteres" ).html(count);
+      }else{
+        if( $( this ).val().length <= 0 ){
+          count = 1;
+          $( "#counCaracteres" ).html(count);
+        }else{
+          count++;
+          $( "#counCaracteres" ).removeClass('bg-danger');
+          $( "#counCaracteres" ).removeClass('bg-success');
+          $( "#counCaracteres" ).addClass('bg-primary');
+          $( "#counCaracteres" ).html(count);
+          if( count >= 300 || $( this ).val().length == 300 ){
+            $( "#counCaracteres" ).removeClass('bg-primary');
+            $( "#counCaracteres" ).removeClass('bg-danger');
+            $( "#counCaracteres" ).addClass('bg-success');
+            $( "#counCaracteres" ).html( $( this ).val().length );
+          }
+          if( count >= 340 || $( this ).val().length == 340 ){
+            $( "#counCaracteres" ).removeClass('bg-success');
+            $( "#counCaracteres" ).removeClass('bg-primary');
+            $( "#counCaracteres" ).addClass('bg-danger');
+            $( "#counCaracteres" ).html( $( this ).val().length );
+          }
+        }
+      }
+    });
+    $("#enviarTodo").click(function(){
+      var codigo = $( "#aleatorioDato" ).val();
+      var correo = $( "#codigoCorreo" ).text();
+      var titulo = 'Mensaje de Intermed';
+      var idMensaje = $("#codigoUser").text();
+      var valor = parseInt($("#codigoUser").text())-1;
+      var mensaje = $("#mensajeAceptado").val();
+      var ids = '#tr'+valor;
+      var id = '#t'+valor;
+      var estado = 1;
+      var spanId = $("#codigoUser").text();
+      var maximo = $( "#mensajeAceptado" ).val().length;
+      if( $("#aleatorioDato").val() != "" ){
+        if( maximo <= 340 ){
+          $.post('/encuesta-intermed/admin/insertaCodigo/'+ $( "#aleatorioDato" ).val(),function(data){
+            $.post('/encuesta-intermed/codigo/sendMail/',{
+              codigo:codigo,
+              correo:correo,
+              titulo:titulo,
+              mensaje:mensaje,
+              estado:estado
+            },function(datas){
+              $.post('/encuesta-intermed/codigo/insertMensaje',{mensaje:mensaje, id:idMensaje},function(dataM){
+                $.post('/encuesta-intermed/codigo/actualizaStatus/',{correo:correo, ids:spanId},function(datasA){
+                }).done(function(){
+                  alert("Campo actualizado y se envio el correo");
+                  $(ids).hide('slow');
+                  $(id).hide('slow');
+                  $('.modal').modal('hide');
+                  $("#aleatorioDato").attr('value','');
+                  $("#mensajeAceptado").val('');
+                });
+              });
             });
           });
-        });
-      });
-    }else{
-      alert("Se debe de generar un código primero");
-    }
-  });
-  // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
-  // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
-  $("#envioRechazado").click(function(){
-    var mail = $("#rechazos").text();
-    var titulo = 'INFORMACION INTERMED';
-    var mensaje = $("#areaRechazado").val();
-    var valor = parseInt($("#rechazosID").text())-1;
-    var idMensaje = $("#rechazosID").text();
-    var ids = '#tr'+valor;
-    var id = '#t'+valor;
-    var spanId = $("#rechazosID").text();
-    $.post('/encuesta-intermed/codigo/sendMail/',{correo:mail,titulo:titulo,mensaje:mensaje},function(data){
-      $.post('/encuesta-intermed/codigo/negado',{correo:mail, ids:spanId},function(negado){
-        $.post('/encuesta-intermed/codigo/insertMensaje',{mensaje:mensaje, id:idMensaje},function(dataM){});
-      }).done(function(){
-        alert("Usuario rechazado, correo enviado....");
-        $("#areaRechazado").val('') ;
-        $('.modal').modal('hide');
-        $(ids).hide('slow');
-        $(id).hide('slow');
-      });
+        }else{
+          alert("Corrija el mensaje: No debe de contener mas de 340 caracteres");
+        }
+      }else{
+        alert("Se debe de generar un código primero");
+      }
     });
-  });
-  //cerrar session
-  $("#salir").click(function(){
-    $.post('/encuesta-intermed/admin/cerrar/',function(data){
-    }).done(function(){
-      window.location = '/encuesta-intermed/admin/index';
-    }).fail(function(){console.log("ERROR AL CERRAR SESSION");});
-  });
-  $( "#enviarNoSucces" ).click( function () {
-    $( "#NoaceptarModal" ).modal( 'show' );
-  } );
+    $("#areaRechazado").keyup(function(e){
+      if( e.which == 8 ){
+        count--;
+        $( "#noCaracteres" ).html(count);
+      }else{
+        if( $( this ).val().length <= 0 ){
+          count = 1;
+          $( "#noCaracteres" ).html(count);
+        }else{
+          count++;
+          $( "#noCaracteres" ).removeClass('bg-danger');
+          $( "#noCaracteres" ).removeClass('bg-success');
+          $( "#noCaracteres" ).addClass('bg-primary');
+          $( "#noCaracteres" ).html(count);
+          if( count >= 300 || $( this ).val().length == 300 ){
+            $( "#noCaracteres" ).removeClass('bg-primary');
+            $( "#noCaracteres" ).removeClass('bg-danger');
+            $( "#noCaracteres" ).addClass('bg-success');
+            $( "#noCaracteres" ).html( $( this ).val().length );
+          }
+          if( count >= 340 || $( this ).val().length == 340 ){
+            $( "#noCaracteres" ).removeClass('bg-success');
+            $( "#noCaracteres" ).removeClass('bg-primary');
+            $( "#noCaracteres" ).addClass('bg-danger');
+            $( "#noCaracteres" ).html( $( this ).val().length );
+          }
+        }
+      }
+    });
+    // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
+    // envia el correo de rechazo y actualiza el status a 2 para que aparesca en no aceptados
+    $("#envioRechazado").click(function(){
+      var mail = $("#rechazos").text();
+      var titulo = 'Mensaje de Intermed';
+      var mensaje = $("#areaRechazado").val();
+      var valor = parseInt($("#rechazosID").text())-1;
+      var idMensaje = $("#rechazosID").text();
+      var ids = '#tr'+valor;
+      var id = '#t'+valor;
+      var tamañoChar = $( "#areaRechazado" ).val().length;
+      var spanId = $("#rechazosID").text();
+      if( $("#rechazos").text().length > 0 ){
+        if( tamañoChar <= 340 ){
+          $.post('/encuesta-intermed/codigo/sendMail/',{correo:mail,titulo:titulo,mensaje:mensaje},function(data){
+            $.post('/encuesta-intermed/codigo/negado',{correo:mail, ids:spanId},function(negado){
+              $.post('/encuesta-intermed/codigo/insertMensaje',{mensaje:mensaje, id:idMensaje},function(dataM){});
+            }).done(function(){
+              alert("Usuario rechazado, correo enviado....");
+              $("#areaRechazado").val('') ;
+              $('.modal').modal('hide');
+              $(ids).hide('slow');
+              $(id).hide('slow');
+            });
+          });
+        }else{
+          alert("El mensaje debe de contener menos de 340 caracteres");
+        }
+      }else{
+        $("#mensajeAlerta").text('Presione el boton de enviar para refrescar la pagina');
+        $("#mensajeAlerta").css('color','red');
+        var confirmado = confirm("No se cargo el correo,la pagina se refrescara al presionar \"ok\"");
+        if( confirmado ){
+          location.reload();
+          $( "#NoaceptarModal" ).modal('show');
+        }
+      }
+    });
+    //cerrar session
+    $("#salir").click(function(){
+      $.post('/encuesta-intermed/admin/cerrar/',function(data){
+      }).done(function(){
+        window.location = '/encuesta-intermed/admin/index';
+      }).fail(function(){console.log("ERROR AL CERRAR SESSION");});
+    });
+    /*$( "#enviarNoSucces" ).click( function () {
+      $( "#NoaceptarModal" ).modal( 'show' );
+    } );*/
+  }
 });
-
+//Limpiar modals de la opcion por aceptar
+$( "#aceptarModal" ).on('hidden.bs.modal', function(e){
+  $("#aleatorioDato").val('');
+  $( "#mensajeAceptado" ).val('');
+  $( "#counCaracteres" ).text(0);
+});
+$( "#NoaceptarModal" ).on('hidden.bs.modal', function(e){
+  $("#areaRechazado").val('');
+});
 /* ---------- */
 /* admin menu */
 $( "#menu-toggle" ).click( function ( e ) {
@@ -590,7 +681,7 @@ function initMenu() {
   );
 }
 $( document ).ready( function () {
-  initMenu();
+  /*initMenu();*/
 } );
 
 /*Resultados*/
@@ -682,65 +773,67 @@ function ChartBar(data){
   }
   $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
-  var ctx = canvas.getContext("2d");
-  var MyChart = new Chart(ctx).Bar(barChartData, {
-    responsive : true,
-    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-  });
+  if (canvas != null){
+    var ctx = canvas.getContext("2d");
+    var MyChart = new Chart(ctx).Bar(barChartData, {
+      responsive : true,
+      tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+    });
 
-  canvas.onclick = function(evt){
-      var activePoints = MyChart.getBarsAtEvent(evt);
-      var closePopovers = true;
-      data.data.forEach(function (result){
-        if (activePoints[0]){
-          if (result.label == activePoints[0]['label']){
-            if (result.complemento){
-              closePopovers = false;
+    canvas.onclick = function(evt){
+        var activePoints = MyChart.getBarsAtEvent(evt);
+        var closePopovers = true;
+        data.data.forEach(function (result){
+          if (activePoints[0]){
+            if (result.label == activePoints[0]['label']){
+              if (result.complemento){
+                closePopovers = false;
 
-              console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
-              var valuescomp = [];
-              var labelscomp = [];
-              result.complemento.forEach(function (complemento){
-                //$('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
-                labelscomp.push(complemento.comp);
-                valuescomp.push(complemento.total);
-              });
-              var r = (Math.floor(Math.random() * 256));
-              var g = (Math.floor(Math.random() * 256));
-              var b = (Math.floor(Math.random() * 256));
-              var barChartData = {
-                labels : labelscomp,
-                datasets : [
-                  {
-                    fillColor : "rgba("+r+","+g+","+b+",0.5)",
-                    strokeColor : "rgba("+r+","+g+","+b+",0.8)",
-                    highlightFill : "rgba("+r+","+g+","+b+",0.75)",
-                    highlightStroke : "rgba("+r+","+g+","+b+",1)",
-                    data : valuescomp
-                  }
-                ]
+                console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
+                var valuescomp = [];
+                var labelscomp = [];
+                result.complemento.forEach(function (complemento){
+                  //$('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
+                  labelscomp.push(complemento.comp);
+                  valuescomp.push(complemento.total);
+                });
+                var r = (Math.floor(Math.random() * 256));
+                var g = (Math.floor(Math.random() * 256));
+                var b = (Math.floor(Math.random() * 256));
+                var barChartData = {
+                  labels : labelscomp,
+                  datasets : [
+                    {
+                      fillColor : "rgba("+r+","+g+","+b+",0.5)",
+                      strokeColor : "rgba("+r+","+g+","+b+",0.8)",
+                      highlightFill : "rgba("+r+","+g+","+b+",0.75)",
+                      highlightStroke : "rgba("+r+","+g+","+b+",1)",
+                      data : valuescomp
+                    }
+                  ]
+                }
+                $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
+                $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
+                //var testPopover = $('#canvas_'+element).parent();
+
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+                $('#'+element+'_complemento').popover('show');
+
+                var canvas2 = document.getElementById('canvas_complemento_'+element);
+                var ctx2 = canvas2.getContext("2d");
+                var MyChart = new Chart(ctx2).Bar(barChartData, {
+                  responsive : true,
+                  tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+                });
               }
-              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
-              $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
-              //var testPopover = $('#canvas_'+element).parent();
-
-              $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
-              $('#'+element+'_complemento').popover('show');
-
-              var canvas2 = document.getElementById('canvas_complemento_'+element);
-              var ctx2 = canvas2.getContext("2d");
-              var MyChart = new Chart(ctx2).Bar(barChartData, {
-                responsive : true,
-                tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-              });
             }
           }
+        });
+        if (closePopovers){
+          $('[data-toggle="popover"]').popover('hide');
         }
-      });
-      if (closePopovers){
-        $('[data-toggle="popover"]').popover('hide');
-      }
-  };
+    };
+  }
 }
 
 function ChartRadar(data){
@@ -771,66 +864,68 @@ function ChartRadar(data){
 
   $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
-  var ctx = canvas.getContext("2d");
-  var MyChart = new Chart(ctx).Radar(barChartData, {
-    responsive : true,
-    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-  });
+  if (canvas != null){
+    var ctx = canvas.getContext("2d");
+    var MyChart = new Chart(ctx).Radar(barChartData, {
+      responsive : true,
+      tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+    });
 
-  canvas.onclick = function(evt){
-      var activePoints = MyChart.getPointsAtEvent(evt);
-      var closePopovers = true;
-      data.data.forEach(function (result){
-        if (activePoints[0]){
-          if (result.label == activePoints[0]['label']){
-            if (result.complemento){
-              closePopovers = false;
+    canvas.onclick = function(evt){
+        var activePoints = MyChart.getPointsAtEvent(evt);
+        var closePopovers = true;
+        data.data.forEach(function (result){
+          if (activePoints[0]){
+            if (result.label == activePoints[0]['label']){
+              if (result.complemento){
+                closePopovers = false;
 
-              console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
-              var valuescomp = [];
-              var labelscomp = [];
-              result.complemento.forEach(function (complemento){
-                //$('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
-                labelscomp.push(complemento.comp);
-                valuescomp.push(complemento.total);
-              });
-              var r = (Math.floor(Math.random() * 256));
-              var g = (Math.floor(Math.random() * 256));
-              var b = (Math.floor(Math.random() * 256));
-              var barChartData = {
-                labels : labelscomp,
-                datasets : [
-                  {
-                    fillColor : "rgba("+r+","+g+","+b+",0.5)",
-                    strokeColor : "rgba("+r+","+g+","+b+",0.8)",
-                    highlightFill : "rgba("+r+","+g+","+b+",0.75)",
-                    highlightStroke : "rgba("+r+","+g+","+b+",1)",
-                    data : valuescomp
-                  }
-                ]
+                console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
+                var valuescomp = [];
+                var labelscomp = [];
+                result.complemento.forEach(function (complemento){
+                  //$('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
+                  labelscomp.push(complemento.comp);
+                  valuescomp.push(complemento.total);
+                });
+                var r = (Math.floor(Math.random() * 256));
+                var g = (Math.floor(Math.random() * 256));
+                var b = (Math.floor(Math.random() * 256));
+                var barChartData = {
+                  labels : labelscomp,
+                  datasets : [
+                    {
+                      fillColor : "rgba("+r+","+g+","+b+",0.5)",
+                      strokeColor : "rgba("+r+","+g+","+b+",0.8)",
+                      highlightFill : "rgba("+r+","+g+","+b+",0.75)",
+                      highlightStroke : "rgba("+r+","+g+","+b+",1)",
+                      data : valuescomp
+                    }
+                  ]
+                }
+                $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
+                $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
+                //var testPopover = $('#canvas_'+element).parent();
+
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+                $('#'+element+'_complemento').popover('show');
+
+                var canvas2 = document.getElementById('canvas_complemento_'+element);
+                var ctx2 = canvas2.getContext("2d");
+                var MyChart = new Chart(ctx2).Radar(barChartData, {
+                  responsive : true,
+                  tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+                });
               }
-              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
-              $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
-              //var testPopover = $('#canvas_'+element).parent();
-
-              $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
-              $('#'+element+'_complemento').popover('show');
-
-              var canvas2 = document.getElementById('canvas_complemento_'+element);
-              var ctx2 = canvas2.getContext("2d");
-              var MyChart = new Chart(ctx2).Radar(barChartData, {
-                responsive : true,
-                tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-              });
             }
           }
+        });
+        if (closePopovers){
+          $('[data-toggle="popover"]').popover('hide');
         }
-      });
-      if (closePopovers){
-        $('[data-toggle="popover"]').popover('hide');
-      }
-  };
-}
+    };
+  }
+  }
 
 function ChartPie(data){
   var element = data['element'];
@@ -850,53 +945,55 @@ function ChartPie(data){
 
   $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
-  var ctx = canvas.getContext("2d");
-  var MyChart =  new Chart(ctx).Pie(values, {
-    responsive : true,
-    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-  });
+  if (canvas != null){
+    var ctx = canvas.getContext("2d");
+    var MyChart =  new Chart(ctx).Pie(values, {
+      responsive : true,
+      tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+    });
 
-  canvas.onclick = function(evt){
-      var activePoints = MyChart.getSegmentsAtEvent(evt);
-      var closePopovers = true;
-      data.data.forEach(function (result){
-        if (activePoints[0]){
-          if (result.label == activePoints[0]['label']){
-            if (result.complemento){
-              closePopovers = false;
+    canvas.onclick = function(evt){
+        var activePoints = MyChart.getSegmentsAtEvent(evt);
+        var closePopovers = true;
+        data.data.forEach(function (result){
+          if (activePoints[0]){
+            if (result.label == activePoints[0]['label']){
+              if (result.complemento){
+                closePopovers = false;
 
-              var valuescomp = [];
-              var labelscomp = [];
-              result.complemento.forEach(function (complemento){
-                var r = (Math.floor(Math.random() * 256));
-                valuescomp.push({
-                  value: complemento.total,
-                  color: "rgba("+r+","+g+","+b+",0.7)",
-                  highlight: "rgba("+r+","+g+","+b+",0.5)",
-                  label: complemento.comp
+                var valuescomp = [];
+                var labelscomp = [];
+                result.complemento.forEach(function (complemento){
+                  var r = (Math.floor(Math.random() * 256));
+                  valuescomp.push({
+                    value: complemento.total,
+                    color: "rgba("+r+","+g+","+b+",0.7)",
+                    highlight: "rgba("+r+","+g+","+b+",0.5)",
+                    label: complemento.comp
+                  });
                 });
-              });
-              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
-              $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
-              //var testPopover = $('#canvas_'+element).parent();
+                $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
+                $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
+                //var testPopover = $('#canvas_'+element).parent();
 
-              $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
-              $('#'+element+'_complemento').popover('show');
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+                $('#'+element+'_complemento').popover('show');
 
-              var canvas2 = document.getElementById('canvas_complemento_'+element);
-              var ctx2 = canvas2.getContext("2d");
-              var MyChart = new Chart(ctx2).Pie(valuescomp, {
-                responsive : true,
-                tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-              });
+                var canvas2 = document.getElementById('canvas_complemento_'+element);
+                var ctx2 = canvas2.getContext("2d");
+                var MyChart = new Chart(ctx2).Pie(valuescomp, {
+                  responsive : true,
+                  tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+                });
+              }
             }
           }
+        });
+        if (closePopovers){
+          $('[data-toggle="popover"]').popover('hide');
         }
-      });
-      if (closePopovers){
-        $('[data-toggle="popover"]').popover('hide');
-      }
-  };
+    };
+  }
 }
 
 function ChartDoughnut(data){
@@ -917,6 +1014,7 @@ function ChartDoughnut(data){
 
   $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
+  if (canvas != null){
   var ctx = canvas.getContext("2d");
   var MyChart = new Chart(ctx).Doughnut(values, {
     responsive : true,
@@ -964,6 +1062,8 @@ function ChartDoughnut(data){
         $('[data-toggle="popover"]').popover('hide');
       }
   };
+
+  }
 }
 
 function ChartPolar(data){
@@ -983,53 +1083,55 @@ function ChartPolar(data){
   });
   $('#'+element).html('<canvas id="canvas_'+element+'"></canvas>');
   var canvas = document.getElementById('canvas_'+element);
-  var ctx = canvas.getContext("2d");
-  var MyChart = new Chart(ctx).PolarArea(values, {
-    responsive : true,
-    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-  });
+  if (canvas != null){
+    var ctx = canvas.getContext("2d");
+    var MyChart = new Chart(ctx).PolarArea(values, {
+      responsive : true,
+      tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+    });
 
-  canvas.onclick = function(evt){
-      var activePoints = MyChart.getSegmentsAtEvent(evt);
-      var closePopovers = true;
-      data.data.forEach(function (result){
-        if (activePoints[0]){
-          if (result.label == activePoints[0]['label']){
-            if (result.complemento){
-              closePopovers = false;
+    canvas.onclick = function(evt){
+        var activePoints = MyChart.getSegmentsAtEvent(evt);
+        var closePopovers = true;
+        data.data.forEach(function (result){
+          if (activePoints[0]){
+            if (result.label == activePoints[0]['label']){
+              if (result.complemento){
+                closePopovers = false;
 
-              var valuescomp = [];
-              var labelscomp = [];
-              result.complemento.forEach(function (complemento){
-                var r = (Math.floor(Math.random() * 256));
-                valuescomp.push({
-                  value: complemento.total,
-                  color: "rgba("+r+","+g+","+b+",0.7)",
-                  highlight: "rgba("+r+","+g+","+b+",0.5)",
-                  label: complemento.comp
+                var valuescomp = [];
+                var labelscomp = [];
+                result.complemento.forEach(function (complemento){
+                  var r = (Math.floor(Math.random() * 256));
+                  valuescomp.push({
+                    value: complemento.total,
+                    color: "rgba("+r+","+g+","+b+",0.7)",
+                    highlight: "rgba("+r+","+g+","+b+",0.5)",
+                    label: complemento.comp
+                  });
                 });
-              });
-              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
-              $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
-              //var testPopover = $('#canvas_'+element).parent();
+                $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
+                $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
+                //var testPopover = $('#canvas_'+element).parent();
 
-              $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
-              $('#'+element+'_complemento').popover('show');
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+                $('#'+element+'_complemento').popover('show');
 
-              var canvas2 = document.getElementById('canvas_complemento_'+element);
-              var ctx2 = canvas2.getContext("2d");
-              var MyChart = new Chart(ctx2).PolarArea(valuescomp, {
-                responsive : true,
-                tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-              });
+                var canvas2 = document.getElementById('canvas_complemento_'+element);
+                var ctx2 = canvas2.getContext("2d");
+                var MyChart = new Chart(ctx2).PolarArea(valuescomp, {
+                  responsive : true,
+                  tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+                });
+              }
             }
           }
+        });
+        if (closePopovers){
+          $('[data-toggle="popover"]').popover('hide');
         }
-      });
-      if (closePopovers){
-        $('[data-toggle="popover"]').popover('hide');
-      }
-  };
+    };
+  }
 }
 
 function ChartLine(data){
@@ -1070,67 +1172,69 @@ function ChartLine(data){
 
   $('#'+element).html('<canvas id="canvas_'+element+'" ></canvas>');
   var canvas = document.getElementById('canvas_'+element);
-  var ctx = canvas.getContext("2d");
-  var MyChart =  new Chart(ctx).Line(data2, {
-    responsive : true,
-    tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-  });
+  if (canvas != null){
+    var ctx = canvas.getContext("2d");
+    var MyChart =  new Chart(ctx).Line(data2, {
+      responsive : true,
+      tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+    });
 
-  canvas.onclick = function(evt){
-      var activePoints = MyChart.getPointsAtEvent(evt);
-      var closePopovers = true;
-      data.data.forEach(function (result){
-        if (activePoints[0]){
-          if (result.label == activePoints[0]['label']){
-            if (result.complemento){
-              closePopovers = false;
+    canvas.onclick = function(evt){
+        var activePoints = MyChart.getPointsAtEvent(evt);
+        var closePopovers = true;
+        data.data.forEach(function (result){
+          if (activePoints[0]){
+            if (result.label == activePoints[0]['label']){
+              if (result.complemento){
+                closePopovers = false;
 
-              console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
-              var valuescomp = [];
-              var labelscomp = [];
-              result.complemento.forEach(function (complemento){
-                //$('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
-                labelscomp.push(complemento.comp);
-                valuescomp.push(complemento.total);
-              });
-              var r = (Math.floor(Math.random() * 256));
-              var g = (Math.floor(Math.random() * 256));
-              var b = (Math.floor(Math.random() * 256));
-              var barChartData = {
-                labels : labelscomp,
-                datasets : [
-                  {
-                    fillColor : "rgba("+r+","+g+","+b+",0.5)",
-                    strokeColor : "rgba("+r+","+g+","+b+",0.8)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    data : valuescomp
-                  }
-                ]
+                console.log('COMPLEMENTO: ' + JSON.stringify(result.complemento));
+                var valuescomp = [];
+                var labelscomp = [];
+                result.complemento.forEach(function (complemento){
+                  //$('#'+element+'_complemento').attr('data-content',$('#'+element+'_complemento').attr('data-content')+'<li> [' + complemento.total + '] '+complemento.comp + '</li>');
+                  labelscomp.push(complemento.comp);
+                  valuescomp.push(complemento.total);
+                });
+                var r = (Math.floor(Math.random() * 256));
+                var g = (Math.floor(Math.random() * 256));
+                var b = (Math.floor(Math.random() * 256));
+                var barChartData = {
+                  labels : labelscomp,
+                  datasets : [
+                    {
+                      fillColor : "rgba("+r+","+g+","+b+",0.5)",
+                      strokeColor : "rgba("+r+","+g+","+b+",0.8)",
+                      pointColor: "rgba(151,187,205,1)",
+                      pointStrokeColor: "#fff",
+                      pointHighlightFill: "#fff",
+                      pointHighlightStroke: "rgba(151,187,205,1)",
+                      data : valuescomp
+                    }
+                  ]
+                }
+                $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
+                $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
+                //var testPopover = $('#canvas_'+element).parent();
+
+                $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
+                $('#'+element+'_complemento').popover('show');
+
+                var canvas2 = document.getElementById('canvas_complemento_'+element);
+                var ctx2 = canvas2.getContext("2d");
+                var MyChart = new Chart(ctx2).Line(barChartData, {
+                  responsive : true,
+                  tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
+                });
               }
-              $('#'+element+'_complemento').attr('data-original-title',result.label + '<button type="button" class="close" aria-label="Close" onclick="cerrarPopovers()"><span aria-hidden="true">&times;</span></button>');
-              $('#'+element+'_complemento').attr('data-content','<canvas id="canvas_complemento_'+element+'" class="col-lg-12 col-md-12" style="width:380px;margin-bottom:30px;"></canvas>');
-              //var testPopover = $('#canvas_'+element).parent();
-
-              $('[data-toggle="popover"]').not($('#'+element+'_complemento')).popover('hide');
-              $('#'+element+'_complemento').popover('show');
-
-              var canvas2 = document.getElementById('canvas_complemento_'+element);
-              var ctx2 = canvas2.getContext("2d");
-              var MyChart = new Chart(ctx2).Line(barChartData, {
-                responsive : true,
-                tooltipTemplate: "<%if (label){%><%=label%> [ <%}%><%= value %> ]"
-              });
             }
           }
+        });
+        if (closePopovers){
+          $('[data-toggle="popover"]').popover('hide');
         }
-      });
-      if (closePopovers){
-        $('[data-toggle="popover"]').popover('hide');
-      }
-  };
+    };
+  }
 }
 
 $(document).ready(function(){
@@ -1152,7 +1256,7 @@ $(function(){
         $(".error-message").html('');
         $("input:submit").attr('disabled','disabled');
         $( this ).parent().addClass('has-error');
-        $( this ).after('<span class="error-message">Recuerda que debe de estar lleno este campo el boton se deshabilito</span>');
+        $( this ).after('<span class="error-message">Recuerda que debe de estar lleno este campo.</span>');
       }else{
         $("input:submit").removeAttr('disabled');
         $( this ).next('span').remove();
@@ -1171,7 +1275,7 @@ $(function(){
         $(".error-justificacion").html('');
         $("input:submit").attr('disabled','disabled');
         $( this ).parent().addClass('has-error');
-        $( this ).after('<span class = "error-justificacion">Danos tu justificación por favor el boton se deshabilito</span>');
+        $( this ).after('<span class = "error-justificacion">Danos tu justificación por favor.</span>');
       }else{
         $("input:submit").removeAttr('disabled');
         $( this ).next('span').remove();
@@ -1443,7 +1547,6 @@ function ChartPolarCross(data,universo){
   });
 }
 
-
 function modificarConsulta(comp, tipo){
   if (!tipo){
     tipo = $('#tipoGrafica').val();
@@ -1538,7 +1641,7 @@ function ejecutarConsulta(finalQuery, tipo){
   if (finalQuery.length > 0){
     int = 0;
     finalQuery.forEach(function (result){
-      finalQuery[int].query = 'SELECT COUNT(*) AS \'total\' FROM  respuestasM, encuestasM where ' + result['query'] + ' AND respuestasM.encuestaM_id = encuestasM.id AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_2 = 1 AND encuestasM.etapa_3 = 1 AND encuestasM.etapa_4 = 1;';
+      finalQuery[int].query = 'SELECT COUNT(*) AS \'total\' FROM  respuestasM, encuestasM where ' + result['query'] + ' AND respuestasM.encuestaM_id = encuestasM.id AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1 AND encuestasM.etapa_1 = 1;';
       finalQuery[int].pregunta = result['pregunta'];
       int++;
     });
@@ -1694,3 +1797,68 @@ function scaleBannerVideoSize(element){
 
     });
 }
+
+//radio on change hide div del about
+$( function () {
+  $( '#btn1' ).click( function () {
+    if ( $( this ).prop( "checked", true ) ) {
+      $( "#comunicacion .info-section" ).removeClass( "hidden" );
+      $( "#funcionalidad .info-section" ).addClass( "hidden" );
+      $( "#versatilidad .info-section" ).addClass( "hidden" );
+      $( "#subComunicacion" ).removeClass( "hidden" );
+      $( "#subFuncionalidad" ).addClass( "hidden" );
+      $( "#subVersatilidad" ).addClass( "hidden" );
+
+    }
+  } );
+  $( '#btn2' ).click( function () {
+    if ( $( this ).prop( "checked", true ) ) {
+      $( "#comunicacion .info-section" ).addClass( "hidden" );
+      $( "#funcionalidad .info-section" ).removeClass( "hidden" );
+      $( "#versatilidad .info-section" ).addClass( "hidden" );
+      $( "#subComunicacion" ).addClass( "hidden" );
+      $( "#subFuncionalidad" ).removeClass( "hidden" );
+      $( "#subVersatilidad" ).addClass( "hidden" );
+    }
+  } );
+  $( '#btn3' ).click( function () {
+    if ( $( this ).prop( "checked", true ) ) {
+      $( "#comunicacion .info-section" ).addClass( "hidden" );
+      $( "#funcionalidad .info-section" ).addClass( "hidden" );
+      $( "#versatilidad .info-section" ).removeClass( "hidden" );
+      $( "#subComunicacion" ).addClass( "hidden" );
+      $( "#subFuncionalidad" ).addClass( "hidden" );
+      $( "#subVersatilidad" ).removeClass( "hidden" );
+    }
+  } );
+} );
+
+$(document).ready(function(){
+  if ( $( '#about' ).length > 0 ) {
+    $('.lanzavideo').click(function(){
+      var id = this.id;
+      var video_src = '';
+      var video_title = '';
+      if(id == 'v1'){
+        video_src = '149526541';
+        video_title = 'Intermed<sup>&reg;</sup>, una red social funcional.'
+      }
+      else if(id == 'v2'){
+        video_src = '150442610';
+        video_title = 'Intermed<sup>&reg;</sup> oficina.'
+      }
+      else if(id == 'v3'){
+        video_src = '150510178';
+        video_title = 'Intermed<sup>&reg;</sup> historiales.'
+      }
+      $('#videoModal .modal-header h4').append(video_title);
+      $('#videoModal .modal-body').append('<iframe src="https://player.vimeo.com/video/'+ video_src +'" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+      $('#videoModal').modal('show');
+    });
+  }
+});
+
+$('.modal').on('hide.bs.modal', function (e) {
+  $(this).find('.modal-header h4').html('');
+  $(this).find('iframe').remove();
+})

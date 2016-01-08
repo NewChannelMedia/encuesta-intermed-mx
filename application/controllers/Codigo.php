@@ -4,6 +4,8 @@
   * desde Generarlo hasta comprobar que exista. En caso que no exista,
   * se mandara a llamar otras funciones de otras clases para su uso, y
   * realice la tarea destinada que tiene el metodo que las esta llamando
+  *
+  *
   **/
   class Codigo extends CI_Controller
   {
@@ -33,7 +35,7 @@
       * @param: $subject: el Asunto del correo
       * @param: file la plantilla que se enviara al usuario
       **/
-      public function sendMail(){
+      public function sendMail($data = null){
           $correo = $this->input->post('correo');
           $titulo = $this->input->post('titulo');
           $codigo = $this->input->post('codigo');
@@ -66,27 +68,37 @@
           	$sustituir = '<span id="codigo">'.$codigo.'</span>';
             	$conCodigo = str_replace('<span id="codigo"></span>',$sustituir, $html2);
             	if($mensaje != ""){
-	              $sustituir2 = '<span id="mensaje"><p>'.$mensaje.'</p></span>';
+	              $sustituir2 = "<span id='mensaje'><p>".$mensaje."</p></span>";
 	              $conCodigo2 = str_replace('<span id="mensaje"><p></p></span>',$sustituir2, $conCodigo);
 	              $mensajeCompleto = $html1.$conCodigo2.$html3;
-	        }else{
-	        	$mensajeCompleto = $html1.$conCodigo.$html3;
-	        }
+    	        }else{
+    	        	$mensajeCompleto = $html1.$conCodigo.$html3;
+    	        }
           }else{
           	$borrar = array(
-          		'<div id="zonaCodigo">',
-          		'<h1>Este es tu codigo de acceso.</h1>',
-          		'<div class="codigoContainer"><span id="codigo"></span></div>',
-          		'</div>'
+          		'<h1>Este es tu c&oacute;digo de acceso.</h1>',
+          		'<div class="codigoContainer" style="background-color: white;color: black;font-weight: bold;padding: 10px 20px;margin-top: 45px;margin-bottom: 30px;font-size: 30px;text-transform: uppercase;width: 200px;height: 45px;display: table;display: table-cell;vertical-align: middle;"><span id="codigo"></span></div>'
           	);
-              $sustituir3 = "<span id='mensaje'><p>".$mensaje."</p></span>";
-              $conCodigo5 = str_replace('<span id="mensaje"><p></p></span>',$sustituir3,$html2);
-              $conCodigo4 = str_replace($borrar,'',$conCodigo5);
-              $mensajeCompleto = $html1.$conCodigo4.$html3;
+            $sustituir3 = "<span id='mensaje'><p>".$mensaje."</p></span>";
+            $conCodigo5 = str_replace('<span id="mensaje"><p></p></span>',$sustituir3,$html2);
+            $conCodigo4 = str_replace($borrar,'',$conCodigo5);
+            $mensajeCompleto = $html1.$conCodigo4.$html3;
           }
           $headers = "MIME-Version: 1.0" . "\r\n";
-          $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-          $headers .= 'From: <intermed.encuestas@newchannel.mx>'."\r\n";
+          $headers .= "Content-Type:text/html;charset=utf-8" . "\r\n";
+
+          $mensajeCompleto = str_replace('Á','&aacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('É','&eacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('Í','&iacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('Ó','&oacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('Ú','&uacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('á','&aacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('é','&eacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('í','&iacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('ó','&oacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('ú','&uacute;',$mensajeCompleto);
+
+          $headers .= 'From: Intermed <intermed.encuestas@newchannel.mx>'."\r\n";
           return mail($correo,$titulo,$mensajeCompleto,$headers);
       }
       /**

@@ -35,41 +35,55 @@
 
     public function existe(){
       $this->load->helper('url');
-      $this->session->set_userdata('codigo', '');
       $codigo = $this->input->post('codigo');
-      $this->session->set_userdata('codigo', $codigo);
+      if ($codigo != ""){
+        $this->session->set_userdata('codigo', $codigo);
+      } else {
+        $codigo = $this->session->userdata('codigo');
+      }
 
       $data = $this->checkStatus($codigo);
 
-      $this->load->view('templates/header', $data);
       /*Cargar la vista correspondiente al status de la encuesta*/
       switch ($data['status']) {
         case 0:
             //No existe la encuesta con ese código
-            $data['title'] = "Error";
+            $data['title'] = "Intermed | Error";
             $data['encabezado'] = "Error de código";
             $data['mensaje'] = 'El código que ingresaste es incorrecto, o hubo un error al procesar tu solicitud, por favor intenta de nuevo.';
+            $this->load->view('templates/header', $data);
             $this->load->view('encuesta/alert', $data);
+            $this->load->view('templates/footer2', $data);
             break;
         case 1:
-            //Encuesta sin iniciar
+            //Encuesta sin empezar
         case 2:
             //Encuesta sin terminar
+            $data['contestar'] = true;
+            $data['title'] = "Intermed | About";
+            $this->load->view('templates/header', $data);
             $this->load->view('about', $data);
+            $this->load->view('templates/footer', $data);
             break;
         case 3:
             //Encuesta ya contestada
             //No existe la encuesta con ese código
-            $data['title'] = "Error";
+            $data['title'] = "Intermed | About";
+            $this->load->view('templates/header', $data);
+            $this->load->view('about', $data);
+            $this->load->view('templates/footer', $data);
+            /*
+            $data['title'] = "Intermed | Error";
             $data['encabezado'] = "Atención";
             $data['mensaje'] = 'El codigo que ingresaste ya ha sido usado anteriormente. <br>Puedes solicitar uno nuevo dando click a continuación:<br><br><a href="codigo/pedir" class="btn btn-default s20">Solicitar un código nuevo</a>';
+            $this->load->view('templates/header', $data);
             $this->load->view('encuesta/alert', $data);
+            $this->load->view('templates/footer2', $data);*/
             break;
         default:
             break;
       }
       /**/
-      $this->load->view('templates/footer2', $data);
     }
 
     public function newsletter(){
@@ -91,7 +105,7 @@
       window.onpopstate = function(event) {
           history.go(1);
       };</script>';
-      $data['title'] = "Newsletter";
+      $data['title'] = "Intermed | Newsletter";
       $data['nombre'] = $nombre;
       $data['correo'] = $email;
       $data['encabezado'] = "¡Gracias por tu colaboración!";
@@ -204,7 +218,7 @@
           $this->Encuestam_model->update_encuestam($data['encuesta_id'], $update);
           $data = $this->checkStatus($codigo);
           $guardado = true;
-          if ($data['terminado'] == 4){
+          if ($data['terminado'] == $this->Categorias_model->get_etapas()){
             $finalizar = true;
           }
         }
@@ -212,20 +226,41 @@
       $data['finalizar'] = $finalizar;
 
       $data['codigo'] = $codigo;
-      $data['title'] = "Encuesta";
+      $data['title'] = "Intermed | Encuesta";
 
       if ($continuarEnc === "0"){
         header('Location: ' .  base_url() );
+        session_destroy();
         die();
       }
 
       $contenido = '';
-      if (($data['status'] == 1 || $data['status'] == 2) && !$finalizar){
+
+      if (!$finalizar && ($data['tipoCodigo'] == 2 || ($data['status'] == 1 || $data['status'] == 2))){
         //Mostrar la encuesta
         $this->load->view('templates/header', $data);
+        $cantEtapas = $this->Categorias_model->get_etapas();
 
         if (!$irEtapa){
-          if ($etapaResp && $etapaResp < 4) $etapa = ++$etapaResp;
+          if ($etapaResp && $etapaResp < $cantEtapas){
+            $resultado = $this->Encuestam_model->get_encuestamByCodigo($codigo);
+             $buscarEtapa = true;
+            $etapa = ++$etapaResp;
+             while ($buscarEtapa){
+               if ($etapaResp <= $cantEtapas){
+                 if (array_key_exists('etapa_'.$etapa,$resultado)){
+                    if ($resultado['etapa_'.$etapa] == 1){
+                      $etapa = ++$etapaResp;
+                    } else {
+                      $buscarEtapa = false;
+                    }
+                 }
+               } else {
+                 $etapa = $data['paso'];
+                 $buscarEtapa = false;
+               }
+             }
+           }
           else {
             $etapa = '1';
             if (isset($data['paso'])){
@@ -241,6 +276,8 @@
 
         $resultado = $this->Categorias_model->get_categoriasByEtapa($etapa);
 
+        $data['contestada'] = 'contestada';
+
         foreach ($resultado as $categoria) {
           if ($categoria){
             $contenido .= '<div class="block-container-category"><span class="glyphicon glyphicon-asterisk"></span><span class="category">' . $categoria['categoria'] . '</span></div>';
@@ -249,6 +286,9 @@
 
             foreach ($preguntas as $pregunta) {
                 $respuesta = $this->Respuestasm_model->get_respuestaByEncuestaPregunta($data['encuesta_id'], $pregunta['id']);
+                if (strlen($respuesta['pregunta_' . $pregunta['id']])==0){
+                  $data['contestada'] = '';
+                }
                 $respuesta = explode('|',$respuesta['pregunta_' . $pregunta['id']]);
                 //echo 'respuesta: <pre>' . print_r($respuesta,1) . '</pre>';
                 if (!($pregunta['tipo'] == 'checkbox')){
@@ -270,15 +310,15 @@
                 $opciones = explode('|', $pregunta['opciones']);
                 switch ($pregunta['tipo']) {
                   case 'text':
-                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
+                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['numPreg'] . ' - ' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
                       $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" id="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control block-container-table-respuesta" >';
                       break;
                   case 'money':
-                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
+                      $contenido .= '<label for="respuesta_' . $pregunta['id'] . '" class="block-container-table-pregunta">' . $pregunta['numPreg'] . ' - ' . $pregunta['pregunta'] . '&nbsp;&nbsp;</label>';
                       $contenido .= '<input type="text" name="respuesta_' . $pregunta['id'] . '" id="respuesta_' . $pregunta['id'] . '" value="' . $respuestas[0] .'" required class="form-control block-container-table-respuesta" onkeypress="return validarMoneda(event, this)" onblur="formatoMoneda(this)">';
                       break;
                   case 'radio':
-                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['numPreg'] . ' - ' . $pregunta['pregunta'] . '</div>';
                       $contenido .= '<div class="block-container-table-respuesta">';
                       $total = 0;
                       foreach ($opciones as $opcion) {
@@ -300,7 +340,7 @@
                       }
                       break;
                   case 'checkbox':
-                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['numPreg'] . ' - ' . $pregunta['pregunta'] . '</div>';
                       $contenido .= '<div class="block-container-table-respuesta">';
                       $total = 0;
 
@@ -335,7 +375,7 @@
                       }
                       break;
                   case 'text|enum':
-                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['id'] . ' - ' . $pregunta['pregunta'] . '</div>';
+                      $contenido .= '<div class="block-container-table-pregunta">' . $pregunta['numPreg'] . ' - ' . $pregunta['pregunta'] . '</div>';
                       $contenido .= '<div class="block-container-table-respuesta">';
                       $contenido .= '<ul class="sortable">';
                       if (count($respuestas) > 1){
@@ -364,10 +404,12 @@
           }
           $data['contenido'] = $contenido;
         }
+        $data['cantEtapas'] = $cantEtapas;
 
         $this->load->view('encuesta/encuesta', $data);
         $this->load->view('templates/footer', $data);
       } else if ($data['status'] != 0) {
+        session_destroy();
         $this->load->view('templates/header', $data);
         /*
         $contenido .= '<h1 class="Flama-normal s40 text-center">Gracias por contestar la encuesta</h1>';
@@ -385,10 +427,9 @@
         $this->load->view('templates/footer2', $data);
         //Redirect /about o index
       }
-
     }
 
-    public function checkStatus($codigo){
+    public function checkStatus($codigo,$paso = null){
       /*
       --STATUS--
       0-La encuesta no existe
@@ -397,42 +438,56 @@
       3-La encuesta existe y ya la terminaron de contenstar
       */
       $data = array();
+      $cantEtapas = $this->Categorias_model->get_etapas();
       $resultado = $this->Encuestam_model->get_encuestamByCodigo($codigo);
 
+      $etapa = 0;
       $status = -1;
+      $etapas = array();
+
       if ($resultado){
+        foreach ($resultado as $field => $value) {
+          $fieldEsperado = "etapa_" . ($etapa+1);
+          if ($field == $fieldEsperado){
+            $etapa++;
+            $etapas[$field] = $value;
+          }
+        }
+      }
+
+      $paso = 0;
+      $etapa = 1;
+      $terminado = 0;
+      if (count($etapas) >0){
         $data['encuesta_id'] = $resultado['id'];
-        $paso = 0;
-        $terminado = 0;
-        if ($resultado['etapa_1'] == 1) {
-          $paso = 1;
-          $terminado++;
-        }
-        if ($resultado['etapa_2'] == 1){
-          if ($paso == 1) $paso = 2;
-          $terminado++;
-        }
-        if ($resultado['etapa_3'] == 1) {
-          if ($paso == 2) $paso = 3;
-          $terminado++;
-        }
-        if ($resultado['etapa_4'] == 1){
-          if ($paso == 3) $paso = 4;
-          $terminado++;
+        foreach ($etapas as $etapaKey => $resp) {
+          if ($resp == 0 && $paso == 0){
+            $paso = $etapa;
+          }
+          if ($resp == 1) {
+            $terminado++;
+          }
+          $etapa++;
         }
         $data['terminado'] = $terminado;
-        if ($paso == 4) $status = 3;
-        else if ($paso > 0) {
+        if ($terminado == $cantEtapas) $status = 3; //Encuesta terminada
+        else if ($paso > 0) { //Encuesta por empezar
           $status = 2;
-          $data['paso'] = ++$paso;
-        } else $status = 1;
+          $data['paso'] = $paso;
+        } else $status = 1; //Encuesta sin empezar
       } else {
         $status = 0;
       }
 
       $data['codigo'] = $codigo;
       $data['status'] = $status;
+      $data['tipoCodigo'] = $this->Encuestam_model->get_tipoEncuesta($codigo);
+      //Encuesta maestra (puede entrar aunque ya este contestada)
+      if ($data['tipoCodigo'] == 2 && $status == 3){
+        $data['paso'] = 1;
+      }
       return $data;
     }
+
   }
 ?>

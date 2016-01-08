@@ -21,101 +21,10 @@
         src: url('/Flama/Flama.eot?#iefix') format('embedded-opentype'), url('/Flama/Flama.woff') format('woff'), url('/Flama/Flama.ttf') format('truetype'), url('/Flama/Flama.svg#Flama') format('svg');
       }
 
-      .Flama {
-        font-family: 'Flama';
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-      }
-
       @media screen and (max-width: 600px) {
         table[class="container"] {
           width: 95% !important;
         }
-      }
-
-      #outlook a {
-        padding: 0;
-      }
-
-      body {
-        width: 100% !important;
-        -webkit-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%;
-        margin: 0;
-        padding: 0;
-      }
-
-      .ExternalClass {
-        width: 100%;
-      }
-
-      .ExternalClass,
-      .ExternalClass p,
-      .ExternalClass span,
-      .ExternalClass font,
-      .ExternalClass td,
-      .ExternalClass div {
-        line-height: 100%;
-      }
-
-      #backgroundTable {
-        margin: 0;
-        padding: 30px;
-        width: 100% !important;
-        line-height: 100% !important;
-        background-color: #86c2e7;
-      }
-
-      #mainTable {
-        border-radius: 20px;
-        border: solid 7px white;
-        background-color: #50a7dd;
-        padding: 0;
-        margin: 0;
-        overflow: hidden;
-        background-image: url("http://newchannel.mx/encuesta-intermed/img/correo/bottom.png");
-        background-position: center bottom;
-        background-repeat: no-repeat;
-        background-size: contain;
-        
-      }
-      #bottomBody {
-        height:467px;
-        width: 100%; 
-      }
-
-      .codigoContainer {
-        background-color: white;
-        color: black;
-        font-weight: bold;
-        padding: 10px 20px;
-        margin-top: 45px;
-        margin-bottom: 30px;
-        font-size: 30px;
-        text-transform: uppercase;
-        width: 200px;
-        height: 45px;
-        display: table;
-      }
-
-      #codigo {
-        display: table-cell;
-        vertical-align: middle;
-
-      }
-
-      .separador {
-        width: 90%;
-        margin: 0 auto;
-        height:2px;
-        background-color: white;
-      }
-      .notransform {
-        text-transform: none;
-      }
-      .whie {
-        color: white;
       }
 
       img {
@@ -265,14 +174,10 @@
 
     </style>
 
-    <script type="colorScheme" class="swatch active">
-      { "name":"Default", "bgBody":"ffffff", "link":"fff", "color":"555555", "bgItem":"ffffff", "title":"181818" }
-    </script>
-
   </head>
 
-  <body class="Flama">
-    <table cellpadding="0" width="100%" cellspacing="0" border="0" id="backgroundTable" class='bgBody'>
+  <body style="width: 100% !important;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;margin: 0;padding: 0;font-family: 'Flama';font-weight: normal;font-style: normal;font-stretch: normal;">
+    <table cellpadding="0" width="100%" cellspacing="0" border="0" id="backgroundTable" class='bgBody' style="margin: 0;padding: 30px;width: 100% !important;line-height: 100% !important;background-color: #86c2e7;">
       <tr>
         <td>
           <table cellpadding="0" width="620" class="container" align="center" cellspacing="0" border="0">

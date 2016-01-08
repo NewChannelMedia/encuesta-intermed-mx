@@ -1,4 +1,10 @@
-<div class="container-fluid resultados-contanier">
+<?php
+//Si no tiene permisos de rol admin, redirect a pagina principal
+if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
+  redirect(base_url().'admin');
+}
+?>
+<div class="container-fluid resultados-container flama-normal">
 <div class="row">
 <div class="col-lg-2 col-md-6">
 <div class="column" id="columna_preguntas">
@@ -14,7 +20,7 @@ foreach ($resultado as $categoria){
           if (stripos($pregunta['pregunta'],'ordene') === false ){
             $data = array(); $complemento=false;
 
-            $divId = 'pregunta_' . ++$totalChar;
+            $divId = 'pregunta_' . $pregunta['id'];
             echo '<div class="portlet panel panel-default" id="' . $divId .'_div"><div class="portlet-header panel-heading">';
             echo '<b >' .$pregunta['pregunta'] . '</b>';
             echo '</div><div class="portlet-content panel-body">';
