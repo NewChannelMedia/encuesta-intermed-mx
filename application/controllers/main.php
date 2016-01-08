@@ -6,6 +6,7 @@
       $data = array(
         "title" => "¡Bienvenido a Intermed!",
       );
+      session_destroy();
 
       $this->load->view('templates/header', $data);
       $this->load->view('index', $data);

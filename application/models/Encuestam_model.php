@@ -150,4 +150,9 @@ class Encuestam_model extends CI_Model {
         return true;
     }
   }
+
+  public function get_tipoEncuesta( $codigo ){
+    $query = $this->db_encuesta->get_where('encuestasM', array('codigo' => $codigo));
+    return $query->row_array()['tipoCodigo'];
+  }
 }

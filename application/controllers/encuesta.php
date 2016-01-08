@@ -61,6 +61,7 @@
             //Encuesta sin empezar
         case 2:
             //Encuesta sin terminar
+            $data['contestar'] = true;
             $data['title'] = "Intermed | About";
             $this->load->view('templates/header', $data);
             $this->load->view('about', $data);
@@ -69,12 +70,17 @@
         case 3:
             //Encuesta ya contestada
             //No existe la encuesta con ese código
+            $data['title'] = "Intermed | About";
+            $this->load->view('templates/header', $data);
+            $this->load->view('about', $data);
+            $this->load->view('templates/footer', $data);
+            /*
             $data['title'] = "Intermed | Error";
             $data['encabezado'] = "Atención";
             $data['mensaje'] = 'El codigo que ingresaste ya ha sido usado anteriormente. <br>Puedes solicitar uno nuevo dando click a continuación:<br><br><a href="codigo/pedir" class="btn btn-default s20">Solicitar un código nuevo</a>';
             $this->load->view('templates/header', $data);
             $this->load->view('encuesta/alert', $data);
-            $this->load->view('templates/footer2', $data);
+            $this->load->view('templates/footer2', $data);*/
             break;
         default:
             break;
@@ -231,7 +237,8 @@
       }
 
       $contenido = '';
-      if (($data['status'] == 1 || $data['status'] == 2) && !$finalizar){
+
+      if (!$finalizar && ($data['tipoCodigo'] == 2 || ($data['status'] == 1 || $data['status'] == 2))){
         //Mostrar la encuesta
         $this->load->view('templates/header', $data);
         $cantEtapas = $this->Categorias_model->get_etapas();
@@ -424,7 +431,7 @@
       }
     }
 
-    public function checkStatus($codigo){
+    public function checkStatus($codigo,$paso = null){
       /*
       --STATUS--
       0-La encuesta no existe
@@ -476,6 +483,11 @@
 
       $data['codigo'] = $codigo;
       $data['status'] = $status;
+      $data['tipoCodigo'] = $this->Encuestam_model->get_tipoEncuesta($codigo);
+      //Encuesta maestra (puede entrar aunque ya este contestada)
+      if ($data['tipoCodigo'] == 2 && $status == 3){
+        $data['paso'] = 1;
+      }
       return $data;
     }
 

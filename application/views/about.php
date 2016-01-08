@@ -233,6 +233,7 @@
           </div>
         </div>
       </div>
+      <?php if ($tipoCodigo == 2 || isset($contestar) && $contestar === true){ ?>
       <div class="midsection3b">
         <div class="container">
           <div class="row">
@@ -266,6 +267,7 @@
           </div>
         </div>
       </div>
+      <?php } ?>
     </div>
   </section>
   <section id="info">

@@ -45,6 +45,7 @@
         <a class="nav-enc pull-right" onclick="siguiente()" type="submit">Siguiente<span class="glyphicon glyphicon-chevron-right"></span></a>
       </div>
     <?php } ?>
+    <?php if (!($tipoCodigo == 2 && $status == 3)){ ?>
     <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7 pull-right">
       <div class="row">
         <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
@@ -58,6 +59,7 @@
         </div>
       </div>
     </div>
+    <?php } ?>
     <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5 pull-left">
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-10 col-xs-12">
