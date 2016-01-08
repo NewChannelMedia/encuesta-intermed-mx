@@ -255,7 +255,7 @@
                     </button>
                     <p class="ag-medium white-c s15 text-center">
                       <br>* La encuesta es de caracter anónimo.
-                      <br>Si quieres saber más lee nuestra <a href="privacidad" class="btn-privacy">política de privacidad</a>
+                      <br>Si quieres saber más lee nuestra <a href="terminos" class="btn-privacy">Política de Privacidad</a>.
                     </p>
                   </form>
                 <?php } else {?>

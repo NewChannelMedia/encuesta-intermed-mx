@@ -28,7 +28,7 @@ body {
   color: #606060;
   padding: 0;
   height: 110px;
-  margin-bottom: 30px;
+  box-shadow: 0 0 50px rgba(10, 10, 10, .4);
 }
 @media(max-width:768px) {
   .navbarMain.about {

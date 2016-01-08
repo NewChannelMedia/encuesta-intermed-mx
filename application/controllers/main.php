@@ -37,12 +37,12 @@
         $this->load->view('templates/footerAdmin');
     }
 
-    public function privacidad(){
+    public function terminos(){
         $data = array(
           "title" => "Intermed - Política de privacidad"
         );
         $this->load->view('templates/header', $data);
-        $this->load->view('privacidad', $data);
+        $this->load->view('terminos', $data);
         $this->load->view('templates/footer', $data);
     }
   }
