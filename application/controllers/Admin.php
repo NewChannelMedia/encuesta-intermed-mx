@@ -561,22 +561,66 @@
       }
 
       public function enviarCorreo(){
-          $asunto = $this->input->post('asunto');
+          $titulo = $this->input->post('asunto');
           $id = $this->input->post('id');
-          $email = $this->input->post('email');
+          $correo = $this->input->post('email');
           $mensaje = $this->input->post('mensaje');
 
+          // se lee el archivo
+          $fileh = realpath(APPPATH.'views/correos/headerCorreo.php');
+          $fileb = realpath(APPPATH.'views/correos/bodyCorreo.php');
+          $filef = realpath(APPPATH.'views/correos/footerCorreo.php');
+          $fpH = fopen( $fileh,'r');
+          $fpB = fopen( $fileb,'r');
+          $fpF = fopen( $filef,'r');
+          $html1 = "";
+          $html2 = "";
+          $html3 = "";
+          while( $line = fgets($fpH) ){
+            $html1 .= $line;
+          }
+          while( $line = fgets($fpB) ){
+            $html2 .= $line;
+          }
+          while( $line = fgets($fpF) ){
+            $html3 .= $line;
+          }
+          fclose($fpH);
+          fclose($fpB);
+          fclose($fpF);
+          $mensajeCompleto = "";
+          $borrar = array(
+            '<h1>Este es tu c&oacute;digo de acceso.</h1>',
+            '<div class="codigoContainer" style="background-color: white;color: black;font-weight: bold;padding: 10px 20px;margin-top: 45px;margin-bottom: 30px;font-size: 30px;text-transform: uppercase;width: 200px;height: 45px;display: table;display: table-cell;vertical-align: middle;"><span id="codigo"></span></div>'
+          );
+          $sustituir3 = "<span id='mensaje'><p>".$mensaje."</p></span>";
+          $conCodigo5 = str_replace('<span id="mensaje"><p></p></span>',$sustituir3,$html2);
+          $conCodigo4 = str_replace($borrar,'',$conCodigo5);
+          $mensajeCompleto = $html1.$conCodigo4.$html3;
           $headers = "MIME-Version: 1.0" . "\r\n";
-          $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-          $headers .= 'From: <intermed.encuestas@newchannel.mx>'."\r\n";
+          $headers .= "Content-Type:text/html;charset=utf-8" . "\r\n";
 
-          $result= mail($email,$asunto,$mensaje,$headers);
+          $headers .= 'From: Intermed <intermed.encuestas@newchannel.mx>'."\r\n";
+
+          $mensajeCompleto = str_replace('Á','&aacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('É','&eacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('Í','&iacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('Ó','&oacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('Ú','&uacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('á','&aacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('é','&eacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('í','&iacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('ó','&oacute;',$mensajeCompleto);
+          $mensajeCompleto = str_replace('ú','&uacute;',$mensajeCompleto);
+
+          $result =  mail($correo,$titulo,$mensajeCompleto,$headers);
 
           $array = array();
           $array['success'] = $result;
           if ($result){
             $query = $this->Contacto_model->set_respuesta($id,$mensaje);
           }
+
       		echo json_encode($array);
       }
 

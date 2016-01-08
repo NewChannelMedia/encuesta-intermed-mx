@@ -37,7 +37,7 @@
               <div class="contentEditableContainer contentTextEditable">
                 <div class="contentEditable" align='center'>
                   <div id="zonaCodigo">
-                    <h1>Este es tu código de acceso.</h1>
+                    <h1>Este es tu c&oacute;digo de acceso.</h1>
                     <div class="codigoContainer" style="background-color: white;color: black;font-weight: bold;padding: 10px 20px;margin-top: 45px;margin-bottom: 30px;font-size: 30px;text-transform: uppercase;width: 200px;height: 45px;display: table;display: table-cell;vertical-align: middle;"><span id="codigo"></span></div>
                   </div>
                 </div>
