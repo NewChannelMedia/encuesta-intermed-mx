@@ -6,7 +6,7 @@ function guardarMedico(){
     var especialidad = $('#especialidad').val();
     var email = $('#email').prop('value');
     var medico_id = $("#medico_id").val();
-    $.post('/encuesta-intermed/capturista/editDatos/',{
+    $.post('/capturista/editDatos/',{
       nombre:nombre,
       apellidoP: apellidoP,
       apellidoM: apellidoM,
@@ -39,7 +39,7 @@ function guardarMedico(){
                 'especialidad': especialidad
               };
     $.ajax( {
-      url: '/encuesta-intermed/Capturista/guardarMedico',
+      url: '/Capturista/guardarMedico',
       type: "POST",
       data: data,
       dataType: 'JSON',
@@ -88,14 +88,14 @@ function guardarTelefono(){
               'tipo': tipo
             };
   if( $("#fonOculto").val() != "" ){
-    $.post('/encuesta-intermed/capturista/actualizarFon/',{
+    $.post('/capturista/actualizarFon/',{
       id: telefono_id,
       clave: clave,
       numero: numero,
       tipo: tipo
     },function(data){
       limpiaSection('#registroTelefonos');
-      $.post('/encuesta-intermed/capturista/traerFonsolo/',{id:telefono_id},function(numero){
+      $.post('/capturista/traerFonsolo/',{id:telefono_id},function(numero){
         $.each(JSON.parse(numero), function( i, item){
           var btntxt = "btntxt" + telefono_id;
           //$("#fonAgregado ul.list-inline li input.editar").html(item.numero);
@@ -111,7 +111,7 @@ function guardarTelefono(){
   }else{
     if (id != ''){
       $.ajax( {
-        url: '/encuesta-intermed/Capturista/guardarTelefono',
+        url: '/Capturista/guardarTelefono',
         type: "POST",
         data: data,
         dataType: 'JSON',
@@ -122,7 +122,7 @@ function guardarTelefono(){
             document.getElementById("tipoTelefono").selectedIndex = "0";
             $('#ladaTelefono').focus();
             var html2 = "";
-            $.post('/encuesta-intermed/capturista/anadirFon/',{
+            $.post('/capturista/anadirFon/',{
               id: $('#medico_id').val()
             },function(datas){
               var idBoton;
@@ -236,7 +236,7 @@ $(document).ready(function(){
     var numero = $("#numero").val();
     if( $("#superOculto").val() != "" ){
       var id = $("#superOculto").val();
-      $.post('/encuesta-intermed/capturista/actualizaDireccion/',{
+      $.post('/capturista/actualizaDireccion/',{
         id: id,
         consultorio:nombreConsultorio,
         calle: calle,
@@ -249,7 +249,7 @@ $(document).ready(function(){
         id_medico: id_medico,
         otralocalidad: otralocalidad
       },function(){
-        $.post('/encuesta-intermed/capturista/ponerNombre/',{id:id},function(datos){
+        $.post('/capturista/ponerNombre/',{id:id},function(datos){
           $.each(JSON.parse(datos), function(i, item){
             var btntxt = "btntxt" + id;
             var iddireccion = 'direccionGuardada' + id;
@@ -274,7 +274,7 @@ $(document).ready(function(){
       });
     }else{
       if( id_medico != "" ){
-          $.post('/encuesta-intermed/capturista/insertDireccion/',{
+          $.post('/capturista/insertDireccion/',{
             consultorio:nombreConsultorio,
             calle: calle,
             cp: cp,
@@ -302,7 +302,7 @@ $(document).ready(function(){
             *
             *
             */
-            $.post('/encuesta-intermed/capturista/editarDirecciones',{
+            $.post('/capturista/editarDirecciones',{
               medico_id: id_medico
             },function(d){
               var html="";
@@ -411,7 +411,7 @@ function fonAdd(dato){
   $('#'+dato).parent().find('.borrar').prop('disabled', false);
   $('#'+dato).parent().parent().parent().find('.btnAñade').html('Guardar');
   $('#'+dato).parent().parent().parent().parent().find('input:visible:first').focus();
-  $.post('/encuesta-intermed/capturista/sincFon/',{
+  $.post('/capturista/sincFon/',{
     id: idConsulta
   },function(datas){
     $.each(JSON.parse(datas),function(i, item){
@@ -449,7 +449,7 @@ function generarMuestraMedicos(){
   $('.loader-container').removeClass('hidden');
   $('#muestraMed').html('');
   $.ajax( {
-    url: '/encuesta-intermed/Capturista/generarMuestraMedicos',
+    url: '/Capturista/generarMuestraMedicos',
     type: "POST",
     dataType: 'JSON',
     async: true,
@@ -511,7 +511,7 @@ function guardarMuestra(id){
 
   if (guardar){
     $.ajax( {
-      url: '/encuesta-intermed/Capturista/guardarMuestraMedico',
+      url: '/Capturista/guardarMuestraMedico',
       type: "POST",
       dataType: 'JSON',
       data: {'id':id,'telefono_id':telefono_id,'correo':correo,'correo2':correo2,'aut':autorizo},
@@ -554,7 +554,7 @@ function eliminarDireccion(id){
       callback: function(result) {
           if (result){
             $.ajax( {
-              url: '/encuesta-intermed/Capturista/eliminarDireccion',
+              url: '/Capturista/eliminarDireccion',
               type: "POST",
               dataType: 'JSON',
               data: {'id':id},
@@ -589,7 +589,7 @@ function eliminarTelefono(id){
       callback: function(result) {
           if (result){
             $.ajax( {
-              url: '/encuesta-intermed/Capturista/eliminarTelefono',
+              url: '/Capturista/eliminarTelefono',
               type: "POST",
               dataType: 'JSON',
               data: {'id':id},
@@ -648,7 +648,7 @@ function obtenerSeleccionados(){
   $('.loader-container').removeClass('hidden');
   $('#seleccionadosList').html('');
   $.ajax( {
-    url: '/encuesta-intermed/Capturista/generarMuestraMedicos',
+    url: '/Capturista/generarMuestraMedicos',
     type: "POST",
     dataType: 'JSON',
     async: true,
@@ -740,7 +740,7 @@ function obtenerNoSeleccionados(){
     url = 'obtenerNoSeleccionadosRevisados';
   }
   $.ajax( {
-    url: '/encuesta-intermed/Capturista/'+url,
+    url: '/Capturista/'+url,
     type: "POST",
     dataType: 'JSON',
     async: true,
@@ -837,7 +837,7 @@ function modificarMedico(id){
   $('#ActualizarMedico').find('input').prop('value','');
   $('#ActualizarMedico').find('#registroMedico').find('input,button#agregarDatos').attr('disabled','disabled');
   $.ajax( {
-    url: '/encuesta-intermed/Capturista/obtenerDatosMedicoId',
+    url: '/Capturista/obtenerDatosMedicoId',
     type: "POST",
     dataType: 'JSON',
     data: {'id':id},
@@ -925,7 +925,7 @@ function traerBorrarDireccion(element){
         callback: function(result) {
             if (result){
               $.ajax( {
-                url: '/encuesta-intermed/Capturista/eliminarDireccion',
+                url: '/Capturista/eliminarDireccion',
                 type: "POST",
                 dataType: 'JSON',
                 data: {'id':$(element).prop('id')},
@@ -969,7 +969,7 @@ function traerBorrarTelefono(element){
             if (result){
               if (result){
                 $.ajax( {
-                  url: '/encuesta-intermed/Capturista/eliminarTelefono',
+                  url: '/Capturista/eliminarTelefono',
                   type: "POST",
                   dataType: 'JSON',
                   data: {'id':$(element).prop('id')},
@@ -1000,7 +1000,7 @@ function traerBorrarTelefono(element){
 
 function LimpiarFormularios(){
   $.ajax( {
-    url: '/encuesta-intermed/Capturista/terminarCaptura',
+    url: '/Capturista/terminarCaptura',
     type: "POST",
     dataType: 'JSON',
     data: {'id':$('#medico_id').val()},
@@ -1039,7 +1039,7 @@ function LimpiarFormularios(){
 function actualizarInformacionMedico(id){
     //console.log('medicoSeleccionado_id: ' +medicoSeleccionado_id);
     $.ajax( {
-      url: '/encuesta-intermed/Capturista/obtenerDatosMedicoId',
+      url: '/Capturista/obtenerDatosMedicoId',
       type: "POST",
       dataType: 'JSON',
       data: {'id':id},
@@ -1131,7 +1131,7 @@ function traerMunicipios(){
   $('#municipio').html('<option value="">Municipio/Ciudad</option>');
   $('#localidad').html('<option value="">Localidad/Colonia</option>');
   $.ajax( {
-    url: '/encuesta-intermed/Capturista/municipios',
+    url: '/Capturista/municipios',
     type: "POST",
     dataType: 'JSON',
     data: {'estado_id':estado_id},
@@ -1158,7 +1158,7 @@ function traerLocalidades(){
   var municipio_id = $('#municipio').prop('value');
   $('#localidad').html('<option value="">Localidad/Colonia</option>');
   $.ajax( {
-    url: '/encuesta-intermed/Capturista/localidades',
+    url: '/Capturista/localidades',
     type: "POST",
     dataType: 'JSON',
     data: {'estado_id':estado_id,'municipio_id':municipio_id},
@@ -1180,7 +1180,7 @@ $('#localidad').change(function () {
   var localidad_id = this.value;
   $('#localidades').html('');
   $.ajax( {
-    url: '/encuesta-intermed/Capturista/localidad',
+    url: '/Capturista/localidad',
     type: "POST",
     dataType: 'JSON',
     data: {'localidad_id':localidad_id},
@@ -1206,14 +1206,14 @@ $(document).ready(function(){
     var password = $("#password").val();
     // se checa que no esten vacios estos campos para poderlos insertar
     if( user != "" && password != "" ){
-      $.post('/encuesta-intermed/capturista/usuarioPassword/',{
+      $.post('/capturista/usuarioPassword/',{
         usuario: usuario,
         password: password
       },function(data){
         if( data ){
           // si data es verdadero, se inserta en un div un span con un letrero de que su insercion fue hecha bien
           $("#usuarioGuardado").addClass('guardado');
-          $.post('/encuesta-intermed/capturista/getDatas/',{
+          $.post('/capturista/getDatas/',{
             usuario:usuario,
             password:password
           },function(datas){
@@ -1263,7 +1263,7 @@ $(document).ready(function(){
       var idUsuario = $("#usuario_id").val();
       var correo = $("#mailCapturista").val();
       if( nombre != "" && apellido != "" && correo != ""){
-        $.post('/encuesta-intermed/capturista/insertDatosCapturista/',{
+        $.post('/capturista/insertDatosCapturista/',{
           id:idUsuario,
           nombre:nombre,
           correo: correo,
@@ -1271,7 +1271,7 @@ $(document).ready(function(){
         }, function(datas){
           if(datas){
             $("#usuarioGuardado").addClass('guardado');
-            $.post('/encuesta-intermed/capturista/getDatosNombres/',{
+            $.post('/capturista/getDatosNombres/',{
               id: idUsuario
             },function(d){
               $.each(JSON.parse(d), function(i, item){
@@ -1325,7 +1325,7 @@ function getId(id, dinamico){
 function actualizarData(id,id_master, nombre, apellido,usuario,correo,password,spanNombre,spanApe,spanUser,spanMail,dinamico){
   if( $("#"+password).val() != "" ){
     //envio para que se actualice
-    $.post('/encuesta-intermed/capturista/actualizainfoCapturista/',{
+    $.post('/capturista/actualizainfoCapturista/',{
       id: id,
       id_master: id_master,
       nombre: $("#"+nombre).val(),
@@ -1367,7 +1367,7 @@ function deleteCapturista(id_capturista, id_master ){
     title: "¿Eliminar capturista?",
     callback: function(result) {
       if (result){
-        $.post('/encuesta-intermed/capturista/deleteCapturista/',{
+        $.post('/capturista/deleteCapturista/',{
           idCapturista: id_capturista,
           idMaster: id_master
         },function(data){
@@ -1412,7 +1412,7 @@ function eliminarMedico(medico_id){
       callback: function(result) {
           if (result){
             $.ajax( {
-              url: '/encuesta-intermed/Capturista/eliminarMedico',
+              url: '/Capturista/eliminarMedico',
               type: "POST",
               dataType: 'JSON',
               data: {'medico_id':medico_id},
@@ -1451,7 +1451,7 @@ function MarcarRevisado(medico_id){
       callback: function(result) {
           if (result){
             $.ajax( {
-              url: '/encuesta-intermed/Capturista/marcarRevisado',
+              url: '/Capturista/marcarRevisado',
               type: "POST",
               dataType: 'JSON',
               data: {'medico_id':medico_id},

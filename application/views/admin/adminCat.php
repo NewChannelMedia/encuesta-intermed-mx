@@ -62,7 +62,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
             if (result){
               var categoria_id = liElement.find('input').prop('value');
              $.ajax( {
-               url: '/encuesta-intermed/Admin/eliminarCategoria',
+               url: '/Admin/eliminarCategoria',
                type: "POST",
                dataType: 'JSON',
                data: {'categoria_id':categoria_id},
@@ -95,7 +95,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
     bootbox.prompt("Nombre de la categoría: ", function(result) {
       if (!(result === null) && result != "") {
           $.ajax( {
-            url: '/encuesta-intermed/Admin/nuevaCategoria',
+            url: '/Admin/nuevaCategoria',
             type: "POST",
             dataType: 'JSON',
             data: {'categoria':result},
@@ -123,7 +123,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
           callback: function(result){
             if (result){
               $.ajax( {
-                url: '/encuesta-intermed/Admin/eliminarEtapa',
+                url: '/Admin/eliminarEtapa',
                 type: "POST",
                 dataType: 'JSON',
                 data: {'etapa':i},
@@ -153,7 +153,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
 
   function nuevaEtapa(){
     $.ajax( {
-      url: '/encuesta-intermed/Admin/nuevaEtapa',
+      url: '/Admin/nuevaEtapa',
       type: "POST",
       dataType: 'JSON',
       async: true,
@@ -208,7 +208,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
     if (guardar){
 
     $.ajax( {
-      url: '/encuesta-intermed/Admin/guardarCambioscategorias',
+      url: '/Admin/guardarCambioscategorias',
       type: "POST",
       dataType: 'JSON',
       data: {'data':ordenGuardar},
