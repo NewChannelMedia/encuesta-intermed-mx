@@ -472,7 +472,7 @@ function generarMuestraMedicos(){
               if (telefono.tipo == "celular"){
                 icon = '<span class="glyphicon glyphicon-phone" style="font-size:80%"></span>'
               }
-              telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center">'+ icon +' ' + telefono.numero +'</td><td class="text-center"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></td></tr>';
+              telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center"><div class="media"><div class="media-left">'+ icon +'</div><div class="media-body">' + telefono.numero +'</div><div class="media-right"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></div></div></td></tr>';
               checked = '';
             });
             telefonos+='</table>'
