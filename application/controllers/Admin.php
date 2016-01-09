@@ -561,7 +561,7 @@
       }
 
       public function enviarCorreo(){
-          $titulo = $this->input->post('asunto');
+          $titulo = 'Mensaje de Intermed';
           $id = $this->input->post('id');
           $correo = $this->input->post('email');
           $mensaje = $this->input->post('mensaje');
