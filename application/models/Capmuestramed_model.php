@@ -328,7 +328,7 @@
           $codigo = array_slice($posible, 0,6);
           $str = implode('', $codigo);
         }
-        $this->Encuestam_model->create_encuestam($str,1);
+        $this->Encuestam_model->create_encuestam($str,4);
         return $str;
       }
 
