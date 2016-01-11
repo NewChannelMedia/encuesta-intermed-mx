@@ -298,7 +298,7 @@
           $id[] = $random;
           if (count($this->db_capturista->get_where('medicos', array('id' => $random,'terminado'=>1))->row_array())>0){
             //Checar si tiene direccion
-            if (count($this->db_capturista->get_where('direcciones', array('medico_id' => $random,'nombre'=>'consultorio'))->row_array())>0)
+            if (count($this->db_capturista->get_where('direcciones', array('medico_id' => $random,'nombre'=>'consultorio','localidad<>'=>''))->row_array())>0)
             {
               if (count($this->db_capturista->get_where('muestraMedicos', array('medico_id' => $random))->row_array())==0){
                 $codigo = $this->generarCodigo();

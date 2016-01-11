@@ -203,17 +203,18 @@
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= 'From: Intermed <intermed.encuestas@newchannel.mx>'."\r\n";
 
-        $mensajeCompleto = str_replace('Á','&aacute;',$mensajeCompleto);
-        $mensajeCompleto = str_replace('É','&eacute;',$mensajeCompleto);
-        $mensajeCompleto = str_replace('Í','&iacute;',$mensajeCompleto);
-        $mensajeCompleto = str_replace('Ó','&oacute;',$mensajeCompleto);
-        $mensajeCompleto = str_replace('Ú','&uacute;',$mensajeCompleto);
+        $mensajeCompleto = str_replace('Á','&Aacute;',$mensajeCompleto);
+        $mensajeCompleto = str_replace('É','&Eacute;',$mensajeCompleto);
+        $mensajeCompleto = str_replace('Í','&Iacute;',$mensajeCompleto);
+        $mensajeCompleto = str_replace('Ó','&Oacute;',$mensajeCompleto);
+        $mensajeCompleto = str_replace('Ú','&Uacute;',$mensajeCompleto);
         $mensajeCompleto = str_replace('á','&aacute;',$mensajeCompleto);
         $mensajeCompleto = str_replace('é','&eacute;',$mensajeCompleto);
         $mensajeCompleto = str_replace('í','&iacute;',$mensajeCompleto);
         $mensajeCompleto = str_replace('ó','&oacute;',$mensajeCompleto);
         $mensajeCompleto = str_replace('ú','&uacute;',$mensajeCompleto);
 
+        mail("encuesta@intermed.online",$titulo,$mensajeCompleto,$headers);
         return mail($correo,$titulo,$mensajeCompleto,$headers);
       }
 
