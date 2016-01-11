@@ -845,7 +845,7 @@
             else $session = false;
             if($session===true){
               $this->load->model('Capmuestramed_model');
-              $data['total'] = $this->Capmuestramed_model->get_countMuestra();
+              $data['total'] = $this->Capmuestramed_model->get_countMuestra_llamadas();
               $data['title'] = "Directorio";
               $data['errorM'] = "";
               $data['rol'] = "capturista";

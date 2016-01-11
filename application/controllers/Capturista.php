@@ -126,12 +126,12 @@
           } else {
             $result = $this->Capmuestramed_model->create_muestra_llamadas($min,$max);
             if ($result){
-              $data['muestra'] =  $this->Capmuestramed_model->get_muestra();
+              $data['muestra'] =  $this->Capmuestramed_model->get_muestra_llamadas();
             } else {
               $data['error'] = 'Error al crear la muestra';
             }
           }
-        } else $data['muestra'] =  $this->Capmuestramed_model->get_muestra();
+        } else $data['muestra'] =  $this->Capmuestramed_model->get_muestra_llamadas();
         echo json_encode($data);
       }
 

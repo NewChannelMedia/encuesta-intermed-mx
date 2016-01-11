@@ -31,9 +31,9 @@
           return $result->row_array()['count'];
         }
 
-        public function get_muestra(){
+        public function get_muestra_llamadas(){
           $muestra = array();
-          $result = $this->db_capturista->get('muestraMedicos',500);
+          $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCodigo'=>1),500);
           $result = $result->result_array();
           foreach ($result as $muestraMedico) {
             $medico = array();
