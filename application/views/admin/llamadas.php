@@ -102,22 +102,54 @@
         </div>
       </div>
       <div class="panel-body">
-        <table class="table table-condensed">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Teléfono</th>
-              <th>Correo</th>
-              <th>Conf. correo</th>
-              <th>Autorizo</th>
-              <th>No autorizo</th>
-              <th>Guardar</th>
-            </tr>
-          </thead>
-          <tbody id="muestraMed">
 
-          </tbody>
-        </table>
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" onclick="generarMuestraMedicos()">Por hacer</a></li>
+          <li role="presentation"><a href="#Pospuestos" aria-controls="Pospuestos" role="tab" data-toggle="tab" onclick="generarMuestraMedicosPospuestos()">Pospuestos</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="home">
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th class="text-center">Nombre</th>
+                  <th class="text-center">Teléfono</th>
+                  <th class="text-center">Correo</th>
+                  <th class="text-center">Conf. correo</th>
+                  <th class="text-center">Autorizo</th>
+                  <th class="text-center">No autorizo</th>
+                  <th class="text-center">Guardar</th>
+                  <th class="text-center">Posponer</th>
+                </tr>
+              </thead>
+              <tbody id="muestraMed">
+
+              </tbody>
+            </table>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="Pospuestos" >
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th class="text-center">Pospuesto</th>
+                  <th class="text-center">Nombre</th>
+                  <th class="text-center">Teléfono</th>
+                  <th class="text-center">Correo</th>
+                  <th class="text-center">Conf. correo</th>
+                  <th class="text-center">Autorizo</th>
+                  <th class="text-center">No autorizo</th>
+                  <th class="text-center">Guardar</th>
+                  <th class="text-center">Posponer</th>
+                </tr>
+              </thead>
+              <tbody id="muestraMedPos">
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
