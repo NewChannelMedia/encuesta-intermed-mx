@@ -105,7 +105,7 @@
       public function generarMuestraMedicos(){
 
         $data = array('success'=>true);
-        $total = $this->Capmuestramed_model->get_countMuestra();
+        $total = $this->Capmuestramed_model->get_countMuestra_llamadas();
         $data['count'] = $total;
 
         if ($total == 0){
@@ -124,7 +124,7 @@
             $result = false;
             $data['error'] = 'Médicos registrados insuficientes (mínimo 1000)';
           } else {
-            $result = $this->Capmuestramed_model->create_muestra($min,$max);
+            $result = $this->Capmuestramed_model->create_muestra_llamadas($min,$max);
             if ($result){
               $data['muestra'] =  $this->Capmuestramed_model->get_muestra();
             } else {

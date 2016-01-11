@@ -25,9 +25,9 @@
           }
         }
 
-        public function get_countMuestra(){
+        public function get_countMuestra_llamadas(){
           $this->db_capturista->select('count(*) AS "count"');
-          $result = $this->db_capturista->get('muestraMedicos');
+          $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCodigo'=>1));
           return $result->row_array()['count'];
         }
 
@@ -84,16 +84,28 @@
           return $max;
         }
 
-        public function create_muestra($min,$max){
+        public function create_muestra_llamadas($min,$max){
           $id = array();
-          for ($i=0; $i < 1000; $i++) {
+          for ($i=0; $i < 500; $i++) {
             $random = rand($min,$max);
             while(in_array($random,$id)){
               $random = rand($min,$max);
             }
             $id[] = $random;
             if (count($this->db_capturista->get_where('medicos', array('id' => $random,'terminado'=>1))->row_array())>0){
-              $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random));
+              //Checar si tiene telefono
+              if (count($this->db_capturista->get_where('telefonos', array('medico_id' => $random))->row_array())>0)
+              {
+                if (count($this->db_capturista->get_where('muestraMedicos', array('medico_id' => $random))->row_array())==0){
+                  $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random,'tipoCodigo'=>1));
+                } else {
+                  $i--;
+                }
+              } else {
+                $i--;
+              }
+            } else {
+              $i--;
             }
           }
           return true;
