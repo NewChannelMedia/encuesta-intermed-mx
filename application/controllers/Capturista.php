@@ -576,5 +576,17 @@
         } else $data['muestra'] =  $this->Capmuestramed_model->get_muestra_correos();
         echo json_encode($data);
       }
+
+      public function PosponerMuestraMedico(){
+        $id = $this->input->post('id');
+        $posponer = $this->input->post('posponer');
+
+        $result = $this->Capmuestramed_model->update_muestra_Posponer($id,$posponer);
+
+        $array = array('success'=>$result);
+
+        echo json_encode($array);
+      }
+
   }
 ?>

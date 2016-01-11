@@ -39,6 +39,7 @@
             $medico = array();
             $medico['muestra_id'] = $muestraMedico['id'];
             $medico['aut'] = $muestraMedico['aut'];
+            $medico['posponer'] = $muestraMedico['posponer'];
             $this->db_capturista->where('id', $muestraMedico['medico_id']);
             $medico['medico'] = $this->db_capturista->get('medicos')->row_array();
             $this->db_capturista->where('id',$medico['medico']['especialidad_id']);
@@ -128,6 +129,15 @@
         public function update_muestra_NoAut($id){
           $data = array(
                          'aut' => 2
+                      );
+
+          $this->db_capturista->where('id', $id);
+          return $this->db_capturista->update('muestraMedicos', $data);
+        }
+
+        public function update_muestra_Posponer($id,$posponer){
+          $data = array(
+                         'posponer' => $posponer
                       );
 
           $this->db_capturista->where('id', $id);
