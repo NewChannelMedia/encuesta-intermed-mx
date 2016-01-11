@@ -456,7 +456,7 @@ function generarMuestraMedicos(){
     success: function (result) {
       if (result.success && result.muestra && result.muestra.length>0){
         result.muestra.forEach(function(val){
-          if (val.aut == 0){
+          if (val.aut == 0 && (!val.posponer || val.posponer == "")){
             var nombre = val.medico.nombre + ' ' + val.medico.apellidop;
             if (val.medico.apellidom){
               nombre +=  ' ' + val.medico.apellidom;
@@ -479,10 +479,12 @@ function generarMuestraMedicos(){
 
             var guardar = '<button class="btn btn-success" onclick="guardarMuestra('+ val.muestra_id+')"><span class="glyphicon glyphicon-saved"></button>'
 
+            var posponer = '<div class="input-group" style="width: 200px;"><input type="text" class="form-control posponer"><span class="input-group-btn"><button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-folder-close" onclick="posponerMuestra('+ val.muestra_id+')"></span></button></span></div>';
+
             var confirmCorreo = '<input type="text" value="" class="confirmCorreo">';
             var autorizo = '<input type="radio" name="autorizo_'+val.muestra_id+'" value="true" checked>';
             var noautorizo = '<input type="radio" name="autorizo_'+val.muestra_id+'" value="false">';
-            $('#muestraMed').append('<tr class="muestra" id="'+ val.muestra_id+'"><td>'+nombre+'</td><td class="text-center">'+telefonos+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+confirmCorreo+'</td><td class="autorizo text-center">'+autorizo+'</td><td class="autorizo text-center">'+noautorizo+'</td><td class="text-center">'+guardar+'</td></tr>');
+            $('#muestraMed').append('<tr class="muestra" id="'+ val.muestra_id+'"><td>'+nombre+'</td><td class="text-center">'+telefonos+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+confirmCorreo+'</td><td class="autorizo text-center">'+autorizo+'</td><td class="autorizo text-center">'+noautorizo+'</td><td class="text-center">'+guardar+'</td><td>'+ posponer +'</td></tr>');
             $('#muestraMed').find('tr').first().addClass('active');
             $('#muestraMed .active').find(':input').filter(':visible:first').focus();
           }
@@ -538,6 +540,34 @@ function guardarMuestra(id){
       title: "No se pueden guardar los cambios"
     });
   }
+}
+
+function posponerMuestra(id){
+  var trmuestra = $('tr.muestra#'+id);
+  var posponer =  trmuestra.find('input.posponer').val();
+
+  var guardar = true;
+
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/PosponerMuestraMedico',
+    type: "POST",
+    dataType: 'JSON',
+    data: {'id':id,'posponer':posponer},
+    async: true,
+    success: function ( result ) {
+      if ( result.success ) {
+        trmuestra.fadeOut( 300, function () {
+          $( this ).remove();
+          $( '#muestraMed' ).find( 'tr' ).first().addClass( 'active' );
+          $('#muestraMed .active').find(':input').filter(':visible:first').focus();
+        } );
+      }
+    },
+
+    error: function (err){
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  });
 }
 
 function validarEmail( email ) {
@@ -1486,4 +1516,124 @@ function MarcarRevisado(medico_id){
         }
       }
     });
+}
+
+
+
+function generarMuestraMedicos_correo(){
+  $('.loader-container').removeClass('hidden');
+  $('#muestraMedCorreo').html('');
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/generarMuestraMedicosCorreo',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      if (result.success && result.muestra && result.muestra.length>0){
+        result.muestra.forEach(function(val){
+          if (val.aut == 0){
+            var nombre = val.medico.nombre + ' ' + val.medico.apellidop;
+            if (val.medico.apellidom){
+              nombre +=  ' ' + val.medico.apellidom;
+            }
+
+            var dir = '';
+            val.direcciones.forEach(function(direccion){
+              var numInt = '';
+              if (direccion.numero.split('-').length>1){
+                numInt = ' ' + direccion.numero.split('-')[1];
+              }
+              var cp = '';
+              if (direccion.cp && direccion.cp.length>0){
+                cp = ', C.P. ' + direccion.cp;
+              }
+              var estado = '';
+              if (direccion.municipio && direccion.municipio.length>0){
+                estado = ', '+ direccion.municipio + ', ' + direccion.estado;
+              }
+              var localidad = '';
+              if (direccion.localidad && direccion.localidad.length>0){
+                localidad = direccion.tipolocalidad + ' ' + direccion.localidad;
+              } else {
+                localidad = direccion.otralocalidad;
+              }
+              dir = direccion.calle + ' #' + direccion.numero.split('-')[0] + numInt +' ' + localidad + estado+ cp ;
+            });
+
+            var codigo = val.codigo;
+
+
+            $('#muestraMedCorreo').append('<tr class="muestra" id="'+ val.muestra_id+'"><td class="text-capitalize">'+nombre+'</td><td class="text-center">'+dir+'</td><td class="text-center">'+codigo+'</td></tr>');
+            $('#muestraMedCorreo').find('tr').first().addClass('active');
+            $('#muestraMedCorreo .active').find(':input').filter(':visible:first').focus();
+          }
+        });
+      }
+      $('.loader-container').addClass('hidden');
+    },
+    error: function (err) {
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  } );
+}
+
+function ExportarAExcell(tablaId){
+  $("#"+tablaId).table2excel({
+    filename: "NewChannel_ListaMedicos"
+  });
+}
+
+
+
+function generarMuestraMedicosPospuestos(){
+  $('.loader-container').removeClass('hidden');
+  $('#muestraMedPos').html('');
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/generarMuestraMedicos',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      if (result.success && result.muestra && result.muestra.length>0){
+        result.muestra.forEach(function(val){
+          if (val.aut == 0 && val.posponer && val.posponer != ""){
+            var nombre = val.medico.nombre + ' ' + val.medico.apellidop;
+            if (val.medico.apellidom){
+              nombre +=  ' ' + val.medico.apellidom;
+          modificarMedico  }
+            var correo = '';
+            if (val.medico.correo){
+              correo = val.medico.correo;
+            }
+            var telefonos = '<table width="100%">';
+            var checked = ' checked';
+            val.telefonos.forEach(function(telefono){
+              var icon = '<span class="glyphicon glyphicon-earphone" style="font-size:80%"></span>'
+              if (telefono.tipo == "celular"){
+                icon = '<span class="glyphicon glyphicon-phone" style="font-size:80%"></span>'
+              }
+              telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center"><div class="media"><div class="media-left">'+ icon +'</div><div class="media-body">' + telefono.numero +'</div><div class="media-right"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></div></div></td></tr>';
+              checked = '';
+            });
+            telefonos+='</table>'
+
+            var guardar = '<button class="btn btn-success" onclick="guardarMuestra('+ val.muestra_id+')"><span class="glyphicon glyphicon-saved"></button>'
+
+            var posponer = '<div class="input-group" style="width: 200px;"><input type="text" class="form-control posponer"><span class="input-group-btn"><button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-folder-close" onclick="posponerMuestra('+ val.muestra_id+')"></span></button></span></div>';
+
+            var confirmCorreo = '<input type="text" value="" class="confirmCorreo">';
+            var autorizo = '<input type="radio" name="autorizo_'+val.muestra_id+'" value="true" checked>';
+            var noautorizo = '<input type="radio" name="autorizo_'+val.muestra_id+'" value="false">';
+            $('#muestraMedPos').append('<tr class="muestra" id="'+ val.muestra_id+'"><td>'+val.posponer+'</td><td>'+nombre+'</td><td class="text-center">'+telefonos+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+confirmCorreo+'</td><td class="autorizo text-center">'+autorizo+'</td><td class="autorizo text-center">'+noautorizo+'</td><td class="text-center">'+guardar+'</td><td>'+ posponer +'</td></tr>');
+            $('#muestraMedPos').find('tr').first().addClass('active');
+            $('#muestraMedPos .active').find(':input').filter(':visible:first').focus();
+          }
+        });
+      }
+      $('.loader-container').addClass('hidden');
+    },
+    error: function (err) {
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  } );
 }

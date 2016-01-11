@@ -236,7 +236,7 @@
 
       $contenido = '';
 
-      if (!$finalizar && ($data['tipoCodigo'] == 2 || ($data['status'] == 1 || $data['status'] == 2))){
+      if (!$finalizar && ($data['tipoCodigo'] == 0 || ($data['status'] == 1 || $data['status'] == 2))){
         //Mostrar la encuesta
         $this->load->view('templates/header', $data);
         $cantEtapas = $this->Categorias_model->get_etapas();
@@ -483,7 +483,7 @@
       $data['status'] = $status;
       $data['tipoCodigo'] = $this->Encuestam_model->get_tipoEncuesta($codigo);
       //Encuesta maestra (puede entrar aunque ya este contestada)
-      if ($data['tipoCodigo'] == 2 && $status == 3){
+      if ($data['tipoCodigo'] == 0 && $status == 3){
         $data['paso'] = 1;
       }
       return $data;
