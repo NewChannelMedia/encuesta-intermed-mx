@@ -809,35 +809,6 @@
             }
         }
         public function llamadas(){
-          /*
-            $this->load->model('Capmedicos_model');
-                $this->load->model('Captelefonos_model');
-            for ($i=0; $i < 3000; $i++) {
-              # code...
-              $data = array(
-                'nombre'=>'Nombre medico '.$i,
-                'apellidop'=>'Apellido P',
-                'correo' => 'bmdz.acos@gmail.com'
-              );
-              $this->Capmedicos_model->create_medico($data);
-
-              $data = array(
-                'medico_id'=>$i+1,
-                'claveRegion'=>'333',
-                'numero'=>'777777',
-                'tipo'=>'casa'
-              );
-              $this->Captelefonos_model->create_telefono($data);
-
-              $data = array(
-                'medico_id'=>$i+1,
-                'claveRegion'=>'111',
-                'numero'=>'222222',
-                'tipo'=>'oficina'
-              );
-              $this->Captelefonos_model->create_telefono($data);
-            }*/
-
             // se carga el modelo para verificar si existen el usuario y password que se reciben por post
             $this->load->model('Admin_model');
             if (isset($_SESSION) )
@@ -926,6 +897,34 @@
           $this->load->view('admin/revisados', $data);
           $this->load->view('templates/footerAdmin');
         }
+
+        public function correo(){
+            // se carga el modelo para verificar si existen el usuario y password que se reciben por post
+            $this->load->model('Admin_model');
+            if (isset($_SESSION) )
+            $session = $_SESSION['status'];
+            else $session = false;
+            if($session===true){
+              $this->load->model('Capmuestramed_model');
+              $data['total'] = $this->Capmuestramed_model->get_countMuestra_correos();
+              $data['title'] = "Directorio";
+              $data['errorM'] = "";
+              $data['rol'] = "capturista";
+              $this->load->view('templates/headerAdmin', $data);
+              $this->load->view('admin/correo', $data);
+              $this->load->view('templates/footerAdmin');
+            }else{
+              $data['title'] = "Directorio";
+              $data['error'] = "no sesion";
+              $_SESSION['status'] = false;
+              $data['status'] = $_SESSION['status'];
+              $data['errorM'] = "Revisa tus credenciales de acceso, o la sesión ha sido cerrada.";
+              $this->load->view('templates/header', $data);
+              $this->load->view('admin/Admin_vista', $data);
+              $this->load->view('templates/footerAdmin');
+            }
+        }
+
   }
 
   function encuestas_dropDown($enviar, $tipo){

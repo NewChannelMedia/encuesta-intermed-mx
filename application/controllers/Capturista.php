@@ -159,7 +159,7 @@
           }
         } else {
           //Eliminar de muestra el id
-          $result = $this->Capmuestramed_model->delete_muestraId($id);
+          $result = $this->Capmuestramed_model->update_muestra_NoAut($id);
         }
 
         $array = array('success'=>$result);
@@ -540,6 +540,40 @@
         $medico_id = $this->input->post('medico_id');
         $result = $this->Capmedicos_model->marcarRevisado($medico_id);
         echo json_encode(array('success'=>$result));
+      }
+
+
+      public function generarMuestraMedicosCorreo(){
+
+        $data = array('success'=>true);
+        $total = $this->Capmuestramed_model->get_countMuestra_correos();
+        $data['count'] = $total;
+
+        if ($total == 0){
+          //Generar muestra
+          $min = intval($this->Capmuestramed_model->get_minIdMedicos());
+          $max = intval($this->Capmuestramed_model->get_maxIdMedicos());
+          $data['min']= $min;
+          $data['max']= $max;
+
+          if ($min == $max){
+            //No hay medicos registrados
+            $result = false;
+            $data['error'] = 'No hay médicos registrados';
+          } else if (($max-$min) < 999){
+            //Medicos registrados insuficientes (mínimo 1000)
+            $result = false;
+            $data['error'] = 'Médicos registrados insuficientes (mínimo 1000)';
+          } else {
+            $result = $this->Capmuestramed_model->create_muestra_correos($min,$max);
+            if ($result){
+              $data['muestra'] =  $this->Capmuestramed_model->get_muestra_correos();
+            } else {
+              $data['error'] = 'Error al crear la muestra';
+            }
+          }
+        } else $data['muestra'] =  $this->Capmuestramed_model->get_muestra_correos();
+        echo json_encode($data);
       }
   }
 ?>
