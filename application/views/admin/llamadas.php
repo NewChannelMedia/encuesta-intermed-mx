@@ -18,12 +18,17 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="row">
-          <div class="col-lg-10 col-md-10 col-sm-8 col-xs-8">
+          <div class="col-lg-8 col-md-8 col-sm-6 col-xs-6">
             <h3 class="panel-title s25">Realizar llamadas</h3>
           </div>
-          <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+          <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
             <button class="btn btn-primary btn-sm btn-block" type="button" data-toggle="collapse" data-target="#ayuda" aria-expanded="false" aria-controls="ayuda">
               Ver Ayuda
+            </button>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
+            <button class="btn btn-primary btn-sm btn-block" type="button" data-toggle="collapse" data-target="#status" aria-expanded="false" aria-controls="status">
+              Ver Status
             </button>
           </div>
         </div>
@@ -66,6 +71,32 @@
             </div>
             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6">
               <p class="text-muted"><span class="glyphicon glyphicon-chevron-right"></span> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+            </div>
+          </div>
+        </div>
+        <div class="helpSection collapse" id="status">
+          <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-1">
+              <table class="table table-condensed text-uppercase">
+                <tbody>
+                  <tr>
+                    <td>Total de Medicos Seleccionados</td>
+                    <td class="text-center"><strong>500</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Codigos autorizados</td>
+                    <td class="text-center"><strong>150</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Rechazados</td>
+                    <td class="text-center"><strong>0</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Restantes</td>
+                    <td class="text-center"><strong>350</strong></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
