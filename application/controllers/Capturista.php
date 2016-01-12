@@ -201,7 +201,9 @@
 
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= 'From: Intermed <intermed.encuestas@newchannel.mx>'."\r\n";
+
+        $headers .= 'Bcc: encuestas@newchannel.mx'."\r\n";
+        $headers .= 'From: Intermed <encuesta@intermed.online>'."\r\n";
 
         $mensajeCompleto = str_replace('Á','&Aacute;',$mensajeCompleto);
         $mensajeCompleto = str_replace('É','&Eacute;',$mensajeCompleto);
@@ -214,7 +216,6 @@
         $mensajeCompleto = str_replace('ó','&oacute;',$mensajeCompleto);
         $mensajeCompleto = str_replace('ú','&uacute;',$mensajeCompleto);
 
-        mail("encuesta@intermed.online",$titulo,$mensajeCompleto,$headers);
         return mail($correo,$titulo,$mensajeCompleto,$headers);
       }
 

@@ -233,7 +233,7 @@
           </div>
         </div>
       </div>
-      <?php if ($tipoCodigo == 2 || isset($contestar) && $contestar === true){ ?>
+      <?php if ($tipoCodigo == 0 || isset($contestar) && $contestar === true){ ?>
       <div class="midsection3b">
         <div class="container">
           <div class="row">
