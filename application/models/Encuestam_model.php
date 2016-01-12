@@ -21,6 +21,17 @@ class Encuestam_model extends CI_Model {
     return $query->row_array();
   }
 
+
+  public function get_encuestamById($id = FALSE)
+  {
+    if ($id === FALSE)
+    {
+      return FALSE;
+    }
+    $query = $this->db_encuesta->get_where('encuestasM', array('id' => $id));
+    return $query->row_array();
+  }
+
   public function get_encuestamByUsuario($usuario_id = FALSE)
   {
     if ($usuario_id === FALSE)
@@ -154,5 +165,21 @@ class Encuestam_model extends CI_Model {
   public function get_tipoEncuesta( $codigo ){
     $query = $this->db_encuesta->get_where('encuestasM', array('codigo' => $codigo));
     return $query->row_array()['tipoCodigo'];
+  }
+
+  public function marcarEncuestaUsada($codigo){
+      $this->db_encuesta->where('codigo', $codigo);
+      $data = array(
+        'usada' => 1
+      );
+      return $this->db_encuesta->update('encuestasM', $data);
+  }
+
+  public function marcarEncuestaCanalUsado($codigo){
+      $this->db_encuesta->where('codigo', $codigo);
+      $data = array(
+        'canalUsado' => 1
+      );
+      return $this->db_encuesta->update('encuestasM', $data);
   }
 }

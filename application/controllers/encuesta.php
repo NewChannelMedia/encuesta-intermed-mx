@@ -59,6 +59,8 @@
             break;
         case 1:
             //Encuesta sin empezar
+            //Marcar encuesta $codigo como usado
+            $this->Encuestam_model->marcarEncuestaUsada($codigo);
         case 2:
             //Encuesta sin terminar
             $data['contestar'] = true;
@@ -473,7 +475,7 @@
         }
         $data['terminado'] = $terminado;
         if ($terminado == $cantEtapas) $status = 3; //Encuesta terminada
-        else if ($paso > 0) { //Encuesta por empezar
+        else if ($paso > 1) { //Encuesta por continuar
           $status = 2;
           $data['paso'] = $paso;
         } else $status = 1; //Encuesta sin empezar

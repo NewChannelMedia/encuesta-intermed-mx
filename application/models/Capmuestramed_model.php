@@ -27,13 +27,13 @@
 
         public function get_countMuestra_llamadas(){
           $this->db_capturista->select('count(*) AS "count"');
-          $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCodigo'=>1));
+          $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCanal'=>1));
           return $result->row_array()['count'];
         }
 
         public function get_muestra_llamadas(){
           $muestra = array();
-          $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCodigo'=>1,'aut<='=>1),500);
+          $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCanal'=>1,'aut<='=>1),500);
           $result = $result->result_array();
           foreach ($result as $muestraMedico) {
             $medico = array();
@@ -98,7 +98,7 @@
               if (count($this->db_capturista->get_where('telefonos', array('medico_id' => $random))->row_array())>0)
               {
                 if (count($this->db_capturista->get_where('muestraMedicos', array('medico_id' => $random))->row_array())==0){
-                  $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random,'tipoCodigo'=>1));
+                  $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random,'tipoCanal'=>1));
                 } else {
                   $i--;
                 }
@@ -246,18 +246,19 @@
 
       public function get_countMuestra_correos(){
         $this->db_capturista->select('count(*) AS "count"');
-        $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCodigo'=>4));
+        $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCanal'=>4));
         return $result->row_array()['count'];
       }
 
       public function get_muestra_correos(){
+        $this->load->model('Encuestam_model');
         $muestra = array();
-        $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCodigo'=>4),500);
+        $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCanal'=>4),500);
         $result = $result->result_array();
         foreach ($result as $muestraMedico) {
           $medico = array();
           $medico['muestra_id'] = $muestraMedico['id'];
-          $medico['codigo'] = $muestraMedico['codigo'];
+          $medico['codigo'] = $this->Encuestam_model->get_encuestamById($muestraMedico['codigo_id'])['codigo'];
           $medico['aut'] = $muestraMedico['aut'];
           $this->db_capturista->where('id', $muestraMedico['medico_id']);
           $medico['medico'] = $this->db_capturista->get('medicos')->row_array();
@@ -312,7 +313,8 @@
             {
               if (count($this->db_capturista->get_where('muestraMedicos', array('medico_id' => $random))->row_array())==0){
                 $codigo = $this->generarCodigo();
-                $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random,'tipoCodigo'=>4,'codigo'=>$codigo));
+                $codigo_id = $this->Encuestam_model->get_encuestamId($codigo);
+                $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random,'tipoCanal'=>4,'codigo_id'=>$codigo_id));
                 //Generar codigo con tipoCodigo = 4
               } else {
                 $i--;
@@ -343,25 +345,25 @@
       }
 
       public function get_countMuestra_llamadas_sel(){
-        $this->db_capturista->select('count(*) AS "count" from muestraMedicos where tipoCodigo = 1 AND (aut = 0 OR aut = 1)');
+        $this->db_capturista->select('count(*) AS "count" from muestraMedicos where tipoCanal = 1 AND (aut = 0 OR aut = 1)');
         $result = $this->db_capturista->get();
         return $result->row_array()['count'];
       }
 
       public function get_countMuestra_llamadas_aut(){
-        $this->db_capturista->select('count(*) AS "count" from muestraMedicos where tipoCodigo = 1 AND aut = 1');
+        $this->db_capturista->select('count(*) AS "count" from muestraMedicos where tipoCanal = 1 AND aut = 1');
         $result = $this->db_capturista->get();
         return $result->row_array()['count'];
       }
 
       public function get_countMuestra_llamadas_rech(){
-        $this->db_capturista->select('count(*) AS "count" from muestraMedicos where tipoCodigo = 1 AND aut = 2');
+        $this->db_capturista->select('count(*) AS "count" from muestraMedicos where tipoCanal = 1 AND aut = 2');
         $result = $this->db_capturista->get();
         return $result->row_array()['count'];
       }
 
       public function get_countMuestra_llamadas_rest(){
-        $this->db_capturista->select('count(*) AS "count" from muestraMedicos where tipoCodigo = 1 AND aut = 0');
+        $this->db_capturista->select('count(*) AS "count" from muestraMedicos where tipoCanal = 1 AND aut = 0');
         $result = $this->db_capturista->get();
         return $result->row_array()['count'];
       }

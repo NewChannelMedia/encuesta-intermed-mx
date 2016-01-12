@@ -46,5 +46,14 @@
         $this->load->view('terminos', $data);
         $this->load->view('templates/footer', $data);
     }
+
+    function usarCodigo($codigo){
+      //marcar canal de codigo como usado
+      if ($codigo != ""){
+        $this->load->model('Encuestam_model');
+        $this->Encuestam_model->marcarEncuestaCanalUsado($codigo);
+      }
+      $this->index();
+    }
   }
 ?>
