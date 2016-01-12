@@ -101,7 +101,7 @@
           </div>
         </div>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" style="padding:0px">
 
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab" onclick="generarMuestraMedicos()">Por hacer</a></li>
