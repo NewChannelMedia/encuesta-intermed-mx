@@ -1645,7 +1645,7 @@ function generarMuestraMedicosPospuestos(){
 function actualizarStatus(){
 
   $.ajax( {
-    url: '/encuesta-intermed/Capturista/statusLlamadas',
+    url: '/Capturista/statusLlamadas',
     type: "POST",
     dataType: 'JSON',
     async: true,
