@@ -589,5 +589,14 @@
         echo json_encode($array);
       }
 
+      public function statusLlamadas(){
+          $data = array('success'=>true);
+          $data['seleccionados'] = $this->Capmuestramed_model->get_countMuestra_llamadas_sel();
+          $data['autorizados'] = $this->Capmuestramed_model->get_countMuestra_llamadas_aut();
+          $data['rechazados'] = $this->Capmuestramed_model->get_countMuestra_llamadas_rech();
+          $data['restantes'] = $this->Capmuestramed_model->get_countMuestra_llamadas_rest();
+          echo json_encode($data);
+      }
+
   }
 ?>

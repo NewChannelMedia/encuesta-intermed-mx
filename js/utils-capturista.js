@@ -470,9 +470,11 @@ function generarMuestraMedicos(){
             val.telefonos.forEach(function(telefono){
               var icon = '<span class="glyphicon glyphicon-earphone" style="font-size:80%"></span>'
               if (telefono.tipo == "celular"){
-                icon = '<span class="glyphicon glyphicon-phone" style="font-size:80%"></span>'
+                icon = '<span class="glyphicon glyphicon-phone" style="font-size:80%"></span>';
+              } else if (telefono.tipo == "casa"){
+                icon = '<span class="glyphicon glyphicon-home" style="font-size:80%"></span>';
               }
-              telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center"><div class="media"><div class="media-left">'+ icon +'</div><div class="media-body">' + telefono.numero +'</div><div class="media-right"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></div></div></td></tr>';
+              telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center"><div class="media"><div class="media-left">' + icon +'</div><div class="media-body">' + telefono.numero +'</div><div class="media-right"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></div></div></td></tr>';
               checked = '';
             });
             telefonos+='</table>'
@@ -1610,7 +1612,9 @@ function generarMuestraMedicosPospuestos(){
             val.telefonos.forEach(function(telefono){
               var icon = '<span class="glyphicon glyphicon-earphone" style="font-size:80%"></span>'
               if (telefono.tipo == "celular"){
-                icon = '<span class="glyphicon glyphicon-phone" style="font-size:80%"></span>'
+                icon = '<span class="glyphicon glyphicon-phone" style="font-size:80%"></span>';
+              } else if (telefono.tipo == "casa"){
+                icon = '<span class="glyphicon glyphicon-home" style="font-size:80%"></span>';
               }
               telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center"><div class="media"><div class="media-left">'+ icon +'</div><div class="media-body">' + telefono.numero +'</div><div class="media-right"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></div></div></td></tr>';
               checked = '';
@@ -1636,4 +1640,27 @@ function generarMuestraMedicosPospuestos(){
       console.log( "Error: AJax dead :" + JSON.stringify(err) );
     }
   } );
+}
+
+function actualizarStatus(){
+
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/statusLlamadas',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      if (result.seleccionados>500){
+        result.seleccionados = 500;
+      }
+      result.restantes = result.seleccionados - result.autorizados;
+      $('#status .seleccionados').text(result.seleccionados);
+      $('#status .autorizados').text(result.autorizados);
+      $('#status .rechazados').text(result.rechazados);
+      $('#status .restantes').text(result.restantes);
+    },
+    error: function (err){
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  });
 }
