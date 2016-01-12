@@ -202,7 +202,7 @@
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-        $headers .= 'Bcc: hola@newchannel.mx'."\r\n";
+        $headers .= 'Bcc: encuestas@newchannel.mx'."\r\n";
         $headers .= 'From: Intermed <encuesta@intermed.online>'."\r\n";
 
         $mensajeCompleto = str_replace('Á','&Aacute;',$mensajeCompleto);

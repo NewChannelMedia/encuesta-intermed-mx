@@ -30,26 +30,30 @@
   </div>
   <div class="row" id="btn-encuesta">
     <?php if ($etapa > 1 && $etapa < $cantEtapas){?>
+      <!--
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
         <a class="nav-enc pull-left" onclick="regresar()" type="submit"><span class="glyphicon glyphicon-chevron-left"></span>Anterior</a>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
         <a class="nav-enc pull-right" onclick="siguiente()" type="submit">Siguiente<span class="glyphicon glyphicon-chevron-right"></span></a>
-      </div>
+      </div>-->
     <?php } elseif ($etapa > 1){ ?>
+      <!--
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <a class="nav-enc pull-left" onclick="regresar()" type="submit"><span class="glyphicon glyphicon-chevron-left"></span>Anterior</a>
-      </div>
+      </div>-->
     <?php } elseif ($etapa < $cantEtapas){ ?>
+      <!--
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
         <a class="nav-enc pull-right" onclick="siguiente()" type="submit">Siguiente<span class="glyphicon glyphicon-chevron-right"></span></a>
       </div>
+      -->
     <?php } ?>
     <?php if (!($tipoCodigo == 2 && $status == 3)){ ?>
     <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7 pull-right">
       <div class="row">
         <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
-          <input onclick="guardarycont()" id="btnguardarycontinuar"  class="btn notEnabled" type="button" value="Guardar y continuar">
+          <input onclick="guardarycont()" id="btnguardarycontinuar"  class="btn notEnabled" type="button" value="Guardar y continuar >">
         </div>
         <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
           <input onclick="guardarysal()" id="btnguardarysalir"  class="btn notEnabled" type="button" value="Guardar y salir"><br/>
