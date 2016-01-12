@@ -479,7 +479,7 @@ function generarMuestraMedicos(){
 
             var guardar = '<button class="btn btn-success" onclick="guardarMuestra('+ val.muestra_id+')"><span class="glyphicon glyphicon-saved"></button>'
 
-            var posponer = '<div class="input-group" style="width: 200px;"><input type="text" class="form-control posponer"><span class="input-group-btn"><button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-folder-close" onclick="posponerMuestra('+ val.muestra_id+')"></span></button></span></div>';
+            var posponer = '<div class="input-group" style="width: 200px;"><input type="text" class="form-control posponer"><span class="input-group-btn"><button class="btn btn-danger" type="button" onclick="posponerMuestra('+ val.muestra_id+')"><span class="glyphicon glyphicon-folder-close"></span></button></span></div>';
 
             var confirmCorreo = '<input type="text" value="" class="confirmCorreo">';
             var autorizo = '<input type="radio" name="autorizo_'+val.muestra_id+'" value="true" checked>';
@@ -500,6 +500,7 @@ function generarMuestraMedicos(){
 
 function guardarMuestra(id){
   var trmuestra = $('tr.muestra#'+id);
+
   var telefono_id = trmuestra.find('tr.telefono>td>input:checked').prop('value');
   var correo = trmuestra.find('input.confirmCorreo').prop('value');
   var correo2 =  trmuestra.find('td.email').html();
@@ -549,7 +550,7 @@ function posponerMuestra(id){
   var guardar = true;
 
   $.ajax( {
-    url: '/encuesta-intermed/Capturista/PosponerMuestraMedico',
+    url: '/Capturista/PosponerMuestraMedico',
     type: "POST",
     dataType: 'JSON',
     data: {'id':id,'posponer':posponer},
@@ -1524,7 +1525,7 @@ function generarMuestraMedicos_correo(){
   $('.loader-container').removeClass('hidden');
   $('#muestraMedCorreo').html('');
   $.ajax( {
-    url: '/encuesta-intermed/Capturista/generarMuestraMedicosCorreo',
+    url: '/Capturista/generarMuestraMedicosCorreo',
     type: "POST",
     dataType: 'JSON',
     async: true,
@@ -1583,13 +1584,11 @@ function ExportarAExcell(tablaId){
   });
 }
 
-
-
 function generarMuestraMedicosPospuestos(){
   $('.loader-container').removeClass('hidden');
   $('#muestraMedPos').html('');
   $.ajax( {
-    url: '/encuesta-intermed/Capturista/generarMuestraMedicos',
+    url: '/Capturista/generarMuestraMedicos',
     type: "POST",
     dataType: 'JSON',
     async: true,
@@ -1619,7 +1618,7 @@ function generarMuestraMedicosPospuestos(){
 
             var guardar = '<button class="btn btn-success" onclick="guardarMuestra('+ val.muestra_id+')"><span class="glyphicon glyphicon-saved"></button>'
 
-            var posponer = '<div class="input-group" style="width: 200px;"><input type="text" class="form-control posponer"><span class="input-group-btn"><button class="btn btn-danger" type="button"><span class="glyphicon glyphicon-folder-close" onclick="posponerMuestra('+ val.muestra_id+')"></span></button></span></div>';
+            var posponer = '<div class="input-group" style="width: 200px;"><input type="text" class="form-control posponer"><span class="input-group-btn"><button class="btn btn-danger" type="button" onclick="posponerMuestra('+ val.muestra_id+')"><span class="glyphicon glyphicon-folder-close" ></span></button></span></div>';
 
             var confirmCorreo = '<input type="text" value="" class="confirmCorreo">';
             var autorizo = '<input type="radio" name="autorizo_'+val.muestra_id+'" value="true" checked>';
