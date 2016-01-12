@@ -1639,3 +1639,26 @@ function generarMuestraMedicosPospuestos(){
     }
   } );
 }
+
+function actualizarStatus(){
+
+  $.ajax( {
+    url: '/encuesta-intermed/Capturista/statusLlamadas',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      if (result.seleccionados>500){
+        result.seleccionados = 500;
+      }
+      result.restantes = result.seleccionados - result.autorizados;
+      $('#status .seleccionados').text(result.seleccionados);
+      $('#status .autorizados').text(result.autorizados);
+      $('#status .rechazados').text(result.rechazados);
+      $('#status .restantes').text(result.restantes);
+    },
+    error: function (err){
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  });
+}

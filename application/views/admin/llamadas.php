@@ -27,7 +27,7 @@
             </button>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
-            <button class="btn btn-primary btn-sm btn-block" type="button" data-toggle="collapse" data-target="#status" aria-expanded="false" aria-controls="status">
+            <button class="btn btn-primary btn-sm btn-block" type="button" data-toggle="collapse" data-target="#status" aria-expanded="false" aria-controls="status" onclick="actualizarStatus()">
               Ver Status
             </button>
           </div>
@@ -78,22 +78,22 @@
           <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-1">
               <table class="table table-condensed text-uppercase">
-                <tbody>
+                <tbody id="status">
                   <tr>
                     <td>Total de Medicos Seleccionados</td>
-                    <td class="text-center"><strong>500</strong></td>
+                    <td class="text-center"><strong class="seleccionados"></strong></td>
                   </tr>
                   <tr>
                     <td>Codigos autorizados</td>
-                    <td class="text-center"><strong>150</strong></td>
+                    <td class="text-center"><strong class="autorizados"></strong></td>
                   </tr>
                   <tr>
                     <td>Rechazados</td>
-                    <td class="text-center"><strong>0</strong></td>
+                    <td class="text-center"><strong class="rechazados"></strong></td>
                   </tr>
                   <tr>
                     <td>Restantes</td>
-                    <td class="text-center"><strong>350</strong></td>
+                    <td class="text-center"><strong class="restantes"></strong></td>
                   </tr>
                 </tbody>
               </table>

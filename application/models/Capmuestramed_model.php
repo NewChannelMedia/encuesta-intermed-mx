@@ -342,5 +342,29 @@
         return $str;
       }
 
+      public function get_countMuestra_llamadas_sel(){
+        $this->db_capturista->select('count(*) AS "count" from muestraMedicos where tipoCodigo = 1 AND (aut = 0 OR aut = 1)');
+        $result = $this->db_capturista->get();
+        return $result->row_array()['count'];
+      }
+
+      public function get_countMuestra_llamadas_aut(){
+        $this->db_capturista->select('count(*) AS "count" from muestraMedicos where tipoCodigo = 1 AND aut = 1');
+        $result = $this->db_capturista->get();
+        return $result->row_array()['count'];
+      }
+
+      public function get_countMuestra_llamadas_rech(){
+        $this->db_capturista->select('count(*) AS "count" from muestraMedicos where tipoCodigo = 1 AND aut = 2');
+        $result = $this->db_capturista->get();
+        return $result->row_array()['count'];
+      }
+
+      public function get_countMuestra_llamadas_rest(){
+        $this->db_capturista->select('count(*) AS "count" from muestraMedicos where tipoCodigo = 1 AND aut = 0');
+        $result = $this->db_capturista->get();
+        return $result->row_array()['count'];
+      }
+
     }
 ?>
