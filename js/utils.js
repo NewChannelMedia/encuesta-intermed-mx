@@ -1892,7 +1892,7 @@ function enviarCodigosRecomendados(){
   });
   if (Destinatarios.length>0){
     $.ajax( {
-      url: '/encuesta-intermed/Admin/enviarEncuestaRecomendada',
+      url: '/Admin/enviarEncuestaRecomendada',
       type: "POST",
       data: {destinatarios: Destinatarios, mensaje: $('#mensaje').val()},
       dataType: 'JSON',
