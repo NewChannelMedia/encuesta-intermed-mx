@@ -925,6 +925,176 @@
             }
         }
 
+        public function invitacionDirecta(){
+            // se carga el modelo para verificar si existen el usuario y password que se reciben por post
+            $this->load->model('Admin_model');
+            if (isset($_SESSION) && isset($_SESSION['status']))
+              $session = $_SESSION['status'];
+            else $session = false;
+            if($session===true){
+              $data = array();
+              $data['title'] = "Invitación directa";
+              $this->load->view('templates/headerAdmin',$data);
+              $this->load->view('admin/invDirecta',$data);
+              $this->load->view('templates/footerAdmin');
+            }else{
+              $data['title'] = "Directorio";
+              $data['error'] = "no sesion";
+              $_SESSION['status'] = false;
+              $data['status'] = $_SESSION['status'];
+              $data['errorM'] = "Revisa tus credenciales de acceso, o la sesión ha sido cerrada.";
+              $this->load->view('templates/header', $data);
+              $this->load->view('admin/Admin_vista', $data);
+              $this->load->view('templates/footerAdmin');
+            }
+        }
+
+        public function enviarEncuestaDirecta(){
+          $nombre = $this->input->post('nombre');
+          $correo = $this->input->post('correo');
+          $result = $this->enviarCorreoPersonalizado($nombre, $correo, 6);
+          if ($result){
+            //Insertar en la base de datos el envio a encuesta directa (porValidar status = 2)
+            $this->Porvalidar_model->insertarEnvioDirecto($nombre,$correo, 6);
+          }
+          $array = array(
+            'success'=>$result,
+            'result' => array(
+              'nombre'=>$nombre,
+              'correo'=>$correo,
+              'fecha' =>date('Y-m-d H:i:s')
+            )
+          );
+          echo json_encode($array);
+        }
+
+
+        public function enviarCorreoPersonalizado($nombre, $correo,$tipoCanal = null, $mensaje = '', $titulo = 'Mensaje de Intermed'){
+            $codigo = '';
+            if ($tipoCanal != null){
+              $codigo = $this->generarCodigo($tipoCanal);
+            }
+            // se lee el archivo
+            $fileh = realpath(APPPATH.'views/correos/headerCorreo.php');
+            $fileb = realpath(APPPATH.'views/correos/bodyCorreo.php');
+            $filef = realpath(APPPATH.'views/correos/footerCorreo.php');
+            $fpH = fopen( $fileh,'r');
+            $fpB = fopen( $fileb,'r');
+            $fpF = fopen( $filef,'r');
+
+            $html1 = "";
+            $html2 = "";
+            $html3 = "";
+            while( $line = fgets($fpH) ){
+              $html1 .= $line;
+            }
+            while( $line = fgets($fpB) ){
+              $html2 .= $line;
+            }
+            while( $line = fgets($fpF) ){
+              $html3 .= $line;
+            }
+            fclose($fpH);
+            fclose($fpB);
+            fclose($fpF);
+            $mensajeCompleto = "";
+            $sustituir = '<span id="codigo">'.$codigo.'</span>';
+            $conCodigo = str_replace('<span id="codigo"></span>',$sustituir, $html2);
+            $mensajeCompleto = $html1.$conCodigo.$html3;
+
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+            $headers .= 'Bcc: encuestas@newchannel.mx'."\r\n";
+            $headers .= 'From: Intermed <encuesta@intermed.online>'."\r\n";
+
+            $mensajeCompleto = str_replace('Á','&Aacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('É','&Eacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('Í','&Iacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('Ó','&Oacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('Ú','&Uacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('á','&aacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('é','&eacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('í','&iacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('ó','&oacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('ú','&uacute;',$mensajeCompleto);
+
+            return mail($correo,$titulo,$mensajeCompleto,$headers);
+        }
+
+        public function generarCodigo($canal){
+          $this->load->model('Encuestam_model');
+          $posible = str_split("abcdefghijklmnopqrstuvwxyz0123456789");
+          shuffle($posible);
+          $codigo = array_slice($posible, 0,6);
+          $str = implode('', $codigo);
+          while ($this->Encuestam_model->get_encuestamId($str)>0){
+            shuffle($posible);
+            $codigo = array_slice($posible, 0,6);
+            $str = implode('', $codigo);
+          }
+          $this->Encuestam_model->create_encuestam($str,$canal);
+          return $str;
+        }
+
+        public function enviadosCanalDirectos(){
+          $this->load->model('Admin_model');
+          $result = $this->Admin_model->enviadosCanalDirectos();
+          echo json_encode($result);
+        }
+
+        public function enviarEncuestaRecomendada(){
+          $destinatarios = $this->input->post('destinatarios');
+          $mensaje = $this->input->post('mensaje');
+          $result = true;
+          foreach ($destinatarios as $destinatario) {
+            if ($result){
+              $nombre = $destinatario['nombre'];
+              $correo = $destinatario['correo'];
+              $result = $this->enviarCorreoPersonalizado($nombre, $correo, 5, $mensaje);
+              if ($result){
+                //Insertar en la base de datos el envio a encuesta directa (porValidar status = 2)
+                $this->Porvalidar_model->insertarEnvioRecomendado($nombre,$correo,$mensaje);
+              }
+            }
+          }
+          $array = array(
+            'success'=>$result
+          );
+          echo json_encode($array);
+        }
+
+
+        public function invitacionRecomendada(){
+            // se carga el modelo para verificar si existen el usuario y password que se reciben por post
+            $this->load->model('Admin_model');
+            if (isset($_SESSION) && isset($_SESSION['status']))
+              $session = $_SESSION['status'];
+            else $session = false;
+            if($session===true){
+              $data = array();
+              $data['title'] = "Invitación recomendada";
+              $this->load->view('templates/headerAdmin',$data);
+              $this->load->view('admin/invRecom',$data);
+              $this->load->view('templates/footerAdmin');
+            }else{
+              $data['title'] = "Directorio";
+              $data['error'] = "no sesion";
+              $_SESSION['status'] = false;
+              $data['status'] = $_SESSION['status'];
+              $data['errorM'] = "Revisa tus credenciales de acceso, o la sesión ha sido cerrada.";
+              $this->load->view('templates/header', $data);
+              $this->load->view('admin/Admin_vista', $data);
+              $this->load->view('templates/footerAdmin');
+            }
+        }
+
+        public function enviadosCanalRecomendados(){
+          $this->load->model('Admin_model');
+          $result = $this->Admin_model->enviadosCanalRecomendados();
+          echo json_encode($result);
+        }
+
   }
 
   function encuestas_dropDown($enviar, $tipo){

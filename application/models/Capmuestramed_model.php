@@ -312,7 +312,7 @@
             if (count($this->db_capturista->get_where('direcciones', array('medico_id' => $random,'nombre'=>'consultorio','localidad<>'=>''))->row_array())>0)
             {
               if (count($this->db_capturista->get_where('muestraMedicos', array('medico_id' => $random))->row_array())==0){
-                $codigo = $this->generarCodigo();
+                $codigo = $this->generarCodigo(4);
                 $codigo_id = $this->Encuestam_model->get_encuestamId($codigo);
                 $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random,'tipoCanal'=>4,'codigo_id'=>$codigo_id));
                 //Generar codigo con tipoCodigo = 4
@@ -329,7 +329,7 @@
         return true;
       }
 
-      public function generarCodigo(){
+      public function generarCodigo($tipo){
         $this->load->model('Encuestam_model');
         $posible = str_split("abcdefghijklmnopqrstuvwxyz0123456789");
         shuffle($posible);
@@ -340,7 +340,7 @@
           $codigo = array_slice($posible, 0,6);
           $str = implode('', $codigo);
         }
-        $this->Encuestam_model->create_encuestam($str,4);
+        $this->Encuestam_model->create_encuestam($str,$tipo);
         return $str;
       }
 
