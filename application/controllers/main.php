@@ -5,6 +5,7 @@
     public function index() {
       $data = array(
         "title" => "¡Bienvenido a Intermed!",
+        'codigo' => ''
       );
       session_destroy();
 
@@ -45,6 +46,25 @@
         $this->load->view('templates/header', $data);
         $this->load->view('terminos', $data);
         $this->load->view('templates/footer', $data);
+    }
+
+    function usarCodigo($codigo){
+      //marcar canal de codigo como usado
+      $this->load->model('Encuestam_model');
+      if ($codigo != "" && $this->Encuestam_model->get_encuestamByCodigo($codigo)){
+        $this->Encuestam_model->marcarEncuestaCanalUsado($codigo);
+      } else{
+        $codigo = '';
+      }
+      $data = array(
+        "title" => "¡Bienvenido a Intermed!",
+        'codigo' => $codigo
+      );
+      session_destroy();
+
+      $this->load->view('templates/header', $data);
+      $this->load->view('index', $data);
+      $this->load->view('templates/footer', $data);
     }
   }
 ?>

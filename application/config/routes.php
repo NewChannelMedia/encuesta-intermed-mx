@@ -61,4 +61,5 @@ $route['encuesta/(:any)'] = 'Encuesta/view/$1';
 $route['encuesta'] = 'Encuesta/encuesta';
 $route['about'] = 'Encuesta/existe';
 $route['terminos'] = 'Main/terminos';
+//$route['e/(:any)'] = 'Main/usarCodigo/$1';
 $route['default_controller'] = 'Main';

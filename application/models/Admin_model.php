@@ -37,7 +37,7 @@
         }
         //retorna toda la tabla para poder ver los que estan por aceptar no @params
         public function porAceptar(){
-          $query = $this->db_encuesta->get('porValidar');
+          $query = $this->db_encuesta->get_where('porValidar',array('status <'=>2));
           return $query;
         }
 
@@ -50,6 +50,16 @@
         public function insertaCodigoGenerado($codigo){
           $data = array('codigo' => $codigo);
           return $this->db_encuesta->insert('encuestasM',$data);
+        }
+
+        public function enviadosCanalDirectos(){
+          $query = $this->db_encuesta->get_where('porValidar',array('status'=>2));
+          return $query->result_array();
+        }
+
+        public function enviadosCanalRecomendados(){
+          $query = $this->db_encuesta->get_where('porValidar',array('status'=>3));
+          return $query->result_array();
         }
     }
 ?>

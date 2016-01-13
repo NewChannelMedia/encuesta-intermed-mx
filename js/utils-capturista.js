@@ -473,6 +473,8 @@ function generarMuestraMedicos(){
                 icon = '<span class="glyphicon glyphicon-phone" style="font-size:80%"></span>';
               } else if (telefono.tipo == "casa"){
                 icon = '<span class="glyphicon glyphicon-home" style="font-size:80%"></span>';
+              } else if (telefono.tipo == "localizador"){
+                icon = '<span class="glyphicon glyphicon-screenshot" style="font-size:80%"></span>';
               }
               telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center"><div class="media"><div class="media-left">' + icon +'</div><div class="media-body">' + telefono.numero +'</div><div class="media-right"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></div></div></td></tr>';
               checked = '';
@@ -1615,6 +1617,8 @@ function generarMuestraMedicosPospuestos(){
                 icon = '<span class="glyphicon glyphicon-phone" style="font-size:80%"></span>';
               } else if (telefono.tipo == "casa"){
                 icon = '<span class="glyphicon glyphicon-home" style="font-size:80%"></span>';
+              } else if (telefono.tipo == "localizador"){
+                icon = '<span class="glyphicon glyphicon-screenshot" style="font-size:80%"></span>';
               }
               telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center"><div class="media"><div class="media-left">'+ icon +'</div><div class="media-body">' + telefono.numero +'</div><div class="media-right"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></div></div></td></tr>';
               checked = '';
@@ -1663,4 +1667,71 @@ function actualizarStatus(){
       console.log( "Error: AJax dead :" + JSON.stringify(err) );
     }
   });
+}
+
+function cargar_invitacionDirecta(){
+  $.ajax( {
+    url: '/encuesta-intermed/Admin/enviadosCanalDirectos',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      var inv = '';
+      result.forEach(function(res){
+        inv += '<tr><td class="text-center" >'+res.nombre+'</td><td class="text-center" >'+res.correo+'</td><td class="text-center" >'+res.fecha+'</td></tr>';
+      });
+      $('#InvDirecta').html(inv);
+    },
+    error: function (err) {
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  } );
+}
+
+function enviarInvitacionDirecta(){
+  var nombre = $('#nombreInvitacion').val();
+  var email = $('#correoInvitacion').val();
+  $.ajax( {
+    url: '/encuesta-intermed/Admin/enviarEncuestaDirecta',
+    type: "POST",
+    data: {nombre: nombre, correo: email},
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      if (result.success){
+        $('#InvDirecta').append('<tr><td class="text-center" >'+result.result.nombre+'</td><td class="text-center" >'+result.result.correo+'</td><td class="text-center" >'+result.result.fecha+'</td></tr>');
+        $('#enviarForm')[0].reset();
+        //Bootbox encuesta enviada, borrar formulario y agregar a lista result.result
+      } else {
+        //Bootbox error
+        bootbox.alert({
+            message: "No se pudo enviar el mensaje.",
+            title: "Mensaje de Intermed",
+          });
+      }
+    },
+    error: function (err) {
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  } );
+  return false;
+}
+
+function cargar_invitacionRecomendada(){
+  $.ajax( {
+    url: '/encuesta-intermed/Admin/enviadosCanalRecomendados',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      var inv = '';
+      result.forEach(function(res){
+        inv += '<tr><td class="text-center" >'+res.nombre+'</td><td class="text-center" >'+res.correo+'</td><td class="text-center" >'+res.justificacion+'</td><td class="text-center" >'+res.fecha+'</td></tr>';
+      });
+      $('#InvDirecta').html(inv);
+    },
+    error: function (err) {
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  } );
 }
