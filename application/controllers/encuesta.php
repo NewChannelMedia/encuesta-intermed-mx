@@ -60,7 +60,8 @@
         case 1:
             //Encuesta sin empezar
             //Marcar encuesta $codigo como usado
-            $this->Encuestam_model->marcarEncuestaUsada($codigo);
+            //$this->Encuestam_model->marcarEncuestaUsada($codigo);
+            $this->Encuestam_model->marcarEncuestaCanalUsado($codigo);
         case 2:
             //Encuesta sin terminar
             $data['contestar'] = true;
@@ -130,6 +131,7 @@
         header('Location: ' .  base_url() );
         die();
       }
+      $this->Encuestam_model->marcarEncuestaUsada($codigo);
 
       $etapaResp = $this->input->post('etapaResp');
       $continuarEnc = $this->input->post('continuar');

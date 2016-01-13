@@ -86,7 +86,7 @@
             <div class="code-input">
               <form role="form" method="POST" action="<?= base_url(); ?>about">
                 <div class="form-group">
-                  <input type="text" class="form-control code-intput-control" placeholder="" name="codigo">
+                  <input type="text" class="form-control code-intput-control" placeholder="" name="codigo" value="<?php echo $codigo ?>">
                 </div>
                 <div class="">
                   <input type="submit" value="Enviar" class="btn btn-default center-block code-intput-button">
