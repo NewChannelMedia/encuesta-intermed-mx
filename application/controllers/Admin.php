@@ -901,7 +901,7 @@
         public function correo(){
             // se carga el modelo para verificar si existen el usuario y password que se reciben por post
             $this->load->model('Admin_model');
-            if (isset($_SESSION) )
+            if (isset($_SESSION) && isset($_SESSION['status']))
             $session = $_SESSION['status'];
             else $session = false;
             if($session===true){
