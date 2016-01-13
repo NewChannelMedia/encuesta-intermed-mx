@@ -1862,3 +1862,64 @@ $('.modal').on('hide.bs.modal', function (e) {
   $(this).find('.modal-header h4').html('');
   $(this).find('iframe').remove();
 })
+
+
+function agregarDestRecom(){
+  var nombre = $('#nombreRecomendacion').val();
+  var email = $('#correoRecomendacion').val();
+  $('#Destinatarios').append('<div class="input-group-btn InvitacionRecomendacion" style="display:inline-table;margin: 3px;">'+
+    '<label class="btn btn-xs" style="background-color:#f0ad4e;border-color:#eea236;">'+
+      '<span class="Nombre">'+nombre+'</span>&lt;'+
+      '<span class="Correo">'+email+'</span>&gt;'+
+    '</label>'+
+    '<button class="btn btn-xs borrar" onclick="$(this).parent().remove()">'+
+      '<span class="glyphicon glyphicon-remove"></span>'+
+    '</button>'+
+  '</div>');
+  $('#destRec')[0].reset();
+  return false;
+}
+
+function enviarCodigosRecomendados(){
+  var Destinatarios = [];
+  $('#Destinatarios .InvitacionRecomendacion').each(function(){
+    var nombre =$(this).find('.Nombre').text();
+    var correo =$(this).find('.Correo').text();
+    Destinatarios.push({
+      'nombre': nombre,
+      'correo': correo
+    });
+  });
+  if (Destinatarios.length>0){
+    $.ajax( {
+      url: '/encuesta-intermed/Admin/enviarEncuestaRecomendada',
+      type: "POST",
+      data: {destinatarios: Destinatarios, mensaje: $('#mensaje').val()},
+      dataType: 'JSON',
+      async: true,
+      success: function (result) {
+        if (result.success){
+          $('#destRec')[0].reset();
+          $('#destRec2')[0].reset();
+          $('#Destinatarios').html('');
+          //Bootbox encuesta enviada, borrar formulario y agregar a lista result.result
+        } else {
+          //Bootbox error
+          bootbox.alert({
+              message: "No se pudo enviar el mensaje.",
+              title: "Mensaje de Intermed",
+            });
+        }
+      },
+      error: function (err) {
+        console.log( "Error: AJax dead :" + JSON.stringify(err) );
+      }
+    } );
+  } else {
+    bootbox.alert({
+        message: "Debe de ingresar por lo menos un destinatario.",
+        title: "Mensaje de Intermed",
+      });
+  }
+  return false;
+}
