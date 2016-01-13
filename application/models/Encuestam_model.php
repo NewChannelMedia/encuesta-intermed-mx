@@ -182,4 +182,12 @@ class Encuestam_model extends CI_Model {
       );
       return $this->db_encuesta->update('encuestasM', $data);
   }
+
+  public function agregarFechaEncuesta($codigo){
+      $this->db_encuesta->where('codigo', $codigo);
+      $data = array(
+        'fecha' => date('Y-m-d H:i:s')
+      );
+      return $this->db_encuesta->update('encuestasM', $data);
+  }
 }

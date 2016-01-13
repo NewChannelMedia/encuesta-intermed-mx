@@ -62,6 +62,7 @@
             //Marcar encuesta $codigo como usado
             //$this->Encuestam_model->marcarEncuestaUsada($codigo);
             $this->Encuestam_model->marcarEncuestaCanalUsado($codigo);
+            $this->Encuestam_model->agregarFechaEncuesta($codigo);
         case 2:
             //Encuesta sin terminar
             $data['contestar'] = true;
