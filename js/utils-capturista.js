@@ -505,7 +505,10 @@ function generarMuestraMedicos(){
 function guardarMuestra(id, element){
   //var trmuestra = $('tr.muestra#'+id);
   var trmuestra = $(element).parent().parent();
-  var telefono_id = trmuestra.find('tr.telefono>td>input:checked').prop('value');
+  var telefono_id = '';
+  trmuestra.find('tr.telefono>td').find('[type=radio]:checked').each(function(){
+    telefono_id = $(this).val();
+  });
   var correo = trmuestra.find('input.confirmCorreo').prop('value');
   var correo2 =  trmuestra.find('td.email').html();
   var autorizo = trmuestra.find('td.autorizo>input:checked').prop('value');
