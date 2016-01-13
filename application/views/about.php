@@ -51,28 +51,32 @@
           <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-1">
               <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                  <p class="text-right">
-                    <span class="leftlogo ag-medium shadow">Bienvenido a</span>
-                  </p>
-                </div>
-                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                  <p class="logotxt">
-                    <span class="logo ag-medium bold s130 shadow">intermed<sup><span class="suplogo shadow s25">&reg;</span></sup></span><br>
-                    <span class="slogan ag-medium s40 shadow ">La red social de la salud</span>
-                  </p>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <p class="text-center">
-                    <span class="ag-light s30 shadow">¡Conéctate con tu entorno profesional como nunca antes!</span>
-                  </p>
+                <div class="up-logo">
+                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <p class="text-right">
+                      <span class="leftlogo ag-medium shadow">Bienvenido a</span>
+                    </p>
+                  </div>
+                  <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <p class="logotxt">
+                      <span class="logo ag-medium bold s130 shadow">intermed<sup><span class="suplogo shadow s25">&reg;</span></sup></span><br>
+                      <span class="slogan ag-medium s40 shadow ">La red social de la salud</span>
+                    </p>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p class="text-center">
+                      <span class="ag-light s30 shadow">¡Conéctate con tu entorno profesional como nunca antes!</span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="header-img clearfix col-lg-10 col-md-12 col-sm-12 col-xs-12 hidden-xs col-lg-offset-1">
-              <img class="img-responsive" src="<?=base_url()?>img/lapbg3.png">
+              <div class="up-logo">
+                <img class="img-responsive" src="<?=base_url()?>img/lapbg3.png">
+              </div>
             </div>
           </div>
         </div>

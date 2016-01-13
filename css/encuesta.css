@@ -396,6 +396,11 @@ body {
   margin-bottom: 10px;
 }
 
+.up-logo {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .main-extra {
   padding-top: 0;
   padding-bottom: 40px;

@@ -1840,15 +1840,15 @@ $(document).ready(function(){
       var video_src = '';
       var video_title = '';
       if(id == 'v1'){
-        video_src = '149526541';
+        video_src = '151203118';
         video_title = 'Intermed<sup>&reg;</sup>, una red social funcional.'
       }
       else if(id == 'v2'){
-        video_src = '150442610';
+        video_src = '151203232';
         video_title = 'Intermed<sup>&reg;</sup> oficina.'
       }
       else if(id == 'v3'){
-        video_src = '150510178';
+        video_src = '151203284';
         video_title = 'Intermed<sup>&reg;</sup> historiales.'
       }
       $('#videoModal .modal-header h4').append(video_title);
