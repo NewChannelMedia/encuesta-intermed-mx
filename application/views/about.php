@@ -292,7 +292,7 @@
                   <div class="col-md-2 white-c ag-bold s20" style="min-height:35px">
                     Destinatarios:
                   </div>
-                  <div class="form-group col-md-10"><div id="Destinatarios" style="background-color: #DADADA;min-height: 30px;border-radius: 5px;"></div></div>
+                  <div class="form-group col-md-10"><div id="Destinatarios" style="min-height: 30px;border-radius: 5px;"></div></div>
                 </form>
 
                 <form method="POST" onsubmit="return enviarCodigosRecomendados();" id="destRec2">
