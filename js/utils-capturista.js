@@ -1671,7 +1671,7 @@ function actualizarStatus(){
 
 function cargar_invitacionDirecta(){
   $.ajax( {
-    url: '/encuesta-intermed/Admin/enviadosCanalDirectos',
+    url: '/Admin/enviadosCanalDirectos',
     type: "POST",
     dataType: 'JSON',
     async: true,
@@ -1692,7 +1692,7 @@ function enviarInvitacionDirecta(){
   var nombre = $('#nombreInvitacion').val();
   var email = $('#correoInvitacion').val();
   $.ajax( {
-    url: '/encuesta-intermed/Admin/enviarEncuestaDirecta',
+    url: '/Admin/enviarEncuestaDirecta',
     type: "POST",
     data: {nombre: nombre, correo: email},
     dataType: 'JSON',
@@ -1719,7 +1719,7 @@ function enviarInvitacionDirecta(){
 
 function cargar_invitacionRecomendada(){
   $.ajax( {
-    url: '/encuesta-intermed/Admin/enviadosCanalRecomendados',
+    url: '/Admin/enviadosCanalRecomendados',
     type: "POST",
     dataType: 'JSON',
     async: true,
