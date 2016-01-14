@@ -69,14 +69,11 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-        </div>
       </div>
       <div class="row">
         <div class="main-body clearfix">
-          <div class="main-body-container col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
-            <div class="up-logo">
+          <div class="up-logo">
+            <div class="main-body-container col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
               <div class="code-info">
                 <h4 class="flama-normal s20 text-center">
                   <span class="ag-medium">Intermed<sup>®</sup></span> se encuentra en  desarrollo. <br>

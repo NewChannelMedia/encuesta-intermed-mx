@@ -73,8 +73,8 @@
             </div>
           </div>
           <div class="row">
-            <div class="header-img clearfix col-lg-10 col-md-12 col-sm-12 col-xs-12 hidden-xs col-lg-offset-1">
-              <div class="up-logo">
+            <div class="up-logo">
+              <div class="header-img clearfix col-lg-10 col-md-12 col-sm-12 col-xs-12 hidden-xs col-lg-offset-1">
                 <img class="img-responsive" src="<?=base_url()?>img/lapbg3.png">
               </div>
             </div>
