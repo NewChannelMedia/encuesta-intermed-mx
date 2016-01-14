@@ -1861,4 +1861,206 @@ $(document).ready(function(){
 $('.modal').on('hide.bs.modal', function (e) {
   $(this).find('.modal-header h4').html('');
   $(this).find('iframe').remove();
-})
+});
+//<-------------------- MAILS MASIVOS -------------->
+  function emailGenerate(){
+    // se carga de la base de datos los correos y ademas se manda a llamar a la funcion que genera los
+    // numeros aleatorios para que esos sean enviados al correo elegido
+    $.post('/encuesta-intermed/Emails/traeMails',function(data){
+    }).fail(function(e){
+      bootbox.alert('Fallo al enviar los correos', function(){});
+    });
+  }
+  function recibeData(data){
+    $("#todoArray").html(JSON.stringify(data));
+  }
+//<-------------------- FIN MAILS MASIVOS ----------->
+//<------------------ Cargar correos masivos --------->
+  function getMails(){
+    var html = "";
+    $.post('/encuesta-intermed/Emails/getMails',function(data){
+      $.each(JSON.parse(data), function( i, item ){
+        var ch = 'tdCheck-'+i;
+        html += '<tr>';
+          html += '<td class="text-center checks" dato="'+ch+'">';
+            html += '<div class="checkbox">';
+              html += '<label>';
+                html += '<input id="'+ch+'" type="checkbox" value="0">';
+              html += '</label>';
+            html +='</div>';
+          html += '</td>';
+          html += '<td class="text-center numero">'+i+'</td>';
+          html += '<td class="text-center correo">'+item['correos'].toLowerCase()+'</td>';
+          html += '<td class="text-center nombres">'+item['nombres'].toLowerCase()+'</td>';
+        html += '</tr>';
+      });
+      $('#loadData').html(html);
+    });
+  }
+  // trae los correos ya enviados
+  function getMailsSends(){
+    var html = "";
+    // se trae la consulta de los que ya contestaron la encuesta
+    $.post('/encuesta-intermed/Emails/getMailsSends',function(data){
+      $.each(JSON.parse(data), function( i, item ){
+        html += '<tr>';
+          html += '<td class="text-center">'+i+'</td>';
+          html += '<td class="text-center">'+item['correos']+'</td>';
+          html += '<td class="text-center">'+item['nombres']+'</td>';
+          //html += '<td class="text-center">'+item['codigo']+'</td>';
+        html += '</tr>';
+      });
+      $("#dataLoad").html(html);
+    });
+  }
+//<------------------ FIN CARGAR MASIVOS ------------->
+//<------------------ Envio masivo de los correos ---->
+  /***
+  * nombre de la funcion masiveMails
+  * la siguiente funcion, es para el envio de correos masivos
+  * se van a enviar a todos e-mails que aparece en la tabla
+  * junto con el mensaje que se pondra en el text area y el nombre
+  * que aparece en la tabla en el campo nombre
+  * cuando se le de click al boton enviar a todos, se revisara que el textarea
+  * tenga informacion, que la tabla tenga informacion y se metera a un for
+  * donde se estara ejecutando uno por uno el envio de los correos hasta que termine
+  * de procesar todo el envio de correos. Estos correos son solo los que aparecen en la
+  * muestra de medicos, y son los que no contienen el campo de correo vacio.
+  * @param ninguno.
+  * @throw exception mail no send
+  * @return true: al terminar de enviar todos los correos.
+  ***/
+  function masiveMails(){
+    try{
+      // primero se recorre la tabla para ver si ha sido seleccionado un campo
+      var totalChecados = $('#enviosRandom tr td [type=checkbox]:checked').length;
+      var body = $("#bodyMensaje").val();
+      if( body != "" ){
+        if( totalChecados <= 0 ){
+          bootbox.dialog({
+            title:'Seleccione al menos una casilla',
+            onEscape: function(){ bootbox.hideAll(); },
+            closeButton:true,
+            buttons:{
+              danger:{
+                label:'Error',
+                className:'btn-danger',
+                callback: function(){ bootbox.hideAll(); }
+              }
+            },
+            message:
+              '<div class="row">'+
+                '<div class="col-md-12">'+
+                  '<div>'+
+                    '<h3>debe de seleccionar al menos una casilla</h3>'+
+                  '</div>'+
+                '</div>'+
+              '</div>'
+          });
+        }else{
+          //console.log("Entro aqui desde alla: "+totalChecados);
+          $('#enviosRandom tr td [type=checkbox]:checked').each(function(){
+            var padre = $(this).parent().parent().parent().parent();
+            var correo = padre.find('.correo').text();
+            var nombres = padre.find('.nombres').text();
+            $.post('/encuesta-intermed/Emails/passofHel',{
+              correo: correo,
+              nombres: nombres,
+              cuerpo: body
+            }, function(data){
+              if(data != true){console.log("Entro");
+                $("#spin").removeClass('hidden');
+              }
+              if( data == true ){console.log("si entro");
+                $("#spin").addClass('hidden');
+              }
+            });
+          });
+        }
+      }else{
+        bootbox.dialog({
+          title:'Mensaje vacio',
+          onEscape: function(){ bootbox.hideAll(); },
+          closeButton:true,
+          buttons:{
+            danger:{
+              label:'Error',
+              className:'btn-danger',
+              callback: function(){ bootbox.hideAll(); }
+            }
+          },
+          message:
+            '<div class="row">'+
+              '<div class="col-md-12">'+
+                '<div>'+
+                  '<h3>El cuerpo del mensaje no debe de estar vacio</h3>'+
+                '</div>'+
+              '</div>'+
+            '</div>'
+        });
+      }
+    }catch(e){
+      bootbox.dialog({
+        title:'Error al enviar los correos',
+        buttons:{
+          danger:'Error',
+          className:'btn-danger',
+          onEscape: function(){ bootbox.hideAll() },
+          closeButton:true,
+          callback: function(){ bootbox.hideAll() }
+        },
+        message:
+          '<div class="row">'+
+            '<div class="col-md-12">'+
+              '<div>'+
+                '<h3>Error al enviar el correo Err-23: '+e.message+'</h3>'+
+              '</div>'+
+            '</div>'+
+          '</div>'
+      });
+    }
+  }
+  $("#sendToAll").click(function(){
+    masiveMails();
+  });
+//<------------------ FIN envio masivo correos ------->
+// Evento para obtener el valor de los seleccionados y hacer que se seleccionen los respectivos checkbox
+$("#seleccionEnviar").click(function(){
+  //trae el numero que se le da en el input
+  var numero = parseInt( $("#num_seleccionado").val() );
+  // var contador esta variable servira para poder hacer que el ciclo haga un break
+  var contador = 0;
+  var error = false;
+  var total = $('#enviosRandom tr td [type=checkbox]').length;
+
+  if (numero > total){
+    bootbox.dialog({
+      title:'Error numero demasiado alto',
+      onEscape: function(){ bootbox.hideAll(); },
+      closeButton:true,
+      buttons:{
+        danger:{
+          label:'Error',
+          className:'btn-danger',
+          callback: function(){ bootbox.hideAll(); }
+        }
+      },
+      message:
+        '<div class="row">'+
+          '<div class="col-md-12">'+
+            '<div>'+
+              '<h3>El numero que ingreso es mas grande que la cantidad de correos que existen en la tabla</h3>'+
+            '</div>'+
+          '</div>'+
+        '</div>'
+    });
+  } else {
+    $('#enviosRandom tr td [type=checkbox]').each( function(i, item){
+        if (contador < numero){
+          $( this).attr('value','1');
+          $(this).prop('checked','checked');
+          contador++;
+        }
+    });
+  }
+});

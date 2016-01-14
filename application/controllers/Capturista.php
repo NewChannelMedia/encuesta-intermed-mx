@@ -124,7 +124,7 @@
             $result = false;
             $data['error'] = 'Médicos registrados insuficientes (mínimo 1000)';
           } else {
-            $result = $this->Capmuestramed_model->create_muestra($min,$max);
+            $result = $this->Capmuestramed_model->create_muestra_llamadas($min,$max);
             if ($result){
               $data['muestra'] =  $this->Capmuestramed_model->get_muestra();
             } else {

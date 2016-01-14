@@ -926,6 +926,14 @@
           $this->load->view('admin/revisados', $data);
           $this->load->view('templates/footerAdmin');
         }
+        public function masivos(){
+          $this->load->model('Capmuestramed_model');
+         $data['total'] = $this->Capmuestramed_model->get_muestra_correos();
+         $data['title'] = "Envio masivo";
+         $this->load->view( 'templates/headerAdmin',$data );
+         $this->load->view( 'admin/masivos');
+         $this->load->view( 'templates/footerAdmin' );
+       }
   }
 
   function encuestas_dropDown($enviar, $tipo){
@@ -945,5 +953,4 @@
     $data .= '<label class="col-md-12"><input type="radio" name="radio'. $enviar['element'] .'" ' . $checked . ' onclick="ChartLine('.htmlspecialchars(print_r(json_encode($enviar),1)).')" > Linea</label>';
     return $data;
   }
-
 ?>

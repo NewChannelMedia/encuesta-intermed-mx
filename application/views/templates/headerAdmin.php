@@ -76,6 +76,9 @@
             <a href="<?= base_url() ?>admin/llamadas"><span class="glyphicon glyphicon-user navicon"></span>Llamadas</a>
           </li>
           <li>
+              <a href="<?= base_url() ?>admin/masivos"><span class="glyphicon glyphicon-comment navicon"></span>E-mail Masivos</a>
+          </li>
+          <li>
             <a href="<?= base_url() ?>admin/anadirCapturista"><span class="glyphicon glyphicon-headphones navicon"></span>Añadir Capturista</a>
           </li>
           <li>
