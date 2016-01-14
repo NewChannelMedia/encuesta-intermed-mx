@@ -116,19 +116,23 @@
           return $this->db_capturista->delete('muestraMedicos', array('id' => $id));
         }
 
-        public function update_muestra($id, $telefono_id){
+        public function update_muestra($id, $telefono_id, $usuario_capt_id){
           $data = array(
                          'telefono_id' => $telefono_id,
-                         'aut' => 1
+                         'aut' => 1,
+                         'usuario_capt_id'=>$usuario_capt_id,
+                         'fecha' =>date('Y-m-d H:i:s')
                       );
 
           $this->db_capturista->where('id', $id);
           return $this->db_capturista->update('muestraMedicos', $data);
         }
 
-        public function update_muestra_NoAut($id){
+        public function update_muestra_NoAut($id, $usuario_capt_id){
           $data = array(
-                         'aut' => 2
+                         'aut' => 2,
+                         'usuario_capt_id'=>$usuario_capt_id,
+                         'fecha' =>date('Y-m-d H:i:s')
                       );
 
           $this->db_capturista->where('id', $id);

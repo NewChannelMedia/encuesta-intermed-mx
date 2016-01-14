@@ -600,7 +600,7 @@
           $headers = "MIME-Version: 1.0" . "\r\n";
           $headers .= "Content-Type:text/html;charset=utf-8" . "\r\n";
 
-          $headers .= 'From: Intermed <intermed.encuestas@newchannel.mx>'."\r\n";
+          $headers .= 'From: Intermed <hola@intermed.online>'."\r\n";
 
           $mensajeCompleto = str_replace('Á','&Aacute;',$mensajeCompleto);
           $mensajeCompleto = str_replace('É','&Eacute;',$mensajeCompleto);
@@ -871,6 +871,12 @@
             $arr[ $i ]['RegistrosHoy'] = $this->Capcapturista_model->RegistrosHoy($row->id_master);
             $arr[ $i ]['Registros'] = $this->Capcapturista_model->Registros($row->id_master);
             $arr[ $i ]['RegistrosAyer'] = $this->Capcapturista_model->RegistrosAyer($row->id_master);
+            $arr[ $i ]['RegistrosHoyLlamadasAut'] = $this->Capcapturista_model->RegistrosHoyLlamadasAut($row->id_master);
+            $arr[ $i ]['RegistrosLlamadasAut'] = $this->Capcapturista_model->RegistrosLlamadasAut($row->id_master);
+            $arr[ $i ]['RegistrosHoyLlamadasNoAut'] = $this->Capcapturista_model->RegistrosHoyLlamadasNoAut($row->id_master);
+            $arr[ $i ]['RegistrosLlamadasNoAut'] = $this->Capcapturista_model->RegistrosLlamadasNOAut($row->id_master);
+            $arr[ $i ]['RegistrosLlamadasAnteriores'] = $this->Capcapturista_model->RegistrosLlamadasAnteriores($row->id_master);
+            $arr[ $i ]['totalFechasLlamadas'] = $this->Capcapturista_model->LlamadasTotalFechas($row->id_master);
             $i++;
            }
           $data['capturistas'] = $arr;

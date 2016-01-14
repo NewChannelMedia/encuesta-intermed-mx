@@ -141,6 +141,8 @@
         $correo = $this->input->post('correo');
         $correo2 = $this->input->post('correo2');
         $aut = $this->input->post('aut');
+        $usuario_capt_id = intval($_SESSION['id']);
+
 
         if ($correo != ""){
           //Actualizar correo del medico
@@ -150,7 +152,7 @@
 
         $result = false;
         if ($aut == "true"){
-          $result = $this->Capmuestramed_model->update_muestra($id, $telefono_id);
+          $result = $this->Capmuestramed_model->update_muestra($id, $telefono_id,$usuario_capt_id);
 
           if ($result){
             if ($correo == ""){
@@ -159,7 +161,7 @@
           }
         } else {
           //Eliminar de muestra el id
-          $result = $this->Capmuestramed_model->update_muestra_NoAut($id);
+          $result = $this->Capmuestramed_model->update_muestra_NoAut($id,$usuario_capt_id);
         }
 
         $array = array('success'=>$result);

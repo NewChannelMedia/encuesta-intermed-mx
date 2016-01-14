@@ -517,7 +517,7 @@ function guardarMuestra(id, element){
 
   if (correo != ""){
     console.log('Nuevo correo: ' + correo);
-    guardar = validarEmail(correo);
+    //guardar = validarEmail(correo);
   }
 
   if (guardar){
