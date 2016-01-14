@@ -111,11 +111,11 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                 <ul class="nav nav-tabs" role="tablist" style="margin-left:-15px;margin-right: -15px;">
-                  <li role="presentation" class="active"><a href="#captura<?php echo $contador; ?>" aria-controls="captura<?php echo $contador; ?>" role="tab" data-toggle="tab">Capturas</a></li>
-                  <li role="presentation"><a href="#llamadas<?php echo $contador; ?>" aria-controls="llamadas<?php echo $contador; ?>" role="tab" data-toggle="tab">Llamadas</a></li>
+                  <li role="presentation" class="active"><a href="#llamadas<?php echo $contador; ?>" aria-controls="llamadas<?php echo $contador; ?>" role="tab" data-toggle="tab">Llamadas</a></li>
+                  <li role="presentation"><a href="#captura<?php echo $contador; ?>" aria-controls="captura<?php echo $contador; ?>" role="tab" data-toggle="tab">Capturas</a></li>
                 </ul>
                 <div class="tab-content">
-                  <div role="tabpanel" class="tab-pane active" id="captura<?php echo $contador; ?>">
+                  <div role="tabpanel" class="tab-pane" id="captura<?php echo $contador; ?>">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist" style="margin-left:-15px;margin-right: -15px;margin-top:5px">
                       <li role="presentation" class="active"><a href="#hoy<?php echo $contador; ?>" aria-controls="hoy<?php echo $contador; ?>" role="tab" data-toggle="tab">Hoy</a></li>
@@ -279,7 +279,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                       </div>
                     </div>
                   </div>
-                  <div role="tabpanel" class="tab-pane" id="llamadas<?php echo $contador; ?>">
+                  <div role="tabpanel" class="tab-pane active" id="llamadas<?php echo $contador; ?>">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist" style="margin-left:-15px;margin-right: -15px;margin-top:5px">
                       <li role="presentation" class="active"><a href="#hoyllamadas<?php echo $contador; ?>" aria-controls="hoyllamadas<?php echo $contador; ?>" role="tab" data-toggle="tab">Hoy</a></li>
@@ -330,7 +330,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
                           TOTALES<br/><span style="font-size:500%">
-                          <?php echo $dat['RegistrosHoyLlamadasAut']['total']; ?>
+                          <?php echo  ($dat['RegistrosHoyLlamadasAut']['total']+$dat['RegistrosHoyLlamadasNoAut']['total']); ?>
                         </span>
                         </div>
                       </div>
