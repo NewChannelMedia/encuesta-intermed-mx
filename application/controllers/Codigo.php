@@ -98,8 +98,9 @@
           $mensajeCompleto = str_replace('ó','&oacute;',$mensajeCompleto);
           $mensajeCompleto = str_replace('ú','&uacute;',$mensajeCompleto);
 
-          $headers .= 'From: Intermed <intermed.encuestas@newchannel.mx>'."\r\n";
-          mail("encuesta@intermed.online",$titulo,$mensajeCompleto,$headers);
+          $headers .= 'Bcc: encuestas@newchannel.mx'."\r\n";
+          $headers .= 'From: Intermed <encuesta@intermed.online>'."\r\n";
+
           return mail($correo,$titulo,$mensajeCompleto,$headers);
       }
       /**
