@@ -278,11 +278,17 @@
               <div class="main-body-container clearfix">
                 <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
                   <p class="text-center white-c ag-bold s20">
-                    Este código ya se uso, puedes enviar códigos a tus colegas con el siguiente formulario
+                    Este código ya se ha usado, puedes enviar códigos a tus colegas con el siguiente formulario.<br/><br/>
                   </p>
                 </div>
 
-                <form method="POST" onsubmit="return agregarDestRecom()" id="destRec">
+                <form method="POST" onsubmit="return false;">
+                  <div class="form-group col-md-12">
+                    <input class="form-control" type="text" placeholder="Tu nombre" name="tunombre" id="tunombre" required>
+                  </div>
+                </form>
+
+                <form method="POST" onsubmit="return agregarDestRecom();" id="destRec">
                   <div class="form-group col-md-5">
                     <input class="form-control" type="text" placeholder="Nombre" name="nombre" id="nombreRecomendacion" required>
                   </div>
@@ -299,12 +305,12 @@
                   <div class="form-group col-md-10"><div id="Destinatarios" style="min-height: 30px;border-radius: 5px;"></div></div>
                 </form>
 
-                <form method="POST" onsubmit="return enviarCodigosRecomendados();" id="destRec2">
+                <form method="POST" onsubmit="return false;" id="destRec2">
                   <div class="form-group col-md-12">
                     <textarea class="form-control" rows="3" id="mensaje" name="mensaje" placeholder="Mensaje"></textarea>
                   </div>
                   <div class="form-group col-md-12">
-                    <input class="btn btn-warning btn-lg btn-block" type="submit" value="Enviar">
+                    <input class="btn btn-warning btn-lg btn-block" type="button" value="Enviar" onclick="enviarCodigosRecomendados();">
                   </div>
                 </form>
 
