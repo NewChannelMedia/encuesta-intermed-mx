@@ -600,7 +600,7 @@
           $headers = "MIME-Version: 1.0" . "\r\n";
           $headers .= "Content-Type:text/html;charset=utf-8" . "\r\n";
 
-          $headers .= 'From: Intermed <intermed.encuestas@newchannel.mx>'."\r\n";
+          $headers .= 'From: Intermed <hola@intermed.online>'."\r\n";
 
           $mensajeCompleto = str_replace('Á','&Aacute;',$mensajeCompleto);
           $mensajeCompleto = str_replace('É','&Eacute;',$mensajeCompleto);
@@ -871,6 +871,12 @@
             $arr[ $i ]['RegistrosHoy'] = $this->Capcapturista_model->RegistrosHoy($row->id_master);
             $arr[ $i ]['Registros'] = $this->Capcapturista_model->Registros($row->id_master);
             $arr[ $i ]['RegistrosAyer'] = $this->Capcapturista_model->RegistrosAyer($row->id_master);
+            $arr[ $i ]['RegistrosHoyLlamadasAut'] = $this->Capcapturista_model->RegistrosHoyLlamadasAut($row->id_master);
+            $arr[ $i ]['RegistrosLlamadasAut'] = $this->Capcapturista_model->RegistrosLlamadasAut($row->id_master);
+            $arr[ $i ]['RegistrosHoyLlamadasNoAut'] = $this->Capcapturista_model->RegistrosHoyLlamadasNoAut($row->id_master);
+            $arr[ $i ]['RegistrosLlamadasNoAut'] = $this->Capcapturista_model->RegistrosLlamadasNOAut($row->id_master);
+            $arr[ $i ]['RegistrosLlamadasAnteriores'] = $this->Capcapturista_model->RegistrosLlamadasAnteriores($row->id_master);
+            $arr[ $i ]['totalFechasLlamadas'] = $this->Capcapturista_model->LlamadasTotalFechas($row->id_master);
             $i++;
            }
           $data['capturistas'] = $arr;
@@ -897,6 +903,14 @@
           $this->load->view('admin/revisados', $data);
           $this->load->view('templates/footerAdmin');
         }
+        public function masivos(){
+          $this->load->model('Capmuestramed_model');
+         $data['total'] = $this->Capmuestramed_model->get_muestra_correosM();
+         $data['title'] = "Envio masivo";
+         $this->load->view( 'templates/headerAdmin',$data );
+         $this->load->view( 'admin/masivos');
+         $this->load->view( 'templates/footerAdmin' );
+       }
 
         public function correo(){
             // se carga el modelo para verificar si existen el usuario y password que se reciben por post
@@ -1114,5 +1128,4 @@
     $data .= '<label class="col-md-12"><input type="radio" name="radio'. $enviar['element'] .'" ' . $checked . ' onclick="ChartLine('.htmlspecialchars(print_r(json_encode($enviar),1)).')" > Linea</label>';
     return $data;
   }
-
 ?>

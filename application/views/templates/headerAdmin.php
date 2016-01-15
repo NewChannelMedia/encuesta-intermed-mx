@@ -75,6 +75,9 @@
             <a href="<?= base_url() ?>admin/llamadas"><span class="glyphicon glyphicon-user navicon"></span>Llamadas</a>
           </li>
           <li>
+              <a href="<?= base_url() ?>admin/masivos"><span class="glyphicon glyphicon-comment navicon"></span>E-mail Masivos</a>
+          </li>
+          <li>
             <a href="<?= base_url() ?>admin/correo"><span class="glyphicon glyphicon-user navicon"></span>Correos físicos</a>
           </li>
           <li>

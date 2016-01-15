@@ -52,15 +52,21 @@
     <?php if (!($tipoCodigo == 2 && $status == 3)){ ?>
     <div class="col-lg-6 col-md-6 col-sm-7 col-xs-7 pull-right">
       <div class="row">
-        <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
-          <input onclick="guardarycont()" id="btnguardarycontinuar"  class="btn notEnabled" type="button" value="Guardar y continuar >">
-        </div>
-        <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
+        <?php if ($etapa < $cantEtapas){ ?>
+          <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
+            <input onclick="guardarycont()" id="btnguardarycontinuar"  class="btn notEnabled" type="button" value="Guardar y continuar >">
+          </div>
+        <?php } else { ?>
+          <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
+            <input onclick="guardarycont()" id="btnguardarycontinuar"  class="btn notEnabled" type="button" value="Guardar y finalizar">
+          </div>
+        <?php } ?>
+<!--        <div class="col-lg-4 col-md-4 col-xs-8 pull-right">
           <input onclick="guardarysal()" id="btnguardarysalir"  class="btn notEnabled" type="button" value="Guardar y salir"><br/>
         </div>
         <div class="col-lg-4 col-md-4 col-xs-12 text-right">
           <span class="text-right">Retoma la encuesta volviendo a ingresar con tu código</span>
-        </div>
+        </div>-->
       </div>
     </div>
     <?php } ?>

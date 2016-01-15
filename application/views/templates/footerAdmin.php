@@ -10,8 +10,9 @@
     <script src="<?= base_url(); ?>js/bootbox.min.js"></script>
     <script src="<?= base_url(); ?>js/jquery-ui-touch-punch.min.js"></script>
     <script src="<?= base_url(); ?>js/utils.js"></script>
-	   <script src="<?= base_url(); ?>js/FontUtils.js"></script>
+	<script src="<?= base_url(); ?>js/FontUtils.js"></script>
     <script src="<?= base_url(); ?>js/utils-capturista.js"></script>
+    <script src="<?= base_url(); ?>js/bootboxDialogs.js"></script>
     <script src="<?= base_url(); ?>js/jquery.table2excel.js"></script>
     <script src="<?= base_url(); ?>js/jquery.datetimepicker.full.js"></script>
 

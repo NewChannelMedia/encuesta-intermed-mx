@@ -792,7 +792,7 @@ body {
     background : #FEFEFE;
     text-align: center;
   }
-html>body .sortable li { height: 2em; line-height: 1.2em; }
+html>body .sortable li { height: 2em; line-height: 1.2em; cursor: ns-resize; }
 .ui-state-highlight { height: 1.5em; line-height: 1.2em; }
 /*End sortable*/
 
@@ -2030,3 +2030,36 @@ body.modal-open {
     display: table-cell;
     vertical-align: middle;
 }
+
+/**
+* Informacion para el spinner
+* http://blog.pexels.com/css-only-loaders/
+*/
+.spinner {
+  height: 80px;
+}
+.spinner div {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: -20px;
+  top: 40px;
+  background-color: #333;
+  border-radius: 50%;
+  animation: move 4s infinite cubic-bezier(.2,.64,.81,.23);
+}
+.spinner div:nth-child(2) {
+  animation-delay: 150ms;
+}
+.spinner div:nth-child(3) {
+  animation-delay: 300ms;
+}
+.spinner div:nth-child(4) {
+  animation-delay: 450ms;
+}
+@keyframes move {
+  0% {left: 0%;}
+  75% {left:100%;}
+  100% {left:100%;}
+}
+/*Fin de la informacion para el spinner*/

@@ -30,7 +30,11 @@
           $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCanal'=>1));
           return $result->row_array()['count'];
         }
-
+        public function get_muestra_correosM(){
+          $this->db_capturista->select('count(*) AS "count"');
+          $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCanal'=>3));
+          return $result->row_array()['count'];
+        }
         public function get_muestra_llamadas(){
           $muestra = array();
           $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCanal'=>1,'aut<='=>1),500);
@@ -116,19 +120,23 @@
           return $this->db_capturista->delete('muestraMedicos', array('id' => $id));
         }
 
-        public function update_muestra($id, $telefono_id){
+        public function update_muestra($id, $telefono_id, $usuario_capt_id){
           $data = array(
                          'telefono_id' => $telefono_id,
-                         'aut' => 1
+                         'aut' => 1,
+                         'usuario_capt_id'=>$usuario_capt_id,
+                         'fecha' =>date('Y-m-d H:i:s')
                       );
 
           $this->db_capturista->where('id', $id);
           return $this->db_capturista->update('muestraMedicos', $data);
         }
 
-        public function update_muestra_NoAut($id){
+        public function update_muestra_NoAut($id, $usuario_capt_id){
           $data = array(
-                         'aut' => 2
+                         'aut' => 2,
+                         'usuario_capt_id'=>$usuario_capt_id,
+                         'fecha' =>date('Y-m-d H:i:s')
                       );
 
           $this->db_capturista->where('id', $id);
@@ -250,7 +258,7 @@
         return $result->row_array()['count'];
       }
 
-      public function get_muestra_correos(){
+      public function get_muestra_correosF(){
         $this->load->model('Encuestam_model');
         $muestra = array();
         $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCanal'=>4),500);
