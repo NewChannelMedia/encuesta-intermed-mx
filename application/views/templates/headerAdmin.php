@@ -16,7 +16,6 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>css/encuesta.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>fonts/fonts.css">
-    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.js">
     <link rel="stylesheet" href="http://css-spinners.com/css/spinner/spinner.css" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -74,6 +73,18 @@
           </li>
           <li>
             <a href="<?= base_url() ?>admin/llamadas"><span class="glyphicon glyphicon-user navicon"></span>Llamadas</a>
+          </li>
+          <li>
+              <a href="<?= base_url() ?>admin/masivos"><span class="glyphicon glyphicon-comment navicon"></span>E-mail Masivos</a>
+          </li>
+          <li>
+            <a href="<?= base_url() ?>admin/correo"><span class="glyphicon glyphicon-user navicon"></span>Correos físicos</a>
+          </li>
+          <li>
+            <a href="<?= base_url() ?>admin/invitaciondirecta"><span class="glyphicon glyphicon-user navicon"></span>Invitación directa</a>
+          </li>
+          <li>
+            <a href="<?= base_url() ?>admin/invitacionrecomendada"><span class="glyphicon glyphicon-user navicon"></span>Invitación recomendada</a>
           </li>
           <li>
             <a href="<?= base_url() ?>admin/anadirCapturista"><span class="glyphicon glyphicon-headphones navicon"></span>Añadir Capturista</a>
