@@ -1963,16 +1963,16 @@ $('.modal').on('hide.bs.modal', function (e) {
             var padre = $(this).parent().parent().parent().parent();
             var correo = padre.find('.correo').text();
             var nombres = padre.find('.nombres').text();
+            var prueba = this;
             $.post('/encuesta-intermed/Emails/passofHel',{
               correo: correo,
               nombres: nombres,
               cuerpo: body
             }, function(data){
-              if(data != true){console.log("Entro");
-                $("#spin").removeClass('hidden');
-              }
-              if( data == true ){console.log("si entro");
+              $("#spin").removeClass('hidden');
+              if(data == "true"){
                 $("#spin").addClass('hidden');
+                $( prueba ).parent().parent().parent().parent().remove();
               }
             });
           });
@@ -2124,4 +2124,3 @@ function enviarCodigosRecomendados(){
   }
   return false;
 }
-
