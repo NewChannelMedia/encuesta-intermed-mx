@@ -278,7 +278,7 @@
               <div class="main-body-container clearfix">
                 <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
                   <p class="text-center white-c ag-bold s20">
-                    Este código ya se uso, puedes enviar códigos a tus colegas con el siguiente formulario
+                    Este código ya se ha usado, puedes enviar códigos a tus colegas con el siguiente formulario.<br/><br/>
                   </p>
                 </div>
 
