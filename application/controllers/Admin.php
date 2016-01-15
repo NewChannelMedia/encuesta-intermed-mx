@@ -1061,8 +1061,7 @@
             $headers .= 'Bcc: encuestas@newchannel.mx'."\r\n";
             $headers .= 'From: Intermed <encuesta@intermed.online>'."\r\n";
 
-            echo $mensajeCompleto;
-            //return mail($correo,$titulo,$mensajeCompleto,$headers);
+            return mail($correo,$titulo,$mensajeCompleto,$headers);
         }
 
         public function generarCodigo($canal){
