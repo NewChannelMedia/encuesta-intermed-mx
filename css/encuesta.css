@@ -792,7 +792,7 @@ body {
     background : #FEFEFE;
     text-align: center;
   }
-html>body .sortable li { height: 2em; line-height: 1.2em; }
+html>body .sortable li { height: 2em; line-height: 1.2em; cursor: ns-resize; }
 .ui-state-highlight { height: 1.5em; line-height: 1.2em; }
 /*End sortable*/
 
