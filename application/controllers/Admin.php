@@ -1001,7 +1001,7 @@
 
             // se lee el archivo
             $fileh = realpath(APPPATH.'views/correos/headerMasivo.php');
-            $fileb = realpath(APPPATH.'views/correos/correoMasivo.php');
+            $fileb = realpath(APPPATH.'views/correos/correoPersonalizado.php');
             $filef = realpath(APPPATH.'views/correos/footerMasivo.php');
             $fpH = fopen( $fileh,'r');
             $fpB = fopen( $fileb,'r');
