@@ -1840,7 +1840,7 @@ $(document).ready(function(){
       var video_src = '';
       var video_title = '';
       if(id == 'v1'){
-        video_src = '151203118';
+        video_src = '151851237';
         video_title = 'Intermed<sup>&reg;</sup>, una red social funcional.'
       }
       else if(id == 'v2'){
@@ -2124,4 +2124,3 @@ function enviarCodigosRecomendados(){
   }
   return false;
 }
-
