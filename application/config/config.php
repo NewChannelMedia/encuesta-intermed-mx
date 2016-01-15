@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://www.intermed.online/';
+$config['base_url'] = 'http://www.pruebas.intermed.online/';
 /*
 |--------------------------------------------------------------------------
 | Index File
