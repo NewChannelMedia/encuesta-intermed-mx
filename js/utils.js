@@ -1866,7 +1866,7 @@ $('.modal').on('hide.bs.modal', function (e) {
   function emailGenerate(){
     // se carga de la base de datos los correos y ademas se manda a llamar a la funcion que genera los
     // numeros aleatorios para que esos sean enviados al correo elegido
-    $.post('/encuesta-intermed/Emails/traeMails',function(data){
+    $.post('//Emails/traeMails',function(data){
     }).fail(function(e){
       bootbox.alert('Fallo al enviar los correos', function(){});
     });
@@ -1878,7 +1878,7 @@ $('.modal').on('hide.bs.modal', function (e) {
 //<------------------ Cargar correos masivos --------->
   function getMails(){
     var html = "";
-    $.post('/encuesta-intermed/Emails/getMails',function(data){
+    $.post('//Emails/getMails',function(data){
       $.each(JSON.parse(data), function( i, item ){
         var ch = 'tdCheck-'+i;
         html += '<tr>';
@@ -1901,7 +1901,7 @@ $('.modal').on('hide.bs.modal', function (e) {
   function getMailsSends(){
     var html = "";
     // se trae la consulta de los que ya contestaron la encuesta
-    $.post('/encuesta-intermed/Emails/getMailsSends',function(data){
+    $.post('//Emails/getMailsSends',function(data){
       $.each(JSON.parse(data), function( i, item ){
         html += '<tr>';
           html += '<td class="text-center">'+i+'</td>';
@@ -1963,7 +1963,7 @@ $('.modal').on('hide.bs.modal', function (e) {
             var padre = $(this).parent().parent().parent().parent();
             var correo = padre.find('.correo').text();
             var nombres = padre.find('.nombres').text();
-            $.post('/encuesta-intermed/Emails/passofHel',{
+            $.post('//Emails/passofHel',{
               correo: correo,
               nombres: nombres,
               cuerpo: body
