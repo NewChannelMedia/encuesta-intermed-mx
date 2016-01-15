@@ -30,7 +30,11 @@
           $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCanal'=>1));
           return $result->row_array()['count'];
         }
-
+        public function get_muestra_correosM(){
+          $this->db_capturista->select('count(*) AS "count"');
+          $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCanal'=>3));
+          return $result->row_array()['count'];
+        }
         public function get_muestra_llamadas(){
           $muestra = array();
           $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCanal'=>1,'aut<='=>1),500);
@@ -254,7 +258,7 @@
         return $result->row_array()['count'];
       }
 
-      public function get_muestra_correos(){
+      public function get_muestra_correosF(){
         $this->load->model('Encuestam_model');
         $muestra = array();
         $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCanal'=>4),500);

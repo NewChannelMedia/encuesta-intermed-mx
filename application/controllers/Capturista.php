@@ -571,12 +571,12 @@
           } else {
             $result = $this->Capmuestramed_model->create_muestra_correos($min,$max);
             if ($result){
-              $data['muestra'] =  $this->Capmuestramed_model->get_muestra_correos();
+              $data['muestra'] =  $this->Capmuestramed_model->get_muestra_correosF();
             } else {
               $data['error'] = 'Error al crear la muestra';
             }
           }
-        } else $data['muestra'] =  $this->Capmuestramed_model->get_muestra_correos();
+        } else $data['muestra'] =  $this->Capmuestramed_model->get_muestra_correosF();
         echo json_encode($data);
       }
 
