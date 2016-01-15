@@ -5,7 +5,7 @@
           <tbody>
             <tr style="height:100px;">
               <td style="text-align:center;vertical-align:middle;padding-left:10px;padding-right:10px;">
-                <h1 style="color:#ffffff;font-size:30px;">Bienvenido Dr(a). <span id="nombreDoc"></span>.</h1>
+                <h1 style="color:#ffffff;font-size:30px;">Bienvenido Dr(a). <span id="nombreDoc" style="text-transform: capitalize;"></span>.</h1>
                 <p style="color:#ffffff;font-size:18px;color:rgba(255,255,255,0.9);">Agredecemos tu tiempo y atenci&oacute;n y te invitamos a visitar nuestra p&aacute;gina para conocer
                   <strong>Intermed<sup>&reg;</sup></strong>, la nueva red social que revolucionar&aacute; la manera en que trabajas y te conectas con tu entorno profesional.</p>
               </td>
@@ -17,7 +17,7 @@
     <!-- Inicio del mensaje -->
     <tr>
     <td style="text-align:center;vertical-align:middle;border:none;padding:0;">
-      <table style="max-width:650px;width:100%;border:none;padding:20px;background-color:#f5f5f5  ;margin:0 auto;height:150px;border-spacing:0;border-left:solid 1px rgba(0,0,0,.2);border-right:solid 1px rgba(0,0,0,.2);">
+      <table style="max-width:650px;width:100%;border:none;padding:20px;background-color:#f5f5f5 Â ;margin:0 auto;height:150px;border-spacing:0;border-left:solid 1px rgba(0,0,0,.2);border-right:solid 1px rgba(0,0,0,.2);">
         <tbody>
           <tr>
             <td style="text-align:justify;vertical-align:middle;padding:0;">

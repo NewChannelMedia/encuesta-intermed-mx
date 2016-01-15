@@ -18,7 +18,6 @@
          $codigo = array_slice($posible, 0,6);
          $str = implode('', $codigo);
        }
-       //$this->Encuestam_model->create_encuestam($str,3);
       return $str;
     }
     //function que trae todos los emails requeridos
@@ -41,7 +40,7 @@
                  foreach( $query->result() as $row ){
                    if( $row->correo != '' && !is_numeric($row->correo) ){
                      $arreglo[ $i ]['correo'] = $row->correo;
-                     $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random,'tipoCanal'=>3));
+                     $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random,'tipoCanal'=>3,'codigo_id'=>0));
                    }
                  }
               }else{
@@ -186,10 +185,9 @@
       $titulo = "Te presentamos Intermed®";
       $headers = "MIME-Version: 1.0" . "\r\n";
       $headers .= "Content-Type:text/html;charset=utf-8" . "\r\n";
+      $headers .= 'Bcc: pruebamasivos@newchannel.mx' . "\r\n";
       $headers .= 'From: Intermed <intermed.encuestas@newchannel.mx>'."\r\n";
-      $correo2 = 'lestat_kerveros@hotmail.com';
-      echo $mensajeCompleto;
-      //return mail($correo2,$titulo,$mensajeCompleto,$headers);
+      return mail($correo,$titulo,$mensajeCompleto,$headers);
     }
   }
 ?>
