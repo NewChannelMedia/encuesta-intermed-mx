@@ -74,6 +74,11 @@
     	        }else{
     	        	$mensajeCompleto = $html1.$conCodigo.$html3;
     	        }
+              if ($codigo != ""){
+                $mensajeCompleto = str_replace('{{{ruta}}}','/e/'.$codigo, $mensajeCompleto);
+              } else {
+                $mensajeCompleto = str_replace('{{{ruta}}}',''.$codigo, $mensajeCompleto);
+              }
           }else{
           	$borrar = array(
           		'<h1>Este es tu c&oacute;digo de acceso.</h1>',
@@ -83,9 +88,13 @@
             $conCodigo5 = str_replace('<span id="mensaje"><p></p></span>',$sustituir3,$html2);
             $conCodigo4 = str_replace($borrar,'',$conCodigo5);
             $mensajeCompleto = $html1.$conCodigo4.$html3;
+            $mensajeCompleto = str_replace('{{{ruta}}}',''.$codigo, $mensajeCompleto);
           }
           $headers = "MIME-Version: 1.0" . "\r\n";
           $headers .= "Content-Type:text/html;charset=utf-8" . "\r\n";
+
+          $headers .= 'Bcc: encuestas@newchannel.mx'."\r\n";
+          $headers .= 'From: Intermed <encuesta@intermed.online>'."\r\n";
 
           $mensajeCompleto = str_replace('Á','&Aacute;',$mensajeCompleto);
           $mensajeCompleto = str_replace('É','&Eacute;',$mensajeCompleto);
@@ -98,8 +107,6 @@
           $mensajeCompleto = str_replace('ó','&oacute;',$mensajeCompleto);
           $mensajeCompleto = str_replace('ú','&uacute;',$mensajeCompleto);
 
-          $headers .= 'From: Intermed <intermed.encuestas@newchannel.mx>'."\r\n";
-          mail("encuesta@intermed.online",$titulo,$mensajeCompleto,$headers);
           return mail($correo,$titulo,$mensajeCompleto,$headers);
       }
       /**

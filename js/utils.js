@@ -2095,9 +2095,9 @@ function enviarCodigosRecomendados(){
     $.ajax( {
       url: '/encuesta-intermed/Admin/enviarEncuestaRecomendada',
       type: "POST",
-      data: {destinatarios: Destinatarios, mensaje: $('#mensaje').val()},
+      data: {destinatarios: Destinatarios, mensaje: $('#mensaje').val(), tunombre: $('#tunombre').val()},
       dataType: 'JSON',
-      async: true,
+      async: false,
       success: function (result) {
         if (result.success){
           $('#destRec')[0].reset();
@@ -2116,12 +2116,12 @@ function enviarCodigosRecomendados(){
         console.log( "Error: AJax dead :" + JSON.stringify(err) );
       }
     } );
+    return false;
   } else {
     bootbox.alert({
         message: "Debe de ingresar por lo menos un destinatario.",
         title: "Mensaje de Intermed",
       });
+    return false;
   }
-  return false;
 }
-

@@ -283,6 +283,9 @@
                 </div>
 
                 <form method="POST" onsubmit="return agregarDestRecom()" id="destRec">
+                  <div class="form-group col-md-12">
+                    <input class="form-control" type="text" placeholder="Tu nombre" name="tunombre" id="tunombre" required>
+                  </div>
                   <div class="form-group col-md-5">
                     <input class="form-control" type="text" placeholder="Nombre" name="nombre" id="nombreRecomendacion" required>
                   </div>

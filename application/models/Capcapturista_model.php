@@ -108,12 +108,12 @@
       $query = $this->db_encuesta->delete('master');
       return $query;
     }
+    
     public function deleteCapturista($idCapturista){
       $this->db_capturista->where('id',$idCapturista);
       $query = $this->db_capturista->delete('capturista');
       return $query;
     }
-
 
     public function RegistrosHoyLlamadasAut($id){
       $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "total" FROM muestraMedicos where muestraMedicos.usuario_capt_id = "'. $id .'" AND DATE(fecha) = DATE(NOW()) AND muestraMedicos.aut = 1;');

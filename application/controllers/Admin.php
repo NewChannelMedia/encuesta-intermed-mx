@@ -148,7 +148,11 @@
       public function solicitudes(){
           // se carga el modelo para verificar si existen el usuario y password que se reciben por post
           $this->load->model('Admin_model');
-          $session = $_SESSION['status'];
+          if (isset($_SESSION['status'])){
+            $session = $_SESSION['status'];
+          } else {
+            $session = false;
+          }
           if($session===true){
             $data['title'] = "Solicitudes";
             $data['errorM'] = "";
@@ -593,6 +597,8 @@
             '<h1>Este es tu c&oacute;digo de acceso.</h1>',
             '<div class="codigoContainer" style="background-color: white;color: black;font-weight: bold;padding: 10px 20px;margin-top: 45px;margin-bottom: 30px;font-size: 30px;text-transform: uppercase;width: 200px;height: 45px;display: table;display: table-cell;vertical-align: middle;"><span id="codigo"></span></div>'
           );
+
+
           $sustituir3 = "<span id='mensaje'><p>".$mensaje."</p></span>";
           $conCodigo5 = str_replace('<span id="mensaje"><p></p></span>',$sustituir3,$html2);
           $conCodigo4 = str_replace($borrar,'',$conCodigo5);
@@ -612,6 +618,8 @@
           $mensajeCompleto = str_replace('í','&iacute;',$mensajeCompleto);
           $mensajeCompleto = str_replace('ó','&oacute;',$mensajeCompleto);
           $mensajeCompleto = str_replace('ú','&uacute;',$mensajeCompleto);
+
+          $mensajeCompleto = str_replace('{{{ruta}}}',''.$codigo, $mensajeCompleto);
 
           $result =  mail($correo,$titulo,$mensajeCompleto,$headers);
 
@@ -967,6 +975,7 @@
           $nombre = $this->input->post('nombre');
           $correo = $this->input->post('correo');
           $result = $this->enviarCorreoPersonalizado($nombre, $correo, 6);
+
           if ($result){
             //Insertar en la base de datos el envio a encuesta directa (porValidar status = 2)
             $this->Porvalidar_model->insertarEnvioDirecto($nombre,$correo, 6);
@@ -983,44 +992,58 @@
         }
 
 
-        public function enviarCorreoPersonalizado($nombre, $correo,$tipoCanal = null, $mensaje = '', $titulo = 'Mensaje de Intermed'){
+        public function enviarCorreoPersonalizado($nombre, $correo,$tipoCanal = null, $mensaje = '', $nombreDoc = '', $titulo = 'Mensaje de Intermed'){
+            //Cambiar vista correo
             $codigo = '';
             if ($tipoCanal != null){
               $codigo = $this->generarCodigo($tipoCanal);
             }
+
             // se lee el archivo
-            $fileh = realpath(APPPATH.'views/correos/headerCorreo.php');
-            $fileb = realpath(APPPATH.'views/correos/bodyCorreo.php');
-            $filef = realpath(APPPATH.'views/correos/footerCorreo.php');
+            $fileh = realpath(APPPATH.'views/correos/headerMasivo.php');
+            $fileb = realpath(APPPATH.'views/correos/correoMasivo.php');
+            $filef = realpath(APPPATH.'views/correos/footerMasivo.php');
             $fpH = fopen( $fileh,'r');
             $fpB = fopen( $fileb,'r');
             $fpF = fopen( $filef,'r');
-
-            $html1 = "";
-            $html2 = "";
-            $html3 = "";
+            $mensajeCompleto = "";
             while( $line = fgets($fpH) ){
-              $html1 .= $line;
+              $mensajeCompleto .= $line;
             }
             while( $line = fgets($fpB) ){
-              $html2 .= $line;
+              $mensajeCompleto .= $line;
             }
             while( $line = fgets($fpF) ){
-              $html3 .= $line;
+              $mensajeCompleto .= $line;
             }
             fclose($fpH);
             fclose($fpB);
             fclose($fpF);
-            $mensajeCompleto = "";
-            $sustituir = '<span id="codigo">'.$codigo.'</span>';
-            $conCodigo = str_replace('<span id="codigo"></span>',$sustituir, $html2);
-            $mensajeCompleto = $html1.$conCodigo.$html3;
 
-            $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            //Reemplazar nombre de médico
+            if ($nombre != ""){
+              $nombre .= '.';
+            }
+            $mensajeCompleto = str_replace('<span id="nombreDoc"></span>',$nombre,$mensajeCompleto);
 
-            $headers .= 'Bcc: encuestas@newchannel.mx'."\r\n";
-            $headers .= 'From: Intermed <encuesta@intermed.online>'."\r\n";
+            if ($nombreDoc != ""){
+              $mensajeDoc = '<div id="mensajeMasivo" style="margin:20px;"><p>Hemos invitado con anteriorodad al Dr. '. $nombreDoc .', y ahora el te invita a conocer Intermed<sup>&reg;</sup>, la red social de la salud.</p>{{{mensajeDoc}}}</p>';
+              $mensajeCompleto = str_replace('<div id="mensajeMasivo" style="margin:20px;"></div>',$mensajeDoc,$mensajeCompleto);
+              if ($mensaje != ""){
+                //Agregar mensaje
+                $mensaje = '<blockquote style="text-align: center;margin-top: 50px;color: #999999;"><q><em>'.$mensaje.'</em></q><footer>&#8212; Dr(a). '. $nombreDoc .'</footer></blockquote>';
+              }
+              $mensajeCompleto = str_replace('{{{mensajeDoc}}}',$mensaje,$mensajeCompleto);
+            } else {
+              if ($mensaje != ""){
+                echo 'replace msg';
+                //Agregar mensaje
+                $mensaje = '<p id="mensajeMasivo" style="margin:20px;">'.$mensaje.'</p>';
+              }
+              $mensajeCompleto = str_replace('<div id="mensajeMasivo" style="margin:20px;"></div>',$mensaje,$mensajeCompleto);
+            }
+
+            $mensajeCompleto = str_replace('{{{codigo}}}',$codigo,$mensajeCompleto);
 
             $mensajeCompleto = str_replace('Á','&Aacute;',$mensajeCompleto);
             $mensajeCompleto = str_replace('É','&Eacute;',$mensajeCompleto);
@@ -1033,7 +1056,13 @@
             $mensajeCompleto = str_replace('ó','&oacute;',$mensajeCompleto);
             $mensajeCompleto = str_replace('ú','&uacute;',$mensajeCompleto);
 
-            return mail($correo,$titulo,$mensajeCompleto,$headers);
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers .= 'Bcc: encuestas@newchannel.mx'."\r\n";
+            $headers .= 'From: Intermed <encuesta@intermed.online>'."\r\n";
+
+            echo $mensajeCompleto;
+            //return mail($correo,$titulo,$mensajeCompleto,$headers);
         }
 
         public function generarCodigo($canal){
@@ -1060,12 +1089,13 @@
         public function enviarEncuestaRecomendada(){
           $destinatarios = $this->input->post('destinatarios');
           $mensaje = $this->input->post('mensaje');
+          $nombreDoc = $this->input->post('tunombre');
           $result = true;
           foreach ($destinatarios as $destinatario) {
             if ($result){
               $nombre = $destinatario['nombre'];
               $correo = $destinatario['correo'];
-              $result = $this->enviarCorreoPersonalizado($nombre, $correo, 5, $mensaje);
+              $result = $this->enviarCorreoPersonalizado($nombre, $correo, 5, $mensaje, $nombreDoc);
               if ($result){
                 //Insertar en la base de datos el envio a encuesta directa (porValidar status = 2)
                 $this->Porvalidar_model->insertarEnvioRecomendado($nombre,$correo,$mensaje);
