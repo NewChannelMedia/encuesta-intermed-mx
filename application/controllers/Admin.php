@@ -600,7 +600,7 @@
           $headers = "MIME-Version: 1.0" . "\r\n";
           $headers .= "Content-Type:text/html;charset=utf-8" . "\r\n";
 
-          $headers .= 'From: Intermed <intermed.encuestas@newchannel.mx>'."\r\n";
+          $headers .= 'From: Intermed <hola@intermed.online>'."\r\n";
 
           $mensajeCompleto = str_replace('Á','&Aacute;',$mensajeCompleto);
           $mensajeCompleto = str_replace('É','&Eacute;',$mensajeCompleto);
