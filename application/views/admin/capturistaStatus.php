@@ -314,7 +314,7 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                               </tr>
                               <tr>
                                 <td>Tiempo promedio por llamada</td>
-                                <td class="text-center"><?php echo $minutos = round((($dat['RegistrosHoyLlamadasAut']['minutos']-$dat['RegistrosHoyLlamadasNoAut']['minutos'])/($dat['RegistrosHoyLlamadasAut']['total']+$dat['RegistrosHoyLlamadasNoAut']['total'])),2) ?> min</td>
+                                <td class="text-center"><?php if (($dat['RegistrosHoyLlamadasAut']['total']+$dat['RegistrosHoyLlamadasNoAut']['total'])>0) echo $minutos = round((($dat['RegistrosHoyLlamadasAut']['minutos']-$dat['RegistrosHoyLlamadasNoAut']['minutos'])/($dat['RegistrosHoyLlamadasAut']['total']+$dat['RegistrosHoyLlamadasNoAut']['total'])),2); else echo '¿?'; ?> min</td>
                               </tr>
                               <tr>
                                 <td>Promedio de llamadas por hora (según tiempo promedio por llamada)</td>
@@ -322,7 +322,15 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                               </tr>
                             <tr>
                               <td>Efectividad</td>
-                              <td class="text-center"><?php echo round((($dat['RegistrosHoyLlamadasNoAut']['total']+$dat['RegistrosHoyLlamadasAut']['total'])/(($dat['RegistrosLlamadasAut']['total']+$dat['RegistrosLlamadasNoAut']['total'])/$dat['totalFechasLlamadas']))*100,2) ?> %</td>
+                              <?php
+                                if ($dat['totalFechasLlamadas'] > 0 && (($dat['RegistrosLlamadasAut']['total']+$dat['RegistrosLlamadasNoAut']['total'])/$dat['totalFechasLlamadas'])> 0){
+                                  $efect =round((($dat['RegistrosHoyLlamadasNoAut']['total']+$dat['RegistrosHoyLlamadasAut']['total'])/(($dat['RegistrosLlamadasAut']['total']+$dat['RegistrosLlamadasNoAut']['total'])/$dat['totalFechasLlamadas']))*100,2);
+                                } else {
+                                  $efect = '0';
+                                }
+
+                               ?>
+                              <td class="text-center"><?php echo $efect ?> %</td>
 
                             </tr>
                           </tbody>
@@ -368,7 +376,14 @@ if (!(isset($_SESSION['rol']) && $_SESSION['rol'] == "admin")){
                                 </tr>
                               <tr>
                                 <td>Efectividad</td>
-                                <td class="text-center"><?php echo round((($registroDiaAnterior['aut']['total']+$registroDiaAnterior['noaut']['total'])/(($dat['RegistrosLlamadasAut']['total']+$dat['RegistrosLlamadasNoAut']['total'])/$dat['totalFechasLlamadas']))*100,2) ?> %</td>
+                                <?php
+                                  if ($dat['totalFechasLlamadas'] > 0 && ($dat['RegistrosLlamadasAut']['total']+$dat['RegistrosLlamadasNoAut']['total'])>0){
+                                    $efect = round((($registroDiaAnterior['aut']['total']+$registroDiaAnterior['noaut']['total'])/(($dat['RegistrosLlamadasAut']['total']+$dat['RegistrosLlamadasNoAut']['total'])/$dat['totalFechasLlamadas']))*100,2);
+                                  } else {
+                                    $efect = '0';
+                                  }
+                                ?>
+                                <td class="text-center"><?php echo $efect; ?> %</td>
                               </tr>
                             </tbody>
                           </table>
