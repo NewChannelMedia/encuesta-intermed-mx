@@ -90,5 +90,27 @@
       $this->db_encuesta->where('id',$id);
       $this->db_encuesta->update('porValidar',$obj);
     }
+
+    public function insertarEnvioDirecto( $nombre, $correo){
+      //objecto para insertar a la tabla
+      $obj = array(
+        'nombre' => $nombre,
+        'correo'=> $correo,
+        'status'=>2
+      );
+      return $this->db_encuesta->insert('porValidar', $obj);
+    }
+
+    public function insertarEnvioRecomendado( $nombre, $correo,$mensaje){
+      //objecto para insertar a la tabla
+      $obj = array(
+        'nombre' => $nombre,
+        'correo'=> $correo,
+        'justificacion'=>$mensaje,
+        'status'=>3
+      );
+      return $this->db_encuesta->insert('porValidar', $obj);
+    }
+
   }
 ?>

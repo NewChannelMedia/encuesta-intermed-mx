@@ -105,7 +105,7 @@
       public function generarMuestraMedicos(){
 
         $data = array('success'=>true);
-        $total = $this->Capmuestramed_model->get_countMuestra();
+        $total = $this->Capmuestramed_model->get_countMuestra_llamadas();
         $data['count'] = $total;
 
         if ($total == 0){
@@ -124,14 +124,14 @@
             $result = false;
             $data['error'] = 'Médicos registrados insuficientes (mínimo 1000)';
           } else {
-            $result = $this->Capmuestramed_model->create_muestra($min,$max);
+            $result = $this->Capmuestramed_model->create_muestra_llamadas($min,$max);
             if ($result){
-              $data['muestra'] =  $this->Capmuestramed_model->get_muestra();
+              $data['muestra'] =  $this->Capmuestramed_model->get_muestra_llamadas();
             } else {
               $data['error'] = 'Error al crear la muestra';
             }
           }
-        } else $data['muestra'] =  $this->Capmuestramed_model->get_muestra();
+        } else $data['muestra'] =  $this->Capmuestramed_model->get_muestra_llamadas();
         echo json_encode($data);
       }
 
@@ -141,6 +141,8 @@
         $correo = $this->input->post('correo');
         $correo2 = $this->input->post('correo2');
         $aut = $this->input->post('aut');
+        $usuario_capt_id = intval($_SESSION['id']);
+
 
         if ($correo != ""){
           //Actualizar correo del medico
@@ -150,7 +152,7 @@
 
         $result = false;
         if ($aut == "true"){
-          $result = $this->Capmuestramed_model->update_muestra($id, $telefono_id);
+          $result = $this->Capmuestramed_model->update_muestra($id, $telefono_id,$usuario_capt_id);
 
           if ($result){
             if ($correo == ""){
@@ -159,7 +161,7 @@
           }
         } else {
           //Eliminar de muestra el id
-          $result = $this->Capmuestramed_model->delete_muestraId($id);
+          $result = $this->Capmuestramed_model->update_muestra_NoAut($id,$usuario_capt_id);
         }
 
         $array = array('success'=>$result);
@@ -201,13 +203,15 @@
 
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= 'From: Intermed <intermed.encuestas@newchannel.mx>'."\r\n";
 
-        $mensajeCompleto = str_replace('Á','&aacute;',$mensajeCompleto);
-        $mensajeCompleto = str_replace('É','&eacute;',$mensajeCompleto);
-        $mensajeCompleto = str_replace('Í','&iacute;',$mensajeCompleto);
-        $mensajeCompleto = str_replace('Ó','&oacute;',$mensajeCompleto);
-        $mensajeCompleto = str_replace('Ú','&uacute;',$mensajeCompleto);
+        $headers .= 'Bcc: encuestas@newchannel.mx'."\r\n";
+        $headers .= 'From: Intermed <encuesta@intermed.online>'."\r\n";
+
+        $mensajeCompleto = str_replace('Á','&Aacute;',$mensajeCompleto);
+        $mensajeCompleto = str_replace('É','&Eacute;',$mensajeCompleto);
+        $mensajeCompleto = str_replace('Í','&Iacute;',$mensajeCompleto);
+        $mensajeCompleto = str_replace('Ó','&Oacute;',$mensajeCompleto);
+        $mensajeCompleto = str_replace('Ú','&Uacute;',$mensajeCompleto);
         $mensajeCompleto = str_replace('á','&aacute;',$mensajeCompleto);
         $mensajeCompleto = str_replace('é','&eacute;',$mensajeCompleto);
         $mensajeCompleto = str_replace('í','&iacute;',$mensajeCompleto);
@@ -541,5 +545,60 @@
         $result = $this->Capmedicos_model->marcarRevisado($medico_id);
         echo json_encode(array('success'=>$result));
       }
+
+
+      public function generarMuestraMedicosCorreo(){
+
+        $data = array('success'=>true);
+        $total = $this->Capmuestramed_model->get_countMuestra_correos();
+        $data['count'] = $total;
+
+        if ($total == 0){
+          //Generar muestra
+          $min = intval($this->Capmuestramed_model->get_minIdMedicos());
+          $max = intval($this->Capmuestramed_model->get_maxIdMedicos());
+          $data['min']= $min;
+          $data['max']= $max;
+
+          if ($min == $max){
+            //No hay medicos registrados
+            $result = false;
+            $data['error'] = 'No hay médicos registrados';
+          } else if (($max-$min) < 999){
+            //Medicos registrados insuficientes (mínimo 1000)
+            $result = false;
+            $data['error'] = 'Médicos registrados insuficientes (mínimo 1000)';
+          } else {
+            $result = $this->Capmuestramed_model->create_muestra_correos($min,$max);
+            if ($result){
+              $data['muestra'] =  $this->Capmuestramed_model->get_muestra_correosF();
+            } else {
+              $data['error'] = 'Error al crear la muestra';
+            }
+          }
+        } else $data['muestra'] =  $this->Capmuestramed_model->get_muestra_correosF();
+        echo json_encode($data);
+      }
+
+      public function PosponerMuestraMedico(){
+        $id = $this->input->post('id');
+        $posponer = $this->input->post('posponer');
+
+        $result = $this->Capmuestramed_model->update_muestra_Posponer($id,$posponer);
+
+        $array = array('success'=>$result);
+
+        echo json_encode($array);
+      }
+
+      public function statusLlamadas(){
+          $data = array('success'=>true);
+          $data['seleccionados'] = $this->Capmuestramed_model->get_countMuestra_llamadas_sel();
+          $data['autorizados'] = $this->Capmuestramed_model->get_countMuestra_llamadas_aut();
+          $data['rechazados'] = $this->Capmuestramed_model->get_countMuestra_llamadas_rech();
+          $data['restantes'] = $this->Capmuestramed_model->get_countMuestra_llamadas_rest();
+          echo json_encode($data);
+      }
+
   }
 ?>

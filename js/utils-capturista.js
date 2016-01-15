@@ -456,7 +456,7 @@ function generarMuestraMedicos(){
     success: function (result) {
       if (result.success && result.muestra && result.muestra.length>0){
         result.muestra.forEach(function(val){
-          if (val.aut == 0){
+          if (val.aut == 0 && (!val.posponer || val.posponer == "")){
             var nombre = val.medico.nombre + ' ' + val.medico.apellidop;
             if (val.medico.apellidom){
               nombre +=  ' ' + val.medico.apellidom;
@@ -470,19 +470,25 @@ function generarMuestraMedicos(){
             val.telefonos.forEach(function(telefono){
               var icon = '<span class="glyphicon glyphicon-earphone" style="font-size:80%"></span>'
               if (telefono.tipo == "celular"){
-                icon = '<span class="glyphicon glyphicon-phone" style="font-size:80%"></span>'
+                icon = '<span class="glyphicon glyphicon-phone" style="font-size:80%"></span>';
+              } else if (telefono.tipo == "casa"){
+                icon = '<span class="glyphicon glyphicon-home" style="font-size:80%"></span>';
+              } else if (telefono.tipo == "localizador"){
+                icon = '<span class="glyphicon glyphicon-screenshot" style="font-size:80%"></span>';
               }
-              telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center">'+ icon +' ' + telefono.numero +'</td><td class="text-center"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></td></tr>';
+              telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center"><div class="media"><div class="media-left">' + icon +'</div><div class="media-body">' + telefono.numero +'</div><div class="media-right"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></div></div></td></tr>';
               checked = '';
             });
             telefonos+='</table>'
 
-            var guardar = '<button class="btn btn-success" onclick="guardarMuestra('+ val.muestra_id+')"><span class="glyphicon glyphicon-saved"></button>'
+            var guardar = '<button class="btn btn-success" onclick="guardarMuestra('+ val.muestra_id+',this)"><span class="glyphicon glyphicon-saved"></button>'
+
+            var posponer = '<div class="input-group" style="width: 200px;"><input type="text" class="form-control posponer"><span class="input-group-btn"><button class="btn btn-danger" type="button" onclick="posponerMuestra('+ val.muestra_id+')"><span class="glyphicon glyphicon-folder-close"></span></button></span></div>';
 
             var confirmCorreo = '<input type="text" value="" class="confirmCorreo">';
             var autorizo = '<input type="radio" name="autorizo_'+val.muestra_id+'" value="true" checked>';
             var noautorizo = '<input type="radio" name="autorizo_'+val.muestra_id+'" value="false">';
-            $('#muestraMed').append('<tr class="muestra" id="'+ val.muestra_id+'"><td>'+nombre+'</td><td class="text-center">'+telefonos+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+confirmCorreo+'</td><td class="autorizo text-center">'+autorizo+'</td><td class="autorizo text-center">'+noautorizo+'</td><td class="text-center">'+guardar+'</td></tr>');
+            $('#muestraMed').append('<tr class="muestra" id="'+ val.muestra_id+'"><td>'+nombre+'</td><td class="text-center">'+telefonos+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+confirmCorreo+'</td><td class="autorizo text-center">'+autorizo+'</td><td class="autorizo text-center">'+noautorizo+'</td><td class="text-center">'+guardar+'</td><td>'+ posponer +'</td></tr>');
             $('#muestraMed').find('tr').first().addClass('active');
             $('#muestraMed .active').find(':input').filter(':visible:first').focus();
           }
@@ -496,8 +502,9 @@ function generarMuestraMedicos(){
   } );
 }
 
-function guardarMuestra(id){
-  var trmuestra = $('tr.muestra#'+id);
+function guardarMuestra(id, element){
+  //var trmuestra = $('tr.muestra#'+id);
+  var trmuestra = $(element).parent().parent();
   var telefono_id = trmuestra.find('tr.telefono>td>input:checked').prop('value');
   var correo = trmuestra.find('input.confirmCorreo').prop('value');
   var correo2 =  trmuestra.find('td.email').html();
@@ -506,7 +513,8 @@ function guardarMuestra(id){
   var guardar = true;
 
   if (correo != ""){
-    guardar = validarEmail(correo);
+    console.log('Nuevo correo: ' + correo);
+    //guardar = validarEmail(correo);
   }
 
   if (guardar){
@@ -538,6 +546,34 @@ function guardarMuestra(id){
       title: "No se pueden guardar los cambios"
     });
   }
+}
+
+function posponerMuestra(id){
+  var trmuestra = $('tr.muestra#'+id);
+  var posponer =  trmuestra.find('input.posponer').val();
+
+  var guardar = true;
+
+  $.ajax( {
+    url: '/Capturista/PosponerMuestraMedico',
+    type: "POST",
+    dataType: 'JSON',
+    data: {'id':id,'posponer':posponer},
+    async: true,
+    success: function ( result ) {
+      if ( result.success ) {
+        trmuestra.fadeOut( 300, function () {
+          $( this ).remove();
+          $( '#muestraMed' ).find( 'tr' ).first().addClass( 'active' );
+          $('#muestraMed .active').find(':input').filter(':visible:first').focus();
+        } );
+      }
+    },
+
+    error: function (err){
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  });
 }
 
 function validarEmail( email ) {
@@ -1486,4 +1522,216 @@ function MarcarRevisado(medico_id){
         }
       }
     });
+}
+
+
+
+function generarMuestraMedicos_correo(){
+  $('.loader-container').removeClass('hidden');
+  $('#muestraMedCorreo').html('');
+  $.ajax( {
+    url: '/Capturista/generarMuestraMedicosCorreo',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      if (result.success && result.muestra && result.muestra.length>0){
+        result.muestra.forEach(function(val){
+          if (val.aut == 0){
+            var nombre = val.medico.nombre + ' ' + val.medico.apellidop;
+            if (val.medico.apellidom){
+              nombre +=  ' ' + val.medico.apellidom;
+            }
+
+            var dir = '';
+            val.direcciones.forEach(function(direccion){
+              var numInt = '';
+              if (direccion.numero.split('-').length>1){
+                numInt = ' ' + direccion.numero.split('-')[1];
+              }
+              var cp = '';
+              if (direccion.cp && direccion.cp.length>0){
+                cp = ', C.P. ' + direccion.cp;
+              }
+              var estado = '';
+              if (direccion.municipio && direccion.municipio.length>0){
+                estado = ', '+ direccion.municipio + ', ' + direccion.estado;
+              }
+              var localidad = '';
+              if (direccion.localidad && direccion.localidad.length>0){
+                localidad = direccion.tipolocalidad + ' ' + direccion.localidad;
+              } else {
+                localidad = direccion.otralocalidad;
+              }
+              dir = direccion.calle + ' #' + direccion.numero.split('-')[0] + numInt +' ' + localidad + estado+ cp ;
+            });
+
+            var codigo = val.codigo;
+
+
+            $('#muestraMedCorreo').append('<tr class="muestra" id="'+ val.muestra_id+'"><td class="text-capitalize">'+nombre+'</td><td class="text-center">'+dir+'</td><td class="text-center">'+codigo+'</td></tr>');
+            $('#muestraMedCorreo').find('tr').first().addClass('active');
+            $('#muestraMedCorreo .active').find(':input').filter(':visible:first').focus();
+          }
+        });
+      }
+      $('.loader-container').addClass('hidden');
+    },
+    error: function (err) {
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  } );
+}
+
+function ExportarAExcell(tablaId){
+  $("#"+tablaId).table2excel({
+    filename: "NewChannel_ListaMedicos"
+  });
+}
+
+function generarMuestraMedicosPospuestos(){
+  $('.loader-container').removeClass('hidden');
+  $('#muestraMedPos').html('');
+  $.ajax( {
+    url: '/Capturista/generarMuestraMedicos',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      if (result.success && result.muestra && result.muestra.length>0){
+        result.muestra.forEach(function(val){
+          if (val.aut == 0 && val.posponer && val.posponer != ""){
+            var nombre = val.medico.nombre + ' ' + val.medico.apellidop;
+            if (val.medico.apellidom){
+              nombre +=  ' ' + val.medico.apellidom;
+          modificarMedico  }
+            var correo = '';
+            if (val.medico.correo){
+              correo = val.medico.correo;
+            }
+            var telefonos = '<table width="100%">';
+            var checked = ' checked';
+            val.telefonos.forEach(function(telefono){
+              var icon = '<span class="glyphicon glyphicon-earphone" style="font-size:80%"></span>'
+              if (telefono.tipo == "celular"){
+                icon = '<span class="glyphicon glyphicon-phone" style="font-size:80%"></span>';
+              } else if (telefono.tipo == "casa"){
+                icon = '<span class="glyphicon glyphicon-home" style="font-size:80%"></span>';
+              } else if (telefono.tipo == "localizador"){
+                icon = '<span class="glyphicon glyphicon-screenshot" style="font-size:80%"></span>';
+              }
+              telefonos += '<tr id="'+ telefono.id +'" class="telefono"><td width="120" class="text-center"><div class="media"><div class="media-left">'+ icon +'</div><div class="media-body">' + telefono.numero +'</div><div class="media-right"><input type="radio" name="telefono_'+ val.muestra_id +'" value="'+ telefono.id +'" '+checked+'></div></div></td></tr>';
+              checked = '';
+            });
+            telefonos+='</table>'
+
+            var guardar = '<button class="btn btn-success" onclick="guardarMuestra('+ val.muestra_id+',this)"><span class="glyphicon glyphicon-saved"></button>'
+
+            var posponer = '<div class="input-group" style="width: 200px;"><input type="text" class="form-control posponer"><span class="input-group-btn"><button class="btn btn-danger" type="button" onclick="posponerMuestra('+ val.muestra_id+')"><span class="glyphicon glyphicon-folder-close" ></span></button></span></div>';
+
+            var confirmCorreo = '<input type="text" value="" class="confirmCorreo">';
+            var autorizo = '<input type="radio" name="autorizo_'+val.muestra_id+'" value="true" checked>';
+            var noautorizo = '<input type="radio" name="autorizo_'+val.muestra_id+'" value="false">';
+            $('#muestraMedPos').append('<tr class="muestra" id="'+ val.muestra_id+'"><td>'+val.posponer+'</td><td>'+nombre+'</td><td class="text-center">'+telefonos+'</td><td class="text-center email">'+correo+'</td><td class="text-center">'+confirmCorreo+'</td><td class="autorizo text-center">'+autorizo+'</td><td class="autorizo text-center">'+noautorizo+'</td><td class="text-center">'+guardar+'</td><td>'+ posponer +'</td></tr>');
+            $('#muestraMedPos').find('tr').first().addClass('active');
+            $('#muestraMedPos .active').find(':input').filter(':visible:first').focus();
+          }
+        });
+      }
+      $('.loader-container').addClass('hidden');
+    },
+    error: function (err) {
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  } );
+}
+
+function actualizarStatus(){
+
+  $.ajax( {
+    url: '/Capturista/statusLlamadas',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      if (result.seleccionados>500){
+        result.seleccionados = 500;
+      }
+      result.restantes = result.seleccionados - result.autorizados;
+      $('#status .seleccionados').text(result.seleccionados);
+      $('#status .autorizados').text(result.autorizados);
+      $('#status .rechazados').text(result.rechazados);
+      $('#status .restantes').text(result.restantes);
+    },
+    error: function (err){
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  });
+}
+
+function cargar_invitacionDirecta(){
+  $.ajax( {
+    url: '/Admin/enviadosCanalDirectos',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      var inv = '';
+      result.forEach(function(res){
+        inv += '<tr><td class="text-center" >'+res.nombre+'</td><td class="text-center" >'+res.correo+'</td><td class="text-center" >'+res.fecha+'</td></tr>';
+      });
+      $('#InvDirecta').html(inv);
+    },
+    error: function (err) {
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  } );
+}
+
+function enviarInvitacionDirecta(){
+  var nombre = $('#nombreInvitacion').val();
+  var email = $('#correoInvitacion').val();
+  $.ajax( {
+    url: '/Admin/enviarEncuestaDirecta',
+    type: "POST",
+    data: {nombre: nombre, correo: email},
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      if (result.success){
+        $('#InvDirecta').append('<tr><td class="text-center" >'+result.result.nombre+'</td><td class="text-center" >'+result.result.correo+'</td><td class="text-center" >'+result.result.fecha+'</td></tr>');
+        $('#enviarForm')[0].reset();
+        //Bootbox encuesta enviada, borrar formulario y agregar a lista result.result
+      } else {
+        //Bootbox error
+        bootbox.alert({
+            message: "No se pudo enviar el mensaje.",
+            title: "Mensaje de Intermed",
+          });
+      }
+    },
+    error: function (err) {
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  } );
+  return false;
+}
+
+function cargar_invitacionRecomendada(){
+  $.ajax( {
+    url: '/Admin/enviadosCanalRecomendados',
+    type: "POST",
+    dataType: 'JSON',
+    async: true,
+    success: function (result) {
+      var inv = '';
+      result.forEach(function(res){
+        inv += '<tr><td class="text-center" >'+res.nombre+'</td><td class="text-center" >'+res.correo+'</td><td class="text-center" >'+res.justificacion+'</td><td class="text-center" >'+res.fecha+'</td></tr>';
+      });
+      $('#InvDirecta').html(inv);
+    },
+    error: function (err) {
+      console.log( "Error: AJax dead :" + JSON.stringify(err) );
+    }
+  } );
 }

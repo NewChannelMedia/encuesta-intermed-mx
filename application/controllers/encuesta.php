@@ -57,6 +57,10 @@
             break;
         case 1:
             //Encuesta sin empezar
+            //Marcar encuesta $codigo como usado
+            //$this->Encuestam_model->marcarEncuestaUsada($codigo);
+            $this->Encuestam_model->marcarEncuestaCanalUsado($codigo);
+            $this->Encuestam_model->agregarFechaEncuesta($codigo);
         case 2:
             //Encuesta sin terminar
             $data['contestar'] = true;
@@ -126,6 +130,7 @@
         header('Location: ' .  base_url() );
         die();
       }
+      $this->Encuestam_model->marcarEncuestaUsada($codigo);
 
       $etapaResp = $this->input->post('etapaResp');
       $continuarEnc = $this->input->post('continuar');
@@ -236,7 +241,7 @@
 
       $contenido = '';
 
-      if (!$finalizar && ($data['tipoCodigo'] == 2 || ($data['status'] == 1 || $data['status'] == 2))){
+      if (!$finalizar && ($data['tipoCodigo'] == 0 || ($data['status'] == 1 || $data['status'] == 2))){
         //Mostrar la encuesta
         $this->load->view('templates/header', $data);
         $cantEtapas = $this->Categorias_model->get_etapas();
@@ -471,7 +476,7 @@
         }
         $data['terminado'] = $terminado;
         if ($terminado == $cantEtapas) $status = 3; //Encuesta terminada
-        else if ($paso > 0) { //Encuesta por empezar
+        else if ($paso > 1) { //Encuesta por continuar
           $status = 2;
           $data['paso'] = $paso;
         } else $status = 1; //Encuesta sin empezar
@@ -483,7 +488,7 @@
       $data['status'] = $status;
       $data['tipoCodigo'] = $this->Encuestam_model->get_tipoEncuesta($codigo);
       //Encuesta maestra (puede entrar aunque ya este contestada)
-      if ($data['tipoCodigo'] == 2 && $status == 3){
+      if ($data['tipoCodigo'] == 0 && $status == 3){
         $data['paso'] = 1;
       }
       return $data;
