@@ -1027,7 +1027,7 @@
             $mensajeCompleto = str_replace('<span id="nombreDoc"></span>',$nombre,$mensajeCompleto);
 
             if ($nombreDoc != ""){
-              $mensajeDoc = '<div id="mensajeMasivo" style="margin:20px;"><p>Hemos invitado con anteriorodad al Dr. '. $nombreDoc .', y ahora el te invita a conocer Intermed<sup>&reg;</sup>, la red social de la salud.</p>{{{mensajeDoc}}}</p>';
+              $mensajeDoc = '<div id="mensajeMasivo" style="margin:20px;"><p>Hemos invitado con anteriorodad al Dr(a). '. $nombreDoc .', y ahora el te invita a conocer Intermed<sup>&reg;</sup>, la red social de la salud.</p>{{{mensajeDoc}}}</p>';
               $mensajeCompleto = str_replace('<div id="mensajeMasivo" style="margin:20px;"></div>',$mensajeDoc,$mensajeCompleto);
               if ($mensaje != ""){
                 //Agregar mensaje
