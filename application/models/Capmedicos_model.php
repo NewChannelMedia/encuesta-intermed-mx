@@ -106,5 +106,13 @@
           $this->db_capturista->where('id', $medico_id);
           return $this->db_capturista->update('medicos', $data);
         }
+
+        public function get_nombreMedico($medico_id){
+          $result = $this->db_capturista->get_where('medicos', array('id'=>$medico_id))->row_array();
+          if ($result['apellidom']!=""){
+            $result['apellidom']  = ' ' . $result['apellidom'];
+          }
+          return $result['nombre'] . ' ' .$result['apellidop'] . $result['apellidom'];
+        }
     }
 ?>
