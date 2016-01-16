@@ -2091,36 +2091,46 @@ function enviarCodigosRecomendados(){
       'correo': correo
     });
   });
-  if (Destinatarios.length>0){
-    $.ajax( {
-      url: '/encuesta-intermed/Admin/enviarEncuestaRecomendada',
-      type: "POST",
-      data: {destinatarios: Destinatarios, mensaje: $('#mensaje').val()},
-      dataType: 'JSON',
-      async: true,
-      success: function (result) {
-        if (result.success){
-          $('#destRec')[0].reset();
-          $('#destRec2')[0].reset();
-          $('#Destinatarios').html('');
-          //Bootbox encuesta enviada, borrar formulario y agregar a lista result.result
-        } else {
-          //Bootbox error
-          bootbox.alert({
-              message: "No se pudo enviar el mensaje.",
-              title: "Mensaje de Intermed",
-            });
+  if ($('#tunombre').val() != ""){
+    if (Destinatarios.length>0){
+      $.ajax( {
+        url: '/encuesta-intermed/Admin/enviarEncuestaRecomendada',
+        type: "POST",
+        data: {destinatarios: Destinatarios, mensaje: $('#mensaje').val(), tunombre: $('#tunombre').val()},
+        dataType: 'JSON',
+        async: false,
+        success: function (result) {
+          if (result.success){
+            $('#destRec')[0].reset();
+            $('#tunombre').val('');
+            $('#destRec2')[0].reset();
+            $('#Destinatarios').html('');
+          } else {
+            //Bootbox error
+            bootbox.alert({
+                message: "No se pudo enviar el mensaje.",
+                title: "Mensaje de Intermed",
+              });
+          }
+        },
+        error: function (err) {
+          console.log( "Error: AJax dead :" + JSON.stringify(err) );
         }
-      },
-      error: function (err) {
-        console.log( "Error: AJax dead :" + JSON.stringify(err) );
-      }
-    } );
+      } );
+    } else {
+      bootbox.alert({
+          message: "Debe de ingresar por lo menos un destinatario.",
+          title: "Mensaje de Intermed"
+        });
+    }
   } else {
-    bootbox.alert({
-        message: "Debe de ingresar por lo menos un destinatario.",
+      bootbox.alert({
+        message: "Debe de ingresar su nombre.",
         title: "Mensaje de Intermed",
+        callback: function(){
+          bootbox.hideAll();
+          $('#tunombre').focus();
+        }
       });
   }
-  return false;
 }

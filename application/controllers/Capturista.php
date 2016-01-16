@@ -207,6 +207,12 @@
         $headers .= 'Bcc: encuestas@newchannel.mx'."\r\n";
         $headers .= 'From: Intermed <encuesta@intermed.online>'."\r\n";
 
+        if ($codigo != ""){
+          $mensajeCompleto = str_replace('{{{ruta}}}','/e/'.$codigo, $mensajeCompleto);
+        } else {
+          $mensajeCompleto = str_replace('{{{ruta}}}',''.$codigo, $mensajeCompleto);
+        }
+
         $mensajeCompleto = str_replace('Á','&Aacute;',$mensajeCompleto);
         $mensajeCompleto = str_replace('É','&Eacute;',$mensajeCompleto);
         $mensajeCompleto = str_replace('Í','&Iacute;',$mensajeCompleto);

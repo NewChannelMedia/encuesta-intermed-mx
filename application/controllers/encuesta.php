@@ -61,8 +61,7 @@
             //Encuesta sin empezar
             //Marcar encuesta $codigo como usado
             //$this->Encuestam_model->marcarEncuestaUsada($codigo);
-            $this->Encuestam_model->marcarEncuestaCanalUsado($codigo);
-            $this->Encuestam_model->agregarFechaEncuesta($codigo);
+            $this->Encuestam_model->marcarEncuestaCodigoUsado($codigo);
         case 2:
             //Encuesta sin terminar
             $data['contestar'] = true;
@@ -133,6 +132,7 @@
         die();
       }
       $this->Encuestam_model->marcarEncuestaUsada($codigo);
+      $this->Encuestam_model->agregarFechaEncuesta($codigo);
 
       $etapaResp = $this->input->post('etapaResp');
       $continuarEnc = $this->input->post('continuar');
