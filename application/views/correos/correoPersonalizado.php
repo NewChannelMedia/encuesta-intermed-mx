@@ -6,8 +6,7 @@
             <tr style="height:100px;">
               <td style="text-align:center;vertical-align:middle;padding-left:10px;padding-right:10px;">
                 <h1 style="color:#ffffff;font-size:30px;">Bienvenido Dr(a). <span id="nombreDoc"></span></h1>
-                <p style="color:#ffffff;font-size:18px;color:rgba(255,255,255,0.9);">Agredecemos tu tiempo y atenci&oacute;n y te invitamos a visitar nuestra p&aacute;gina para conocer
-                  <strong>Intermed<sup>&reg;</sup></strong>, la nueva red social que revolucionar&aacute; la manera en que trabajas y te conectas con tu entorno profesional.</p>
+                <p style="color:#ffffff;font-size:18px;">Te invitamos a conocer <strong>Intermed<sup>&reg;</sup></strong>, la nueva red social que revolucionará la manera en que trabajas y te conectas con tu entorno profesional.</p>
               </td>
             </tr>
           </tbody>
