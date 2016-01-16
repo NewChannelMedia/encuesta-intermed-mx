@@ -83,7 +83,7 @@
     public function getMailsSends(){
       // hara un join para traer los correos y solo mostrar eso
       $arreglo = array();
-      $this->db_capturista->where('aut',1);
+      $this->db_capturista->where(array('aut'=>1,'tipoCanal'=>3));
       $this->db_capturista->select('correo');
       $this->db_capturista->select('nombre');
       $this->db_capturista->select('apellidop');
