@@ -108,15 +108,15 @@
       $query = $this->db_encuesta->delete('master');
       return $query;
     }
+    
     public function deleteCapturista($idCapturista){
       $this->db_capturista->where('id',$idCapturista);
       $query = $this->db_capturista->delete('capturista');
       return $query;
     }
 
-
     public function RegistrosHoyLlamadasAut($id){
-      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "total" FROM muestramedicos where muestramedicos.usuario_capt_id = "'. $id .'" AND DATE(fecha) = DATE(NOW()) AND muestramedicos.aut = 1;');
+      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "total" FROM muestraMedicos where muestraMedicos.usuario_capt_id = "'. $id .'" AND DATE(fecha) = DATE(NOW()) AND muestraMedicos.aut = 1;');
       $result = $this->db_capturista->get()->row_array();
       $to_time = strtotime($result['MAX']);
       $from_time = strtotime($result['MIN']);
@@ -131,7 +131,7 @@
 
 
     public function RegistrosHoyLlamadasNoAut($id){
-      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "total" FROM muestramedicos where muestramedicos.usuario_capt_id = "'. $id .'" AND DATE(fecha) = DATE(NOW()) AND muestramedicos.aut = 2;');
+      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "total" FROM muestraMedicos where muestraMedicos.usuario_capt_id = "'. $id .'" AND DATE(fecha) = DATE(NOW()) AND muestraMedicos.aut = 2;');
       $result = $this->db_capturista->get()->row_array();
       $to_time = strtotime($result['MAX']);
       $from_time = strtotime($result['MIN']);
@@ -145,7 +145,7 @@
     }
 
     public function RegistrosLlamadasAut($id){
-      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "TOTAL" FROM muestramedicos where muestramedicos.usuario_capt_id = "'. $id .'"  AND muestramedicos.aut = 1 GROUP BY(DATE(fecha));');
+      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "TOTAL" FROM muestraMedicos where muestraMedicos.usuario_capt_id = "'. $id .'"  AND muestraMedicos.aut = 1 GROUP BY(DATE(fecha));');
       $result = array();
       $totalRegistros = 0;
       $minutos = 0;
@@ -168,7 +168,7 @@
     }
 
     public function RegistrosLlamadasNoAut($id){
-      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "TOTAL" FROM muestramedicos where muestramedicos.usuario_capt_id = "'. $id .'"  AND muestramedicos.aut = 2 GROUP BY(DATE(fecha));');
+      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "TOTAL" FROM muestraMedicos where muestraMedicos.usuario_capt_id = "'. $id .'"  AND muestraMedicos.aut = 2 GROUP BY(DATE(fecha));');
       $result = array();
       $totalRegistros = 0;
       $minutos = 0;
@@ -205,7 +205,7 @@
     }
 
     public function RegistrosHoyLlamadasDate($id,$aut,$date){
-      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "total" FROM muestramedicos where muestramedicos.usuario_capt_id = "'. $id .'" AND DATE(fecha) = "'.$date.'" AND muestramedicos.aut = '.$aut.';');
+      $this->db_capturista->select('min(fecha) AS "MIN", max(fecha) AS "MAX", count(*) AS "total" FROM muestraMedicos where muestraMedicos.usuario_capt_id = "'. $id .'" AND DATE(fecha) = "'.$date.'" AND muestraMedicos.aut = '.$aut.';');
       $result = $this->db_capturista->get()->row_array();
       $to_time = strtotime($result['MAX']);
       $from_time = strtotime($result['MIN']);
@@ -222,7 +222,7 @@
     }
 
     public function LlamadasTotalFechas($id){
-      $this->db_capturista->select('fecha FROM muestramedicos where muestramedicos.usuario_capt_id = "'. $id .'"  GROUP BY(DATE(fecha));');
+      $this->db_capturista->select('fecha FROM muestraMedicos where muestraMedicos.usuario_capt_id = "'. $id .'"  GROUP BY(DATE(fecha));');
       $result = count($this->db_capturista->get()->result_array());
       return $result;
     }

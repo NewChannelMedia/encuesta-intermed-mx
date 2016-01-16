@@ -65,9 +65,9 @@
 
       <div class="movableContent">
         <table cellpadding="0" cellspacing="0" border="0" align="center" width="600" id="bottomBody" class="container" style="height:467px;width: 100%;">
-          <tbody><tr>
-            <td width="100%" align="center" valign="top" style="padding-top:30px;height: 50px;">
-              <a href="http://www.intermed.online" style="font-size:30px;color:white;text-transform:none;text-decoration:none;"><strong>www.intermed.online</strong></a>
+          <tr>
+            <td width="100%" align="center" valign="top" style="padding-top:30px;">
+              <a href="http://www.intermed.online{{{ruta}}}" style="font-size:30px;color:white;text-transform:none;text-decoration:none;"><strong>www.intermed.online</strong></a>
             </td>
 
           </tr>

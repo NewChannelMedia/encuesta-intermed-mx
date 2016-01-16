@@ -190,4 +190,20 @@ class Encuestam_model extends CI_Model {
       );
       return $this->db_encuesta->update('encuestasM', $data);
   }
+
+  public function marcarEncuestaCodigoUsado($codigo){
+      $this->db_encuesta->where('codigo', $codigo);
+      $data = array(
+        'codigoUsado' => 1
+      );
+      $result = $this->db_encuesta->update('encuestasM', $data);
+      //Si aun no esta marcado el canal como usado, entonces se deduce por exclusion que es de tipo canal correo fisico, y se marca.
+      $query = $this->db_encuesta->get_where('encuestasM', array('codigo' => $codigo));
+      $canalUsado = $query->row_array();
+      if ($canalUsado['canalUsado'] == 0){
+        $this->marcarEncuestaCanalUsado($codigo);
+      }
+      //
+      return $result;
+  }
 }
