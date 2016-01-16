@@ -2093,7 +2093,7 @@ function enviarCodigosRecomendados(){
   if ($('#tunombre').val() != ""){
     if (Destinatarios.length>0){
       $.ajax( {
-        url: '/encuesta-intermed/Admin/enviarEncuestaRecomendada',
+        url: '/Admin/enviarEncuestaRecomendada',
         type: "POST",
         data: {destinatarios: Destinatarios, mensaje: $('#mensaje').val(), tunombre: $('#tunombre').val()},
         dataType: 'JSON',

@@ -36,7 +36,7 @@
             <tr style="height:200px;">
               <td style="text-align:center;vertical-align:middle;padding:0;">
                 <h2>Este es tu c&oacute;digo de acceso:</h2>
-                <strong><span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;">{{{codigo}}}</span></strong>
+                <strong><span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;border:solid 1px rgba(0,0,0,.1);padding:5px 10px;margin:5px;background-color:#ffffff;">{{{codigo}}}</span></strong>
                 <p>
                   Con &eacute;l ingresa aqu&iacute;:
                   <br><a style="color:#3690c8;font-size:25px;text-decoration:none;" href="http://intermed.online/e/{{{codigo}}}">www.intermed.online</a>

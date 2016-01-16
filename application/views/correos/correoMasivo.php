@@ -6,7 +6,7 @@
             <tr style="height:100px;">
               <td style="text-align:center;vertical-align:middle;padding-left:10px;padding-right:10px;">
                 <h1 style="color:#ffffff;font-size:30px;">Bienvenido Dr(a). <span id="nombreDoc" style="text-transform: capitalize;"></span>.</h1>
-                <p style="color:#ffffff;font-size:18px;color:rgba(255,255,255,0.9);">Agredecemos tu tiempo y atenci&oacute;n y te invitamos a visitar nuestra p&aacute;gina para conocer
+                <p style="color:#ffffff;font-size:18px;">Agredecemos tu tiempo y atenci&oacute;n y te invitamos a visitar nuestra p&aacute;gina para conocer
                   <strong>Intermed<sup>&reg;</sup></strong>, la nueva red social que revolucionar&aacute; la manera en que trabajas y te conectas con tu entorno profesional.</p>
               </td>
             </tr>
@@ -21,7 +21,7 @@
         <tbody>
           <tr>
             <td style="text-align:justify;vertical-align:middle;padding:0;">
-              <p id="mensajeMasivo"></p>
+              <p style="color:#333;font-size:18px;" id="mensajeMasivo"></p>
             </td>
           </tr>
         </tbody>
@@ -36,7 +36,7 @@
             <tr style="height:200px;">
               <td style="text-align:center;vertical-align:middle;padding:0;">
                 <h2>Este es tu c&oacute;digo de acceso:</h2>
-                <strong><span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;">{{{codigo}}}</span></strong>
+                <strong><span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;border:solid 1px rgba(0,0,0,.1);padding:5px 10px;margin:5px;background-color:#ffffff;"></span></strong>
                 <p>
                   Con &eacute;l ingresa aqu&iacute;:
                   <br><a style="color:#3690c8;font-size:25px;text-decoration:none;" href="http://intermed.online">www.intermed.online</a>

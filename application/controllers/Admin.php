@@ -1038,7 +1038,7 @@
               if ($mensaje != ""){
                 echo 'replace msg';
                 //Agregar mensaje
-                $mensaje = '<p id="mensajeMasivo" style="margin:20px;">'.$mensaje.'</p>';
+                $mensaje = '<p id="mensajeMasivo" style="margin:20px;font-size:20px;">'.$mensaje.'</p>';
               }
               $mensajeCompleto = str_replace('<div id="mensajeMasivo" style="margin:20px;"></div>',$mensaje,$mensajeCompleto);
             }

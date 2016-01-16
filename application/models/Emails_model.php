@@ -173,12 +173,12 @@
       fclose($fread3);
       // se llena la plantilla con la informacion que debe de sustituirse
       $sustituirNombre = '<span id="nombreDoc">'.$nombre.'</span>';
-      $codigoSus = '<span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;">'.$codigo.'</span>';
-      $mensajeSus = '<p id="mensajeMasivo">'.$cuerpo.'</p>';
-      $cambio = str_replace('<span id="nombreDoc"></span>',$sustituirNombre, $html2);
-      $ch = '<span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;"></span>';
+      $codigoSus = '<span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;border:solid 1px rgba(0,0,0,.1);padding:5px 10px;margin:5px;background-color:#ffffff;">'.$codigo.'</span>';
+      $mensajeSus = '<p style="color:#333;font-size:18px;" id="mensajeMasivo">'.$cuerpo.'</p>';
+      $cambio = str_replace('<span id="nombreDoc" style="text-transform: capitalize;"></span>',$sustituirNombre, $html2);
+      $ch = '<span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;border:solid 1px rgba(0,0,0,.1);padding:5px 10px;margin:5px;background-color:#ffffff;"></span>';
       $cambio2 = str_replace($ch,$codigoSus,$cambio);
-      $cambio3 = str_replace('<p id="mensajeMasivo"></p>',$mensajeSus,$cambio2);
+      $cambio3 = str_replace('<p style="color:#333;font-size:18px;" id="mensajeMasivo"></p>',$mensajeSus,$cambio2);
       $mensajeCompleto = $html.$cambio3.$html3;
 
       //header y envios
