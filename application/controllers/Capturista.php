@@ -154,7 +154,6 @@
         if ($aut == "true"){
           $result = $this->Capmuestramed_model->update_muestra($id, $telefono_id,$usuario_capt_id);
           $nombre = capitalize($this->Capmedicos_model->get_nombreMedico($medico_id));
-          echo 'NOMBRE: ' . $nombre . '<br/>';
           if ($result){
             if ($correo == ""){
               $this->enviarCodigo($correo2, $nombre);
