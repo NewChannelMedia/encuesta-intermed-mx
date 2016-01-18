@@ -2134,3 +2134,7 @@ function enviarCodigosRecomendados(){
       });
   }
 }
+
+function traerDisponiblesReenvio(){
+  
+}

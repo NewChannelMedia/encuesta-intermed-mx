@@ -1138,6 +1138,34 @@
           echo json_encode($result);
         }
 
+
+        public function reenvios(){
+            // se carga el modelo para verificar si existen el usuario y password que se reciben por post
+            $this->load->model('Admin_model');
+            if (isset($_SESSION) && isset($_SESSION['status']))
+            $session = $_SESSION['status'];
+            else $session = false;
+            if($session===true){
+              $this->load->model('Capmuestramed_model');
+              $data['reenvios'] = $this->Capmuestramed_model->get_reenvios();
+              $data['title'] = "Reenvios";
+              $data['errorM'] = "";
+              $data['rol'] = "capturista";
+              $this->load->view('templates/headerAdmin', $data);
+              $this->load->view('admin/reenvios', $data);
+              $this->load->view('templates/footerAdmin');
+            }else{
+              $data['title'] = "Directorio";
+              $data['error'] = "no sesion";
+              $_SESSION['status'] = false;
+              $data['status'] = $_SESSION['status'];
+              $data['errorM'] = "Revisa tus credenciales de acceso, o la sesión ha sido cerrada.";
+              $this->load->view('templates/header', $data);
+              $this->load->view('admin/Admin_vista', $data);
+              $this->load->view('templates/footerAdmin');
+            }
+        }
+
   }
 
   function encuestas_dropDown($enviar, $tipo){
