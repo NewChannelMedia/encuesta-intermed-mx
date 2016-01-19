@@ -1166,6 +1166,82 @@
             }
         }
 
+        public function reenviarEncuestas(){
+          $this->load->model('Capmuestramed_model');
+          $muestraReenviar = $this->input->post('muestraReenviar');
+          if (is_array($muestraReenviar)){
+            foreach ($muestraReenviar as $muestra) {
+              $success = $this->reenviarCodigo($muestra['nombre'], $muestra['correo'],$muestra['codigo']);
+              if ($success){
+                //Actualizar fechaEnviado de muestra
+                $this->Capmuestramed_model->actualizarFechaEnviado($muestra['id']);
+              }
+              //Dormir medio segundo
+              usleep(500000);
+            }
+          }
+          echo json_encode(array('success'=>true));
+        }
+
+
+        public function reenviarCodigo($nombre, $correo, $codigo, $mensaje = ''){
+            $titulo = 'Mensaje de Intermed';
+
+            // se lee el archivo
+            $fileh = realpath(APPPATH.'views/correos/headerMasivo.php');
+            $fileb = realpath(APPPATH.'views/correos/correoPersonalizado.php');
+            $filef = realpath(APPPATH.'views/correos/footerMasivo.php');
+            $fpH = fopen( $fileh,'r');
+            $fpB = fopen( $fileb,'r');
+            $fpF = fopen( $filef,'r');
+            $mensajeCompleto = "";
+            while( $line = fgets($fpH) ){
+              $mensajeCompleto .= $line;
+            }
+            while( $line = fgets($fpB) ){
+              $mensajeCompleto .= $line;
+            }
+            while( $line = fgets($fpF) ){
+              $mensajeCompleto .= $line;
+            }
+            fclose($fpH);
+            fclose($fpB);
+            fclose($fpF);
+
+            //Reemplazar nombre de médico
+            if ($nombre != ""){
+              $nombre .= '.';
+            }
+            $mensajeCompleto = str_replace('<span id="nombreDoc"></span>',$nombre,$mensajeCompleto);
+
+            if ($mensaje != ""){
+              echo 'replace msg';
+              //Agregar mensaje
+              $mensaje = '<p id="mensajeMasivo" style="margin:20px;">'.$mensaje.'</p>';
+            }
+            $mensajeCompleto = str_replace('<div id="mensajeMasivo" style="margin:20px;"></div>',$mensaje,$mensajeCompleto);
+
+            $mensajeCompleto = str_replace('{{{codigo}}}',$codigo,$mensajeCompleto);
+
+            $mensajeCompleto = str_replace('Á','&Aacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('É','&Eacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('Í','&Iacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('Ó','&Oacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('Ú','&Uacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('á','&aacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('é','&eacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('í','&iacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('ó','&oacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('ú','&uacute;',$mensajeCompleto);
+
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers .= 'Bcc: encuestas@newchannel.mx'."\r\n";
+            $headers .= 'From: Intermed <encuesta@intermed.online>'."\r\n";
+
+            return mail($correo,$titulo,$mensajeCompleto,$headers);
+        }
+
   }
 
   function encuestas_dropDown($enviar, $tipo){
@@ -1184,5 +1260,17 @@
     $checked = ($tipo == "Line")? 'checked':'';
     $data .= '<label class="col-md-12"><input type="radio" name="radio'. $enviar['element'] .'" ' . $checked . ' onclick="ChartLine('.htmlspecialchars(print_r(json_encode($enviar),1)).')" > Linea</label>';
     return $data;
+  }
+
+  function capitalize($frase){
+    $temp = explode( ' ', $frase );
+    $frase = '';
+    foreach ($temp as $value) {
+      if ($frase != ""){
+        $frase .= ' ';
+      }
+      $frase .= ucfirst(strtolower($value));
+    }
+    return $frase;
   }
 ?>

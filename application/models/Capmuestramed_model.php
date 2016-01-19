@@ -2,6 +2,7 @@
     class Capmuestramed_model extends CI_Model
     {
         public function __construct(){
+            $this->db_encuesta = $this->load->database('encuesta', TRUE);
 	          $this->db_capturista = $this->load->database('capturista', TRUE);
         }
 
@@ -328,7 +329,6 @@
             $this->db_capturista->from('medicos');
             $this->db_capturista->join('direcciones', 'direcciones.medico_id = medicos.id', 'left');
             $res = $this->db_capturista->get()->row_array();
-            //echo '<pre>'.print_r($res,1).'</pre>';
             if (count($res)>0)
             {
               $nuevo = true;
@@ -343,7 +343,6 @@
               $resMuest = $this->db_capturista->get()->result_array();
 
               foreach ($resMuest as $resm) {
-                //echo '<pre>'.print_r($resm,1).'</pre>';
                 if ($resm['nombre'] == $res['nombre'] && $resm['apellidop'] == $res['apellidop'] && $resm['apellidom'] == $res['apellidom']){
                   $nuevo = false;
                   break;
@@ -424,19 +423,34 @@
         $this->db_capturista->from('medicos');
         $this->db_capturista->join('muestraMedicos', 'muestraMedicos.medico_id = medicos.id', 'left');
         $result = $this->db_capturista->get()->result_array();
-/*
 
-        $this->db_capturista->where(array(
-          'correo'=>'',
-          'direcciones.nombre'=>'consultorio'
-        ));
-        $this->db_capturista->from('medicos');
-        $this->db_capturista->join('direcciones', 'direcciones.medico_id = medicos.id', 'left');
+        $resultado = array();
+        foreach ($result as $med) {
+          //Revisar si encuesta con id $med['codigo_id'] !codigoUsado or !canalUsado
+          $encuesta = $this->db_encuesta->get_where('encuestasM',array('id'=>$med['codigo_id']))->row_array();
+          if ($encuesta['canalUsado'] == 0 || $encuesta['codigoUsado'] == 0){
+            $resultado[] = array(
+              'id'=>$med['id'],
+              'nombre'=>capitalize($med['nombre'] . ' ' . $med['apellidop'] . ' ' .$med['apellidom']),
+              'correo'=>$med['correo'],
+              'codigo'=>$encuesta['codigo'],
+              'tipoCodigo'=>$encuesta['tipoCodigo']
+          );
+          }
+        }
 
-        $result['direccion_nocorreo'] = count($this->db_capturista->get()->result_array());
-*/
-        return $result;
+        return $resultado;
+      }
+
+      function actualizarFechaEnviado($muestra_id){
+        $data = array(
+                       'fechaEnviado' => date('Y-m-d')
+                    );
+
+        $this->db_capturista->where('id', $muestra_id);
+        return $this->db_capturista->update('muestraMedicos', $data);
       }
 
     }
+
 ?>

@@ -2135,6 +2135,42 @@ function enviarCodigosRecomendados(){
   }
 }
 
-function traerDisponiblesReenvio(){
-  
+function reenviarMuestra(){
+
+  $('.loader-container').removeClass('hidden');
+
+  setTimeout(function(){
+
+    var reenvios = new Array();
+
+    $('tr.muestraReenviar').each(function(){
+      reenvios.push({
+        'id':$(this).find('.id').text(),
+        'nombre':$(this).find('.nombre').text(),
+        'correo':$(this).find('.correo').text(),
+        'codigo':$(this).find('.codigo').text(),
+        'tipoCodigo':$(this).find('.tipoCodigo').text()
+      });
+    });
+
+
+    $.ajax( {
+      url: '/encuesta-intermed/admin/reenviarEncuestas',
+      type: 'POST',
+      dataType: 'JSON',
+      data: {'muestraReenviar':reenvios},
+      async: false,
+      success: function ( data ) {
+        if (data.success){
+          $('tr.muestraReenviar').remove();
+        }
+      },
+      error: function ( e ) {
+        console.log( "Ajax error " + JSON.stringify(e) );
+      }
+    } );
+
+    $('.loader-container').addClass('hidden');
+  },500);
+
 }
