@@ -22,61 +22,23 @@
     }
     //function que trae todos los emails requeridos
     public function traeMails(){
-      $arreglo = array();
-      $this->db_capturista->where('tipoCanal',3);
-      $this->db_capturista->from('muestraMedicos');
-      $contador = $this->db_capturista->count_all_results();
-      if( $contador == 0 ){
-        $this->db_capturista->select("correo","");
-        $this->db_capturista->where('correo<>','');
-        $this->db_capturista->from('medicos');
-        $cuenta = $this->db_capturista->count_all_results();
-        for( $i = 0; $i < $cuenta; $i++ ){
-          $random = rand(1,3009);
-          while ( in_array($random, $arreglo) ) {
-            $random = rand(1,3009);
-          }
-          if( count($this->db_capturista->get_where('medicos', array('id' => $random,'terminado'=>1))->row_array())>0 ){
-            if( count($this->db_capturista->get_where('medicos', array('correo <>' => '') )->row_array())>0 ){
-              if( count($this->db_capturista->get_where('muestraMedicos', array('medico_id' => $random))->row_array())==0 ){
-                $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random,'tipoCanal'=>3,'codigo_id'=>0));
-              }else{
-                $i--;
-              }
-            }else{
-              $i--;
-            }
-          }else{
-            $i--;
-          }
+      $medicos = $this->db_capturista->get_where('medicos',array('terminado'=>1,'correo<>'=>''))->result_array();
+      foreach ($medicos as $medico) {
+        if( count($this->db_capturista->get_where('muestraMedicos', array('medico_id' => $medico['id']))->result_array())==0 ){
+          $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$medico['id'],'tipoCanal'=>3,'codigo_id'=>0));
         }
-        return $arreglo;
-      }else{
-        return false;
       }
     }
     //trae los correos de muestraMedicos
     public function getMails(){
       // hara un join para traer los correos y solo mostrar eso
       $arreglo = array();
-      /*$this->db_capturista->where('aut',0);
       $this->db_capturista->select('correo');
       $this->db_capturista->select('nombre');
       $this->db_capturista->select('apellidop');
       $this->db_capturista->from('medicos');
-      $this->db_capturista->join('muestraMedicos','muestraMedicos.medico_id = medicos.id');*/
-      $this->db_capturista->select("correo");
-      $this->db_capturista->select("nombre");
-      $this->db_capturista->select('apellidop');
-      $this->db_capturista->where('correo<>','');
-      $this->db_capturista->from('medicos');
-      /*$this->db_capturista->where(array('tipoCanal'=>3));
-      $this->db_capturista->select('correo');
-      $this->db_capturista->select('nombre');
-      $this->db_capturista->select('apellidop');
-      $this->db_capturista->where('correo<>','');
-      $this->db_capturista->from('medicos');
-      $this->db_capturista->join('muestraMedicos','muestraMedicos.medico_id = medicos.id');*/
+      $this->db_capturista->where('aut',0);
+      $this->db_capturista->join('muestraMedicos','medicos.id = muestraMedicos.medico_id');
       $query= $this->db_capturista->get();
       $i = 0;
       foreach( $query->result() as $row ){
@@ -201,9 +163,7 @@
       $headers .= "Content-Type:text/html;charset=utf-8" . "\r\n";
       $headers .= 'Bcc: pruebamasivos@newchannel.mx' . "\r\n";
       $headers .= 'From: Intermed <intermed.encuestas@newchannel.mx>'."\r\n";
-      $pruebaCorreoCache = 'jcmedinamartinez@gmail.com';
-      return mail($pruebaCorreoCache,$titulo,$mensajeCompleto,$headers);
-      //return mail($correo,$titulo,$mensajeCompleto,$headers);
+      return mail($correo,$titulo,$mensajeCompleto,$headers);
     }
   }
 ?>
