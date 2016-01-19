@@ -27,22 +27,19 @@
       $this->db_capturista->from('muestraMedicos');
       $contador = $this->db_capturista->count_all_results();
       if( $contador == 0 ){
-        for( $i = 0; $i < 500; $i++ ){
+        $this->db_capturista->select("correo","");
+        $this->db_capturista->where('correo<>','');
+        $this->db_capturista->from('medicos');
+        $cuenta = $this->db_capturista->count_all_results();
+        for( $i = 0; $i < $cuenta; $i++ ){
           $random = rand(1,3009);
           while ( in_array($random, $arreglo) ) {
             $random = rand(1,3009);
           }
           if( count($this->db_capturista->get_where('medicos', array('id' => $random,'terminado'=>1))->row_array())>0 ){
-            if( count($this->db_capturista->get_where('medicos', array('correo !=' => '') )->row_array())>0 ){
+            if( count($this->db_capturista->get_where('medicos', array('correo <>' => '') )->row_array())>0 ){
               if( count($this->db_capturista->get_where('muestraMedicos', array('medico_id' => $random))->row_array())==0 ){
-                 $this->db_capturista->where('id',$random);
-                 $query = $this->db_capturista->get('medicos');
-                 foreach( $query->result() as $row ){
-                   if( $row->correo != '' && !is_numeric($row->correo) ){
-                     $arreglo[ $i ]['correo'] = $row->correo;
-                     $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random,'tipoCanal'=>3,'codigo_id'=>0));
-                   }
-                 }
+                $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random,'tipoCanal'=>3,'codigo_id'=>0));
               }else{
                 $i--;
               }
@@ -62,20 +59,30 @@
     public function getMails(){
       // hara un join para traer los correos y solo mostrar eso
       $arreglo = array();
-      $this->db_capturista->where('aut',0);
+      /*$this->db_capturista->where('aut',0);
       $this->db_capturista->select('correo');
       $this->db_capturista->select('nombre');
       $this->db_capturista->select('apellidop');
       $this->db_capturista->from('medicos');
-      $this->db_capturista->join('muestraMedicos','muestraMedicos.medico_id = medicos.id');
-      $query = $this->db_capturista->get();
+      $this->db_capturista->join('muestraMedicos','muestraMedicos.medico_id = medicos.id');*/
+      $this->db_capturista->select("correo");
+      $this->db_capturista->select("nombre");
+      $this->db_capturista->select('apellidop');
+      $this->db_capturista->where('correo<>','');
+      $this->db_capturista->from('medicos');
+      /*$this->db_capturista->where(array('tipoCanal'=>3));
+      $this->db_capturista->select('correo');
+      $this->db_capturista->select('nombre');
+      $this->db_capturista->select('apellidop');
+      $this->db_capturista->where('correo<>','');
+      $this->db_capturista->from('medicos');
+      $this->db_capturista->join('muestraMedicos','muestraMedicos.medico_id = medicos.id');*/
+      $query= $this->db_capturista->get();
       $i = 0;
       foreach( $query->result() as $row ){
-        if( $row->correo != '' && !is_numeric($row->correo) ){
-          $arreglo[ $i ][ 'correos' ] = $row->correo;
-          $arreglo[ $i ][ 'nombres' ] = $row->nombre.' '.$row->apellidop;
-          $i++;
-        }
+        $arreglo[ $i ][ 'correos' ] = $row->correo;
+        $arreglo[ $i ][ 'nombres' ] = $row->nombre.' '.$row->apellidop;
+        $i++;
       }
       return $arreglo;
     }
