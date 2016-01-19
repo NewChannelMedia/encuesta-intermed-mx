@@ -1547,18 +1547,24 @@ function generarMuestraMedicos_correo(){
             }
 
             var dir = '';
+            var cpfin= '';
+            var estadofin = '';
+            var municipiofin = '';
             val.direcciones.forEach(function(direccion){
+              var cp = '';
               var numInt = '';
               if (direccion.numero.split('-').length>1){
                 numInt = ' ' + direccion.numero.split('-')[1];
               }
-              var cp = '';
               if (direccion.cp && direccion.cp.length>0){
                 cp = ', C.P. ' + direccion.cp;
+                cpfin = direccion.cp;
               }
               var estado = '';
               if (direccion.municipio && direccion.municipio.length>0){
                 estado = ', '+ direccion.municipio + ', ' + direccion.estado;
+                estadofin = direccion.estado;
+                municipiofin = direccion.municipio;
               }
               var localidad = '';
               if (direccion.localidad && direccion.localidad.length>0){
@@ -1566,18 +1572,19 @@ function generarMuestraMedicos_correo(){
               } else {
                 localidad = direccion.otralocalidad;
               }
-              dir = direccion.calle + ' #' + direccion.numero.split('-')[0] + numInt +' ' + localidad + estado+ cp ;
+              dir = direccion.calle + ' #' + direccion.numero.split('-')[0] + numInt +' ' + localidad + estado + cp;
             });
 
             var codigo = val.codigo;
 
-
-            $('#muestraMedCorreo').append('<tr class="muestra" id="'+ val.muestra_id+'"><td class="text-capitalize">'+nombre+'</td><td class="text-center">'+dir+'</td><td class="text-center">'+codigo+'</td></tr>');
-            $('#muestraMedCorreo').find('tr').first().addClass('active');
-            $('#muestraMedCorreo .active').find(':input').filter(':visible:first').focus();
+            $('#EncuestasFisicas tbody').append('<tr class="muestra" id="'+ val.muestra_id+'"><td class="text-capitalize">'+ucFirstAllWords(nombre)+'</td><td class="text-center">'+dir+'</td><td class="text-center">'+estadofin+'</td><td class="text-center">'+municipiofin+'</td><td class="text-center">'+cpfin+'</td><td class="text-center">'+codigo+'</td></tr>');
           }
         });
       }
+        $("#EncuestasFisicas").DataTable({
+          searching: false,
+          paging: false
+        });
       $('.loader-container').addClass('hidden');
     },
     error: function (err) {
@@ -1587,11 +1594,30 @@ function generarMuestraMedicos_correo(){
 }
 
 function ExportarAExcell(tablaId){
-  $("#"+tablaId).table2excel({
+  var temptable = $("#"+tablaId).clone();
+  var count = 0;
+  temptable.find('tbody>tr').each(function(){
+    if (count >= 500){
+      $(this).remove();
+    }
+    count++;
+  })
+  $(temptable).table2excel({
     filename: "NewChannel_ListaMedicos"
   });
 }
 
+function ucFirstAllWords( str )
+{
+    str = str.toLowerCase();
+    var pieces = str.split(" ");
+    for ( var i = 0; i < pieces.length; i++ )
+    {
+        var j = pieces[i].charAt(0).toUpperCase();
+        pieces[i] = j + pieces[i].substr(1);
+    }
+    return pieces.join(" ");
+}
 
 
 function generarMuestraMedicosPospuestos(){
@@ -1739,4 +1765,8 @@ function cargar_invitacionRecomendada(){
       console.log( "Error: AJax dead :" + JSON.stringify(err) );
     }
   } );
+}
+
+function ordenarTablaCorreos(column, element ){
+  $('#EncuestasFisicas').sortTable('letter', {column: column, reverse: false});
 }

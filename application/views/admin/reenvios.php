@@ -1,8 +1,4 @@
 <div class="llamadasWrapper">
-  <!--
-  REENVIOS:
-  <pre><?php echo print_r($reenvios,1); ?></pre>
-  -->
   <section class="llamadasSection container-fluid">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -14,7 +10,7 @@
       </div>
       <div class="panel-body">
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="margin-top:30px">
-          <table class="table table-condensed table-hover">
+          <table class="table table-condensed table-hover" id="ReenviosTabla">
             <thead>
               <tr>
                 <th class="text-center" style="width:10%">Fecha</th>

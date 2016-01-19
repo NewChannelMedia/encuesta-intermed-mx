@@ -262,7 +262,7 @@
       public function get_muestra_correosF(){
         $this->load->model('Encuestam_model');
         $muestra = array();
-        $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCanal'=>4),500);
+        $result = $this->db_capturista->get_where('muestraMedicos',array('tipoCanal'=>4));//,500);
         $result = $result->result_array();
         foreach ($result as $muestraMedico) {
           $medico = array();
@@ -309,60 +309,40 @@
       }
 
       public function create_muestra_correos($min,$max){
-        $id = array();
-        for ($i=0; $i < 500; $i++) {
-          $random = rand($min,$max);
-          while(in_array($random,$id)){
-            $random = rand($min,$max);
-          }
-          $id[] = $random;
-          if (count($this->db_capturista->get_where('medicos', array('id' => $random,'terminado'=>1))->row_array())>0){
-            //Checar si tiene direccion y no tiene correo
-            $this->db_capturista->where(array(
-              'medico_id' => $random,
-              'correo'=>'',
-              'terminado'=>1,
-              'direcciones.nombre'=>'consultorio',
-              'localidad<>'=>''
-            ));
-            $this->db_capturista->select('medicos.nombre, medicos.apellidop, medicos.apellidom');
+        $this->db_capturista->where(array(
+          'correo'=>'',
+          'terminado'=>1,
+          'direcciones.nombre'=>'consultorio',
+          'localidad<>'=>''
+        ));
+        $this->db_capturista->select('medicos.id, medicos.nombre, medicos.apellidop, medicos.apellidom');
+        $this->db_capturista->from('medicos');
+        $this->db_capturista->join('direcciones', 'direcciones.medico_id = medicos.id', 'left');
+        $medicos = $this->db_capturista->get()->result_array();
+        foreach ($medicos as $medico) {
+          if( count($this->db_capturista->get_where('muestraMedicos', array('medico_id' => $medico['id']))->result_array())==0 ){
+            $nuevo = true;
+
+            $this->db_capturista->reset_query();
+            $this->db_capturista->select('nombre');
+            $this->db_capturista->select('apellidop');
+            $this->db_capturista->select('apellidom');
+            $this->db_capturista->where(array('muestraMedicos.id<>'=>null));
             $this->db_capturista->from('medicos');
-            $this->db_capturista->join('direcciones', 'direcciones.medico_id = medicos.id', 'left');
-            $res = $this->db_capturista->get()->row_array();
-            if (count($res)>0)
-            {
-              $nuevo = true;
+            $this->db_capturista->join('muestraMedicos', 'muestraMedicos.medico_id = medicos.id', 'left');
+            $resMuest = $this->db_capturista->get()->result_array();
 
-              $this->db_capturista->reset_query();
-              $this->db_capturista->select('nombre');
-              $this->db_capturista->select('apellidop');
-              $this->db_capturista->select('apellidom');
-              $this->db_capturista->where(array('muestraMedicos.id<>'=>null));
-              $this->db_capturista->from('medicos');
-              $this->db_capturista->join('muestraMedicos', 'muestraMedicos.medico_id = medicos.id', 'left');
-              $resMuest = $this->db_capturista->get()->result_array();
-
-              foreach ($resMuest as $resm) {
-                if ($resm['nombre'] == $res['nombre'] && $resm['apellidop'] == $res['apellidop'] && $resm['apellidom'] == $res['apellidom']){
-                  $nuevo = false;
-                  break;
-                }
+            foreach ($resMuest as $resm) {
+              if ($resm['nombre'] == $medico['nombre'] && $resm['apellidop'] == $medico['apellidop'] && $resm['apellidom'] == $medico['apellidom']){
+                $nuevo = false;
+                break;
               }
-
-              $this->db_capturista->reset_query();
-              if (count($this->db_capturista->get_where('muestraMedicos', array('medico_id' => $random))->row_array())==0 && $nuevo){
-                $codigo = $this->generarCodigo(4);
-                $codigo_id = $this->Encuestam_model->get_encuestamId($codigo);
-                $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random,'tipoCanal'=>4,'codigo_id'=>$codigo_id));
-                //Generar codigo con tipoCodigo = 4
-              } else {
-                $i--;
-              }
-            } else {
-              $i--;
             }
-          } else {
-            $i--;
+            if ($nuevo){
+              $codigo = $this->generarCodigo(4);
+              $codigo_id = $this->Encuestam_model->get_encuestamId($codigo);
+              $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$medico['id'],'tipoCanal'=>4,'codigo_id'=>$codigo_id));
+            }
           }
         }
         return true;
