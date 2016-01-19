@@ -109,7 +109,7 @@
     * @param nombre, el nombre para personalizar el correo
     *
     **/
-    public function passofHel($correo, $nombre, $cuerpo ){
+    public function passofHel($correo, $nombre){ //, $cuerpo ){
       $ultimoID = "";
       $medico_id = 0;
       $codigo = "";
@@ -171,15 +171,22 @@
       fclose($fread);
       fclose($fread2);
       fclose($fread3);
+
+      $nombreS = str_replace('<!--nombreDoc-->', $nombre, $html2);
+      $codigoS = str_replace('<!--codigo-->', $codigo, $nombreS);
+
       // se llena la plantilla con la informacion que debe de sustituirse
-      $sustituirNombre = '<span id="nombreDoc">'.$nombre.'</span>';
+      /*$sustituirNombre = '<span id="nombreDoc">'.$nombre.'</span>';
+      $cambio = str_replace('<span id="nombreDoc"></span>', $sustituirNombre, $html2);*/
+
+      /*$ch = '<span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;"></span>';
       $codigoSus = '<span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;">'.$codigo.'</span>';
-      $mensajeSus = '<p id="mensajeMasivo">'.$cuerpo.'</p>';
-      $cambio = str_replace('<span id="nombreDoc"></span>',$sustituirNombre, $html2);
-      $ch = '<span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;"></span>';
-      $cambio2 = str_replace($ch,$codigoSus,$cambio);
-      $cambio3 = str_replace('<p id="mensajeMasivo"></p>',$mensajeSus,$cambio2);
-      $mensajeCompleto = $html.$cambio3.$html3;
+      $cambio2 = str_replace($ch,$codigoSus,$cambio);*/
+
+      /*$mensajeSus = '<p id="mensajeMasivo">'.$cuerpo.'</p>';
+      $cambio3 = str_replace('<p id="mensajeMasivo"></p>',$mensajeSus,$cambio2);*/
+
+      $mensajeCompleto = $html.$codigoS.$html3;
 
       //header y envios
       $titulo = "Te presentamos Intermed®";
@@ -187,7 +194,9 @@
       $headers .= "Content-Type:text/html;charset=utf-8" . "\r\n";
       $headers .= 'Bcc: pruebamasivos@newchannel.mx' . "\r\n";
       $headers .= 'From: Intermed <intermed.encuestas@newchannel.mx>'."\r\n";
-      return mail($correo,$titulo,$mensajeCompleto,$headers);
+      $pruebaCorreoCache = 'jcmedinamartinez@gmail.com';
+      return mail($pruebaCorreoCache,$titulo,$mensajeCompleto,$headers);
+      //return mail($correo,$titulo,$mensajeCompleto,$headers);
     }
   }
 ?>

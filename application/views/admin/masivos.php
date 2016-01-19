@@ -43,9 +43,9 @@
       </div>
       <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <button class="btn btn-danger btn-block" id="sendToAll">
-                <span class="glyphicon glyphicon-screenshot"></span>&nbsp;Enviar a todos
-            </button>
+          <button class="btn btn-danger btn-block" id="sendToAll">
+            <span class="glyphicon glyphicon-screenshot"></span>&nbsp;Enviar a todos
+          </button>
         </div>
       </div>
     </div>
