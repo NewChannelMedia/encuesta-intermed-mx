@@ -974,7 +974,11 @@
         public function enviarEncuestaDirecta(){
           $nombre = $this->input->post('nombre');
           $correo = $this->input->post('correo');
-          $result = $this->enviarCorreoPersonalizado($nombre, $correo, 6);
+
+
+          $mensaje = "<p>Estimado(a) <!--nombreDoc-->, agradecemos tu tiempo y tu atenci&oacute;n a la presente.</p><p>Est&aacute;s recibiendo este correo como una invitaci&oacute;n a participar en el desarrollo de <strong>Intermed<sup>&reg;</sup></strong>.</p><p><strong>Intermed<sup>&reg;</sup></strong> es una plataforma que conecta a los principales participantes del ecosistema de la salud, otorgando a cada uno de ellos herramientas que ayudan a agilizar y modernizar los procesos relacionados con su trabajo, mejorar su comunicaci&oacute;n y permitir un mayor control sobre el estado de su salud a los pacientes.</p><p>Como parte de nuestro proceso de desarrollo, queremos mantener un contacto cercano con nuestros futuros usuarios, de los cuales t&uacute; formas parte importante, y como tal, queremos conocer tu opini&oacute;n.</p><p>A continuaci&oacute;n, hemos incluido un c&oacute;digo de acceso exclusivo, que te permitir&aacute; acceder a 3 peque&ntilde;os videos informativos que hemos preparado para ti, a trav&eacute;s de los cuales podr&aacute;s conocer las funciones de <strong>Intermed<sup>&reg;</sup></strong>.</p><p>Rogamos tu apoyo para contestar la encuesta incluida al finalizar los videos.</p><p>Tu participaci&oacute;n es de gran importancia para nuestro proyecto, ya que nos ayudar&aacute; a finalizar de adaptar y definir la funcionalidad de <strong>Intermed<sup>&reg;</sup></strong> de acuerdo a tus necesidades y expectativas.</p><p>Recibe un afectuoso saludo.<br>Atte: Jorge Alejandro Preciado.<br>CEO Intermed<sup>&reg;</sup></p>";
+
+          $result = $this->enviarCorreoPersonalizado($nombre, $correo, 6,$mensaje);
 
           if ($result){
             //Insertar en la base de datos el envio a encuesta directa (porValidar status = 2)
@@ -1028,19 +1032,14 @@
 
             if ($nombreDoc != ""){
               $mensajeDoc = '<div id="mensajeMasivo" style="margin:20px;"><p>Hemos invitado con anterioridad al Dr(a). '. $nombreDoc .', y ahora el te invita a conocer Intermed<sup>&reg;</sup>, la red social de la salud.</p>{{{mensajeDoc}}}</p>';
-              $mensajeCompleto = str_replace('<div id="mensajeMasivo" style="margin:20px;"></div>',$mensajeDoc,$mensajeCompleto);
+              $mensajeCompleto = str_replace('{{{mensajeMasivo}}}',$mensajeDoc,$mensajeCompleto);
               if ($mensaje != ""){
                 //Agregar mensaje
                 $mensaje = '<blockquote style="text-align: center;margin-top: 50px;color: #999999;"><q><em>'.$mensaje.'</em></q><footer>&#8212; Dr(a). '. $nombreDoc .'</footer></blockquote>';
               }
               $mensajeCompleto = str_replace('{{{mensajeDoc}}}',$mensaje,$mensajeCompleto);
             } else {
-              if ($mensaje != ""){
-                echo 'replace msg';
-                //Agregar mensaje
-                $mensaje = '<p id="mensajeMasivo" style="margin:20px;">'.$mensaje.'</p>';
-              }
-              $mensajeCompleto = str_replace('<div id="mensajeMasivo" style="margin:20px;"></div>',$mensaje,$mensajeCompleto);
+              $mensajeCompleto = str_replace('{{{mensajeMasivo}}}',$mensaje,$mensajeCompleto);
             }
 
             $mensajeCompleto = str_replace('{{{codigo}}}',$codigo,$mensajeCompleto);
@@ -1219,7 +1218,7 @@
               //Agregar mensaje
               $mensaje = '<p id="mensajeMasivo" style="margin:20px;">'.$mensaje.'</p>';
             }
-            $mensajeCompleto = str_replace('<div id="mensajeMasivo" style="margin:20px;"></div>',$mensaje,$mensajeCompleto);
+            $mensajeCompleto = str_replace('{{{mensajeMasivo}}}',$mensaje,$mensajeCompleto);
 
             $mensajeCompleto = str_replace('{{{codigo}}}',$codigo,$mensajeCompleto);
 
