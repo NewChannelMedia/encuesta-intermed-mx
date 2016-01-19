@@ -68,14 +68,14 @@
       <tbody>
         <tr style="height:100px;">
           <td style="text-align:left;vertical-align:top;padding:0;">
-            <p style="color:#bbb;font-size:12px;text-align:justify;padding-right:30px;">
-              El contenido de este mensaje, incluidas imagenes y ficheros adjuntos, son confidenciales y son propiedad de qui&eacute;n los env&iacute;a. Puede revisar nuestras p&oacute;liticas de privacidad y terminos de uso en el siguiente enlace: <b style="color:#999;">http://www.intermed.online/terminos</b>.
+            <p style="color:#bbb;font-size:11px;text-align:justify;padding-right:30px;margin:5px 0;line-height:1;">
+              El contenido de este mensaje, incluidas imagenes y ficheros adjuntos, son confidenciales y son propiedad de qui&eacute;n los env&iacute;a. Puede revisar nuestras p&oacute;liticas de privacidad y terminos de uso en el siguiente enlace: <strong style="color:#999;">http://www.intermed.online/terminos</strong>.
             </p>
-            <p style="color:#999;font-size:12px;text-align:justify;padding-right:30px;">
-              Si deseas contactarnos no respondas a este mensaje, env&iacute;anos un correo a: <b>hola@intermed.online</b>
+            <p style="color:#999;font-size:11px;text-align:justify;padding-right:30px;margin:0;line-height:1;">
+              Si deseas contactarnos no respondas a este mensaje, env&iacute;anos un correo a: <b>hola@intermed.online</b>.
             </p>
-            <p style="color:#bbb;font-size:12px;text-align:justify;padding-right:30px;">
-              Todos los derechos reservados Intermed<sup>&reg;</sup> 2015. New Channel Media S.A. de C.V.
+            <p style="color:#bbb;font-size:11px;text-align:justify;padding-right:30px;margin:5px 0;line-height:1;">
+              Todos los derechos reservados Intermed<sup>&reg;</sup> 2015. New Channel Media S. A. de C. V.
             </p>
           </td>
           <td style="width:200px;vertical-align:top;padding:0;">

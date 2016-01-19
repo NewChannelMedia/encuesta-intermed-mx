@@ -1934,52 +1934,9 @@ $('.modal').on('hide.bs.modal', function (e) {
     try{
       // primero se recorre la tabla para ver si ha sido seleccionado un campo
       var totalChecados = $('#enviosRandom tr td [type=checkbox]:checked').length;
-      var body = $("#bodyMensaje").val();
-      if( body != "" ){
-        if( totalChecados <= 0 ){
-          bootbox.dialog({
-            title:'Seleccione al menos una casilla',
-            onEscape: function(){ bootbox.hideAll(); },
-            closeButton:true,
-            buttons:{
-              danger:{
-                label:'Error',
-                className:'btn-danger',
-                callback: function(){ bootbox.hideAll(); }
-              }
-            },
-            message:
-              '<div class="row">'+
-                '<div class="col-md-12">'+
-                  '<div>'+
-                    '<h3>debe de seleccionar al menos una casilla</h3>'+
-                  '</div>'+
-                '</div>'+
-              '</div>'
-          });
-        }else{
-          //console.log("Entro aqui desde alla: "+totalChecados);
-          $('#enviosRandom tr td [type=checkbox]:checked').each(function(){
-            var padre = $(this).parent().parent().parent().parent();
-            var correo = padre.find('.correo').text();
-            var nombres = padre.find('.nombres').text();
-            var prueba = this;
-            $.post('/encuesta-intermed/Emails/passofHel',{
-              correo: correo,
-              nombres: nombres,
-              cuerpo: body
-            }, function(data){
-              $("#spin").removeClass('hidden');
-              if(data == "true"){
-                $("#spin").addClass('hidden');
-                $( prueba ).parent().parent().parent().parent().remove();
-              }
-            });
-          });
-        }
-      }else{
+      if( totalChecados <= 0 ){
         bootbox.dialog({
-          title:'Mensaje vacio',
+          title:'Seleccione al menos una casilla',
           onEscape: function(){ bootbox.hideAll(); },
           closeButton:true,
           buttons:{
@@ -1993,10 +1950,28 @@ $('.modal').on('hide.bs.modal', function (e) {
             '<div class="row">'+
               '<div class="col-md-12">'+
                 '<div>'+
-                  '<h3>El cuerpo del mensaje no debe de estar vacio</h3>'+
+                  '<h3>debe de seleccionar al menos una casilla</h3>'+
                 '</div>'+
               '</div>'+
             '</div>'
+        });
+      }else{
+        //console.log("Entro aqui desde alla: "+totalChecados);
+        $('#enviosRandom tr td [type=checkbox]:checked').each(function(){
+          var padre = $(this).parent().parent().parent().parent();
+          var correo = padre.find('.correo').text();
+          var nombres = padre.find('.nombres').text();
+          var prueba = this;
+          $.post('/encuesta-intermed/Emails/passofHel',{
+            correo: correo,
+            nombres: nombres
+          }, function(data){
+            $("#spin").removeClass('hidden');
+            if(data == "true"){
+              $("#spin").addClass('hidden');
+              $( prueba ).parent().parent().parent().parent().remove();
+            }
+          });
         });
       }
     }catch(e){
