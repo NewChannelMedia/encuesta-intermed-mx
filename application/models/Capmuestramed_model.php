@@ -434,7 +434,11 @@
               'nombre'=>capitalize($med['nombre'] . ' ' . $med['apellidop'] . ' ' .$med['apellidom']),
               'correo'=>$med['correo'],
               'codigo'=>$encuesta['codigo'],
-              'tipoCodigo'=>$encuesta['tipoCodigo']
+              'tipoCodigo'=>$encuesta['tipoCodigo'],
+              'fechaEnviado'=>$med['fechaEnviado'],
+              'codigoUsado'=>$encuesta['codigoUsado'],
+              'canalUsado'=>$encuesta['canalUsado'],
+              'usada'=>$encuesta['usada'],
           );
           }
         }
