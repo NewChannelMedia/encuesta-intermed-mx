@@ -91,30 +91,43 @@
         }
 
         public function create_muestra_llamadas($min,$max){
-          $id = array();
-          for ($i=0; $i < 1000; $i++) {
-            $random = rand($min,$max);
-            while(in_array($random,$id)){
-              $random = rand($min,$max);
-            }
-            $id[] = $random;
-            if (count($this->db_capturista->get_where('medicos', array('id' => $random,'terminado'=>1))->row_array())>0){
-              //Checar si tiene telefono
-              if (count($this->db_capturista->get_where('telefonos', array('medico_id' => $random))->row_array())>0)
-              {
-                if (count($this->db_capturista->get_where('muestraMedicos', array('medico_id' => $random))->row_array())==0){
-                  $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random,'tipoCanal'=>1));
-                } else {
-                  $i--;
+            $this->db_capturista->where(array(
+              'terminado'=>1,
+              'correo<>'=>'',
+              'telefonos.id>'=>0
+            ));
+            $this->db_capturista->select('medicos.id, medicos.nombre, medicos.apellidop, medicos.apellidom');
+            $this->db_capturista->from('medicos');
+            $this->db_capturista->join('telefonos', 'telefonos.medico_id = medicos.id', 'left');
+            $medicos = $this->db_capturista->get()->result_array();
+            foreach ($medicos as $medico) {
+              //Si no existe el medico aun en la muestra
+              if( count($this->db_capturista->get_where('muestraMedicos', array('medico_id' => $medico['id']))->result_array())==0 ){
+                $nuevo = true;
+
+                $this->db_capturista->reset_query();
+                $this->db_capturista->select('nombre');
+                $this->db_capturista->select('apellidop');
+                $this->db_capturista->select('apellidom');
+                $this->db_capturista->where(array('muestraMedicos.id<>'=>null));
+                $this->db_capturista->from('medicos');
+                $this->db_capturista->join('muestraMedicos', 'muestraMedicos.medico_id = medicos.id', 'left');
+                $resMuest = $this->db_capturista->get()->result_array();
+
+                foreach ($resMuest as $resm) {
+                  if ($resm['nombre'] == $medico['nombre'] && $resm['apellidop'] == $medico['apellidop'] && $resm['apellidom'] == $medico['apellidom']){
+                    $nuevo = false;
+                    break;
+                  }
                 }
-              } else {
-                $i--;
+                if ($nuevo){
+                  $codigo = $this->generarCodigo(1);
+                  $codigo_id = $this->Encuestam_model->get_encuestamId($codigo);
+                  $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$medico['id'],'tipoCanal'=>1,'codigo_id'=>$codigo_id));
+                }
               }
-            } else {
-              $i--;
             }
-          }
-          return true;
+            return true;
         }
 
         public function delete_muestraId($id){
@@ -415,7 +428,7 @@
                 'nombre'=>capitalize($med['nombre'] . ' ' . $med['apellidop'] . ' ' .$med['apellidom']),
                 'correo'=>$med['correo'],
                 'codigo'=>$encuesta['codigo'],
-                'tipoCodigo'=>$encuesta['tipoCodigo'],
+                'tipoCodigo'=>$med['tipoCanal'],
                 'fechaEnviado'=>$med['fechaEnviado'],
                 'codigoUsado'=>$encuesta['codigoUsado'],
                 'canalUsado'=>$encuesta['canalUsado'],
@@ -432,7 +445,15 @@
         $data = array(
                        'fechaEnviado' => date('Y-m-d')
                     );
+        $this->db_capturista->where('id', $muestra_id);
+        return $this->db_capturista->update('muestraMedicos', $data);
+      }
 
+      function actualizarCodigoId($muestra_id,$codigo_id){
+        echo 'actualizar ' . $muestra_id  . ' por ' . $codigo_id . ' >';
+        $data = array(
+                       'codigo_id' => $codigo_id
+                    );
         $this->db_capturista->where('id', $muestra_id);
         return $this->db_capturista->update('muestraMedicos', $data);
       }

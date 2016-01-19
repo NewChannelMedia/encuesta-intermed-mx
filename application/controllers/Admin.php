@@ -1170,13 +1170,21 @@
           $muestraReenviar = $this->input->post('muestraReenviar');
           if (is_array($muestraReenviar)){
             foreach ($muestraReenviar as $muestra) {
-              $success = $this->reenviarCodigo($muestra['nombre'], $muestra['correo'],$muestra['codigo']);
-              if ($success){
-                //Actualizar fechaEnviado de muestra
-                $this->Capmuestramed_model->actualizarFechaEnviado($muestra['id']);
+              if ($muestra['tipoCodigo'] != ""){
+                if ($muestra['codigo'] == ""){
+                  echo 'actualizar codigo_id >';
+                  $muestra['codigo'] = $this->Capmuestramed_model->generarCodigo($muestra['tipoCodigo']);
+                  $codigo_id = $this->Encuestam_model->get_encuestamId($muestra['codigo'] );
+                  $this->Capmuestramed_model->actualizarCodigoId($muestra['id'],$codigo_id);
+                }
+                $success = $this->reenviarCodigo($muestra['nombre'], $muestra['correo'],$muestra['codigo']);
+                if ($success){
+                  //Actualizar fechaEnviado de muestra
+                  $this->Capmuestramed_model->actualizarFechaEnviado($muestra['id']);
+                }
+                //Dormir medio segundo
+                usleep(500000);
               }
-              //Dormir medio segundo
-              usleep(500000);
             }
           }
           echo json_encode(array('success'=>true));

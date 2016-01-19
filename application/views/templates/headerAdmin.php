@@ -71,10 +71,9 @@
           <li>
             <a href="<?= base_url() ?>admin/registrados"><span class="glyphicon glyphicon-user navicon"></span>Registrados</a>
           </li>
-          <!--
           <li>
             <a href="<?= base_url() ?>admin/llamadas"><span class="glyphicon glyphicon-user navicon"></span>Llamadas</a>
-          </li>-->
+          </li>
           <li>
             <a href="<?= base_url() ?>admin/reenvios"><span class="glyphicon glyphicon-retweet navicon"></span>Reenvíos</a>
           </li>

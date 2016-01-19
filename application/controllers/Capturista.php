@@ -108,6 +108,8 @@
         $total = $this->Capmuestramed_model->get_countMuestra_llamadas();
         $data['count'] = $total;
 
+        //$result = $this->Capmuestramed_model->create_muestra_llamadas(1,1);
+
         if ($total == 0){
           //Generar muestra
           $min = intval($this->Capmuestramed_model->get_minIdMedicos());
