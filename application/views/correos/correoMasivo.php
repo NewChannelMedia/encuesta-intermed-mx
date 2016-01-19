@@ -6,7 +6,7 @@
           <tr style="height:100px;">
             <td style="text-align:center;vertical-align:middle;padding-left:10px;padding-right:10px;text-shadow: rgba(0, 0, 0, .2) 0 0 10px;">
               <h1 style="color:#ffffff;font-size:30px;">Bienvenido Dr(a). <span id="nombreDoc" style="text-transform: capitalize;"><!--nombreDoc--></span>.</h1>
-              <p style="color:#ffffff;font-size:18px;color:rgba(255,255,255,0.9);">Agredecemos tu tiempo y atenci&oacute;n y te invitamos a visitar nuestra p&aacute;gina para conocer
+              <p style="color:#ffffff;font-size:18px;">Agredecemos tu tiempo y atenci&oacute;n y te invitamos a visitar nuestra p&aacute;gina para conocer
                 <strong>Intermed<sup>&reg;</sup></strong>, la nueva red social que revolucionar&aacute; la manera en que trabajas y te conectas con tu entorno profesional.</p>
             </td>
           </tr>
@@ -43,7 +43,7 @@
                 <br>Tu participaci&oacute;n es de gran importancia para nuestro proyecto, ya que nos ayudar&aacute; a finalizar de adaptar y definir la funcionalidad de <strong>Intermed<sup>&reg;</sup></strong> de acuerdo a tus necesidades y expectativas.
               </p>
               <p style="margin:0;">
-                <br><br>Recibe un afectuoso saludo.
+                Recibe un afectuoso saludo.
                 <br>Atte: Jorge Alejandro Preciado.
                 <br>CEO Intermed<sup>&reg;</sup>
               </p>

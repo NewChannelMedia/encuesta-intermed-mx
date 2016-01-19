@@ -1,4 +1,4 @@
-<?php if( $total <= 0 ){?>
+<?php if( $total <= 0 ){ ?>
 <section id="generando">
   <div class="container-fluid">
     <div class="row">
@@ -16,7 +16,7 @@
     </div>
   </div>
 </section>
-<?php }else{?>
+<?php }else{ ?>
   <section id="enviarEmailA" >
     <!-- div spinner -->
     <div class="spinner hidden" id="spin">
@@ -26,7 +26,7 @@
       <div></div>
     </div>
     <!-- div fin spinner -->
-    <div class="container-fluid">
+<!--    <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <h2 style="color:red">
@@ -48,29 +48,35 @@
           </button>
         </div>
       </div>
-    </div>
-  </section><br /><br /> <br />
+    </div>-->
+  </section>
   <section id="generados">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <label>Escribe el numero de los correos que quieres que se seleccionen</label>
         </div>
-        <div class="col-md-12">
-          <div class="col-md-3">
-            <div class="input-group">
-              <input type="text" class="form-control" id="num_seleccionado" placeholder="Nº">
-              <span class="input-group-btn">
-                <button class="btn btn-warning" id="seleccionEnviar" type="button">
-                  <span class="glyphicon glyphicon-magnet"></span>
-                </button>
-              </span>
-            </div>
+        <div class="col-md-3">
+          <div class="input-group">
+            <input type="text" class="form-control" id="num_seleccionado" placeholder="Nº">
+            <span class="input-group-btn">
+              <button class="btn btn-warning" id="seleccionEnviar" type="button">
+                <span class="glyphicon glyphicon-magnet"></span>
+              </button>
+            </span>
           </div>
         </div>
-      </div><br /> <br />
-      <!-- INICIO DE TABS -->
-        <div class="container-fluid">
+        <div class="col-md-3">
+          <button class="btn btn-danger btn-block" id="sendToAll">
+            <span class="glyphicon glyphicon-screenshot"></span>&nbsp;Enviar
+          </button>
+        </div>
+      </div>
+    </div><br>
+    <!-- INICIO DE TABS -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
               <a href="#generarMas" aria-controls="generar" role="tab" data-toggle="tab">
@@ -146,7 +152,8 @@
             </div>
           </div>
         </div>
-      <!-- FIN DE TABS -->
+      </div>
     </div>
+    <!-- FIN DE TABS -->
   </section>
 <?php } ?>
