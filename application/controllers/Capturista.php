@@ -144,20 +144,20 @@
         $usuario_capt_id = intval($_SESSION['id']);
 
 
+        $medico_id = $this->Capmuestramed_model->get_muestraMedicoId($id);
         if ($correo != ""){
           //Actualizar correo del medico
-          $medico_id = $this->Capmuestramed_model->get_muestraMedicoId($id);
           $this->Capmedicos_model->update_medico($medico_id,$correo);
         }
 
         $result = false;
         if ($aut == "true"){
           $result = $this->Capmuestramed_model->update_muestra($id, $telefono_id,$usuario_capt_id);
-
+          $nombre = capitalize($this->Capmedicos_model->get_nombreMedico($medico_id));
           if ($result){
             if ($correo == ""){
-              $this->enviarCodigo($correo2);
-            } else $this->enviarCodigo($correo);
+              $this->enviarCodigo($correo2, $nombre);
+            } else $this->enviarCodigo($correo, $nombre);
           }
         } else {
           //Eliminar de muestra el id
@@ -169,49 +169,44 @@
         echo json_encode($array);
       }
 
-      public function enviarCodigo($email){
-        $correo = $email;
+      public function enviarCodigo($correo, $nombre){
         $titulo = 'Mensaje de Intermed';
         $codigo = $this->generarCodigo();
+
         // se lee el archivo
-        $fileh = realpath(APPPATH.'views/correos/headerCorreo.php');
-        $fileb = realpath(APPPATH.'views/correos/bodyCorreo.php');
-        $filef = realpath(APPPATH.'views/correos/footerCorreo.php');
+        $fileh = realpath(APPPATH.'views/correos/headerMasivo.php');
+        $fileb = realpath(APPPATH.'views/correos/correoPersonalizado.php');
+        $filef = realpath(APPPATH.'views/correos/footerMasivo.php');
         $fpH = fopen( $fileh,'r');
         $fpB = fopen( $fileb,'r');
         $fpF = fopen( $filef,'r');
-
-        $html1 = "";
-        $html2 = "";
-        $html3 = "";
+        $mensajeCompleto = "";
         while( $line = fgets($fpH) ){
-          $html1 .= $line;
+          $mensajeCompleto .= $line;
         }
         while( $line = fgets($fpB) ){
-          $html2 .= $line;
+          $mensajeCompleto .= $line;
         }
         while( $line = fgets($fpF) ){
-          $html3 .= $line;
+          $mensajeCompleto .= $line;
         }
         fclose($fpH);
         fclose($fpB);
         fclose($fpF);
-        $mensajeCompleto = "";
-        $sustituir = '<span id="codigo">'.$codigo.'</span>';
-        $conCodigo = str_replace('<span id="codigo"></span>',$sustituir, $html2);
-        $mensajeCompleto = $html1.$conCodigo.$html3;
+
+        //Reemplazar nombre de médico
+        $nombre .= '.';
+        $mensajeCompleto = str_replace('<span id="nombreDoc"></span>',$nombre,$mensajeCompleto);
+
+        //Borrrar mensaje
+        $mensajeCompleto = str_replace('{{{mensajeMasivo}}}','',$mensajeCompleto);
+
+        $mensajeCompleto = str_replace('{{{codigo}}}',$codigo,$mensajeCompleto);
 
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
         $headers .= 'Bcc: encuestas@newchannel.mx'."\r\n";
         $headers .= 'From: Intermed <encuesta@intermed.online>'."\r\n";
-
-        if ($codigo != ""){
-          $mensajeCompleto = str_replace('{{{ruta}}}','/e/'.$codigo, $mensajeCompleto);
-        } else {
-          $mensajeCompleto = str_replace('{{{ruta}}}',''.$codigo, $mensajeCompleto);
-        }
 
         $mensajeCompleto = str_replace('Á','&Aacute;',$mensajeCompleto);
         $mensajeCompleto = str_replace('É','&Eacute;',$mensajeCompleto);
@@ -606,5 +601,17 @@
           echo json_encode($data);
       }
 
+  }
+
+  function capitalize($frase){
+    $temp = explode( ' ', $frase );
+    $frase = '';
+    foreach ($temp as $value) {
+      if ($frase != ""){
+        $frase .= ' ';
+      }
+      $frase .= ucfirst(strtolower($value));
+    }
+    return $frase;
   }
 ?>

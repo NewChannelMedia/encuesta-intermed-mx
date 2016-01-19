@@ -22,60 +22,29 @@
     }
     //function que trae todos los emails requeridos
     public function traeMails(){
-      $arreglo = array();
-      $this->db_capturista->where('tipoCanal',3);
-      $this->db_capturista->from('muestraMedicos');
-      $contador = $this->db_capturista->count_all_results();
-      if( $contador == 0 ){
-        for( $i = 0; $i < 500; $i++ ){
-          $random = rand(1,3009);
-          while ( in_array($random, $arreglo) ) {
-            $random = rand(1,3009);
-          }
-          if( count($this->db_capturista->get_where('medicos', array('id' => $random,'terminado'=>1))->row_array())>0 ){
-            if( count($this->db_capturista->get_where('medicos', array('correo !=' => '') )->row_array())>0 ){
-              if( count($this->db_capturista->get_where('muestraMedicos', array('medico_id' => $random))->row_array())==0 ){
-                 $this->db_capturista->where('id',$random);
-                 $query = $this->db_capturista->get('medicos');
-                 foreach( $query->result() as $row ){
-                   if( $row->correo != '' && !is_numeric($row->correo) ){
-                     $arreglo[ $i ]['correo'] = $row->correo;
-                     $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$random,'tipoCanal'=>3,'codigo_id'=>0));
-                   }
-                 }
-              }else{
-                $i--;
-              }
-            }else{
-              $i--;
-            }
-          }else{
-            $i--;
-          }
+      $medicos = $this->db_capturista->get_where('medicos',array('terminado'=>1,'correo<>'=>''))->result_array();
+      foreach ($medicos as $medico) {
+        if( count($this->db_capturista->get_where('muestraMedicos', array('medico_id' => $medico['id']))->result_array())==0 ){
+          $this->db_capturista->insert('muestraMedicos', array('medico_id'=>$medico['id'],'tipoCanal'=>3,'codigo_id'=>0));
         }
-        return $arreglo;
-      }else{
-        return false;
       }
     }
     //trae los correos de muestraMedicos
     public function getMails(){
       // hara un join para traer los correos y solo mostrar eso
       $arreglo = array();
-      $this->db_capturista->where('aut',0);
       $this->db_capturista->select('correo');
       $this->db_capturista->select('nombre');
       $this->db_capturista->select('apellidop');
       $this->db_capturista->from('medicos');
-      $this->db_capturista->join('muestraMedicos','muestraMedicos.medico_id = medicos.id');
-      $query = $this->db_capturista->get();
+      $this->db_capturista->where('aut',0);
+      $this->db_capturista->join('muestraMedicos','medicos.id = muestraMedicos.medico_id');
+      $query= $this->db_capturista->get();
       $i = 0;
       foreach( $query->result() as $row ){
-        if( $row->correo != '' && !is_numeric($row->correo) ){
-          $arreglo[ $i ][ 'correos' ] = $row->correo;
-          $arreglo[ $i ][ 'nombres' ] = $row->nombre.' '.$row->apellidop;
-          $i++;
-        }
+        $arreglo[ $i ][ 'correos' ] = $row->correo;
+        $arreglo[ $i ][ 'nombres' ] = $row->nombre.' '.$row->apellidop;
+        $i++;
       }
       return $arreglo;
     }
@@ -109,7 +78,7 @@
     * @param nombre, el nombre para personalizar el correo
     *
     **/
-    public function passofHel($correo, $nombre, $cuerpo ){
+    public function passofHel($correo, $nombre){ //, $cuerpo ){
       $ultimoID = "";
       $medico_id = 0;
       $codigo = "";
@@ -171,15 +140,22 @@
       fclose($fread);
       fclose($fread2);
       fclose($fread3);
+
+      $nombreS = str_replace('<!--nombreDoc-->', $nombre, $html2);
+      $codigoS = str_replace('<!--codigo-->', $codigo, $nombreS);
+
       // se llena la plantilla con la informacion que debe de sustituirse
-      $sustituirNombre = '<span id="nombreDoc">'.$nombre.'</span>';
-      $codigoSus = '<span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;border:solid 1px rgba(0,0,0,.1);padding:5px 10px;margin:5px;background-color:#ffffff;">'.$codigo.'</span>';
-      $mensajeSus = '<p style="color:#333;font-size:18px;" id="mensajeMasivo">'.$cuerpo.'</p>';
-      $cambio = str_replace('<span id="nombreDoc" style="text-transform:capitalize;"></span>',$sustituirNombre, $html2);
-      $ch = '<span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;border:solid 1px rgba(0,0,0,.1);padding:5px 10px;margin:5px;background-color:#ffffff;"></span>';
-      $cambio2 = str_replace($ch,$codigoSus,$cambio);
-      $cambio3 = str_replace('<p style="color:#333;font-size:18px;" id="mensajeMasivo"></p>',$mensajeSus,$cambio2);
-      $mensajeCompleto = $html.$cambio3.$html3;
+      /*$sustituirNombre = '<span id="nombreDoc">'.$nombre.'</span>';
+      $cambio = str_replace('<span id="nombreDoc"></span>', $sustituirNombre, $html2);*/
+
+      /*$ch = '<span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;"></span>';
+      $codigoSus = '<span id="codigoSend" style="font-size:25px;letter-spacing:2px;text-transform:uppercase;">'.$codigo.'</span>';
+      $cambio2 = str_replace($ch,$codigoSus,$cambio);*/
+
+      /*$mensajeSus = '<p id="mensajeMasivo">'.$cuerpo.'</p>';
+      $cambio3 = str_replace('<p id="mensajeMasivo"></p>',$mensajeSus,$cambio2);*/
+
+      $mensajeCompleto = $html.$codigoS.$html3;
 
       //header y envios
       $titulo = "Te presentamos Intermed®";

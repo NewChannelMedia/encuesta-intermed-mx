@@ -15,12 +15,13 @@
     </tr>
     <!-- Inicio del mensaje -->
     <tr>
-      <td style="text-align:center;vertical-align:middle;border:none;padding:0;">
-        <table style="max-width:650px;width:100%;border:none;background-color:#f5f5f5;margin:0 auto;min-height:0px;border-spacing:0;border-left:solid 1px rgba(0,0,0,.2);border-right:solid 1px rgba(0,0,0,.2);">
-          <tbody>
-            <tr>
-              <td style="text-align:justify;vertical-align:middle;padding:0;">
-                <div id="mensajeMasivo" style="margin:20px;"></div>
+      <tr>
+        <td style="text-align:center;vertical-align:middle;border:none;padding:0;">
+          <table style="max-width:650px;width:100%;border:none;background-color:#f5f5f5  ;margin:0 auto;height:150px;border-spacing:0;border-left:solid 1px rgba(0,0,0,.2);border-right:solid 1px rgba(0,0,0,.2);">
+            <tbody>
+              <tr>
+                <td style="text-align:justify;vertical-align:top;padding:20px;font-size:14px;color:#333;">
+                {{{mensajeMasivo}}}
               </td>
             </tr>
           </tbody>
