@@ -3,7 +3,9 @@
 
     <!-- Aqui termina el body de la pagina -->
     <script src="<?= base_url(); ?>js/jquery.js"></script>
+
     <script src="<?= base_url(); ?>js/jquery0.js"></script>
+
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="<?= base_url(); ?>js/bootstrap.min.js"></script>
     <script src="<?= base_url(); ?>js/Chart.js"></script>
@@ -14,7 +16,9 @@
     <script src="<?= base_url(); ?>js/utils-capturista.js"></script>
     <script src="<?= base_url(); ?>js/bootboxDialogs.js"></script>
     <script src="<?= base_url(); ?>js/jquery.table2excel.js"></script>
-    <script src="<?= base_url(); ?>js/jquery.datetimepicker.full.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.10/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.10/js/jquery.dataTables.js"></script>
 
   </body>
 </html>

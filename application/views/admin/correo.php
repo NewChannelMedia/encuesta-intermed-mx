@@ -32,12 +32,15 @@
         <table class="table table-condensed" id="EncuestasFisicas">
           <thead>
             <tr>
-              <th class="text-center text-capitalize" style="width:20%">Nombre</th>
-              <th class="text-center" style="width:70%">Direcciones</th>
+              <th class="text-center text-capitalize" style="width:30%">Nombre</th>
+              <th class="text-center" style="width:30%">Direcciones</th>
+              <th class="text-center" style="width:10%">Estado</th>
+              <th class="text-center" style="width:10%">Municipio</th>
+              <th class="text-center" style="width:10%">CP</th>
               <th class="text-center" style="width:10%">Código</th>
             </tr>
           </thead>
-          <tbody id="muestraMedCorreo">
+          <tbody>
 
           </tbody>
         </table>

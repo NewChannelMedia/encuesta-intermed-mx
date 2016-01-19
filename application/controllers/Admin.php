@@ -974,7 +974,11 @@
         public function enviarEncuestaDirecta(){
           $nombre = $this->input->post('nombre');
           $correo = $this->input->post('correo');
-          $result = $this->enviarCorreoPersonalizado($nombre, $correo, 6);
+
+
+          $mensaje = "<p>Estimado(a) <!--nombreDoc-->, agradecemos tu tiempo y tu atenci&oacute;n a la presente.</p><p>Est&aacute;s recibiendo este correo como una invitaci&oacute;n a participar en el desarrollo de <strong>Intermed<sup>&reg;</sup></strong>.</p><p><strong>Intermed<sup>&reg;</sup></strong> es una plataforma que conecta a los principales participantes del ecosistema de la salud, otorgando a cada uno de ellos herramientas que ayudan a agilizar y modernizar los procesos relacionados con su trabajo, mejorar su comunicaci&oacute;n y permitir un mayor control sobre el estado de su salud a los pacientes.</p><p>Como parte de nuestro proceso de desarrollo, queremos mantener un contacto cercano con nuestros futuros usuarios, de los cuales t&uacute; formas parte importante, y como tal, queremos conocer tu opini&oacute;n.</p><p>A continuaci&oacute;n, hemos incluido un c&oacute;digo de acceso exclusivo, que te permitir&aacute; acceder a 3 peque&ntilde;os videos informativos que hemos preparado para ti, a trav&eacute;s de los cuales podr&aacute;s conocer las funciones de <strong>Intermed<sup>&reg;</sup></strong>.</p><p>Rogamos tu apoyo para contestar la encuesta incluida al finalizar los videos.</p><p>Tu participaci&oacute;n es de gran importancia para nuestro proyecto, ya que nos ayudar&aacute; a finalizar de adaptar y definir la funcionalidad de <strong>Intermed<sup>&reg;</sup></strong> de acuerdo a tus necesidades y expectativas.</p><p>Recibe un afectuoso saludo.<br>Atte: Jorge Alejandro Preciado.<br>CEO Intermed<sup>&reg;</sup></p>";
+
+          $result = $this->enviarCorreoPersonalizado($nombre, $correo, 6,$mensaje);
 
           if ($result){
             //Insertar en la base de datos el envio a encuesta directa (porValidar status = 2)
@@ -1028,19 +1032,14 @@
 
             if ($nombreDoc != ""){
               $mensajeDoc = '<div id="mensajeMasivo" style="margin:20px;"><p>Hemos invitado con anterioridad al Dr(a). '. $nombreDoc .', y ahora el te invita a conocer Intermed<sup>&reg;</sup>, la red social de la salud.</p>{{{mensajeDoc}}}</p>';
-              $mensajeCompleto = str_replace('<div id="mensajeMasivo" style="margin:20px;"></div>',$mensajeDoc,$mensajeCompleto);
+              $mensajeCompleto = str_replace('{{{mensajeMasivo}}}',$mensajeDoc,$mensajeCompleto);
               if ($mensaje != ""){
                 //Agregar mensaje
                 $mensaje = '<blockquote style="text-align: center;margin-top: 50px;color: #999999;"><q><em>'.$mensaje.'</em></q><footer>&#8212; Dr(a). '. $nombreDoc .'</footer></blockquote>';
               }
               $mensajeCompleto = str_replace('{{{mensajeDoc}}}',$mensaje,$mensajeCompleto);
             } else {
-              if ($mensaje != ""){
-                echo 'replace msg';
-                //Agregar mensaje
-                $mensaje = '<p id="mensajeMasivo" style="margin:20px;">'.$mensaje.'</p>';
-              }
-              $mensajeCompleto = str_replace('<div id="mensajeMasivo" style="margin:20px;"></div>',$mensaje,$mensajeCompleto);
+              $mensajeCompleto = str_replace('{{{mensajeMasivo}}}',$mensaje,$mensajeCompleto);
             }
 
             $mensajeCompleto = str_replace('{{{codigo}}}',$codigo,$mensajeCompleto);
@@ -1138,6 +1137,110 @@
           echo json_encode($result);
         }
 
+
+        public function reenvios(){
+            // se carga el modelo para verificar si existen el usuario y password que se reciben por post
+            $this->load->model('Admin_model');
+            if (isset($_SESSION) && isset($_SESSION['status']))
+            $session = $_SESSION['status'];
+            else $session = false;
+            if($session===true){
+              $this->load->model('Capmuestramed_model');
+              $data['reenvios'] = $this->Capmuestramed_model->get_reenvios();
+              $data['title'] = "Reenvios";
+              $data['errorM'] = "";
+              $data['rol'] = "capturista";
+              $this->load->view('templates/headerAdmin', $data);
+              $this->load->view('admin/reenvios', $data);
+              $this->load->view('templates/footerAdmin');
+            }else{
+              $data['title'] = "Directorio";
+              $data['error'] = "no sesion";
+              $_SESSION['status'] = false;
+              $data['status'] = $_SESSION['status'];
+              $data['errorM'] = "Revisa tus credenciales de acceso, o la sesión ha sido cerrada.";
+              $this->load->view('templates/header', $data);
+              $this->load->view('admin/Admin_vista', $data);
+              $this->load->view('templates/footerAdmin');
+            }
+        }
+
+        public function reenviarEncuestas(){
+          $this->load->model('Capmuestramed_model');
+          $muestraReenviar = $this->input->post('muestraReenviar');
+          if (is_array($muestraReenviar)){
+            foreach ($muestraReenviar as $muestra) {
+              $success = $this->reenviarCodigo($muestra['nombre'], $muestra['correo'],$muestra['codigo']);
+              if ($success){
+                //Actualizar fechaEnviado de muestra
+                $this->Capmuestramed_model->actualizarFechaEnviado($muestra['id']);
+              }
+              //Dormir medio segundo
+              usleep(500000);
+            }
+          }
+          echo json_encode(array('success'=>true));
+        }
+
+
+        public function reenviarCodigo($nombre, $correo, $codigo, $mensaje = ''){
+            $titulo = 'Mensaje de Intermed';
+
+            // se lee el archivo
+            $fileh = realpath(APPPATH.'views/correos/headerMasivo.php');
+            $fileb = realpath(APPPATH.'views/correos/correoPersonalizado.php');
+            $filef = realpath(APPPATH.'views/correos/footerMasivo.php');
+            $fpH = fopen( $fileh,'r');
+            $fpB = fopen( $fileb,'r');
+            $fpF = fopen( $filef,'r');
+            $mensajeCompleto = "";
+            while( $line = fgets($fpH) ){
+              $mensajeCompleto .= $line;
+            }
+            while( $line = fgets($fpB) ){
+              $mensajeCompleto .= $line;
+            }
+            while( $line = fgets($fpF) ){
+              $mensajeCompleto .= $line;
+            }
+            fclose($fpH);
+            fclose($fpB);
+            fclose($fpF);
+
+            //Reemplazar nombre de médico
+            if ($nombre != ""){
+              $nombre .= '.';
+            }
+            $mensajeCompleto = str_replace('<span id="nombreDoc"></span>',$nombre,$mensajeCompleto);
+
+            if ($mensaje != ""){
+              echo 'replace msg';
+              //Agregar mensaje
+              $mensaje = '<p id="mensajeMasivo" style="margin:20px;">'.$mensaje.'</p>';
+            }
+            $mensajeCompleto = str_replace('{{{mensajeMasivo}}}',$mensaje,$mensajeCompleto);
+
+            $mensajeCompleto = str_replace('{{{codigo}}}',$codigo,$mensajeCompleto);
+
+            $mensajeCompleto = str_replace('Á','&Aacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('É','&Eacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('Í','&Iacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('Ó','&Oacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('Ú','&Uacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('á','&aacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('é','&eacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('í','&iacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('ó','&oacute;',$mensajeCompleto);
+            $mensajeCompleto = str_replace('ú','&uacute;',$mensajeCompleto);
+
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers .= 'Bcc: encuestas@newchannel.mx'."\r\n";
+            $headers .= 'From: Intermed <encuesta@intermed.online>'."\r\n";
+
+            return mail($correo,$titulo,$mensajeCompleto,$headers);
+        }
+
   }
 
   function encuestas_dropDown($enviar, $tipo){
@@ -1156,5 +1259,17 @@
     $checked = ($tipo == "Line")? 'checked':'';
     $data .= '<label class="col-md-12"><input type="radio" name="radio'. $enviar['element'] .'" ' . $checked . ' onclick="ChartLine('.htmlspecialchars(print_r(json_encode($enviar),1)).')" > Linea</label>';
     return $data;
+  }
+
+  function capitalize($frase){
+    $temp = explode( ' ', $frase );
+    $frase = '';
+    foreach ($temp as $value) {
+      if ($frase != ""){
+        $frase .= ' ';
+      }
+      $frase .= ucfirst(strtolower($value));
+    }
+    return $frase;
   }
 ?>

@@ -199,7 +199,7 @@
         $mensajeCompleto = str_replace('<span id="nombreDoc"></span>',$nombre,$mensajeCompleto);
 
         //Borrrar mensaje
-        $mensajeCompleto = str_replace('<div id="mensajeMasivo" style="margin:20px;"></div>','',$mensajeCompleto);
+        $mensajeCompleto = str_replace('{{{mensajeMasivo}}}','',$mensajeCompleto);
 
         $mensajeCompleto = str_replace('{{{codigo}}}',$codigo,$mensajeCompleto);
 
