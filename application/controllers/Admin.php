@@ -1172,7 +1172,6 @@
             foreach ($muestraReenviar as $muestra) {
               if ($muestra['tipoCodigo'] != ""){
                 if ($muestra['codigo'] == ""){
-                  echo 'actualizar codigo_id >';
                   $muestra['codigo'] = $this->Capmuestramed_model->generarCodigo($muestra['tipoCodigo']);
                   $codigo_id = $this->Encuestam_model->get_encuestamId($muestra['codigo'] );
                   $this->Capmuestramed_model->actualizarCodigoId($muestra['id'],$codigo_id);

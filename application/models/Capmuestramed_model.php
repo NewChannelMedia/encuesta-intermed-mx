@@ -403,7 +403,7 @@
       public function get_reenvios(){
         $result = array();
         $fecha = date('Y-m-j');
-        $fecha = strtotime ( '-3 day' , strtotime ( $fecha ) ) ;
+        $fecha = strtotime ( '-5 day' , strtotime ( $fecha ) ) ;
         $fecha = date ( 'Y-m-j' , $fecha );
 
         $this->db_capturista->where(array(
