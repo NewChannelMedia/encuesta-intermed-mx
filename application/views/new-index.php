@@ -178,18 +178,18 @@
           <br>
         </div>
         <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-          <form role="form" method="POST" action="" class="code-input">
+          <form id="frm_contacto" method="POST" class="code-input">
             <div class="form-group">
               <label class="h65-medium s20 grey3-c">Nombre:</label>
-              <input type="text" class="form-control code-intput-control h65-medium s20" placeholder="" name="nombreContacto" required>
+              <input type="text" class="form-control code-intput-control h65-medium s20" placeholder="" name="nombre" id="nombre" required>
             </div>
             <div class="form-group">
               <label class="h65-medium s20 grey3-c">Correo:</label>
-              <input type="email" class="form-control code-intput-control h65-medium s20" placeholder="" name="correoContacto" required>
+              <input type="email" class="form-control code-intput-control h65-medium s20" placeholder="" name="email" id="email" required>
             </div>
             <div class="form-group">
               <label class="h65-medium s20 grey3-c">Mensaje:</label>
-              <textarea class="form-control code-intput-control h65-medium s20" rows="6" placeholder="" name="mensaje" required></textarea>
+              <textarea class="form-control code-intput-control h65-medium s20" rows="6" placeholder="" id="mensaje" name="mensaje" required></textarea>
             </div>
             <br>
             <input type="submit" value="Enviar" class="btn btn-default btn-submit h45-light s30 ls2">

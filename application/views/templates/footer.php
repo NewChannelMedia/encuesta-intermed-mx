@@ -35,8 +35,8 @@
                   <li class="top-content lh2">
                     Información
                     <p class="h35-thin s15 lh1-5 text-right ">
-                      <a href="terminos.html" class="grey3-c">Política de privacidad</a>
-                      <br><a href="terminos.html" class="grey3-c">Términos de uso</a>
+                      <a href="terminos" class="grey3-c">Política de privacidad</a>
+                      <br><a href="terminos" class="grey3-c">Términos de uso</a>
                     </p>
                   </li>
                 </ul>
