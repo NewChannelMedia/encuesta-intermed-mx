@@ -10,7 +10,7 @@
       session_destroy();
 
       $this->load->view('templates/header', $data);
-      $this->load->view('index', $data);
+      $this->load->view('new-index', $data);
       $this->load->view('templates/footer', $data);
     }
 

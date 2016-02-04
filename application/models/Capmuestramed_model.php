@@ -406,20 +406,22 @@
 
         $resultado = array();
         foreach ($result as $med) {
-          //Revisar si encuesta con id $med['codigo_id'] !codigoUsado or !canalUsado
-          $encuesta = $this->db_encuesta->get_where('encuestasM',array('id'=>$med['codigo_id']))->row_array();
-          if ($encuesta['canalUsado'] == 0 || $encuesta['codigoUsado'] == 0){
-            $resultado[] = array(
-              'id'=>$med['id'],
-              'nombre'=>capitalize($med['nombre'] . ' ' . $med['apellidop'] . ' ' .$med['apellidom']),
-              'correo'=>$med['correo'],
-              'codigo'=>$encuesta['codigo'],
-              'tipoCodigo'=>$encuesta['tipoCodigo'],
-              'fechaEnviado'=>$med['fechaEnviado'],
-              'codigoUsado'=>$encuesta['codigoUsado'],
-              'canalUsado'=>$encuesta['canalUsado'],
-              'usada'=>$encuesta['usada'],
-          );
+          if ($med['fechaEnviado'] != "0000-00-00"){
+            //Revisar si encuesta con id $med['codigo_id'] !codigoUsado or !canalUsado
+            $encuesta = $this->db_encuesta->get_where('encuestasM',array('id'=>$med['codigo_id']))->row_array();
+            if ($encuesta['canalUsado'] == 0 || $encuesta['codigoUsado'] == 0){
+              $resultado[] = array(
+                'id'=>$med['id'],
+                'nombre'=>capitalize($med['nombre'] . ' ' . $med['apellidop'] . ' ' .$med['apellidom']),
+                'correo'=>$med['correo'],
+                'codigo'=>$encuesta['codigo'],
+                'tipoCodigo'=>$encuesta['tipoCodigo'],
+                'fechaEnviado'=>$med['fechaEnviado'],
+                'codigoUsado'=>$encuesta['codigoUsado'],
+                'canalUsado'=>$encuesta['canalUsado'],
+                'usada'=>$encuesta['usada'],
+            );
+            }
           }
         }
 
