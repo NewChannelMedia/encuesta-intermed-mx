@@ -2069,13 +2069,13 @@ body.modal-open {
 }
 
 #newHomeHeader {
-  position: absolute;
+  /*position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 1000;
-  /*position: relative;*/
+  z-index: 1000;*/
+  position: relative;
   margin: 0;
   background-image: url('../img/newHome/headerBG.png');
   background-repeat: no-repeat;

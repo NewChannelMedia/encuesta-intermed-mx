@@ -1,9 +1,44 @@
-/*!
- * Start Bootstrap - Agency Bootstrap Theme (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
-// jQuery for page scrolling feature - requires jQuery Easing plugin
+/* newHome */
+$(document).ready(function(){
+  if ($('#newHome').length > 0){
+    $('#newHome #newHomeHeader').height(
+      $(window).height()
+    );
+    /*$('#homeMainTitle').css({'margin-top':$(window).height()})*/
+
+    $('#gotocode').click(function(){
+      $('body').scrollTo($('#codigo'), 1000);
+    });
+    $('#bounce').click(function(){
+      $('body').scrollTo($('#homeMainTitle'), 1000);
+    })
+  }
+
+  var bouncetime = 1100;
+  var jumpSize = 35;
+
+  $('#bounce').css({'bottom':jumpSize});
+  bounce();
+
+  function bounce() {
+    $('#bounce').animate({'bottom':20}, bouncetime, 'easeInQuad', function() {
+      $('#bounce').animate({'bottom':jumpSize}, bouncetime, 'easeOutQuad', function() {
+        bounce();
+      });
+    });
+  }
+});
+
+$(window).on('resize', function() {
+  if ($('#newHome').length > 0){
+    $('#newHome #newHomeHeader').height(
+      $(window).height()
+    );
+  }
+});
+
+
+
 $( function () {
   $( 'a.page-scroll' ).bind( 'click', function ( event ) {
     var $anchor = $( this );
@@ -2149,45 +2184,3 @@ function reenviarMuestra(){
   },500);
 
 }
-
-/* newHome */
-$(document).ready(function(){
-  if ($('#newHome').length > 0){
-    $('#newHome #newHomeHeader').height(
-      $(window).height()
-    );
-    $('#homeMainTitle').css({'margin-top':$(window).height()})
-
-    $('#gotocode').click(function(){
-      $('body').scrollTo($('#codigo'), 1000);
-    });
-    $('#bounce').click(function(){
-      $('body').scrollTo($('#homeMainTitle'), 1000);
-    })
-
-
-
-  }
-
-  var bouncetime = 1100;
-  var jumpSize = 35;
-
-  $('#bounce').css({'bottom':jumpSize});
-  bounce();
-
-  function bounce() {
-    $('#bounce').animate({'bottom':20}, bouncetime, 'easeInQuad', function() {
-      $('#bounce').animate({'bottom':jumpSize}, bouncetime, 'easeOutQuad', function() {
-        bounce();
-      });
-    });
-  }
-});
-
-$(window).on('resize', function() {
-  if ($('#newHome').length > 0){
-    $('#newHome #newHomeHeader').height(
-      $(window).height()
-    );
-  }
-});
