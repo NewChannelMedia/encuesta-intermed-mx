@@ -138,12 +138,15 @@
           </p><br>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-8 col-xs-10 col-lg-offset-4 col-md-offset-4 col-sm-offset-2 col-xs-offset-1">
-          <form role="form" method="POST" action="<?= base_url(); ?>about" class="code-input">
+          <form role="form" method="POST" action="<?= base_url(); ?>about" class="code-input" onsubmit="return revisarCodigo('codigoEnc');">
             <div class="input-group">
-              <input type="text" class="form-control code-intput-control h65-medium s20" placeholder="" name="codigo">
+              <input type="text" class="form-control code-intput-control h65-medium s20" placeholder="" name="codigo" id="codigoEnc">
               <span class="input-group-btn">
                 <input type="submit" value="Entrar" class="btn btn-default code-intput-button h35-thin s25 ls2">
               </span>
+            </div>
+            <div class="alert alert-danger hidden" style="border-radius:0;" id="codigoError">
+              <strong>¡Error!</strong> El código que ingresaste es incorrecto.
             </div>
           </form>
         </div>

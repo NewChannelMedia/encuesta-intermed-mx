@@ -2191,3 +2191,34 @@ $(window).on('resize', function() {
     );
   }
 });
+
+function revisarCodigo(input){
+  var ret = false;
+  try{
+    var codigo = $('#'+input).val();
+    $.ajax( {
+      url: '/encuesta-intermed/Encuesta/checkStatusAjax',
+      type: "POST",
+      dataType: 'JSON',
+      async: false,
+      data: {codigo:codigo},
+      success: function (result) {
+        if (result.status >0){
+          ret = true;
+        } else {
+          $('#codigoError').removeClass('hidden');
+          setTimeout(function(e){
+            $('#codigoError').addClass('hidden');
+          },3000);
+        }
+      },
+      error: function (err) {
+        console.log( "Error: AJax dead :" + JSON.stringify(err) );
+      }
+    } );
+    return ret;
+  }catch(e){
+    console.error(JSON.stringify(e));
+    return false;
+  }
+}
