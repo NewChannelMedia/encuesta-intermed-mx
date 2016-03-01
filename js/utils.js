@@ -2184,3 +2184,76 @@ function reenviarMuestra(){
   },500);
 
 }
+
+/* newHome */
+$(document).ready(function(){
+  if ($('#newHome').length > 0){
+    $('#newHome #newHomeHeader').height(
+      $(window).height()
+    );
+    $('#homeMainTitle').css({'margin-top':$(window).height()})
+
+    $('#gotocode').click(function(){
+      $('body').scrollTo($('#codigo'), 1000);
+    });
+    $('#bounce').click(function(){
+      $('body').scrollTo($('#homeMainTitle'), 1000);
+    })
+
+
+
+  }
+
+  var bouncetime = 1100;
+  var jumpSize = 35;
+
+  $('#bounce').css({'bottom':jumpSize});
+  bounce();
+
+  function bounce() {
+    $('#bounce').animate({'bottom':20}, bouncetime, 'easeInQuad', function() {
+      $('#bounce').animate({'bottom':jumpSize}, bouncetime, 'easeOutQuad', function() {
+        bounce();
+      });
+    });
+  }
+});
+
+$(window).on('resize', function() {
+  if ($('#newHome').length > 0){
+    $('#newHome #newHomeHeader').height(
+      $(window).height()
+    );
+  }
+});
+
+function revisarCodigo(input){
+  var ret = false;
+  try{
+    var codigo = $('#'+input).val();
+    $.ajax( {
+      url: '/encuesta-intermed/Encuesta/checkStatusAjax',
+      type: "POST",
+      dataType: 'JSON',
+      async: false,
+      data: {codigo:codigo},
+      success: function (result) {
+        if (result.status >0){
+          ret = true;
+        } else {
+          $('#codigoError').removeClass('hidden');
+          setTimeout(function(e){
+            $('#codigoError').addClass('hidden');
+          },3000);
+        }
+      },
+      error: function (err) {
+        console.log( "Error: AJax dead :" + JSON.stringify(err) );
+      }
+    } );
+    return ret;
+  }catch(e){
+    console.error(JSON.stringify(e));
+    return false;
+  }
+}

@@ -95,7 +95,7 @@
             </p>
             <p class="ag-light s15 text-center muted">
               <br>*Promoción válida para los primeros 500 participantes. La promoción se hara efectiva al momento del lanzamiento comercial de la plataforma.<br>
-              Puedes participar en las pruebas beta de Intermed<sup>&reg;</sup> y ampliar tu periodo de cortesía por 3 meses más. Activa la opción al finalizar la encuesta.
+              Puedes participar en las pruebas beta de Intermed<sup>&reg;</sup>. Activa la opción al finalizar la encuesta.
             </p>
           </div>
         </div>
@@ -248,7 +248,7 @@
                   pequeña encuesta que será de enorme ayuda para nuestro proyecto.<br><br>
                 </p>
                 <p class="text-center white-c ag-bold s20">
-                  ¡Al finalizar la encuesta podrás registrarte para obtener hasta 6 meses de suscripción gratis a Intermed<sup>&reg;</sup>!<br><br>
+                  ¡Al finalizar la encuesta podrás registrarte para obtener hasta 3 meses de suscripción gratis a Intermed<sup>&reg;</sup>!<br><br>
                 </p>
               </div>
               <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
