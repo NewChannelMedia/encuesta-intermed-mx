@@ -96,22 +96,23 @@
       <div class="center-content">
         <div class="container">
           <div class="row">
-            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 preCodigoContainer">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 preCodigoContainer">
               <div class="body-container">
                 <div class="center-content">
                   <img class="center-block img-responsive" src="<?=base_url();?>img/newHome/iconoMedico.png">
                   <h4 class="h35-thin s55 text-uppercase text-center black-c">¿Eres <span class="h65-medium">Médico</span>?</h4>
-                  <h5 class="h75-bold s30 text-center red-c">¡Nos interesa tu opinión!</h5>
+                  <h5 class="h75-bold s30 text-center red-c hidden invisible">¡Nos interesa tu opinión!</h5>
                 </div>
               </div>
             </div>
-            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12 preCodigoContainer">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 preCodigoContainer">
               <div class="body-container">
                 <div class="center-content">
                   <p class="h35-thin s25 text-justify grey2-c">
-                    ¡Conoce <span class="h65-medium">Intermed</span> y gánate una <span class="h65-medium">iPad Mini</span> o un <span class="h65-medium">iPod Nano</span> participando en nuestra encuesta!
-                    <br><br>Estamos diseñando Intermed para acercarte a tus pacientes y revolucionar la manera en que te comunicas con ellos.
-                    <br><br>¡Ayúdanos a crear un mejor producto para ti y obten la oportunidad de ganar estos fantásticos premios!
+                    <span class="hidden invisible">¡Conoce <span class="h65-medium">Intermed</span> y gánate una <span class="h65-medium">iPad Mini</span> o un <span class="h65-medium">iPod Nano</span> participando en nuestra encuesta!</span>
+                    Estamos diseñando Intermed para acercarte a tus pacientes y revolucionar la manera en que te comunicas con ellos.
+                    <br><br>A continuación hemos preparado 3 breves videos para ti, con los que podrás conocer más acerca de Intermed.
+                    <span class="hidden invisible"><br><br>¡Ayúdanos a crear un mejor producto para ti y obten la oportunidad de ganar estos fantásticos premios!</span>
                   </p>
                 </div>
               </div>
@@ -121,15 +122,20 @@
       </div>
     </div>
   </section>
-  <section id="codigo">
+  <section id="codigo" style="height:280px!important;">
     <div class="container-fluid body-container">
       <div class="row center-content">
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-0">
-          <p class="h35-thin s25 lh1-5 text-center white-c">
+          <p class="h35-thin s25 lh1-5 text-center white-c hidden invisible">
             A continuación hemos preparado 3 breves videos para ti, con los que podrás conocer más acerca de Intermed y después contestar nuestra pequeña encuesta.
             <br>Anota tus datos al finalizar la encuesta para participar en el sorteo de una <span class="h65-medium">iPad Mini*</span> y un <span class="h65-medium">iPod Nano*</span>.
           </p>
           <br><br>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0">
+          <p class="h75-bold s30 text-center white-c">
+            Ingresa con tu código de acceso.
+          </p><br>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-8 col-xs-10 col-lg-offset-4 col-md-offset-4 col-sm-offset-2 col-xs-offset-1">
           <form role="form" method="POST" action="<?= base_url(); ?>about" class="code-input">
@@ -142,10 +148,7 @@
           </form>
         </div>
         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1 col-sm-offset-0 col-xs-offset-0">
-          <br><br>
-          <p class="h75-bold s30 text-center white-c">
-            Ingresa con tu código de acceso.
-          </p>
+          <br>
           <p class="h35-thin s25 lh1-5 text-center white-c">
             Si no tienes un código, solicitalo <a href="<?php echo base_url(); ?>codigo/pedir" class="h65-medium dark-c">aqui</a>.
           </p>
@@ -153,7 +156,7 @@
       </div>
     </div>
   </section>
-  <section id="postCodigo">
+  <section id="postCodigo" class="hidden invisible">
     <div class="container-fluid body-container">
       <div class="row center-content">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
