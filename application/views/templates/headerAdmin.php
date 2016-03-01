@@ -91,6 +91,9 @@
             <a href="<?= base_url() ?>admin/invitacionrecomendada"><span class="glyphicon glyphicon-user navicon"></span>Invitación recomendada</a>
           </li>
           <li>
+            <a href="<?= base_url() ?>admin/invitacionextra"><span class="glyphicon glyphicon-gift navicon"></span>Invitación extra <small>[7]</small></a>
+          </li>
+          <li>
             <a href="<?= base_url() ?>admin/anadirCapturista"><span class="glyphicon glyphicon-headphones navicon"></span>Añadir Capturista</a>
           </li>
           <li>

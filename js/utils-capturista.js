@@ -1770,3 +1770,33 @@ function cargar_invitacionRecomendada(){
 function ordenarTablaCorreos(column, element ){
   $('#EncuestasFisicas').sortTable('letter', {column: column, reverse: false});
 }
+
+function enviarInvitacionExtra(){
+  var cantidad = $('#cantidadCodigos').val();
+  try{
+    if (cantidad>0){
+      $.ajax( {
+        url: '/encuesta-intermed/Admin/generarCodigosExtra',
+        type: "POST",
+        dataType: 'JSON',
+        async: true,
+        data: {cantidad:cantidad},
+        success: function (result) {
+          var codigos = '';
+          count = 1;
+          result.forEach(function(res){
+            codigos += '<tr><td class="text-center" >'+ count++ +'</td><td class="text-center" >'+res+'</td></tr>';
+          });
+          $('#invExtra').html(codigos);
+        },
+        error: function (err) {
+          console.log( "Error: AJax dead :" + JSON.stringify(err) );
+        }
+      } );
+    }
+    return false;
+  }catch(e){
+    console.error(JSON.stringify(e));
+    return false;
+  }
+}

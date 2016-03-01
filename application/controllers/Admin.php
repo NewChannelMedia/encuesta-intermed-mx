@@ -971,6 +971,30 @@
             }
         }
 
+        public function invitacionextra(){
+            // se carga el modelo para verificar si existen el usuario y password que se reciben por post
+            $this->load->model('Admin_model');
+            if (isset($_SESSION) && isset($_SESSION['status']))
+              $session = $_SESSION['status'];
+            else $session = false;
+            if($session===true){
+              $data = array();
+              $data['title'] = "Invitación extra";
+              $this->load->view('templates/headerAdmin',$data);
+              $this->load->view('admin/invExtra',$data);
+              $this->load->view('templates/footerAdmin');
+            }else{
+              $data['title'] = "Directorio";
+              $data['error'] = "no sesion";
+              $_SESSION['status'] = false;
+              $data['status'] = $_SESSION['status'];
+              $data['errorM'] = "Revisa tus credenciales de acceso, o la sesión ha sido cerrada.";
+              $this->load->view('templates/header', $data);
+              $this->load->view('admin/Admin_vista', $data);
+              $this->load->view('templates/footerAdmin');
+            }
+        }
+
         public function enviarEncuestaDirecta(){
           $nombre = $this->input->post('nombre');
           $correo = $this->input->post('correo');
@@ -1180,6 +1204,16 @@
             }
           }
           echo json_encode(array('success'=>true));
+        }
+
+        function generarCodigosExtra(){
+          $cantidad = $this->input->post('cantidad');
+          $codigos = [];
+          for ($i = 0; $i < $cantidad; $i++){
+            $codigo = $this->generarCodigo(7);
+            $codigos[] = $codigo;
+          }
+          echo json_encode($codigos);;
         }
 
 
