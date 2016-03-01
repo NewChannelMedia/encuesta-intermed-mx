@@ -49,7 +49,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
           <form method="post" action="<?php echo base_url(); ?>codigo/dataPost" id="datosSolicitud"><!-- main-body-intern-container -->
-            <h4 class="flama-normal s20 text-center white-c">Ingresa los siguientes datos para procesar tu solicitud:</h4>
+            <h4 class="flama-normal s20 text-center white-c shadow">Ingresa los siguientes datos para procesar tu solicitud:</h4>
             <div class="form-group col-md-8 col-md-offset-2 usuarioSolcitud">
               <input class="form-control validada" type="text" placeholder="Nombre" name="nombre" id="nombre">
             </div>
@@ -58,14 +58,14 @@
             </div>
           <div id = "doctor"></div>
             <div class="form-group col-md-8 col-md-offset-2">
-              <div class="seleccionador radio flama-normal s20">
-                <label>
+              <div class="seleccionador radio flama-normal s20 white-c">
+                <label class="shadow">
                   <input class="" type="radio" name="medico" checked="true" value="1" id="medicoRadio"/>
-                  Soy Medico
+                  Soy Médico
                 </label>
-                <label>
+                <label class="shadow">
                   <input class="" type="radio" name="medico" value="0" id="usuarioRadio"/>
-                  No soy medico
+                  No soy Médico
                 </label>
               </div>
             </div>

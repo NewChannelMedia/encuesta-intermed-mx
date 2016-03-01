@@ -55,7 +55,7 @@
             $data['mensaje'] = 'El código que ingresaste es incorrecto, o hubo un error al procesar tu solicitud, por favor intenta de nuevo.';
             $this->load->view('templates/header', $data);
             $this->load->view('encuesta/alert', $data);
-            $this->load->view('templates/footer', $data);
+            $this->load->view('templates/footer2', $data);
             break;
         case 1:
             //Encuesta sin empezar
@@ -118,7 +118,7 @@
       "Recibiras dentro de poco información y promociones.<br>Hasta pronto.";
       $this->load->view('templates/header', $data);
       $this->load->view('encuesta/alert', $data);
-      $this->load->view('templates/footer', $data);
+      $this->load->view('templates/footer2', $data);
 /*cache*/
     }
 
