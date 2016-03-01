@@ -278,7 +278,8 @@
               <div class="main-body-container clearfix">
                 <div class="col-lg-8 col-md-8 col-sm-10 col-xs-10 col-lg-offset-2 col-md-offset-2 col-sm-offset-1 col-xs-offset-1">
                   <p class="text-center white-c ag-bold s20">
-                    Este código ya se ha usado, puedes enviar códigos a tus colegas con el siguiente formulario.<br/><br/>
+                    El código con el que ingresaste ya ha sido usado anteriormente para contestar la encuesta.
+                    <br><br>Puedes invitar a tus colegas enviandoles un código con el siguiente formulario.<br/><br/>
                   </p>
                 </div>
 
@@ -290,7 +291,7 @@
 
                 <form method="POST" onsubmit="return agregarDestRecom();" id="destRec">
                   <div class="form-group col-md-5">
-                    <input class="form-control" type="text" placeholder="Nombre" name="nombre" id="nombreRecomendacion" required>
+                    <input class="form-control" type="text" placeholder="Nombre colega" name="nombre" id="nombreRecomendacion" required>
                   </div>
                   <div class="form-group col-md-6">
                     <input class="form-control" type="email" placeholder="E-mail" name="email" id="correoRecomendacion" required>
