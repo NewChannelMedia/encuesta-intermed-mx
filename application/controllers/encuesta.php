@@ -35,6 +35,12 @@
       $this->load->view('templates/footer', $data);
     }
 
+    public function checkStatusAjax(){
+      $codigo = $this->input->post('codigo');
+      $data = $this->checkStatus($codigo);
+      echo json_encode($data);
+    }
+
     public function existe(){
       $this->load->helper('url');
       $codigo = $this->input->post('codigo');
